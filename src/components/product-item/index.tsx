@@ -5,7 +5,7 @@ import Image from "next/image";
 import { LikeButton } from "@/components/ui/like-button";
 import { IconButton } from "@/components/ui/icon-button";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
-import TrashIcon from "../../../public/assets/icons/trash.svg";
+import TrashIcon from "../../../public/icons/trash.svg";
 import { formatPrice, getProductMainTagColor } from "@/utils/helpers";
 import { useTranslation } from "next-i18next";
 import { useFavoriteStore } from "@/store/favorite";

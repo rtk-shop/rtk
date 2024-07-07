@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useFormContext } from "react-hook-form";
-import FilterIcon from "../../../../../public/assets/icons/filter.svg";
-import SortIcon from "../../../../../public/assets/icons/sort.svg";
+import FilterIcon from "../../../../../public/icons/filter.svg";
+import SortIcon from "../../../../../public/icons/sort.svg";
 
 import styles from "./styles.module.scss";
 

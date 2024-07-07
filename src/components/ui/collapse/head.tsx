@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import ExpandIcon from "../../../public/assets/icons/expand-arrow.svg";
+import ExpandIcon from "../../../public/icons/expand-arrow.svg";
 
 import styles from "./styles.module.scss";
 
