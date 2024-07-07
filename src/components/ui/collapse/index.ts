@@ -1,2 +1,2 @@
-export { Collapse } from "./collapse";
-export { CollapseHead } from "./head";
+export { Collapse } from './collapse'
+export { CollapseHead } from './head'

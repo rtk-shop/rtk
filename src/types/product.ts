@@ -1,17 +1,17 @@
 export const enum ProductTag {
   new,
   stock,
-  top,
+  top
 }
 
 export type P = {
-  id: string;
-};
+  id: string
+}
 
 export const enum Gender {
   female,
   male,
-  unisex,
+  unisex
 }
 
 export const enum Category {
@@ -19,5 +19,5 @@ export const enum Category {
   bag,
   suitcase,
   wallet,
-  other,
+  other
 }

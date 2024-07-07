@@ -1,33 +1,30 @@
-import React from "react";
-import clsx from "clsx";
-import { useFormContext } from "react-hook-form";
-import styles from "./styles.module.scss";
+import React from 'react'
+import clsx from 'clsx'
+import { useFormContext } from 'react-hook-form'
+import styles from './styles.module.scss'
 
 type option = {
-  value: string;
-  label: string;
-  disabled?: boolean;
-};
+  value: string
+  label: string
+  disabled?: boolean
+}
 
 interface RadioGroupProps {
-  name: string;
-  options: option[];
-  asRow?: boolean;
+  name: string
+  options: option[]
+  asRow?: boolean
 }
 
 export function RadioGroup({ name, asRow = false, options }: RadioGroupProps) {
-  const { register } = useFormContext();
+  const { register } = useFormContext()
 
   return (
     <div className={clsx(styles.container, asRow && styles.asRow)}>
       {options.map(({ value, label, disabled = false }, ind) => {
-        const inputId = ind + value;
+        const inputId = ind + value
 
         return (
-          <div
-            key={value + ind}
-            className={clsx(styles.inputWrapper, asRow && styles.rowWrapper)}
-          >
+          <div key={value + ind} className={clsx(styles.inputWrapper, asRow && styles.rowWrapper)}>
             <input
               id={inputId}
               type="radio"
@@ -43,8 +40,8 @@ export function RadioGroup({ name, asRow = false, options }: RadioGroupProps) {
               {label}
             </label>
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

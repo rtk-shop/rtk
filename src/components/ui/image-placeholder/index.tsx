@@ -1,30 +1,26 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState } from 'react'
+import Image from 'next/image'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
 export interface ImagePlaceholderProps {
-  src: string;
-  altText: string;
-  priority?: boolean;
+  src: string
+  altText: string
+  priority?: boolean
 }
 
-export function ImagePlaceholder({
-  src,
-  altText,
-  priority,
-}: ImagePlaceholderProps) {
-  const [loading, setLoading] = useState(true);
+export function ImagePlaceholder({ src, altText, priority }: ImagePlaceholderProps) {
+  const [loading, setLoading] = useState(true)
 
   const plug = (
     <div className={styles.placeholder}>
       <div className={styles.shine} />
     </div>
-  );
+  )
 
   const handleImageLoad = () => {
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <div className={styles.container}>
@@ -37,11 +33,11 @@ export function ImagePlaceholder({
         priority={priority}
         onLoad={handleImageLoad}
         style={{
-          opacity: loading ? "0" : "100",
-          objectFit: "contain",
+          opacity: loading ? '0' : '100',
+          objectFit: 'contain'
         }}
       />
       {loading && plug}
     </div>
-  );
+  )
 }

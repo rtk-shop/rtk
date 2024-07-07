@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import Link from "next/link";
-import Image from "next/image";
-import { LikeButton } from "@/components/ui/like-button";
-import { IconButton } from "@/components/ui/icon-button";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
-import TrashIcon from "../../../public/icons/trash.svg";
-import { formatPrice, getProductMainTagColor } from "@/utils/helpers";
-import { useTranslation } from "next-i18next";
-import { useFavoriteStore } from "@/store/favorite";
-import { routeNames, generateProductLink } from "@/utils/navigation";
-import type { ProductTag } from "@/types";
+import React, { useState } from 'react'
+import clsx from 'clsx'
+import Link from 'next/link'
+import Image from 'next/image'
+import { LikeButton } from '@/components/ui/like-button'
+import { IconButton } from '@/components/ui/icon-button'
+import { ImagePlaceholder } from '@/components/ui/image-placeholder'
+import TrashIcon from '../../../public/icons/trash.svg'
+import { formatPrice, getProductMainTagColor } from '@/utils/helpers'
+import { useTranslation } from 'next-i18next'
+import { useFavoriteStore } from '@/store/favorite'
+import { routeNames, generateProductLink } from '@/utils/navigation'
+import type { ProductTag } from '@/types'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
 interface ProductItemProps {
-  id: string;
-  slug: string;
-  url: string;
-  title: string;
-  price: number;
-  inStock: boolean;
-  basePrice: number;
-  tag?: keyof typeof ProductTag | null;
-  isFavorite: boolean;
-  withDelete?: boolean;
+  id: string
+  slug: string
+  url: string
+  title: string
+  price: number
+  inStock: boolean
+  basePrice: number
+  tag?: keyof typeof ProductTag | null
+  isFavorite: boolean
+  withDelete?: boolean
 }
 
 export function ProductItem({
@@ -37,43 +37,34 @@ export function ProductItem({
   tag,
   basePrice,
   isFavorite,
-  withDelete = false,
+  withDelete = false
 }: ProductItemProps) {
-  const addToFavorite = useFavoriteStore((state) => state.add);
-  const removeFavorite = useFavoriteStore((state) => state.remove);
+  const addToFavorite = useFavoriteStore((state) => state.add)
+  const removeFavorite = useFavoriteStore((state) => state.remove)
 
-  const { t } = useTranslation("common");
-  const [isLiked, setLiked] = useState<boolean>(isFavorite);
+  const { t } = useTranslation('common')
+  const [isLiked, setLiked] = useState<boolean>(isFavorite)
 
   const handleActionClick = (): void => {
     if (isLiked) {
-      removeFavorite(id);
+      removeFavorite(id)
     } else {
-      addToFavorite(id);
+      addToFavorite(id)
     }
 
-    setLiked(!isLiked);
-  };
+    setLiked(!isLiked)
+  }
 
   function genTagView(productTag: string): React.ReactElement | null {
     switch (productTag) {
-      case "new":
-        return <span>{t(`productTag.${tag}`)}</span>;
-      case "top":
-        return (
-          <Image
-            width={19}
-            height={19}
-            src="/assets/icons/fire.png"
-            alt="смайлик - огонь"
-          />
-        );
-      case "stock":
-        return (
-          <span>-{Math.round(((basePrice - price) * 100) / basePrice)}%</span>
-        );
+      case 'new':
+        return <span>{t(`productTag.${tag}`)}</span>
+      case 'top':
+        return <Image width={19} height={19} src="/assets/icons/fire.png" alt="смайлик - огонь" />
+      case 'stock':
+        return <span>-{Math.round(((basePrice - price) * 100) / basePrice)}%</span>
       default:
-        return null;
+        return null
     }
   }
 
@@ -90,20 +81,18 @@ export function ProductItem({
             className={clsx({
               [styles.price]: true,
               [styles.discount]: basePrice !== price,
-              [styles.outStock]: !inStock,
+              [styles.outStock]: !inStock
             })}
           >
             {basePrice !== price && (
-              <p className={styles["discount-price"]}>
-                {formatPrice(basePrice)}&nbsp;₴
-              </p>
+              <p className={styles['discount-price']}>{formatPrice(basePrice)}&nbsp;₴</p>
             )}
             <span>{formatPrice(price)}&nbsp;₴</span>
           </div>
           <div className={styles.buttonWrapper}>
             {withDelete ? (
               <IconButton onClick={handleActionClick}>
-                <div className={clsx("svg-icon", styles.trashIcon)}>
+                <div className={clsx('svg-icon', styles.trashIcon)}>
                   <TrashIcon />
                 </div>
               </IconButton>
@@ -124,12 +113,12 @@ export function ProductItem({
         <div
           className={styles.tag}
           style={{
-            backgroundColor: getProductMainTagColor(tag),
+            backgroundColor: getProductMainTagColor(tag)
           }}
         >
           {genTagView(tag)}
         </div>
       )}
     </div>
-  );
+  )
 }

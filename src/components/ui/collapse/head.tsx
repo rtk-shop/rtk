@@ -1,32 +1,28 @@
-import React from "react";
-import clsx from "clsx";
-import ExpandIcon from "../../../public/icons/expand-arrow.svg";
+import React from 'react'
+import clsx from 'clsx'
+import ExpandIcon from '../../../public/icons/expand-arrow.svg'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
 interface CollapseHeadProps {
-  collapsed: boolean;
-  title: string | React.ReactNode;
-  onCollapse(): void;
+  collapsed: boolean
+  title: string | React.ReactNode
+  onCollapse(): void
 }
 
-export function CollapseHead({
-  title,
-  collapsed,
-  onCollapse,
-}: CollapseHeadProps) {
+export function CollapseHead({ title, collapsed, onCollapse }: CollapseHeadProps) {
   return (
     <div onClick={onCollapse} className={styles.groupHead}>
       <span>{title}</span>
       <div
         className={clsx({
-          ["svg-icon"]: true,
+          ['svg-icon']: true,
           [styles.expandIcon]: true,
-          [styles.collapsed]: collapsed,
+          [styles.collapsed]: collapsed
         })}
       >
         <ExpandIcon />
       </div>
     </div>
-  );
+  )
 }

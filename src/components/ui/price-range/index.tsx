@@ -1,91 +1,81 @@
-import React, { useState, useEffect } from "react";
-import Slider from "rc-slider";
-import { Button } from "@/components/ui/button";
-import { Collapse, CollapseHead } from "@/components/ui/collapse";
-import type { SliderProps } from "rc-slider";
+import React, { useState, useEffect } from 'react'
+import Slider from 'rc-slider'
+import { Button } from '@/components/ui/button'
+import { Collapse, CollapseHead } from '@/components/ui/collapse'
+import type { SliderProps } from 'rc-slider'
 
-import styles from "./styles.module.scss";
-import "rc-slider/assets/index.css";
+import styles from './styles.module.scss'
+import 'rc-slider/assets/index.css'
 
 interface PriceRangeProps {
-  title: string;
-  min: number;
-  max: number;
-  step?: number;
-  onSet(range: [number, number]): void;
+  title: string
+  min: number
+  max: number
+  step?: number
+  onSet(range: [number, number]): void
 }
 
-export function PriceRange({
-  title,
-  min,
-  max,
-  step = 1,
-  onSet,
-}: PriceRangeProps) {
-  const [isCollapsed, setCollapsed] = useState(true);
+export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps) {
+  const [isCollapsed, setCollapsed] = useState(true)
 
-  const [minInputValue, setMinInputValue] = useState(min);
-  const [maxInputValue, setMaxInputValue] = useState(max);
+  const [minInputValue, setMinInputValue] = useState(min)
+  const [maxInputValue, setMaxInputValue] = useState(max)
 
-  const [sliderMin, setSliderMin] = useState(min);
-  const [sliderMax, setSliderMax] = useState(max);
+  const [sliderMin, setSliderMin] = useState(min)
+  const [sliderMax, setSliderMax] = useState(max)
 
   useEffect(() => {
-    setMinInputValue(min);
-    setMaxInputValue(max);
+    setMinInputValue(min)
+    setMaxInputValue(max)
 
-    setSliderMin(min);
-    setSliderMax(max);
-  }, [min, max]);
+    setSliderMin(min)
+    setSliderMax(max)
+  }, [min, max])
 
   const handleCollapse = (): void => {
-    setCollapsed(!isCollapsed);
-  };
+    setCollapsed(!isCollapsed)
+  }
 
   const onSliderChange = (values: number | number[]): void => {
     if (Array.isArray(values)) {
-      const [min, max] = values;
+      const [min, max] = values
 
-      setMinInputValue(min);
-      setMaxInputValue(max);
+      setMinInputValue(min)
+      setMaxInputValue(max)
 
-      setSliderMin(min);
-      setSliderMax(max);
+      setSliderMin(min)
+      setSliderMax(max)
     }
-  };
+  }
 
   const onMinChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const min = +event.target.value;
-    setMinInputValue(min);
-    setSliderMin(min);
-  };
+    const min = +event.target.value
+    setMinInputValue(min)
+    setSliderMin(min)
+  }
 
   const onMaxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const max = +event.target.value;
-    setMaxInputValue(max);
-    setSliderMax(max);
-  };
+    const max = +event.target.value
+    setMaxInputValue(max)
+    setSliderMax(max)
+  }
 
   const handleSubmit = () => {
-    onSet([minInputValue, maxInputValue]);
-  };
+    onSet([minInputValue, maxInputValue])
+  }
 
-  const marks: SliderProps["marks"] = {
+  const marks: SliderProps['marks'] = {
     [min]: {
-      label: <span className={styles.sliderMark}>{min}</span>,
+      label: <span className={styles.sliderMark}>{min}</span>
     },
     [max]: {
-      label: <span className={styles.sliderMark}>{max}</span>,
-    },
-  };
+      label: <span className={styles.sliderMark}>{max}</span>
+    }
+  }
 
   return (
     <div>
-      <CollapseHead
-        title={title}
-        collapsed={isCollapsed}
-        onCollapse={handleCollapse}
-      />
+      <CollapseHead title={title} collapsed={isCollapsed} onCollapse={handleCollapse} />
       <Collapse open={isCollapsed}>
         <div className={styles.container}>
           <div className={styles.controls}>
@@ -101,11 +91,7 @@ export function PriceRange({
               onChange={onMaxChange}
               className={styles.priceInput}
             />
-            <Button
-              color="secondary"
-              onClick={handleSubmit}
-              className={styles.setButton}
-            >
+            <Button color="secondary" onClick={handleSubmit} className={styles.setButton}>
               ok
             </Button>
           </div>
@@ -124,5 +110,5 @@ export function PriceRange({
         </div>
       </Collapse>
     </div>
-  );
+  )
 }

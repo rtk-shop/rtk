@@ -1,11 +1,11 @@
-import React from "react";
-import clsx from "clsx";
+import React from 'react'
+import clsx from 'clsx'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
 export interface ScaleLoaderProps {
-  fallback?: boolean;
-  dark?: boolean;
+  fallback?: boolean
+  dark?: boolean
 }
 
 export function ScaleLoader({ fallback = false, dark }: ScaleLoaderProps) {
@@ -13,11 +13,11 @@ export function ScaleLoader({ fallback = false, dark }: ScaleLoaderProps) {
     <svg
       className={clsx({
         [styles.svgEl]: true,
-        [styles.dark]: dark,
+        [styles.dark]: dark
       })}
       xmlns="http://www.w3.org/2000/svg"
-      width={fallback ? "34px" : "24px"}
-      height={fallback ? "40px" : "24px"}
+      width={fallback ? '34px' : '24px'}
+      height={fallback ? '40px' : '24px'}
       viewBox="0 0 24 30"
     >
       <rect x="0" y="13" width="4" height="5" fill="#333">
@@ -75,5 +75,5 @@ export function ScaleLoader({ fallback = false, dark }: ScaleLoaderProps) {
         />
       </rect>
     </svg>
-  );
+  )
 }

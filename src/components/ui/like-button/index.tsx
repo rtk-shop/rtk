@@ -1,17 +1,17 @@
-import React from "react";
-import clsx from "clsx";
-import { IconButton } from "@/components/ui/icon-button";
+import React from 'react'
+import clsx from 'clsx'
+import { IconButton } from '@/components/ui/icon-button'
 
-import styles from "./LikeButton.module.scss";
+import styles from './LikeButton.module.scss'
 
 interface LikeButtonProps {
-  liked: boolean;
-  width?: number;
-  height?: number;
-  text?: string;
-  disableRipple?: boolean;
-  className?: string;
-  onClick: (e: React.MouseEvent) => void;
+  liked: boolean
+  width?: number
+  height?: number
+  text?: string
+  disableRipple?: boolean
+  className?: string
+  onClick: (e: React.MouseEvent) => void
 }
 
 export function LikeButton({
@@ -31,7 +31,7 @@ export function LikeButton({
         className={clsx({
           [styles.svgEL]: true,
           [styles.liked]: liked,
-          [styles.withText]: !!text,
+          [styles.withText]: !!text
         })}
       >
         <use xlinkHref="#heart" />
@@ -43,7 +43,7 @@ export function LikeButton({
         height={height}
         className={clsx({
           [styles.hide]: true,
-          [styles.liked]: liked,
+          [styles.liked]: liked
         })}
       >
         <defs>
@@ -55,5 +55,5 @@ export function LikeButton({
       </svg>
       {text && <span>{text}</span>}
     </IconButton>
-  );
+  )
 }
