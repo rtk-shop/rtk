@@ -1,0 +1,20 @@
+.groupHead {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-weight: 500;
+  user-select: none;
+}
+
+.expandIcon {
+  font-size: 1.5rem;
+  transition: all 160ms linear;
+  fill: #343434; // dark #fff
+  transform: rotate(180deg);
+}
+
+.collapsed {
+  transform: rotate(360deg);
+}

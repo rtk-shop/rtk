@@ -1,0 +1,88 @@
+.base {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  padding: 15px 30px;
+  border-radius: 14px;
+  border: 1px solid;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: initial;
+    opacity: 0.7;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.withShadow {
+  box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.3);
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+// Color types
+.primary {
+  color: #fff;
+  background-color: #232323;
+
+  @media (hover: none) {
+    &:active:not(:disabled) {
+      background-color: #383838;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: #383838;
+    }
+  }
+}
+
+.secondary {
+  color: #343434;
+  background-color: #fff128;
+}
+
+.accept {
+  color: #fff;
+  border: none;
+  background-color: var(--green-light);
+  font-weight: 600;
+
+  @media (hover: none) {
+    &:active:not(:disabled) {
+      background-color: #38e938;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: #38e938;
+    }
+  }
+}
+
+.danger {
+  color: #343434;
+  background-color: #f44336;
+  &:hover:not(:disabled) {
+    background-color: #f2554a;
+  }
+}

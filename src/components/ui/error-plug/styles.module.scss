@@ -1,0 +1,42 @@
+.container {
+  flex-grow: 1;
+  display: flex;
+  //   height: calc(95 * var(--vh));
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrapper {
+  padding: 0 10px;
+  max-width: 230px;
+  margin: 0 auto;
+  width: 100%;
+  & > img {
+    width: 100%;
+  }
+
+  @include _minLG {
+    max-width: 300px;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 21px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  @include _minMD {
+    margin-top: 50px;
+    font-size: 27px;
+  }
+}
+
+.subTitle {
+  font-size: 16px;
+  text-align: center;
+  color: var(--sub-title-color);
+  @include _minMD {
+    font-size: 20px;
+  }
+}

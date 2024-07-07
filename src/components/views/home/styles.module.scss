@@ -1,0 +1,118 @@
+.wrapper {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding-top: 17px;
+}
+
+.viewBox {
+  flex-grow: 0;
+  border-radius: 7px;
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
+.loaderWapper {
+  display: flex;
+  height: calc(100 * var(--vh));
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.pageContainer {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding: 0 7px;
+}
+
+// todo
+.what {
+  flex-grow: 0;
+  max-width: 100%;
+  flex-basis: 100%;
+
+  @include _minLG {
+    width: auto;
+    max-width: initial;
+    flex-basis: initial;
+  }
+}
+
+.productsView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  @include _minLG {
+    height: 100%;
+  }
+}
+
+.filters {
+  position: fixed;
+  top: 0;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  right: -100%;
+  outline: none;
+  z-index: 1200;
+  width: 100%;
+  max-width: 300px;
+  height: 100dvh;
+  overflow-x: hidden;
+  transition: all 0.3s;
+  background-color: #fff;
+
+  @include _minLG {
+    position: static;
+    right: 0;
+    height: 100%;
+    border-radius: 7px;
+  }
+
+  @include _minDesktop {
+    width: 300px;
+  }
+}
+
+.filtersVisible {
+  right: 0;
+}
+
+.overlay {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.overlayVisible {
+  display: block;
+  @include _minLG {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $lg) {
+  .loaderWapper {
+    height: 100%;
+  }
+
+  .viewBox {
+    max-width: initial;
+    margin-left: 7px;
+    flex-grow: 1;
+    width: calc(100% - 307px);
+    flex-basis: initial;
+  }
+}

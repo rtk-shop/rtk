@@ -1,0 +1,57 @@
+$btn-border-radius: 10px;
+
+.navigationButton {
+  position: absolute;
+  top: 45%;
+  width: 38px;
+  height: 43px;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px;
+  border-radius: 0;
+  transition: all 0.3s;
+  background-color: hsla(0, 100%, 99%, 0.702);
+  &:hover {
+    background-color: hsla(0, 100%, 99%, 0.902);
+  }
+
+  &:active {
+    transform: scale(1.2);
+  }
+  @include _minMD {
+    display: flex;
+  }
+}
+
+.prevButton {
+  border-radius: 4px;
+  border-top-left-radius: $btn-border-radius;
+  border-bottom-left-radius: $btn-border-radius;
+  @include _minMD {
+    left: 3%;
+  }
+}
+
+.prevButtonIcon {
+  fill: #232323;
+  transform: rotate(-90deg);
+}
+
+.nextButton {
+  border-radius: 4px;
+  border-top-right-radius: $btn-border-radius;
+  border-bottom-right-radius: $btn-border-radius;
+  @include _minMD {
+    right: 3%;
+  }
+}
+
+.nextButtonIcon {
+  fill: #232323;
+  transform: rotate(90deg);
+}

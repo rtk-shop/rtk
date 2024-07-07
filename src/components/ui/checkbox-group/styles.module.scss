@@ -1,0 +1,9 @@
+.container {
+  & > div:first-child {
+    padding: 8px 10px;
+  }
+}
+
+.fieldset {
+  border: none;
+}

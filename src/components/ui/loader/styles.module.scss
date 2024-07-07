@@ -1,0 +1,11 @@
+.svgEl {
+  & > rect {
+    fill: $main-color;
+  }
+}
+
+.dark {
+  & > rect {
+    fill: #343434; // dark colors.primary
+  }
+}

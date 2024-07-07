@@ -1,0 +1,46 @@
+.container {
+  position: relative;
+  padding: 10px 10px 20px 10px;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 15px 10px;
+}
+
+.title {
+  margin: 0;
+  line-height: 22px;
+  font-size: 21px;
+  text-align: center;
+  position: relative;
+  font-weight: 500;
+  @include _minLG {
+    text-align: start;
+  }
+}
+
+.divider {
+  margin: 0;
+  height: 2px;
+  margin-bottom: 10px;
+  background-color: #d8bbbb80;
+}
+
+.clearButton {
+  position: absolute;
+  right: 10px;
+  color: #fff;
+  background-color: #232323; // dark #f44336
+  font-weight: 600;
+  top: 17px;
+  font-size: 13px;
+  padding: 5px 6px;
+  border-radius: 7px;
+  border: none;
+}
+
+.tagSectionWrapper {
+  padding: 8px 10px;
+}

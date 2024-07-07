@@ -1,0 +1,64 @@
+$controls-brd-radius: 10px;
+$side-border: 1px solid #dadada;
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 0 3px;
+
+  @include _minLG {
+    justify-content: flex-end;
+    padding: 0 10px;
+    margin-bottom: 0;
+  }
+}
+
+.control {
+  font-size: 14px;
+  background-color: #ededed;
+  border: none;
+  font-weight: 600;
+  width: 100%;
+  border-radius: $controls-brd-radius;
+  padding: 7px;
+}
+
+.sortButton {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: $side-border;
+
+  @include _minLG {
+    max-width: 190px;
+    border: none;
+    border-radius: $controls-brd-radius;
+  }
+}
+
+.sortIcon {
+  margin-right: 10px;
+  font-size: 27px;
+}
+
+.filterButton {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: $side-border;
+}
+
+.filterIcon {
+  margin-right: 10px;
+}
+
+.badge {
+  flex-basis: 50%;
+
+  @include _minLG {
+    display: none;
+  }
+}
+
+.badgeDot {
+  right: 8px;
+}
