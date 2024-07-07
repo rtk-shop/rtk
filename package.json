@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "gen": "graphql-codegen",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\""
   },
   "dependencies": {

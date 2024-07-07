@@ -9,9 +9,9 @@ import { useLazyQuery } from '@apollo/client'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
 import {
-  AllProductsDocument,
-  AllProductsQuery,
-  AllProductsQueryVariables
+  ProductsDocument,
+  ProductsQuery,
+  ProductsQueryVariables
 } from '@/graphql/product/_gen_/products.query'
 
 import styles from './styles.module.scss'
@@ -29,7 +29,7 @@ export type FormValues = {
   category: Array<Lowercase<keyof typeof CategoryType>>
 }
 
-export function CatalogIndex() {
+export function HomeIndex() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
   const [isOpen, setOpen] = useState(false)
 
@@ -37,9 +37,9 @@ export function CatalogIndex() {
   const numOfPage = !isNaN(Number(page)) ? Number(page) : 1
 
   const [getProducts, { loading, data, error }] = useLazyQuery<
-    AllProductsQuery,
-    AllProductsQueryVariables
-  >(AllProductsDocument, {
+    ProductsQuery,
+    ProductsQueryVariables
+  >(ProductsDocument, {
     onCompleted: (data) => {
       if (data?.products.priceRange) {
         const { gt, lt } = data.products.priceRange
