@@ -60,7 +60,7 @@ export function ProductItem({
       case 'new':
         return <span>{t(`productTag.${tag}`)}</span>
       case 'top':
-        return <Image width={19} height={19} src="/assets/icons/fire.png" alt="смайлик - огонь" />
+        return <Image width={19} height={19} src="/icons/fire.png" alt="смайлик - огонь" />
       case 'stock':
         return <span>-{Math.round(((basePrice - price) * 100) / basePrice)}%</span>
       default:

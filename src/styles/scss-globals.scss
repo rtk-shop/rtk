@@ -1,0 +1,75 @@
+$green: rgb(60, 255, 0);
+
+// @media (prefers-color-scheme: dark) {}
+
+$main-color: #f2e30c;
+
+$xs: 0px;
+$sm: 450px;
+$md: 600px;
+$tablet: 800px;
+$lg: 900px;
+$laptop: 1000px;
+$xl: 1200px;
+$desktop: 1400px;
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin hide {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin _minSM {
+  @media (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin _minMD {
+  @media (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin _minTablet {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin _minLG {
+  @media (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin _minLaptop {
+  @media (min-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin _minXL {
+  @media (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin _minDesktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "home": "головна",
+  "catalog": "каталог",
+  "mySearch": "Я шукаю...",
+  "cart": {
+    "topControls": {
+      "title1": "Ваші",
+      "title2": "товари",
+      "action": "Очистити"
+    },
+    "total": "Разом",
+    "makeOrder": "Оформити замовлення",
+    "emptyMsg": "Кошик порожній",
+    "errorMsg": "Не вдалося отримати дані"
+  },
+  "productTag": {
+    "new": "New",
+    "top": "Топ",
+    "stock": "Акція"
+  },
+  "drawer": {
+    "home": "Головна",
+    "profile": "Кабінет",
+    "sales": "Знижки та Акції",
+    "favorite": "Обране",
+    "catalog": "Каталог",
+    "history": "Історія перегляду",
+    "lang": "Мова"
+  },
+  "product": {
+    "common": {
+      "category": "Категорія",
+      "type": "Тип",
+      "color": "Колір",
+      "material": "Матеріал",
+      "textile": "тканина",
+      "plastic": "пластик",
+      "leath": "шкіра"
+    }
+  },
+  "page404": {
+    "title": "Помилка 404",
+    "subTitle1": "Запитану вами",
+    "subTitle2": "сторінку",
+    "subTitle3": "не знайдено",
+    "action": "На головну"
+  }
+}

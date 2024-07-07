@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import styles from './Badge.module.scss'
+import styles from './styles.module.scss'
 
 interface BadgeProps {
   max?: number

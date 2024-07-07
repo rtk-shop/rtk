@@ -1,0 +1,48 @@
+{
+  "home": "главная",
+  "catalog": "каталог",
+  "mySearch": "Я ищу...",
+  "cart": {
+    "topControls": {
+      "title1": "Ваши",
+      "title2": "товары",
+      "action": "Очистить"
+    },
+    "total": "Итого",
+    "makeOrder": "Оформить заказ",
+    "emptyMsg": "Корзина пуста",
+    "errorMsg": "Не удалось получить данные"
+  },
+  "productTag": {
+    "new": "New",
+    "top": "Топ",
+    "stock": "Акция"
+  },
+  "drawer": {
+    "home": "Главная",
+    "profile": "Профиль",
+    "sales": "Скидки и Акции",
+    "favorite": "Избранное",
+    "catalog": "Каталог",
+    "history": "История просмотра",
+    "lang": "Язык"
+  },
+  "product": {
+    "common": {
+      "category": "Категория",
+      "type": "Тип",
+      "color": "Цвет",
+      "material": "Материал",
+      "textile": "ткань",
+      "plastic": "пластик",
+      "leath": "кожа"
+    }
+  },
+  "page404": {
+    "title": "Ошибка 404",
+    "subTitle1": "Запрашиваемая вами",
+    "subTitle2": "страница",
+    "subTitle3": "не найдена",
+    "action": "На главную"
+  }
+}

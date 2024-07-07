@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { IconButton } from '@/components/ui/icon-button'
 
-import styles from './LikeButton.module.scss'
+import styles from './styles.module.scss'
 
 interface LikeButtonProps {
   liked: boolean
