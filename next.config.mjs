@@ -1,7 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
-
-// import i18n from './next-i18next.config.js'
+import nextTranslate from 'next-translate-plugin'
 
 const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
 const __dirname = path.dirname(__filename) // get the name of the director
@@ -36,4 +35,4 @@ const nextConfig = {
   }
 }
 
-export default nextConfig
+export default nextTranslate(nextConfig)

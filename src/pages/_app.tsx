@@ -5,8 +5,6 @@ import client from '../apollo/client'
 import { ApolloProvider } from '@apollo/client'
 // import { ThemeProvider } from '@/providers/theme'
 import { Montserrat } from 'next/font/google'
-import { appWithTranslation } from 'next-i18next'
-import nextI18NextConfig from '../../next-i18next.config'
 import type { AppProps } from 'next/app'
 
 // import '../../node_modules/modern-normalize/modern-normalize.css'
@@ -52,6 +50,4 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   )
 }
 
-// INFO: https://github.com/i18next/next-i18next/issues/1917
-export default appWithTranslation(MyApp, nextI18NextConfig)
-// export default MyApp
+export default MyApp

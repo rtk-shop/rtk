@@ -1,37 +1,34 @@
 {
-  "headers": {
-    "categories": "Категорії",
-    "advise": "Рекомендовані"
-  },
-  "categories": {
-    "suitcases": "Валізи",
-    "bags": "Сумки",
-    "wallets": "Гаманці",
-    "backpacks": "Рюкзаки",
-    "other": "Інше",
-    "seeAll": "дивитись всі"
-  },
-  "promo": {
-    "firstTitle": "Щось у дорогу",
-    "secondTitle": "Щось на кожен день",
-    "action": "Докладніше"
-  },
-  "advantages": {
-    "discounts": {
-      "title": "Акції",
-      "info": "Наявність товарів по акції"
+  "filters": {
+    "title": "Параметри",
+    "clear": "Очистити",
+    "name": {
+      "type": "Тип",
+      "availability": "Наявність",
+      "price": "Ціна",
+      "category": "Категорія"
     },
-    "delivery": {
-      "title": "Доставка по Україні",
-      "info": "У будь-яке місто через накладений платіж"
+    "gender": {
+      "female": "Жіночий",
+      "male": "Чоловічий",
+      "unisex": "Унісекс"
     },
-    "workTime": {
-      "title": "Працюємо весь тиждень",
-      "info": "Пн-Нд, 9:00-20:00"
+    "availability": {
+      "inStock": "В наявності",
+      "byOrder": "Під замовлення"
     },
-    "payment": {
-      "title": "Оплата при отриманні",
-      "info": "Кур'єру або в відділенні Нової Пошти"
+    "tag": {
+      "all": "Усе",
+      "new": "Новинки",
+      "discounts": "Акції"
+    },
+    "categories": {
+      "all": "Інше",
+      "suitcases": "Валізи",
+      "bags": "Сумки",
+      "wallets": "Гаманці",
+      "backpack": "Рюкзаки",
+      "other": "Інше"
     }
   }
 }

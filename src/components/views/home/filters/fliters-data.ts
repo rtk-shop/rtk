@@ -11,15 +11,15 @@ export interface FilterSection {
 const gender: FilterSection = {
   options: [
     {
-      label: 'catalog:filters.gender.female',
+      label: 'filters.gender.female',
       value: 'female'
     },
     {
-      label: 'catalog:filters.gender.male',
+      label: 'filters.gender.male',
       value: 'male'
     },
     {
-      label: 'catalog:filters.gender.unisex',
+      label: 'filters.gender.unisex',
       value: 'unisex'
     }
   ]
@@ -28,11 +28,11 @@ const gender: FilterSection = {
 const availability: FilterSection = {
   options: [
     {
-      label: 'catalog:filters.availability.inStock',
+      label: 'filters.availability.inStock',
       value: 'inStock'
     },
     {
-      label: 'catalog:filters.availability.byOrder',
+      label: 'filters.availability.byOrder',
       value: 'byOrder'
     }
   ]
@@ -41,17 +41,17 @@ const availability: FilterSection = {
 const tags: FilterSection = {
   options: [
     {
-      label: 'Топ', //'catalog:filters.tag.all',
+      label: 'Топ', //'filters.tag.all',
       value: 'top',
       disabled: false
     },
     {
-      label: 'catalog:filters.tag.new',
+      label: 'filters.tag.new',
       value: 'new',
       disabled: false
     },
     {
-      label: 'catalog:filters.tag.discounts',
+      label: 'filters.tag.discounts',
       value: 'stock',
       disabled: false
     }
@@ -61,23 +61,23 @@ const tags: FilterSection = {
 const categories: FilterSection = {
   options: [
     {
-      label: 'catalog:filters.categories.suitcases',
+      label: 'filters.categories.suitcases',
       value: 'suitcase'
     },
     {
-      label: 'catalog:filters.categories.bags',
+      label: 'filters.categories.bags',
       value: 'bag'
     },
     {
-      label: 'catalog:filters.categories.wallets',
+      label: 'filters.categories.wallets',
       value: 'wallet'
     },
     {
-      label: 'catalog:filters.categories.backpack',
+      label: 'filters.categories.backpack',
       value: 'backpack'
     },
     {
-      label: 'catalog:filters.categories.other',
+      label: 'filters.categories.other',
       value: 'other'
     }
   ]

@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckBoxGroup } from '@/components/ui/checkbox-group'
 import { PriceRange } from '@/components/ui/price-range'
+import useTranslation from 'next-translate/useTranslation'
 import fieldProps, { FilterItem } from './fliters-data'
-import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import type { FormValues } from '../index'
 
@@ -16,7 +16,7 @@ interface FiltersProps {
 }
 
 export function Filters({ priceRange, onReset }: FiltersProps) {
-  const { t } = useTranslation(['common', 'catalog'])
+  const { t } = useTranslation('home')
 
   const { gender, availability, tags, categories } = fieldProps
 
@@ -55,22 +55,18 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
     <aside className={styles.container}>
       <form>
         <div className={styles.titleWrapper}>
-          <p className={styles.title}>{t('catalog:filters.title')}</p>
+          <p className={styles.title}>{t('filters.title')}</p>
           {isDirty && (
             <Button color="danger" onClick={handleReset} className={styles.clearButton}>
-              {t('catalog:filters.clear')}
+              {t('filters.clear')}
             </Button>
           )}
         </div>
         <div className={styles.divider} />
-        <CheckBoxGroup
-          title={t('catalog:filters.name.type')}
-          name="gender"
-          options={genderOptions}
-        />
+        <CheckBoxGroup title={t('filters.name.type')} name="gender" options={genderOptions} />
         <CheckBoxGroup
           name="availability"
-          title={t('catalog:filters.name.availability')}
+          title={t('filters.name.availability')}
           options={availabilityOptions}
         />
         <div className={styles.tagSectionWrapper}>
@@ -80,10 +76,10 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
           min={currentRange[0]}
           max={currentRange[1]}
           onSet={handlePriceRange}
-          title={t('catalog:filters.name.price')}
+          title={t('filters.name.price')}
         />
         <CheckBoxGroup
-          title={t('catalog:filters.name.category')}
+          title={t('filters.name.category')}
           name="category"
           options={categoriesOptions}
         />
