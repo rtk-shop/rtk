@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import clsx from 'clsx'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 // import {ScaleLoader} from '@/shared/loaders/ScaleLoader'
 // import Image from 'next/image'
@@ -115,9 +116,9 @@ export function Search() {
           {...register('searchQuery')}
         />
         <IconButton type="submit" className={styles['search-button']}>
-          <div className={clsx('svg-icon', styles['search-icon'])}>
+          <SvgIcon className={styles['search-icon']}>
             <SearchIcon />
-          </div>
+          </SvgIcon>
         </IconButton>
       </form>
       {/* {inputValue && withFocus && (

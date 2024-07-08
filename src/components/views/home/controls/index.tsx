@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useFormContext } from 'react-hook-form'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import FilterIcon from '../../../../../public/icons/filter.svg'
 import SortIcon from '../../../../../public/icons/sort.svg'
 
@@ -22,9 +23,9 @@ export function Controls({ onFilterClick }: ControlsProps) {
         color="secondary"
         className={clsx(styles.control, styles.sortButton)}
         startIcon={
-          <div className={clsx('svg-icon', styles.sortIcon)}>
+          <SvgIcon className={styles.sortIcon}>
             <SortIcon />
-          </div>
+          </SvgIcon>
         }
       >
         По умолчанию
@@ -39,9 +40,9 @@ export function Controls({ onFilterClick }: ControlsProps) {
           onClick={onFilterClick}
           className={clsx(styles.control, styles.filterButton)}
           startIcon={
-            <div className={clsx('svg-icon', styles.filterIcon)}>
+            <SvgIcon className={styles.filterIcon}>
               <FilterIcon />
-            </div>
+            </SvgIcon>
           }
         >
           Фильтр

@@ -9,6 +9,7 @@ import { useFavoriteStore } from '@/store/favorite'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { Search } from './search'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import useTranslation from 'next-translate/useTranslation'
 import MenuIcon from '../../../../public/icons/menu.svg'
 import HeartIcon from '../../../../public/icons/heart.svg'
@@ -50,9 +51,9 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
         )}
       >
         <IconButton disableRipple onClick={onDrawerOpen}>
-          <div className={clsx('svg-icon', styles['menu-icon'])}>
+          <SvgIcon className={styles['menu-icon']}>
             <MenuIcon />
-          </div>
+          </SvgIcon>
         </IconButton>
         <Link href={routeNames.root} className={styles.logo}>
           <Image width={150} height={40} src="/assets/logo.svg" alt="логотип" priority={true} />
@@ -76,23 +77,23 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
         {/*  */}
         <IconButton className={styles.dynamic} onClick={handleFavoritesClick} disableRipple>
           <Badge content={favoriteAmount}>
-            <div className={clsx('svg-icon', styles['heart-icon'])}>
+            <SvgIcon className={styles['heart-icon']}>
               <HeartIcon />
-            </div>
+            </SvgIcon>
           </Badge>
         </IconButton>
         <IconButton className={styles.dynamic} onClick={handleProfileClick} disableRipple>
           <Badge content={0} max={5}>
-            <div className={clsx('svg-icon', styles['profile-icon'])}>
+            <SvgIcon className={styles['profile-icon']}>
               <ProfileIcon />
-            </div>
+            </SvgIcon>
           </Badge>
         </IconButton>
         <IconButton className={styles['cart-button']} onClick={handleCartClick} disableRipple>
           <Badge content={cartAmount}>
-            <div className={clsx('svg-icon', styles['cart-icon'])}>
+            <SvgIcon className={styles['cart-icon']}>
               <CartIcon />
-            </div>
+            </SvgIcon>
           </Badge>
         </IconButton>
       </div>

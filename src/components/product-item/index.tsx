@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { LikeButton } from '@/components/ui/like-button'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
+import { SvgIcon } from '../ui/svg-icon'
 import TrashIcon from '../../../public/icons/trash.svg'
 import useTranslation from 'next-translate/useTranslation'
 import { formatPrice, getProductMainTagColor } from '@/utils/helpers'
@@ -92,9 +93,9 @@ export function ProductItem({
           <div className={styles.buttonWrapper}>
             {withDelete ? (
               <IconButton onClick={handleActionClick}>
-                <div className={clsx('svg-icon', styles.trashIcon)}>
+                <SvgIcon className={styles.trashIcon}>
                   <TrashIcon />
-                </div>
+                </SvgIcon>
               </IconButton>
             ) : (
               <LikeButton liked={isLiked} onClick={handleActionClick} />

@@ -1,5 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
+import { SvgIcon } from '../svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import ArrowIcon from '../../../../public/assets/icons/expand-arrow.svg'
 
@@ -18,18 +19,18 @@ export function NavButtons({ onPrev, onNext }: NavButtonsProps) {
         disableRipple
         className={clsx(styles.navigationButton, styles.prevButton)}
       >
-        <div className={clsx('svg-icon', styles.prevButtonIcon)}>
+        <SvgIcon className={styles.prevButtonIcon}>
           <ArrowIcon />
-        </div>
+        </SvgIcon>
       </IconButton>
       <IconButton
         onClick={onNext}
         disableRipple
         className={clsx(styles.navigationButton, styles.nextButton)}
       >
-        <div className={clsx('svg-icon', styles.nextButtonIcon)}>
+        <SvgIcon className={styles.nextButtonIcon}>
           <ArrowIcon />
-        </div>
+        </SvgIcon>
       </IconButton>
     </>
   )
