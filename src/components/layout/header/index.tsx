@@ -56,7 +56,7 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
           </SvgIcon>
         </IconButton>
         <Link href={routeNames.root} className={styles.logo}>
-          <Image width={150} height={40} src="/assets/logo.svg" alt="логотип" priority={true} />
+          <Image width={150} height={50} src="/assets/logo.svg" alt="логотип" priority={true} />
         </Link>
         <nav>
           <ul className={styles.navlist}>

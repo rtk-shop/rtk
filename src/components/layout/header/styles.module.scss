@@ -1,3 +1,5 @@
+$icon-color: #171717;
+
 .header {
   position: sticky;
   z-index: 500;
@@ -5,20 +7,22 @@
   left: 0;
   right: 0;
   flex-wrap: wrap;
-  padding: 5px 0;
-  background-color: #171717; // #1e1e1e;
+  padding: 10px 0;
+  background-color: #171717;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.05),
     0 1px 4px rgba(0, 0, 0, 0.05),
     0 2px 8px rgba(0, 0, 0, 0.05);
 
   @include _minLG {
+    background-color: #fff; // #e4ff00;
     position: static;
     padding: 10px 17px;
+    border-bottom: none;
   }
 
   @include _minXL {
-    padding: 13px 50px;
+    padding: 10px 50px;
   }
 }
 
@@ -73,14 +77,14 @@
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
-    color: $main-color;
+    color: #171717;
     transition: color 0.3s;
 
     &::after {
       content: '';
       position: absolute;
       border-bottom: 2px solid;
-      border-bottom-color: $main-color;
+      border-bottom-color: #171717;
       bottom: -7px;
       left: 0;
       right: 0;
@@ -106,13 +110,16 @@
 }
 
 .menu-icon {
-  fill: $main-color;
+  fill: #efefef;
+  @include _minLG {
+    fill: $icon-color;
+  }
 }
 
 .heart-icon {
   font-size: 24px;
   fill: none;
-  stroke: $main-color;
+  stroke: $icon-color;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.2);
@@ -121,7 +128,7 @@
 
 .profile-icon {
   font-size: 24px;
-  fill: $main-color;
+  fill: $icon-color;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.2);
@@ -130,14 +137,19 @@
 
 .cart-icon {
   font-size: 27px;
-  fill: $main-color;
-  stroke: $main-color;
+  fill: #efefef;
+  stroke: #efefef;
+
   @include _minMD {
     font-size: 25px;
     transition: all 0.3s;
     &:hover {
       transform: scale(1.2);
     }
+  }
+  @include _minLG {
+    fill: $icon-color;
+    stroke: $icon-color;
   }
 }
 

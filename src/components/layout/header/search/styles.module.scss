@@ -17,7 +17,7 @@
 
 .search-input {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
   position: absolute;
   right: 0;
   outline: none;
@@ -27,22 +27,29 @@
   z-index: 450;
   transition-duration: 0.4s;
   border-radius: 10px;
-  border: 1px solid;
-  color: #fff;
-  border-color: #3c4144;
-  background-color: #3c4144;
+  border: 2px solid;
+  color: #171717;
+  border-color: transparent;
+  background-color: #dfdfdf;
   padding: 10px 46px 10px 15px;
   -moz-transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
   -o-transition-duration: 0.4s;
   &::placeholder {
-    color: #c4c4c4;
+    color: #272727;
     text-align: center;
+    @include _minLG {
+      color: #8e8e8e;
+    }
+  }
+  &:focus {
+    border-color: #171717;
   }
 
   @include _minLG {
     width: 100%;
-    border-color: transparent;
+    border-color: #cacaca;
+    background-color: #fff;
   }
 }
 
@@ -53,11 +60,11 @@
 
 .search-button {
   z-index: 475;
-  color: #bbc0c4;
+  color: #171717;
 }
 
 .search-icon {
-  fill: #bbc0c4;
+  fill: #171717;
   font-size: 19px;
   @include _minMD {
     font-size: 22px;
