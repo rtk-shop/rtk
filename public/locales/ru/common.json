@@ -1,7 +1,9 @@
 {
-  "home": "главная",
-  "catalog": "каталог",
-  "mySearch": "Я ищу...",
+  "header": {
+    "home": "главная",
+    "catalog": "каталог",
+    "mySearch": "Я ищу..."
+  },
   "cart": {
     "topControls": {
       "title1": "Ваши",
