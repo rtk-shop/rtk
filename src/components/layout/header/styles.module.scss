@@ -1,40 +1,75 @@
 $icon-color: #171717;
+$mobile-icon-color: #efefef;
 
-.header {
+.container {
   position: sticky;
   z-index: 500;
   top: 0;
   left: 0;
   right: 0;
+
+  @include _minLG {
+    position: static;
+  }
+}
+
+.cap {
+  display: none;
+
+  @include _minLG {
+    display: flex;
+    max-width: 1700px;
+    margin: 0 auto;
+    justify-content: flex-end;
+    padding: 7px 17px;
+  }
+
+  @include _minXL {
+    padding: 7px 60px;
+  }
+}
+
+.capList {
+  color: #747474;
+  display: flex;
+  font-weight: 600;
+  font-size: 14px;
+  & li {
+    margin-left: 20px;
+  }
+}
+
+.header {
   flex-wrap: wrap;
-  padding: 10px 0;
   background-color: #171717;
+
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.05),
     0 1px 4px rgba(0, 0, 0, 0.05),
     0 2px 8px rgba(0, 0, 0, 0.05);
 
   @include _minLG {
+    box-shadow: none;
     background-color: #fff; // #e4ff00;
-    position: static;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+  }
+}
+
+.inner {
+  max-width: 1700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+
+  @include _minLG {
     padding: 10px 17px;
-    border-bottom: none;
   }
 
   @include _minXL {
-    padding: 10px 50px;
+    padding: 13px 50px;
   }
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 1500px;
-}
-
-.wrapper-expand {
-  max-width: 1700px;
 }
 
 .logo {
@@ -54,9 +89,6 @@ $icon-color: #171717;
 
 .navlist {
   display: none;
-  padding: 0;
-  margin: 0;
-  list-style: none;
   & li {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -110,7 +142,7 @@ $icon-color: #171717;
 }
 
 .menu-icon {
-  fill: #efefef;
+  fill: $mobile-icon-color;
   @include _minLG {
     fill: $icon-color;
   }
@@ -119,26 +151,32 @@ $icon-color: #171717;
 .heart-icon {
   font-size: 24px;
   fill: none;
-  stroke: $icon-color;
+  stroke: $mobile-icon-color;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.2);
+  }
+  @include _minLG {
+    stroke: $icon-color;
   }
 }
 
 .profile-icon {
   font-size: 24px;
-  fill: $icon-color;
+  fill: $mobile-icon-color;
   transition: all 0.3s;
   &:hover {
     transform: scale(1.2);
+  }
+  @include _minLG {
+    fill: $icon-color;
   }
 }
 
 .cart-icon {
   font-size: 27px;
-  fill: #efefef;
-  stroke: #efefef;
+  fill: $mobile-icon-color;
+  stroke: $mobile-icon-color;
 
   @include _minMD {
     font-size: 25px;

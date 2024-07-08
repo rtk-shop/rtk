@@ -43,60 +43,66 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
   }
 
   return (
-    <header className={styles.header}>
-      <div
-        className={clsx(
-          styles.wrapper,
-          pathname === routeNames.catalog && styles['wrapper-expand']
-        )}
-      >
-        <IconButton disableRipple onClick={onDrawerOpen}>
-          <SvgIcon className={styles['menu-icon']}>
-            <MenuIcon />
-          </SvgIcon>
-        </IconButton>
-        <Link href={routeNames.root} className={styles.logo}>
-          <Image width={150} height={50} src="/assets/logo.svg" alt="логотип" priority={true} />
-        </Link>
-        <nav>
-          <ul className={styles.navlist}>
-            <li>
-              <Link href={routeNames.root} className={styles['nav-link']}>
-                {t('header.home')}
-              </Link>
-            </li>
-            <li>
-              <Link href={routeNames.catalog} className={styles['nav-link']}>
-                {t('header.catalog')}
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        {/*  */}
-        <Search />
-        {/*  */}
-        <IconButton className={styles.dynamic} onClick={handleFavoritesClick} disableRipple>
-          <Badge content={favoriteAmount}>
-            <SvgIcon className={styles['heart-icon']}>
-              <HeartIcon />
-            </SvgIcon>
-          </Badge>
-        </IconButton>
-        <IconButton className={styles.dynamic} onClick={handleProfileClick} disableRipple>
-          <Badge content={0} max={5}>
-            <SvgIcon className={styles['profile-icon']}>
-              <ProfileIcon />
-            </SvgIcon>
-          </Badge>
-        </IconButton>
-        <IconButton className={styles['cart-button']} onClick={handleCartClick} disableRipple>
-          <Badge content={cartAmount}>
-            <SvgIcon className={styles['cart-icon']}>
-              <CartIcon />
-            </SvgIcon>
-          </Badge>
-        </IconButton>
+    <div className={clsx(styles.container)}>
+      <div className={styles.cap}>
+        <ul className={styles.capList}>
+          {/* TODO: env + t()  */}
+          <li>Курс 1$=40.3₴</li>
+          <li>Тел: 077-777-7777</li>
+          <li>Прием заказов: с 8:00 до 13:00</li>
+          <li>Дни работы: ПН-СР-ЧТ-СБ</li>
+        </ul>
       </div>
-    </header>
+      <header className={styles.header}>
+        <div className={styles.inner}>
+          <IconButton disableRipple onClick={onDrawerOpen}>
+            <SvgIcon className={styles['menu-icon']}>
+              <MenuIcon />
+            </SvgIcon>
+          </IconButton>
+          <Link href={routeNames.root} className={styles.logo}>
+            <Image width={150} height={50} src="/assets/logo.svg" alt="логотип" priority={true} />
+          </Link>
+          <nav>
+            <ul className={styles.navlist}>
+              <li>
+                <Link href={routeNames.root} className={styles['nav-link']}>
+                  {t('header.home')}
+                </Link>
+              </li>
+              <li>
+                <Link href={routeNames.catalog} className={styles['nav-link']}>
+                  {t('header.catalog')}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          {/*  */}
+          <Search />
+          {/*  */}
+          <IconButton className={styles.dynamic} onClick={handleFavoritesClick} disableRipple>
+            <Badge content={favoriteAmount}>
+              <SvgIcon className={styles['heart-icon']}>
+                <HeartIcon />
+              </SvgIcon>
+            </Badge>
+          </IconButton>
+          <IconButton className={styles.dynamic} onClick={handleProfileClick} disableRipple>
+            <Badge content={0} max={5}>
+              <SvgIcon className={styles['profile-icon']}>
+                <ProfileIcon />
+              </SvgIcon>
+            </Badge>
+          </IconButton>
+          <IconButton className={styles['cart-button']} onClick={handleCartClick} disableRipple>
+            <Badge content={cartAmount}>
+              <SvgIcon className={styles['cart-icon']}>
+                <CartIcon />
+              </SvgIcon>
+            </Badge>
+          </IconButton>
+        </div>
+      </header>
+    </div>
   )
 })
