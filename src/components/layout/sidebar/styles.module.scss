@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+  width: 75vw;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--sidebar-bkg);
+}
+
+.langSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 15px;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  & > span {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}

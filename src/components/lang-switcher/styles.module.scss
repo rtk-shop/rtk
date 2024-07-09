@@ -1,0 +1,52 @@
+$box-radius: 8px;
+
+.container {
+  display: flex;
+  border-color: #f0f0f0;
+  background-color: #eaeaea;
+  border-radius: $box-radius;
+  position: relative;
+}
+
+.lang {
+  cursor: pointer;
+  font-weight: 600;
+  display: block;
+  padding: 6px 18px;
+  font-size: 16px;
+  line-height: 23px;
+  user-select: none;
+  margin-right: 7px;
+  z-index: 100;
+  &:last-child {
+    margin-right: 0;
+  }
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang.current {
+  color: #fff;
+}
+
+.island {
+  width: 50%;
+  height: 100%;
+  background-color: #232323;
+  position: absolute;
+  z-index: 50;
+  // default ru
+  transform: translateX(100%);
+  border-top-right-radius: $box-radius;
+  border-bottom-right-radius: $box-radius;
+
+  transition-property: transform;
+  transition-timing-function: ease-in;
+  transition-duration: 160ms;
+}
+
+.island.ua {
+  transform: translateX(0);
+  border-radius: 0;
+  border-top-left-radius: $box-radius;
+  border-bottom-left-radius: $box-radius;
+}
