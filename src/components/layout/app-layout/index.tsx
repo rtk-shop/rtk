@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Header } from '../header'
-// import { Footer } from '../Footer'
+import { Footer } from '../footer'
 // import { Sidebar } from '@/components/Sidebar'
 // import { Cart } from '../Cart'
 import { useCartStore } from '@/store/cart'
@@ -45,7 +45,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       {/* <Cart isOpen={isCartOpen} onClose={handleCartClose} /> */}
       <Header onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
       <main>{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

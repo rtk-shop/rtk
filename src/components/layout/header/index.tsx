@@ -48,7 +48,7 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
         <ul className={styles.capList}>
           {/* TODO: env + t()  */}
           <li>Курс 1$=40.3₴</li>
-          <li>Тел: 077-777-7777</li>
+          <li>Тел: {process.env.NEXT_PUBLIC_CONTACT_PHONE}</li>
           <li>Прием заказов: с 8:00 до 13:00</li>
           <li>Дни работы: ПН-СР-ЧТ-СБ</li>
         </ul>
