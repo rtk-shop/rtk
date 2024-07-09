@@ -5,7 +5,7 @@
   position: fixed;
   //   box-shadow: ${({ $open }) => ($open ? '0 0 15px rgba(0, 0, 0, 0.5)' : 'none')};
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  transition: transform 199ms ease-in;
+  transition: transform 199ms ease-in-out;
   z-index: 1000;
   //   ${({ $pos, $open }) => {
   //     switch ($pos) {
