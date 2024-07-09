@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import clsx from 'clsx'
 import ExpandIcon from '../../../../public/icons/expand-arrow.svg'
 
@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 
 interface CollapseHeadProps {
   collapsed: boolean
-  title: string | React.ReactNode
+  title: string | ReactNode
   onCollapse(): void
 }
 

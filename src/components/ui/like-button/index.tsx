@@ -1,4 +1,4 @@
-import React from 'react'
+import { MouseEvent } from 'react'
 import clsx from 'clsx'
 import { IconButton } from '@/components/ui/icon-button'
 
@@ -11,7 +11,7 @@ interface LikeButtonProps {
   text?: string
   disableRipple?: boolean
   className?: string
-  onClick: (e: React.MouseEvent) => void
+  onClick: (e: MouseEvent) => void
 }
 
 export function LikeButton({

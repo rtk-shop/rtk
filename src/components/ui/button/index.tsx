@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { ReactNode, forwardRef, RefObject, MouseEvent } from 'react'
 import clsx from 'clsx'
 import { ScaleLoader } from '@/components/ui/loader'
 import styles from './styles.module.scss'
@@ -14,16 +14,16 @@ interface ButtonProps {
   to?: string
   type?: 'button' | 'reset' | 'submit'
   color?: keyof typeof ButtonColor
-  children: React.ReactNode
-  startIcon?: React.ReactNode
-  endIcon?: React.ReactNode
+  children: ReactNode
+  startIcon?: ReactNode
+  endIcon?: ReactNode
   loading?: boolean
   disabled?: boolean
   fullWidth?: boolean
   withShadow?: boolean
   tabIndex?: number
-  ref?: React.RefObject<HTMLButtonElement> | null
-  onClick?(event: React.MouseEvent<HTMLButtonElement>): void
+  ref?: RefObject<HTMLButtonElement> | null
+  onClick?(event: MouseEvent<HTMLButtonElement>): void
   className?: string
 }
 

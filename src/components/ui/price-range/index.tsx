@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import Slider from 'rc-slider'
 import { Button } from '@/components/ui/button'
 import { Collapse, CollapseHead } from '@/components/ui/collapse'
@@ -48,13 +48,13 @@ export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps
     }
   }
 
-  const onMinChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const onMinChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const min = +event.target.value
     setMinInputValue(min)
     setSliderMin(min)
   }
 
-  const onMaxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const onMaxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const max = +event.target.value
     setMaxInputValue(max)
     setSliderMax(max)

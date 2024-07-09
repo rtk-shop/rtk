@@ -1,4 +1,3 @@
-import React from 'react'
 import clsx from 'clsx'
 import { useFormContext } from 'react-hook-form'
 import styles from './styles.module.scss'

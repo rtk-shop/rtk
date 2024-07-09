@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, ReactNode } from 'react'
 import { Header } from '../header'
 import { Footer } from '../footer'
 // import { Sidebar } from '@/components/Sidebar'
@@ -9,7 +9,7 @@ import { useUiStore } from '@/store/ui'
 import { useUserStore } from '@/store/user'
 
 interface AppLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function AppLayout({ children }: AppLayoutProps) {

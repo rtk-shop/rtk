@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef, ReactNode, MouseEvent } from 'react'
 import clsx from 'clsx'
 import { ScaleLoader } from '@/components/ui/loader'
 import styles from './styles.module.scss'
@@ -6,13 +6,13 @@ import styles from './styles.module.scss'
 interface IconButtonProps {
   to?: string
   type?: 'button' | 'reset' | 'submit'
-  children: React.ReactNode
+  children: ReactNode
   loading?: boolean
   disabled?: boolean // TODO: disabled styles
   darkLoader?: boolean
   disableRipple?: boolean
   className?: string
-  onClick?(event: React.MouseEvent<HTMLButtonElement>): void
+  onClick?(event: MouseEvent<HTMLButtonElement>): void
 }
 
 export function IconButton({
@@ -27,7 +27,7 @@ export function IconButton({
 }: IconButtonProps) {
   const rippleEl = useRef<HTMLSpanElement | null>(null)
 
-  const handleRippleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRippleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!disableRipple) {
       const button = event.currentTarget
       const circle = document.createElement('span')

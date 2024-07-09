@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ReactNode } from 'react'
 
 interface CollapseProps {
   open?: boolean
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function Collapse({ open, children }: CollapseProps) {

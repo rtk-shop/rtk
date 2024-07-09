@@ -1,11 +1,11 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import clsx from 'clsx'
 import styles from './styles.module.scss'
 
 interface BadgeProps {
   max?: number
   color?: string
-  children: React.ReactNode
+  children: ReactNode
   content?: string | number
   className?: string
   dotClassName?: string

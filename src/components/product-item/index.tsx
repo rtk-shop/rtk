@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, ReactElement } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -56,7 +56,7 @@ export function ProductItem({
     setLiked(!isLiked)
   }
 
-  function genTagView(productTag: string): React.ReactElement | null {
+  function genTagView(productTag: string): ReactElement | null {
     switch (productTag) {
       case 'new':
         return <span>{t(`productTag.${tag}`)}</span>
