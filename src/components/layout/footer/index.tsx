@@ -14,7 +14,13 @@ export const Footer = memo(function Footer() {
         <div className={styles.brand}>
           <Link href="#">
             <div className={styles.logo}>
-              <Image src="/assets/logo.svg" alt="логотип" width={190} height={41} />
+              <Image
+                src="/assets/logo.svg"
+                alt="логотип"
+                priority={false}
+                width={190}
+                height={41}
+              />
             </div>
           </Link>
           <div className={styles.logoBox}>
