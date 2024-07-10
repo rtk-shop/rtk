@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  @include _minLG {
+    max-width: 500px;
+  }
+}
+
+.controlButton {
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #343434; // dark #fff
+  padding: 10px;
+  border-radius: 10px;
+  flex-grow: 1;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: #ededed; // dark #353535
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      background-color: #ededed; // dark #353535
+    }
+  }
+
+  @include _minDesktop {
+    flex-grow: initial;
+  }
+}
+
+.likeButton {
+  position: relative;
+  flex-grow: 1;
+  order: 1;
+  flex-basis: 100%;
+
+  @include _minDesktop {
+    margin: 0 15px;
+    order: initial;
+    flex-basis: initial;
+    flex-grow: 1;
+    &::before {
+      position: absolute;
+      content: '';
+      background-color: #cfcfcf;
+      width: 2px;
+      height: 60%;
+      left: -5%;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      background-color: #cfcfcf;
+      width: 2px;
+      height: 60%;
+      right: -5%;
+    }
+  }
+}
+
+.icon {
+  height: 100%;
+  margin-right: 10px;
+  font-size: 18px;
+  fill: #232323; // dark #d0d0d0
+}
+
+.shareIcon {
+  font-size: 16px;
+}

@@ -1,0 +1,181 @@
+$breakpoint: 770px;
+
+.container {
+  padding: 10px 10px 15px 10px;
+  @include _minLG {
+    padding-top: 30px;
+  }
+}
+
+.title {
+  font-size: 22px;
+  line-height: 25px;
+  font-weight: 600;
+  margin: 15px 0;
+  @include _minXL {
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 25px;
+    line-height: 30px;
+  }
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-basis: 100%;
+  @include _minLaptop {
+    flex-basis: auto;
+  }
+}
+
+.skuCode {
+  color: #343434;
+  margin: 0;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 17px;
+  margin-left: 20px;
+  & span {
+    color: #939191;
+  }
+}
+
+.availabilityPlug {
+  display: inline-flex;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  width: auto;
+  padding: 7px 12px 7px 10px;
+  color: #57ae00;
+  background-color: #e2f9cd;
+  & > span {
+    font-size: 12px;
+    margin-left: 5px;
+    font-weight: 600;
+  }
+  @include _minLaptop {
+    margin-bottom: 0;
+  }
+}
+
+.availabilityOutStock {
+  color: #8d8d8d;
+  background-color: #e4e4e4;
+}
+
+.availabilityIcon {
+  fill: #8d8d8d;
+  font-size: 18px;
+  margin-right: 3px;
+}
+
+.availabilityIconInStock {
+  fill: #57ae00;
+}
+
+.currentPrice {
+  margin: 0;
+  font-size: 29px;
+  line-height: 29px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  & span {
+    font-size: 25px;
+  }
+}
+
+.discountPriceBox {
+  color: #f44336;
+}
+
+.discountPrice {
+  color: #999999;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.percentage {
+  color: #fff;
+  margin-left: 7px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 2px 3px;
+  background-color: #f44336;
+}
+
+.buttonsWrapper {
+  margin: 30px 0 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include _minMD {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  @media (min-width: $breakpoint) {
+    flex-wrap: wrap;
+  }
+}
+
+.orderNowButton {
+  color: #fff;
+  border: none;
+  padding: 18px;
+  font-size: 16px;
+  max-width: 500px;
+  font-weight: 600;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  background-color: #232323;
+  &:hover {
+    background-color: #32cd32;
+  }
+
+  @include _minMD {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+
+  @media (min-width: $breakpoint) {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+}
+
+.orderButtonIcon {
+  font-size: 30px;
+  fill: #232323;
+  margin-right: 10px;
+  transition: all 250ms;
+}
+
+.orderButton {
+  max-width: 500px;
+  background-color: transparent;
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: none;
+  font-weight: 600;
+  padding: 10px;
+  color: #232323;
+  border: 2px solid #232323;
+  &:hover {
+    & .orderButtonIcon {
+      transform: scale(1.1);
+    }
+  }
+}

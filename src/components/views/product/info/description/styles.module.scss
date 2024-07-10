@@ -1,0 +1,54 @@
+.container {
+  padding: 10px 5px;
+}
+
+.title {
+  margin-top: 0;
+  margin: 10px 0 5px 0;
+  font-size: 24px;
+}
+
+.descText {
+  margin-top: 0;
+  font-weight: 500;
+  font-size: 16px;
+  @include _minLG {
+    font-size: 17px;
+  }
+}
+
+.inner {
+  max-width: 700px;
+}
+
+.detail {
+  margin: 0;
+  margin-bottom: 3px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.detailTitle {
+  color: #777;
+  flex-shrink: 0;
+}
+
+.divider {
+  margin-right: 4%;
+  margin-left: 2%;
+  color: #777;
+}
+
+.info {
+  flex-basis: 60%;
+  color: #000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  @include _minLG {
+    flex-basis: 75%;
+  }
+}

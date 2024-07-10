@@ -1,0 +1,38 @@
+.container {
+  margin-top: 28px;
+  padding: 0;
+}
+
+.deliveryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 15px;
+  font-weight: 500;
+  margin-bottom: 13px;
+  @include _minLG {
+    font-size: 15px;
+  }
+  & p {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+
+  & p {
+    margin-left: 7px;
+    text-align: left;
+  }
+}
+
+.freeDelivery {
+  color: #343434;
+  background-color: #ffff83;
+  border-radius: 12px;
+  padding: 4px 6px;
+}

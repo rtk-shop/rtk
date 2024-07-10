@@ -1,0 +1,51 @@
+.container {
+  margin-top: 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 5px;
+  @include _minLG {
+    padding: 0 25px;
+  }
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  @include _minMD {
+    margin-bottom: 50px;
+  }
+}
+
+$wrapper-bp: 770px;
+
+.previewWrapper {
+  flex-grow: 0;
+  flex-basis: 100%;
+  max-width: 100%;
+  @media (min-width: $wrapper-bp) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  @include _minXL {
+    flex-basis: 60%;
+    max-width: 60%;
+  }
+}
+
+.detailsWrapper {
+  flex-grow: 0;
+  flex-basis: 100%;
+  max-width: 100%;
+  @media (min-width: $wrapper-bp) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  @include _minXL {
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+}
