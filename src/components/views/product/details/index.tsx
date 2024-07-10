@@ -5,7 +5,6 @@ import HeaderCartIcon from '../../../../../public/icons/header_cart.svg'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { Button } from '@/components/ui/button'
 import { Tags } from './tags'
-// import { Rating } from '@/components/Rating'
 import { Delivery } from './delivery'
 import { SizeGuide } from './size-guide'
 import { SubControls } from './sub-controls'
@@ -24,21 +23,9 @@ interface DetailsProps {
   tags?: string[]
   basePrice: number
   inStock: boolean
-  rating?: number
-  delivery: string
 }
 
-export function Details({
-  id,
-  sku,
-  title,
-  currentPrice,
-  tags,
-  inStock,
-  basePrice,
-  rating,
-  delivery
-}: DetailsProps) {
+export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
   const router = useRouter()
 
   const addItem = useCartStore((state) => state.addItem)
@@ -80,7 +67,6 @@ export function Details({
           <span>{inStock ? 'В наличии' : 'Нет в наличии'}</span>
         </div>
         <div className={styles.inner}>
-          {/* <Rating starRating={rating} /> */}
           <p className={styles.skuCode}>
             <span>Код:</span>&nbsp;{sku}
           </p>
@@ -125,9 +111,8 @@ export function Details({
         </Button>
       </div>
       <SubControls productId={id} />
-
       {tags && tags.length > 1 && <Tags tags={tags} />}
-      <Delivery free={delivery === 'free'} />
+      <Delivery />
     </section>
   )
 }

@@ -6,19 +6,13 @@ import type { GetProductQuery } from '@/graphql/product/_gen_/product.query'
 import styles from './styles.module.scss'
 import 'keen-slider/keen-slider.min.css'
 
-interface TodoProps {
-  rating: number
-}
-
 interface ProductIndexProps {
   product: Extract<GetProductQuery['product'], { __typename: 'Product' }>
-  todo: TodoProps
 }
 
-export function ProductIndex({ product, todo }: ProductIndexProps) {
+export function ProductIndex({ product }: ProductIndexProps) {
   const TODO_TAGS: string[] = []
 
-  const delivery = 'free'
   const dimensions = 'no no no'
 
   return (
@@ -36,8 +30,6 @@ export function ProductIndex({ product, todo }: ProductIndexProps) {
             inStock={product.inStock}
             basePrice={product.basePrice}
             currentPrice={product.currentPrice}
-            rating={todo.rating}
-            delivery={delivery}
           />
         </div>
       </div>

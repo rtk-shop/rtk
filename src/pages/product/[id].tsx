@@ -4,23 +4,12 @@ import { ProductIndex } from '@/components/views/product'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { productIdFromSlug } from '@/utils/navigation'
 
-function getRandomRating(): number {
-  const min = 3
-  const max = 5
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
 interface Params extends ParsedUrlQuery {
   id: string
 }
 
-interface TodoProps {
-  rating: number
-}
-
 export const getServerSideProps: GetServerSideProps<{
   product: QueryResult
-  todo: TodoProps
   err: boolean
 }> = async (ctx) => {
   const params = ctx.params as Params
@@ -36,15 +25,9 @@ export const getServerSideProps: GetServerSideProps<{
     err = true
   }
 
-  // TODO: no rating there
-  const todo = {
-    rating: getRandomRating()
-  }
-
   return {
     props: {
       product: data,
-      todo,
       err
     }
   }
@@ -52,7 +35,6 @@ export const getServerSideProps: GetServerSideProps<{
 
 export default function Product({
   product,
-  todo,
   err
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   if (!product || err) {
@@ -71,5 +53,5 @@ export default function Product({
     )
   }
 
-  return <ProductIndex product={product} todo={todo} />
+  return <ProductIndex product={product} />
 }

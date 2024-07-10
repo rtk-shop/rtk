@@ -1,6 +1,13 @@
-.container {
-  margin-top: 28px;
-  padding: 0;
+.title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 17px;
+  padding-left: 2px;
+  margin: 20px 0 10px 0;
+}
+
+.deliveryList {
+  padding-left: 3px;
 }
 
 .deliveryItem {
@@ -28,11 +35,4 @@
     margin-left: 7px;
     text-align: left;
   }
-}
-
-.freeDelivery {
-  color: #343434;
-  background-color: #ffff83;
-  border-radius: 12px;
-  padding: 4px 6px;
 }
