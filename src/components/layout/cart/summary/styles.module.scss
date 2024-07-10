@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  padding: 15px 10px 25px 15px;
+  background-color: #f3f3f3; // dark #282828
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.cartPrice {
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  & > b {
+    font-size: 19px;
+    font-weight: 600;
+  }
+}
+
+.skeleton {
+  padding: 15px 10px 19px 15px;
+}

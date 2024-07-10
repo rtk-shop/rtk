@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  position: relative;
+  margin-bottom: 35px;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    border-radius: inherit;
+    background-color: #dcdcdc;
+    bottom: -20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  min-width: 100px;
+  max-width: 180px;
+  position: relative;
+  margin-right: 20px;
+  & > a > div {
+    border-radius: 8px;
+  }
+}
+
+.info {
+  width: 100%;
+  max-width: 900px;
+  padding-top: 10px;
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.title {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 500;
+  padding-bottom: 4px;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover,
+  &:focus {
+    color: orange;
+    outline: none;
+  }
+}
+
+.price {
+  color: #707070;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.amount {
+  margin: 0;
+  padding-left: 1px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.deleteButton {
+  color: #a7a7a7;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 0px 17px;
+  background-color: #eee; // dark #363636
+  fill: #9b9b9b;
+  &:hover {
+    fill: #434343;
+  }
+}
+
+.trashIcon {
+  font-size: 20px;
+  transition: fill 0.2s;
+}

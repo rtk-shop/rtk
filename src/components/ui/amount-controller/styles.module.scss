@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #b4b4b4;
+  border-radius: 12px;
+}
+
+.button {
+  padding: 7px;
+  &:active {
+    transform: scale(1.1);
+  }
+}
+
+.icon {
+  fill: #1e1e1e;
+  font-size: 18px;
+}
+
+.counter {
+  width: 27px;
+  font-size: 16px;
+  display: inline-block;
+  color: #1e1e1e;
+  text-align: center;
+  user-select: none;
+  font-weight: 600;
+}

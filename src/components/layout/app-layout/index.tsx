@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, ReactNode } from 'react'
 import { Header } from '../header'
 import { Footer } from '../footer'
 import { Sidebar } from '@/components/layout/sidebar'
-// import { Cart } from '../Cart'
+import { Cart } from '../cart'
 import { useCartStore } from '@/store/cart'
 import { useFavoriteStore } from '@/store/favorite'
 import { useUiStore } from '@/store/ui'
@@ -42,7 +42,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseDrawer} />
-      {/* <Cart isOpen={isCartOpen} onClose={handleCartClose} /> */}
+      <Cart isOpen={isCartOpen} onClose={handleCartClose} />
       <Header onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
       <main>{children}</main>
       <Footer />

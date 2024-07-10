@@ -1,0 +1,9 @@
+query CartProducts($input: [CartItem!]!) {
+  cartProducts(input: $input) {
+    id
+    slug
+    title
+    currentPrice
+    preview
+  }
+}
