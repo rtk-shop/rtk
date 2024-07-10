@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import clsx from 'clsx'
 import Link from 'next/link'
 import TrashIcon from '../../../public/icons/trash.svg'
+import { SvgIcon } from '../ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
@@ -41,6 +41,8 @@ export function CartItem({ product, amount, onRemove }: CartItemProps) {
     onRemove(id)
   }
 
+  SvgIcon
+
   return (
     <li className={styles.container}>
       <div className={styles.imageWrapper}>
@@ -68,9 +70,9 @@ export function CartItem({ product, amount, onRemove }: CartItemProps) {
             aria-label={`Удалить "${title}"`}
             className={styles.deleteButton}
           >
-            <div className={clsx('svg-icon', styles.trashIcon)}>
+            <SvgIcon className={styles.trashIcon}>
               <TrashIcon />
-            </div>
+            </SvgIcon>
           </IconButton>
         </div>
       </div>

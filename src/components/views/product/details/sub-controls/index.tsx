@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import CommentIcon from '../../../../../../public/icons/comment.svg'
 import ShareIcon from '../../../../../../public/icons/share.svg'
 import { Button } from '@/components/ui/button'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/store/favorite'
 
@@ -32,9 +33,9 @@ export function SubControls({ productId }: SubControlsProps) {
         color="secondary"
         className={styles.controlButton}
         startIcon={
-          <div className={clsx('svg-icon', styles.icon)}>
+          <SvgIcon className={styles.icon}>
             <CommentIcon />
-          </div>
+          </SvgIcon>
         }
       >
         Комментарии
@@ -54,9 +55,9 @@ export function SubControls({ productId }: SubControlsProps) {
         color="secondary"
         className={styles.controlButton}
         startIcon={
-          <div className={clsx('svg-icon', styles.icon, styles.shareIcon)}>
+          <SvgIcon className={clsx(styles.icon, styles.shareIcon)}>
             <ShareIcon />
-          </div>
+          </SvgIcon>
         }
       >
         Поделиться

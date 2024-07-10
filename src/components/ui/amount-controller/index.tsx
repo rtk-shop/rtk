@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { SvgIcon } from '../svg-icon'
 import { IconButton } from '../icon-button'
 import PlusIcon from '../../../../public/icons/plus.svg'
 import MinusIcon from '../../../../public/icons/minus.svg'
@@ -32,9 +32,9 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
         aria-label="удалить одну единицу данного продукта"
         className={styles.button}
       >
-        <div className={clsx('svg-icon', styles.icon)}>
+        <SvgIcon className={styles.icon}>
           <MinusIcon />
-        </div>
+        </SvgIcon>
       </IconButton>
       <div className={styles.counter}>
         <span>{amount}</span>
@@ -46,9 +46,9 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
         aria-label="добавить одну единицу данного продукта"
         className={styles.button}
       >
-        <div className={clsx('svg-icon', styles.icon)}>
+        <SvgIcon className={styles.icon}>
           <PlusIcon />
-        </div>
+        </SvgIcon>
       </IconButton>
     </div>
   )

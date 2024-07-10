@@ -1,5 +1,4 @@
 import { ElementType } from 'react'
-import clsx from 'clsx'
 import HomeIcon from '../../../../../public/icons/eye.svg'
 import UserIcon from '../../../../../public/icons/user.svg'
 import HeartIcon from '../../../../../public/icons/heart_2.svg'
@@ -7,6 +6,7 @@ import ListIcon from '../../../../../public/icons/list.svg'
 import EyeIcon from '../../../../../public/icons/eye.svg'
 import useTranslation from 'next-translate/useTranslation'
 import { Badge } from '@/components/ui/badge'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { ConditionalRender } from '@/components/layout/conditional-render'
 import { routeNames } from '@/utils/navigation'
 import { useUserStore } from '@/store/user'
@@ -84,9 +84,9 @@ export function Navigation({ onClose }: SidebarNavListProps) {
             condition={!!item.withBadge}
             wrap={(children) => <Badge content={favoriteAmount}>{children}</Badge>}
           >
-            <div className={clsx('svg-icon', styles.icon)}>
+            <SvgIcon className={styles.icon}>
               <item.icon />
-            </div>
+            </SvgIcon>
           </ConditionalRender>
           <div className={styles.text}>
             <p>{t(`drawer.${item.i18n}`)}</p>

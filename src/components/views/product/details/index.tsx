@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import ExclamationIcon from '../../../../../public/icons/exclamation-circle.svg'
 import CheckIcon from '../../../../../public/icons/check-circle.svg'
 import HeaderCartIcon from '../../../../../public/icons/header_cart.svg'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { Button } from '@/components/ui/button'
 import { Tags } from './tags'
 // import { Rating } from '@/components/Rating'
@@ -115,9 +116,9 @@ export function Details({
           onClick={handleAddToCart}
           className={styles.orderButton}
           startIcon={
-            <div className={clsx('svg-icon', styles.orderButtonIcon)}>
+            <SvgIcon className={styles.orderButtonIcon}>
               <HeaderCartIcon />
-            </div>
+            </SvgIcon>
           }
         >
           {inStock ? 'Добавить в корзину' : 'Сообщить когда появиться'}
