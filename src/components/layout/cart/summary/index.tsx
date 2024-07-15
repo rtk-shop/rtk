@@ -7,11 +7,11 @@ import useTranslation from 'next-translate/useTranslation'
 import styles from './styles.module.scss'
 
 interface SummaryProps {
-  isLoading: boolean
+  loading: boolean
   onCheckout(): void
 }
 
-export function Summary({ isLoading, onCheckout }: SummaryProps) {
+export function Summary({ loading, onCheckout }: SummaryProps) {
   const cartPrice = useCartStore((state) => state.cartPrice)
   const { t } = useTranslation('common')
 
@@ -19,21 +19,17 @@ export function Summary({ isLoading, onCheckout }: SummaryProps) {
     onCheckout()
   }
 
-  if (isLoading) {
-    return <Skeleton />
-  }
+  if (loading) return <Skeleton />
 
   return (
     <div className={styles.container}>
-      <div className={styles.inner}>
-        <p className={styles.cartPrice}>
-          <span>{t('cart.total')}:</span>
-          <b>{formatPrice(cartPrice)}&nbsp;грн.</b>
-        </p>
-        <Button color="accept" fullWidth onClick={handleButtonClick}>
-          {t('cart.makeOrder')}
-        </Button>
-      </div>
+      <p className={styles.cartPrice}>
+        <span>{t('cart.total')}:</span>
+        <b>{formatPrice(cartPrice)}&nbsp;грн.</b>
+      </p>
+      <Button color="accept" fullWidth onClick={handleButtonClick}>
+        {t('cart.makeOrder')}
+      </Button>
     </div>
   )
 }

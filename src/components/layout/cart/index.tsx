@@ -7,11 +7,11 @@ import { CartHead } from './head'
 import { CartItem, CartItemType } from '@/components/cart-item'
 import useTranslation from 'next-translate/useTranslation'
 import { useCartStore } from '@/store/cart'
+import { useRouter } from 'next/router'
+import { routeNames } from '@/utils/navigation'
 import { useCartProductsLazyQuery } from '@/graphql/product/_gen_/cartProducts.query'
 
 import styles from './styles.module.scss'
-import { useRouter } from 'next/router'
-import { routeNames } from '@/utils/navigation'
 
 interface CartProps {
   isOpen: boolean
@@ -19,6 +19,16 @@ interface CartProps {
 }
 
 export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
+  return (
+    <Drawer position="right" onClose={onClose} open={isOpen}>
+      <div className={styles.container}>
+        <CartInner isOpen={isOpen} onClose={onClose} />
+      </div>
+    </Drawer>
+  )
+})
+
+export function CartInner({ isOpen, onClose }: CartProps) {
   const router = useRouter()
 
   const cartItems = useCartStore((state) => state.cartItems)
@@ -89,27 +99,23 @@ export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
   }
 
   return (
-    <Drawer position="right" onClose={onClose} open={isOpen}>
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <CartHead onCartClose={onClose} />
-          {loading ? (
-            <ListSkeleton itemsAmount={cartItems.length} />
-          ) : (
-            <ul className={styles.list}>
-              {data?.cartProducts.map((product: CartItemType) => (
-                <CartItem
-                  key={product.id}
-                  amount={normalizedCart[product.id]}
-                  product={product}
-                  onRemove={handleProductRemove}
-                />
-              ))}
-            </ul>
-          )}
-          <Summary isLoading={loading} onCheckout={handleCheckout} />
-        </div>
-      </div>
-    </Drawer>
+    <div className={styles.wrapper}>
+      <CartHead onCartClose={onClose} />
+      {loading ? (
+        <ListSkeleton max={3} itemsAmount={cartItems.length} />
+      ) : (
+        <ul className={styles.list}>
+          {data?.cartProducts.map((product: CartItemType) => (
+            <CartItem
+              key={product.id}
+              amount={normalizedCart[product.id]}
+              product={product}
+              onRemove={handleProductRemove}
+            />
+          ))}
+        </ul>
+      )}
+      <Summary loading={loading} onCheckout={handleCheckout} />
+    </div>
   )
-})
+}

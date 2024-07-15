@@ -1,17 +1,18 @@
-.wrapper {
+.container {
   width: 100vw;
-  height: 100%;
+  height: 100dvh;
   overflow-x: hidden;
-  background-color: #fff; // dark #343434
-  max-width: 400px;
+  background-color: #fff;
+
+  @include _minLG {
+    max-width: 400px;
+  }
 }
 
-.container {
-  position: fixed; // INFO: fix for Chrome: https://developer.chrome.com/blog/url-bar-resizing/
+.wrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-width: 400px;
 }
 
 .list {
