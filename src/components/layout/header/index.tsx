@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/utils/navigation'
-import { usePathname } from 'next/navigation'
 import { useCartStore } from '@/store/cart'
 import { useFavoriteStore } from '@/store/favorite'
 import { Badge } from '@/components/ui/badge'
@@ -24,7 +23,6 @@ interface HeaderProps {
 }
 
 export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderProps) {
-  const pathname = usePathname()
   const { t } = useTranslation('common')
 
   const cartAmount = useCartStore((state) => state.cartAmount())
@@ -45,13 +43,23 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
   return (
     <div className={clsx(styles.container)}>
       <div className={styles.cap}>
-        <ul className={styles.capList}>
-          {/* TODO: env + t()  */}
-          <li>Курс 1$=40.3₴</li>
-          <li>Тел: {process.env.NEXT_PUBLIC_CONTACT_PHONE}</li>
-          <li>Прием заказов: с 8:00 до 13:00</li>
-          <li>Дни работы: ПН-СР-ЧТ-СБ</li>
-        </ul>
+        <div className={styles.capInner}>
+          <ul className={styles.capList}>
+            {/* TODO: env + t()  */}
+            <li>
+              Курс: <span>1$=40.3₴</span>
+            </li>
+            <li>
+              Тел: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>
+            </li>
+            <li>
+              Прием заказов: <span>с 8:00 до 13:00</span>
+            </li>
+            <li>
+              Дни работы: <span>ПН-СР-ЧТ-СБ</span>
+            </li>
+          </ul>
+        </div>
       </div>
       <header className={styles.header}>
         <div className={styles.inner}>

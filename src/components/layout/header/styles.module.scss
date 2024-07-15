@@ -15,27 +15,39 @@ $mobile-icon-color: #efefef;
 
 .cap {
   display: none;
+  background-color: #171717;
 
   @include _minLG {
-    display: flex;
-    max-width: 1700px;
-    margin: 0 auto;
-    justify-content: flex-end;
+    display: block;
+  }
+}
+
+.capInner {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  max-width: 1700px;
+
+  @include _minLG {
     padding: 7px 17px;
   }
 
   @include _minXL {
-    padding: 7px 60px;
+    padding: 8px 60px;
   }
 }
 
 .capList {
-  color: #747474;
+  color: #e8e8e8;
   display: flex;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   & li {
     margin-left: 20px;
+  }
+  & span {
+    font-weight: 600;
+    color: #fff;
   }
 }
 
@@ -49,10 +61,7 @@ $mobile-icon-color: #efefef;
     0 2px 8px rgba(0, 0, 0, 0.05);
 
   @include _minLG {
-    box-shadow: none;
-    background-color: #fff; // #e4ff00;
-    border-top: 2px solid #e0e0e0;
-    border-bottom: 2px solid #e0e0e0;
+    background-color: #fff;
   }
 }
 
