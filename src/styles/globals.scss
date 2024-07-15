@@ -49,41 +49,11 @@ ul {
 }
 
 :root {
-  --font-color: #343434;
-  --footer-bg: #f8f8f8;
-  --sub-footer-bg: #eaeaea;
-  --sub-title-color: #515154;
-  --catalog-bg-primary: #fff;
-  --catalog-bg-secondary: #f2f2f2;
-
   --green: #2bab2b;
   --green-light: #32cd32;
 
-  --base-scale: calc(100vw / 75);
-
-  // new
-  --sidebar-bkg: #fefefe;
+  // todo
   --checkout-bkg: #f3f3f3;
   --checkout-form-bkg: #f2f2f2;
   --checkout-form-bkg-lg: #fff;
-}
-
-[data-theme='dark'] {
-  --font-color: #fff;
-  --footer-bg: #333;
-  --sub-footer-bg: #252121;
-  --sub-title-color: #c1c1c1;
-  --catalog-bg-primary: #272727;
-  --catalog-bg-secondary: #0f0f0f;
-
-  --green: #2bab2b;
-  --green-light: #32cd32;
-
-  --base-scale: calc(100vw / 75);
-
-  // new
-  --sidebar-bkg: #0f0f0f;
-  --checkout-bkg: none;
-  --checkout-form-bkg: none;
-  --checkout-form-bkg-lg: #323232;
 }

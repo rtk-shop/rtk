@@ -16,12 +16,12 @@
 
 .slider {
   & :global(.rc-slider-track) {
-    background-color: #232323; // dark colors.primary
+    background-color: #232323;
   }
 
   & > :global(.rc-slider-handle) {
-    border-color: #232323; // dark colors.primary
-    background-color: #fff; // dark colors.primary
+    border-color: #232323;
+    background-color: #fff;
     &:hover {
       border-color: #acacac;
     }
@@ -34,7 +34,7 @@
 }
 
 .sliderMark {
-  color: #343434; // dark #fff
+  color: #343434;
   font-weight: 500;
 }
 
@@ -48,9 +48,9 @@
   border-radius: 6px;
   transition: all 0.3s;
   border: 1px solid;
-  color: #343434; // dark #fff
-  background-color: #fff; // dark #3c4144
-  border-color: #c4c4c4; // dark #3c4144
+  color: #343434;
+  background-color: #fff;
+  border-color: #c4c4c4;
   -moz-appearance: textfield;
 
   &:hover {
@@ -69,10 +69,10 @@
   border-radius: 6px;
   text-transform: uppercase;
   background-color: transparent;
-  color: #343434; // dark #fff
-  border-color: #fff; // dark #3c4144
+  color: #343434;
+  border-color: #fff;
   border: 1px solid;
-  border-color: #c4c4c4; // dark #3c4144
+  border-color: #c4c4c4;
   &:hover {
     color: #fff;
     background-color: var(--green-light);

@@ -42,14 +42,14 @@ $c-color: #232323;
     z-index: 1;
   }
   &::before {
-    background-color: #dcdcdc; // dark #3c4144
+    background-color: #dcdcdc;
     border: 2px solid #dcdcdc;
     top: 0;
     left: 10px;
     transition: all 0.5s;
   }
   &::after {
-    background-color: #fff; // dark #3c4144
+    background-color: #fff;
     top: 2px;
     left: 12px;
     transition: all 0.15s;
@@ -59,7 +59,7 @@ $c-color: #232323;
   &:hover {
     &::before {
       border: 2px solid;
-      border-color: $c-color; // dark colors.primary
+      border-color: $c-color;
     }
   }
 }
@@ -79,9 +79,9 @@ $c-color: #232323;
   &:checked ~ .label {
     &::before {
       box-sizing: content-box;
-      background-color: $c-color; // dark colors.primary
+      background-color: $c-color;
       border: 2px solid;
-      border-color: $c-color; // dark colors.primary
+      border-color: $c-color;
     }
     &::after {
       box-sizing: content-box;

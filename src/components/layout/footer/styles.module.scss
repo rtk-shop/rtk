@@ -6,12 +6,11 @@ $text-color: #939191;
     margin: 0;
     margin-bottom: 25px;
     font-weight: 600;
-    color: var(--font-color);
   }
 }
 
 .wrapper {
-  background: var(--footer-bg);
+  background: #f8f8f8;
 }
 
 .root {
@@ -24,7 +23,6 @@ $text-color: #939191;
 }
 
 .contact {
-  color: var(--font-color);
   flex-basis: 100%;
   max-width: 420px;
   padding-top: 30px;
@@ -60,7 +58,7 @@ $text-color: #939191;
   }
   & p {
     font-size: 15px;
-    color: var(--sub-title-color);
+    color: #515154;
     margin-top: 0;
     margin-bottom: 6px;
     transition: all 0.2s;
@@ -92,24 +90,8 @@ $text-color: #939191;
   margin-bottom: 10px;
 }
 
-.makeCallPlug {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--font-color);
-  padding: 10px;
-  border-radius: 10px;
-  margin-left: auto;
-  text-decoration: none;
-  color: inherit;
-  &:hover {
-    & > div {
-      fill: $main-color;
-    }
-  }
-}
-
 .phone {
-  color: var(--font-color);
+  color: inherit;
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -119,11 +101,11 @@ $text-color: #939191;
 .phoneIcon {
   font-size: 22px;
   margin-right: 5px;
-  fill: var(--sub-title-color);
+  fill: #171717;
 }
 
 .subFooter {
-  background-color: var(--sub-footer-bg);
+  background-color: #eaeaea;
   padding: 10px 0;
   color: $text-color;
   text-align: center;
@@ -133,10 +115,6 @@ $text-color: #939191;
 }
 
 @media screen and (min-width: $lg) {
-  .makeCallPlug {
-    margin-left: 15px;
-  }
-
   .column {
     flex-basis: 25%;
     max-width: 200px;

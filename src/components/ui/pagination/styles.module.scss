@@ -13,7 +13,7 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; // dark #444444
+  background-color: #f0f0f0;
   border-radius: 5px;
   font-size: 15px;
   outline: none;
@@ -28,6 +28,6 @@
 }
 
 .item.current {
-  background-color: #fff; // dark #696c72
+  background-color: #fff;
   border: 1px solid #b3b3b3;
 }
