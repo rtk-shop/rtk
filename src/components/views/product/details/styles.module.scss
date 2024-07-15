@@ -164,7 +164,7 @@
     }
   }
 
-  &:active {
+  &:active:not(:disabled) {
     & .orderButtonIcon {
       transform: scale(1.2);
     }

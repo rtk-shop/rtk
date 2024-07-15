@@ -106,7 +106,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
               </SvgIcon>
             }
           >
-            {inStock ? 'Добавить в корзину' : 'Сообщить когда появиться'}
+            {inStock ? 'Добавить в корзину' : 'Нет в наличии'}
           </Button>
         </div>
         <SubControls productId={id} />

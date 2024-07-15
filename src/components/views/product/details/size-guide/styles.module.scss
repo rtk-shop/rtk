@@ -1,3 +1,5 @@
+$cross-color: #bcbcbc;
+
 .title {
   margin: 0;
   font-weight: 600;
@@ -12,6 +14,7 @@
 
 .sizeItem {
   cursor: pointer;
+  position: relative;
   font-size: 14px;
   text-transform: uppercase;
   border: 2px solid #eaeaea;
@@ -26,6 +29,10 @@
   &:hover {
     border-color: #232323;
   }
+  & > span {
+    position: relative;
+    z-index: 50;
+  }
 }
 
 .active {
@@ -35,10 +42,32 @@
 }
 
 .inactive {
-  color: #7c7c7c;
+  cursor: not-allowed;
   border-color: #f0f0f0;
   background-color: #f0f0f0;
   &:hover {
     border-color: #f0f0f0;
+  }
+  &::before {
+    content: '';
+    z-index: 1;
+    width: 3px;
+    height: 49px;
+    background-color: $cross-color;
+    position: absolute;
+    top: -6px;
+    left: 30px;
+    transform: rotate(-120deg);
+  }
+  &::after {
+    content: '';
+    z-index: 1;
+    width: 3px;
+    height: 49px;
+    background-color: $cross-color;
+    position: absolute;
+    top: -6px;
+    right: 30px;
+    transform: rotate(120deg);
   }
 }

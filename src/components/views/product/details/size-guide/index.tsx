@@ -26,7 +26,7 @@ export function SizeGuide({ current, available }: SizeGuideProps) {
               [styles.inactive]: !Object.prototype.hasOwnProperty.call(normalized, size)
             })}
           >
-            {size}
+            <span>{size}</span>
           </li>
         ))}
       </ul>
