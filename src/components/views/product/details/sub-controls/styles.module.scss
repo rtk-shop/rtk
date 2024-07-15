@@ -3,9 +3,7 @@
   align-items: center;
   overflow-x: auto;
   flex-wrap: wrap;
-  @include _minLG {
-    max-width: 500px;
-  }
+  max-width: 500px;
 }
 
 .controlButton {
