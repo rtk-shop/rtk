@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState, ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
 import { IconButton } from '@/components/ui/icon-button'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import PlusIcon from '../../../../../../public/icons/plus.svg'
@@ -7,32 +7,32 @@ import MinusIcon from '../../../../../../public/icons/minus.svg'
 
 import styles from './styles.module.scss'
 
-interface AmauntProps {}
+interface AmauntProps {
+  amount: number
+  onChange(type: 'add' | 'sub' | number): void
+  max?: number
+}
 
-export function Amaunt(props: AmauntProps) {
-  const [amount, setAmount] = useState(1)
-  const max = 100
+export function Amaunt({ amount, onChange, max = 30 }: AmauntProps) {
   const min = 1
 
   const handleAddClick = () => {
-    setAmount((prev) => prev + 1)
+    onChange('add')
   }
+
   const handleSubClick = () => {
-    setAmount((prev) => {
-      if (prev === 1) return prev
-      return prev - 1
-    })
+    onChange('sub')
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = +event.target.value
 
     if (value < min) {
-      setAmount(min)
+      onChange(min)
       return
     }
     if (value <= max) {
-      setAmount(value)
+      onChange(value)
     }
   }
 

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import clsx from 'clsx'
 import ExclamationIcon from '../../../../../public/icons/exclamation-circle.svg'
 import CheckIcon from '../../../../../public/icons/check-circle.svg'
@@ -27,14 +28,26 @@ interface DetailsProps {
 export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
   const addItem = useCartStore((state) => state.addItem)
 
-  const handleAddToCart = (): void => {
-    if (inStock) {
-      addItem({
-        productId: id,
-        amount: 1
-      })
+  const [amount, setAmount] = useState(1)
 
+  const handleAddToCart = (): void => {
+    addItem({
+      productId: id,
+      amount: amount
+    })
+    setAmount(1)
+  }
+
+  const handleControllerChange = (value: 'add' | 'sub' | number) => {
+    if (typeof value === 'number') {
+      setAmount(value)
       return
+    }
+
+    if (value === 'add') {
+      setAmount((prev) => prev + 1)
+    } else {
+      setAmount((prev) => prev - 1)
     }
   }
 
@@ -79,7 +92,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
         <SizeGuide current="L" available={['M', '2XL', 'L']} />
         <div className={styles.buttonsWrapper}>
           <div className={styles.amauntBox}>
-            <Amaunt />
+            <Amaunt amount={amount} onChange={handleControllerChange} />
           </div>
           <Button
             fullWidth
