@@ -75,11 +75,6 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
             <ul className={styles.navlist}>
               <li>
                 <Link href={routeNames.root} className={styles['nav-link']}>
-                  {t('header.home')}
-                </Link>
-              </li>
-              <li>
-                <Link href={routeNames.catalog} className={styles['nav-link']}>
                   {t('header.catalog')}
                 </Link>
               </li>
