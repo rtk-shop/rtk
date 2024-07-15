@@ -9,9 +9,8 @@ import { Delivery } from './delivery'
 import { SizeGuide } from './size-guide'
 import { SubControls } from './sub-controls'
 import { useCartStore } from '@/store/cart'
-import { useRouter } from 'next/navigation'
-import { routeNames } from '@/utils/navigation'
 import { formatPrice } from '@/utils/helpers'
+import { Amaunt } from './amaunt'
 
 import styles from './styles.module.scss'
 
@@ -26,8 +25,6 @@ interface DetailsProps {
 }
 
 export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
-  const router = useRouter()
-
   const addItem = useCartStore((state) => state.addItem)
 
   const handleAddToCart = (): void => {
@@ -39,15 +36,6 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
 
       return
     }
-  }
-
-  const handleOrderNow = (): void => {
-    addItem({
-      productId: id,
-      amount: 1
-    })
-
-    router.push(routeNames.checkout)
   }
 
   return (
@@ -72,7 +60,6 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
             </p>
           </div>
         </div>
-
         {/*  */}
         <div className={styles.priceBox}>
           <p className={styles.currentPrice}>
@@ -82,7 +69,8 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
             <div className={styles.discountPriceBox}>
               <span className={styles.discountPrice}>{formatPrice(basePrice)}&nbsp;$</span>
               <span className={styles.percentage}>
-                -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%
+                -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}
+                <span>%</span>
               </span>
             </div>
           )}
@@ -90,15 +78,9 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
         {/*  */}
         <SizeGuide current="L" available={['M', '2XL', 'L']} />
         <div className={styles.buttonsWrapper}>
-          <Button
-            fullWidth
-            color="secondary"
-            disabled={!inStock}
-            onClick={handleOrderNow}
-            className={styles.orderNowButton}
-          >
-            Купить сейчас
-          </Button>
+          <div className={styles.amauntBox}>
+            <Amaunt />
+          </div>
           <Button
             fullWidth
             color="secondary"

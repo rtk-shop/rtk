@@ -1,5 +1,3 @@
-$breakpoint: 770px;
-
 .container {
   padding: 10px 10px 15px 10px;
   @include _minLG {
@@ -104,6 +102,7 @@ $breakpoint: 770px;
 }
 
 .discountPriceBox {
+  user-select: none;
   display: flex;
   align-items: center;
 }
@@ -118,70 +117,53 @@ $breakpoint: 770px;
 
 .percentage {
   color: #fff;
-  font-size: 12px;
-  margin-left: 7px;
+  width: 50px;
+  text-align: center;
+  font-size: 13px;
+  margin-left: 10px;
   font-weight: 600;
-  border-radius: 8px;
-  padding: 3px 4px;
-  background-color: #f44336;
+  border-radius: 6px;
+  padding: 2px 4px;
+  background-color: #f12315;
 }
 
 .buttonsWrapper {
   margin: 30px 0 10px 0;
   display: flex;
   flex-wrap: wrap;
-  @include _minMD {
-    flex-wrap: nowrap;
-  }
-
-  @media (min-width: $breakpoint) {
-    flex-wrap: wrap;
-  }
+  max-width: 500px;
 }
 
-.orderNowButton {
-  color: #fff;
-  border: none;
-  padding: 18px;
-  font-size: 16px;
-  max-width: 500px;
-  font-weight: 600;
-  border-radius: 14px;
+.amauntBox {
+  width: 100%;
   margin-bottom: 15px;
-  background-color: #232323;
-  &:hover {
-    background-color: #32cd32;
-  }
-
-  @include _minMD {
-    margin-bottom: 0;
-    margin-right: 15px;
-  }
-
-  @media (min-width: $breakpoint) {
-    margin-bottom: 15px;
-    margin-right: 0;
-  }
 }
 
 .orderButtonIcon {
   font-size: 30px;
-  fill: #171717;
+  fill: #fff;
   margin-right: 10px;
   transition: all 190ms;
 }
 
 .orderButton {
-  max-width: 500px;
+  border: none;
   background-color: transparent;
   border-radius: 14px;
   font-size: 16px;
   line-height: 16px;
   text-transform: none;
   font-weight: 600;
-  padding: 10px;
-  color: #171717;
-  border: 2px solid #171717;
+  padding: 14px;
+  color: #fff;
+  background-color: #232323;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: #32cd32;
+    }
+  }
+
   &:active {
     & .orderButtonIcon {
       transform: scale(1.2);

@@ -1,0 +1,52 @@
+$border: 2px solid #bbbbbb;
+
+.container {
+  width: 100%;
+  border: $border;
+  display: flex;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.button {
+  height: 47px;
+  flex-basis: 26%;
+  border-radius: 0;
+
+  &:active {
+    & .icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.left {
+  border-right: $border;
+}
+
+.right {
+  border-left: $border;
+}
+
+.icon {
+  fill: #1e1e1e;
+  font-size: 28px;
+  transition: all 150ms;
+}
+
+.counter {
+  flex-basis: 48%;
+  max-width: 48%;
+}
+
+.input {
+  width: 100%;
+  padding: 0;
+  border: none;
+  font-weight: 600;
+  text-align: center;
+  font-size: 21px;
+  &:focus {
+    outline: none;
+  }
+}
