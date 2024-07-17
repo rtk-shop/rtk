@@ -3,14 +3,6 @@
     "categories": "Категорії",
     "advise": "Рекомендовані"
   },
-  "categories": {
-    "suitcases": "Валізи",
-    "bags": "Сумки",
-    "wallets": "Гаманці",
-    "backpacks": "Рюкзаки",
-    "other": "Інше",
-    "seeAll": "дивитись всі"
-  },
   "promo": {
     "firstTitle": "Щось у дорогу",
     "secondTitle": "Щось на кожен день",

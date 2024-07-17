@@ -4,6 +4,14 @@
     "catalog": "каталог",
     "mySearch": "Найти товар по названию или коду..."
   },
+  "categories": {
+    "all": "Все категории",
+    "suitcases": "Чемоданы",
+    "bags": "Сумки",
+    "wallets": "Кошельки",
+    "backpacks": "Рюкзаки",
+    "other": "Другое"
+  },
   "cart": {
     "topControls": {
       "title1": "Ваши",

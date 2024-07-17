@@ -3,14 +3,6 @@
     "categories": "Категории",
     "advise": "Рекомендуемые"
   },
-  "categories": {
-    "suitcases": "Чемоданы",
-    "bags": "Сумки",
-    "wallets": "Кошельки",
-    "backpacks": "Рюкзаки",
-    "other": "Другое",
-    "seeAll": "смотреть все"
-  },
   "promo": {
     "firstTitle": "Что-то в дорогу",
     "secondTitle": "Что-то на каждый день",

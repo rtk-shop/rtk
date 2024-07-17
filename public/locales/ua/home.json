@@ -22,14 +22,6 @@
       "all": "Усе",
       "new": "Новинки",
       "discounts": "Акції"
-    },
-    "categories": {
-      "all": "Інше",
-      "suitcases": "Валізи",
-      "bags": "Сумки",
-      "wallets": "Гаманці",
-      "backpack": "Рюкзаки",
-      "other": "Інше"
     }
   }
 }
