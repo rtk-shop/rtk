@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import clsx from 'clsx'
 import ExpandIcon from '../../../../public/icons/expand-arrow.svg'
+import { SvgIcon } from '../svg-icon'
 
 import styles from './styles.module.scss'
 
@@ -14,15 +15,14 @@ export function CollapseHead({ title, collapsed, onCollapse }: CollapseHeadProps
   return (
     <div onClick={onCollapse} className={styles.groupHead}>
       <span>{title}</span>
-      <div
+      <SvgIcon
         className={clsx({
-          ['svg-icon']: true,
           [styles.expandIcon]: true,
           [styles.collapsed]: collapsed
         })}
       >
         <ExpandIcon />
-      </div>
+      </SvgIcon>
     </div>
   )
 }
