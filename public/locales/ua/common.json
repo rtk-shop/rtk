@@ -2,7 +2,7 @@
   "header": {
     "home": "головна",
     "catalog": "каталог",
-    "mySearch": "Я шукаю..."
+    "mySearch": "Знайти товар за назвою або кодом..."
   },
   "cart": {
     "topControls": {

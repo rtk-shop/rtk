@@ -8,6 +8,7 @@ import { IconButton } from '@/components/ui/icon-button'
 // import { useLazyQuery } from '@apollo/client'
 import useTranslation from 'next-translate/useTranslation'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { Dropdown, type Option } from '@/components/ui/dropdown'
 import SearchIcon from '../../../../../public/icons/search.svg'
 // import { getProductMainTagColor } from '@/utils/styling'
 // import {
@@ -24,10 +25,12 @@ type FormValues = {
 
 export function Search() {
   const { t } = useTranslation('common')
-  const [inputValue, setInputValue] = useState<string>('')
-  const [withFocus, setWithFocus] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState('')
+  const [withFocus, setWithFocus] = useState(false)
 
   const { register, handleSubmit } = useForm<FormValues>()
+
+  const [category, setCategory] = useState('all')
 
   // const [getProducts, { loading, data, error }] = useLazyQuery<
   //   SearchProductQuery,
@@ -35,6 +38,25 @@ export function Search() {
   // >(SearchProductDocument, {
   //   fetchPolicy: 'network-only'
   // })
+
+  const optios: Option[] = [
+    {
+      title: 'Все категории',
+      value: 'all'
+    },
+    {
+      title: 'Сумки',
+      value: 'bag'
+    },
+    {
+      title: 'Чемоданы',
+      value: 'suitcase'
+    }
+  ]
+
+  const handleCategoryChange = (value: string) => {
+    setCategory(value)
+  }
 
   const onSubmit: SubmitHandler<FormValues> = (values) => {
     console.log(values)
@@ -106,6 +128,15 @@ export function Search() {
         onFocus={() => setWithFocus(true)}
         noValidate
       >
+        <div className={styles.dropdownBox}>
+          <Dropdown
+            selected={optios.find((o) => o.value === category)}
+            options={optios}
+            onChange={handleCategoryChange}
+            rootStyles={styles.dropdown}
+            defaultValue="all"
+          />
+        </div>
         <input
           autoComplete="off"
           placeholder={t('header.mySearch')}
@@ -115,7 +146,7 @@ export function Search() {
           })}
           {...register('searchQuery')}
         />
-        <IconButton type="submit" className={styles['search-button']}>
+        <IconButton type="submit" className={styles.searchButton}>
           <SvgIcon className={styles['search-icon']}>
             <SearchIcon />
           </SvgIcon>
