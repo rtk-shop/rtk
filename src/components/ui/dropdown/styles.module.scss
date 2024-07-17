@@ -1,0 +1,73 @@
+.dropdown {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.show {
+  user-select: none;
+}
+
+.default {
+  color: #a5a5a5;
+}
+
+.placeholder {
+  color: #a5a5a5;
+}
+
+.expandIcon {
+  font-size: 1.5rem;
+  transition: all 160ms linear;
+  fill: currentColor;
+  transform: rotate(180deg);
+}
+
+.collapsed {
+  transform: rotate(0deg);
+}
+
+.list {
+  position: absolute;
+  z-index: 110;
+  background-color: #fff;
+  top: 130%;
+  left: 0;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+  animation: list-appearance 300ms;
+}
+
+@keyframes list-appearance {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.option {
+  cursor: pointer;
+  user-select: none;
+  padding: 7px 0;
+  padding-left: 3px;
+  border-radius: 6px;
+  &:hover {
+    background-color: #ededed;
+  }
+}
+
+.option.selected {
+  background-color: #ededed;
+}
