@@ -9,8 +9,6 @@ export const useWindowSize = (): [number, number] => {
 
   useLayoutEffect(() => {
     function updateSize() {
-      const vh = (window.innerHeight * 0.01).toFixed(2)
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
       setDimensions([window.innerWidth, window.innerHeight])
     }
     window.addEventListener('resize', updateSize)
