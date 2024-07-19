@@ -12,6 +12,8 @@ interface AppLayoutProps {
   children: ReactNode
 }
 
+const CURRENCY = 41.9
+
 export function AppLayout({ children }: AppLayoutProps) {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
@@ -41,9 +43,9 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
-      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseDrawer} />
+      <Sidebar isOpen={isSidebarOpen} currency={CURRENCY} onClose={handleCloseDrawer} />
       <Cart isOpen={isCartOpen} onClose={handleCartClose} />
-      <Header onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
+      <Header currency={CURRENCY} onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
       <main>{children}</main>
       <Footer />
     </>

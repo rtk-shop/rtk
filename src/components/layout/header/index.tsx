@@ -18,11 +18,12 @@ import CartIcon from '../../../../public/icons/header_cart.svg'
 import styles from './styles.module.scss'
 
 interface HeaderProps {
+  currency: number
   onDrawerOpen(): void
   onCartOpen(): void
 }
 
-export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderProps) {
+export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen }: HeaderProps) {
   const { t } = useTranslation('common')
 
   const cartAmount = useCartStore((state) => state.cartAmount())
@@ -47,7 +48,7 @@ export const Header = memo(function Header({ onDrawerOpen, onCartOpen }: HeaderP
           <ul className={styles.capList}>
             {/* TODO: env + t()  */}
             <li>
-              Курс: <span>1$=40.3₴</span>
+              Курс: <span>1$={currency}₴</span>
             </li>
             <li>
               Тел: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>

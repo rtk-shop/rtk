@@ -1,21 +1,37 @@
 .container {
   height: 100%;
-  width: 75vw;
+  width: 100vw;
   max-width: 350px;
   display: flex;
   flex-direction: column;
   background-color: #fefefe;
 }
 
-.langSwitch {
+.section {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.currency {
+  padding: 20px 30px 20px 20px;
+}
+
+.currencyValue {
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #eaeaea;
+  padding: 5px 15px;
+  border-radius: 12px;
+}
+
+.lang {
   padding: 24px 15px;
   border-top: 1px solid #dcdcdc;
-  border-bottom: 1px solid #dcdcdc;
-  & > span {
-    font-weight: 500;
-    font-size: 18px;
-  }
 }
