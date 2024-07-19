@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.8",
+    "@hookform/resolvers": "^3.9.0",
     "clsx": "^2.1.1",
     "graphql": "^16.9.0",
     "i18next": "^23.11.5",
@@ -24,7 +25,11 @@
     "react-content-loader": "^7.0.2",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "react-modal": "^3.16.1",
     "react-number-format": "^5.4.0",
+    "react-select": "^5.8.0",
+    "react-virtualized": "^9.22.5",
+    "valibot": "^0.36.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
@@ -38,6 +43,8 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-modal": "^3.16.3",
+    "@types/react-virtualized": "^9.21.30",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "^9.1.0",

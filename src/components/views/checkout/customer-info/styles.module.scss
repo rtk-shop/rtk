@@ -1,0 +1,63 @@
+.container {
+  margin-bottom: 30px;
+  border-radius: 10px;
+  background-color: #fff;
+
+  @include _minLG {
+    background-color: none;
+    border-radius: 0;
+  }
+}
+
+.animated {
+  padding: 0 17px;
+
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+
+  transition-timing-function: ease;
+  transition-property: height, opacity;
+  transition-delay: 0ms, 220ms;
+  transition-duration: 400ms, 200ms;
+  will-change: height;
+
+  @include _minLG {
+    padding: 0 5px;
+    opacity: 1;
+    height: auto !important;
+  }
+}
+
+.animatedOpen {
+  opacity: 1;
+  height: 475px;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  & > li {
+    flex-basis: 100%;
+    @include _minLaptop {
+      flex-basis: 48%;
+    }
+  }
+}
+
+.continueButton {
+  @include _minLG {
+    display: none;
+  }
+}
+
+.divider {
+  @include _minLG {
+    margin-top: 15px;
+    border-bottom: 2px solid;
+    border-bottom-color: #dcdcdc;
+  }
+}

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-// import Modal from 'react-modal'
+import Modal from 'react-modal'
 import client from '../apollo/client'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ApolloProvider } from '@apollo/client'
@@ -18,7 +18,7 @@ const montserrat = Montserrat({
   display: 'swap'
 })
 
-// Modal.setAppElement('#__next')
+Modal.setAppElement('#__next')
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (

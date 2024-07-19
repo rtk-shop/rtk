@@ -1,0 +1,17 @@
+.container {
+  padding: 10px;
+  margin: 0 auto;
+  @include _minLG {
+    max-width: 450px;
+    padding: 0;
+  }
+}
+
+.wrapper {
+  border-radius: 14px;
+  padding: 7px 10px 15px 10px;
+  background-color: #fff; // dark #323232
+  @include _minLG {
+    padding: 20px 30px 20px 30px;
+  }
+}

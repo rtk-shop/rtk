@@ -1,0 +1,36 @@
+.container {
+}
+
+.radioWrapper {
+  overflow-x: auto;
+}
+
+.fieldWrapper {
+  /* position: relative; */
+  width: 100%;
+  & > span {
+    font-size: 15px;
+    color: #6a6a6a; // dark #fff
+    font-weight: 500;
+    padding-left: 7px;
+    margin-bottom: 7px;
+  }
+}
+
+.citiesList {
+  margin: 0;
+  padding: 0;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cityItem {
+  font-size: 14px;
+  color: #0670eb;
+  cursor: pointer;
+  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+  }
+}

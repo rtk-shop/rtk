@@ -1,0 +1,31 @@
+$image-path: '../../../../../../public/assets/signup-promo-bg.jpg';
+
+.container {
+  cursor: pointer;
+  margin-top: 15px;
+  user-select: none;
+  padding: 7px 15px;
+  background-image: url($image-path);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+.top {
+  font-size: max(1em, min(4em, calc(var(--base-scale) * 6)));
+  margin-right: 15px;
+}
+
+.bottom {
+  font-size: max(1em, min(1.4em, calc(var(--base-scale) * 3)));
+  margin: 0;
+  & > p {
+    margin: 0;
+  }
+}
