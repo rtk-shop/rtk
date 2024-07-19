@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--checkout-bkg);
+  background-color: #f3f3f3;
 }
 
 .pageForm {
@@ -20,11 +20,11 @@
 .formContent {
   width: 100%;
   padding: 20px 10px 20px 10px;
-  background-color: var(--checkout-form-bkg);
+  background-color: #f2f2f2;
   @include _minLG {
     border-radius: 14px;
     margin-right: 20px;
-    background-color: var(--checkout-form-bkg-lg);
+    background-color: #fff;
   }
   @include _minXL {
     padding: 20px 40px 20px 30px;
