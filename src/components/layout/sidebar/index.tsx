@@ -31,6 +31,17 @@ export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
           <span className={styles.sectionTitle}>{t('drawer.lang')}:</span>
           <LangSwitcher />
         </div>
+        <ul className={styles.info}>
+          <li>
+            Телефон: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>
+          </li>
+          <li>
+            Прием заказов: <span>{process.env.NEXT_PUBLIC_ORDER_ACCEPTANCE_TIME}</span>
+          </li>
+          <li>
+            Дни работы: <span>{process.env.NEXT_PUBLIC_WORKING_DAYS}</span>
+          </li>
+        </ul>
       </div>
     </Drawer>
   )

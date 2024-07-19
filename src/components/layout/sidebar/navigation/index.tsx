@@ -1,5 +1,5 @@
 import { ElementType } from 'react'
-import HomeIcon from '../../../../../public/icons/eye.svg'
+// import HomeIcon from '../../../../../public/icons/home.svg'
 import UserIcon from '../../../../../public/icons/user.svg'
 import HeartIcon from '../../../../../public/icons/heart_2.svg'
 import ListIcon from '../../../../../public/icons/list.svg'
@@ -26,9 +26,9 @@ const drawerItems: {
   withBadge?: boolean
 }[] = [
   {
-    icon: HomeIcon,
+    icon: ListIcon,
     to: routeNames.root,
-    i18n: 'home'
+    i18n: 'catalog'
   },
   // {
   //   icon: SaleIcon,
@@ -42,15 +42,9 @@ const drawerItems: {
   },
   {
     icon: HeartIcon,
-    to: '/favorite', // TODO: add route
+    to: '/favorite',
     i18n: 'favorite',
     withBadge: true
-  },
-
-  {
-    icon: ListIcon,
-    to: routeNames.catalog,
-    i18n: 'catalog'
   },
   {
     icon: EyeIcon,
