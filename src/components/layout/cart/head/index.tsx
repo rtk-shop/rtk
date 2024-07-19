@@ -17,7 +17,7 @@ export function CartHead({ onCartClose }: CartHeadProps) {
 
   const clearCart = useCartStore((state) => state.clear)
 
-  const handleClearButtonClick = (): void => {
+  const handleClearClick = (): void => {
     clearCart()
   }
 
@@ -34,7 +34,7 @@ export function CartHead({ onCartClose }: CartHeadProps) {
         </p>
         <Button
           color="secondary"
-          onClick={handleClearButtonClick}
+          onClick={handleClearClick}
           className={styles.clearButton}
           startIcon={
             <SvgIcon className={styles.trashIcon}>
