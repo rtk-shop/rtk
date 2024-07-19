@@ -46,7 +46,6 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
       <div className={styles.cap}>
         <div className={styles.capInner}>
           <ul className={styles.capList}>
-            {/* TODO: env + t()  */}
             <li>
               Курс: <span>1$={currency}₴</span>
             </li>
@@ -54,10 +53,10 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               Тел: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>
             </li>
             <li>
-              Прием заказов: <span>с 8:00 до 13:00</span>
+              Прием заказов: <span>{process.env.NEXT_PUBLIC_ORDER_ACCEPTANCE_TIME}</span>
             </li>
             <li>
-              Дни работы: <span>ПН-СР-ЧТ-СБ</span>
+              Дни работы: <span>{process.env.NEXT_PUBLIC_WORKING_DAYS}</span>
             </li>
           </ul>
         </div>

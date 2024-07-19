@@ -91,11 +91,11 @@ export const Footer = memo(function Footer() {
             </li>
             <li>
               <p>Дни работы:</p>
-              <span>Пн-Ср-Чт-Сб</span>
+              <span>{process.env.NEXT_PUBLIC_WORKING_DAYS}</span>
             </li>
             <li>
               <p>Прием заказов:</p>
-              <span>с 8:00 до 13:00</span>
+              <span>{process.env.NEXT_PUBLIC_ORDER_ACCEPTANCE_TIME}</span>
             </li>
             <li>
               <p>Мы находимся:</p>
