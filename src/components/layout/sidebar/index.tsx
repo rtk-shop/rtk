@@ -19,7 +19,7 @@ export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
   return (
     <Drawer open={isOpen} position="left" onClose={onClose}>
       <div className={styles.container}>
-        <SidebarHead />
+        <SidebarHead onClose={onClose} />
         <div className={clsx(styles.section, styles.currency)}>
           <span className={styles.sectionTitle}>Курс:</span>
           <p className={styles.currencyValue}>
