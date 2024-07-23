@@ -252,7 +252,7 @@ export type Query = {
   cartProducts: Array<Product>
   homeData?: Maybe<HomeDataResponse>
   logInRoot?: Maybe<LogInRsponse>
-  product?: Maybe<ProductResult>
+  product: ProductResult
   products: ProductsResponse
   productsByID: Array<Product>
 }

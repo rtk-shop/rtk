@@ -1,57 +1,52 @@
 import { ParsedUrlQuery } from 'querystring'
-import getProduct, { QueryResult } from '../api/getProduct'
 import { ProductIndex } from '@/components/views/product'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { productIdFromSlug } from '@/utils/navigation'
+import {
+  GetProductQuery,
+  GetProductQueryVariables,
+  GetProductDocument
+} from '@/graphql/product/_gen_/product.query'
+import { type ApolloInitState, initializeApollo } from '@/apollo/ssr'
 
 interface Params extends ParsedUrlQuery {
   id: string
 }
 
 export const getServerSideProps: GetServerSideProps<{
-  product: QueryResult
-  err: boolean
+  productID: string
+  initialApolloState: ApolloInitState
 }> = async (ctx) => {
-  const params = ctx.params as Params
-  const slugURL = params.id
+  const { id } = ctx.params as Params
+  const client = initializeApollo()
 
-  let err = false
-  let data: QueryResult
+  let productId: string = ''
 
   try {
-    const productId = productIdFromSlug(slugURL)
-    data = await getProduct(productId)
+    productId = productIdFromSlug(id)
+    await client.query<GetProductQuery, GetProductQueryVariables>({
+      query: GetProductDocument,
+      variables: { id: productId }
+    })
   } catch (error) {
-    err = true
+    return {
+      props: {
+        productID: productId,
+        initialApolloState: null
+      }
+    }
   }
 
   return {
     props: {
-      product: data,
-      err
+      productID: productId,
+      initialApolloState: client.cache.extract()
     }
   }
 }
 
 export default function Product({
-  product,
-  err
+  productID
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  if (!product || err) {
-    return (
-      <div>
-        <h1>No product</h1>
-      </div>
-    )
-  }
-
-  if (product.__typename === 'NotFound') {
-    return (
-      <div>
-        <h1>No product found</h1>
-      </div>
-    )
-  }
-
-  return <ProductIndex product={product} />
+  return <ProductIndex productID={productID} />
 }

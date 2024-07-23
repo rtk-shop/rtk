@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Modal from 'react-modal'
-import client from '../apollo/client'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '@/apollo/ssr'
 import { Montserrat } from 'next/font/google'
 import type { AppProps } from 'next/app'
 
@@ -21,6 +21,8 @@ const montserrat = Montserrat({
 Modal.setAppElement('#__next')
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const apolloClient = useApollo(pageProps.initialApolloState)
+
   return (
     <>
       <Head>
@@ -30,7 +32,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <AppLayout>
           <style jsx global>
             {`

@@ -9,7 +9,7 @@ export type GetProductQueryVariables = Types.Exact<{
 
 export type GetProductQuery = {
   __typename?: 'Query'
-  product?:
+  product:
     | { __typename: 'NotFound'; message: string }
     | {
         __typename: 'Product'
@@ -42,7 +42,6 @@ export type GetProductQuery = {
           color: string
         }> | null
       }
-    | null
 }
 
 export const GetProductDocument = gql`
