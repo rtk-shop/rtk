@@ -16,6 +16,7 @@
 }
 
 .list {
+  @include scroll-bar;
   margin: 0;
   padding: 20px 10px 0 10px;
   flex-grow: 1;

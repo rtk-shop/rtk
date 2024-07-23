@@ -10,21 +10,11 @@
 }
 
 .list {
+  @include scroll-bar;
   margin: 0;
   padding: 15px 10px 0 10px;
   max-height: 500px;
   overflow: auto;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #e6e6e6;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
 }
 
 .clearButton {
