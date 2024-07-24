@@ -1,7 +1,7 @@
 import ContentLoader from 'react-content-loader'
 import { Button } from '@/components/ui/button'
-import { useCartStore } from '@/store/cart'
 import { formatPrice } from '@/utils/helpers'
+import { useCartPrice } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'
 
@@ -12,7 +12,7 @@ interface SummaryProps {
 }
 
 export function Summary({ loading, submitLoading, orderCreationErr }: SummaryProps) {
-  const cartPrice = useCartStore((state) => state.cartPrice)
+  const cartPrice = useCartPrice()
 
   return (
     <div className={styles.container}>

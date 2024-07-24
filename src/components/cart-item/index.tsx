@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import Link from 'next/link'
 import TrashIcon from '../../../public/icons/trash.svg'
 import { SvgIcon } from '../ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
-import { useCartStore } from '@/store/cart'
 import { formatPrice } from '@/utils/helpers'
 import { routeNames, generateProductLink } from '@/utils/navigation'
+import { updateItemAmount, removeFromCart } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'
 
@@ -18,30 +17,22 @@ export type CartItemType = {
   currentPrice: number
   preview: string
 }
-
 interface CartItemProps {
   amount: number
   product: CartItemType
-  onRemove: (id: string) => void
+  onRemove?: (id: string) => void // todo: delete on checkout
 }
 
-export function CartItem({ product, amount, onRemove }: CartItemProps) {
-  const [count, setCount] = useState<number>(amount)
-
-  const updateAmount = useCartStore((state) => state.updateAmount)
-
+export function CartItem({ product, amount }: CartItemProps) {
   const { id, slug, title, preview, currentPrice } = product
 
   const handleAmountChange = (_: string, n: number): void => {
-    updateAmount(id, n)
-    setCount(n)
+    updateItemAmount(id, n)
   }
 
   const handleProductRemove = () => {
-    onRemove(id)
+    removeFromCart(id)
   }
-
-  SvgIcon
 
   return (
     <li className={styles.container}>
@@ -60,10 +51,10 @@ export function CartItem({ product, amount, onRemove }: CartItemProps) {
         </Link>
         <span className={styles.price}>Цена:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴</span>
         <p className={styles.amount}>
-          {count}&nbsp;шт:&nbsp;&nbsp;{formatPrice(count * currentPrice)}&nbsp;грн.
+          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;грн.
         </p>
         <div className={styles.controls}>
-          <AmountController min={1} max={100} amount={count} onChange={handleAmountChange} />
+          <AmountController min={1} max={100} amount={amount} onChange={handleAmountChange} />
           <IconButton
             disableRipple
             onClick={handleProductRemove}

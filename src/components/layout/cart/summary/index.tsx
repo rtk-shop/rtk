@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from './skeleton'
 import { formatPrice } from '@/utils/helpers'
-import { useCartStore } from '@/store/cart'
+import { useCartPrice } from '@/apollo/cache/cart'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
@@ -12,8 +12,8 @@ interface SummaryProps {
 }
 
 export function Summary({ loading, onCheckout }: SummaryProps) {
-  const cartPrice = useCartStore((state) => state.cartPrice)
   const { t } = useTranslation('common')
+  const cartPrice = useCartPrice()
 
   const handleButtonClick = (): void => {
     onCheckout()

@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
-import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
-import { concatPagination } from '@apollo/client/utilities'
+import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client'
+// import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
+import { cache } from './cache'
 
-let apolloClient: ApolloClient<NormalizedCacheObject>
+export let apolloClient: ApolloClient<NormalizedCacheObject>
 
 export type ApolloInitState = NormalizedCacheObject | null
 
@@ -15,16 +16,16 @@ function createApolloClient() {
       uri: process.env.NEXT_PUBLIC_API_HOST + '/graphql'
     }),
     connectToDevTools: process.env.NODE_ENV === 'development',
-
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            allPosts: concatPagination()
-          }
-        }
-      }
-    })
+    cache
+    // cache: new InMemoryCache({
+    //   typePolicies: {
+    //     Query: {
+    //       fields: {
+    //         allPosts: concatPagination()
+    //       }
+    //     }
+    //   }
+    // })
   })
 }
 

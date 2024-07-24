@@ -81,6 +81,9 @@
   padding: 0px 17px;
   background-color: #eee;
   fill: #9b9b9b;
+  @include _minLG {
+    background: none;
+  }
   &:hover {
     fill: #434343;
   }

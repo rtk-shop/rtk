@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
-import { useCartStore } from '@/store/cart'
+import { clearCart } from '@/apollo/cache/cart'
 import useTranslation from 'next-translate/useTranslation'
 import CrossIcon from '../../../../../public/icons/cross.svg'
 import TrashIcon from '../../../../../public/icons/trash.svg'
@@ -14,12 +14,6 @@ interface CartHeadProps {
 
 export function CartHead({ onCartClose }: CartHeadProps) {
   const { t } = useTranslation('common')
-
-  const clearCart = useCartStore((state) => state.clear)
-
-  const handleClearClick = (): void => {
-    clearCart()
-  }
 
   return (
     <div className={styles.container}>
@@ -34,7 +28,7 @@ export function CartHead({ onCartClose }: CartHeadProps) {
         </p>
         <Button
           color="secondary"
-          onClick={handleClearClick}
+          onClick={clearCart}
           className={styles.clearButton}
           startIcon={
             <SvgIcon className={styles.trashIcon}>

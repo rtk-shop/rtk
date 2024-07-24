@@ -9,9 +9,9 @@ import { Tags } from './tags'
 import { Delivery } from './delivery'
 import { SizeGuide } from './size-guide'
 import { SubControls } from './sub-controls'
-import { useCartStore } from '@/store/cart'
 import { formatPrice } from '@/utils/helpers'
 import { Amaunt } from './amaunt'
+import { addToCart } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'
 
@@ -26,15 +26,15 @@ interface DetailsProps {
 }
 
 export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
-  const addItem = useCartStore((state) => state.addItem)
-
   const [amount, setAmount] = useState(1)
 
-  const handleAddToCart = (): void => {
-    addItem({
+  const handleAddToCart = () => {
+    addToCart({
       productId: id,
-      amount: amount
+      price: currentPrice,
+      amount
     })
+
     setAmount(1)
   }
 

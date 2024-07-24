@@ -9,7 +9,6 @@ import {
   CartProductsQuery,
   CartProductsQueryVariables
 } from '@/graphql/product/_gen_/cartProducts.query'
-import type { CartItemType } from '@/components/cart-item'
 
 import styles from './styles.module.scss'
 
@@ -20,21 +19,8 @@ interface PreviewProps {
 
 export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
   const cartItems = useCartStore((state) => state.cartItems)
-  const setCartPrice = useCartStore((state) => state.setCartPrice)
 
   const [l, setl] = useState(true)
-
-  const cartMap: Record<string, number> = {}
-
-  const normalizedCart = cartItems.reduce((acc, item) => {
-    if (acc[item.productId]) {
-      acc[item.productId] = acc[item.productId] += item.amount
-      return acc
-    }
-
-    acc[item.productId] = item.amount
-    return acc
-  }, cartMap)
 
   const { data, loading, error } = useQuery<CartProductsQuery, CartProductsQueryVariables>(
     CartProductsDocument,
@@ -46,16 +32,9 @@ export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
       notifyOnNetworkStatusChange: true,
       onCompleted: (data) => {
         if (data) {
-          const totalSumm = data.cartProducts.reduce(
-            (previousValue: number, item: CartItemType) =>
-              previousValue + item.currentPrice * normalizedCart[item.id],
-            0
-          )
-
           setTimeout(() => {
             setl(false)
-            setCartPrice(totalSumm)
-          }, 2000)
+          }, 1500)
         }
       }
     }
