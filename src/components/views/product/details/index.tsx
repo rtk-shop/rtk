@@ -53,8 +53,10 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
 
   return (
     <section className={styles.container}>
-      <h1 className={styles.title}>{title}</h1>
       <div className={styles.inner}>
+        {/*  */}
+        <h1 className={styles.title}>{title}</h1>
+        {/*  */}
         <div className={styles.availability}>
           <div className={clsx(styles.availabilityPlug, !inStock && styles.availabilityOutStock)}>
             <SvgIcon
@@ -90,6 +92,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
         </div>
         {/*  */}
         <SizeGuide current="L" available={['M', '2XL', 'L']} />
+        {/*  */}
         <div className={styles.buttonsWrapper}>
           <div className={styles.amauntBox}>
             <Amaunt amount={amount} onChange={handleControllerChange} />
