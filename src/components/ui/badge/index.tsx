@@ -14,7 +14,7 @@ interface BadgeProps {
 export function Badge({
   children,
   content,
-  color = '#f44336',
+  color = '#ff2727',
   max = 100,
   className,
   dotClassName

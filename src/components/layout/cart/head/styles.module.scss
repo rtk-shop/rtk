@@ -56,7 +56,7 @@
   &:hover:not(:disabled) {
     background-color: #d7d7d7;
     & .trashIcon {
-      fill: #f44336;
+      fill: var(--red);
     }
   }
 }

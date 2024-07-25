@@ -1,19 +1,21 @@
+$el-color: var(--red);
+
 .button {
-  color: #f44336;
+  color: $el-color;
   padding: 7px;
 }
 
 .svgEL {
   display: initial;
   fill: transparent;
-  stroke: #f44336;
+  stroke: $el-color;
   overflow: visible !important;
   stroke-width: 1.5px;
   transition: all 0.33s ease;
 
   & use:last-child {
-    fill: #f44336;
-    stroke: #f44336;
+    fill: $el-color;
+    stroke: $el-color;
     opacity: 0;
     transform: scale(0.33);
     transform-origin: center;

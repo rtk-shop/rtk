@@ -52,7 +52,7 @@
 }
 
 .baseError {
-  border-color: #ff182e;
+  border-color: var(--red);
 }
 
 .errorMessage {
@@ -62,7 +62,7 @@
   font-weight: 500;
   user-select: none;
   margin: 0;
-  color: #ff182e;
+  color: var(--red);
   padding-left: 10px;
   transition: opacity 0.2s ease-in-out;
 }

@@ -81,7 +81,7 @@
 
 .danger {
   color: #343434;
-  background-color: #f44336;
+  background-color: var(--red);
   &:hover:not(:disabled) {
     background-color: #f2554a;
   }
