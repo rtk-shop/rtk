@@ -20,7 +20,6 @@ export type CartItemType = {
 interface CartItemProps {
   amount: number
   product: CartItemType
-  onRemove?: (id: string) => void // todo: delete on checkout
 }
 
 export function CartItem({ product, amount }: CartItemProps) {

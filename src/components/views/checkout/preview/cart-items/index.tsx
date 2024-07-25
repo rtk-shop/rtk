@@ -1,49 +1,29 @@
-import clsx from 'clsx'
-import { CartItem } from '@/components/cart-item'
+import { CartItem, type CartItemType } from '@/components/cart-item'
 import { IconButton } from '@/components/ui/icon-button'
 import TrashIcon from '../../../../../../public/icons/trash.svg'
-// TODO: make shared
-import { ListSkeleton } from '@/components/layout/cart/list-skeleton'
-import { useCartStore } from '@/store/cart'
+import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
+import { SvgIcon } from '@/components/ui/svg-icon'
+import { normalizedView, useCartStore } from '@/store/cart'
 import { useRouter } from 'next/router'
 import { routeNames } from '@/utils/navigation'
-import type { cartItem } from '@/types'
+import { clearCart } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'
 
 interface CartItemsProps {
-  cartCount: number
-  cartProducts: cartItem[]
   loading: boolean
+  cartProducts: CartItemType[]
 }
 
-export function CartItems({ loading, cartProducts, cartCount }: CartItemsProps) {
+export function CartItems({ loading, cartProducts }: CartItemsProps) {
   const router = useRouter()
 
-  const clearCart = useCartStore((state) => state.clear)
-  const removeCartItem = useCartStore((state) => state.remove)
   const cartItems = useCartStore((state) => state.cartItems)
-
-  // TODO: put this logic into state elements
-  const cartMap: Record<string, number> = {}
-
-  const normalizedCart = cartItems.reduce((acc, item) => {
-    if (acc[item.productId]) {
-      acc[item.productId] = acc[item.productId] += item.amount
-      return acc
-    }
-
-    acc[item.productId] = item.amount
-    return acc
-  }, cartMap)
+  const itemsMap = normalizedView(cartItems)
 
   const handleClearAllClick = (): void => {
     clearCart()
     router.replace(routeNames.root)
-  }
-
-  const handleProductRemove = (id: string): void => {
-    removeCartItem(id)
   }
 
   return (
@@ -51,22 +31,17 @@ export function CartItems({ loading, cartProducts, cartCount }: CartItemsProps) 
       <div className={styles.container}>
         <h2 className={styles.title}>Ваш заказ</h2>
         <IconButton className={styles.clearButton} onClick={handleClearAllClick}>
-          <div className={clsx('svg-icon', styles.trashIcon)}>
+          <SvgIcon className={styles.trashIcon}>
             <TrashIcon />
-          </div>
+          </SvgIcon>
         </IconButton>
       </div>
       {loading ? (
-        <ListSkeleton max={3} itemsAmount={cartCount} />
+        <ListSkeleton max={3} itemsAmount={cartItems.length} />
       ) : (
         <ul className={styles.list}>
           {cartProducts.map((product) => (
-            <CartItem
-              key={product.id}
-              amount={normalizedCart[product.id]}
-              product={product}
-              onRemove={handleProductRemove}
-            />
+            <CartItem key={product.id} amount={itemsMap[product.id]} product={product} />
           ))}
         </ul>
       )}
