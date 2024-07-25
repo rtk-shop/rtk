@@ -2,6 +2,7 @@ import { memo, ReactNode } from 'react'
 import clsx from 'clsx'
 import CheckIcon from '../../../../../../public/icons/check.svg'
 import ExpandArrowIcon from '../../../../../../public/icons/expand-arrow.svg'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { useWindowSize } from '@/hooks'
 
 import styles from './styles.module.scss'
@@ -39,23 +40,22 @@ export const StepTitle = memo(function StepTitle({
           })}
         >
           {valid ? (
-            <div className={clsx('svg-icon', styles.checkIcon)}>
+            <SvgIcon className={styles.checkIcon}>
               <CheckIcon />
-            </div>
+            </SvgIcon>
           ) : (
             <span>{step}</span>
           )}
         </div>
         <h2 className={styles.title}>{children}</h2>
-        <div
+        <SvgIcon
           className={clsx({
-            'svg-icon': true,
             [styles.expandIcon]: true,
             [styles.collapsed]: isEdit
           })}
         >
           <ExpandArrowIcon />
-        </div>
+        </SvgIcon>
       </div>
     </div>
   )
