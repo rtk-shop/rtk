@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 5px 0 15px 0;
 }
 
 .title {
@@ -16,19 +17,13 @@
   overflow: auto;
 }
 
-.clearButton {
-  font-size: 5px;
-  border-radius: 10px;
-  width: 50px;
-  height: 50px;
-  transition: all 0.3s;
+.deleteButton {
+  font-size: 12px;
+  padding: 3px 8px;
+  background: none;
+  border-radius: 8px;
+  color: #ababab;
   &:hover {
-    background-color: transparent;
-    transform: scale(1.1);
+    color: rgb(255, 39, 39);
   }
-}
-
-.trashIcon {
-  font-size: 20px;
-  fill: #dc143c;
 }
