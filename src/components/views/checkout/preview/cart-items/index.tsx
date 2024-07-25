@@ -1,8 +1,6 @@
 import { CartItem, type CartItemType } from '@/components/cart-item'
-import { IconButton } from '@/components/ui/icon-button'
-import TrashIcon from '../../../../../../public/icons/trash.svg'
+import { Button } from '@/components/ui/button'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
-import { SvgIcon } from '@/components/ui/svg-icon'
 import { normalizedView, useCartStore } from '@/store/cart'
 import { useRouter } from 'next/router'
 import { routeNames } from '@/utils/navigation'
@@ -30,11 +28,9 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
     <div>
       <div className={styles.container}>
         <h2 className={styles.title}>Ваш заказ</h2>
-        <IconButton className={styles.clearButton} onClick={handleClearAllClick}>
-          <SvgIcon className={styles.trashIcon}>
-            <TrashIcon />
-          </SvgIcon>
-        </IconButton>
+        <Button color="secondary" className={styles.deleteButton} onClick={handleClearAllClick}>
+          Удалить все
+        </Button>
       </div>
       {loading ? (
         <ListSkeleton max={3} itemsAmount={cartItems.length} />
