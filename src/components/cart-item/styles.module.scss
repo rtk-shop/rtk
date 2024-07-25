@@ -38,7 +38,7 @@
   display: inline-block;
   width: 100%;
   margin: 0;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 500;
   padding-bottom: 4px;
   color: inherit;
@@ -49,28 +49,28 @@
   transition: color 0.2s;
   &:hover,
   &:focus {
-    color: orange;
     outline: none;
   }
 }
 
 .price {
   color: #707070;
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 15px;
+  line-height: 15px;
   font-weight: 500;
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 23px;
 }
 
 .amount {
   margin: 0;
   padding-left: 1px;
   font-size: 16px;
+  line-height: 16px;
   font-weight: 500;
 }
 

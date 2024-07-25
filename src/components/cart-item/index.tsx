@@ -50,7 +50,7 @@ export function CartItem({ product, amount }: CartItemProps) {
         </Link>
         <span className={styles.price}>Цена:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴</span>
         <p className={styles.amount}>
-          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;грн.
+          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;грн
         </p>
         <div className={styles.controls}>
           <AmountController min={1} max={100} amount={amount} onChange={handleAmountChange} />
