@@ -2,61 +2,52 @@
   z-index: 100;
   position: sticky;
   top: 0;
-  padding: 10px 5px;
+  padding: 10px;
   background-color: #f5f5f5;
 }
 
 .inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .closeButton {
-  margin-left: 10px;
-  font-size: 5px;
-
+  margin-right: 15px;
+  font-size: 17px;
   transition: transform 0.3s;
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 
 .closeIcon {
-  fill: #373737;
-  font-size: 17px;
+  fill: #171717;
 }
 
 .title {
-  font-size: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #3d3d3d;
+  line-height: 17px;
   margin: 0;
-  & b {
-    font-weight: 600;
+}
+
+.clearButton {
+  margin-left: auto;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 9px;
+  background: #171717;
+  border-radius: 8px;
+  color: #fff;
+  &:hover {
+    background-color: #383838;
   }
 }
 
 .trashIcon {
-  fill: #858585;
+  fill: #fff;
   font-size: 15px;
-  margin-right: 4px;
-  transition: fill 0.2s;
-}
-
-.clearButton {
-  font-size: 13px;
-  line-height: 14px;
-  font-weight: 600;
-  padding: 8px 7px;
-  align-self: center;
-  text-transform: none;
-  border: none;
-  color: #9b9b9b;
-  background-color: #e1e1e1;
   margin-right: 5px;
-  &:hover:not(:disabled) {
-    background-color: #d7d7d7;
-    & .trashIcon {
-      fill: var(--red);
-    }
-  }
 }

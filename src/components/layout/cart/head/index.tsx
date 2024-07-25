@@ -23,9 +23,7 @@ export function CartHead({ onCartClose }: CartHeadProps) {
             <CrossIcon />
           </SvgIcon>
         </IconButton>
-        <p className={styles.title}>
-          <b>{t('cart.topControls.title1')}</b>&nbsp;{t('cart.topControls.title2')}
-        </p>
+        <p className={styles.title}>{t('cart.topControls.title')}</p>
         <Button
           color="secondary"
           onClick={clearCart}
