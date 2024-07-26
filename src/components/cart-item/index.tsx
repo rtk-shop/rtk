@@ -7,6 +7,7 @@ import { AmountController } from '@/components/ui/amount-controller'
 import { formatPrice } from '@/utils/helpers'
 import { routeNames, generateProductLink } from '@/utils/navigation'
 import { updateItemAmount, removeFromCart } from '@/apollo/cache/cart'
+import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
 
@@ -23,6 +24,8 @@ interface CartItemProps {
 }
 
 export function CartItem({ product, amount }: CartItemProps) {
+  const { t } = useTranslation('common')
+
   const { id, slug, title, preview, currentPrice } = product
 
   const handleAmountChange = (_: string, n: number): void => {
@@ -48,7 +51,9 @@ export function CartItem({ product, amount }: CartItemProps) {
         >
           {title}
         </Link>
-        <span className={styles.price}>Цена:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴</span>
+        <span className={styles.price}>
+          {t('price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
+        </span>
         <p className={styles.amount}>
           {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;грн
         </p>
