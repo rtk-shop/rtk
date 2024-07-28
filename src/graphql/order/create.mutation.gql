@@ -1,0 +1,25 @@
+mutation CreateOrder(
+  $name: String!
+  $surname: String!
+  $email: String!
+  $phone: String!
+  $cityName: String!
+  $postOfficeName: String!
+  $cartItems: [CartItem!]!
+  $supplier: String!
+) {
+  createOrder(
+    input: {
+      name: $name
+      surname: $surname
+      email: $email
+      phone: $phone
+      cityName: $cityName
+      postOfficeName: $postOfficeName
+      cartItems: $cartItems
+      supplier: $supplier
+    }
+  ) {
+    message
+  }
+}

@@ -109,11 +109,11 @@ export type MutationProductRatingVoteArgs = {
 
 export type NewOrderInput = {
   cartItems: Array<CartItem>
-  cityId: Scalars['String']['input']
+  cityName: Scalars['String']['input']
   email: Scalars['String']['input']
   name: Scalars['String']['input']
   phone: Scalars['String']['input']
-  postOfficeId: Scalars['String']['input']
+  postOfficeName: Scalars['String']['input']
   supplier: Scalars['String']['input']
   surname: Scalars['String']['input']
 }
