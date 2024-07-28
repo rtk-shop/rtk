@@ -124,7 +124,7 @@
   font-weight: 600;
   border-radius: 6px;
   padding: 2px 4px;
-  background-color: #f12315;
+  background-color: var(--green-light);
 }
 
 .buttonsWrapper {
@@ -156,14 +156,13 @@
   font-weight: 600;
   padding: 14px;
   color: #fff;
-  background-color: #232323;
+  background-color: #171717;
 
   @media (hover: hover) {
     &:hover:not(:disabled) {
-      background-color: #32cd32;
+      background-color: var(--green-light);
     }
   }
-
   &:active:not(:disabled) {
     & .orderButtonIcon {
       transform: scale(1.2);
