@@ -1,8 +1,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
-import Slider from 'rc-slider'
+import Slider, { type SliderProps } from 'rc-slider'
 import { Button } from '@/components/ui/button'
 import { Collapse, CollapseHead } from '@/components/ui/collapse'
-import type { SliderProps } from 'rc-slider'
 
 import styles from './styles.module.scss'
 import 'rc-slider/assets/index.css'
