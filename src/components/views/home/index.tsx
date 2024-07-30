@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
-import { ScaleLoader } from '@/components/ui/loader'
+import { ListSkeleton } from './product-list/skeleton'
 import { ErrorPlug } from '@/components/ui/error-plug'
 import { Controls } from './controls'
 import { useLazyQuery } from '@apollo/client'
@@ -152,9 +152,7 @@ export function HomeIndex() {
             </div>
             <div className={styles.viewBox}>
               {loading ? (
-                <div className={styles.loaderWapper}>
-                  <ScaleLoader fallback={true} />
-                </div>
+                <ListSkeleton />
               ) : (
                 <div className={styles.productsView}>
                   <Controls onFilterClick={handleFilterClick} />
