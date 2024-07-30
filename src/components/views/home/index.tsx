@@ -5,14 +5,9 @@ import { ProductList } from './product-list'
 import { ListSkeleton } from './product-list/skeleton'
 import { ErrorPlug } from '@/components/ui/error-plug'
 import { Controls } from './controls'
-import { useLazyQuery } from '@apollo/client'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
-import {
-  ProductsDocument,
-  ProductsQuery,
-  ProductsQueryVariables
-} from '@/graphql/product/_gen_/products.query'
+import { useProductsLazyQuery } from '@/graphql/product/_gen_/products.query'
 
 import styles from './styles.module.scss'
 
@@ -36,10 +31,7 @@ export function HomeIndex() {
   const page = 1
   const numOfPage = !isNaN(Number(page)) ? Number(page) : 1
 
-  const [getProducts, { loading, data, error }] = useLazyQuery<
-    ProductsQuery,
-    ProductsQueryVariables
-  >(ProductsDocument, {
+  const [getProducts, { loading, data, error }] = useProductsLazyQuery({
     onCompleted: (data) => {
       if (data?.products.priceRange) {
         const { gt, lt } = data.products.priceRange
