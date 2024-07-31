@@ -6,8 +6,6 @@ import { Preview } from './preview'
 import { OrderSuccessModal } from './modals/order-success'
 import { useRouter } from 'next/router'
 import { routeNames } from '@/utils/navigation'
-import { useMutation } from '@apollo/client'
-import { CREATE_ORDER } from '@/graphql/order'
 import { usePageState } from './model/usePageState'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
@@ -15,6 +13,7 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { useCartStore } from '@/store/cart'
 
 import styles from './styles.module.scss'
+import { useCreateOrderMutation } from '@/graphql/order/_gen_/create.mutation'
 
 export function CheckoutIndex() {
   const router = useRouter()
@@ -30,10 +29,10 @@ export function CheckoutIndex() {
 
   const cartItems = useCartStore((state) => state.cartItems)
 
-  const [createOrder, { loading }] = useMutation(CREATE_ORDER)
+  const [createOrder, { loading }] = useCreateOrderMutation()
 
   useEffect(() => {
-    console.log(cartItems)
+    // console.log(cartItems)
 
     if (!cartItems.length) {
       // router.back()
@@ -47,6 +46,13 @@ export function CheckoutIndex() {
     resolver: valibotResolver(validationSchema),
     defaultValues: {
       supplier: 'nova-poshta'
+      // temp
+      // name: 'Vlad',
+      // surname: 'Shevliakov',
+      // email: 'vlad@mail.com',
+      // phone: '380777777777',
+      // cityName: '_test_',
+      // postOfficeName: 'test_test'
     }
   })
 
@@ -71,10 +77,12 @@ export function CheckoutIndex() {
 
     try {
       await createOrder({
-        variables: { ...values }
+        variables: { cartItems, ...values }
       })
       setOrderSuccess(true)
     } catch (error) {
+      console.log(error)
+
       setOrderErr(true)
     }
   }
