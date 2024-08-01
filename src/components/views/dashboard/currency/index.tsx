@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Loader } from '@/components/ui/loaderV2'
+import { Loader } from '@/components/ui/loader'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@/utils/helpers'

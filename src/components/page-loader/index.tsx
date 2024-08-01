@@ -1,4 +1,4 @@
-import { ScaleLoader } from '@/components/ui/loader'
+import { Loader } from '@/components/ui/loader'
 
 export function PageLoader() {
   return (
@@ -11,7 +11,7 @@ export function PageLoader() {
         alignItems: 'center'
       }}
     >
-      <ScaleLoader fallback />
+      <Loader />
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
-// import {ScaleLoader} from '@/shared/loaders/ScaleLoader'
 // import Image from 'next/image'
 // import { routeNames, generateLink } from '@/utils/navigation'
 // import { useLazyQuery } from '@apollo/client'
@@ -156,7 +155,7 @@ export function Search() {
         <Results>
           {loading ? (
             <LoaderBox>
-              <ScaleLoader />
+              <Loader />
             </LoaderBox>
           ) : (
             content

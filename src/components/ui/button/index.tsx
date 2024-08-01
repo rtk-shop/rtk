@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef, RefObject, MouseEvent } from 'react'
 import clsx from 'clsx'
-import { Loader } from '../loaderV2'
+import { Loader } from '../loader'
 
 import styles from './styles.module.scss'
 
