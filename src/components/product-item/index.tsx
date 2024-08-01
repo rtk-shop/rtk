@@ -86,9 +86,9 @@ export function ProductItem({
             })}
           >
             {basePrice !== price && (
-              <p className={styles['discount-price']}>{formatPrice(basePrice)}&nbsp;₴</p>
+              <p className={styles['discount-price']}>{formatPrice(basePrice)}&nbsp;$</p>
             )}
-            <span>{formatPrice(price)}&nbsp;₴</span>
+            <span>{formatPrice(price)}&nbsp;$</span>
           </div>
           <div className={styles.buttonWrapper}>
             {withDelete ? (

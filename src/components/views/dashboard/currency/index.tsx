@@ -49,7 +49,7 @@ export function Currency() {
       <p className={styles.changedAt}>
         Изменено: <span>{data && formatDate(data.globalData.updatedAt)}</span>
       </p>
-      <IconButton onClick={() => setEditMode(true)} className={styles.editButton}>
+      <IconButton disableRipple onClick={() => setEditMode(true)} className={styles.editButton}>
         <SvgIcon>
           <EditIcon />
         </SvgIcon>

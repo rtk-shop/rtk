@@ -7,16 +7,24 @@ import { useCartStore } from '@/store/cart'
 import { useFavoriteStore } from '@/store/favorite'
 import { useUiStore } from '@/store/ui'
 import { useUserStore } from '@/store/user'
+import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 
 interface AppLayoutProps {
   children: ReactNode
+  currency?: number
 }
-
-const CURRENCY = 41.9
 
 export function AppLayout({ children }: AppLayoutProps) {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
+
+  const { data, error } = useGlobalDataQuery()
+
+  const currency = data?.globalData.usdCourse || 0
+
+  if (error) {
+    console.log(error.message)
+  }
 
   useEffect(() => {
     useCartStore.persist.rehydrate()
@@ -43,9 +51,9 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
-      <Sidebar isOpen={isSidebarOpen} currency={CURRENCY} onClose={handleCloseDrawer} />
+      <Sidebar isOpen={isSidebarOpen} currency={currency} onClose={handleCloseDrawer} />
       <Cart isOpen={isCartOpen} onClose={handleCartClose} />
-      <Header currency={CURRENCY} onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
+      <Header currency={currency} onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
       <main>{children}</main>
       <Footer />
     </>
