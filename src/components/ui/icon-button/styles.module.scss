@@ -54,3 +54,11 @@
   align-items: inherit;
   justify-content: inherit;
 }
+
+.loader {
+  display: flex;
+  height: 1em;
+  width: 1em;
+  justify-content: center;
+  border-right-color: #171717;
+}

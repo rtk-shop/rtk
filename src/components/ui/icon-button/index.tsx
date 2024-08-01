@@ -1,6 +1,7 @@
 import { useRef, ReactNode, MouseEvent } from 'react'
 import clsx from 'clsx'
-import { ScaleLoader } from '@/components/ui/loader'
+import { Loader } from '../loaderV2'
+
 import styles from './styles.module.scss'
 
 interface IconButtonProps {
@@ -9,7 +10,6 @@ interface IconButtonProps {
   children: ReactNode
   loading?: boolean
   disabled?: boolean // TODO: disabled styles
-  darkLoader?: boolean
   disableRipple?: boolean
   className?: string
   onClick?(event: MouseEvent<HTMLButtonElement>): void
@@ -18,7 +18,6 @@ interface IconButtonProps {
 export function IconButton({
   loading,
   children,
-  darkLoader,
   disableRipple = false,
   type = 'button',
   onClick,
@@ -57,7 +56,9 @@ export function IconButton({
       {...otherProps}
     >
       {loading ? (
-        <ScaleLoader dark={darkLoader} />
+        <div className={styles.loader}>
+          <Loader adaptive />
+        </div>
       ) : (
         <span className={styles.inner}>{children}</span>
       )}
