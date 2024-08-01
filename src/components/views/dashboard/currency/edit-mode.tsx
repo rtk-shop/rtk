@@ -86,12 +86,12 @@ export function EditMode({ onExit }: EditModeProps) {
         <Button
           disabled={loading}
           color="secondary"
-          className={clsx(styles.actionButton, styles.cancel)}
+          className={styles.actionButton}
           onClick={onExit}
         >
           Отмена
         </Button>
-        <Button loading={loading} onClick={handleCourseSet} className={clsx(styles.actionButton)}>
+        <Button loading={loading} onClick={handleCourseSet} className={styles.actionButton}>
           Сохранить
         </Button>
       </div>

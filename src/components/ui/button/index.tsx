@@ -1,6 +1,7 @@
 import { ReactNode, forwardRef, RefObject, MouseEvent } from 'react'
 import clsx from 'clsx'
-import { ScaleLoader } from '@/components/ui/loader'
+import { Loader } from '../loaderV2'
+
 import styles from './styles.module.scss'
 
 const enum ButtonColor {
@@ -73,12 +74,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         className
       )}
       type={type}
+      disabled={loading || otherProps.disabled}
       {...otherProps}
     >
       {!loading && startIcon}
       {loading ? (
         <div className={styles.loader}>
-          <ScaleLoader dark={color !== ButtonColor.primary} />
+          <Loader adaptive />
         </div>
       ) : (
         <span>{children}</span>

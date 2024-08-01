@@ -34,13 +34,18 @@
 
 .loader {
   display: flex;
+  height: 1lh;
+  width: 1lh;
   justify-content: center;
+  border-right-color: inherit; // loader related
 }
 
 // Color types
 .primary {
+  border: none;
   color: #fff;
   background-color: #171717;
+  border-right-color: #171717; // loader related
 
   @media (hover: none) {
     &:active:not(:disabled) {
@@ -56,15 +61,18 @@
 }
 
 .secondary {
+  border: none;
   color: #171717;
-  background-color: #fff128;
+  background-color: #f0f0f0;
+  border-right-color: #171717; // loader related
 }
 
 .accept {
-  color: #fff;
   border: none;
+  color: #fff;
   background-color: var(--green-light);
   font-weight: 600;
+  border-right-color: var(--green-light);
 
   @media (hover: none) {
     &:active:not(:disabled) {

@@ -35,13 +35,7 @@ export function Summary({ loading, submitLoading, orderCreationErr }: SummaryPro
           </div>
         )}
       </div>
-      <Button
-        fullWidth
-        color="accept"
-        type="submit"
-        loading={submitLoading || loading}
-        disabled={submitLoading || loading}
-      >
+      <Button fullWidth color="accept" type="submit" loading={submitLoading || loading}>
         Подтвердить заказ
       </Button>
       {orderCreationErr && (
