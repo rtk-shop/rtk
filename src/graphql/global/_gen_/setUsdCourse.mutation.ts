@@ -7,11 +7,18 @@ export type SetUsdCourseMutationVariables = Types.Exact<{
   value: Types.Scalars['Float']['input']
 }>
 
-export type SetUsdCourseMutation = { __typename?: 'Mutation'; setUsdCourse: number }
+export type SetUsdCourseMutation = {
+  __typename?: 'Mutation'
+  setUsdCourse: { __typename?: 'GlobalData'; id: string; usdCourse: number; updatedAt: string }
+}
 
 export const SetUsdCourseDocument = gql`
   mutation SetUsdCourse($value: Float!) {
-    setUsdCourse(input: $value)
+    setUsdCourse(input: $value) {
+      id
+      usdCourse
+      updatedAt
+    }
   }
 `
 export type SetUsdCourseMutationFn = Apollo.MutationFunction<

@@ -22,6 +22,9 @@ export function EditMode({ onExit }: EditModeProps) {
     variables: {
       value: newCurrency
     },
+    onCompleted() {
+      onExit()
+    },
     onError(error) {
       console.log(error)
       setError('Ошибка, не удалось обновить')
@@ -43,24 +46,7 @@ export function EditMode({ onExit }: EditModeProps) {
   const handleCourseSet = () => {
     if (newCurrency >= schema.min) {
       setError('')
-      setCourse({
-        update(cache, { data }) {
-          if (data) {
-            const newCourse = data.setUsdCourse
-
-            cache.modify({
-              id: 'GlobalData:1',
-              fields: {
-                usdCourse() {
-                  return newCourse
-                }
-              }
-            })
-
-            onExit()
-          }
-        }
-      })
+      setCourse()
     }
   }
 

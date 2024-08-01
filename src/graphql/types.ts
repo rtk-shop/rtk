@@ -95,7 +95,7 @@ export type Mutation = {
   deleteProduct?: Maybe<DeleteProductResponse>
   hideProduct?: Maybe<HideProductResponse>
   productRatingVote?: Maybe<ProductRatingVoteResponse>
-  setUsdCourse: Scalars['Float']['output']
+  setUsdCourse: GlobalData
 }
 
 export type MutationCreateOrderArgs = {
