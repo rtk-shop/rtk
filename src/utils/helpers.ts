@@ -1,6 +1,24 @@
 export const formatPrice = (num: number): string =>
   num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
 
+/**
+ * @param src is a date-time string in RFC 3339 format
+ */
+export const formatDate = (src: string, options?: Intl.DateTimeFormatOptions): string => {
+  const initOptions: Intl.DateTimeFormatOptions = {
+    dateStyle: 'short',
+    timeStyle: 'medium'
+  }
+  try {
+    return new Intl.DateTimeFormat('uk-UA', { ...initOptions, ...options }).format(
+      new Date(src.slice(0, -1))
+    )
+  } catch (error) {
+    console.log(error)
+    return 'invalid date'
+  }
+}
+
 export const getColorByTagName = (name: string): string => {
   switch (name) {
     case 'new':

@@ -55,6 +55,13 @@ export const enum Gender {
   Unisex = 'unisex'
 }
 
+export type GlobalData = {
+  __typename?: 'GlobalData'
+  id: Scalars['ID']['output']
+  updatedAt: Scalars['String']['output']
+  usdCourse: Scalars['Float']['output']
+}
+
 export type HideProductResponse = {
   __typename?: 'HideProductResponse'
   isHidden: Scalars['Boolean']['output']
@@ -88,6 +95,7 @@ export type Mutation = {
   deleteProduct?: Maybe<DeleteProductResponse>
   hideProduct?: Maybe<HideProductResponse>
   productRatingVote?: Maybe<ProductRatingVoteResponse>
+  setUsdCourse: Scalars['Float']['output']
 }
 
 export type MutationCreateOrderArgs = {
@@ -105,6 +113,10 @@ export type MutationHideProductArgs = {
 
 export type MutationProductRatingVoteArgs = {
   input: ProductRatingVoteInput
+}
+
+export type MutationSetUsdCourseArgs = {
+  input: Scalars['Float']['input']
 }
 
 export type NewOrderInput = {
@@ -170,12 +182,12 @@ export type Product = {
   __typename?: 'Product'
   amount: Scalars['Int']['output']
   availableColors?: Maybe<Array<ProductColors>>
-  basePrice: Scalars['Int']['output']
+  basePrice: Scalars['Float']['output']
   brandName: Scalars['String']['output']
   category: CategoryType
   colorName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
-  currentPrice: Scalars['Int']['output']
+  currentPrice: Scalars['Float']['output']
   defaultSizeID: Scalars['Int']['output']
   description?: Maybe<Scalars['String']['output']>
   gender: Gender
@@ -250,6 +262,7 @@ export type ProductsResponse = {
 export type Query = {
   __typename?: 'Query'
   cartProducts: Array<Product>
+  globalData: GlobalData
   homeData?: Maybe<HomeDataResponse>
   logInRoot?: Maybe<LogInRsponse>
   product: ProductResult

@@ -1,0 +1,116 @@
+.container {
+  min-width: 300px;
+  font-weight: 500;
+  position: relative;
+  padding: 15px 20px;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 122px;
+}
+
+.warning {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 122px;
+
+  & p {
+    font-size: 15px;
+    margin-top: 8px;
+  }
+}
+
+.warningIcon {
+  font-size: 60px;
+  fill: var(--red);
+}
+
+.title {
+  font-size: 18px;
+}
+
+.currency {
+  font-size: 30px;
+}
+
+.changedAt {
+  color: #808080;
+  font-size: 12px;
+}
+
+.editButton {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  font-size: 22px;
+  color: #808080;
+  fill: #808080;
+  &:hover {
+    fill: #171717;
+  }
+}
+
+// EDIT MODE
+
+.preview {
+  margin-top: 7px;
+  font-size: 30px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.currencyInput {
+  margin: 0 5px 0 7px;
+  width: 100px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 24px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.currencyErr {
+  color: var(--red);
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionButton {
+  flex-basis: 48%;
+  font-size: 15px;
+  padding: 5px 8px;
+  border-radius: 8px;
+}
+
+.cancel {
+  border: none;
+  color: #464646;
+  background-color: #f0f0f0;
+}
+
+.errorMessage {
+  opacity: 0;
+  height: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  user-select: none;
+  margin: 0;
+  color: var(--red);
+}
+
+.showMessage {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}

@@ -1,0 +1,3 @@
+mutation SetUsdCourse($value: Float!) {
+  setUsdCourse(input: $value)
+}
