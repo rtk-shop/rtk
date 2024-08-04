@@ -1,5 +1,14 @@
-export const formatPrice = (num: number): string =>
-  num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+export const formatPrice = (num: number): string => {
+  let dst: string
+
+  if (Number.isInteger(num)) {
+    dst = num.toString()
+  } else {
+    dst = num.toFixed(2)
+  }
+
+  return dst.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+}
 
 /**
  * @param src is a date-time string in RFC 3339 format

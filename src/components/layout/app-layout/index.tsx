@@ -52,7 +52,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <Sidebar isOpen={isSidebarOpen} currency={currency} onClose={handleCloseDrawer} />
-      <Cart isOpen={isCartOpen} onClose={handleCartClose} />
+      <Cart isOpen={isCartOpen} currency={currency} onClose={handleCartClose} />
       <Header currency={currency} onCartOpen={handleCartOpen} onDrawerOpen={handleOpenDrawer} />
       <main>{children}</main>
       <Footer />

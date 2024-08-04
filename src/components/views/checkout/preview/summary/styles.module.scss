@@ -11,12 +11,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 22px;
-  line-height: 22px;
+  font-size: 18px;
+  line-height: 18px;
   font-weight: 500;
   & > b {
     font-size: 19px;
   }
+}
+
+.uahPrice {
+  color: #989898;
 }
 
 .conditions {

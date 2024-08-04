@@ -15,21 +15,22 @@ import { setCartItems } from '@/apollo/cache/cart'
 import styles from './styles.module.scss'
 
 interface CartProps {
+  currency: number
   isOpen: boolean
   onClose(): void
 }
 
-export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
+export const Cart = memo(function Cart({ isOpen, currency, onClose }: CartProps) {
   return (
     <Drawer position="right" onClose={onClose} open={isOpen}>
       <div className={styles.container}>
-        <CartInner onClose={onClose} />
+        <CartInner currency={currency} onClose={onClose} />
       </div>
     </Drawer>
   )
 })
 
-export function CartInner({ onClose }: { onClose(): void }) {
+export function CartInner({ currency, onClose }: { currency: number; onClose(): void }) {
   const router = useRouter()
   const { t } = useTranslation('common')
 
@@ -81,7 +82,7 @@ export function CartInner({ onClose }: { onClose(): void }) {
           ))}
         </ul>
       )}
-      <Summary loading={loading} onCheckout={handleCheckout} />
+      <Summary loading={loading} currency={currency} onCheckout={handleCheckout} />
     </div>
   )
 }

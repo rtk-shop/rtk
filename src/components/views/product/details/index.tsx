@@ -12,6 +12,7 @@ import { SubControls } from './sub-controls'
 import { formatPrice } from '@/utils/helpers'
 import { Amaunt } from './amaunt'
 import { addToCart } from '@/apollo/cache/cart'
+import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 
 import styles from './styles.module.scss'
 
@@ -27,6 +28,8 @@ interface DetailsProps {
 
 export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
   const [amount, setAmount] = useState(1)
+
+  const { data } = useGlobalDataQuery()
 
   const handleAddToCart = () => {
     addToCart({
@@ -88,6 +91,11 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
                 <span>%</span>
               </span>
             </div>
+          )}
+          {data && (
+            <span className={styles.uahPrice}>
+              &nbsp;• {formatPrice(currentPrice * data.globalData.usdCourse)}грн
+            </span>
           )}
         </div>
         {/*  */}
