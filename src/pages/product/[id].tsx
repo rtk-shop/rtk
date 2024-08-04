@@ -20,20 +20,15 @@ export const getServerSideProps: GetServerSideProps<{
   const { id } = ctx.params as Params
   const client = initializeApollo()
 
-  let productId: string = ''
+  const productId = productIdFromSlug(id)
+  const { data } = await client.query<GetProductQuery, GetProductQueryVariables>({
+    query: GetProductDocument,
+    variables: { id: productId }
+  })
 
-  try {
-    productId = productIdFromSlug(id)
-    await client.query<GetProductQuery, GetProductQueryVariables>({
-      query: GetProductDocument,
-      variables: { id: productId }
-    })
-  } catch (error) {
+  if (data.product.__typename === 'NotFound') {
     return {
-      props: {
-        productID: productId,
-        initialApolloState: null
-      }
+      notFound: true
     }
   }
 

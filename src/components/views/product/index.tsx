@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 import 'keen-slider/keen-slider.min.css'
 
 export function ProductIndex({ productID }: { productID: string }) {
-  const { loading, error, data } = useGetProductQuery({
+  const { loading, data } = useGetProductQuery({
     variables: {
       id: productID
     }
@@ -15,18 +15,6 @@ export function ProductIndex({ productID }: { productID: string }) {
 
   if (loading) {
     return <p>Loading...</p>
-  }
-
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    )
-  }
-
-  if (data && data.product.__typename === 'NotFound') {
-    return <h1>Not found</h1>
   }
 
   if (data && data.product.__typename === 'Product') {
