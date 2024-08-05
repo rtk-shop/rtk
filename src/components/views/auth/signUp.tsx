@@ -3,10 +3,13 @@ import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { signUpSchema, SignupFormValues } from './model'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
 
 export function SignUp({ onLogIn }: { onLogIn(): void }) {
+  const { t } = useTranslation('auth')
+
   const {
     register,
     formState: { errors },
@@ -22,29 +25,33 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h1 className={styles.title}>Создание аккаунта</h1>
-      <p className={styles.subTitle}>Введите свои данные для регистрации</p>
-      <TextInput name="name" label="Имя" register={register} errors={errors} />
-      <TextInput name="email" type="email" label="E-mail" register={register} errors={errors} />
+      <h1 className={styles.title}>{t('signUp.title')}</h1>
+      <p className={styles.subTitle}>{t('signUp.subTitle')}</p>
+      <TextInput name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
+      <TextInput
+        name="email"
+        type="email"
+        label={t('signUp.fields.email')}
+        register={register}
+        errors={errors}
+      />
       <TextInput
         name="password"
         type="password"
-        label="Пароль"
+        label={t('signUp.fields.password')}
         register={register}
         errors={errors}
       />
       <div className={styles.code}>
-        <span>Код</span>
+        <span>{t('signUp.fields.code')}</span>
         <TextInput name="code" type="number" register={register} errors={errors} />
       </div>
       <Button fullWidth type="submit" className={styles.logInButton}>
-        Зарегистрироваться
+        {t('signUp.button')}
       </Button>
-      <p className={styles.offer}>
-        Нажав кнопку «Зарегистрироваться», вы принимаете условия пользовательского соглашения
-      </p>
-      <p className={styles.signupMessage}>
-        Уже есть аккаунт? <span onClick={onLogIn}>Войти сейчас</span>
+      <p className={styles.offer}>{t('signUp.info', { text: t('signUp.button') })}</p>
+      <p className={styles.modeController}>
+        {t('signUp.mode')} <span onClick={onLogIn}>{t('signUp.modeAction')}</span>
       </p>
     </form>
   )

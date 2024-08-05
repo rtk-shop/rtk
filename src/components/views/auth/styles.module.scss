@@ -3,6 +3,7 @@
 }
 .inner {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   height: 100%;
   flex-direction: column-reverse;
@@ -12,7 +13,6 @@
 }
 
 .auth {
-  //   background-color: #fafafa;
   padding: 20px;
   padding-bottom: 40px;
 
@@ -21,6 +21,12 @@
     padding-bottom: 0;
     align-self: center;
   }
+}
+
+.langWrapper {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .banner {
@@ -70,7 +76,7 @@
   margin: 0 auto;
 }
 
-.signupMessage {
+.modeController {
   font-weight: 500;
   text-align: center;
   margin-top: 15px;

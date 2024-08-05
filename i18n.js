@@ -4,7 +4,8 @@ module.exports = {
   locales: ['ru', 'ua'],
   pages: {
     '*': ['common'],
-    '/': ['home']
+    '/': ['home'],
+    '/auth': ['auth']
   },
   loadLocaleFrom: (lang, ns) =>
     // You can use a dynamic import, fetch, whatever. You should
