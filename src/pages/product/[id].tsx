@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+import { AppLayout } from '@/components/layout/app-layout'
 import { ParsedUrlQuery } from 'querystring'
 import { ProductIndex } from '@/components/views/product'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
@@ -8,6 +10,7 @@ import {
   GetProductDocument
 } from '@/graphql/product/_gen_/product.query'
 import { type ApolloInitState, initializeApollo } from '@/apollo/ssr'
+import { NextPageWithLayout } from '../_app'
 
 interface Params extends ParsedUrlQuery {
   id: string
@@ -40,8 +43,14 @@ export const getServerSideProps: GetServerSideProps<{
   }
 }
 
-export default function Product({
-  productID
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+type PageProps = NextPageWithLayout<InferGetServerSidePropsType<typeof getServerSideProps>>
+
+const Product: PageProps = ({ productID }) => {
   return <ProductIndex productID={productID} />
 }
+
+Product.getLayout = function getLayout(page: ReactElement) {
+  return <AppLayout>{page}</AppLayout>
+}
+
+export default Product

@@ -1,14 +1,21 @@
+import { ReactElement, ReactNode } from 'react'
 import Head from 'next/head'
 import Modal from 'react-modal'
-import { AppLayout } from '@/components/layout/app-layout'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@/apollo/ssr'
 import { Montserrat } from 'next/font/google'
 import type { AppProps } from 'next/app'
+import { NextPage } from 'next'
 
 import '@/styles/globals.scss'
 
-type AppPropsWithLayout = AppProps
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600'],
@@ -23,6 +30,8 @@ Modal.setAppElement('#__next')
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   return (
     <>
       <Head>
@@ -33,16 +42,14 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ApolloProvider client={apolloClient}>
-        <AppLayout>
-          <style jsx global>
-            {`
-              html {
-                font-family: ${montserrat.style.fontFamily};
-              }
-            `}
-          </style>
-          <Component {...pageProps} />
-        </AppLayout>
+        <style jsx global>
+          {`
+            html {
+              font-family: ${montserrat.style.fontFamily};
+            }
+          `}
+        </style>
+        {getLayout(<Component {...pageProps} />)}
       </ApolloProvider>
     </>
   )
