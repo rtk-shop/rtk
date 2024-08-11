@@ -6,6 +6,7 @@ import { useApollo } from '@/apollo/ssr'
 import { Montserrat } from 'next/font/google'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
+import { Toaster } from 'sonner'
 
 import '@/styles/globals.scss'
 
@@ -50,6 +51,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           `}
         </style>
         {getLayout(<Component {...pageProps} />)}
+        <Toaster position="bottom-right" richColors expand />
       </ApolloProvider>
     </>
   )
