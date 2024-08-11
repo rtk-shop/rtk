@@ -4,16 +4,16 @@ export const common = v.object({
   email: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('* обязательное поле'),
-    v.email('* значение не похоже на email '),
-    v.maxLength(70, '* максимум 70 символов')
+    v.nonEmpty('common:validation.requiredField'),
+    v.email('common:validation.wrongEmail'),
+    v.maxLength(60, 'common:validation.maxLength60')
   ),
   password: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('* обязательное поле'),
-    v.minLength(6, '* минимум 6 символов'),
-    v.maxLength(30, '* максимум 30 символов')
+    v.nonEmpty('common:validation.requiredField'),
+    v.minLength(6, 'common:validation.minLength6'),
+    v.maxLength(30, 'common:validation.maxLength30')
   )
 })
 
@@ -24,15 +24,14 @@ export const signUpSchema = v.object({
   name: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('* обязательное поле'),
-    v.minLength(1, '* введите имя'),
-    v.maxLength(30, '* максимум 30 символов')
+    v.nonEmpty('common:validation.requiredField'),
+    v.maxLength(70, 'common:validation.maxLength70')
   ),
   code: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('* обязательное поле'),
-    v.length(5, '* должно быть 5 символов')
+    v.nonEmpty('common:validation.requiredField'),
+    v.length(5, 'common:validation.lengthEquals5')
   )
 })
 
