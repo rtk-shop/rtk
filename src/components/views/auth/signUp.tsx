@@ -31,6 +31,7 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
   })
 
   const onSubmit: SubmitHandler<SignupFormValues> = (values) => {
+    toast.dismiss()
     signUp(values)
   }
 

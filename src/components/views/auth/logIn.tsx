@@ -2,7 +2,9 @@ import { TextInput } from '@/components/ui/text-input'
 import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { logInSchema, LoginFormValues } from './model'
+import { toast } from 'sonner'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useLogIn } from './hooks'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
@@ -19,8 +21,18 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
     resolver: valibotResolver(logInSchema)
   })
 
+  const [logIn, { loading }] = useLogIn<LoginFormValues>({
+    onSuccess(data) {
+      console.log('sucess', data)
+    },
+    onError(err) {
+      toast.warning(t(err))
+    }
+  })
+
   const onSubmit: SubmitHandler<LoginFormValues> = (values) => {
-    console.log('log in: ', values)
+    toast.dismiss()
+    logIn(values)
   }
 
   return (
@@ -41,7 +53,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
         register={register}
         errors={errors}
       />
-      <Button fullWidth type="submit" className={styles.logInButton}>
+      <Button fullWidth type="submit" loading={loading} className={styles.logInButton}>
         {t('logIn.button')}
       </Button>
       <p className={styles.offer}>{t('logIn.info', { text: t('logIn.button') })}</p>
