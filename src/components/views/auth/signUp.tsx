@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { signUpSchema, SignupFormValues } from './model'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useSignUp } from './hooks'
+import { toast } from 'sonner'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
@@ -19,8 +21,17 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
     resolver: valibotResolver(signUpSchema)
   })
 
+  const [signUp, { loading }] = useSignUp<SignupFormValues>({
+    onSuccess(data) {
+      console.log('sucess', data)
+    },
+    onError(err) {
+      toast.warning(t(err))
+    }
+  })
+
   const onSubmit: SubmitHandler<SignupFormValues> = (values) => {
-    console.log('sign up: ', values)
+    signUp(values)
   }
 
   return (
@@ -46,7 +57,7 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
         <span>{t('signUp.fields.code')}</span>
         <TextInput name="code" type="number" register={register} errors={errors} />
       </div>
-      <Button fullWidth type="submit" className={styles.logInButton}>
+      <Button fullWidth type="submit" loading={loading} className={styles.logInButton}>
         {t('signUp.button')}
       </Button>
       <p className={styles.offer}>{t('signUp.info', { text: t('signUp.button') })}</p>

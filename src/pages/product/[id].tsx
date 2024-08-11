@@ -22,11 +22,19 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async (ctx) => {
   const { id } = ctx.params as Params
   const client = initializeApollo()
+  const cookies = ctx.req.cookies
+
+  const sessionToken = cookies['session']
 
   const productId = productIdFromSlug(id)
   const { data } = await client.query<GetProductQuery, GetProductQueryVariables>({
     query: GetProductDocument,
-    variables: { id: productId }
+    variables: { id: productId },
+    context: {
+      headers: {
+        Authorization: sessionToken ? 'Bearer ' + sessionToken : null
+      }
+    }
   })
 
   if (data.product.__typename === 'NotFound') {
