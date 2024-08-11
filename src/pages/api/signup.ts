@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       method: 'POST',
       body: req.body,
       cache: 'no-cache',
-      credentials: 'same-origin'
+      credentials: 'include'
     })
 
     if (resp.ok) {
