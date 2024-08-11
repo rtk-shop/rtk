@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react'
 import clsx from 'clsx'
 import { UseFormRegister, Path, FieldValues, FieldErrors } from 'react-hook-form'
+import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
 
@@ -32,9 +33,10 @@ export function TextInput<T extends FieldValues>({
   register,
   ...restProps
 }: TextInputProps<T>) {
+  const { t } = useTranslation()
   const isErr = errors && errors[name]
 
-  const message = errors && errors[name] && (errors[name]?.message as string)
+  const message = isErr && t(errors[name]?.message as string)
 
   return (
     <div>
