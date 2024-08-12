@@ -1,4 +1,5 @@
 import { TextInput } from '@/components/ui/text-input'
+import { PhoneInput } from '@/components/ui/phone-input'
 import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { logInSchema, LoginFormValues } from './model'
@@ -14,6 +15,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
 
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit
   } = useForm<LoginFormValues>({
@@ -39,11 +41,10 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h1 className={styles.title}>{t('logIn.title')}</h1>
       <p className={styles.subTitle}>{t('logIn.subTitle')}</p>
-      <TextInput
-        name="email"
-        type="email"
-        label={t('logIn.fields.email')}
-        register={register}
+      <PhoneInput
+        name="phone"
+        label={t('logIn.fields.phone')}
+        setValue={setValue}
         errors={errors}
       />
       <TextInput

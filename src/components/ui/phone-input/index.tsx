@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { NumberFormatValues } from 'react-number-format'
 import { PatternFormat } from 'react-number-format'
 import { Path, FieldValues, FieldErrors, UseFormSetValue, PathValue } from 'react-hook-form'
+import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
 
@@ -18,9 +19,12 @@ export function PhoneInput<T extends FieldValues>({
   errors,
   setValue
 }: PhoneInputProps<T>) {
-  const isErr = errors && errors[name]
-  const message = errors && errors[name] && (errors[name]?.message as string)
+  const { t } = useTranslation()
 
+  const isErr = errors && errors[name]
+  const message = isErr && t(errors[name]?.message as string)
+
+  // todo: maybe throw register pattern as text input?
   const handleValueChange = (values: NumberFormatValues): void => {
     setValue(name, values.value as PathValue<T, Path<T>>)
   }
@@ -29,7 +33,8 @@ export function PhoneInput<T extends FieldValues>({
     <div>
       {label && <span className={styles.label}>{label}</span>}
       <PatternFormat
-        format="+38 (###) ###-####"
+        type="tel"
+        format="+380 (##) ###-####"
         mask="_"
         autoComplete="off"
         allowEmptyFormatting

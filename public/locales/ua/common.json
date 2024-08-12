@@ -64,6 +64,7 @@
   "validation": {
     "requiredField": "* обов'язкове поле",
     "wrongEmail": "* значення не схоже на email",
+    "wrongPhone": "* некоректний номер",
     "lengthEquals5": "* має бути 5 символів",
     "minLength6": "* мінімум 6 символів",
     "maxLength30": "* максимум 30 символів",

@@ -1,12 +1,22 @@
 import * as v from 'valibot'
 
-export const common = v.object({
+// todo: EMAIL validator
+/*
   email: v.pipe(
     v.string(),
     v.trim(),
     v.nonEmpty('common:validation.requiredField'),
     v.email('common:validation.wrongEmail'),
     v.maxLength(60, 'common:validation.maxLength60')
+  )
+*/
+
+export const common = v.object({
+  phone: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty('common:validation.requiredField'),
+    v.length(9, 'common:validation.wrongPhone')
   ),
   password: v.pipe(
     v.string(),
