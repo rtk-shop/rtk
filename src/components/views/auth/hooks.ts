@@ -26,7 +26,7 @@ export function useSignUp<T>({ onSuccess, onError }: params): ReturnValues<T> {
       })
         .then((resp) => {
           if (resp.status === 409) throw new Error('auth:signUp.errors.userExists')
-          if (!resp.ok) throw new Error('auth:signUp.errors.signup')
+          if (!resp.ok || resp.status >= 500) throw new Error('auth:signUp.errors.signup')
 
           return resp.json()
         })
@@ -61,7 +61,7 @@ export function useLogIn<T>({ onSuccess, onError }: params): ReturnValues<T> {
       })
         .then((resp) => {
           if (resp.status === 404) throw new Error('Пользователь не зарегестрирован')
-          if (!resp.ok) throw new Error('Неправильный пароль')
+          if (!resp.ok || resp.status >= 500) throw new Error('Ошибка на стороне сервера')
 
           return resp.json()
         })

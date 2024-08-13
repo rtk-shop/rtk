@@ -1,4 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { decodeJwt } from 'jose'
+
+type authResp = {
+  accessToken: string
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { type } = req.query // 'login' | 'signup'
@@ -12,9 +17,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     if (resp.ok) {
-      const body = await resp.json()
+      const body = (await resp.json()) as authResp
+      const token = decodeJwt(body.accessToken)
+
       const cookies = resp.headers.getSetCookie()
-      const sessionCookie = `session=${body.accessToken}; Path=/; Max-Age=${15 * 60}; HttpOnly`
+
+      const tokenExp = token.exp as number
+
+      const exp = new Date(tokenExp * 1000).toUTCString() // add epoch to jwt exp seconds
+
+      const sessionCookie = `session=${body.accessToken}; Path=/; Expires=${exp}; HttpOnly`
+
       res.setHeader('Set-Cookie', [...cookies, sessionCookie])
 
       res.status(resp.status).json(body)
