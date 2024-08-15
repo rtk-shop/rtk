@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
-import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, NormalizedCacheObject, from } from '@apollo/client'
 // import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import { cache } from './cache'
+import { authorizationLink, refreshLink, httpLink } from './links'
 
 export let apolloClient: ApolloClient<NormalizedCacheObject>
 
@@ -12,9 +13,7 @@ export type ApolloInitState = NormalizedCacheObject | null
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_API_HOST + '/graphql'
-    }),
+    link: from([authorizationLink, httpLink]),
     connectToDevTools: process.env.NODE_ENV === 'development',
     cache
     // cache: new InMemoryCache({
