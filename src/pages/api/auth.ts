@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const exp = new Date(tokenExp * 1000).toUTCString() // add epoch to jwt exp seconds
 
-      const sessionCookie = `session=${data.accessToken}; Path=/; Expires=${exp}; HttpOnly`
+      const sessionCookie = `session=${data.accessToken}; Path=/; Expires=${exp}`
 
       res.setHeader('Set-Cookie', [...cookies, sessionCookie])
 
