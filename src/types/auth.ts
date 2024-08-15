@@ -3,6 +3,7 @@ export type SuccessfulAuthorization = {
 }
 
 export type SessionData = {
+  role: string
   userId: string
   firstName: string
 }
