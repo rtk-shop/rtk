@@ -2,15 +2,18 @@ import { TextInput } from '@/components/ui/text-input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRouter } from 'next/router'
 import { signUpSchema, SignupFormValues } from './model'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useSignUp } from './hooks'
+import { routeNames } from '@/utils/navigation'
 import { toast } from 'sonner'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
 
 export function SignUp({ onLogIn }: { onLogIn(): void }) {
+  const router = useRouter()
   const { t } = useTranslation('auth')
 
   const {
@@ -24,8 +27,8 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
   })
 
   const [signUp, { loading }] = useSignUp<SignupFormValues>({
-    onSuccess(data) {
-      console.log('sucess', data)
+    onSuccess() {
+      router.push(routeNames.root)
     },
     onError(err) {
       toast.warning(t(err))

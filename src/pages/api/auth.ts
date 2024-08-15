@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { decodeJwt } from 'jose'
 import { SuccessfulAuthorization } from '@/types'
+import { decrypt } from '@/utils/session'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { type } = req.query // 'login' | 'signup'
@@ -16,7 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (resp.ok) {
       const data = (await resp.json()) as SuccessfulAuthorization
 
-      const token = decodeJwt(data.accessToken)
+      const token = decrypt(data.accessToken)
+      if (!token) throw new Error('failed to parse access token')
+
       const tokenExp = token.exp as number
 
       const cookies = resp.headers.getSetCookie()

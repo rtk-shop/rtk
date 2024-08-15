@@ -1,6 +1,7 @@
 import { TextInput } from '@/components/ui/text-input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/router'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { logInSchema, LoginFormValues } from './model'
 import { toast } from 'sonner'
@@ -9,8 +10,11 @@ import { useLogIn } from './hooks'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
+import { routeNames } from '@/utils/navigation'
+import { decrypt } from '@/utils/session'
 
 export function LogIn({ onSignUp }: { onSignUp(): void }) {
+  const router = useRouter()
   const { t } = useTranslation('auth')
 
   const {
@@ -25,7 +29,13 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
 
   const [logIn, { loading }] = useLogIn<LoginFormValues>({
     onSuccess(data) {
-      console.log('sucess', data)
+      const tokenData = decrypt(data.accessToken)
+
+      if (tokenData?.role == 'admin' || tokenData?.role == 'manager') {
+        router.push(routeNames.dashboard)
+      } else {
+        router.push(routeNames.root)
+      }
     },
     onError(err) {
       toast.warning(t(err))
