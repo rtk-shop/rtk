@@ -1,11 +1,8 @@
 import { useCallback, useState } from 'react'
-
-type SuccessData = {
-  accessToken: string
-}
+import { SuccessfulAuthorization } from '@/types'
 
 type params = {
-  onSuccess: (data: SuccessData) => void
+  onSuccess: (data: SuccessfulAuthorization) => void
   onError: (error: string) => void
 }
 

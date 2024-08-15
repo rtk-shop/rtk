@@ -1,26 +1,10 @@
-type RouteName =
-  | 'root'
-  | 'catalog'
-  | 'product'
-  | 'login'
-  | 'discounts'
-  | 'profile'
-  | 'profileFavorite'
-  | 'profileInfo'
-  | 'checkout'
-  | 'notFound'
+type RouteName = 'root' | 'product' | 'auth' | 'dashboard'
 
 export const routeNames: Record<RouteName, string> = {
   root: '/',
-  catalog: '/catalog',
-  product: '/product/:id',
-  login: '/login',
-  discounts: '/discounts',
-  profile: '/profile',
-  profileFavorite: '/profile/favorite',
-  profileInfo: '/profile/info',
-  checkout: '/checkout',
-  notFound: '/404'
+  product: '/product',
+  auth: '/auth',
+  dashboard: '/dashboard'
 }
 
 export const generateProductLink = (path: string, id: string, slug: string): string => {
