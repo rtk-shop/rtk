@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { decrypt, refreshSession, setSessionCookie } from '@/utils/session'
+import { decrypt, refreshSession, setSessionCookie } from '@/lib/session'
 import { cookies } from 'next/headers'
 import cookieLib from 'cookie'
-import { routeNames } from './utils/navigation'
+import { routeNames } from '@/lib/navigation'
 
 const protectedRoutes = [routeNames.dashboard, routeNames.product]
 const publicRoutes = [routeNames.auth, routeNames.root]

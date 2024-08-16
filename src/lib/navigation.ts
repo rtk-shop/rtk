@@ -1,10 +1,12 @@
-type RouteName = 'root' | 'product' | 'auth' | 'dashboard'
+type RouteName = 'root' | 'product' | 'auth' | 'dashboard' | 'checkout' | 'profile'
 
 export const routeNames: Record<RouteName, string> = {
   root: '/',
   product: '/product',
   auth: '/auth',
-  dashboard: '/dashboard'
+  dashboard: '/dashboard',
+  checkout: '/checkout',
+  profile: '/profile'
 }
 
 export const generateProductLink = (path: string, id: string, slug: string): string => {

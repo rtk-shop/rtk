@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from './skeleton'
-import { formatPrice } from '@/utils/helpers'
+import { formatPrice } from '@/lib/helpers'
 import { useCartPrice } from '@/apollo/cache/cart'
 import useTranslation from 'next-translate/useTranslation'
 

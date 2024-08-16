@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import LetterCheckIcon from '../../../../../../public/assets/letter-check.svg'
 import LetterIcon from '../../../../../../public/icons/letter.svg'
 import LocationIcon from '../../../../../../public/icons/location.svg'
-import { routeNames } from '@/utils/navigation'
+import { routeNames } from '@/lib/navigation'
 
 import styles from './styles.module.scss'
 

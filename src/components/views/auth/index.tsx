@@ -6,7 +6,7 @@ import { LangSwitcher } from '@/components/lang-switcher'
 import styles from './styles.module.scss'
 
 export function AuthView() {
-  const [logInMode, setLogInMode] = useState(false)
+  const [logInMode, setLogInMode] = useState(true)
 
   const handleModeChange = () => {
     setLogInMode((prev) => !prev)

@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 // import Image from 'next/image'
-// import { routeNames, generateLink } from '@/utils/navigation'
+// import { routeNames, generateLink } from '@/lib/navigation'
 // import { useLazyQuery } from '@apollo/client'
 import useTranslation from 'next-translate/useTranslation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Dropdown, type Option } from '@/components/ui/dropdown'
 import SearchIcon from '../../../../../public/icons/search.svg'
-// import { getProductMainTagColor } from '@/utils/styling'
+// import { getProductMainTagColor } from '@/lib/styling'
 // import {
 //   SearchProductQuery,
 //   SearchProductVariables,

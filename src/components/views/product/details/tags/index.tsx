@@ -1,4 +1,4 @@
-import { getColorByTagName } from '@/utils/helpers'
+import { getColorByTagName } from '@/lib/helpers'
 import styles from './styles.module.scss'
 
 interface TagsProps {

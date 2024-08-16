@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { SuccessfulAuthorization } from '@/types'
-import { decrypt } from '@/utils/session'
+import { decrypt } from '@/lib/session'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { type } = req.query // 'login' | 'signup'

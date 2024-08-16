@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { signUpSchema, SignupFormValues } from './model'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useSignUp } from './hooks'
-import { routeNames } from '@/utils/navigation'
+import { routeNames } from '@/lib/navigation'
 import { toast } from 'sonner'
 import useTranslation from 'next-translate/useTranslation'
 

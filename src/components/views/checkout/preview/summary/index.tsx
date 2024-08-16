@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader'
 import { Button } from '@/components/ui/button'
-import { formatPrice } from '@/utils/helpers'
+import { formatPrice } from '@/lib/helpers'
 import { useCartPrice } from '@/apollo/cache/cart'
 import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 

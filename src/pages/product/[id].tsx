@@ -3,7 +3,7 @@ import { AppLayout } from '@/components/layout/app-layout'
 import { ParsedUrlQuery } from 'querystring'
 import { ProductIndex } from '@/components/views/product'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { productIdFromSlug } from '@/utils/navigation'
+import { productIdFromSlug } from '@/lib/navigation'
 import {
   GetProductQuery,
   GetProductQueryVariables,

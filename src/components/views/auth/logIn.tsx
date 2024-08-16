@@ -10,8 +10,8 @@ import { useLogIn } from './hooks'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'
-import { routeNames } from '@/utils/navigation'
-import { decrypt } from '@/utils/session'
+import { routeNames } from '@/lib/navigation'
+import { decrypt } from '@/lib/session'
 
 export function LogIn({ onSignUp }: { onSignUp(): void }) {
   const router = useRouter()

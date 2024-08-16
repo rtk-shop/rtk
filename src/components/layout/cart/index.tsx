@@ -8,7 +8,7 @@ import { CartItem, CartItemType } from '@/components/cart-item'
 import useTranslation from 'next-translate/useTranslation'
 import { normalizedView, useCartStore } from '@/store/cart'
 import { useRouter } from 'next/router'
-import { routeNames } from '@/utils/navigation'
+import { routeNames } from '@/lib/navigation'
 import { useCartProductsQuery } from '@/graphql/product/_gen_/cartProducts.query'
 import { setCartItems } from '@/apollo/cache/cart'
 
