@@ -13,44 +13,6 @@ $mobile-icon-color: #efefef;
   }
 }
 
-.cap {
-  display: none;
-  background-color: #171717;
-
-  @include _minLG {
-    display: block;
-  }
-}
-
-.capInner {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 auto;
-  max-width: 1700px;
-
-  @include _minLG {
-    padding: 7px 17px;
-  }
-
-  @include _minXL {
-    padding: 8px 60px;
-  }
-}
-
-.capList {
-  color: #e8e8e8;
-  display: flex;
-  font-weight: 500;
-  font-size: 14px;
-  & li {
-    margin-left: 20px;
-  }
-  & span {
-    font-weight: 600;
-    color: #fff;
-  }
-}
-
 .header {
   flex-wrap: wrap;
   background-color: #171717;

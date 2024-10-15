@@ -10,6 +10,7 @@ import { IconButton } from '@/components/ui/icon-button'
 import { Search } from './search'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import useTranslation from 'next-translate/useTranslation'
+import { Cap } from './cap'
 import MenuIcon from '../../../../public/icons/menu.svg'
 import HeartIcon from '../../../../public/icons/heart.svg'
 import ProfileIcon from '../../../../public/icons/profile.svg'
@@ -43,24 +44,9 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
 
   return (
     <div className={clsx(styles.container)}>
-      <div className={styles.cap}>
-        <div className={styles.capInner}>
-          <ul className={styles.capList}>
-            <li>
-              Курс: <span>1$={currency}₴</span>
-            </li>
-            <li>
-              Тел: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>
-            </li>
-            <li>
-              Прием заказов: <span>{process.env.NEXT_PUBLIC_ORDER_ACCEPTANCE_TIME}</span>
-            </li>
-            <li>
-              Дни работы: <span>{process.env.NEXT_PUBLIC_WORKING_DAYS}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      {/*  */}
+      <Cap currency={currency} />
+      {/*  */}
       <header className={styles.header}>
         <div className={styles.inner}>
           <IconButton disableRipple onClick={onDrawerOpen}>
