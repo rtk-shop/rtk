@@ -2,7 +2,7 @@ type RouteName = 'root' | 'product' | 'auth' | 'dashboard' | 'checkout' | 'profi
 
 export const routeNames: Record<RouteName, string> = {
   root: '/',
-  product: '/product',
+  product: '/product/:id',
   auth: '/auth',
   dashboard: '/dashboard',
   checkout: '/checkout',
