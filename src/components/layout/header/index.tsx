@@ -16,7 +16,7 @@ import HeartIcon from '../../../../public/icons/heart.svg'
 import ProfileIcon from '../../../../public/icons/profile.svg'
 import CartIcon from '../../../../public/icons/header_cart.svg'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 interface HeaderProps {
   currency: number
@@ -43,24 +43,30 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
   }
 
   return (
-    <div className={clsx(styles.container)}>
+    <div className="sticky top-0 z-[500] lg:static">
       {/*  */}
       <Cap currency={currency} />
       {/*  */}
-      <header className={styles.header}>
-        <div className={styles.inner}>
+      <header className="flex-wrap bg-black shadow-md lg:bg-white">
+        <div className="m-auto flex max-w-[1700px] items-center px-0 py-2.5 lg:px-4 xl:py-3">
           <IconButton disableRipple onClick={onDrawerOpen}>
-            <SvgIcon className={styles['menu-icon']}>
+            <SvgIcon className="fill-slate-100 lg:fill-black">
               <MenuIcon />
             </SvgIcon>
           </IconButton>
-          <Link href={routeNames.root} className={styles.logo}>
+          <Link href={routeNames.root} className="ml-10 mr-8 hidden w-36 lg:block">
             <Image width={150} height={50} src="/assets/logo.svg" alt="логотип" priority={true} />
           </Link>
           <nav>
-            <ul className={styles.navlist}>
+            <ul className="hidden items-center *:px-4 *:py-2 lg:flex">
               <li>
-                <Link href={routeNames.root} className={styles['nav-link']}>
+                <Link
+                  href={routeNames.root}
+                  className={clsx(
+                    styles['nav-link'],
+                    'relative text-[14px] font-semibold uppercase text-black no-underline'
+                  )}
+                >
                   {t('header.catalog')}
                 </Link>
               </li>
@@ -69,23 +75,23 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
           {/*  */}
           <Search />
           {/*  */}
-          <IconButton className={styles.dynamic} onClick={handleFavoritesClick} disableRipple>
+          <IconButton className="hidden p-3 md:block" onClick={handleFavoritesClick} disableRipple>
             <Badge content={favoriteAmount}>
-              <SvgIcon className={styles['heart-icon']}>
+              <SvgIcon className="fill-none stroke-slate-100 text-[24px] transition duration-200 hover:scale-110 lg:stroke-black">
                 <HeartIcon />
               </SvgIcon>
             </Badge>
           </IconButton>
-          <IconButton className={styles.dynamic} onClick={handleProfileClick} disableRipple>
+          <IconButton className="hidden p-3 md:block" onClick={handleProfileClick} disableRipple>
             <Badge content={0} max={5}>
-              <SvgIcon className={styles['profile-icon']}>
+              <SvgIcon className="fill-slate-100 text-[24px] transition duration-200 hover:scale-110 lg:fill-black">
                 <ProfileIcon />
               </SvgIcon>
             </Badge>
           </IconButton>
-          <IconButton className={styles['cart-button']} onClick={handleCartClick} disableRipple>
+          <IconButton onClick={handleCartClick} disableRipple>
             <Badge content={cartAmount}>
-              <SvgIcon className={styles['cart-icon']}>
+              <SvgIcon className="fill-slate-100 stroke-slate-100 text-[28px] transition duration-300 hover:scale-125 md:text-[24px] lg:fill-black lg:stroke-black">
                 <CartIcon />
               </SvgIcon>
             </Badge>

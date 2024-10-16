@@ -4,7 +4,7 @@ interface CapProps {
 
 export function Cap({ currency }: CapProps) {
   return (
-    <div className="hidden bg-black lg:block">
+    <div className="bg-cap-pattern hidden bg-black lg:block">
       <div className="m-auto flex max-w-[1700px] justify-end px-5 py-2">
         <ul className="flex text-[14px] font-medium text-slate-200 *:ml-5">
           <li>

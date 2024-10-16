@@ -8,6 +8,10 @@ module.exports = {
       },
       colors: {
         black: '#171717'
+      },
+      backgroundImage: {
+        'cap-pattern':
+          'linear-gradient(90deg, #fa8bff 0%, #2bff88 26%, #000000 65%, #000000 90%, #2bff88 99%)'
       }
     },
     screens: {
