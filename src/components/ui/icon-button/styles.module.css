@@ -1,0 +1,22 @@
+.button-ripple {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  background-position: center;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

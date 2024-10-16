@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      spacing: {
+        '1e': '1em'
+      },
       colors: {
         black: '#171717'
       }

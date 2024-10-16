@@ -1,8 +1,8 @@
 import { useRef, ReactNode, MouseEvent } from 'react'
-import clsx from 'clsx'
+import { cva } from 'cva'
 import { Loader } from '../loader'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 interface IconButtonProps {
   to?: string
@@ -14,6 +14,10 @@ interface IconButtonProps {
   className?: string
   onClick?(event: MouseEvent<HTMLButtonElement>): void
 }
+
+const button = cva(
+  'border-none text-inherit cursor-pointer m-0 inline-flex outline-0 relative items-center select-none align-middle justify-center no-underline bg-transparent p-3 overflow-visible rounded-full text-center text-2xl flex-initial'
+)
 
 export function IconButton({
   loading,
@@ -32,6 +36,9 @@ export function IconButton({
       const circle = document.createElement('span')
       const diameter = Math.max(button.clientWidth, button.clientHeight)
       circle.style.width = circle.style.height = `${diameter}px`
+
+      // NOTE: The Tailwind can't scan multiple classes in DOM
+      // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
       circle.classList.add(styles['button-ripple'])
 
       if (rippleEl.current) {
@@ -50,17 +57,17 @@ export function IconButton({
 
   return (
     <button
-      className={clsx(styles.button, className)}
+      className={button({ className })}
       onClick={handleRippleClick}
       type={type}
       {...otherProps}
     >
       {loading ? (
-        <div className={styles.loader}>
+        <div className="size-1e flex justify-center border-r-black">
           <Loader adaptive />
         </div>
       ) : (
-        <span className={styles.inner}>{children}</span>
+        <span className="flex w-full">{children}</span>
       )}
     </button>
   )
