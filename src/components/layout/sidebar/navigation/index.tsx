@@ -13,8 +13,6 @@ import { useUserStore } from '@/store/user'
 import { useFavoriteStore } from '@/store/favorite'
 import { useRouter } from 'next/router'
 
-import styles from './styles.module.scss'
-
 interface SidebarNavListProps {
   onClose(): void
 }
@@ -71,19 +69,25 @@ export function Navigation({ onClose }: SidebarNavListProps) {
   }
 
   return (
-    <ul className={styles.navList}>
+    <ul className="pl-4 text-white md:pl-7">
       {drawerItems.map((item) => (
-        <li key={item.to} onClick={() => goTo(item.to)} className={styles.listItem}>
+        <li
+          key={item.to}
+          onClick={() => goTo(item.to)}
+          className="group flex cursor-pointer items-center py-3 hover:text-gray-300 md:py-4"
+        >
           <ConditionalRender
             condition={!!item.withBadge}
             wrap={(children) => <Badge content={favoriteAmount}>{children}</Badge>}
           >
-            <SvgIcon className={styles.icon}>
+            <SvgIcon className="fill-white text-3xl transition-all">
               <item.icon />
             </SvgIcon>
           </ConditionalRender>
-          <div className={styles.text}>
-            <p>{t(`drawer.${item.i18n}`)}</p>
+          <div className="ml-4">
+            <p className="text-lg font-medium transition-colors md:text-2xl">
+              {t(`drawer.${item.i18n}`)}
+            </p>
           </div>
         </li>
       ))}
