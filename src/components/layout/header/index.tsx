@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import clsx from 'clsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/lib/navigation'
@@ -15,8 +14,6 @@ import MenuIcon from '../../../../public/icons/menu.svg'
 import HeartIcon from '../../../../public/icons/heart.svg'
 import ProfileIcon from '../../../../public/icons/profile.svg'
 import CartIcon from '../../../../public/icons/header_cart.svg'
-
-import styles from './styles.module.css'
 
 interface HeaderProps {
   currency: number
@@ -62,10 +59,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               <li>
                 <Link
                   href={routeNames.root}
-                  className={clsx(
-                    styles['nav-link'],
-                    'relative text-[14px] font-semibold uppercase text-black no-underline'
-                  )}
+                  className="header-nav-link relative text-[14px] font-semibold uppercase text-black no-underline"
                 >
                   {t('header.catalog')}
                 </Link>

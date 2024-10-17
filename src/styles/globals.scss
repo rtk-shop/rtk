@@ -52,6 +52,27 @@ ul {
   overflow: hidden;
 }
 
+.header-nav-link::after {
+  content: '';
+  position: absolute;
+  border-bottom: 2px solid;
+  border-bottom-color: #171717;
+  bottom: -7px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.header-nav-link:hover::after {
+  width: 45%;
+  opacity: 1;
+  visibility: visible;
+}
+
 :root {
   --green: #2bab2b;
   --green-light: #32cd32;
