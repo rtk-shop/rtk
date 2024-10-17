@@ -1,17 +1,19 @@
-import clsx from 'clsx'
-import styles from './styles.module.scss'
+import { cva } from 'cva'
 
-interface LoaderProps {
-  adaptive?: boolean
-}
+const loader = cva(
+  'w-10 aspect-square rounded-full border-6 border-solid border-neutral-200 border-r-black animate-spin',
+  {
+    variants: {
+      adaptive: {
+        true: 'size-auto border-2 border-r-inherit'
+      }
+    },
+    defaultVariants: {
+      adaptive: false
+    }
+  }
+)
 
-export function Loader({ adaptive = false }: LoaderProps) {
-  return (
-    <div
-      className={clsx({
-        [styles.loader]: true,
-        [styles.adaptive]: adaptive
-      })}
-    />
-  )
+export function Loader({ adaptive }: { adaptive?: boolean }) {
+  return <div className={loader({ adaptive })} />
 }
