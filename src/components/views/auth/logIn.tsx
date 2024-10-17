@@ -9,7 +9,6 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useLogIn } from './hooks'
 import useTranslation from 'next-translate/useTranslation'
 
-import styles from './styles.module.scss'
 import { routeNames } from '@/lib/navigation'
 import { decrypt } from '@/lib/session'
 
@@ -48,9 +47,9 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h1 className={styles.title}>{t('logIn.title')}</h1>
-      <p className={styles.subTitle}>{t('logIn.subTitle')}</p>
+    <form onSubmit={handleSubmit(onSubmit)} className="m-auto max-w-xl">
+      <h1 className="text-3xl font-medium">{t('logIn.title')}</h1>
+      <p className="mb-5 text-neutral-400 lg:mb-6">{t('logIn.subTitle')}</p>
       <PhoneInput
         name="phone"
         label={t('logIn.fields.phone')}
@@ -64,12 +63,17 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
         register={register}
         errors={errors}
       />
-      <Button fullWidth type="submit" loading={loading} className={styles.logInButton}>
+      <Button fullWidth type="submit" loading={loading} className="mt-4">
         {t('logIn.button')}
       </Button>
-      <p className={styles.offer}>{t('logIn.info', { text: t('logIn.button') })}</p>
-      <p className={styles.modeController}>
-        {t('logIn.mode')} <span onClick={onSignUp}>{t('logIn.modeAction')}</span>
+      <p className="m-auto mt-1 w-4/5 text-center text-sm text-neutral-500">
+        {t('logIn.info', { text: t('logIn.button') })}
+      </p>
+      <p className="mt-4 text-center text-sm font-medium text-neutral-400">
+        {t('logIn.mode')}{' '}
+        <span onClick={onSignUp} className="cursor-pointer text-black hover:underline">
+          {t('logIn.modeAction')}
+        </span>
       </p>
     </form>
   )

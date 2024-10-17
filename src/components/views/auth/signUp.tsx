@@ -10,8 +10,6 @@ import { routeNames } from '@/lib/navigation'
 import { toast } from 'sonner'
 import useTranslation from 'next-translate/useTranslation'
 
-import styles from './styles.module.scss'
-
 export function SignUp({ onLogIn }: { onLogIn(): void }) {
   const router = useRouter()
   const { t } = useTranslation('auth')
@@ -41,9 +39,9 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h1 className={styles.title}>{t('signUp.title')}</h1>
-      <p className={styles.subTitle}>{t('signUp.subTitle')}</p>
+    <form onSubmit={handleSubmit(onSubmit)} className="m-auto max-w-xl">
+      <h1 className="text-3xl font-medium">{t('signUp.title')}</h1>
+      <p className="mb-5 text-neutral-400 lg:mb-6">{t('signUp.subTitle')}</p>
       <TextInput name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
       <PhoneInput
         name="phone"
@@ -58,16 +56,21 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
         register={register}
         errors={errors}
       />
-      <div className={styles.code}>
-        <span>{t('signUp.fields.code')}</span>
+      <div className="flex justify-end">
+        <span className="mr-4 mt-3 font-medium">{t('signUp.fields.code')}</span>
         <TextInput name="code" type="number" register={register} errors={errors} />
       </div>
-      <Button fullWidth type="submit" loading={loading} className={styles.logInButton}>
+      <Button fullWidth type="submit" loading={loading} className="mt-4">
         {t('signUp.button')}
       </Button>
-      <p className={styles.offer}>{t('signUp.info', { text: t('signUp.button') })}</p>
-      <p className={styles.modeController}>
-        {t('signUp.mode')} <span onClick={onLogIn}>{t('signUp.modeAction')}</span>
+      <p className="m-auto mt-1 w-4/5 text-center text-sm text-neutral-500">
+        {t('signUp.info', { text: t('signUp.button') })}
+      </p>
+      <p className="mt-4 text-center text-sm font-medium text-neutral-400">
+        {t('signUp.mode')}{' '}
+        <span onClick={onLogIn} className="cursor-pointer text-black hover:underline">
+          {t('signUp.modeAction')}
+        </span>
       </p>
     </form>
   )

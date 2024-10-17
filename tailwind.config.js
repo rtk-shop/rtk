@@ -7,11 +7,13 @@ module.exports = {
         '1e': '1em'
       },
       colors: {
-        black: '#171717'
+        black: '#171717',
+        'gray-light': '#ededed'
       },
       backgroundImage: {
         'cap-pattern':
-          'linear-gradient(90deg, #fa8bff 0%, #2bff88 26%, #000000 65%, #000000 90%, #2bff88 99%)'
+          'linear-gradient(90deg, #fa8bff 0%, #2bff88 26%, #000000 65%, #000000 90%, #2bff88 99%)',
+        suitcases: "url('/assets/suitcases.jpeg')"
       }
     },
     screens: {
