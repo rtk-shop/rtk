@@ -1,10 +1,10 @@
 .box {
-  background: #fff;
   height: 100dvh;
   overflow: auto;
   position: fixed;
   transition: transform 199ms ease-in-out;
   z-index: 1000;
+  will-change: transform;
   //   ${({ $pos, $open }) => {
   //     switch ($pos) {
   //       case 'right':
