@@ -16,7 +16,7 @@ export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
   return (
     <Drawer open={isOpen} position="left" onClose={onClose}>
       <div className="h-full md:p-2">
-        <div className="flex h-full w-screen max-w-80 flex-col bg-black/60 backdrop-blur-lg md:max-w-md md:rounded-xl">
+        <div className="flex h-full w-screen max-w-80 flex-col overflow-y-auto bg-black/60 backdrop-blur-lg md:max-w-md md:rounded-xl">
           {/*  */}
           <SidebarHead onClose={onClose} />
           {/*  */}
