@@ -9,8 +9,6 @@ import { routeNames, generateProductLink } from '@/lib/navigation'
 import { updateItemAmount, removeFromCart } from '@/apollo/cache/cart'
 import useTranslation from 'next-translate/useTranslation'
 
-import styles from './styles.module.scss'
-
 export type CartItemType = {
   id: string
   slug: string
@@ -18,6 +16,7 @@ export type CartItemType = {
   currentPrice: number
   preview: string
 }
+
 interface CartItemProps {
   amount: number
   product: CartItemType
@@ -37,35 +36,35 @@ export function CartItem({ product, amount }: CartItemProps) {
   }
 
   return (
-    <li className={styles.container}>
-      <div className={styles.imageWrapper}>
-        <Link href={generateProductLink(routeNames.product, id, slug)}>
+    <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-0.5 after:w-2/3 after:-translate-x-2/4 after:bg-gray-300 after:last:hidden">
+      <div className="relative mr-5 min-h-44 w-full min-w-44">
+        <Link href={generateProductLink(routeNames.product, id, slug)} className="rounded-lg">
           <ImagePlaceholder src={preview} altText={title} />
         </Link>
       </div>
-      <div className={styles.info}>
+      <div className="w-full min-w-0 max-w-md pt-3">
         <Link
           title={title}
           href={generateProductLink(routeNames.product, id, slug)}
-          className={styles.title}
+          className="clear-both mb-2 line-clamp-2 h-[35px] text-ellipsis whitespace-normal text-sm font-semibold leading-4 text-black no-underline"
         >
           {title}
         </Link>
-        <span className={styles.price}>
+        <span className="text-[14px] font-medium text-gray-500">
           {t('price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;$
         </span>
-        <p className={styles.amount}>
+        <p className="text-[15px] font-semibold leading-none">
           {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;$
         </p>
-        <div className={styles.controls}>
+        <div className="mt-6 flex justify-between">
           <AmountController min={1} max={100} amount={amount} onChange={handleAmountChange} />
           <IconButton
             disableRipple
             onClick={handleProductRemove}
             aria-label={`Удалить "${title}"`}
-            className={styles.deleteButton}
+            className="rounded-lg bg-gray-100 fill-gray-400 px-3 text-lg hover:fill-black"
           >
-            <SvgIcon className={styles.trashIcon}>
+            <SvgIcon>
               <TrashIcon />
             </SvgIcon>
           </IconButton>
