@@ -120,7 +120,7 @@ export function ProductItem({
           title={title}
           href={generateProductLink(routeNames.product, id, slug)}
         >
-          {'skdmkm' + title}
+          {title}
         </Link>
       </div>
       {tag && (
