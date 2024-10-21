@@ -1,8 +1,8 @@
 import { ReactNode, forwardRef, RefObject, MouseEvent } from 'react'
-import clsx from 'clsx'
+import { cva } from 'cva'
 import { Loader } from '../loader'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 const enum ButtonColor {
   primary = 'primary',
@@ -21,65 +21,63 @@ interface ButtonProps {
   loading?: boolean
   disabled?: boolean
   fullWidth?: boolean
-  withShadow?: boolean
   tabIndex?: number
   ref?: RefObject<HTMLButtonElement> | null
   onClick?(event: MouseEvent<HTMLButtonElement>): void
   className?: string
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+const button = cva(
+  'cursor-pointer inline-flex items-center justify-center leading-none font-medium py-3.5 px-7 rounded-xl  select-none transition-all',
+  {
+    variants: {
+      color: {
+        primary: 'text-white bg-black border-r-black ' + styles.primary,
+        secondary: '',
+        accept: 'text-white bg-green-light border-r-green-light ' + styles.accept,
+        danger: 'text-white bg-red-600 ' + styles.danger
+      },
+      disabled: {
+        true: 'cursor-not-allowed opacity-75'
+      },
+      fullWidth: {
+        true: 'w-full',
+        false: 'w-auto'
+      }
+    },
+    defaultVariants: {
+      color: 'primary',
+      fullWidth: false
+    }
+  }
+)
+
+export default forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     loading,
     children,
     color,
-    withShadow = false,
     startIcon,
     endIcon,
     type = 'button',
     fullWidth,
     className,
+    disabled,
     ...otherProps
   },
   ref
 ) {
-  let colorClass: string
-
-  switch (color as ButtonColor) {
-    case ButtonColor.secondary:
-      colorClass = styles.secondary
-      break
-    case ButtonColor.accept:
-      colorClass = styles.accept
-      break
-    case ButtonColor.danger:
-      colorClass = styles.danger
-      break
-
-    default:
-      colorClass = styles.primary
-      break
-  }
-
   return (
     <button
       ref={ref}
-      className={clsx(
-        {
-          [styles.base]: true,
-          [styles.fullWidth]: fullWidth,
-          [styles.withShadow]: withShadow
-        },
-        colorClass,
-        className
-      )}
       type={type}
-      disabled={loading || otherProps.disabled}
+      className={button({ color, disabled, fullWidth, class: className })}
+      disabled={loading || disabled}
       {...otherProps}
     >
       {!loading && startIcon}
       {loading ? (
-        <div className={styles.loader}>
+        <div className="flex size-[1lh] justify-center border-r-inherit">
           <Loader adaptive />
         </div>
       ) : (
