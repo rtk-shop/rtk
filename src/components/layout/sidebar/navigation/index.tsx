@@ -74,7 +74,7 @@ export function Navigation({ onClose }: SidebarNavListProps) {
         <li
           key={item.to}
           onClick={() => goTo(item.to)}
-          className="group flex cursor-pointer items-center py-3 hover:text-gray-300 md:py-4"
+          className="flex cursor-pointer items-center py-3 hover:text-gray-300 md:py-4"
         >
           <ConditionalRender
             condition={!!item.withBadge}
