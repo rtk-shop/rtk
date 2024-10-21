@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Drawer } from '@/components/layout/drawer'
 import { Summary } from './summary'
 import { ProcessPlug } from './plug'
@@ -12,8 +12,6 @@ import { routeNames } from '@/lib/navigation'
 import { useCartProductsQuery } from '@/graphql/product/_gen_/cartProducts.query'
 import { setCartItems } from '@/apollo/cache/cart'
 
-import styles from './styles.module.scss'
-
 interface CartProps {
   currency: number
   isOpen: boolean
@@ -23,7 +21,7 @@ interface CartProps {
 export const Cart = memo(function Cart({ isOpen, currency, onClose }: CartProps) {
   return (
     <Drawer position="right" onClose={onClose} open={isOpen}>
-      <div className={styles.container}>
+      <div className="h-dvh w-full overflow-hidden bg-white md:max-w-[400px]">
         <CartInner currency={currency} onClose={onClose} />
       </div>
     </Drawer>
@@ -71,12 +69,12 @@ export function CartInner({ currency, onClose }: { currency: number; onClose(): 
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className="flex h-full flex-col">
       <CartHead onCartClose={onClose} />
       {loading ? (
-        <ListSkeleton max={3} itemsAmount={cartItems.length} />
+        <ListSkeleton itemsAmount={cartItems.length} />
       ) : (
-        <ul className={styles.list}>
+        <ul className="scroll-bar grow overflow-y-auto px-2.5 pt-5">
           {data?.cartProducts.map((product: CartItemType) => (
             <CartItem key={product.id} amount={itemsMap[product.id]} product={product} />
           ))}
