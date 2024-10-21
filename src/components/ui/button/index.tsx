@@ -52,7 +52,7 @@ const button = cva(
   }
 )
 
-export default forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     loading,
     children,
