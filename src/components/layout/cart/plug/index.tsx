@@ -3,8 +3,6 @@ import { SvgIcon } from '@/components/ui/svg-icon'
 import EmptyCartIcon from '../../../../../public/assets/emptycart.svg'
 import ArrowIcon from '../../../../../public/icons/expand-arrow.svg'
 
-import styles from './index.module.scss'
-
 interface ProcessPlugProps {
   text: string
   onClose(): void
@@ -12,18 +10,16 @@ interface ProcessPlugProps {
 
 export function ProcessPlug({ text, onClose }: ProcessPlugProps) {
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
+    <div className="flex h-full flex-col items-center justify-center">
+      <div className="w-full fill-gray-400 px-4">
         <EmptyCartIcon />
-        <p>{text}</p>
+        <p className="text-center text-xl font-medium">{text}</p>
       </div>
       <Button
-        fullWidth
         onClick={onClose}
-        color="secondary"
-        className={styles.backButton}
+        className="group mt-12 w-8/12 font-medium"
         startIcon={
-          <SvgIcon className={styles.icon}>
+          <SvgIcon className="mr-1.5 -rotate-90 fill-white text-[23px] transition-transform group-hover:-translate-x-2">
             <ArrowIcon />
           </SvgIcon>
         }

@@ -4,8 +4,6 @@ import { formatPrice } from '@/lib/helpers'
 import { useCartPrice } from '@/apollo/cache/cart'
 import useTranslation from 'next-translate/useTranslation'
 
-import styles from './styles.module.scss'
-
 interface SummaryProps {
   currency: number
   loading: boolean
@@ -23,12 +21,12 @@ export function Summary({ loading, currency, onCheckout }: SummaryProps) {
   if (loading) return <Skeleton />
 
   return (
-    <div className={styles.container}>
-      <p className={styles.cartPrice}>
-        <b>{t('cart.total')}:</b>
+    <div className="bg-gray-50 px-4 pb-5 pt-4 md:bg-gray-light">
+      <p className="mb-2 flex justify-between text-lg font-semibold">
+        <span>{t('cart.total')}:</span>
         <span>
           <span>{formatPrice(cartPrice)}$&nbsp;</span>
-          <span className={styles.uahPrice}>• {formatPrice(cartPrice * currency)}грн</span>
+          <span className="text-gray-500">• {formatPrice(cartPrice * currency)}₴</span>
         </span>
       </p>
       <Button color="accept" fullWidth onClick={handleButtonClick}>

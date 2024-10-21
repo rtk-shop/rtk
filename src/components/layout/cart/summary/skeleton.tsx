@@ -4,15 +4,15 @@ export function Skeleton() {
   return (
     <div>
       <ContentLoader
-        backgroundColor="#f3f3f3"
-        foregroundColor="#e1e1e1"
         width="100%"
-        height="86px"
-        viewBox="0 0 400 86"
+        height={116}
+        viewBox="0 0 400 116x"
+        backgroundColor="#eeeeee"
+        foregroundColor="#e1e1e1"
       >
-        <rect x="5" y="3" rx="6" ry="6" width="60" height="26" />
-        <rect x="73%" y="3" rx="6" ry="6" width="100" height="26" />
-        <rect x="5" y="40" rx="14" ry="14" width="97%" height="40" />
+        <rect x="20" y="10" rx="10" ry="10" width="60" height="26" />
+        <rect x="48%" y="10" rx="10" ry="10" width="190" height="26" />
+        <rect x="16" y="54" rx="14" ry="14" width="372" height="44" />
       </ContentLoader>
     </div>
   )

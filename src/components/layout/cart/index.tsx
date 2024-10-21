@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { Drawer } from '@/components/layout/drawer'
 import { Summary } from './summary'
 import { ProcessPlug } from './plug'
@@ -21,7 +21,7 @@ interface CartProps {
 export const Cart = memo(function Cart({ isOpen, currency, onClose }: CartProps) {
   return (
     <Drawer position="right" onClose={onClose} open={isOpen}>
-      <div className="h-dvh w-full overflow-hidden bg-white md:max-w-[400px]">
+      <div className="h-dvh w-screen overflow-hidden bg-white md:max-w-[400px]">
         <CartInner currency={currency} onClose={onClose} />
       </div>
     </Drawer>
