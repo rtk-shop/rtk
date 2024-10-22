@@ -40,7 +40,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
   }
 
   return (
-    <div className="sticky top-0 z-[500] lg:static">
+    <div className="sticky top-0 z-40 lg:static">
       {/*  */}
       <Cap currency={currency} />
       {/*  */}
