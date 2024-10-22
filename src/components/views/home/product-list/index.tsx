@@ -1,11 +1,9 @@
-import clsx from 'clsx'
+import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
 import { ProductItem } from '@/components/product-item'
 import { Pagination } from '@/components/ui/pagination'
 import { useFavoriteStore } from '@/store/favorite'
 import type { ProductTag } from '@/types'
-
-import styles from './styles.module.scss'
 
 interface ProductsProps {
   totalPages: number
@@ -25,6 +23,15 @@ interface ProductsProps {
   onReset(): void
 }
 
+const pagination = cva('py-4', {
+  variants: {
+    visible: {
+      true: 'visible',
+      false: 'invisible'
+    }
+  }
+})
+
 export function ProductList({ totalPages, currentPage, products, onReset }: ProductsProps) {
   const favoriteItems = useFavoriteStore((state) => state.favoriteItems)
 
@@ -36,11 +43,13 @@ export function ProductList({ totalPages, currentPage, products, onReset }: Prod
 
   if (!products.length) {
     return (
-      <div className={styles.notFound}>
-        <div className={styles.notFoundInner}>
-          <p className={styles.smile}>:(</p>
-          <p className={styles.message}>Извините, но по вашему запросу ничего не найдено</p>
-          <Button color="primary" onClick={onReset} className={styles.actionButton}>
+      <div className="flex h-screen justify-center">
+        <div className="mt-60 text-center">
+          <p className="text-[39px] font-medium">:(</p>
+          <p className="mb-5 max-w-64 font-medium">
+            Извините, но по вашему запросу ничего не найдено
+          </p>
+          <Button color="primary" onClick={onReset} fullWidth>
             Смотреть все
           </Button>
         </div>
@@ -49,13 +58,13 @@ export function ProductList({ totalPages, currentPage, products, onReset }: Prod
   }
 
   return (
-    <div className={styles.container}>
-      <ul className={styles.list}>
+    <div className="lg:px-2.5">
+      <ul className="flex flex-wrap">
         {products.map((product) => {
           const isFavorite = favoriteItems.includes(product.id)
 
           return (
-            <li key={product.id} className={styles.productWrapper}>
+            <li key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
               <ProductItem
                 id={product.id}
                 slug={product.slug}
@@ -71,7 +80,7 @@ export function ProductList({ totalPages, currentPage, products, onReset }: Prod
           )
         })}
       </ul>
-      <div className={clsx(styles.pagination, totalPages === 1 && styles.paginationHide)}>
+      <div className={pagination({ visible: totalPages > 1 })}>
         <Pagination total={totalPages} currentPage={currentPage} onChange={handlePagination} />
       </div>
     </div>

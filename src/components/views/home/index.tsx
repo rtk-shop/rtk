@@ -150,7 +150,7 @@ export function HomeIndex() {
               {loading ? (
                 <ListSkeleton />
               ) : (
-                <div>
+                <div className="h-full">
                   <Controls onFilterClick={handleFilterClick} />
                   <ProductList
                     totalPages={totalPages ? totalPages : 1}
