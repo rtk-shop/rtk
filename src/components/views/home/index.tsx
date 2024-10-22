@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
-import clsx from 'clsx'
+import { cva } from 'cva'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
 import { ListSkeleton } from './product-list/skeleton'
 import { ErrorPlug } from '@/components/ui/error-plug'
+import { Backdrop } from '@/components/ui/backdrop'
 import { Controls } from './controls'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
 import { useProductsLazyQuery } from '@/graphql/product/_gen_/products.query'
-
-import styles from './styles.module.scss'
 
 type PriceRangeType = {
   gt: number
@@ -24,6 +23,18 @@ export type FormValues = {
   category: Array<Lowercase<keyof typeof CategoryType>>
 }
 
+const filtersBox = cva(
+  'scroll-bar fixed top-0 z-50 h-full w-full max-w-80 overflow-y-auto bg-white transition-all duration-200 lg:static lg:right-0 lg:max-w-64 desktop:max-w-80',
+  {
+    variants: {
+      isOpen: {
+        true: 'right-0',
+        false: '-right-full'
+      }
+    }
+  }
+)
+
 export function HomeIndex() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
   const [isOpen, setOpen] = useState(false)
@@ -31,7 +42,7 @@ export function HomeIndex() {
   const page = 1
   const numOfPage = !isNaN(Number(page)) ? Number(page) : 1
 
-  const [getProducts, { loading, data, error }] = useProductsLazyQuery({
+  const [getProducts, { data, error, loading }] = useProductsLazyQuery({
     onCompleted: (data) => {
       if (data?.products.priceRange) {
         const { gt, lt } = data.products.priceRange
@@ -130,23 +141,16 @@ export function HomeIndex() {
   return (
     <div>
       <FormProvider {...formMethods}>
-        <div className={styles.wrapper}>
-          <div className={styles.pageContainer}>
-            <div className={styles.what}>
-              <div
-                className={clsx({
-                  [styles.filters]: true,
-                  [styles.filtersVisible]: isOpen
-                })}
-              >
-                <Filters onReset={handleReset} priceRange={priceRange} />
-              </div>
+        <div className="m-auto max-w-[1700px] pt-4">
+          <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
+            <div className={filtersBox({ isOpen })}>
+              <Filters onReset={handleReset} priceRange={priceRange} />
             </div>
-            <div className={styles.viewBox}>
+            <div className="w-full">
               {loading ? (
                 <ListSkeleton />
               ) : (
-                <div className={styles.productsView}>
+                <div>
                   <Controls onFilterClick={handleFilterClick} />
                   <ProductList
                     totalPages={totalPages ? totalPages : 1}
@@ -158,13 +162,7 @@ export function HomeIndex() {
               )}
             </div>
           </div>
-          <div
-            onClick={handleDrawerClose}
-            className={clsx({
-              [styles.overlay]: true,
-              [styles.overlayVisible]: isOpen
-            })}
-          />
+          <Backdrop open={isOpen} onClick={handleDrawerClose} />
         </div>
       </FormProvider>
     </div>
