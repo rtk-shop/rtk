@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useFormContext } from 'react-hook-form'
@@ -6,11 +6,18 @@ import { SvgIcon } from '@/components/ui/svg-icon'
 import FilterIcon from '../../../../../public/icons/filter.svg'
 import SortIcon from '../../../../../public/icons/sort.svg'
 
-import styles from './styles.module.scss'
-
 interface ControlsProps {
   onFilterClick(): void
 }
+
+const control = cva('w-full rounded-lg bg-gray-light !p-2 text-[15px] font-semibold', {
+  variants: {
+    type: {
+      sort: 'rounded-br-none rounded-tr-none lg:max-w-48 lg:rounded-lg',
+      filters: 'rounded-bl-none rounded-tl-none border-l border-l-gray-300'
+    }
+  }
+})
 
 export function Controls({ onFilterClick }: ControlsProps) {
   const {
@@ -18,12 +25,12 @@ export function Controls({ onFilterClick }: ControlsProps) {
   } = useFormContext()
 
   return (
-    <div className={styles.container}>
+    <div className="mb-2.5 flex justify-center px-1 lg:mb-0 lg:justify-end lg:px-2.5">
       <Button
         color="secondary"
-        className={clsx(styles.control, styles.sortButton)}
+        className={control({ type: 'sort' })}
         startIcon={
-          <SvgIcon className={styles.sortIcon}>
+          <SvgIcon className="mr-2.5 text-[27px]">
             <SortIcon />
           </SvgIcon>
         }
@@ -32,15 +39,15 @@ export function Controls({ onFilterClick }: ControlsProps) {
       </Button>
       <Badge
         content={Object.keys(dirtyFields).length}
-        className={styles.badge}
-        dotClassName={styles.badgeDot}
+        className="basis-1/2 lg:hidden"
+        dotClassName="right-1"
       >
         <Button
           color="secondary"
           onClick={onFilterClick}
-          className={clsx(styles.control, styles.filterButton)}
+          className={control({ type: 'filters' })}
           startIcon={
-            <SvgIcon className={styles.filterIcon}>
+            <SvgIcon className="mr-2.5">
               <FilterIcon />
             </SvgIcon>
           }
