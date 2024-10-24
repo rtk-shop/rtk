@@ -1,7 +1,7 @@
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import useTranslation from 'next-translate/useTranslation'
-import CrossIcon from '../../../../../public/icons/cross.svg'
+import XmarkIcon from '../../../../../public/icons/xmark.svg'
 
 interface CartHeadProps {
   onCartClose(): void
@@ -16,7 +16,7 @@ export function CartHead({ onCartClose }: CartHeadProps) {
         <p className="text-xl font-medium text-black lg:text-lg">{t('cart.topControls.title')}</p>
         <IconButton disableRipple onClick={onCartClose} className="fill-gray-500 text-base">
           <SvgIcon>
-            <CrossIcon />
+            <XmarkIcon />
           </SvgIcon>
         </IconButton>
       </div>

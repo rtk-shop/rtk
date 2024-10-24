@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { IconButton } from '@/components/ui/icon-button'
 import { SvgIcon } from '@/components/ui/svg-icon'
-import CrossIcon from '../../../../../public/icons/cross.svg'
+import XmarkIcon from '../../../../../public/icons/xmark.svg'
 
 export function SidebarHead({ onClose }: { onClose(): void }) {
   return (
@@ -17,7 +17,7 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
           className="fill-white text-sm hover:fill-gray-300"
         >
           <SvgIcon>
-            <CrossIcon />
+            <XmarkIcon />
           </SvgIcon>
         </IconButton>
       </div>
