@@ -1,6 +1,5 @@
 import { Drawer } from '@/components/layout/drawer'
 import { SidebarHead } from './head'
-import { Navigation } from './navigation'
 import { LangSwitcher } from '@/components/lang-switcher'
 import useTranslation from 'next-translate/useTranslation'
 
@@ -19,9 +18,6 @@ export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
         <div className="flex h-full w-screen max-w-80 flex-col overflow-y-auto bg-black/60 backdrop-blur-lg md:max-w-md md:rounded-xl">
           {/*  */}
           <SidebarHead onClose={onClose} />
-          {/*  */}
-          <Navigation onClose={onClose} />
-          {/*  */}
           {/*  */}
           <div className="flex grow flex-col justify-end">
             <div className="mb-3 flex items-center justify-between px-5">
