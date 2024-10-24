@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { Cap } from './cap'
 import MenuIcon from '../../../../public/icons/menu.svg'
 import HeartIcon from '../../../../public/icons/heart.svg'
-import ProfileIcon from '../../../../public/icons/profile.svg'
+import ProfileIcon from '../../../../public/icons/user.svg'
 import CartIcon from '../../../../public/icons/header_cart.svg'
 
 interface HeaderProps {
