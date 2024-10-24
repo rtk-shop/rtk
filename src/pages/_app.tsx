@@ -3,10 +3,10 @@ import Head from 'next/head'
 import Modal from 'react-modal'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@/apollo/ssr'
-import { Montserrat } from 'next/font/google'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import { Toaster } from 'sonner'
+import localFont from 'next/font/local'
 
 import '@/styles/globals.scss'
 
@@ -18,12 +18,21 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-const montserrat = Montserrat({
-  weight: ['400', '500', '600'],
-  subsets: ['latin', 'cyrillic'],
-  style: 'normal',
-  variable: '--font-montserrat',
-  display: 'swap'
+const proximanova = localFont({
+  display: 'optional',
+  variable: '--font-proximanova',
+  src: [
+    {
+      path: '../../font/ProximaNova-Regular.woff2',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../../font/ProximaNova-Semibold.woff2',
+      weight: '500',
+      style: 'normal'
+    }
+  ]
 })
 
 Modal.setAppElement('#__next')
@@ -32,6 +41,8 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   const getLayout = Component.getLayout ?? ((page) => page)
+
+  console.log(proximanova)
 
   return (
     <>
@@ -46,7 +57,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         <style jsx global>
           {`
             html {
-              font-family: ${montserrat.style.fontFamily};
+              font-family: ${proximanova.style.fontFamily};
             }
           `}
         </style>
