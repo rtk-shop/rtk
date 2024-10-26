@@ -10,7 +10,7 @@ import HeartIcon from '../../../../public/icons/heart-2.svg'
 import UserIcon from '../../../../public/icons/user.svg'
 import CartIcon from '../../../../public/icons/cart.svg'
 import GridIcon from '../../../../public/icons/grid.svg'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 interface NavigationProps {
   onSidebarOpen(): void
@@ -28,11 +28,11 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
   }
 
   const handleHomeClick = () => {
-    router.push(routeNames.root)
+    router.push('/catalog')
   }
 
   const handleProfileClick = () => {
-    console.log('profile click')
+    router.push(routeNames.profile)
   }
 
   return (
