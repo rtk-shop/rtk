@@ -4,7 +4,7 @@ module.exports = {
   locales: ['ru', 'ua'],
   pages: {
     '*': ['common'],
-    '/': ['home'],
+    '/(bot)/catalog': ['catalog'],
     '/auth': ['auth']
   },
   loadLocaleFrom: (lang, ns) =>

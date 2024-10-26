@@ -27,7 +27,7 @@ interface FiltersProps {
 }
 
 export function Filters({ priceRange, onReset }: FiltersProps) {
-  const { t } = useTranslation('home')
+  const { t } = useTranslation('catalog')
 
   // const t = (s: string) => s
 
