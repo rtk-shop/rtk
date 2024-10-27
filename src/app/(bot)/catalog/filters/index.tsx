@@ -8,6 +8,7 @@ import { PriceRange } from '@/components/ui/price-range'
 import useTranslation from 'next-translate/useTranslation'
 import fieldProps, { FilterItem } from './fliters-data'
 import { useFormContext } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
 
@@ -29,7 +30,7 @@ interface FiltersProps {
 export function Filters({ priceRange, onReset }: FiltersProps) {
   const { t } = useTranslation('catalog')
 
-  // const t = (s: string) => s
+  const t2 = useTranslations('Common')
 
   const { gender, availability, tags, categories } = fieldProps
 
@@ -49,6 +50,11 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
     label: t(option.label)
   })
 
+  const addI18V2 = (option: FilterItem) => ({
+    ...option,
+    label: t2(option.label)
+  })
+
   const handleReset = () => {
     setCurrentRange([0, 0]) // in this case RHF set field to undefined
     onReset()
@@ -62,7 +68,7 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
   const genderOptions = gender.options.map(addI18)
   const availabilityOptions = availability.options.map(addI18)
   const tagsOptions = tags.options.map(addI18)
-  const categoriesOptions = categories.options.map(addI18)
+  const categoriesOptions = categories.options.map(addI18V2)
 
   return (
     <aside className="relative px-2.5 pb-5 pt-2.5">

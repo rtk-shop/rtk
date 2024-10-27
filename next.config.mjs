@@ -1,6 +1,8 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
-import nextTranslate from 'next-translate-plugin'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin()
 
 const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
 const __dirname = path.dirname(__filename) // get the name of the director
@@ -35,4 +37,4 @@ const nextConfig = {
   }
 }
 
-export default nextTranslate(nextConfig)
+export default withNextIntl(nextConfig)

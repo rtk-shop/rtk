@@ -1,0 +1,12 @@
+{
+  "Common": {
+    "categories": {
+      "all": "Усі категорії",
+      "suitcases": "Валізи",
+      "bags": "Сумки",
+      "wallets": "Гаманці",
+      "backpacks": "Рюкзаки",
+      "other": "Інше"
+    }
+  }
+}

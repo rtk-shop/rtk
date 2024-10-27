@@ -1,0 +1,12 @@
+{
+  "Common": {
+    "categories": {
+      "all": "Все категории",
+      "suitcases": "Чемоданы",
+      "bags": "Сумки",
+      "wallets": "Кошельки",
+      "backpacks": "Рюкзаки",
+      "other": "Другое"
+    }
+  }
+}

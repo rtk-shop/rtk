@@ -61,23 +61,23 @@ const tags: FilterSection = {
 const categories: FilterSection = {
   options: [
     {
-      label: 'common:categories.suitcases',
+      label: 'categories.suitcases',
       value: 'suitcase'
     },
     {
-      label: 'common:categories.bags',
+      label: 'categories.bags',
       value: 'bag'
     },
     {
-      label: 'common:categories.wallets',
+      label: 'categories.wallets',
       value: 'wallet'
     },
     {
-      label: 'common:categories.backpacks',
+      label: 'categories.backpacks',
       value: 'backpack'
     },
     {
-      label: 'common:categories.other',
+      label: 'categories.other',
       value: 'other'
     }
   ]
