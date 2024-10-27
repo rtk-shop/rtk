@@ -1,7 +1,7 @@
+import { cva } from 'cva'
 import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/lib/navigation'
-
 import { useTranslations } from 'next-intl'
 
 const categoriesValues: Array<{
@@ -31,19 +31,25 @@ const categoriesValues: Array<{
   }
 ]
 
+const pseudoLine = cva('absolute left-1/2 top-2/4 bg-gray-400', {
+  variants: {
+    type: {
+      vertical: 'h-full w-px -translate-y-2/4',
+      horizontal: 'h-px w-full -translate-x-2/4'
+    }
+  }
+})
+
 export function Categories() {
   const t = useTranslations('Common')
 
   return (
-    <section className="mt-20 px-4">
-      <ul className="rounded-md border border-gray-400 bg-white/10 text-white">
+    <section className="px-4">
+      <ul className="relative flex flex-wrap rounded-md border border-gray-400 bg-white/10 text-gray-100">
         {categoriesValues.map((category, ind) => (
-          <li
-            key={ind}
-            className="relative mb-2 flex pl-2 after:absolute after:-bottom-1.5 after:left-1/2 after:h-[1px] after:w-8/12 after:-translate-x-2/4 after:bg-gray-400 after:last:hidden"
-          >
-            <Link href={category.to} className="flex items-center">
-              <div className="mr-1 size-14">
+          <li key={ind} className="mb-2.5 flex basis-1/2 justify-center">
+            <Link href={category.to} className="items-center">
+              <div className="size-16">
                 <Image
                   priority
                   src={category.img}
@@ -53,12 +59,14 @@ export function Categories() {
                   alt={`Изображение категории - ${t(`categories.${category.i18n}`)}`}
                 />
               </div>
-              <div className="text-lg font-medium">
+              <div className="text-center text-[14px] font-medium">
                 <p>{t(`categories.${category.i18n}`)}</p>
               </div>
             </Link>
           </li>
         ))}
+        <div className={pseudoLine({ type: 'vertical' })} />
+        <div className={pseudoLine({ type: 'horizontal' })} />
       </ul>
     </section>
   )

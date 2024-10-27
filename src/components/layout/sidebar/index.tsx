@@ -24,12 +24,6 @@ export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
           {/*  */}
           <div className="flex grow flex-col justify-end">
             <div className="mb-3 flex items-center justify-between px-5">
-              <span className="text-lg font-medium text-white">Курс:</span>
-              <p className="text-lg text-white">
-                <span>1$</span> = <span className="font-semibold">{currency}₴</span>
-              </p>
-            </div>
-            <div className="mb-3 flex items-center justify-between px-5">
               <span className="text-lg font-medium text-white">{t('drawer.lang')}:</span>
               <LangSwitcher />
             </div>
