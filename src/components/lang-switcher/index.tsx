@@ -1,12 +1,7 @@
 import { cva } from 'cva'
-import { useRouter } from 'next/router'
-
-const locales = {
-  ua: 'Ua',
-  ru: 'Ru'
-}
-
-type Lang = keyof typeof locales
+import { setUserLocale } from '@/lib/locale'
+import { useLocale } from 'next-intl'
+import { locales, type Locale } from '@/i18n/config'
 
 const langItem = cva('z-20 cursor-pointer select-none px-4 py-1 text-base font-medium', {
   variants: {
@@ -16,35 +11,39 @@ const langItem = cva('z-20 cursor-pointer select-none px-4 py-1 text-base font-m
   }
 })
 
-const island = cva('w-2/4 h-full z-10 bg-green-400 absolute transition-transform', {
+const island = cva('absolute z-10 h-full w-2/4 bg-green-400 transition-transform', {
   variants: {
     lang: {
-      ru: 'translate-x-full',
-      ua: 'translate-x-0'
+      ua: 'translate-x-full',
+      ru: 'translate-x-0'
     }
   }
 })
 
 export function LangSwitcher() {
-  const router = useRouter()
-  const { locale = 'ru', pathname, asPath, query } = router
+  const locale = useLocale()
 
-  const handleLangSelect = (lang: string) => {
-    router.push({ pathname, query }, asPath, { locale: lang })
+  const handleLangSelect = async (lang: Locale) => {
+    setUserLocale(lang)
+  }
+
+  const view: Record<Locale, string> = {
+    ua: 'Ua',
+    ru: 'Ru'
   }
 
   return (
     <div className="relative flex bg-white">
-      {Object.keys(locales).map((lang) => (
-        <span
+      {locales.map((lang) => (
+        <div
           key={lang}
           onClick={() => handleLangSelect(lang)}
           className={langItem({ selected: lang === locale })}
         >
-          {locales[lang as Lang]}
-        </span>
+          {view[lang]}
+        </div>
       ))}
-      <div className={island({ lang: locale as Lang })} />
+      <div className={island({ lang: locale as Locale })} />
     </div>
   )
 }
