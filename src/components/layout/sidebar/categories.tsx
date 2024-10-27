@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/lib/navigation'
 
-import useTranslation from 'next-translate/useTranslation'
+import { useTranslations } from 'next-intl'
 
 const categoriesValues: Array<{
   img: string
@@ -32,7 +32,7 @@ const categoriesValues: Array<{
 ]
 
 export function Categories() {
-  const { t } = useTranslation('common')
+  const t = useTranslations('Common')
 
   return (
     <section className="mt-20 px-4">

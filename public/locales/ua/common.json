@@ -4,14 +4,6 @@
     "catalog": "каталог",
     "mySearch": "Знайти товар за назвою або кодом..."
   },
-  "categories": {
-    "all": "Усі категорії",
-    "suitcases": "Валізи",
-    "bags": "Сумки",
-    "wallets": "Гаманці",
-    "backpacks": "Рюкзаки",
-    "other": "Інше"
-  },
   "cart": {
     "topControls": {
       "title": "Товари в кошику"
