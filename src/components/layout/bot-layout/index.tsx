@@ -1,8 +1,9 @@
 'use client'
 
 import { type ReactNode, useCallback, useMemo, useState } from 'react'
-import { Navigation } from '../navigation'
-import { Sidebar } from '../sidebar'
+import { Navigation } from '@/components/layout/navigation'
+import { Cart } from '@/components/layout/cart'
+import { Sidebar } from '@/components/layout/sidebar'
 import { UrqlProvider, ssrExchange, cacheExchange, fetchExchange, createClient } from '@urql/next'
 
 export function BotLayout({ children }: { children: ReactNode }) {
@@ -40,8 +41,8 @@ export function BotLayout({ children }: { children: ReactNode }) {
 
   return (
     <UrqlProvider client={client} ssr={ssr}>
-      {/* <Cart isOpen={isCartOpen} currency={10} onClose={handleCartClose} /> */}
-      <Sidebar isOpen={isSidebarOpen} currency={10} onClose={handleCloseDrawer} />
+      <Cart isOpen={isCartOpen} onClose={handleCartClose} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseDrawer} />
       <Navigation onCartOpen={handleCartOpen} onSidebarOpen={handleOpenDrawer} />
       {children}
     </UrqlProvider>

@@ -5,30 +5,28 @@ import { ProcessPlug } from './plug'
 import { ListSkeleton } from './list-skeleton'
 import { CartHead } from './head'
 import { CartItem, CartItemType } from '@/components/cart-item'
-import useTranslation from 'next-translate/useTranslation'
 import { normalizedView, useCartStore } from '@/store/cart'
-import { useRouter } from 'next/router'
 import { routeNames } from '@/lib/navigation'
-import { useCartProductsQuery } from '@/graphql/product/_gen_/cartProducts.query'
-import { setCartItems } from '@/apollo/cache/cart'
+import { useRouter } from 'next/navigation'
+import { useCartProductsQuery } from '@/lib/graphql/product/_gen_/cartProducts.query'
+import useTranslation from 'next-translate/useTranslation'
 
 interface CartProps {
-  currency: number
   isOpen: boolean
   onClose(): void
 }
 
-export const Cart = memo(function Cart({ isOpen, currency, onClose }: CartProps) {
+export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
   return (
     <Drawer position="right" onClose={onClose} open={isOpen}>
       <div className="h-dvh w-screen overflow-hidden bg-white md:max-w-[400px]">
-        <CartInner currency={currency} onClose={onClose} />
+        <CartInner onClose={onClose} />
       </div>
     </Drawer>
   )
 })
 
-export function CartInner({ currency, onClose }: { currency: number; onClose(): void }) {
+export function CartInner({ onClose }: { onClose(): void }) {
   const router = useRouter()
   const { t } = useTranslation('common')
 
@@ -37,23 +35,24 @@ export function CartInner({ currency, onClose }: { currency: number; onClose(): 
 
   const isCartEmpty = cartItems.length === 0
 
-  const { data, error, loading } = useCartProductsQuery({
+  const [result] = useCartProductsQuery({
+    pause: isCartEmpty,
     variables: {
-      input: cartItems
-    },
-    skip: isCartEmpty,
-    onCompleted: (data) => {
-      if (data) {
-        setCartItems(
-          data.cartProducts.map((p) => ({
-            productId: p.id,
-            amount: itemsMap[p.id],
-            price: p.currentPrice
-          }))
-        )
-      }
+      input: [...cartItems]
     }
   })
+
+  // set cache '@/apollo/cache/cart'
+
+  // setCartItems(
+  //   data.cartProducts.map((p) => ({
+  //     productId: p.id,
+  //     amount: itemsMap[p.id],
+  //     price: p.currentPrice
+  //   }))
+  // )
+
+  const { data, fetching, error } = result
 
   const handleCheckout = (): void => {
     onClose()
@@ -71,7 +70,7 @@ export function CartInner({ currency, onClose }: { currency: number; onClose(): 
   return (
     <div className="flex h-full flex-col">
       <CartHead onCartClose={onClose} />
-      {loading ? (
+      {fetching ? (
         <ListSkeleton itemsAmount={cartItems.length} />
       ) : (
         <ul className="scroll-bar grow overflow-y-auto px-2.5 pt-5">
@@ -80,7 +79,7 @@ export function CartInner({ currency, onClose }: { currency: number; onClose(): 
           ))}
         </ul>
       )}
-      <Summary loading={loading} currency={currency} onCheckout={handleCheckout} />
+      <Summary loading={fetching} currency={41.2} onCheckout={handleCheckout} />
     </div>
   )
 }

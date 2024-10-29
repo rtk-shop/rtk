@@ -6,11 +6,10 @@ import useTranslation from 'next-translate/useTranslation'
 
 interface SidebarProps {
   isOpen: boolean
-  currency: number
   onClose(): void
 }
 
-export function Sidebar({ isOpen, currency, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { t } = useTranslation('common')
 
   return (
