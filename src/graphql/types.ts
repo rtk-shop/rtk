@@ -80,15 +80,6 @@ export type HomeMainSlide = {
   imageURL: Scalars['String']['output']
 }
 
-export type LogInInput = {
-  keyWord: Scalars['String']['input']
-}
-
-export type LogInRsponse = {
-  __typename?: 'LogInRsponse'
-  token: Scalars['String']['output']
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
   createOrder?: Maybe<NewOrderResponse>
@@ -264,7 +255,6 @@ export type Query = {
   cartProducts: Array<Product>
   globalData: GlobalData
   homeData?: Maybe<HomeDataResponse>
-  logInRoot?: Maybe<LogInRsponse>
   product: ProductResult
   products: ProductsResponse
   productsByID: Array<Product>
@@ -272,10 +262,6 @@ export type Query = {
 
 export type QueryCartProductsArgs = {
   input: Array<CartItem>
-}
-
-export type QueryLogInRootArgs = {
-  input: LogInInput
 }
 
 export type QueryProductArgs = {
@@ -292,7 +278,19 @@ export type QueryProductsByIdArgs = {
 
 export const enum Role {
   Admin = 'ADMIN',
-  Customer = 'CUSTOMER'
+  Customer = 'CUSTOMER',
+  Manager = 'MANAGER'
+}
+
+export type User = {
+  __typename?: 'User'
+  createdAt: Scalars['String']['output']
+  email: Scalars['String']['output']
+  firstName: Scalars['String']['output']
+  id: Scalars['ID']['output']
+  phone: Scalars['String']['output']
+  role: Scalars['String']['output']
+  updatedAt: Scalars['String']['output']
 }
 
 export interface PossibleTypesResultData {

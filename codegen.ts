@@ -3,7 +3,9 @@ import { CodegenConfig } from '@graphql-codegen/cli'
 const config: CodegenConfig = {
   overwrite: true,
   schema: 'http://localhost:8080/graphql',
-  documents: './src/**/*.gql',
+  // documents: './src/**/*.gql',
+  documents: './src/lib/graphql/product/*.gql',
+  ignoreNoDocuments: true,
   generates: {
     'src/graphql/types.ts': {
       plugins: ['typescript', 'fragment-matcher'],
@@ -18,12 +20,11 @@ const config: CodegenConfig = {
         baseTypesPath: 'graphql/types.ts',
         folder: '_gen_'
       },
-      plugins: ['typescript-operations', 'typescript-react-apollo'],
+      plugins: ['typescript-operations', 'typescript-urql'],
       config: {
-        preResolveTypes: true,
         withHooks: true,
-        withRefetchFn: false,
-        apolloClientVersion: 3
+        gqlImport: 'urql#gql',
+        defaultScalarType: 'unknown'
       }
     }
   },

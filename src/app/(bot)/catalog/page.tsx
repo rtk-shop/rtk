@@ -1,11 +1,5 @@
 'use client'
 
-// import type { Metadata } from 'next'
-
-// export const metadata: Metadata = {
-//   title: 'Catalog'
-// }
-
 import { useState, useEffect } from 'react'
 import { cva } from 'cva'
 import { Filters } from './filters'
@@ -13,12 +7,10 @@ import { ProductList } from './product-list'
 import { ListSkeleton } from './product-list/skeleton'
 import { ErrorPlug } from '@/components/ui/error-plug'
 import { Backdrop } from '@/components/ui/backdrop'
-// import { Controls } from './controls'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
-import { useProductsLazyQuery } from '@/graphql/product/_gen_/products.query'
-import { useQuery } from '@urql/next'
-import { catalog_products } from './urql'
+import { useProductsQuery } from '@/lib/graphql/product/_gen_/products.query'
+// import { Controls } from './controls'
 
 type PriceRangeType = {
   gt: number
@@ -31,6 +23,15 @@ export type FormValues = {
   tag: Lowercase<keyof typeof ProductTag> | null
   priceRange: [number, number]
   category: Array<Lowercase<keyof typeof CategoryType>>
+}
+
+interface Params {
+  price?: PriceRangeType
+  instock?: boolean
+  tag?: ProductTag
+  category?: CategoryType
+  gender?: Gender
+  page: number
 }
 
 const filtersBox = cva(
@@ -49,6 +50,10 @@ export default function Catalog() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
   const [isOpen, setOpen] = useState(false)
 
+  const [params, setParams] = useState<Params>({
+    page: 1
+  })
+
   const page = 1
   const numOfPage = !isNaN(Number(page)) ? Number(page) : 1
 
@@ -61,11 +66,10 @@ export default function Catalog() {
   //     }
   //   })
 
-  const [result, getProducts] = useQuery({
-    query: catalog_products,
+  const [result, getProducts] = useProductsQuery({
     pause: true,
     variables: {
-      page: 1
+      ...params
     }
   })
 
@@ -107,15 +111,13 @@ export default function Catalog() {
     const tagData = tag as unknown as ProductTag
     const genderData = gender as unknown as Gender
 
-    getProducts({
-      variables: {
-        page: numOfPage,
-        price,
-        instock,
-        category: categoryData,
-        tag: tagData,
-        gender: genderData
-      }
+    setParams({
+      page: numOfPage,
+      price,
+      instock,
+      category: categoryData,
+      tag: tagData,
+      gender: genderData
     })
   }
 

@@ -1,6 +1,5 @@
 query Products(
   $gender: [Gender!]
-  $isHidden: Boolean = false
   $instock: Boolean
   $tag: ProductTag
   $price: PriceRange
@@ -10,7 +9,7 @@ query Products(
   products(
     filter: {
       gender: $gender
-      isHidden: $isHidden
+      isHidden: false # todo: make it optional
       instock: $instock
       tag: $tag
       price: $price
