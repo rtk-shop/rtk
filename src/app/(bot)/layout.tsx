@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { BotLayout } from '@/components/layout/bot-layout'
+import { UrqlProvider } from '@/providers/urql'
 
 import '@/styles/globals.scss'
 
@@ -30,11 +31,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale}>
       <body className={proximanova.variable}>
-        <main>
-          <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages}>
+          <UrqlProvider>
             <BotLayout>{children}</BotLayout>
-          </NextIntlClientProvider>
-        </main>
+          </UrqlProvider>
+        </NextIntlClientProvider>
         <div id="app-drawers" />
       </body>
     </html>
