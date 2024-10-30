@@ -1,8 +1,10 @@
+'use client'
+
 import { useState } from 'react'
 import clsx from 'clsx'
-import ExclamationIcon from '../../../../../public/icons/exclamation-circle.svg'
-import CheckIcon from '../../../../../public/icons/check-circle.svg'
-import HeaderCartIcon from '../../../../../public/icons/cart.svg'
+import ExclamationIcon from '../../../../../../public/icons/exclamation-circle.svg'
+import CheckIcon from '../../../../../../public/icons/check-circle.svg'
+import HeaderCartIcon from '../../../../../../public/icons/cart.svg'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { Button } from '@/components/ui/button'
 import { Tags } from './tags'
@@ -29,7 +31,13 @@ interface DetailsProps {
 export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
   const [amount, setAmount] = useState(1)
 
-  const { data } = useGlobalDataQuery()
+  // const { data } = useGlobalDataQuery()
+
+  const data = {
+    globalData: {
+      usdCourse: 41.2
+    }
+  }
 
   const handleAddToCart = () => {
     addToCart({

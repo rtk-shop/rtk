@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import CommentIcon from '../../../../../../public/icons/comment.svg'
-import ShareIcon from '../../../../../../public/icons/share.svg'
+import CommentIcon from '../../../../../../../public/icons/comment.svg'
+import ShareIcon from '../../../../../../../public/icons/share.svg'
 import { Button } from '@/components/ui/button'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { LikeButton } from '@/components/ui/like-button'

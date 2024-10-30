@@ -2,8 +2,8 @@ import clsx from 'clsx'
 import { ChangeEvent } from 'react'
 import { IconButton } from '@/components/ui/icon-button'
 import { SvgIcon } from '@/components/ui/svg-icon'
-import PlusIcon from '../../../../../../public/icons/plus.svg'
-import MinusIcon from '../../../../../../public/icons/minus.svg'
+import PlusIcon from '../../../../../../../public/icons/plus.svg'
+import MinusIcon from '../../../../../../../public/icons/minus.svg'
 
 import styles from './styles.module.scss'
 
