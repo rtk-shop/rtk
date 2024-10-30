@@ -6,7 +6,7 @@ import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
 
 export function BotLayout({ children }: { children: ReactNode }) {
-  const [isSidebarOpen, setSidebarOpen] = useState(true)
+  const [isSidebarOpen, setSidebarOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
 
   const handleOpenDrawer = useCallback(() => {

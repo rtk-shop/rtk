@@ -4,6 +4,7 @@ import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { BotLayout } from '@/components/layout/bot-layout'
 import { UrqlProvider } from '@/providers/urql'
+import { CartStoreProvider } from '@/providers/cart-store-provider'
 
 import '@/styles/globals.scss'
 
@@ -33,7 +34,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body className={proximanova.variable}>
         <NextIntlClientProvider messages={messages}>
           <UrqlProvider>
-            <BotLayout>{children}</BotLayout>
+            <CartStoreProvider>
+              <BotLayout>{children}</BotLayout>
+            </CartStoreProvider>
           </UrqlProvider>
         </NextIntlClientProvider>
         <div id="app-drawers" />
