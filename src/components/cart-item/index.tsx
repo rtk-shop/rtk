@@ -5,8 +5,8 @@ import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
 import { formatPrice } from '@/lib/helpers'
-import { routeNames, generateProductLink } from '@/lib/navigation'
 import { updateItemAmount, removeFromCart } from '@/apollo/cache/cart'
+import { routeNames } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 
 export type CartItemType = {
@@ -38,14 +38,14 @@ export function CartItem({ product, amount }: CartItemProps) {
   return (
     <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 after:last:hidden">
       <div className="relative mr-5 min-h-44 w-full min-w-44">
-        <Link href={generateProductLink(routeNames.product, id, slug)} className="rounded-lg">
+        <Link href={routeNames.product + id} className="rounded-lg">
           <ImagePlaceholder src={preview} altText={title} />
         </Link>
       </div>
       <div className="w-full min-w-0 max-w-md pt-3">
         <Link
           title={title}
-          href={generateProductLink(routeNames.product, id, slug)}
+          href={routeNames.product + id}
           className="clear-both mb-2 line-clamp-2 h-[35px] text-ellipsis whitespace-normal text-sm font-semibold leading-4 text-black no-underline"
         >
           {title}

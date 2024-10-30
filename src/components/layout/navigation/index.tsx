@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 // import { useFavoriteStore } from '@/store/favorite'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
@@ -29,8 +29,8 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
     console.log('favorite click')
   }
 
-  const handleHomeClick = () => {
-    router.push('/catalog')
+  const handleCatalogClick = () => {
+    router.push(routeNames.catalog)
   }
 
   const handleProfileClick = () => {
@@ -71,7 +71,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={handleHomeClick} disableRipple>
+              <IconButton onClick={handleCatalogClick} disableRipple>
                 <SvgIcon className="stroke-white text-[28px] text-white">
                   <GridIcon />
                 </SvgIcon>

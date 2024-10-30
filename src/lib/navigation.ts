@@ -9,10 +9,6 @@ export const routeNames: Record<RouteName, string> = {
   profile: '/profile'
 }
 
-export const generateProductLink = (path: string, id: string, slug: string): string => {
-  return path.replace(':id', id + 'i__' + slug)
-}
-
 export const productIdFromSlug = (slugURL: string): string => {
   const slug = slugURL.match(/i__(.*)/)
 

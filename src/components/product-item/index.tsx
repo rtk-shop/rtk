@@ -7,11 +7,11 @@ import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { SvgIcon } from '../ui/svg-icon'
 import TrashIcon from '../../../public/icons/trash.svg'
-import useTranslation from 'next-translate/useTranslation'
+import { routeNames } from '@/lib/constants'
 import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/store/favorite'
-import { routeNames, generateProductLink } from '@/lib/navigation'
 import type { ProductTag } from '@/types'
+import useTranslation from 'next-translate/useTranslation'
 
 interface ProductItemProps {
   id: string
@@ -26,7 +26,7 @@ interface ProductItemProps {
   withDelete?: boolean
 }
 
-const priceBlock = cva('basis-4/5 font-semibold text-black text-[18px] leading-5', {
+const priceBlock = cva('basis-4/5 text-[18px] font-semibold leading-5 text-black', {
   variants: {
     discount: {
       true: 'text-red-600'
@@ -82,8 +82,8 @@ export function ProductItem({
     <div className="relative mx-0.5 my-2 rounded-lg shadow transition-shadow hover:shadow-lg md:mx-1">
       <div>
         <Link
+          href={routeNames.product + id}
           className={`rounded-t-lg border-none focus:ring-0 md:rounded-none ${!inStock ? 'opacity-50' : ''}`}
-          href={generateProductLink(routeNames.product, id, slug)}
         >
           <ImagePlaceholder src={url} altText={title} />
         </Link>
@@ -116,9 +116,9 @@ export function ProductItem({
           </div>
         </div>
         <Link
-          className="clear-both mb-1.5 line-clamp-2 h-[34px] text-ellipsis whitespace-normal text-[13px] font-semibold leading-4 text-black no-underline md:h-9 md:text-sm md:font-medium"
+          href={routeNames.product + id}
           title={title}
-          href={generateProductLink(routeNames.product, id, slug)}
+          className="clear-both mb-1.5 line-clamp-2 h-[34px] text-ellipsis whitespace-normal text-[13px] font-semibold leading-4 text-black no-underline md:h-9 md:text-sm md:font-medium"
         >
           {title}
         </Link>
