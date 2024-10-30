@@ -2,5 +2,8 @@ export const routeNames = {
   root: '/',
   catalog: '/catalog',
   product: '/product/',
-  profile: '/profile'
+  profile: '/profile',
+  dashboard: '/dashboard',
+  auth: '/auth',
+  checkout: '/checkout'
 } as const

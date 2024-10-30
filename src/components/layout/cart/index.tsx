@@ -6,7 +6,7 @@ import { ListSkeleton } from './list-skeleton'
 import { CartHead } from './head'
 import { CartItem, CartItemType } from '@/components/cart-item'
 import { normalizedView, useCartStore } from '@/store/cart'
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
 import { useQuery } from 'urql'
 import {

@@ -9,7 +9,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useLogIn } from './hooks'
 import useTranslation from 'next-translate/useTranslation'
 
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 import { decrypt } from '@/lib/session'
 
 export function LogIn({ onSignUp }: { onSignUp(): void }) {

@@ -1,7 +1,7 @@
 import { cva } from 'cva'
 import Link from 'next/link'
 import Image from 'next/image'
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
 
 const categoriesValues: Array<{
@@ -11,22 +11,22 @@ const categoriesValues: Array<{
 }> = [
   {
     img: '/assets/bag.webp',
-    to: routeNames.root,
+    to: routeNames.catalog,
     i18n: 'bags'
   },
   {
     img: '/assets/wallet.webp',
-    to: routeNames.root,
+    to: routeNames.catalog,
     i18n: 'wallets'
   },
   {
     img: '/assets/backpack.webp',
-    to: routeNames.root,
+    to: routeNames.catalog,
     i18n: 'backpacks'
   },
   {
     img: '/assets/suitcase.webp',
-    to: routeNames.root,
+    to: routeNames.catalog,
     i18n: 'suitcases'
   }
 ]

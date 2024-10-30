@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
 import { normalizedView, useCartStore } from '@/store/cart'
 import { useRouter } from 'next/router'
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 import { clearCart } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'

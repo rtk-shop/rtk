@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ArrowIcon from '../../../../public/icons/expand-arrow.svg'
-import { routeNames } from '@/lib/navigation'
+import { routeNames } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 
 import styles from './styles.module.scss'

@@ -3,7 +3,6 @@ import { AppLayout } from '@/components/layout/app-layout'
 import { ParsedUrlQuery } from 'querystring'
 import { ProductIndex } from '@/components/views/product'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { productIdFromSlug } from '@/lib/navigation'
 import {
   GetProductQuery,
   GetProductQueryVariables,
@@ -14,6 +13,18 @@ import { NextPageWithLayout } from '../_app'
 
 interface Params extends ParsedUrlQuery {
   id: string
+}
+
+const productIdFromSlug = (slugURL: string): string => {
+  const slug = slugURL.match(/i__(.*)/)
+
+  if (slug === null) {
+    throw new Error('no slug matched')
+  }
+
+  const slugSide = slug[0]
+
+  return slugURL.substring(0, slugURL.length - slugSide.length)
 }
 
 export const getServerSideProps: GetServerSideProps<{
