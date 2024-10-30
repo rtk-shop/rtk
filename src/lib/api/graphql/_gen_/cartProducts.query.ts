@@ -1,7 +1,6 @@
 import * as Types from '../../../../graphql/types'
 
 import { gql } from 'urql'
-import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type CartProductsQueryVariables = Types.Exact<{
   input: Array<Types.CartItem> | Types.CartItem
@@ -30,12 +29,3 @@ export const CartProductsDocument = gql`
     }
   }
 `
-
-export function useCartProductsQuery(
-  options: Omit<Urql.UseQueryArgs<CartProductsQueryVariables>, 'query'>
-) {
-  return Urql.useQuery<CartProductsQuery, CartProductsQueryVariables>({
-    query: CartProductsDocument,
-    ...options
-  })
-}

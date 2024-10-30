@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: 'http://localhost:8080/graphql',
   // documents: './src/**/*.gql',
-  documents: './src/lib/graphql/product/*.gql',
+  documents: './src/lib/api/graphql/**/*.gql',
   ignoreNoDocuments: true,
   generates: {
     'src/graphql/types.ts': {
@@ -22,7 +22,7 @@ const config: CodegenConfig = {
       },
       plugins: ['typescript-operations', 'typescript-urql'],
       config: {
-        withHooks: true,
+        withHooks: false,
         gqlImport: 'urql#gql',
         defaultScalarType: 'unknown'
       }

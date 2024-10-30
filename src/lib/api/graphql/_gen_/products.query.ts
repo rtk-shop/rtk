@@ -1,7 +1,6 @@
 import * as Types from '../../../../graphql/types'
 
 import { gql } from 'urql'
-import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ProductsQueryVariables = Types.Exact<{
   gender?: Types.InputMaybe<Array<Types.Gender> | Types.Gender>
@@ -73,12 +72,3 @@ export const ProductsDocument = gql`
     }
   }
 `
-
-export function useProductsQuery(
-  options: Omit<Urql.UseQueryArgs<ProductsQueryVariables>, 'query'>
-) {
-  return Urql.useQuery<ProductsQuery, ProductsQueryVariables>({
-    query: ProductsDocument,
-    ...options
-  })
-}

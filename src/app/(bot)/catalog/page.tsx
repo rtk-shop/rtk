@@ -9,7 +9,12 @@ import { ErrorPlug } from '@/components/ui/error-plug'
 import { Backdrop } from '@/components/ui/backdrop'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
-import { useProductsQuery } from '@/lib/graphql/product/_gen_/products.query'
+import { useQuery } from 'urql'
+import {
+  ProductsDocument,
+  ProductsQuery,
+  ProductsQueryVariables
+} from '@/lib/api/graphql/_gen_/products.query'
 // import { Controls } from './controls'
 
 type PriceRangeType = {
@@ -66,7 +71,8 @@ export default function Catalog() {
   //     }
   //   })
 
-  const [result, getProducts] = useProductsQuery({
+  const [result, getProducts] = useQuery<ProductsQuery, ProductsQueryVariables>({
+    query: ProductsDocument,
     pause: true,
     variables: {
       ...params
