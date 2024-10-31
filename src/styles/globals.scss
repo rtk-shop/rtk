@@ -101,3 +101,11 @@ a {
   visibility: visible;
   z-index: 40;
 }
+
+// info: layout shift fix for one per view slide
+// https://github.com/rcbyr/keen-slider/issues/146#issuecomment-970380029
+.keen-slider__slide {
+  min-width: 100%;
+  max-width: 100%;
+  transform: translate3d(0, 0, 0);
+}
