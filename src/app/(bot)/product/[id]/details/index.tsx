@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { cva } from 'cva'
 import clsx from 'clsx'
 import ExclamationIcon from '../../../../../../public/icons/exclamation-circle.svg'
 import CheckIcon from '../../../../../../public/icons/check-circle.svg'
@@ -14,7 +15,6 @@ import { SubControls } from './sub-controls'
 import { formatPrice } from '@/lib/helpers'
 import { Amaunt } from './amaunt'
 import { addToCart } from '@/apollo/cache/cart'
-import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 
 import styles from './styles.module.scss'
 
@@ -28,16 +28,17 @@ interface DetailsProps {
   inStock: boolean
 }
 
-export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
-  const [amount, setAmount] = useState(1)
-
-  // const { data } = useGlobalDataQuery()
-
-  const data = {
-    globalData: {
-      usdCourse: 41.2
+const priceTitle = cva('text-[23px] font-medium', {
+  variants: {
+    withDiscount: {
+      true: 'mx-1.5 text-red-600',
+      false: 'text-black'
     }
   }
+})
+
+export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice }: DetailsProps) {
+  const [amount, setAmount] = useState(1)
 
   const handleAddToCart = () => {
     addToCart({
@@ -62,76 +63,70 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
     }
   }
 
+  const withDiscount = basePrice !== currentPrice
+
   return (
-    <section className={styles.container}>
-      <div className={styles.inner}>
+    <section className="px-1.5">
+      {/*  */}
+      <h1 className="mb-1.5 mt-4 text-lg font-medium leading-5">{title}</h1>
+      {/*  */}
+      <div className="mb-3 flex items-center">
+        {withDiscount && (
+          <span className="text-lg text-gray-500 line-through">{formatPrice(basePrice)}</span>
+        )}
         {/*  */}
-        <h1 className={styles.title}>{title}</h1>
+        <p className={priceTitle({ withDiscount })}>{formatPrice(currentPrice)} грн</p>
         {/*  */}
-        <div className={styles.availability}>
-          <div className={clsx(styles.availabilityPlug, !inStock && styles.availabilityOutStock)}>
-            <SvgIcon
-              className={clsx({
-                [styles.availabilityIcon]: true,
-                [styles.availabilityIconInStock]: inStock
-              })}
-            >
-              {inStock ? <CheckIcon /> : <ExclamationIcon />}
-            </SvgIcon>
-            <span>{inStock ? 'В наличии' : 'Нет в наличии'}</span>
-          </div>
-          <div className={styles.skuWrapper}>
-            <p className={styles.skuCode}>
-              <span>Код:</span>&nbsp;{sku}
-            </p>
-          </div>
-        </div>
-        {/*  */}
-        <div className={styles.priceBox}>
-          <p className={styles.currentPrice}>
-            {formatPrice(currentPrice)}&nbsp;<span>$</span>
-          </p>
-          {basePrice !== currentPrice && (
-            <div className={styles.discountPriceBox}>
-              <span className={styles.discountPrice}>{formatPrice(basePrice)}&nbsp;$</span>
-              <span className={styles.percentage}>
-                -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}
-                <span>%</span>
-              </span>
-            </div>
-          )}
-          {data && (
-            <span className={styles.uahPrice}>
-              &nbsp;• {formatPrice(currentPrice * data.globalData.usdCourse)}грн
-            </span>
-          )}
-        </div>
-        {/*  */}
-        <SizeGuide current="L" available={['M', '2XL', 'L']} />
-        {/*  */}
-        <div className={styles.buttonsWrapper}>
-          <div className={styles.amauntBox}>
-            <Amaunt amount={amount} onChange={handleControllerChange} />
-          </div>
-          <Button
-            fullWidth
-            color="secondary"
-            onClick={handleAddToCart}
-            className={styles.orderButton}
-            disabled={!inStock}
-            startIcon={
-              <SvgIcon className={styles.orderButtonIcon}>
-                <HeaderCartIcon />
-              </SvgIcon>
-            }
-          >
-            {inStock ? 'Добавить в корзину' : 'Нет в наличии'}
-          </Button>
-        </div>
-        <SubControls productId={id} />
-        {tags && tags.length > 1 && <Tags tags={tags} />}
-        <Delivery />
+        {withDiscount && (
+          <span className="w-12 bg-green-light px-1 text-center text-[13px] font-medium text-white">
+            -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%
+          </span>
+        )}
       </div>
+
+      {/*  */}
+      {/* <div className={styles.availability}>
+        <div className={clsx(styles.availabilityPlug, !inStock && styles.availabilityOutStock)}>
+          <SvgIcon
+            className={clsx({
+              [styles.availabilityIcon]: true,
+              [styles.availabilityIconInStock]: inStock
+            })}
+          >
+            {inStock ? <CheckIcon /> : <ExclamationIcon />}
+          </SvgIcon>
+          <span>{inStock ? 'В наличии' : 'Нет в наличии'}</span>
+        </div>
+        <div className={styles.skuWrapper}>
+          <p className={styles.skuCode}>
+            <span>Код:</span>&nbsp;{sku}
+          </p>
+        </div>
+      </div> */}
+      <SizeGuide current="L" available={['M', '2XL', 'L']} />
+      {/*  */}
+      <div className={styles.buttonsWrapper}>
+        <div className={styles.amauntBox}>
+          <Amaunt amount={amount} onChange={handleControllerChange} />
+        </div>
+        <Button
+          fullWidth
+          color="secondary"
+          onClick={handleAddToCart}
+          className={styles.orderButton}
+          disabled={!inStock}
+          startIcon={
+            <SvgIcon className={styles.orderButtonIcon}>
+              <HeaderCartIcon />
+            </SvgIcon>
+          }
+        >
+          {inStock ? 'Добавить в корзину' : 'Нет в наличии'}
+        </Button>
+      </div>
+      <SubControls productId={id} />
+      {tags && tags.length > 1 && <Tags tags={tags} />}
+      <Delivery />
     </section>
   )
 }
