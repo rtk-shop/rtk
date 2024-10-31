@@ -10,7 +10,7 @@ import { SvgIcon } from '@/components/ui/svg-icon'
 import { Button } from '@/components/ui/button'
 import { Tags } from './tags'
 import { Delivery } from './delivery'
-import { SizeGuide } from './size-guide'
+import { SizeGuide } from '@/components/ui/size-guide'
 import { SubControls } from './sub-controls'
 import { formatPrice } from '@/lib/helpers'
 import { Amaunt } from './amaunt'
@@ -103,7 +103,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
           </p>
         </div>
       </div> */}
-      <SizeGuide current="L" available={['M', '2XL', 'L']} />
+      <SizeGuide title={'Выберите размер'} current="L" available={['M', '2XL', 'L']} />
       {/*  */}
       <div className={styles.buttonsWrapper}>
         <div className={styles.amauntBox}>
