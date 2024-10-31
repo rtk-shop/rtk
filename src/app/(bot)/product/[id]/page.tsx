@@ -23,7 +23,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
   const product = data?.product
 
   return (
-    <div className="mb-16 px-1 pt-1.5">
+    <div className="mb-16">
       <Preview images={product.images} />
       <Details
         id={product.id}
