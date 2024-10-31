@@ -21,12 +21,7 @@ type CartActions = {
 export type CartStore = CartState & CartActions
 
 export const defaultInitState: CartState = {
-  cartItems: [
-    {
-      productId: '6',
-      amount: 2
-    }
-  ]
+  cartItems: []
 }
 
 export const normalizedView = (cartItems: CartItem[]) => {
