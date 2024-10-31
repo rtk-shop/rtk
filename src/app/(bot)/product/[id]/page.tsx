@@ -1,6 +1,6 @@
 import { Preview } from './preview'
 import { Details } from './details'
-// import { Info } from '@/components/views/product/info'
+// import { Info } from './info'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
 import 'keen-slider/keen-slider.min.css'
