@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import MenuIcon from '../../../../public/icons/menu.svg'
-import HeartIcon from '../../../../public/icons/heart-2.svg'
+import HeartIcon from '../../../../public/icons/heart.svg'
 import UserIcon from '../../../../public/icons/user.svg'
 import CartIcon from '../../../../public/icons/cart.svg'
 import GridIcon from '../../../../public/icons/grid.svg'
@@ -51,7 +51,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
             <li>
               <IconButton className="p-3" onClick={handleFavoritesClick} disableRipple>
                 <Badge content={favoriteAmount}>
-                  <SvgIcon className="text-[28px]">
+                  <SvgIcon className="fill-transparent stroke-white text-[28px]">
                     <HeartIcon />
                   </SvgIcon>
                 </Badge>
