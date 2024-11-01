@@ -1,9 +1,7 @@
-import { useUserStore } from '@/store/user'
-
 import styles from './styles.module.scss'
 
 export function Promo() {
-  const isAuthenticated = useUserStore((state) => state.isAuthenticated)
+  const isAuthenticated = true
 
   if (isAuthenticated) return null
 
