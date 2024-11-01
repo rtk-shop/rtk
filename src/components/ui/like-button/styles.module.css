@@ -1,0 +1,23 @@
+.button {
+  color: var(--red);
+  padding: 7px;
+}
+
+.svgEL {
+  fill: transparent;
+  stroke: var(--red);
+  overflow: visible;
+  stroke-width: 1.5px;
+}
+
+.liked {
+  fill: var(--red);
+  animation: beat 250ms linear;
+}
+
+@keyframes beat {
+  50% {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+}
