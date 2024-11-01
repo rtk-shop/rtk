@@ -28,14 +28,14 @@ interface ButtonProps {
 }
 
 const button = cva(
-  'cursor-pointer inline-flex items-center justify-center leading-none font-medium py-3.5 px-7 rounded-xl  select-none transition-all',
+  'inline-flex cursor-pointer select-none items-center justify-center rounded-xl px-7 py-3.5 font-medium leading-none transition-all',
   {
     variants: {
       color: {
-        primary: 'text-white bg-black border-r-black ' + styles.primary,
+        primary: 'border-r-black bg-black text-white ' + styles.primary,
         secondary: '',
-        accept: 'text-white bg-green-light border-r-green-light ' + styles.accept,
-        danger: 'text-white bg-red-600 ' + styles.danger
+        accept: 'border-r-green-light bg-green-light text-white ' + styles.accept,
+        danger: 'bg-red-500 text-white ' + styles.danger
       },
       disabled: {
         true: 'cursor-not-allowed opacity-75'
