@@ -2,7 +2,6 @@ import { memo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/lib/constants'
-import { useCartStore } from '@/store/cart'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { Search } from './search'
@@ -23,7 +22,7 @@ interface HeaderProps {
 export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen }: HeaderProps) {
   const { t } = useTranslation('common')
 
-  const cartAmount = useCartStore((state) => state.cartAmount())
+  const cartAmount = 0
   const favoriteAmount = 0
 
   const handleCartClick = (): void => {

@@ -5,7 +5,8 @@ import { ProcessPlug } from './plug'
 import { ListSkeleton } from './list-skeleton'
 import { CartHead } from './head'
 import { CartItem, CartItemType } from '@/components/cart-item'
-import { normalizedView, useCartStore } from '@/store/cart'
+import { useCartStore } from '@/providers/cart-store-provider'
+import { normalizedView } from '@/stores/cart/store'
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
 import { useQuery } from 'urql'
@@ -38,24 +39,15 @@ export function CartInner({ onClose }: { onClose(): void }) {
   const cartItems = useCartStore((state) => state.cartItems)
   const itemsMap = normalizedView(cartItems)
 
-  const isCartEmpty = cartItems.length === 0
+  const isCartEmpty = !cartItems.length
 
   const [result] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
     query: CartProductsDocument,
+    pause: isCartEmpty,
     variables: {
       input: [...cartItems]
     }
   })
-
-  // set cache '@/apollo/cache/cart'
-
-  // setCartItems(
-  //   data.cartProducts.map((p) => ({
-  //     productId: p.id,
-  //     amount: itemsMap[p.id],
-  //     price: p.currentPrice
-  //   }))
-  // )
 
   const { data, fetching, error } = result
 

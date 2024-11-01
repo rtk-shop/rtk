@@ -5,10 +5,8 @@ import { type StoreObject } from '@apollo/client'
 const __TYPE_NAME = 'CartItem'
 
 import { getCartItemGQL, writeCartItemsGQL } from './queries'
-import { useCartStore } from '@/store/cart'
 
 export { READ_CART_ITEMS } from './queries'
-export { useCartPrice } from './hooks'
 
 export function setCartItems(data: NewCartItem[]) {
   const cacheCartData = data.map((p) => ({
@@ -47,8 +45,6 @@ export function addToCart(item: NewCartItem) {
     })
   }
   // ..else: new item will be created by "local logic" and placed into cache in <Cart />
-
-  useCartStore.getState().addItem({ productId: item.productId, amount: item.amount })
 }
 
 export function updateItemAmount(id: string, newAmount: number) {
@@ -60,8 +56,6 @@ export function updateItemAmount(id: string, newAmount: number) {
       }
     }
   })
-
-  useCartStore.getState().updateAmount(id, newAmount)
 }
 
 export function removeFromCart(id: string) {
@@ -78,8 +72,6 @@ export function removeFromCart(id: string) {
   })
 
   client.cache.evict({ id: idToRemove })
-
-  useCartStore.getState().remove(id)
 }
 
 export function clearCart() {
@@ -92,6 +84,4 @@ export function clearCart() {
   })
 
   client.cache.gc() // remove unreachable CartItem[ID] from cahche after ROOT_QUERY:cartItems
-
-  useCartStore.getState().clear()
 }

@@ -1,7 +1,7 @@
 import { CartItems } from './cart-items'
 import { Summary } from './summary'
 import { Promo } from './promo'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/providers/cart-store-provider'
 import { useCartProductsQuery } from '@/graphql/product/_gen_/cartProducts.query'
 
 import styles from './styles.module.scss'

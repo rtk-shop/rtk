@@ -1,7 +1,6 @@
 import ContentLoader from 'react-content-loader'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/helpers'
-import { useCartPrice } from '@/apollo/cache/cart'
 import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 
 import styles from './styles.module.scss'
@@ -13,7 +12,7 @@ interface SummaryProps {
 }
 
 export function Summary({ loading, submitLoading, orderCreationErr }: SummaryProps) {
-  const cartPrice = useCartPrice()
+  const cartPrice = 2300
 
   const { data } = useGlobalDataQuery()
 

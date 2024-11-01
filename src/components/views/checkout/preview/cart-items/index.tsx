@@ -1,7 +1,8 @@
 import { CartItem, type CartItemType } from '@/components/cart-item'
 import { Button } from '@/components/ui/button'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
-import { normalizedView, useCartStore } from '@/store/cart'
+import { useCartStore } from '@/providers/cart-store-provider'
+import { normalizedView } from '@/stores/cart/store'
 import { useRouter } from 'next/router'
 import { routeNames } from '@/lib/constants'
 import { clearCart } from '@/apollo/cache/cart'

@@ -10,7 +10,7 @@ import { usePageState } from './model/usePageState'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/providers/cart-store-provider'
 
 import styles from './styles.module.scss'
 import { useCreateOrderMutation } from '@/graphql/order/_gen_/create.mutation'
