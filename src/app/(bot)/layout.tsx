@@ -1,11 +1,16 @@
 import { type ReactNode } from 'react'
 import localFont from 'next/font/local'
+import { Toaster } from 'sonner'
 import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { BotLayout } from '@/components/layout/bot-layout'
 import { UrqlProvider } from '@/providers/urql'
 import { CartStoreProvider } from '@/providers/cart-store-provider'
 import { FavoriteStoreProvider } from '@/providers/favorite-store-provider'
+
+// todo: connect it
+// import Modal from 'react-modal'
+// Modal.setAppElement('#__next')
 
 import '@/styles/globals.scss'
 
@@ -38,6 +43,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <FavoriteStoreProvider>
               <CartStoreProvider>
                 <BotLayout>{children}</BotLayout>
+                <Toaster position="bottom-right" richColors expand />
               </CartStoreProvider>
             </FavoriteStoreProvider>
           </UrqlProvider>
