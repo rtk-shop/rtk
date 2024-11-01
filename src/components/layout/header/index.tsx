@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { routeNames } from '@/lib/constants'
 import { useCartStore } from '@/store/cart'
-import { useFavoriteStore } from '@/store/favorite'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { Search } from './search'
@@ -25,7 +24,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
   const { t } = useTranslation('common')
 
   const cartAmount = useCartStore((state) => state.cartAmount())
-  const favoriteAmount = useFavoriteStore((state) => state.amount())
+  const favoriteAmount = 0
 
   const handleCartClick = (): void => {
     onCartOpen()
