@@ -16,7 +16,7 @@ interface IconButtonProps {
 }
 
 const button = cva(
-  'border-none text-inherit cursor-pointer m-0 inline-flex outline-0 relative items-center select-none align-middle justify-center no-underline bg-transparent p-3 overflow-visible rounded-full text-center text-2xl flex-initial'
+  'relative m-0 inline-flex flex-initial cursor-pointer select-none items-center justify-center overflow-visible rounded-full border-none bg-transparent p-3 text-center align-middle text-2xl text-inherit no-underline outline-0'
 )
 
 export function IconButton({
@@ -63,7 +63,7 @@ export function IconButton({
       {...otherProps}
     >
       {loading ? (
-        <div className="size-1e flex justify-center border-r-black">
+        <div className="flex size-1e justify-center border-r-black">
           <Loader adaptive />
         </div>
       ) : (
