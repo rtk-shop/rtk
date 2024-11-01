@@ -4,24 +4,22 @@ import ShareIcon from '../../../../../../public/icons/share.svg'
 import { Button } from '@/components/ui/button'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { LikeButton } from '@/components/ui/like-button'
-import { useFavoriteStore } from '@/store/favorite'
+import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
 interface ControlsProps {
   productID: string
 }
 
 export function Controls({ productID }: ControlsProps) {
-  const favoriteItems = useFavoriteStore((state) => state.favoriteItems)
-  const addToFavorite = useFavoriteStore((state) => state.add)
-  const removeFavorite = useFavoriteStore((state) => state.remove)
+  const { products, add, remove } = useFavoriteStore((state) => state)
 
-  const isLiked = favoriteItems.includes(productID)
+  const isLiked = products.includes(productID)
 
   const handleLikeClick = (): void => {
     if (isLiked) {
-      removeFavorite(productID)
+      remove(productID)
     } else {
-      addToFavorite(productID)
+      add(productID)
     }
   }
 

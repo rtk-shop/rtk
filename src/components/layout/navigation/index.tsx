@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { routeNames } from '@/lib/constants'
-// import { useFavoriteStore } from '@/store/favorite'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { SvgIcon } from '@/components/ui/svg-icon'
@@ -11,6 +10,7 @@ import CartIcon from '../../../../public/icons/cart.svg'
 import GridIcon from '../../../../public/icons/grid.svg'
 import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/providers/cart-store-provider'
+import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
 interface NavigationProps {
   onSidebarOpen(): void
@@ -20,10 +20,8 @@ interface NavigationProps {
 export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }: NavigationProps) {
   const router = useRouter()
 
-  const { cartAmount } = useCartStore((state) => state)
-
-  // const favoriteAmount = useFavoriteStore((state) => state.amount())
-  const favoriteAmount = 0
+  const cartAmount = useCartStore((state) => state.cartAmount())
+  const favoriteAmount = useFavoriteStore((state) => state.amount())
 
   const handleFavoritesClick = () => {
     console.log('favorite click')
@@ -62,7 +60,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
             {/*  */}
             <li>
               <IconButton onClick={onCartOpen} disableRipple>
-                <Badge content={cartAmount()}>
+                <Badge content={cartAmount}>
                   <SvgIcon className="stroke-white text-[28px]">
                     <CartIcon />
                   </SvgIcon>

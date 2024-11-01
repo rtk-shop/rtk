@@ -9,7 +9,7 @@ import { SvgIcon } from '../ui/svg-icon'
 import TrashIcon from '../../../public/icons/trash.svg'
 import { routeNames } from '@/lib/constants'
 import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
-import { useFavoriteStore } from '@/store/favorite'
+import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
 import useTranslation from 'next-translate/useTranslation'
 

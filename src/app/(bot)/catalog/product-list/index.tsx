@@ -2,7 +2,7 @@ import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
 import { ProductItem } from '@/components/product-item'
 import { Pagination } from '@/components/ui/pagination'
-import { useFavoriteStore } from '@/store/favorite'
+import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
 
 interface ProductsProps {
@@ -33,7 +33,7 @@ const pagination = cva('py-4', {
 })
 
 export function ProductList({ totalPages, currentPage, products, onReset }: ProductsProps) {
-  const favoriteItems = useFavoriteStore((state) => state.favoriteItems)
+  const favoriteItems = useFavoriteStore((state) => state.products)
 
   const handlePagination = (page: number) => {
     console.log(`go page ${page}`)
