@@ -5,7 +5,6 @@ import { useCartStore } from '@/providers/cart-store-provider'
 import { normalizedView } from '@/stores/cart/store'
 import { useRouter } from 'next/router'
 import { routeNames } from '@/lib/constants'
-import { clearCart } from '@/apollo/cache/cart'
 
 import styles from './styles.module.scss'
 
@@ -21,7 +20,7 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
   const itemsMap = normalizedView(cartItems)
 
   const handleClearAllClick = (): void => {
-    clearCart()
+    // clearCart() in store
     router.replace(routeNames.root)
   }
 

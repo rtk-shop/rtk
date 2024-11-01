@@ -5,7 +5,6 @@ import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
 import { formatPrice } from '@/lib/helpers'
-import { updateItemAmount, removeFromCart } from '@/apollo/cache/cart'
 import { routeNames } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 
@@ -28,11 +27,11 @@ export function CartItem({ product, amount }: CartItemProps) {
   const { id, slug, title, preview, currentPrice } = product
 
   const handleAmountChange = (_: string, n: number): void => {
-    updateItemAmount(id, n)
+    // updateItemAmount(id, n)
   }
 
   const handleProductRemove = () => {
-    removeFromCart(id)
+    // removeFromCart(id)
   }
 
   return (
