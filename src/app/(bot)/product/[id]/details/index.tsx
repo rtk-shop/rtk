@@ -1,7 +1,7 @@
 import { cva } from 'cva'
 import { Delivery } from './delivery'
 import { SizeGuide } from '@/components/ui/size-guide'
-// import { SubControls } from './sub-controls'
+import { Controls } from './controls'
 import { formatPrice } from '@/lib/helpers'
 import { AddToCartButton } from './add-to-cart'
 
@@ -50,7 +50,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
       {/*  */}
       <AddToCartButton productID={id} inStock={inStock} />
       {/*  */}
-      {/* <SubControls productId={id} /> */}
+      <Controls productID={id} />
       <Delivery />
     </section>
   )
