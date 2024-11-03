@@ -6,7 +6,7 @@ import { useCartStore } from '@/providers/cart-store-provider'
 import CartIcon from '../../../../../../public/icons/cart.svg'
 
 export function AddToCartButton({ productID, inStock }: { productID: string; inStock: boolean }) {
-  const { addItem } = useCartStore((state) => state)
+  const [{ addItem }] = useCartStore((state) => state)
 
   const handleClick = () => {
     addItem({

@@ -1,5 +1,5 @@
-import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { createStore } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type CartItem = {
   productId: string
@@ -42,7 +42,7 @@ export const normalizedView = (cartItems: CartItem[]) => {
 }
 
 export const createCartStore = (initState: CartState = defaultInitState) => {
-  return create<CartStore>()(
+  return createStore<CartStore>()(
     persist(
       (set, get) => ({
         ...initState,
@@ -87,7 +87,6 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
       }),
       {
         name: '_cart',
-        storage: createJSONStorage(() => localStorage),
         skipHydration: true
       }
     )

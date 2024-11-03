@@ -20,7 +20,7 @@ interface NavigationProps {
 export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }: NavigationProps) {
   const router = useRouter()
 
-  const cartAmount = useCartStore((state) => state.cartAmount())
+  const [cartAmount] = useCartStore((state) => state.cartAmount())
   const favoriteAmount = useFavoriteStore((state) => state.amount())
 
   const handleFavoritesClick = () => {

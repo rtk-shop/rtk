@@ -36,7 +36,7 @@ export function CartInner({ onClose }: { onClose(): void }) {
   const router = useRouter()
   const t = useTranslations('Common')
 
-  const cartItems = useCartStore((state) => state.cartItems)
+  const [cartItems] = useCartStore((state) => state.cartItems)
   const itemsMap = normalizedView(cartItems)
 
   const isCartEmpty = !cartItems.length

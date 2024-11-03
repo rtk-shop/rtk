@@ -22,12 +22,14 @@ export const CartStoreProvider = ({ children }: CartStoreProviderProps) => {
   return <CartStoreContext.Provider value={storeRef.current}>{children}</CartStoreContext.Provider>
 }
 
-export const useCartStore = <T,>(selector: (store: CartStore) => T): T => {
+export const useCartStore = <T,>(selector: (store: CartStore) => T): [T, CartStoreApi] => {
   const cartStoreContext = useContext(CartStoreContext)
 
   if (!cartStoreContext) {
     throw new Error(`useCartStore must be used within CartStoreProvider`)
   }
 
-  return useStore(cartStoreContext, selector)
+  const store = useStore(cartStoreContext, selector)
+
+  return [store, cartStoreContext]
 }
