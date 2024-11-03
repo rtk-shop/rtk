@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from './skeleton'
 import { formatPrice } from '@/lib/helpers'
-import useTranslation from 'next-translate/useTranslation'
+import { useTranslations } from 'next-intl'
 
 interface SummaryProps {
   currency: number
@@ -10,7 +10,7 @@ interface SummaryProps {
 }
 
 export function Summary({ loading, currency, onCheckout }: SummaryProps) {
-  const { t } = useTranslation('common')
+  const t = useTranslations('Common')
   const cartPrice = 2300
 
   const handleButtonClick = (): void => {

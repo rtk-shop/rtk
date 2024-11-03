@@ -15,7 +15,7 @@ import {
   CartProductsQuery,
   CartProductsQueryVariables
 } from '@/lib/api/graphql/_gen_/cartProducts.query'
-import useTranslation from 'next-translate/useTranslation'
+import { useTranslations } from 'next-intl'
 
 interface CartProps {
   isOpen: boolean
@@ -34,7 +34,7 @@ export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
 
 export function CartInner({ onClose }: { onClose(): void }) {
   const router = useRouter()
-  const { t } = useTranslation('common')
+  const t = useTranslations('Common')
 
   const cartItems = useCartStore((state) => state.cartItems)
   const itemsMap = normalizedView(cartItems)
@@ -66,7 +66,7 @@ export function CartInner({ onClose }: { onClose(): void }) {
 
   return (
     <div className="flex h-full flex-col">
-      <CartHead onCartClose={onClose} />
+      <CartHead headText={t('cart.topControls.title')} onCartClose={onClose} />
       {fetching ? (
         <ListSkeleton itemsAmount={cartItems.length} />
       ) : (
