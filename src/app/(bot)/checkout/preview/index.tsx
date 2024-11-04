@@ -2,14 +2,12 @@ import { CartItems } from './cart-items'
 import { Summary } from './summary'
 import { Promo } from './promo'
 import { useCartStore } from '@/providers/cart-store-provider'
-import styles from './styles.module.scss'
 import { useQuery } from 'urql'
 import {
   CartProductsQuery,
   CartProductsQueryVariables,
   CartProductsDocument
 } from '@/lib/api/graphql/_gen_/cartProducts.query'
-import { useEffect } from 'react'
 
 interface PreviewProps {
   submitLoading: boolean
@@ -19,9 +17,8 @@ interface PreviewProps {
 export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
   const [cartItems] = useCartStore((state) => state.cartItems)
 
-  const [result, getCart] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
+  const [result] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
     query: CartProductsDocument,
-    // pause: isCartEmpty,
     pause: !cartItems.length,
     variables: {
       input: [...cartItems]
@@ -38,8 +35,8 @@ export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
   }
 
   return (
-    <section className={styles.container}>
-      <div className={styles.wrapper}>
+    <section className="pt-4">
+      <div className="rounded-lg bg-white px-2.5">
         <CartItems loading={loading} cartProducts={data?.cartProducts || []} />
         <Summary
           loading={loading}

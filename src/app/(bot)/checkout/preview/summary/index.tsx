@@ -20,8 +20,8 @@ export function Summary({ loading, submitLoading, orderCreationErr }: SummaryPro
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.info}>
+    <div className="px-2.5 pb-2 pt-4">
+      <div className="mb-4">
         {loading ? (
           <ContentLoader
             backgroundColor="#eeeeee"
@@ -34,31 +34,23 @@ export function Summary({ loading, submitLoading, orderCreationErr }: SummaryPro
             <rect x="71%" y="0" rx="6" ry="6" width="120" height="27" />
           </ContentLoader>
         ) : (
-          <div className={styles.totalPrice}>
-            <b>Итого:</b>
-            <span>
-              <span>{formatPrice(cartPrice)} $&nbsp;</span>
-              {data && (
-                <span className={styles.uahPrice}>
-                  • {formatPrice(cartPrice * data.globalData.usdCourse)} грн
-                </span>
-              )}
-            </span>
-          </div>
+          <p className="flex items-center justify-between text-lg font-medium leading-none">
+            <span>Итого:</span>
+            <span>{formatPrice(cartPrice)} грн</span>
+          </p>
         )}
       </div>
       <Button fullWidth color="accept" type="submit" loading={submitLoading || loading}>
         Подтвердить заказ
       </Button>
       {orderCreationErr && (
-        <div className={styles.error}>
-          <b>Внимание!</b>
-          <p>Произошла ошибка, повторите попытку позже</p>
+        <div>
+          <p>shwow error</p>
         </div>
       )}
-      <div className={styles.conditions}>
-        <p>Подтверждая заказ, я принимаю условия пользовательского соглашения</p>
-      </div>
+      <p className="mt-2 px-5 text-center text-[14px] leading-none text-gray-400">
+        Подтверждая заказ, я принимаю условия пользовательского соглашения
+      </p>
     </div>
   )
 }

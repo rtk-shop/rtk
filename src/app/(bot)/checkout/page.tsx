@@ -8,7 +8,7 @@ import { usePageState } from './model/usePageState'
 import { useCallback } from 'react'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { OrderSuccessModal } from './modals/order-success'
+// import { OrderSuccessModal } from './modals/order-success'
 
 export default function Checkout() {
   const [state, dispatch] = usePageState({
@@ -64,10 +64,10 @@ export default function Checkout() {
   }
 
   return (
-    <div className="bg-gray-100">
+    <div className="mb-16 min-h-dvh bg-gray-100">
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
-          <div className="px-2.5 py-5">
+          <div className="px-2.5 py-5 pb-3">
             <CustomerInfo
               isEdit={state.isInfoOpen}
               onEdit={handleInfoEditOpen}
