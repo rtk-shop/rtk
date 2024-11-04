@@ -1,7 +1,0 @@
-mutation SetUsdCourse($value: Float!) {
-  setUsdCourse(input: $value) {
-    id
-    usdCourse
-    updatedAt
-  }
-}

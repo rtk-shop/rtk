@@ -1,7 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import clsx from 'clsx'
 import { Button } from '@/components/ui/button'
-import { useSetUsdCourseMutation } from '@/graphql/global/_gen_/setUsdCourse.mutation'
 
 import styles from './styles.module.scss'
 
@@ -18,7 +17,8 @@ export function EditMode({ onExit }: EditModeProps) {
   const [newCurrency, setNewCurrency] = useState(0)
   const [error, setError] = useState('')
 
-  const [setCourse, { loading }] = useSetUsdCourseMutation({
+  /*
+  const [setCourse, { loading }] = setCourse({
     variables: {
       value: newCurrency
     },
@@ -30,6 +30,10 @@ export function EditMode({ onExit }: EditModeProps) {
       setError('Ошибка, не удалось обновить')
     }
   })
+  */
+
+  const setCourse = () => console.log('set usd course')
+  const loading = false
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = +event.target.value

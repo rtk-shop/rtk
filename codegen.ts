@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   documents: './src/lib/api/graphql/**/*.gql',
   ignoreNoDocuments: true,
   generates: {
-    'src/graphql/types.ts': {
+    'src/lib/api/graphql/types.ts': {
       plugins: ['typescript', 'fragment-matcher'],
       config: {
         constEnums: true
@@ -16,7 +16,7 @@ const config: CodegenConfig = {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.ts',
-        baseTypesPath: 'graphql/types.ts',
+        baseTypesPath: 'lib/api/graphql/types',
         folder: '_gen_'
       },
       plugins: ['typescript-operations', 'typescript-urql'],

@@ -1,7 +1,0 @@
-query GlobalData {
-  globalData {
-    id
-    usdCourse
-    updatedAt
-  }
-}

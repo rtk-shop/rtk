@@ -3,7 +3,6 @@ import { Loader } from '@/components/ui/loader'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@/lib/helpers'
-import { useGlobalDataQuery } from '@/graphql/global/_gen_/globalData.query'
 import { EditMode } from './edit-mode'
 import EditIcon from '../../../../../public/icons/edit.svg'
 import WarningIcon from '../../../../../public/icons/warning.svg'
@@ -13,7 +12,16 @@ import styles from './styles.module.scss'
 export function Currency() {
   const [editMode, setEditMode] = useState(false)
 
-  const { data, error, loading } = useGlobalDataQuery()
+  const data = {
+    globalData: {
+      id: '1',
+      usdCourse: 41.7,
+      updatedAt: new Date().toISOString()
+    }
+  }
+
+  const error = null
+  const loading = false
 
   if (error) {
     return (
