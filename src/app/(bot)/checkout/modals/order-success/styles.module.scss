@@ -1,0 +1,99 @@
+.container {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+
+  @include _minMD {
+    padding: 0 50px;
+    height: 570px;
+  }
+
+  @include _minLG {
+    display: flex;
+    align-items: center;
+  }
+
+  @include _minLaptop {
+    width: 900px;
+    padding: 0;
+  }
+}
+
+.imageBox {
+  padding-top: 75px;
+  @include _minLG {
+    padding-top: 0;
+    margin-right: 50px;
+  }
+  @include _minLaptop {
+    margin-right: 0;
+    flex-basis: 50%;
+  }
+}
+
+.image {
+  width: 133px;
+  margin: 0 auto;
+  @include _minLG {
+    width: 175px;
+  }
+}
+
+.info {
+  padding: 30px 10px 0 10px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.subTitle {
+  width: 240px;
+  margin: 0 auto;
+  text-align: center;
+  & p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 15px;
+    color: #676767; // dark #e7e7e7
+  }
+}
+
+.infoList {
+  margin: 0;
+  padding: 0;
+  padding-top: 30px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  & p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 20px;
+    max-width: 275px;
+  }
+}
+
+.buttonWrapper {
+  width: 130px;
+  margin: 0 auto;
+  padding-top: 21px;
+}
+
+.linkToProfile {
+  font-weight: 500;
+  color: var(--green-light);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

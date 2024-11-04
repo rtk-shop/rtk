@@ -18,6 +18,15 @@ module.exports = {
       },
       borderWidth: {
         6: '6px'
+      },
+      transitionProperty: {
+        expand: 'height, opacity'
+      },
+      transitionDuration: {
+        expand: '400ms, 200ms'
+      },
+      transitionDelay: {
+        expand: '0ms, 220ms'
       }
     },
     screens: {
