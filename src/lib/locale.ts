@@ -13,6 +13,6 @@ export async function getUserLocale() {
 
 export async function setUserLocale(locale: Locale) {
   cookies().set(COOKIE_NAME, locale, {
-    maxAge: 30 * 24 * 60 * 60 // 30 days
+    maxAge: 90 * 24 * 60 * 60 // 30 days
   })
 }

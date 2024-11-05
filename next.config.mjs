@@ -30,10 +30,6 @@ const nextConfig = {
         hostname: 'res.cloudinary.com'
       }
     ]
-  },
-  i18n: {
-    defaultLocale: 'ru',
-    locales: ['ru', 'ua']
   }
 }
 

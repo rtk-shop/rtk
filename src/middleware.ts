@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { decrypt, refreshSession, setSessionCookie } from '@/lib/session'
 import { cookies } from 'next/headers'
-import cookieLib from 'cookie'
 import { routeNames } from '@/lib/constants'
+import { parse } from 'cookie'
 
 const protectedRoutes = [routeNames.dashboard, routeNames.product]
 const publicRoutes = [routeNames.auth, routeNames.root]
@@ -32,22 +32,24 @@ export default async function middleware(req: NextRequest) {
 
     const res = NextResponse.next()
 
-    try {
-      const uglyCookie = cookieLib.parse(refreshAuthData.refreshCookie)
+    const uglyCookie = parse(refreshAuthData.refreshCookie) as { rfr: string; 'Max-Age': string }
 
-      setSessionCookie(res, refreshAuthData.accessToken)
-      res.cookies.set('rfr', uglyCookie.rfr, {
-        maxAge: +uglyCookie['Max-Age'],
-        path: uglyCookie['Path'],
-        sameSite: 'lax',
-        httpOnly: true
-      })
-
-      return res
-    } catch (error) {
+    if (!uglyCookie) {
       res.cookies.delete('rfr')
       return res
     }
+
+    setSessionCookie(res, refreshAuthData.accessToken)
+    res.cookies.set({
+      name: 'rfr',
+      value: uglyCookie.rfr,
+      maxAge: +uglyCookie['Max-Age'],
+      sameSite: 'lax',
+      httpOnly: true,
+      path: '/'
+    })
+
+    return res
   }
 
   // 4. Redirect to /login if the user is not authenticated
