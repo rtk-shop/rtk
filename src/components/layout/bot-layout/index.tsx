@@ -36,11 +36,11 @@ export function BotLayout({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <main>
+    <div>
       <Cart isOpen={isCartOpen} onClose={handleCartClose} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseDrawer} />
       <Navigation onCartOpen={handleCartOpen} onSidebarOpen={handleOpenDrawer} />
       {children}
-    </main>
+    </div>
   )
 }
