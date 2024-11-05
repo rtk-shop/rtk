@@ -11,7 +11,7 @@ interface ControlsProps {
 }
 
 export function Controls({ productID }: ControlsProps) {
-  const { products, add, remove } = useFavoriteStore((state) => state)
+  const [{ products, add, remove }] = useFavoriteStore((state) => state)
 
   const isLiked = products.includes(productID)
 

@@ -33,7 +33,7 @@ const pagination = cva('py-4', {
 })
 
 export function ProductList({ totalPages, currentPage, products, onReset }: ProductsProps) {
-  const favoriteItems = useFavoriteStore((state) => state.products)
+  const [favoriteItems] = useFavoriteStore((state) => state.products)
 
   const handlePagination = (page: number) => {
     console.log(`go page ${page}`)

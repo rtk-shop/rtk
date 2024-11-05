@@ -26,12 +26,16 @@ export const FavoriteStoreProvider = ({ children }: FavoriteStoreProviderProps) 
   )
 }
 
-export const useFavoriteStore = <T,>(selector: (store: FavoriteStore) => T): T => {
+export const useFavoriteStore = <T,>(
+  selector: (store: FavoriteStore) => T
+): [T, FavoriteStoreApi] => {
   const favoriteStoreContext = useContext(FavoriteStoreContext)
 
   if (!favoriteStoreContext) {
     throw new Error(`useFavoriteStore must be used within FavoriteStoreProvider`)
   }
 
-  return useStore(favoriteStoreContext, selector)
+  const store = useStore(favoriteStoreContext, selector)
+
+  return [store, favoriteStoreContext]
 }

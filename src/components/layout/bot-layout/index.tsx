@@ -5,17 +5,20 @@ import { Navigation } from '@/components/layout/navigation'
 import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
 import { useCartStore } from '@/providers/cart-store-provider'
+import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
 export function BotLayout({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
 
-  const [_, storeApi] = useCartStore((state) => state)
+  const [, storeApi] = useCartStore((state) => state)
+  const [, favoriteApi] = useFavoriteStore((state) => state)
 
   // INFO: I'll keep persistent client state
   // until it get implemented on back-end
   useEffect(() => {
     storeApi.persist.rehydrate()
+    favoriteApi.persist.rehydrate()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
