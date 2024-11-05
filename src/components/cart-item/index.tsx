@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import TrashIcon from '../../../public/icons/trash.svg'
-import { SvgIcon } from '../ui/svg-icon'
+import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
 import { formatPrice } from '@/lib/helpers'
 import { routeNames } from '@/lib/constants'
-import useTranslation from 'next-translate/useTranslation'
+import { useCartStore } from '@/providers/cart-store-provider'
+import { useTranslations } from 'next-intl'
 
 export type CartItemType = {
   id: string
@@ -22,16 +23,18 @@ interface CartItemProps {
 }
 
 export function CartItem({ product, amount }: CartItemProps) {
-  const { t } = useTranslation('common')
+  const t = useTranslations('Common')
 
-  const { id, slug, title, preview, currentPrice } = product
+  const [{ remove, updateAmount }] = useCartStore((state) => state)
+
+  const { id, title, preview, currentPrice } = product
 
   const handleAmountChange = (_: string, n: number): void => {
-    // updateItemAmount(id, n)
+    updateAmount(id, n)
   }
 
   const handleProductRemove = () => {
-    // removeFromCart(id)
+    remove(id)
   }
 
   return (
@@ -50,7 +53,7 @@ export function CartItem({ product, amount }: CartItemProps) {
           {title}
         </Link>
         <span className="text-[14px] font-medium text-gray-500">
-          {t('price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;$
+          {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;$
         </span>
         <p className="text-[15px] font-semibold leading-none">
           {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;$
@@ -60,7 +63,6 @@ export function CartItem({ product, amount }: CartItemProps) {
           <IconButton
             disableRipple
             onClick={handleProductRemove}
-            aria-label={`Удалить "${title}"`}
             className="rounded-lg bg-gray-100 fill-gray-400 px-3 text-lg hover:fill-black"
           >
             <SvgIcon>
