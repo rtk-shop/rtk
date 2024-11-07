@@ -1,4 +1,4 @@
-import { TextInput } from '@/components/ui/text-input'
+import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { Button } from '@/components/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -42,14 +42,14 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
     <form onSubmit={handleSubmit(onSubmit)} className="m-auto max-w-xl">
       <h1 className="text-3xl font-medium">{t('signUp.title')}</h1>
       <p className="mb-5 text-neutral-400 lg:mb-6">{t('signUp.subTitle')}</p>
-      <TextInput name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
+      <Input name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
       <PhoneInput
         name="phone"
         label={t('signUp.fields.phone')}
         setValue={setValue}
         errors={errors}
       />
-      <TextInput
+      <Input
         name="password"
         type="password"
         label={t('signUp.fields.password')}
@@ -58,7 +58,7 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
       />
       <div className="flex justify-end">
         <span className="mr-4 mt-3 font-medium">{t('signUp.fields.code')}</span>
-        <TextInput name="code" type="number" register={register} errors={errors} />
+        <Input name="code" type="number" register={register} errors={errors} />
       </div>
       <Button fullWidth type="submit" loading={loading} className="mt-4">
         {t('signUp.button')}

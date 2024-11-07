@@ -1,7 +1,7 @@
 import { parse } from 'valibot'
 import { StepTitle } from './common/step-title'
 import { Button } from '@/components/ui/button'
-import { TextInput } from '@/components/ui/text-input'
+import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { useFormContext, useWatch } from 'react-hook-form'
 import { customerInfoSchema } from './model/validation-schema'
@@ -54,22 +54,16 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
         <div className="px-4">
           <ul>
             <li>
-              <TextInput name="name" label="Имя" register={register} errors={errors} />
+              <Input name="name" label="Имя" register={register} errors={errors} />
             </li>
             <li>
-              <TextInput name="surname" label="Фамилия" register={register} errors={errors} />
+              <Input name="surname" label="Фамилия" register={register} errors={errors} />
             </li>
             <li>
               <PhoneInput name="phone" label="Телефон" errors={errors} setValue={setValue} />
             </li>
             <li>
-              <TextInput
-                name="email"
-                type="email"
-                label="E-mail"
-                register={register}
-                errors={errors}
-              />
+              <Input name="email" type="email" label="E-mail" register={register} errors={errors} />
             </li>
           </ul>
           <Button color="accept" fullWidth disabled={!isValid} onClick={handleNextClick}>

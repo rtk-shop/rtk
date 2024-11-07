@@ -1,4 +1,4 @@
-import { TextInput } from '@/components/ui/text-input'
+import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/router'
@@ -56,7 +56,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
         setValue={setValue}
         errors={errors}
       />
-      <TextInput
+      <Input
         name="password"
         type="password"
         label={t('logIn.fields.password')}
