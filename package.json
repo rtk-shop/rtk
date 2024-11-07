@@ -21,6 +21,7 @@
     "graphql": "^16.9.0",
     "jose": "^5.9.6",
     "keen-slider": "^6.8.6",
+    "lucide-react": "^0.454.0",
     "next": "^14.2.16",
     "next-intl": "^3.24.0",
     "next-translate": "^2.6.2",
@@ -34,6 +35,7 @@
     "react-select": "^5.8.0",
     "react-virtualized": "^9.22.5",
     "sonner": "^1.5.0",
+    "tailwindcss-animate": "^1.0.7",
     "urql": "^4.2.1",
     "valibot": "^0.42.1",
     "zustand": "^5.0.1"

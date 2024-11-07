@@ -33,7 +33,8 @@ a {
 }
 
 .svg-icon {
-  // font-size: 1.5rem; // TODO: broken inheritance
+  /* font-size: 1.5rem; */
+  /* TODO: broken inheritance */
   width: 1em;
   height: 1em;
   user-select: none;
@@ -113,10 +114,16 @@ a {
   z-index: 40;
 }
 
-// info: layout shift fix for one per view slide
-// https://github.com/rcbyr/keen-slider/issues/146#issuecomment-970380029
+/* info: layout shift fix for one per view slide */
+/* https://github.com/rcbyr/keen-slider/issues/146#issuecomment-970380029 */
 .keen-slider__slide {
   min-width: 100%;
   max-width: 100%;
   transform: translate3d(0, 0, 0);
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }
