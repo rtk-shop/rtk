@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react'
 import { cva } from 'cva'
+import { ErrorMessage } from './error-message'
 import { UseFormRegister, Path, FieldValues, FieldErrors } from 'react-hook-form'
 
 export interface InputProps<T extends FieldValues> {
@@ -10,7 +11,6 @@ export interface InputProps<T extends FieldValues> {
   maxLength?: number
   placeholder?: string
   autoComplete?: string
-  withoutError?: boolean
   onChange?(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void
   register: UseFormRegister<T>
   errors: FieldErrors
@@ -27,25 +27,16 @@ const inpEl = cva(
   }
 )
 
-const errorMessage = cva('h-6 pl-2.5 text-[13px] font-medium leading-none text-red-600', {
-  variants: {
-    show: {
-      true: 'duration-300 animate-in fade-in'
-    }
-  }
-})
-
 export function Input<T extends FieldValues>({
   name,
   type = 'text',
   autoComplete = 'off',
-  withoutError = false,
   errors,
   label,
   register,
   ...restProps
 }: InputProps<T>) {
-  const isErr = errors && errors[name]
+  const isErr = !!(errors && errors[name])
   const message = isErr && (errors[name]?.message as string)
 
   return (
@@ -56,11 +47,11 @@ export function Input<T extends FieldValues>({
       <input
         type={type}
         autoComplete={autoComplete}
-        className={inpEl({ error: !!isErr })}
+        className={inpEl({ error: isErr })}
         {...register(name)}
         {...restProps}
       />
-      {!withoutError && <p className={errorMessage({ show: !!isErr })}>{message}</p>}
+      <ErrorMessage show={isErr}>{message}</ErrorMessage>
     </div>
   )
 }
