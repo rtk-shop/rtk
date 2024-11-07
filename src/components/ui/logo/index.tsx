@@ -1,5 +1,3 @@
-import React from 'react'
-
 export function LogoImage() {
   return (
     <svg viewBox="0 0 75 41">

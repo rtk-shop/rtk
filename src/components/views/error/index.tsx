@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import ArrowIcon from '../../../../public/icons/expand-arrow.svg'
 import { routeNames } from '@/lib/constants'
@@ -8,8 +7,6 @@ import styles from './styles.module.scss'
 
 export function ErrorView({ kind }: { kind: '404' | '500' }) {
   const { t, lang } = useTranslation('common')
-
-  console.log(lang)
 
   const title =
     kind === '404' ? (
