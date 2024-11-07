@@ -23,7 +23,7 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
   } = useFormContext<CustomerInfoValues>()
 
   const values = useWatch({
-    name: ['name', 'surname', 'phone', 'email']
+    name: ['name', 'surname', 'phone']
   })
 
   let isValid = false
@@ -32,8 +32,7 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
     parse(customerInfoSchema, {
       name: values[0],
       surname: values[1],
-      phone: values[2],
-      email: values[3]
+      phone: values[2]
     })
     isValid = true
   } catch (error) {
@@ -49,8 +48,7 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
       <StepTitle step={1} isEdit={isEdit} onEdit={onEdit} valid={isValid}>
         Контактная информация
       </StepTitle>
-
-      <Expander open={isEdit} openHeightPx={470}>
+      <Expander open={isEdit} openHeightPx={363}>
         <div className="px-4">
           <ul>
             <li>
@@ -61,9 +59,6 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
             </li>
             <li>
               <PhoneInput name="phone" label="Телефон" errors={errors} setValue={setValue} />
-            </li>
-            <li>
-              <Input name="email" type="email" label="E-mail" register={register} errors={errors} />
             </li>
           </ul>
           <Button color="accept" fullWidth disabled={!isValid} onClick={handleNextClick}>

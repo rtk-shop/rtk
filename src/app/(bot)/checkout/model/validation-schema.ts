@@ -1,52 +1,37 @@
-// to do make correct import
+import * as v from 'valibot'
 
-import {
-  InferOutput,
-  object,
-  string,
-  minLength,
-  maxLength,
-  trim,
-  email,
-  length,
-  pipe
-} from 'valibot'
-
-export const customerInfoSchema = object({
-  name: pipe(
-    string(),
-    trim(),
-    minLength(1, '* минимум 1 символ'),
-    maxLength(30, '* максимум 30 символов')
+export const customerInfoSchema = v.object({
+  name: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty('common:validation.requiredField'),
+    v.maxLength(70, 'common:validation.maxLength70')
   ),
-  surname: pipe(
-    string(),
-    trim(),
-    minLength(1, '* минимум 1 символ'),
-    maxLength(30, '* максимум 30 символов')
+  surname: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty('common:validation.requiredField'),
+    v.maxLength(70, 'common:validation.maxLength70')
   ),
-  email: pipe(
-    string(),
-    trim(),
-    minLength(3, '* введите email'),
-    email('The email is badly formatted.'),
-    maxLength(70, '* максимум 70 символов')
-  ),
-  phone: pipe(string(), trim()) // todo: is really 10 symbols?
-  // phone: pipe(string(), trim(), length(10, 'The array must contain 10 numbers.'))
+  // phone: v.pipe(v.string(), v.trim(), v.length(9, 'common:validation.wrongPhone'))
+  phone: v.pipe(v.string(), v.trim())
 })
 
-export const deliverySchema = object({
-  supplier: string(),
-  cityName: pipe(string(), minLength(1)),
-  postOfficeName: string()
-})
+export const deliverySchema = v.pipe(
+  v.object({
+    supplier: v.picklist(['nova', 'ukr']),
+    cityName: v.pipe(v.string(), v.minLength(1)),
+    postOfficeName: v.string(),
+    patronymic: v.optional(v.string())
+  }),
+  v.forward(
+    v.check((input) => input.supplier !== 'ukr', 'CUSTOM'),
+    ['patronymic']
+  )
+)
 
-export const validationSchema = object({
-  ...customerInfoSchema.entries,
-  ...deliverySchema.entries
-})
+export const validationSchema = v.intersect([customerInfoSchema, deliverySchema])
 
-export type FormValues = InferOutput<typeof validationSchema>
-export type CustomerInfoValues = InferOutput<typeof customerInfoSchema>
-export type DeliveryValues = InferOutput<typeof deliverySchema>
+export type FormValues = v.InferOutput<typeof validationSchema>
+export type CustomerInfoValues = v.InferOutput<typeof customerInfoSchema>
+export type DeliveryValues = v.InferOutput<typeof deliverySchema>
