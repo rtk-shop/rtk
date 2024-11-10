@@ -64,6 +64,9 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
     return <ProcessPlug text={t('cart.errorMsg')} onClose={onClose} />
   }
 
+  const cartPrice =
+    data?.cartProducts.reduce((acc, p) => p.currentPrice * itemsMap[p.id] + acc, 0) || 0
+
   return (
     <div className="flex h-full flex-col">
       <CartHead headText={t('cart.topControls.title')} onCartClose={onClose} />
@@ -76,7 +79,7 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
           ))}
         </ul>
       )}
-      <Summary loading={fetching} currency={41.2} onCheckout={handleCheckout} />
+      <Summary loading={fetching} totalSum={cartPrice} onCheckout={handleCheckout} />
     </div>
   )
 }

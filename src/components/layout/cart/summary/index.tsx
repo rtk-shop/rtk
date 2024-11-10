@@ -4,28 +4,26 @@ import { formatPrice } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
 
 interface SummaryProps {
-  currency: number
   loading: boolean
+  totalSum: number
   onCheckout(): void
 }
 
-export function Summary({ loading, currency, onCheckout }: SummaryProps) {
+export function Summary({ loading, totalSum, onCheckout }: SummaryProps) {
   const t = useTranslations('Common')
-  const cartPrice = 2300
+
+  if (loading) return <Skeleton />
 
   const handleButtonClick = (): void => {
     onCheckout()
   }
-
-  if (loading) return <Skeleton />
 
   return (
     <div className="bg-gray-50 px-4 pb-5 pt-4 md:bg-gray-light">
       <p className="mb-2 flex justify-between text-lg font-semibold">
         <span>{t('cart.total')}:</span>
         <span>
-          <span>{formatPrice(cartPrice)}$&nbsp;</span>
-          <span className="text-gray-500">• {formatPrice(cartPrice * currency)}₴</span>
+          {formatPrice(totalSum)} <span className="font-normal">₴</span>
         </span>
       </p>
       <Button color="accept" fullWidth onClick={handleButtonClick}>
