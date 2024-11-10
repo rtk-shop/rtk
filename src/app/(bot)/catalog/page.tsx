@@ -169,29 +169,27 @@ export default function Catalog() {
   return (
     <div>
       <FormProvider {...formMethods}>
-        <div className="m-auto max-w-[1700px] pt-4">
-          <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
-            <div className={filtersBox({ isOpen })}>
-              <Filters onReset={handleReset} priceRange={priceRange} />
-            </div>
-            <div className="w-full">
-              {loading ? (
-                <ListSkeleton />
-              ) : (
-                <div className="h-full">
-                  {/* <Controls onFilterClick={handleFilterClick} /> */}
-                  <ProductList
-                    totalPages={totalPages ? totalPages : 1}
-                    currentPage={isNaN(numOfPage) ? 1 : numOfPage}
-                    products={data?.products.products}
-                    onReset={handleReset}
-                  />
-                </div>
-              )}
-            </div>
+        <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
+          <div className={filtersBox({ isOpen })}>
+            <Filters onReset={handleReset} priceRange={priceRange} />
           </div>
-          <Backdrop open={isOpen} onClick={handleDrawerClose} />
+          <div className="w-full">
+            {loading ? (
+              <ListSkeleton />
+            ) : (
+              <div className="h-full">
+                {/* <Controls onFilterClick={handleFilterClick} /> */}
+                <ProductList
+                  totalPages={totalPages ? totalPages : 1}
+                  currentPage={isNaN(numOfPage) ? 1 : numOfPage}
+                  products={data?.products.products}
+                  onReset={handleReset}
+                />
+              </div>
+            )}
+          </div>
         </div>
+        <Backdrop open={isOpen} onClick={handleDrawerClose} />
       </FormProvider>
     </div>
   )
