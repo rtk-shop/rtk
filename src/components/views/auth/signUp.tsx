@@ -14,11 +14,7 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
   const router = useRouter()
   const { t } = useTranslation('auth')
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit
-  } = useForm<SignupFormValues>({
+  const { handleSubmit } = useForm<SignupFormValues>({
     mode: 'onBlur',
     resolver: valibotResolver(signUpSchema)
   })
@@ -41,18 +37,12 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
     <form onSubmit={handleSubmit(onSubmit)} className="m-auto max-w-xl">
       <h1 className="text-3xl font-medium">{t('signUp.title')}</h1>
       <p className="mb-5 text-neutral-400 lg:mb-6">{t('signUp.subTitle')}</p>
-      <Input name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
+      <Input name="name" label={t('signUp.fields.name')} />
       <PhoneInput name="phone" label={t('signUp.fields.phone')} />
-      <Input
-        name="password"
-        type="password"
-        label={t('signUp.fields.password')}
-        register={register}
-        errors={errors}
-      />
+      <Input name="password" type="password" label={t('signUp.fields.password')} />
       <div className="flex justify-end">
         <span className="mr-4 mt-3 font-medium">{t('signUp.fields.code')}</span>
-        <Input name="code" type="number" register={register} errors={errors} />
+        <Input name="code" type="number" />
       </div>
       <Button fullWidth type="submit" loading={loading} className="mt-4">
         {t('signUp.button')}

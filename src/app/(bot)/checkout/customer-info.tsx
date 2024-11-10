@@ -3,7 +3,7 @@ import { StepTitle } from './common/step-title'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
-import { useFormContext, useWatch } from 'react-hook-form'
+import { useWatch } from 'react-hook-form'
 import { customerInfoSchema } from './model/validation-schema'
 import type { CustomerInfoValues } from './model/validation-schema'
 
@@ -16,12 +16,7 @@ interface CustomerInfoProps {
 }
 
 export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext<CustomerInfoValues>()
-
-  const values = useWatch({
+  const values = useWatch<CustomerInfoValues>({
     name: ['name', 'surname', 'phone']
   })
 
@@ -51,10 +46,10 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
         <div className="px-4">
           <ul>
             <li>
-              <Input name="name" label="Имя" register={register} errors={errors} />
+              <Input name="name" label="Имя" />
             </li>
             <li>
-              <Input name="surname" label="Фамилия" register={register} errors={errors} />
+              <Input name="surname" label="Фамилия" />
             </li>
             <li>
               <PhoneInput name="phone" label="Телефон" />

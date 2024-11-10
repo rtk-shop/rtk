@@ -1,7 +1,6 @@
-import { ChangeEvent } from 'react'
 import { cva } from 'cva'
 import { ErrorMessage } from './error-message'
-import { UseFormRegister, Path, FieldValues, FieldErrors } from 'react-hook-form'
+import { Path, FieldValues, useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
 
 export interface InputProps<T extends FieldValues> {
@@ -12,9 +11,6 @@ export interface InputProps<T extends FieldValues> {
   maxLength?: number
   placeholder?: string
   autoComplete?: string
-  onChange?(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void
-  register: UseFormRegister<T>
-  errors: FieldErrors
 }
 
 const inpEl = cva(
@@ -30,14 +26,17 @@ const inpEl = cva(
 
 export function Input<T extends FieldValues>({
   name,
+  label,
   type = 'text',
   autoComplete = 'off',
-  errors,
-  label,
-  register,
   ...restProps
 }: InputProps<T>) {
   const t = useTranslations()
+
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext()
 
   const isErr = !!(errors && errors[name])
   const message = isErr && t(errors[name]?.message as string)

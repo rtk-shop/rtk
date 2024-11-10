@@ -16,11 +16,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
   const router = useRouter()
   const { t } = useTranslation('auth')
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit
-  } = useForm<LoginFormValues>({
+  const { handleSubmit } = useForm<LoginFormValues>({
     mode: 'onBlur',
     resolver: valibotResolver(logInSchema)
   })
@@ -50,13 +46,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
       <h1 className="text-3xl font-medium">{t('logIn.title')}</h1>
       <p className="mb-5 text-neutral-400 lg:mb-6">{t('logIn.subTitle')}</p>
       <PhoneInput name="phone" label={t('logIn.fields.phone')} />
-      <Input
-        name="password"
-        type="password"
-        label={t('logIn.fields.password')}
-        register={register}
-        errors={errors}
-      />
+      <Input name="password" type="password" label={t('logIn.fields.password')} />
       <Button fullWidth type="submit" loading={loading} className="mt-4">
         {t('logIn.button')}
       </Button>
