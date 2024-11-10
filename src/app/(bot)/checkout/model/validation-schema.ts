@@ -4,17 +4,21 @@ export const customerInfoSchema = v.object({
   name: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('common:validation.requiredField'),
-    v.maxLength(70, 'common:validation.maxLength70')
+    v.nonEmpty('Common.validation.requiredField'),
+    v.maxLength(70, 'Common.validation.maxLength70')
   ),
   surname: v.pipe(
     v.string(),
     v.trim(),
-    v.nonEmpty('common:validation.requiredField'),
-    v.maxLength(70, 'common:validation.maxLength70')
+    v.nonEmpty('Common.validation.requiredField'),
+    v.maxLength(70, 'Common.validation.maxLength70')
   ),
-  // phone: v.pipe(v.string(), v.trim(), v.length(9, 'common:validation.wrongPhone'))
-  phone: v.pipe(v.string(), v.trim())
+  phone: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty('Common.validation.requiredField'),
+    v.length(9, 'Common.validation.wrongPhone')
+  )
 })
 
 export const deliverySchema = v.pipe(
