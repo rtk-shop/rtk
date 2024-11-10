@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Drawer } from '@/components/layout/drawer'
+import { Drawer } from '@/components/ui/drawer'
 import { Summary } from './summary'
 import { ProcessPlug } from './plug'
 import { ListSkeleton } from './list-skeleton'
@@ -24,15 +24,15 @@ interface CartProps {
 
 export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
   return (
-    <Drawer position="right" onClose={onClose} open={isOpen}>
-      <div className="h-dvh w-screen overflow-hidden bg-white md:max-w-[400px]">
-        <CartInner onClose={onClose} />
+    <Drawer position="right" onClose={onClose} open={isOpen} fullWidth>
+      <div className="h-dvh overflow-hidden bg-white">
+        <CartInner isOpen={isOpen} onClose={onClose} />
       </div>
     </Drawer>
   )
 })
 
-export function CartInner({ onClose }: { onClose(): void }) {
+export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): void }) {
   const router = useRouter()
   const t = useTranslations('Common')
 
@@ -43,7 +43,7 @@ export function CartInner({ onClose }: { onClose(): void }) {
 
   const [result] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
     query: CartProductsDocument,
-    pause: isCartEmpty,
+    pause: !isOpen || isCartEmpty,
     variables: {
       input: [...cartItems]
     }

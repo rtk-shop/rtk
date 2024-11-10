@@ -17,7 +17,7 @@ export function UrqlProvider({ children }: { children: ReactNode }) {
     const client = createClient({
       url: process.env.NEXT_PUBLIC_API_HOST + '/graphql',
       exchanges: [cacheExchange, ssr, fetchExchange],
-      suspense: true
+      suspense: false
     })
 
     return [client, ssr]
