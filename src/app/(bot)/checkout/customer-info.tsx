@@ -18,7 +18,6 @@ interface CustomerInfoProps {
 export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) {
   const {
     register,
-    setValue,
     formState: { errors }
   } = useFormContext<CustomerInfoValues>()
 
@@ -58,7 +57,7 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
               <Input name="surname" label="Фамилия" register={register} errors={errors} />
             </li>
             <li>
-              <PhoneInput name="phone" label="Телефон" errors={errors} setValue={setValue} />
+              <PhoneInput name="phone" label="Телефон" />
             </li>
           </ul>
           <Button color="accept" fullWidth disabled={!isValid} onClick={handleNextClick}>

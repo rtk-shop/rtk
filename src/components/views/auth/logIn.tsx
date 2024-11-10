@@ -18,7 +18,6 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
 
   const {
     register,
-    setValue,
     formState: { errors },
     handleSubmit
   } = useForm<LoginFormValues>({
@@ -50,12 +49,7 @@ export function LogIn({ onSignUp }: { onSignUp(): void }) {
     <form onSubmit={handleSubmit(onSubmit)} className="m-auto max-w-xl">
       <h1 className="text-3xl font-medium">{t('logIn.title')}</h1>
       <p className="mb-5 text-neutral-400 lg:mb-6">{t('logIn.subTitle')}</p>
-      <PhoneInput
-        name="phone"
-        label={t('logIn.fields.phone')}
-        setValue={setValue}
-        errors={errors}
-      />
+      <PhoneInput name="phone" label={t('logIn.fields.phone')} />
       <Input
         name="password"
         type="password"

@@ -16,7 +16,6 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
 
   const {
     register,
-    setValue,
     formState: { errors },
     handleSubmit
   } = useForm<SignupFormValues>({
@@ -43,12 +42,7 @@ export function SignUp({ onLogIn }: { onLogIn(): void }) {
       <h1 className="text-3xl font-medium">{t('signUp.title')}</h1>
       <p className="mb-5 text-neutral-400 lg:mb-6">{t('signUp.subTitle')}</p>
       <Input name="name" label={t('signUp.fields.name')} register={register} errors={errors} />
-      <PhoneInput
-        name="phone"
-        label={t('signUp.fields.phone')}
-        setValue={setValue}
-        errors={errors}
-      />
+      <PhoneInput name="phone" label={t('signUp.fields.phone')} />
       <Input
         name="password"
         type="password"
