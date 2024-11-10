@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { SvgIcon } from '@/components/ui/svg-icon'
-import EmptyCartIcon from '../../../../../public/assets/emptycart.svg'
-import ArrowIcon from '../../../../../public/icons/expand-arrow.svg'
+import EmptyCartIcon from '../../../../public/assets/emptycart.svg'
+import ArrowIcon from '../../../../public/icons/expand-arrow.svg'
 
 interface ProcessPlugProps {
   text: string

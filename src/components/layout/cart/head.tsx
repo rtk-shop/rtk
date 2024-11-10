@@ -1,6 +1,6 @@
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
-import XmarkIcon from '../../../../../public/icons/xmark.svg'
+import XmarkIcon from '../../../../public/icons/xmark.svg'
 
 interface CartHeadProps {
   headText: string
