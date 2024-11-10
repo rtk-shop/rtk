@@ -48,15 +48,15 @@ export function CartItem({ product, amount }: CartItemProps) {
         <Link
           title={title}
           href={routeNames.product + id}
-          className="clear-both mb-2 line-clamp-2 h-[35px] text-ellipsis whitespace-normal text-sm font-semibold leading-4 text-black no-underline"
+          className="clear-both mb-2 line-clamp-2 h-[33px] text-ellipsis whitespace-normal text-sm font-semibold leading-4 text-black no-underline"
         >
           {title}
         </Link>
         <span className="text-[14px] font-medium text-gray-500">
-          {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;$
+          {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
         </span>
         <p className="text-[15px] font-semibold leading-none">
-          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;$
+          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;₴
         </p>
         <div className="mt-6 flex justify-between">
           <AmountController min={1} max={100} amount={amount} onChange={handleAmountChange} />
