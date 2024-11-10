@@ -9,12 +9,7 @@ import { useCartStore } from '@/providers/cart-store-provider'
 import { normalizedView } from '@/stores/cart/store'
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
-import { useQuery } from 'urql'
-import {
-  CartProductsDocument,
-  CartProductsQuery,
-  CartProductsQueryVariables
-} from '@/lib/api/graphql/_gen_/cartProducts.query'
+import { useCartQuery } from '@/lib/api'
 import { useTranslations } from 'next-intl'
 
 interface CartProps {
@@ -41,8 +36,7 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
 
   const isCartEmpty = !cartItems.length
 
-  const [result] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
-    query: CartProductsDocument,
+  const [result] = useCartQuery({
     pause: !isOpen || isCartEmpty,
     variables: {
       input: [...cartItems]

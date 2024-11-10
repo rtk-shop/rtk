@@ -2,12 +2,7 @@ import { CartItems } from './cart-items'
 import { Summary } from './summary'
 import { Promo } from './promo'
 import { useCartStore } from '@/providers/cart-store-provider'
-import { useQuery } from 'urql'
-import {
-  CartProductsQuery,
-  CartProductsQueryVariables,
-  CartProductsDocument
-} from '@/lib/api/graphql/_gen_/cartProducts.query'
+import { useCartQuery } from '@/lib/api'
 
 interface PreviewProps {
   submitLoading: boolean
@@ -17,8 +12,7 @@ interface PreviewProps {
 export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
   const [cartItems] = useCartStore((state) => state.cartItems)
 
-  const [result] = useQuery<CartProductsQuery, CartProductsQueryVariables>({
-    query: CartProductsDocument,
+  const [result] = useCartQuery({
     pause: !cartItems.length,
     variables: {
       input: [...cartItems]
@@ -26,8 +20,6 @@ export function Preview({ submitLoading, orderCreationErr }: PreviewProps) {
   })
 
   const { error, fetching: loading, data } = result
-
-  console.log(data)
 
   if (error) {
     // TODO: handle error
