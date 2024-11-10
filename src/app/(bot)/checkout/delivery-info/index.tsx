@@ -28,13 +28,18 @@ const peerStyles = cva(
 )
 
 export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) {
-  const { register } = useFormContext<DeliveryValues>()
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<DeliveryValues>()
 
   const values = useWatch({
     name: ['cityName', 'postOfficeName', 'supplier']
   })
 
   const supplier = values[2]
+
+  console.log('ERR', errors)
 
   // const [deliveryService, setDeliveryService] = useState<'nova' | 'ukr'>('nova')
 
@@ -79,9 +84,11 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
       cityName: values[0],
       postOfficeName: values[1],
       supplier: values[2]
+      // patronymic: values[3]
     })
     isValuesValid = true
   } catch (error) {
+    // console.log('error', error)
     isValuesValid = false
   }
 
@@ -93,12 +100,12 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
 
       <Expander open={isEdit} openHeightPx={animatedEl.height}>
         <div ref={animatedRef} className="px-2.5 pb-2.5">
-          <ul className="mb-4 flex">
+          <ul className="flex">
             <li className="mr-2 w-full">
               <label className="">
                 <input
                   type="radio"
-                  value="nova-poshta"
+                  value="nova"
                   className="peer hidden"
                   {...register('supplier')}
                 />
@@ -107,7 +114,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
                     class: peerStyles()
                   })}
                 >
-                  <div className="h-full">
+                  <div className="relative h-full">
                     <Image fill={true} src="/assets/nova_poshta.svg" alt="логотип 'Новая Почта'" />
                   </div>
                 </div>
@@ -116,9 +123,9 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
             <li className="w-full">
               <label className="">
                 <input
-                  type="radio"
-                  value="ukr-poshta"
                   disabled
+                  type="radio"
+                  value="ukr"
                   className="peer hidden"
                   {...register('supplier')}
                 />
@@ -127,18 +134,19 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
                     class: peerStyles()
                   })}
                 >
-                  <div className="h-full">
+                  <div className="relative h-full">
                     <Image fill={true} src="/assets/ukr_poshta.svg" alt="логотип 'Укр Почта'" />
                   </div>
                 </div>
               </label>
             </li>
           </ul>
+          <p className="mb-4 mt-1 text-end text-[13px] leading-none">* поки що недоступно</p>
           {/*  */}
-          <ShowBlock as="nova-poshta" current={supplier}>
+          <ShowBlock as="nova" current={supplier}>
             <NovaPoshta cities={popularCities} />
           </ShowBlock>
-          <ShowBlock as="ukr-poshta" current={supplier}>
+          <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
           </ShowBlock>
           {/*  */}
