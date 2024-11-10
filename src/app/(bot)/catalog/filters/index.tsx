@@ -10,7 +10,7 @@ import fieldProps, { FilterItem } from './fliters-data'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
 
-import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
+import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
 
 export type FormValues = {
   gender: Array<Lowercase<keyof typeof Gender>>

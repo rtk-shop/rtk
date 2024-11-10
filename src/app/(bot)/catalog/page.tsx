@@ -8,7 +8,7 @@ import { ListSkeleton } from './product-list/skeleton'
 import { ErrorPlug } from '@/components/ui/error-plug'
 import { Backdrop } from '@/components/ui/backdrop'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
-import type { CategoryType, ProductTag, Gender } from '@/graphql/types'
+import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
 import { useQuery } from 'urql'
 import {
   ProductsDocument,

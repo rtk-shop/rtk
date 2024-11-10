@@ -1,4 +1,4 @@
-import { Drawer } from '@/components/layout/drawer'
+import { Drawer } from '@/components/ui/drawer'
 import { SidebarHead } from './head'
 import { Categories } from './categories'
 import { LangSwitcher } from '@/components/lang-switcher'
