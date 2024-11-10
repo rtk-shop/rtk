@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react'
 import { cva } from 'cva'
 import { ErrorMessage } from './error-message'
 import { UseFormRegister, Path, FieldValues, FieldErrors } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 
 export interface InputProps<T extends FieldValues> {
   name: Path<T>
@@ -36,8 +37,10 @@ export function Input<T extends FieldValues>({
   register,
   ...restProps
 }: InputProps<T>) {
+  const t = useTranslations()
+
   const isErr = !!(errors && errors[name])
-  const message = isErr && (errors[name]?.message as string)
+  const message = isErr && t(errors[name]?.message as string)
 
   return (
     <div>
