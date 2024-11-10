@@ -1,17 +1,57 @@
-import { useEffect, useRef, useState, ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { cva } from 'cva'
 import { createPortal } from 'react-dom'
-import clsx from 'clsx'
-
-import styles from './styles.module.scss'
+import { Backdrop } from './backdrop'
 
 interface DrawerProps {
   open: boolean
+  fullWidth?: boolean
   position?: 'left' | 'right'
   onClose(): void
   children?: ReactNode
 }
 
-export function Drawer({ open, children, onClose, position = 'left' }: DrawerProps) {
+const container = cva('fixed z-50 h-dvh overflow-auto transition-transform will-change-transform', {
+  variants: {
+    position: {
+      right: 'right-0 top-0',
+      left: 'left-0 top-0'
+    },
+
+    open: {
+      true: '',
+      false: ''
+    },
+    fullWidth: {
+      true: 'w-full'
+    }
+  },
+  compoundVariants: [
+    {
+      position: ['right', 'left'],
+      open: true,
+      className: 'translate-x-0'
+    },
+    {
+      position: 'right',
+      open: false,
+      className: 'translate-x-full'
+    },
+    {
+      position: 'left',
+      open: false,
+      className: '-translate-x-full'
+    }
+  ]
+})
+
+export function Drawer({
+  open,
+  children,
+  onClose,
+  position = 'left',
+  fullWidth = false
+}: DrawerProps) {
   const [mounted, setMounted] = useState(false)
 
   const bodyContainerRef = useRef<HTMLElement | null>(null)
@@ -54,24 +94,8 @@ export function Drawer({ open, children, onClose, position = 'left' }: DrawerPro
   return mounted
     ? createPortal(
         <div>
-          <div
-            className={clsx({
-              [styles.box]: true,
-              [styles.left]: position === 'left',
-              [styles.leftOpen]: position === 'left' && open,
-              [styles.right]: position === 'right',
-              [styles.rightOpen]: position === 'right' && open
-            })}
-          >
-            {children}
-          </div>
-          <div
-            className={clsx({
-              [styles.backdrop]: true,
-              [styles.backdropOpen]: open
-            })}
-            onClick={onClose}
-          />
+          <div className={container({ position, open, fullWidth })}>{children}</div>
+          {!fullWidth && <Backdrop open={open} onClick={onClose} />}
         </div>,
         portalRootRef.current as Element
       )
