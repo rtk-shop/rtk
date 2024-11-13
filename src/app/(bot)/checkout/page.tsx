@@ -93,7 +93,7 @@ export default function Checkout() {
           </div>
         </form>
       </FormProvider>
-      <OrderSuccessModal open={state.successOrderModalOpen} onClose={dispatch.closeSucessModal} />
+      <OrderSuccessModal open={state.successOrderModalOpen} />
     </div>
   )
 }
