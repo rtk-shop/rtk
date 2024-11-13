@@ -1,20 +1,23 @@
 import { useReducer, useMemo } from 'react'
 
-type State = {
+export type State = {
   waitDataSyncing: boolean
   isInfoOpen: boolean
   isDeliveryOpen: boolean
+  successOrderModalOpen: boolean
 }
 
-type Api = {
+export type Actions = {
   dataSynced(): void
   openInfo(): void
   infoChecked(): void
   openDelivery(): void
   closeDelivery(): void
+  openSucessModal(): void
+  closeSucessModal(): void
 }
 
-type Action = {
+export type Action = {
   type:
     | 'data-synced'
     //
@@ -23,6 +26,9 @@ type Action = {
     //
     | 'open-delivery'
     | 'close-delivery'
+    //
+    | 'succes-modal-open'
+    | 'succes-modal-close'
 
   payload?: unknown
 }
@@ -41,21 +47,27 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, isDeliveryOpen: !state.isDeliveryOpen, isInfoOpen: false }
     case 'close-delivery':
       return { ...state, isDeliveryOpen: false }
+    case 'succes-modal-open':
+      return { ...state, successOrderModalOpen: true }
+    case 'succes-modal-close':
+      return { ...state, successOrderModalOpen: false }
   }
 
   return state
 }
 
-export const usePageState = (initState: State): [State, Api] => {
+export const useState = (initState: State): [State, Actions] => {
   const [state, dispatch] = useReducer(reducer, { ...initState })
 
-  const api: Api = useMemo(
+  const api: Actions = useMemo(
     () => ({
       dataSynced: () => dispatch({ type: 'data-synced' }),
       openInfo: () => dispatch({ type: 'open-info' }),
       infoChecked: () => dispatch({ type: 'info-checked' }),
       openDelivery: () => dispatch({ type: 'open-delivery' }),
-      closeDelivery: () => dispatch({ type: 'close-delivery' })
+      closeDelivery: () => dispatch({ type: 'close-delivery' }),
+      openSucessModal: () => dispatch({ type: 'succes-modal-open' }),
+      closeSucessModal: () => dispatch({ type: 'succes-modal-close' })
     }),
     []
   )

@@ -1,16 +1,16 @@
 import { createStore } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type CartItem = {
+export type CartItem = {
   productId: string
   amount: number
 }
 
-type CartState = {
+export type CartState = {
   cartItems: CartItem[]
 }
 
-type CartActions = {
+export type CartActions = {
   cartAmount: () => number
   addItem: (item: CartItem) => void
   clear: () => void

@@ -4,19 +4,20 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { CustomerInfo } from './customer-info'
 import { DeliveryInfo } from './delivery-info'
 import { Preview } from './preview'
-import { usePageState } from './model/usePageState'
+import { useState } from './model/useState'
 import { useCallback } from 'react'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
 import { useCartStore } from '@/providers/cart-store-provider'
-// import { OrderSuccessModal } from './modals/order-success'
+import { OrderSuccessModal } from './modals/order-success'
 
 export default function Checkout() {
-  const [state, dispatch] = usePageState({
+  const [state, dispatch] = useState({
     waitDataSyncing: true,
     isInfoOpen: false,
-    isDeliveryOpen: false
+    isDeliveryOpen: false,
+    successOrderModalOpen: false
   })
 
   const [cartItems] = useCartStore((state) => state.cartItems)
@@ -49,6 +50,7 @@ export default function Checkout() {
       console.log(res.error)
     } else {
       console.log(res.data)
+      dispatch.openSucessModal()
     }
   }
 
@@ -83,11 +85,15 @@ export default function Checkout() {
               onEdit={handleDeliveryEditOpen}
               onContinue={handleDeliveryChecked}
             />
-            <Preview submitLoading={false} orderCreationErr={false} />
+            <Preview
+              cartItems={cartItems}
+              submitLoading={orderResult.fetching}
+              submitError={!!orderResult.error}
+            />
           </div>
         </form>
       </FormProvider>
-      {/* <OrderSuccessModal open={isOrderSuccess} onClose={hanldeModalClose} /> */}
+      <OrderSuccessModal open={state.successOrderModalOpen} onClose={dispatch.closeSucessModal} />
     </div>
   )
 }
