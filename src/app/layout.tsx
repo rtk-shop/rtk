@@ -7,10 +7,6 @@ import { UrqlProvider } from '@/providers/urql'
 
 import '@/styles/globals.scss'
 
-// todo: connect it
-// import Modal from 'react-modal'
-// Modal.setAppElement('#__next')
-
 const proximanova = localFont({
   display: 'optional',
   variable: '--font-proximanova',

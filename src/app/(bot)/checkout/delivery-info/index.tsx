@@ -28,18 +28,13 @@ const peerStyles = cva(
 )
 
 export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext<DeliveryValues>()
+  const { register } = useFormContext<DeliveryValues>()
 
   const values = useWatch({
     name: ['cityName', 'postOfficeName', 'supplier']
   })
 
   const supplier = values[2]
-
-  console.log('ERR', errors)
 
   // const [deliveryService, setDeliveryService] = useState<'nova' | 'ukr'>('nova')
 
