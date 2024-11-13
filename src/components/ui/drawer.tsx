@@ -6,16 +6,17 @@ import { Backdrop } from './backdrop'
 interface DrawerProps {
   open: boolean
   fullWidth?: boolean
-  position?: 'left' | 'right'
+  position?: 'left' | 'right' | 'bottom'
   onClose(): void
   children?: ReactNode
 }
 
-const container = cva('fixed z-50 h-dvh overflow-auto transition-transform will-change-transform', {
+const container = cva('fixed z-50 overflow-auto transition-transform will-change-transform', {
   variants: {
     position: {
-      right: 'right-0 top-0',
-      left: 'left-0 top-0'
+      right: 'right-0 top-0 h-dvh',
+      left: 'left-0 top-0 h-dvh',
+      bottom: 'bottom-0 w-full'
     },
 
     open: {
@@ -41,6 +42,16 @@ const container = cva('fixed z-50 h-dvh overflow-auto transition-transform will-
       position: 'left',
       open: false,
       className: '-translate-x-full'
+    },
+    {
+      position: 'bottom',
+      open: true,
+      className: 'translate-y-0'
+    },
+    {
+      position: 'bottom',
+      open: false,
+      className: 'translate-y-full'
     }
   ]
 })
