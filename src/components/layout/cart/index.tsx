@@ -9,7 +9,7 @@ import { useCartStore } from '@/providers/cart-store-provider'
 import { normalizedView } from '@/stores/cart/store'
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
-import { useCartQuery } from '@/lib/api'
+import { useCartQuery } from '@/lib/api/hooks'
 import { useTranslations } from 'next-intl'
 
 interface CartProps {

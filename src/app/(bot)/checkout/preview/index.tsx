@@ -2,7 +2,7 @@ import { CartItems } from './cart-items'
 import { Summary } from './summary'
 import { Promo } from './promo'
 import { useCartStore } from '@/providers/cart-store-provider'
-import { useCartQuery } from '@/lib/api'
+import { useCartQuery } from '@/lib/api/hooks'
 
 interface PreviewProps {
   submitLoading: boolean
