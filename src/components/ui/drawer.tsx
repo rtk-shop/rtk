@@ -86,27 +86,24 @@ export function Drawer({
     }
   }, [])
 
-  useEffect(() => {
-    const updatePageScroll = () => {
-      if (open) {
-        document.documentElement.style.overflowY = 'scroll'
-        document.documentElement.style.position = 'fixed'
-        document.documentElement.style.width = '100%'
-      } else {
-        document.documentElement.style.overflowY = 'auto'
-        document.documentElement.style.position = 'static'
-        document.documentElement.style.width = 'auto'
-      }
-    }
+  const onCloseMiddleware = () => {
+    document.documentElement.style.overflowY = 'auto'
+    onClose()
+  }
 
-    updatePageScroll()
+  useEffect(() => {
+    if (open) {
+      document.documentElement.style.overflowY = 'hidden'
+    } else {
+      document.documentElement.style.overflowY = 'auto'
+    }
   }, [open])
 
   return mounted
     ? createPortal(
         <div>
           <div className={container({ position, open, fullWidth })}>{children}</div>
-          {!fullWidth && <Backdrop open={open} onClick={onClose} />}
+          {!fullWidth && <Backdrop open={open} onClick={onCloseMiddleware} />}
         </div>,
         portalRootRef.current as Element
       )
