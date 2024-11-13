@@ -8,6 +8,8 @@ import { usePageState } from './model/usePageState'
 import { useCallback } from 'react'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useCreateOrderMutation } from '@/lib/api/hooks'
+import { useCartStore } from '@/providers/cart-store-provider'
 // import { OrderSuccessModal } from './modals/order-success'
 
 export default function Checkout() {
@@ -17,34 +19,37 @@ export default function Checkout() {
     isDeliveryOpen: false
   })
 
+  const [cartItems] = useCartStore((state) => state.cartItems)
+
+  const [orderResult, createOrder] = useCreateOrderMutation()
+
   const formMethods = useForm<FormValues>({
     mode: 'onBlur',
     resolver: valibotResolver(validationSchema),
     defaultValues: {
-      supplier: 'nova-poshta'
+      supplier: 'nova',
       // temp
-      // name: 'User',
-      // surname: 'Surname',
-      // email: 'user@mail.com',
-      // phone: '380777777777',
-      // cityName: '_test_',
-      // postOfficeName: 'test_test'
+      name: 'User',
+      surname: 'Userovich',
+      phone: '998713081',
+      cityName: '_test_',
+      postOfficeName: 'test_test'
     }
   })
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
-    console.log(values)
+    console.log('submit', values)
 
-    // try {
-    //   await createOrder({
-    //     variables: { cartItems, ...values }
-    //   })
-    //   setOrderSuccess(true)
-    // } catch (error) {
-    //   console.log(error)
+    const res = await createOrder({
+      cartItems,
+      ...values
+    })
 
-    //   setOrderErr(true)
-    // }
+    if (res.error) {
+      console.log(res.error)
+    } else {
+      console.log(res.data)
+    }
   }
 
   const handleInfoEditOpen = useCallback(() => {

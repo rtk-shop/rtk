@@ -27,7 +27,7 @@ export type AttachedRating = {
 
 export type CartItem = {
   amount: Scalars['Int']['input']
-  productId: Scalars['String']['input']
+  productId: Scalars['ID']['input']
 }
 
 export type CartItemType = {
@@ -82,7 +82,7 @@ export type HomeMainSlide = {
 
 export type Mutation = {
   __typename?: 'Mutation'
-  createOrder?: Maybe<NewOrderResponse>
+  createOrder: NewOrderResponse
   deleteProduct?: Maybe<DeleteProductResponse>
   hideProduct?: Maybe<HideProductResponse>
   productRatingVote?: Maybe<ProductRatingVoteResponse>
@@ -113,7 +113,6 @@ export type MutationSetUsdCourseArgs = {
 export type NewOrderInput = {
   cartItems: Array<CartItem>
   cityName: Scalars['String']['input']
-  email: Scalars['String']['input']
   name: Scalars['String']['input']
   phone: Scalars['String']['input']
   postOfficeName: Scalars['String']['input']
@@ -123,7 +122,9 @@ export type NewOrderInput = {
 
 export type NewOrderResponse = {
   __typename?: 'NewOrderResponse'
-  message: Scalars['String']['output']
+  createdAt: Scalars['Date']['output']
+  id: Scalars['Int']['output']
+  price: Scalars['Int']['output']
 }
 
 export type NotFound = {
