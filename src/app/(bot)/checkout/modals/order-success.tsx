@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { SvgIcon } from '@/components/ui/svg-icon'
 import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
@@ -12,6 +13,10 @@ export function OrderSuccessModal({ open }: { open: boolean }) {
   const t = useTranslations('Checkout.successModal')
   const router = useRouter()
   const [clear] = useCartStore((state) => state.clear)
+
+  useEffect(() => {
+    router.prefetch(routeNames.profile)
+  }, [router])
 
   const handleComplete = () => {
     router.replace(routeNames.profile)
