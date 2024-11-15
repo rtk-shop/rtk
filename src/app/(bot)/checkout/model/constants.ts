@@ -1,3 +1,7 @@
+export const providerNames = {
+  novaPoshta: 'nova_poshta'
+} as const
+
 export const pupularCitiesNames = ['Харків', 'Київ', 'Одеса', 'Дніпро', 'Львів']
 
 export const novaDeliveryTypeOptions = [

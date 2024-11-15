@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from 'react'
+import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext } from 'react-hook-form'
-import AsyncSelect from 'react-select/async'
 import { components, InputProps } from 'react-select'
 import { RadioGroup } from '@/components/ui/radio-group'
-import { pupularCitiesNames, novaDeliveryTypeOptions } from '../../model/constants'
-import type { PopularCity } from '../../model/types'
+import { pupularCitiesNames, novaDeliveryTypeOptions, providerNames } from '../../model/constants'
+import type { PopularCity, Settlement } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
 
 type CityOption = {
@@ -46,20 +46,35 @@ export function NovaPoshta({
 
   const promiseOptions = (inputValue: string) =>
     new Promise<Array<CityOption>>((resolve) => {
-      setTimeout(() => {
-        const matches = popularCities
-          .map((city) => ({
-            label: city.city_name,
-            value: city.nova_poshta_id
-          }))
-          .filter((c) => c.label.toLowerCase().includes(inputValue.toLowerCase()))
+      const matches = popularCities
+        .map((city) => ({
+          label: city.city_name,
+          value: city.nova_poshta_id
+        }))
+        .filter((c) => c.label.toLowerCase().includes(inputValue.toLowerCase()))
 
-        if (!matches.length) {
-          console.log('we should make API request')
-        }
+      if (!matches.length) {
+        const params = new URLSearchParams({
+          provider: providerNames.novaPoshta,
+          city_name: inputValue.toLocaleLowerCase()
+        })
 
+        fetch(`${process.env.NEXT_PUBLIC_DELIVERY_API}/search-settlements?${params}`)
+          .then((resp) => resp.json())
+          .then((data) => {
+            const settlements = data.map((settlement: Settlement) => ({
+              label: settlement.name,
+              value: settlement.settlement_id
+            }))
+
+            resolve(settlements)
+          })
+          .catch((error) => {
+            console.warn(error)
+          })
+      } else {
         resolve(matches)
-      }, 500)
+      }
     })
 
   const handleSelectChange = (cityId: string) => {
