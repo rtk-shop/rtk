@@ -1,17 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import { Warehouses } from './warehouses'
+import { useFormContext } from 'react-hook-form'
 import AsyncSelect from 'react-select/async'
 import { components, InputProps } from 'react-select'
 import { RadioGroup } from '@/components/ui/radio-group'
-import { pupularCities, novaDeliveryTypeOptions } from '../data'
+import { pupularCitiesNames, novaDeliveryTypeOptions } from '../../model/constants'
 import type { PopularCity } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
-
-import { useFormContext } from 'react-hook-form'
-
-interface NovaPoshtaProps {
-  cities: PopularCity[]
-}
 
 type CityOption = {
   label: string
@@ -24,20 +19,25 @@ const SelectInput = (props: InputProps<CityOption, false>) => {
   return <components.Input {...props} autoComplete="chrome-off" />
 }
 
-export function NovaPoshta({ cities }: NovaPoshtaProps) {
+export function NovaPoshta({
+  popularCitiesLoad,
+  popularCities
+}: {
+  popularCities: PopularCity[]
+  popularCitiesLoad: boolean
+}) {
+  const [cityId, setCityId] = useState('')
   const [selectValue, setSelectValue] = useState<CityOption | null>(null)
 
   const { setValue } = useFormContext<FormValues>()
 
-  const [cityId, setCityId] = useState<string>('')
-
   const memCitiesOptions: CityOption[] = useMemo(
     () =>
-      cities.map((city) => ({
+      popularCities.map((city) => ({
         label: city.city_name,
         value: city.nova_poshta_id
       })),
-    [cities]
+    [popularCities]
   )
 
   useEffect(() => {
@@ -47,15 +47,19 @@ export function NovaPoshta({ cities }: NovaPoshtaProps) {
   const promiseOptions = (inputValue: string) =>
     new Promise<Array<CityOption>>((resolve) => {
       setTimeout(() => {
-        const c = cities
+        const matches = popularCities
           .map((city) => ({
             label: city.city_name,
             value: city.nova_poshta_id
           }))
           .filter((c) => c.label.toLowerCase().includes(inputValue.toLowerCase()))
 
-        resolve(c)
-      }, 3000)
+        if (!matches.length) {
+          console.log('we should make API request')
+        }
+
+        resolve(matches)
+      }, 500)
     })
 
   const handleSelectChange = (cityId: string) => {
@@ -73,15 +77,15 @@ export function NovaPoshta({ cities }: NovaPoshtaProps) {
     setValue('cityName', city.label)
   }
 
-  const selectedCities = pupularCities.map((baseCity) => {
-    const city = cities.find((city) =>
-      city.city_name.toLocaleLowerCase().includes(baseCity.toLocaleLowerCase())
+  const selectedCities = pupularCitiesNames.map((cityName) => {
+    const city = popularCities.find((city) =>
+      city.city_name.toLocaleLowerCase().includes(cityName.toLocaleLowerCase())
     )
 
     return {
       label: city ? city.city_name : '',
       value: city ? city.nova_poshta_id : '',
-      baseLabel: baseCity
+      baseLabel: cityName
     }
   })
 
@@ -100,6 +104,7 @@ export function NovaPoshta({ cities }: NovaPoshtaProps) {
         <p className="my-1.5 leading-none">Город</p>
         <AsyncSelect
           cacheOptions
+          isDisabled={popularCitiesLoad}
           value={selectValue}
           isClearable
           onChange={(newValue, { action }) => {

@@ -39,24 +39,39 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
   const [animatedRef, animatedEl] = useElementSize()
 
   const [popularCities, setPopularCities] = useState<PopularCity[]>([])
-  const [popularCitiesError, setPopularCitiesError] = useState(false)
+  const [citiesMeta, setCitiesMeta] = useState<{
+    error: boolean
+    loading: boolean
+  }>({
+    error: false,
+    loading: true
+  })
 
   useEffect(() => {
     const controller = new AbortController()
     const { signal } = controller
 
     const fetchData = async () => {
-      const resp = await fetch(process.env.NEXT_PUBLIC_DELIVERY_API + '/popular-cities', { signal })
+      const resp = await fetch(process.env.NEXT_PUBLIC_DELIVERY_API + '/popular-cities', {
+        signal,
+        cache: 'default'
+      })
       const data = await resp.json()
 
       setPopularCities(data)
-
-      console.log('data', data)
+      setCitiesMeta({
+        loading: false,
+        error: false
+      })
     }
 
     fetchData().catch((error) => {
-      setPopularCitiesError(true)
-      console.log('ERROR:', error.message)
+      setCitiesMeta({
+        loading: false,
+        error: false
+      })
+      // todo handle this case
+      console.warn('ERROR:', error.message)
     })
 
     return () => {
@@ -75,7 +90,6 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
     })
     isValuesValid = true
   } catch (error) {
-    // console.log('error', error)
     isValuesValid = false
   }
 
@@ -131,7 +145,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
           <p className="mb-4 mt-1 text-end text-[13px] leading-none">* поки що недоступно</p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
-            <NovaPoshta popularCities={popularCities} />
+            <NovaPoshta popularCitiesLoad={citiesMeta.loading} popularCities={popularCities} />
           </ShowBlock>
           <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
