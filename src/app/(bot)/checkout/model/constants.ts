@@ -1,4 +1,4 @@
-export const pupularCities = ['Харків', 'Київ', 'Одеса', 'Дніпро', 'Львів']
+export const pupularCitiesNames = ['Харків', 'Київ', 'Одеса', 'Дніпро', 'Львів']
 
 export const novaDeliveryTypeOptions = [
   {

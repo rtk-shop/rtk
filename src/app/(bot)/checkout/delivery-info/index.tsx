@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { cva } from 'cva'
 import { StepTitle } from '../common/step-title'
@@ -36,41 +36,33 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
 
   const supplier = values[2]
 
-  // const [deliveryService, setDeliveryService] = useState<'nova' | 'ukr'>('nova')
-
   const [animatedRef, animatedEl] = useElementSize()
 
   const [popularCities, setPopularCities] = useState<PopularCity[]>([])
-  const [citieLoading, setCitieLoading] = useState(true)
-  const [areasError, setAreasError] = useState(false)
+  const [popularCitiesError, setPopularCitiesError] = useState(false)
 
-  // useEffect(() => {
-  //   const controller = new AbortController()
-  //   const { signal } = controller
+  useEffect(() => {
+    const controller = new AbortController()
+    const { signal } = controller
 
-  //   fetch('/api/getPopularCities', { signal })
-  //     .then(async (resp) => {
-  //       const data = await resp.json()
-  //       // console.log(data)
+    const fetchData = async () => {
+      const resp = await fetch(process.env.NEXT_PUBLIC_DELIVERY_API + '/popular-cities', { signal })
+      const data = await resp.json()
 
-  //       if (resp.status === 200) {
-  //         setPopularCities(data)
-  //         setCitieLoading(false)
-  //       } else {
-  //         throw new Error(data.error)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('ERROR:', error.message)
+      setPopularCities(data)
 
-  //       setAreasError(true)
-  //       setCitieLoading(false)
-  //     })
+      console.log('data', data)
+    }
 
-  //   return () => {
-  //     controller.abort()
-  //   }
-  // }, [])
+    fetchData().catch((error) => {
+      setPopularCitiesError(true)
+      console.log('ERROR:', error.message)
+    })
+
+    return () => {
+      // controller.abort()
+    }
+  }, [])
 
   let isValuesValid = false
 
@@ -139,7 +131,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
           <p className="mb-4 mt-1 text-end text-[13px] leading-none">* поки що недоступно</p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
-            <NovaPoshta cities={popularCities} />
+            <NovaPoshta popularCities={popularCities} />
           </ShowBlock>
           <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
