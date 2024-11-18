@@ -4,6 +4,7 @@ import { Warehouses } from './warehouses'
 import { useFormContext } from 'react-hook-form'
 import { components, InputProps } from 'react-select'
 import { RadioGroup } from '@/components/ui/radio-group'
+import { ScrollMask } from '@/components/ui/scroll-mask'
 import { pupularCitiesNames, novaDeliveryTypeOptions, providerNames } from '../../model/constants'
 import type { PopularCity, Settlement } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
@@ -115,8 +116,10 @@ export function NovaPoshta({
 
   return (
     <div>
-      <div className="overflow-x-auto">
-        <RadioGroup direction="row" name="_np-delivery-type" options={novaDeliveryTypeOptions} />
+      <div className="mb-3">
+        <ScrollMask>
+          <RadioGroup direction="row" name="_np-delivery-type" options={novaDeliveryTypeOptions} />
+        </ScrollMask>
       </div>
       <div className="w-full">
         <p className="my-1.5 leading-none">Город</p>
