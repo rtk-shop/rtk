@@ -19,7 +19,7 @@ export function Summary({ loading, totalSum, onCheckout }: SummaryProps) {
   }
 
   return (
-    <div className="bg-gray-50 px-4 pb-5 pt-4 md:bg-gray-light">
+    <div className="bg-gray-50 px-4 pb-5 pt-4">
       <p className="mb-2 flex justify-between text-lg font-semibold">
         <span>{t('cart.total')}:</span>
         <span>

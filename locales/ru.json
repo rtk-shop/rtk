@@ -10,7 +10,7 @@
     },
     "cart": {
       "topControls": {
-        "title": "Товары в корзине"
+        "title": "Корзина"
       },
       "total": "Итого",
       "makeOrder": "Оформить заказ",
@@ -29,6 +29,9 @@
     },
     "nouns": {
       "price": "Цена"
+    },
+    "verbs": {
+      "clear": "Очистить"
     }
   },
   "Checkout": {

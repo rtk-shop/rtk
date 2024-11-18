@@ -63,7 +63,7 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
 
   return (
     <div className="flex h-full flex-col">
-      <CartHead headText={t('cart.topControls.title')} onCartClose={onClose} />
+      <CartHead onCartClose={onClose} />
       {fetching ? (
         <ListSkeleton itemsAmount={cartItems.length} />
       ) : (

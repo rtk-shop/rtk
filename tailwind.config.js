@@ -9,7 +9,6 @@ module.exports = {
       },
       colors: {
         black: '#171717',
-        'gray-light': '#ededed',
         'green-light': '#32cd32'
       },
       backgroundImage: {

@@ -10,7 +10,7 @@
     },
     "cart": {
       "topControls": {
-        "title": "Товари в кошику"
+        "title": "Кошик"
       },
       "total": "Разом",
       "makeOrder": "Оформити замовлення",
@@ -29,6 +29,9 @@
     },
     "nouns": {
       "price": "Ціна"
+    },
+    "verbs": {
+      "clear": "Очистити"
     }
   },
   "Checkout": {
