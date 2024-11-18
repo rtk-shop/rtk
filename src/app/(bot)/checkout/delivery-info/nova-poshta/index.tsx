@@ -116,7 +116,7 @@ export function NovaPoshta({
   return (
     <div>
       <div className="overflow-x-auto">
-        <RadioGroup asRow name="_np-delivery-type" options={novaDeliveryTypeOptions} />
+        <RadioGroup direction="row" name="_np-delivery-type" options={novaDeliveryTypeOptions} />
       </div>
       <div className="w-full">
         <p className="my-1.5 leading-none">Город</p>

@@ -6,18 +6,18 @@ export const pupularCitiesNames = ['Харків', 'Київ', 'Одеса', 'Д
 
 export const novaDeliveryTypeOptions = [
   {
-    label: 'В отделение',
+    label: 'Отделение',
     value: 'department',
     disabled: false
   },
   {
-    label: 'В почтомат',
+    label: 'Грузовое отделение',
     value: 'poshtomat',
     disabled: false
   },
   {
-    label: 'Курьером',
+    label: 'Почтомат',
     value: 'courier',
-    disabled: true
+    disabled: false
   }
 ]
