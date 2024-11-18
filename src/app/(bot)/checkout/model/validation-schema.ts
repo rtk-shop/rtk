@@ -25,7 +25,7 @@ export const deliverySchema = v.pipe(
   v.object({
     supplier: v.picklist(['nova', 'ukr']),
     cityName: v.pipe(v.string(), v.minLength(1)),
-    postOfficeName: v.string(),
+    postOfficeName: v.pipe(v.string(), v.trim(), v.nonEmpty('Common.validation.requiredField')),
     patronymic: v.optional(v.string())
   }),
   v.forward(

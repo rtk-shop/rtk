@@ -16,7 +16,9 @@ type CityOption = {
 const SelectInput = (props: InputProps<CityOption, false>) => {
   // Disable autocomplete on field
   // https://stackoverflow.com/a/30976223/15604836
-  return <components.Input {...props} autoComplete="chrome-off" />
+  return (
+    <components.Input aria-activedescendant={undefined} {...props} autoComplete="one-time-code" />
+  )
 }
 
 export function NovaPoshta({
@@ -71,6 +73,7 @@ export function NovaPoshta({
           })
           .catch((error) => {
             console.warn(error)
+            // "!!" is an error
           })
       } else {
         resolve(matches)
@@ -82,8 +85,8 @@ export function NovaPoshta({
     setValue('cityName', cityId)
   }
 
-  const handleWarehouseChange = (warehouse: string) => {
-    setValue('postOfficeName', warehouse)
+  const handleWarehouseChange = (warehouseName: string) => {
+    setValue('postOfficeName', warehouseName)
   }
 
   const handleCityQuikSet = (city: CityOption) => {
@@ -119,17 +122,19 @@ export function NovaPoshta({
         <p className="my-1.5 leading-none">Город</p>
         <AsyncSelect
           cacheOptions
+          instanceId={'rsl1'}
           isDisabled={popularCitiesLoad}
           value={selectValue}
           isClearable
           onChange={(newValue, { action }) => {
             setSelectValue(newValue)
-            if (action === 'select-option' || action === 'clear') {
-              if (newValue) {
-                handleSelectChange(newValue.value)
-              } else {
+            switch (action) {
+              case 'select-option':
+                if (newValue) handleSelectChange(newValue.label)
+                break
+              case 'clear':
                 handleSelectChange('')
-              }
+                break
             }
           }}
           components={{ Input: SelectInput }}
@@ -173,7 +178,7 @@ export function NovaPoshta({
           </li>
         ))}
       </ul>
-      {cityId && <Warehouses cityId={cityId} onSelect={handleWarehouseChange} />}
+      {cityId && <Warehouses cityId={cityId} warehouseType="1" onSelect={handleWarehouseChange} />}
     </div>
   )
 }

@@ -16,7 +16,7 @@ export default function Checkout() {
   const [state, dispatch] = useState({
     waitDataSyncing: true,
     isInfoOpen: false,
-    isDeliveryOpen: false,
+    isDeliveryOpen: true,
     successOrderModalOpen: false
   })
 
@@ -32,9 +32,7 @@ export default function Checkout() {
       // temp
       name: 'User',
       surname: 'Userovich',
-      phone: '998713081',
-      cityName: '_test_',
-      postOfficeName: 'test_test'
+      phone: '998713081'
     }
   })
 

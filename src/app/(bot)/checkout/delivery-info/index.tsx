@@ -100,7 +100,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
       </StepTitle>
 
       <Expander open={isEdit} openHeightPx={animatedEl.height}>
-        <div ref={animatedRef} className="px-2.5 pb-2.5">
+        <div ref={animatedRef} className="px-2.5 pb-3">
           <ul className="flex">
             <li className="mr-2 w-full">
               <label className="">

@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
-import AsyncSelect from 'react-select/async'
+import { providerNames } from '../../model/constants'
 import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from 'react-virtualized'
+import AsyncSelect from 'react-select/async'
 import type { MenuListProps, GroupBase } from 'react-select'
 import type { ListRowProps } from 'react-virtualized'
-
-interface WarehousesProps {
-  cityId: string
-  onSelect(id: string): void
-}
+import type { Warehouse } from '../../model/types'
 
 type WarehousesOption = {
   label: string
   value: string
-}
-
-type Warehouses = {
-  id: string
-  description: string
 }
 
 const cellCache = new CellMeasurerCache({
@@ -24,7 +16,7 @@ const cellCache = new CellMeasurerCache({
   defaultHeight: 30
 })
 
-const VirtualizedList = ({
+export const VirtualizedList = ({
   children
 }: MenuListProps<WarehousesOption, false, GroupBase<WarehousesOption>>) => {
   const rows = children
@@ -67,84 +59,80 @@ const VirtualizedList = ({
   )
 }
 
-export function Warehouses({ cityId, onSelect }: WarehousesProps) {
+export function Warehouses({
+  cityId,
+  warehouseType,
+  onSelect
+}: {
+  cityId: string
+  warehouseType: string
+  onSelect(id: string): void
+}) {
   const [warehouses, setWarehouses] = useState<WarehousesOption[]>([])
   const [selectValue, setSelectValue] = useState<WarehousesOption | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+
+  const [warehousesMeta, setWarehousesMeta] = useState<{
+    error: boolean
+    loading: boolean
+  }>({
+    error: false,
+    loading: true
+  })
 
   useEffect(() => {
-    const controller = new AbortController()
-    const { signal } = controller
-
-    setLoading(true)
-    setWarehouses([])
-    setSelectValue(null)
-
-    fetch('/api/getWarehouses', {
-      signal,
-      method: 'POST',
-      body: JSON.stringify({
-        city_id: cityId,
-        provider: 'nova_poshta'
-      })
+    const params = new URLSearchParams({
+      provider: providerNames.novaPoshta,
+      city_id: cityId,
+      warehouse_type: warehouseType
     })
-      .then(async (resp) => {
-        const data: Warehouses[] = await resp.json()
-        // console.log(data)
 
-        if (resp.status === 200) {
-          const options: WarehousesOption[] = data.map((w) => ({
-            value: w.id,
-            label: w.description
-          }))
-          setWarehouses(options)
-          setLoading(false)
-        } else {
-          throw new Error('failed request')
-        }
-      })
-      .catch((error) => {
-        setLoading(false)
-        console.warn('ERROR:', error)
-      })
+    const fetchData = async () => {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_DELIVERY_API}/warehouses?${params}`)
+      const data = await resp.json()
 
-    return () => {
-      controller.abort()
+      const options = data.map((w: Warehouse) => ({
+        value: w.warehouse_id,
+        label: w.name
+      }))
+
+      setWarehouses(options)
+      setWarehousesMeta((prev) => ({ ...prev, loading: false }))
     }
-  }, [cityId])
 
-  const loadWarehouses = (inputValue: string) =>
-    new Promise<WarehousesOption[]>((resolve) => {
-      setTimeout(() => {
-        const c = warehouses.filter((w) => w.label.toLowerCase().includes(inputValue.toLowerCase()))
-        resolve(c)
-      })
+    fetchData().catch((error) => {
+      // todo handle this case
+      setWarehousesMeta((prev) => ({ ...prev, loading: false, error: true }))
     })
+  }, [cityId, warehouseType])
 
-  const handleSelectChange = (value: string) => {
-    onSelect(value)
-  }
+  const filterWarehouses = (inputValue: string) =>
+    new Promise<WarehousesOption[]>((resolve) => {
+      const res = warehouses.filter((w) => w.label.toLowerCase().includes(inputValue.toLowerCase()))
+      resolve(res)
+    })
 
   return (
-    <div>
+    <div className="mb-3">
       <span>Отделения</span>
       <AsyncSelect
         components={{ MenuList: VirtualizedList }}
         cacheOptions
         isClearable
-        isLoading={loading}
+        isLoading={warehousesMeta.loading}
         value={selectValue}
         onChange={(newValue, { action }) => {
-          // console.log(newValue, action)
           setSelectValue(newValue)
-          if (action === 'select-option') {
-            if (newValue) handleSelectChange(newValue.label)
-            return
+          switch (action) {
+            case 'select-option':
+              if (newValue) onSelect(newValue.label)
+              break
+            case 'clear':
+              onSelect('')
+              break
           }
-          if (action === 'clear') handleSelectChange('')
         }}
         defaultOptions={warehouses}
-        loadOptions={loadWarehouses}
+        loadOptions={filterWarehouses}
         placeholder={'Укажите отделение'}
         styles={{
           menu: ({ position, fontWeight, ...provided }) => ({
