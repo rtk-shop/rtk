@@ -45,5 +45,5 @@ module.exports = {
       desktop: '1400px'
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [require('tailwindcss-animate'), require('tailwind-gradient-mask-image')]
 }
