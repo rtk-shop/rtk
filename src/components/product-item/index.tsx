@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Icon } from '../ui/icon'
 import { type ReactElement } from 'react'
 import { cva } from 'cva'
-import { SvgIcon } from '../ui/svg-icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { IconButton } from '@/components/ui/icon-button'
 import { routeNames } from '@/lib/constants'
@@ -10,7 +10,6 @@ import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
-import TrashIcon from '../../../public/icons/trash.svg'
 
 interface ProductItemProps {
   id: string
@@ -98,12 +97,10 @@ export function ProductItem({
               {formatPrice(price)} <span className="font-normal">₴</span>
             </span>
           </div>
-          <div className="">
+          <div>
             {withDelete ? (
-              <IconButton onClick={handleActionClick}>
-                <SvgIcon className="fill-gray-500">
-                  <TrashIcon />
-                </SvgIcon>
+              <IconButton onClick={handleActionClick} className="p-1.5">
+                <Icon name="action/trash" className="text-[22px]" />
               </IconButton>
             ) : (
               <LikeButton liked={isFavorite} onClick={handleActionClick} />

@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import clsx from 'clsx'
-import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 // import Image from 'next/image'
 import useTranslation from 'next-translate/useTranslation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Dropdown, type Option } from '@/components/ui/dropdown'
-import SearchIcon from '../../../../../public/icons/search.svg'
 // import { getProductMainTagColor } from '@/lib/styling'
 // import {
 //   SearchProductQuery,
@@ -15,6 +13,7 @@ import SearchIcon from '../../../../../public/icons/search.svg'
 // } from '../../graphql/product/_gen_/searchProduct.query'
 
 import styles from './styles.module.scss'
+import { Icon } from '@/components/ui/icon'
 
 type FormValues = {
   searchQuery: string
@@ -144,9 +143,7 @@ export function Search() {
           {...register('searchQuery')}
         />
         <IconButton type="submit" className={styles.searchButton}>
-          <SvgIcon className={styles['search-icon']}>
-            <SearchIcon />
-          </SvgIcon>
+          <Icon name="action/search" className={styles['search-icon']} />
         </IconButton>
       </form>
       {/* {inputValue && withFocus && (

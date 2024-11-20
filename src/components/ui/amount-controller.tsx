@@ -1,9 +1,5 @@
-import { SvgIcon } from '../svg-icon'
-import { IconButton } from '../icon-button'
-import PlusIcon from '../../../../public/icons/plus.svg'
-import MinusIcon from '../../../../public/icons/minus.svg'
-
-import styles from './styles.module.scss'
+import { Icon } from './icon'
+import { IconButton } from './icon-button'
 
 interface AddSubInputProps {
   amount: number
@@ -24,19 +20,17 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
   }
 
   return (
-    <div className={styles.container}>
+    <div className="flex items-center rounded-lg bg-gray-100">
       <IconButton
         disableRipple
         onClick={handleSubClick}
         disabled={amount <= 1}
         aria-label="удалить одну единицу данного продукта"
-        className={styles.button}
+        className="!p-2 text-[25px] !text-gray-500 active:scale-110"
       >
-        <SvgIcon className={styles.icon}>
-          <MinusIcon />
-        </SvgIcon>
+        <Icon name="action/circle-minus" />
       </IconButton>
-      <div className={styles.counter}>
+      <div className="w-7 select-none text-center text-[18px] font-medium">
         <span>{amount}</span>
       </div>
       <IconButton
@@ -44,11 +38,9 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
         onClick={handleAddClick}
         disabled={!!max && amount >= max}
         aria-label="добавить одну единицу данного продукта"
-        className={styles.button}
+        className="!p-2 text-[25px] !text-gray-500 active:scale-110"
       >
-        <SvgIcon className={styles.icon}>
-          <PlusIcon />
-        </SvgIcon>
+        <Icon name="action/circle-plus" />
       </IconButton>
     </div>
   )

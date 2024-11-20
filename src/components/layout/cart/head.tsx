@@ -1,8 +1,7 @@
-import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { useCartStore } from '@/providers/cart-store-provider'
 import { useTranslations } from 'next-intl'
-import ExpandArrowIcon from '../../../../public/icons/expand-arrow.svg'
+import { Icon } from '@/components/ui/icon'
 
 export function CartHead({ onCartClose }: { onCartClose(): void }) {
   const t = useTranslations('Common')
@@ -17,9 +16,7 @@ export function CartHead({ onCartClose }: { onCartClose(): void }) {
           onClick={onCartClose}
           className="-rotate-90 fill-gray-700 !p-0 text-[33px]"
         >
-          <SvgIcon>
-            <ExpandArrowIcon />
-          </SvgIcon>
+          <Icon name="common/arrow" />
         </IconButton>
         <p className="ml-8 text-xl font-medium text-black">{t('cart.topControls.title')}</p>
         <button onClick={clear} className="text-[13px] font-medium text-red-500">

@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { Loader } from '@/components/ui/loader'
-import { SvgIcon } from '@/components/ui/svg-icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@/lib/helpers'
 import { EditMode } from './edit-mode'
-import EditIcon from '../../../../../public/icons/edit.svg'
-import WarningIcon from '../../../../../public/icons/warning.svg'
 
 import styles from './styles.module.scss'
+import { Icon } from '@/components/ui/icon'
 
 export function Currency() {
   const [editMode, setEditMode] = useState(false)
@@ -27,9 +25,7 @@ export function Currency() {
     return (
       <div className={styles.container}>
         <div className={styles.warning}>
-          <SvgIcon className={styles.warningIcon}>
-            <WarningIcon />
-          </SvgIcon>
+          <Icon name="action/warning" className={styles.warningIcon} />
           <p>Ошибка получения данных</p>
         </div>
       </div>
@@ -58,9 +54,7 @@ export function Currency() {
         Изменено: <span>{data && formatDate(data.globalData.updatedAt)}</span>
       </p>
       <IconButton disableRipple onClick={() => setEditMode(true)} className={styles.editButton}>
-        <SvgIcon>
-          <EditIcon />
-        </SvgIcon>
+        <Icon name="action/edit" />
       </IconButton>
     </div>
   )

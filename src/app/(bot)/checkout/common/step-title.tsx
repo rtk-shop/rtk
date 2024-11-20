@@ -1,8 +1,6 @@
 import { memo, type ReactNode } from 'react'
 import { cva } from 'cva'
-import { SvgIcon } from '@/components/ui/svg-icon'
-import CheckIcon from '../../../../../public/icons/check.svg'
-import ExpandArrowIcon from '../../../../../public/icons/expand-arrow.svg'
+import { Icon } from '@/components/ui/icon'
 
 interface StepTitleProps {
   step: number
@@ -29,7 +27,7 @@ const inner = cva('flex select-none items-center justify-start rounded-lg', {
   }
 })
 
-const expandIcon = cva('ml-auto text-[25px] transition-all duration-300', {
+const expandIcon = cva('ml-auto text-[26px] transition-all duration-300', {
   variants: {
     expand: {
       true: 'rotate-0',
@@ -39,7 +37,7 @@ const expandIcon = cva('ml-auto text-[25px] transition-all duration-300', {
 })
 
 const stepBadge = cva(
-  'flex size-3 select-none content-center items-center justify-center rounded-full p-3 text-[14px] font-semibold leading-none text-white transition-colors',
+  'flex select-none content-center items-center justify-center rounded-full p-1 text-[14px] font-semibold leading-none text-white transition-colors',
   {
     variants: {
       expand: {
@@ -47,7 +45,8 @@ const stepBadge = cva(
         false: 'bg-gray-400 delay-300 duration-300'
       },
       valid: {
-        true: 'bg-green-light'
+        true: 'bg-green-light',
+        false: 'size-6'
       }
     }
   }
@@ -68,20 +67,11 @@ export const StepTitle = memo(function StepTitle({
     <div className={container({ expand: isEdit })} onClick={handleTitleClick}>
       <div className={inner({ expand: isEdit })}>
         <div className={stepBadge({ expand: isEdit, valid })}>
-          {valid ? (
-            <SvgIcon className="fill-white text-base">
-              <CheckIcon />
-            </SvgIcon>
-          ) : (
-            <span>{step}</span>
-          )}
+          {valid ? <Icon name="common/check" className="text-base" /> : <span>{step}</span>}
         </div>
         {/*  */}
         <h2 className="ml-2 font-medium">{children}</h2>
-        {/*  */}
-        <SvgIcon className={expandIcon({ expand: isEdit })}>
-          <ExpandArrowIcon />
-        </SvgIcon>
+        <Icon name="common/arrow" className={expandIcon({ expand: isEdit })} />
       </div>
     </div>
   )

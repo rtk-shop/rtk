@@ -1,13 +1,11 @@
 import Image from 'next/image'
+import { Icon } from '@/components/ui/icon'
 import { useEffect } from 'react'
-import { SvgIcon } from '@/components/ui/svg-icon'
 import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
 import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/providers/cart-store-provider'
-import LetterIcon from '../../../../../public/icons/letter.svg'
-import LocationIcon from '../../../../../public/icons/box-taped.svg'
 
 export function OrderSuccessModal({ open }: { open: boolean }) {
   const t = useTranslations('Checkout.successModal')
@@ -39,15 +37,11 @@ export function OrderSuccessModal({ open }: { open: boolean }) {
         {/*  */}
         <ul className="mt-5 text-gray-600 *:flex *:justify-center">
           <li className="mb-3">
-            <SvgIcon className="fill-gray-600 text-[33px]">
-              <LetterIcon />
-            </SvgIcon>
+            <Icon name="checkout/letter" className="text-[33px]" />
             <p className="ml-3 max-w-60 leading-4">{t('hint1')}</p>
           </li>
           <li>
-            <SvgIcon className="fill-gray-500 text-[33px]">
-              <LocationIcon />
-            </SvgIcon>
+            <Icon name="checkout/box-taped" className="fill-gray-500 text-[33px]" />
             <p className="ml-3 max-w-60 leading-4">
               {t.rich('hint2', {
                 highlight: (chunks) => (

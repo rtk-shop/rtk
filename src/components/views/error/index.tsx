@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ArrowIcon from '../../../../public/icons/expand-arrow.svg'
+import { Icon } from '@/components/ui/icon'
 import { routeNames } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 
@@ -40,7 +40,7 @@ export function ErrorView({ kind }: { kind: '404' | '500' }) {
         {title}
         {body}
         <p className={styles.actionWrapper}>
-          <ArrowIcon className={styles.arrowIcon} />
+          <Icon name="common/arrow" className={styles.arrowIcon} />
           <Link className={styles.actionLink} href={routeNames.root}>
             {t(`page${kind}.action`)}
           </Link>

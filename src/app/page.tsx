@@ -2,6 +2,7 @@
 import { RadioGroup } from '@/components/ui/radio-group'
 import { novaDeliveryTypeOptions } from './(bot)/checkout/model/constants'
 import { FormProvider, useForm } from 'react-hook-form'
+import { Icon } from '@/components/ui/icon'
 
 export default function Page() {
   const formMethods = useForm({
@@ -22,6 +23,8 @@ export default function Page() {
         <button className="... animate-in slide-in-from-top">Button D</button>
         <button className="... animate-in slide-in-from-left">Button E</button>
         <br />
+        <Icon name="common/cart" className="text-[133px] text-orange-400" />
+        <Icon name="common/cart" />
       </div>
       <FormProvider {...formMethods}>
         <RadioGroup name="rg2" options={novaDeliveryTypeOptions} />

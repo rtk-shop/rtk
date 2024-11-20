@@ -1,8 +1,7 @@
 'use client'
 
-import ShareIcon from '../../../../../../public/icons/share.svg'
 import { Button } from '@/components/ui/button'
-import { SvgIcon } from '@/components/ui/svg-icon'
+import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
@@ -29,11 +28,7 @@ export function Controls({ productID }: ControlsProps) {
         <Button
           fullWidth
           color="secondary"
-          startIcon={
-            <SvgIcon className="mr-2.5 fill-black text-[21px]">
-              <ShareIcon />
-            </SvgIcon>
-          }
+          startIcon={<Icon name="action/share" className="mr-2.5 fill-black text-[21px]" />}
         >
           Поделиться
         </Button>

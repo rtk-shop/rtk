@@ -32,16 +32,6 @@ a {
   text-decoration: none;
 }
 
-.svg-icon {
-  /* font-size: 1.5rem; */
-  /* TODO: broken inheritance */
-  width: 1em;
-  height: 1em;
-  user-select: none;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
 .hide {
   position: absolute;
   width: 1px;
@@ -125,5 +115,26 @@ a {
 @layer base {
   :root {
     --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  /*
+  Our base class for icons inherits the current text color and applies common styles.
+  We're using a specific component class to prevent potential style conflicts and utilize the [data-axis] attribute.
+  */
+  .icon {
+    @apply box-content inline-block select-none fill-current text-inherit;
+  }
+
+  /* Set icon size to 1em based on its aspect ratio, so we can use `font-size` to scale it */
+  .icon[data-axis*='x'] {
+    /* scale horizontally */
+    @apply w-[1em];
+  }
+
+  .icon[data-axis*='y'] {
+    /* scale vertically */
+    @apply h-[1em];
   }
 }

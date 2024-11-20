@@ -1,7 +1,6 @@
 import { IconButton } from '@/components/ui/icon-button'
-import { SvgIcon } from '@/components/ui/svg-icon'
-import XmarkIcon from '../../../../public/icons/xmark.svg'
 import { LogoImage } from '@/components/ui/logo'
+import { Icon } from '@/components/ui/icon'
 
 export function SidebarHead({ onClose }: { onClose(): void }) {
   return (
@@ -12,11 +11,9 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
       <IconButton
         disableRipple
         onClick={onClose}
-        className="fill-white text-sm hover:fill-gray-300"
+        className="text-sm text-white hover:text-gray-300"
       >
-        <SvgIcon>
-          <XmarkIcon />
-        </SvgIcon>
+        <Icon name="common/xmark" />
       </IconButton>
     </div>
   )

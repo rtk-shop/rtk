@@ -1,7 +1,6 @@
-import { ReactNode, useState, useEffect, useRef } from 'react'
+import { type ReactNode, useState, useEffect, useRef } from 'react'
+import { Icon } from '../icon'
 import clsx from 'clsx'
-import ArrowIcon from '../../../../public/icons/expand-arrow.svg'
-import { SvgIcon } from '../svg-icon'
 
 import styles from './styles.module.scss'
 
@@ -85,14 +84,13 @@ export function Dropdown({
           ))}
         </ul>
       )}
-      <SvgIcon
+      <Icon
+        name="common/arrow"
         className={clsx({
           [styles.expandIcon]: true,
           [styles.collapsed]: open
         })}
-      >
-        <ArrowIcon />
-      </SvgIcon>
+      />
     </div>
   )
 }
