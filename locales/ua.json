@@ -50,7 +50,8 @@
     "delivery": {
       "title": "Спосіб доставки",
       "cityPlaceholder": "Вкажіть місто",
-      "warehousePlaceholder": "Оберіть місце"
+      "warehousePlaceholder": "Оберіть місце",
+      "unavailable": "поки що недоступно"
     },
     "successModal": {
       "title": "Ви успішно створили замовлення!",

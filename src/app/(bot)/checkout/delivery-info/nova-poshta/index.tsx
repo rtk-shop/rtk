@@ -124,6 +124,7 @@ export function NovaPoshta({
   return (
     <div>
       <div className="mb-3">
+        <p>Свайпни</p>
         <ScrollMask>
           <RadioGroup direction="row" name="np-delivery-type" options={radioOptions} />
         </ScrollMask>

@@ -41,10 +41,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
   const [animatedRef, animatedEl] = useElementSize()
 
   const [popularCities, setPopularCities] = useState<PopularCity[]>([])
-  const [citiesMeta, setCitiesMeta] = useState<{
-    error: boolean
-    loading: boolean
-  }>({
+  const [citiesMeta, setCitiesMeta] = useState({
     error: false,
     loading: true
   })
@@ -144,7 +141,9 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
               </label>
             </li>
           </ul>
-          <p className="mb-2 mt-1 text-end text-[13px] leading-none">* поки що недоступно</p>
+          <p className="mb-2 mt-1 text-end text-[13px] leading-none">
+            * {t('Checkout.delivery.unavailable')}
+          </p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
             <NovaPoshta popularCitiesLoad={citiesMeta.loading} popularCities={popularCities} />

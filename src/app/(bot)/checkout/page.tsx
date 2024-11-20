@@ -16,7 +16,7 @@ export default function Checkout() {
   const [state, dispatch] = useState({
     waitDataSyncing: true,
     isInfoOpen: false,
-    isDeliveryOpen: true,
+    isDeliveryOpen: false,
     successOrderModalOpen: false
   })
 
@@ -29,10 +29,6 @@ export default function Checkout() {
     resolver: valibotResolver(validationSchema),
     defaultValues: {
       supplier: 'nova',
-      // temp
-      name: 'User',
-      surname: 'Userovich',
-      phone: '998713081',
       'np-delivery-type': '1'
     }
   })
