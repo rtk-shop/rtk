@@ -7,14 +7,12 @@ import { logInSchema, LoginFormValues } from './model'
 import { toast } from 'sonner'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useLogIn } from './hooks'
-import useTranslation from 'next-translate/useTranslation'
-
 import { routeNames } from '@/lib/constants'
 import { decrypt } from '@/lib/session'
 
 export function LogIn({ onSignUp }: { onSignUp(): void }) {
   const router = useRouter()
-  const { t } = useTranslation('auth')
+  const t = (s: string, ...other: any) => s // ('auth')
 
   const { handleSubmit } = useForm<LoginFormValues>({
     mode: 'onBlur',

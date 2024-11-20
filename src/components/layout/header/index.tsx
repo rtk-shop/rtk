@@ -7,7 +7,6 @@ import { Icon } from '@/components/ui/icon'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { Search } from './search'
-import useTranslation from 'next-translate/useTranslation'
 
 interface HeaderProps {
   currency: number
@@ -16,7 +15,7 @@ interface HeaderProps {
 }
 
 export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen }: HeaderProps) {
-  const { t } = useTranslation('common')
+  const t = (s: string) => s
 
   const cartAmount = 0
   const favoriteAmount = 0

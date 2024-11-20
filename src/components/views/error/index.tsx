@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import { Icon } from '@/components/ui/icon'
 import { routeNames } from '@/lib/constants'
-import useTranslation from 'next-translate/useTranslation'
-
 import styles from './styles.module.scss'
 
 export function ErrorView({ kind }: { kind: '404' | '500' }) {
-  const { t, lang } = useTranslation('common')
+  const lang = 'ru'
+  const t = (s: string) => s
 
   const title =
     kind === '404' ? (

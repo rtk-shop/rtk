@@ -2,7 +2,7 @@ import { Drawer } from '@/components/ui/drawer'
 import { SidebarHead } from './head'
 import { Categories } from './categories'
 import { LangSwitcher } from '@/components/lang-switcher'
-import useTranslation from 'next-translate/useTranslation'
+import { useTranslations } from 'next-intl'
 
 interface SidebarProps {
   isOpen: boolean
@@ -10,7 +10,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const { t } = useTranslation('common')
+  const t = useTranslations('Common')
 
   return (
     <Drawer open={isOpen} position="left" onClose={onClose}>
@@ -23,7 +23,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           {/*  */}
           <div className="flex grow flex-col justify-end">
             <div className="mb-3 flex items-center justify-between px-5">
-              <span className="text-lg font-medium text-white">{t('drawer.lang')}:</span>
+              <span className="text-lg font-medium text-white">{t('nouns.lang')}:</span>
               <LangSwitcher />
             </div>
             <ul className="p-5 text-[14px] text-white *:flex *:justify-between">

@@ -8,11 +8,10 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useSignUp } from './hooks'
 import { routeNames } from '@/lib/constants'
 import { toast } from 'sonner'
-import useTranslation from 'next-translate/useTranslation'
 
 export function SignUp({ onLogIn }: { onLogIn(): void }) {
   const router = useRouter()
-  const { t } = useTranslation('auth')
+  const t = (s: string, ...other: any) => s // ('auth')
 
   const { handleSubmit } = useForm<SignupFormValues>({
     mode: 'onBlur',

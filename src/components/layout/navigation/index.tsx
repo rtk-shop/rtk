@@ -72,7 +72,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
               <IconButton
                 onClick={handleCatalogClick}
                 disableRipple
-                className="text-[28px] text-teal-700 dark:text-white"
+                className="text-[28px] text-teal-800 dark:text-white"
               >
                 <Icon name="common/grid" />
               </IconButton>

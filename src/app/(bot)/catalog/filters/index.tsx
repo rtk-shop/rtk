@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckBoxGroup } from '@/components/ui/checkbox-group'
 import { PriceRange } from '@/components/ui/price-range'
-import useTranslation from 'next-translate/useTranslation'
 import fieldProps, { FilterItem } from './fliters-data'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
@@ -28,7 +27,7 @@ interface FiltersProps {
 }
 
 export function Filters({ priceRange, onReset }: FiltersProps) {
-  const { t } = useTranslation('catalog')
+  const t = (s: string) => s
 
   const t2 = useTranslations('Common')
 

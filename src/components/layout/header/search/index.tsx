@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 import { IconButton } from '@/components/ui/icon-button'
-// import Image from 'next/image'
-import useTranslation from 'next-translate/useTranslation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Dropdown, type Option } from '@/components/ui/dropdown'
 // import { getProductMainTagColor } from '@/lib/styling'
@@ -20,7 +18,8 @@ type FormValues = {
 }
 
 export function Search() {
-  const { t } = useTranslation('common')
+  const t = (s: string) => s
+
   const [inputValue, setInputValue] = useState('')
   const [withFocus, setWithFocus] = useState(false)
 
