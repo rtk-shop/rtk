@@ -27,7 +27,7 @@ const labelEl = cva(
   'relative cursor-pointer select-none whitespace-nowrap rounded-full pb-1 pl-9 pr-4 pt-1 text-base font-medium leading-none transition-all duration-500 peer-checked:before:border-black peer-checked:before:bg-black peer-checked:after:left-2 peer-checked:after:top-1.5 peer-checked:after:size-3 peer-enabled:hover:before:border-black peer-disabled:cursor-not-allowed peer-disabled:opacity-55'
 )
 
-export type option = {
+export type RadioOption = {
   value: string
   label: string
   disabled?: boolean
@@ -35,7 +35,7 @@ export type option = {
 
 export interface RadioGroupProps {
   name: string
-  options: option[]
+  options: RadioOption[]
   direction?: 'row' | 'col'
 }
 

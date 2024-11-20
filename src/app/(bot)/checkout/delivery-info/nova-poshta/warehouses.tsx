@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
-import { providerNames } from '../../model/constants'
-import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from 'react-virtualized'
 import AsyncSelect from 'react-select/async'
+import { useWatch } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
+import { providerNames, warehouseTypeLocale } from '../../model/constants'
+import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from 'react-virtualized'
 import type { MenuListProps, GroupBase } from 'react-select'
 import type { ListRowProps } from 'react-virtualized'
 import type { Warehouse } from '../../model/types'
@@ -59,22 +61,19 @@ export const VirtualizedList = ({
   )
 }
 
-export function Warehouses({
-  cityId,
-  warehouseType,
-  onSelect
-}: {
-  cityId: string
-  warehouseType: string
-  onSelect(id: string): void
-}) {
+export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: string): void }) {
+  const t = useTranslations()
+
+  const values = useWatch({
+    name: ['np-delivery-type']
+  })
+
+  const warehouseType = values[0]
+
   const [warehouses, setWarehouses] = useState<WarehousesOption[]>([])
   const [selectValue, setSelectValue] = useState<WarehousesOption | null>(null)
 
-  const [warehousesMeta, setWarehousesMeta] = useState<{
-    error: boolean
-    loading: boolean
-  }>({
+  const [warehousesMeta, setWarehousesMeta] = useState({
     error: false,
     loading: true
   })
@@ -113,7 +112,7 @@ export function Warehouses({
 
   return (
     <div className="mb-3">
-      <span>Отделения</span>
+      <span>{t(`Common.nouns.${warehouseTypeLocale[+warehouseType]}`)}</span>
       <AsyncSelect
         components={{ MenuList: VirtualizedList }}
         cacheOptions
@@ -133,7 +132,7 @@ export function Warehouses({
         }}
         defaultOptions={warehouses}
         loadOptions={filterWarehouses}
-        placeholder={'Укажите отделение'}
+        placeholder={t('Checkout.delivery.warehousePlaceholder')}
         styles={{
           menu: ({ position, fontWeight, ...provided }) => ({
             ...provided,

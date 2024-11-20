@@ -34,8 +34,13 @@ export const deliverySchema = v.pipe(
   )
 )
 
-export const validationSchema = v.intersect([customerInfoSchema, deliverySchema])
+export const metaSchema = v.object({
+  'np-delivery-type': v.string()
+})
+
+export const validationSchema = v.intersect([customerInfoSchema, deliverySchema, metaSchema])
 
 export type FormValues = v.InferOutput<typeof validationSchema>
 export type CustomerInfoValues = v.InferOutput<typeof customerInfoSchema>
 export type DeliveryValues = v.InferOutput<typeof deliverySchema>
+export type MetaValues = v.InferOutput<typeof metaSchema>

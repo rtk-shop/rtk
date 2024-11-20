@@ -29,13 +29,29 @@
     },
     "nouns": {
       "price": "Цена",
-      "lang": "Язык"
+      "lang": "Язык",
+      "name": "Имя",
+      "surname": "Фамилия",
+      "phone": "Телефон",
+      "city": "Город",
+      "warehouse": "Отделение",
+      "cargoWarehouse": "Грузовое отделение",
+      "parcelAutomat": "Почтомат"
     },
     "verbs": {
-      "clear": "Очистить"
+      "clear": "Очистить",
+      "continue": "Продолжить"
     }
   },
   "Checkout": {
+    "customer": {
+      "title": "Контактная информация"
+    },
+    "delivery": {
+      "title": "Способ доставки",
+      "cityPlaceholder": "Укажите город",
+      "warehousePlaceholder": "Выберите место"
+    },
     "successModal": {
       "title": "Вы успешно создали заказ!",
       "hint1": "Бот отправит вам уведомление с подробностями",

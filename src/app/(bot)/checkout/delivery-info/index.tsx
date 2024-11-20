@@ -10,6 +10,7 @@ import { NovaPoshta } from './nova-poshta'
 import { UkrPoshta } from './ukr-poshta'
 import { parse } from 'valibot'
 import { useFormContext, useWatch } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 import { type DeliveryValues, deliverySchema } from '../model/validation-schema'
 import type { PopularCity } from '../model/types'
 
@@ -28,6 +29,7 @@ const peerStyles = cva(
 )
 
 export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) {
+  const t = useTranslations()
   const { register } = useFormContext<DeliveryValues>()
 
   const values = useWatch({
@@ -96,14 +98,14 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
   return (
     <section className="rounded-lg bg-white">
       <StepTitle step={2} isEdit={isEdit} onEdit={onEdit} valid={isValuesValid}>
-        Способ доставки
+        {t('Checkout.delivery.title')}
       </StepTitle>
 
       <Expander open={isEdit} openHeightPx={animatedEl.height}>
         <div ref={animatedRef} className="px-2.5 pb-3">
           <ul className="flex">
             <li className="mr-2 w-full">
-              <label className="">
+              <label>
                 <input
                   type="radio"
                   value="nova"
@@ -122,7 +124,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
               </label>
             </li>
             <li className="w-full">
-              <label className="">
+              <label>
                 <input
                   disabled
                   type="radio"
@@ -152,7 +154,7 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
           </ShowBlock>
           {/*  */}
           <Button color="accept" fullWidth disabled={!isValuesValid} onClick={onContinue}>
-            Продолжить
+            {t('Common.verbs.continue')}
           </Button>
         </div>
       </Expander>

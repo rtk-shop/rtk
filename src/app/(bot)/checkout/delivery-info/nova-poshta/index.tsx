@@ -3,8 +3,9 @@ import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext } from 'react-hook-form'
 import { components, InputProps } from 'react-select'
-import { RadioGroup } from '@/components/ui/radio-group'
+import { RadioGroup, type RadioOption } from '@/components/ui/radio-group'
 import { ScrollMask } from '@/components/ui/scroll-mask'
+import { useTranslations } from 'next-intl'
 import { pupularCitiesNames, novaDeliveryTypeOptions, providerNames } from '../../model/constants'
 import type { PopularCity, Settlement } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
@@ -29,6 +30,7 @@ export function NovaPoshta({
   popularCities: PopularCity[]
   popularCitiesLoad: boolean
 }) {
+  const t = useTranslations()
   const [cityId, setCityId] = useState('')
   const [selectValue, setSelectValue] = useState<CityOption | null>(null)
 
@@ -114,15 +116,20 @@ export function NovaPoshta({
   //   padding-left: 7px;
   //   margin-bottom: 7px;
 
+  const radioOptions = novaDeliveryTypeOptions.map((option: RadioOption) => ({
+    ...option,
+    label: t(`Common.nouns.${option.label}`)
+  }))
+
   return (
     <div>
       <div className="mb-3">
         <ScrollMask>
-          <RadioGroup direction="row" name="_np-delivery-type" options={novaDeliveryTypeOptions} />
+          <RadioGroup direction="row" name="np-delivery-type" options={radioOptions} />
         </ScrollMask>
       </div>
       <div className="w-full">
-        <p className="my-1.5 leading-none">Город</p>
+        <p className="my-1.5 leading-none">{t('Common.nouns.city')}</p>
         <AsyncSelect
           cacheOptions
           instanceId={'rsl1'}
@@ -143,7 +150,7 @@ export function NovaPoshta({
           components={{ Input: SelectInput }}
           defaultOptions={memCitiesOptions}
           loadOptions={promiseOptions}
-          placeholder={'Укажите город'}
+          placeholder={t('Checkout.delivery.cityPlaceholder')}
           styles={{
             menu: ({ position, ...provided }) => ({
               ...provided,
@@ -181,7 +188,7 @@ export function NovaPoshta({
           </li>
         ))}
       </ul>
-      {cityId && <Warehouses cityId={cityId} warehouseType="1" onSelect={handleWarehouseChange} />}
+      {cityId && <Warehouses cityId={cityId} onSelect={handleWarehouseChange} />}
     </div>
   )
 }

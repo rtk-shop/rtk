@@ -32,16 +32,18 @@ export default function Checkout() {
       // temp
       name: 'User',
       surname: 'Userovich',
-      phone: '998713081'
+      phone: '998713081',
+      'np-delivery-type': '1'
     }
   })
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
-    console.log('submit', values)
+    // delete meta form data
+    const { ['np-delivery-type']: removedKey, ...requestValues } = values
 
     const res = await createOrder({
       cartItems,
-      ...values
+      ...requestValues
     })
 
     if (res.error) {

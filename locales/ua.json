@@ -29,13 +29,29 @@
     },
     "nouns": {
       "price": "Ціна",
-      "lang": "Мова"
+      "lang": "Мова",
+      "name": "Ім'я",
+      "surname": "Прізвище",
+      "phone": "Телефон",
+      "city": "Місто",
+      "warehouse": "Відділення",
+      "cargoWarehouse": "Вантажне відділення",
+      "parcelAutomat": "Поштомат"
     },
     "verbs": {
-      "clear": "Очистити"
+      "clear": "Очистити",
+      "continue": "Продовжити"
     }
   },
   "Checkout": {
+    "customer": {
+      "title": "Контактна інформація"
+    },
+    "delivery": {
+      "title": "Спосіб доставки",
+      "cityPlaceholder": "Вкажіть місто",
+      "warehousePlaceholder": "Оберіть місце"
+    },
     "successModal": {
       "title": "Ви успішно створили замовлення!",
       "hint1": "Бот надішле вам повідомлення з подробицями",
