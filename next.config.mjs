@@ -1,9 +1,7 @@
 import path from 'path'
+import svg from '@neodx/svg/webpack'
 import { fileURLToPath } from 'url'
 import createNextIntlPlugin from 'next-intl/plugin'
-// const svg = require('@neodx/svg/webpack')
-
-import svg from '@neodx/svg/webpack'
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -18,12 +16,6 @@ const nextConfig = {
     prependData: `@import '@/styles/scss-globals.scss';`
   },
   webpack(config, options) {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack']
-    })
-
     if (options.isServer) {
       config.plugins.push(
         svg({
