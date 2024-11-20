@@ -38,7 +38,7 @@ export function CartItem({ product, amount }: CartItemProps) {
 
   return (
     <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 after:last:hidden">
-      <div className="relative mr-5 min-h-44 w-full min-w-44">
+      <div className="relative mr-2 min-h-44 w-full min-w-44">
         <Link href={routeNames.product + id} className="rounded-lg">
           <ImagePlaceholder src={preview} altText={title} />
         </Link>
