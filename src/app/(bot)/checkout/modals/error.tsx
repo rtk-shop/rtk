@@ -2,17 +2,22 @@ import { Icon } from '@/components/ui/icon'
 import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { usePageState } from '../model/state'
 
-export function ErrorModal({ open }: { open: boolean }) {
+export function ErrorModal() {
   const t = useTranslations('Checkout.successModal')
   const router = useRouter()
 
+  const isOpen = usePageState((state) => state.errorOrderModalOpen)
+  const onErrorModal = usePageState((state) => state.onErrorModal)
+
   const handleBack = () => {
     router.back()
+    onErrorModal(false)
   }
 
   return (
-    <Drawer open={open} position="bottom" onClose={handleBack}>
+    <Drawer open={isOpen} position="bottom" onClose={handleBack}>
       <div className="rounded-t-2xl bg-white px-4 py-7">
         <div className="mb-2 flex justify-center">
           <Icon name="action/warning" className="text-[100px] text-yellow-500" />

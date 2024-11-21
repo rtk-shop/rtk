@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { cva } from 'cva'
+import { usePageState } from '../model/state'
 import { StepTitle } from '../common/step-title'
 import { Expander } from '../common/expander'
 import { Button } from '@/components/ui/button'
@@ -22,16 +23,14 @@ const peerStyles = cva(
   'peer-checked:border-green-light peer-checked:bg-green-light/20 peer-checked:before:visible peer-checked:after:visible peer-disabled:opacity-55'
 )
 
-interface DeliveryInfoProps {
-  isEdit: boolean
-  onEdit(): void
-  onContinue(): void
-  onSomeError(): void
-}
-
-export function DeliveryInfo({ isEdit, onEdit, onContinue, onSomeError }: DeliveryInfoProps) {
+export function DeliveryInfo() {
   const t = useTranslations()
   const { register } = useFormContext<DeliveryValues>()
+
+  const isDeliveryOpen = usePageState((state) => state.isDeliveryOpen)
+  const onDeliverySection = usePageState((state) => state.onDeliverySection)
+  const closeDelivery = usePageState((state) => state.closeDelivery)
+  const onErrorModal = usePageState((state) => state.onErrorModal)
 
   const values = useWatch({
     name: ['cityName', 'postOfficeName', 'supplier']
@@ -68,13 +67,13 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue, onSomeError }: Delive
     fetchData().catch((error) => {
       console.warn('fetch popular_citiest:', error.message)
       setCitiesMeta((prev) => ({ ...prev, loading: false, error: true }))
-      onSomeError()
+      onErrorModal(true)
     })
 
     return () => {
       // controller.abort()
     }
-  }, [onSomeError])
+  }, [onErrorModal])
 
   let isValuesValid = false
 
@@ -92,11 +91,11 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue, onSomeError }: Delive
 
   return (
     <section className="rounded-lg bg-white">
-      <StepTitle step={2} isEdit={isEdit} onEdit={onEdit} valid={isValuesValid}>
+      <StepTitle step={2} isEdit={isDeliveryOpen} onEdit={onDeliverySection} valid={isValuesValid}>
         {t('Checkout.delivery.title')}
       </StepTitle>
 
-      <Expander open={isEdit} openHeightPx={animatedEl.height}>
+      <Expander open={isDeliveryOpen} openHeightPx={animatedEl.height}>
         <div ref={animatedRef} className="px-2.5 pb-3">
           <ul className="flex">
             <li className="mr-2 w-full">
@@ -144,17 +143,13 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue, onSomeError }: Delive
           </p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
-            <NovaPoshta
-              popularCitiesLoad={citiesMeta.loading}
-              popularCities={popularCities}
-              onSomeError={onSomeError}
-            />
+            <NovaPoshta popularCitiesLoad={citiesMeta.loading} popularCities={popularCities} />
           </ShowBlock>
           <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
           </ShowBlock>
           {/*  */}
-          <Button color="accept" fullWidth disabled={!isValuesValid} onClick={onContinue}>
+          <Button color="accept" fullWidth disabled={!isValuesValid} onClick={closeDelivery}>
             {t('Common.verbs.continue')}
           </Button>
         </div>

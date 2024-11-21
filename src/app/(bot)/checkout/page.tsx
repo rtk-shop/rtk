@@ -4,25 +4,17 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { CustomerInfo } from './customer-info'
 import { DeliveryInfo } from './delivery-info'
 import { Preview } from './preview'
-import { useState } from './model/useState'
-import { useCallback } from 'react'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
 import { useCartStore } from '@/providers/cart-store-provider'
 import { OrderSuccessModal } from './modals/order-success'
 import { ErrorModal } from './modals/error'
+import { usePageState } from './model/state'
 
 export default function Checkout() {
-  const [state, dispatch] = useState({
-    waitDataSyncing: true,
-    isInfoOpen: false,
-    isDeliveryOpen: false,
-    successOrderModalOpen: false,
-    errorOrderModalOpen: false
-  })
-
   const [cartItems] = useCartStore((state) => state.cartItems)
+  const onSucessModal = usePageState((state) => state.onSucessModal)
 
   const [orderResult, createOrder] = useCreateOrderMutation()
 
@@ -48,24 +40,8 @@ export default function Checkout() {
       console.log(res.error)
     } else {
       console.log(res.data)
-      dispatch.openSucessModal()
+      onSucessModal(true)
     }
-  }
-
-  const handleInfoEditOpen = useCallback(() => {
-    dispatch.openInfo()
-  }, [dispatch])
-
-  const handleInfoChecked = () => {
-    dispatch.infoChecked()
-  }
-
-  const handleDeliveryEditOpen = useCallback(() => {
-    dispatch.openDelivery()
-  }, [dispatch])
-
-  const handleDeliveryChecked = () => {
-    dispatch.closeDelivery()
   }
 
   return (
@@ -73,17 +49,11 @@ export default function Checkout() {
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div className="px-2.5 py-5 pb-3">
-            <CustomerInfo
-              isEdit={state.isInfoOpen}
-              onEdit={handleInfoEditOpen}
-              onContinue={handleInfoChecked}
-            />
-            <DeliveryInfo
-              isEdit={state.isDeliveryOpen}
-              onEdit={handleDeliveryEditOpen}
-              onContinue={handleDeliveryChecked}
-              onSomeError={dispatch.openErrorModal}
-            />
+            {/*  */}
+            <CustomerInfo />
+            {/*  */}
+            <DeliveryInfo />
+            {/*  */}
             <Preview
               cartItems={cartItems}
               submitLoading={orderResult.fetching}
@@ -92,8 +62,8 @@ export default function Checkout() {
           </div>
         </form>
       </FormProvider>
-      <OrderSuccessModal open={state.successOrderModalOpen} />
-      <ErrorModal open={state.errorOrderModalOpen} />
+      <OrderSuccessModal />
+      <ErrorModal />
     </div>
   )
 }

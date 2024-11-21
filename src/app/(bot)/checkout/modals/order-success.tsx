@@ -6,11 +6,15 @@ import { useRouter } from 'next/navigation'
 import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/providers/cart-store-provider'
+import { usePageState } from '../model/state'
 
-export function OrderSuccessModal({ open }: { open: boolean }) {
+export function OrderSuccessModal() {
   const t = useTranslations('Checkout.successModal')
   const router = useRouter()
   const [clear] = useCartStore((state) => state.clear)
+
+  const isOpen = usePageState((state) => state.successOrderModalOpen)
+  const onSucessModal = usePageState((state) => state.onSucessModal)
 
   useEffect(() => {
     router.prefetch(routeNames.profile)
@@ -19,10 +23,11 @@ export function OrderSuccessModal({ open }: { open: boolean }) {
   const handleComplete = () => {
     router.replace(routeNames.profile)
     clear()
+    onSucessModal(false)
   }
 
   return (
-    <Drawer open={open} position="bottom" onClose={handleComplete}>
+    <Drawer open={isOpen} position="bottom" onClose={handleComplete}>
       <div className="rounded-t-2xl bg-white px-4 pb-7 pt-7">
         <Image
           src="/icons/tada.webp"

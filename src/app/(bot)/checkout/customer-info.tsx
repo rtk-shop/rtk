@@ -1,4 +1,5 @@
 import { parse } from 'valibot'
+import { usePageState } from './model/state'
 import { StepTitle } from './common/step-title'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,14 +10,12 @@ import { Expander } from './common/expander'
 import { useTranslations } from 'next-intl'
 import type { CustomerInfoValues } from './model/validation-schema'
 
-interface CustomerInfoProps {
-  isEdit: boolean
-  onEdit(): void
-  onContinue(): void
-}
-
-export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) {
+export function CustomerInfo() {
   const t = useTranslations()
+
+  const isInfoOpen = usePageState((state) => state.isInfoOpen)
+  const onInfoSection = usePageState((state) => state.onInfoSection)
+  const infoChecked = usePageState((state) => state.infoChecked)
 
   const values = useWatch<CustomerInfoValues>({
     name: ['name', 'surname', 'phone']
@@ -36,15 +35,15 @@ export function CustomerInfo({ isEdit, onEdit, onContinue }: CustomerInfoProps) 
   }
 
   const handleNextClick = () => {
-    onContinue()
+    infoChecked()
   }
 
   return (
     <section className="mb-7 rounded-lg bg-white">
-      <StepTitle step={1} isEdit={isEdit} onEdit={onEdit} valid={isValid}>
+      <StepTitle step={1} isEdit={isInfoOpen} onEdit={onInfoSection} valid={isValid}>
         {t('Checkout.customer.title')}
       </StepTitle>
-      <Expander open={isEdit} openHeightPx={363}>
+      <Expander open={isInfoOpen} openHeightPx={363}>
         <div className="px-4">
           <ul>
             <li>

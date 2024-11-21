@@ -17,15 +17,12 @@ type CityOption = {
   value: string
 }
 
-export function NovaPoshta({
-  popularCitiesLoad,
-  popularCities,
-  onSomeError
-}: {
+interface NovaPoshtaProps {
   popularCities: PopularCity[]
   popularCitiesLoad: boolean
-  onSomeError(): void
-}) {
+}
+
+export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps) {
   const t = useTranslations()
   const [cityId, setCityId] = useState('')
   const [selectValue, setSelectValue] = useState<CityOption | null>(null)
@@ -181,9 +178,7 @@ export function NovaPoshta({
           </li>
         ))}
       </ul>
-      {cityId && (
-        <Warehouses cityId={cityId} onSelect={handleWarehouseChange} onSomeError={onSomeError} />
-      )}
+      {cityId && <Warehouses cityId={cityId} onSelect={handleWarehouseChange} />}
     </div>
   )
 }

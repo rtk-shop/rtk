@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import AsyncSelect from 'react-select/async'
+import { usePageState } from '../../model/state'
 import { useWatch } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
 import { providerNames, warehouseTypeLocale } from '../../model/constants'
@@ -64,11 +65,11 @@ export const VirtualizedList = ({
 export interface WarehousesProps {
   cityId: string
   onSelect(id: string): void
-  onSomeError(): void
 }
 
-export function Warehouses({ cityId, onSelect, onSomeError }: WarehousesProps) {
+export function Warehouses({ cityId, onSelect }: WarehousesProps) {
   const t = useTranslations()
+  const onErrorModal = usePageState((state) => state.onErrorModal)
 
   const values = useWatch({
     name: ['np-delivery-type']
@@ -106,9 +107,9 @@ export function Warehouses({ cityId, onSelect, onSomeError }: WarehousesProps) {
 
     fetchData().catch((error) => {
       setWarehousesMeta((prev) => ({ ...prev, loading: false, error: true }))
-      onSomeError()
+      onErrorModal(true)
     })
-  }, [cityId, warehouseType, onSomeError])
+  }, [cityId, warehouseType, onErrorModal])
 
   const filterWarehouses = (inputValue: string) =>
     new Promise<WarehousesOption[]>((resolve) => {
