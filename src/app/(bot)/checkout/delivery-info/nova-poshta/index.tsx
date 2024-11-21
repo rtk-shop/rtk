@@ -2,13 +2,15 @@ import { useEffect, useState, useMemo } from 'react'
 import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext } from 'react-hook-form'
-import { components, InputProps } from 'react-select'
+import { components, InputProps, type OptionsOrGroups } from 'react-select'
 import { RadioGroup, type RadioOption } from '@/components/ui/radio-group'
 import { ScrollMask } from '@/components/ui/scroll-mask'
 import { useTranslations } from 'next-intl'
 import { pupularCitiesNames, novaDeliveryTypeOptions, providerNames } from '../../model/constants'
-import type { PopularCity, Settlement } from '../../model/types'
+import type { PopularCity } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
+import { useDebouncedCallback } from 'use-debounce'
+import { searchSettlements } from '../../model/api'
 
 type CityOption = {
   label: string
@@ -25,10 +27,12 @@ const SelectInput = (props: InputProps<CityOption, false>) => {
 
 export function NovaPoshta({
   popularCitiesLoad,
-  popularCities
+  popularCities,
+  onSomeError
 }: {
   popularCities: PopularCity[]
   popularCitiesLoad: boolean
+  onSomeError(): void
 }) {
   const t = useTranslations()
   const [cityId, setCityId] = useState('')
@@ -49,39 +53,41 @@ export function NovaPoshta({
     setCityId(selectValue ? selectValue.value : '')
   }, [selectValue])
 
-  const promiseOptions = (inputValue: string) =>
-    new Promise<Array<CityOption>>((resolve) => {
-      const matches = popularCities
-        .map((city) => ({
-          label: city.city_name,
-          value: city.nova_poshta_id
-        }))
-        .filter((c) => c.label.toLowerCase().includes(inputValue.toLowerCase()))
+  const fetchOptions = (inputValue: string, callback: (options: CityOption[]) => void) => {
+    return new Promise<CityOption[]>((resolve) => {
+      const matches = memCitiesOptions.filter((c) =>
+        c.label.toLowerCase().includes(inputValue.toLowerCase())
+      )
 
-      if (!matches.length) {
-        const params = new URLSearchParams({
-          provider: providerNames.novaPoshta,
-          city_name: inputValue.toLocaleLowerCase()
-        })
-
-        fetch(`${process.env.NEXT_PUBLIC_DELIVERY_API}/search-settlements?${params}`)
-          .then((resp) => resp.json())
-          .then((data) => {
-            const settlements = data.map((settlement: Settlement) => ({
-              label: settlement.name,
-              value: settlement.settlement_id
-            }))
-
-            resolve(settlements)
-          })
-          .catch((error) => {
-            console.warn(error)
-            // "!!" is an error
-          })
-      } else {
-        resolve(matches)
+      resolve(matches)
+    }).then((options) => {
+      if (options.length) {
+        callback(options)
+        return
       }
+
+      searchSettlements(inputValue)
+        .then((data) => {
+          const settlements: CityOption[] = data.map((v) => ({
+            label: v.name,
+            value: v.settlement_id
+          }))
+
+          callback(settlements)
+        })
+        .catch((err) => {
+          console.log('WALLE', err)
+          // todo handle
+          callback([])
+        })
     })
+  }
+
+  const debouncedLoadOptions = useDebouncedCallback(fetchOptions, 750)
+
+  const getOptionsAsync = (inputValue: string, callback: (options: CityOption[]) => void) => {
+    debouncedLoadOptions(inputValue, callback)
+  }
 
   const handleSelectChange = (cityId: string) => {
     setCityId(cityId)
@@ -110,12 +116,6 @@ export function NovaPoshta({
     }
   })
 
-  // font-size: 15px;
-  //   color: #6a6a6a; // dark #fff
-  //   font-weight: 500;
-  //   padding-left: 7px;
-  //   margin-bottom: 7px;
-
   const radioOptions = novaDeliveryTypeOptions.map((option: RadioOption) => ({
     ...option,
     label: t(`Common.nouns.${option.label}`)
@@ -133,6 +133,7 @@ export function NovaPoshta({
         <p className="my-1.5 leading-none">{t('Common.nouns.city')}</p>
         <AsyncSelect
           cacheOptions
+          loadOptions={getOptionsAsync}
           instanceId={'rsl1'}
           isDisabled={popularCitiesLoad}
           value={selectValue}
@@ -150,7 +151,6 @@ export function NovaPoshta({
           }}
           components={{ Input: SelectInput }}
           defaultOptions={memCitiesOptions}
-          loadOptions={promiseOptions}
           placeholder={t('Checkout.delivery.cityPlaceholder')}
           styles={{
             menu: ({ position, ...provided }) => ({
@@ -189,7 +189,9 @@ export function NovaPoshta({
           </li>
         ))}
       </ul>
-      {cityId && <Warehouses cityId={cityId} onSelect={handleWarehouseChange} />}
+      {cityId && (
+        <Warehouses cityId={cityId} onSelect={handleWarehouseChange} onSomeError={onSomeError} />
+      )}
     </div>
   )
 }
