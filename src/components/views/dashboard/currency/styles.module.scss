@@ -29,7 +29,7 @@
 
 .warningIcon {
   font-size: 60px;
-  fill: var(--red);
+  fill: rgb(255, 39, 39);
 }
 
 .title {
@@ -79,7 +79,7 @@
 }
 
 .currencyErr {
-  color: var(--red);
+  color: rgb(255, 39, 39);
 }
 
 .buttonsWrapper {
@@ -101,7 +101,7 @@
   font-weight: 500;
   user-select: none;
   margin: 0;
-  color: var(--red);
+  color: rgb(255, 39, 39);
 }
 
 .showMessage {
