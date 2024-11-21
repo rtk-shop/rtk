@@ -2,7 +2,6 @@ import { useEffect, useState, useMemo } from 'react'
 import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext } from 'react-hook-form'
-import { components, InputProps, type OptionsOrGroups } from 'react-select'
 import { RadioGroup, type RadioOption } from '@/components/ui/radio-group'
 import { ScrollMask } from '@/components/ui/scroll-mask'
 import { useTranslations } from 'next-intl'
@@ -11,18 +10,11 @@ import type { PopularCity } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
 import { useDebouncedCallback } from 'use-debounce'
 import { searchSettlements } from '../../model/api'
+import { SelectInput, NoOptionsMessage, LoadingMessage } from '../../model/select-customs'
 
 type CityOption = {
   label: string
   value: string
-}
-
-const SelectInput = (props: InputProps<CityOption, false>) => {
-  // Disable autocomplete on field
-  // https://stackoverflow.com/a/30976223/15604836
-  return (
-    <components.Input aria-activedescendant={undefined} {...props} autoComplete="one-time-code" />
-  )
 }
 
 export function NovaPoshta({
@@ -55,8 +47,8 @@ export function NovaPoshta({
 
   const fetchOptions = (inputValue: string, callback: (options: CityOption[]) => void) => {
     return new Promise<CityOption[]>((resolve) => {
-      const matches = memCitiesOptions.filter((c) =>
-        c.label.toLowerCase().includes(inputValue.toLowerCase())
+      const matches = memCitiesOptions.filter((o) =>
+        o.label.toLowerCase().includes(inputValue.toLowerCase())
       )
 
       resolve(matches)
@@ -149,7 +141,7 @@ export function NovaPoshta({
                 break
             }
           }}
-          components={{ Input: SelectInput }}
+          components={{ Input: SelectInput, NoOptionsMessage, LoadingMessage }}
           defaultOptions={memCitiesOptions}
           placeholder={t('Checkout.delivery.cityPlaceholder')}
           styles={{
