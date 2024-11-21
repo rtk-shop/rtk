@@ -11,13 +11,15 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
 import { useCartStore } from '@/providers/cart-store-provider'
 import { OrderSuccessModal } from './modals/order-success'
+import { ErrorModal } from './modals/error'
 
 export default function Checkout() {
   const [state, dispatch] = useState({
     waitDataSyncing: true,
     isInfoOpen: false,
     isDeliveryOpen: false,
-    successOrderModalOpen: false
+    successOrderModalOpen: false,
+    errorOrderModalOpen: false
   })
 
   const [cartItems] = useCartStore((state) => state.cartItems)
@@ -80,6 +82,7 @@ export default function Checkout() {
               isEdit={state.isDeliveryOpen}
               onEdit={handleDeliveryEditOpen}
               onContinue={handleDeliveryChecked}
+              onSomeError={dispatch.openErrorModal}
             />
             <Preview
               cartItems={cartItems}
@@ -90,6 +93,7 @@ export default function Checkout() {
         </form>
       </FormProvider>
       <OrderSuccessModal open={state.successOrderModalOpen} />
+      <ErrorModal open={state.errorOrderModalOpen} />
     </div>
   )
 }

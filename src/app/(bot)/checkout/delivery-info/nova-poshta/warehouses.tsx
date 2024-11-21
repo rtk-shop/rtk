@@ -61,7 +61,13 @@ export const VirtualizedList = ({
   )
 }
 
-export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: string): void }) {
+export interface WarehousesProps {
+  cityId: string
+  onSelect(id: string): void
+  onSomeError(): void
+}
+
+export function Warehouses({ cityId, onSelect, onSomeError }: WarehousesProps) {
   const t = useTranslations()
 
   const values = useWatch({
@@ -99,10 +105,10 @@ export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: 
     }
 
     fetchData().catch((error) => {
-      // todo handle this case
       setWarehousesMeta((prev) => ({ ...prev, loading: false, error: true }))
+      onSomeError()
     })
-  }, [cityId, warehouseType])
+  }, [cityId, warehouseType, onSomeError])
 
   const filterWarehouses = (inputValue: string) =>
     new Promise<WarehousesOption[]>((resolve) => {

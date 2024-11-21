@@ -14,12 +14,6 @@ import { useTranslations } from 'next-intl'
 import { type DeliveryValues, deliverySchema } from '../model/validation-schema'
 import type { PopularCity } from '../model/types'
 
-interface DeliveryInfoProps {
-  isEdit: boolean
-  onEdit(): void
-  onContinue(): void
-}
-
 const deliveryService = cva(
   'relative h-20 rounded-lg border border-gray-300 before:invisible before:absolute before:left-1.5 before:top-1.5 before:size-4 before:rounded-full before:bg-lime-500 after:invisible after:absolute after:left-[11px] after:top-2 after:h-2.5 after:w-1.5 after:rotate-45 after:border-b-2 after:border-r-2 after:border-b-white after:border-r-white'
 )
@@ -28,7 +22,14 @@ const peerStyles = cva(
   'peer-checked:border-green-light peer-checked:bg-green-light/20 peer-checked:before:visible peer-checked:after:visible peer-disabled:opacity-55'
 )
 
-export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) {
+interface DeliveryInfoProps {
+  isEdit: boolean
+  onEdit(): void
+  onContinue(): void
+  onSomeError(): void
+}
+
+export function DeliveryInfo({ isEdit, onEdit, onContinue, onSomeError }: DeliveryInfoProps) {
   const t = useTranslations()
   const { register } = useFormContext<DeliveryValues>()
 
@@ -65,18 +66,15 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
     }
 
     fetchData().catch((error) => {
-      setCitiesMeta({
-        loading: false,
-        error: false
-      })
-      // todo handle this case
-      console.warn('ERROR:', error.message)
+      console.warn('fetch popular_citiest:', error.message)
+      setCitiesMeta((prev) => ({ ...prev, loading: false, error: true }))
+      onSomeError()
     })
 
     return () => {
       // controller.abort()
     }
-  }, [])
+  }, [onSomeError])
 
   let isValuesValid = false
 
@@ -146,7 +144,11 @@ export function DeliveryInfo({ isEdit, onEdit, onContinue }: DeliveryInfoProps) 
           </p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
-            <NovaPoshta popularCitiesLoad={citiesMeta.loading} popularCities={popularCities} />
+            <NovaPoshta
+              popularCitiesLoad={citiesMeta.loading}
+              popularCities={popularCities}
+              onSomeError={onSomeError}
+            />
           </ShowBlock>
           <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
