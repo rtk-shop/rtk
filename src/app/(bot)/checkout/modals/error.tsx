@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { usePageState } from '../model/state'
 
 export function ErrorModal() {
-  const t = useTranslations('Checkout.successModal')
+  const t = useTranslations('Checkout.errorModal')
   const router = useRouter()
 
   const isOpen = usePageState((state) => state.errorOrderModalOpen)
@@ -24,15 +24,13 @@ export function ErrorModal() {
         </div>
         {/*  */}
         <div className="mb-4 text-center">
-          <h1 className="mb-1 text-2xl font-medium">Что-то пошло не так..</h1>
-          <p className="text-lg leading-none text-gray-500">
-            На данный момент создать заказ не возможно
-          </p>
+          <h1 className="mb-1 text-2xl font-medium">{t('title')}</h1>
+          <p className="text-lg leading-none text-gray-500">{t('subTitle')}</p>
         </div>
 
         <button onClick={handleBack} className="m-auto flex items-center text-base">
           <Icon name="common/arrow" className="-rotate-90 text-[23px]" />
-          <span className="underline">Вернуться назад</span>
+          <span className="underline">{t('action')}</span>
         </button>
       </div>
     </Drawer>

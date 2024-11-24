@@ -3,8 +3,8 @@ import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: m
 import { useCartStore } from '@/providers/cart-store-provider'
 import { normalizedView } from '@/stores/cart/store'
 import { routeNames } from '@/lib/constants'
-
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 interface CartItemsProps {
   loading: boolean
@@ -14,14 +14,15 @@ interface CartItemsProps {
 export function CartItems({ loading, cartProducts }: CartItemsProps) {
   const router = useRouter()
 
+  const t = useTranslations('Common.actions')
+
   const [cartItems] = useCartStore((state) => state.cartItems)
+  const [clearCart] = useCartStore((state) => state.clear)
   const itemsMap = normalizedView(cartItems)
 
   const handleClearAllClick = (): void => {
-    console.log('delete all items')
-
-    // clearCart() in store
-    // router.replace(routeNames.root)
+    router.replace(routeNames.catalog)
+    clearCart()
   }
 
   return (
@@ -33,7 +34,7 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
           className="text-[13px] text-gray-500"
           onClick={handleClearAllClick}
         >
-          Удалить все
+          {t('deleteAll')}
         </button>
       </div>
       {loading ? (
