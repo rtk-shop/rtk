@@ -15,11 +15,13 @@ import { usePageState } from './model/state'
 export default function Checkout() {
   const [cartItems] = useCartStore((state) => state.cartItems)
   const onSucessModal = usePageState((state) => state.onSucessModal)
+  const onErrorModal = usePageState((state) => state.onErrorModal)
 
   const [orderResult, createOrder] = useCreateOrderMutation()
 
   const formMethods = useForm<FormValues>({
     mode: 'onBlur',
+    shouldFocusError: false,
     resolver: valibotResolver(validationSchema),
     defaultValues: {
       supplier: 'nova',
@@ -37,9 +39,9 @@ export default function Checkout() {
     })
 
     if (res.error) {
+      onErrorModal(true, { kind: 'submit' })
       console.log(res.error)
     } else {
-      console.log(res.data)
       onSucessModal(true)
     }
   }
@@ -54,11 +56,7 @@ export default function Checkout() {
             {/*  */}
             <DeliveryInfo />
             {/*  */}
-            <Preview
-              cartItems={cartItems}
-              submitLoading={orderResult.fetching}
-              submitError={!!orderResult.error}
-            />
+            <Preview cartItems={cartItems} submitLoading={orderResult.fetching} />
           </div>
         </form>
       </FormProvider>

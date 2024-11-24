@@ -14,7 +14,7 @@ interface CartItemsProps {
 export function CartItems({ loading, cartProducts }: CartItemsProps) {
   const router = useRouter()
 
-  const t = useTranslations('Common.actions')
+  const t = useTranslations()
 
   const [cartItems] = useCartStore((state) => state.cartItems)
   const [clearCart] = useCartStore((state) => state.clear)
@@ -28,13 +28,13 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
   return (
     <div>
       <div className="flex items-center justify-between px-2 pb-4 pt-4">
-        <h2 className="font-medium">Ваш заказ</h2>
+        <h2 className="font-medium">{t('Checkout.preview.yourOrder')}</h2>
         <button
           color="secondary"
           className="text-[13px] text-gray-500"
           onClick={handleClearAllClick}
         >
-          {t('deleteAll')}
+          {t('Common.actions.deleteAll')}
         </button>
       </div>
       {loading ? (
