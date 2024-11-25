@@ -15,7 +15,7 @@ interface CheckBoxGroupProps {
   options: Array<optionType>
 }
 
-export function CheckBoxGroup({ title, options, name }: CheckBoxGroupProps) {
+export function CheckboxGroup({ title, options, name }: CheckBoxGroupProps) {
   const { register } = useFormContext()
   const [isCollapsed, setCollapsed] = useState(true)
 
@@ -24,10 +24,10 @@ export function CheckBoxGroup({ title, options, name }: CheckBoxGroupProps) {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <CollapseHead title={title} collapsed={isCollapsed} onCollapse={handleCollapse} />
       <Collapse open={isCollapsed}>
-        <fieldset className={styles.fieldset}>
+        <fieldset>
           {options.map(({ label, value }) => (
             <div key={value}>
               <Checkbox name={name} label={label} value={value} register={register} />

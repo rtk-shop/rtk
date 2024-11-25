@@ -21,7 +21,7 @@ export function CollapseHead({ title, collapsed, onCollapse }: CollapseHeadProps
   return (
     <div
       onClick={onCollapse}
-      className="flex cursor-pointer select-none items-center justify-between py-2 font-medium"
+      className="flex cursor-pointer select-none items-center justify-between px-2.5 py-2 font-medium"
     >
       <span>{title}</span>
       <Icon name="common/arrow" className={expandIcon({ collapsed })} />

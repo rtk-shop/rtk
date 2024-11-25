@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { RadioGroup } from '@/components/ui/radio-group'
-import { CheckBoxGroup } from '@/components/ui/checkbox-group'
+import { CheckboxGroup } from '@/components/ui/checkbox-group'
 import { PriceRange } from '@/components/ui/price-range'
 import fieldProps, { FilterItem } from './fliters-data'
 import { useFormContext } from 'react-hook-form'
@@ -81,8 +81,8 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
           )}
         </div>
         <div className="mb-2.5 h-0.5 bg-gray-200" />
-        <CheckBoxGroup title={t('filters.name.type')} name="gender" options={genderOptions} />
-        <CheckBoxGroup
+        <CheckboxGroup title={t('filters.name.type')} name="gender" options={genderOptions} />
+        <CheckboxGroup
           name="availability"
           title={t('filters.name.availability')}
           options={availabilityOptions}
@@ -96,7 +96,7 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
           onSet={handlePriceRange}
           title={t('filters.name.price')}
         />
-        <CheckBoxGroup
+        <CheckboxGroup
           title={t('filters.name.category')}
           name="category"
           options={categoriesOptions}
