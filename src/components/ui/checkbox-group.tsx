@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Collapse, CollapseHead } from '@/components/ui/collapse'
 import { useFormContext } from 'react-hook-form'
-import styles from './styles.module.scss'
 
 type optionType = {
   value: string
