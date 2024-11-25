@@ -1,14 +1,48 @@
-import clsx from 'clsx'
-import styles from './styles.module.scss'
+import { cva } from 'cva'
 
-interface TabsPorps {
+export type Tab = {
+  label: string
+  disabled?: boolean
+}
+
+export interface TabsPorps {
   activeTab: number
-  tabs: Array<{
-    label: string
-    disabled?: boolean
-  }>
+  tabs: Tab[]
   onChange(tabIndex: number): void
 }
+
+const tab = cva(
+  'mr-2 select-none rounded-md border-2 px-3 py-1 text-center text-[14px] font-medium transition-all duration-300',
+  {
+    variants: {
+      active: {
+        true: 'text-white',
+        false: ''
+      },
+      disabled: {
+        true: 'bg-gray-200 text-gray-500',
+        false: ''
+      }
+    },
+    compoundVariants: [
+      {
+        active: true,
+        disabled: false,
+        className: 'border-black bg-black'
+      },
+      {
+        active: false,
+        disabled: false,
+        className: 'cursor-pointer hover:border-gray-400'
+      },
+      {
+        active: false,
+        disabled: true,
+        className: 'cursor-not-allowed border-gray-200'
+      }
+    ]
+  }
+)
 
 export function Tabs({ activeTab, tabs, onChange }: TabsPorps) {
   const handleTabClick = (tabIndex: number, disabled: boolean): void => {
@@ -18,16 +52,12 @@ export function Tabs({ activeTab, tabs, onChange }: TabsPorps) {
   }
 
   return (
-    <ul className={styles.tabList}>
+    <ul className="flex">
       {tabs.map(({ label, disabled = false }, ind) => (
         <li
           key={label}
           onClick={() => handleTabClick(ind, disabled)}
-          className={clsx({
-            [styles.tab]: true,
-            [styles.active]: activeTab === ind,
-            [styles.disabled]: disabled
-          })}
+          className={tab({ active: activeTab === ind, disabled })}
         >
           {label}
         </li>

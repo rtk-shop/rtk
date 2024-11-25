@@ -1,9 +1,9 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
-interface TabContentProps {
+export interface TabContentProps {
   tabID: number
   value: number
-  children?: ReactNode
+  children: ReactNode
 }
 
 export function TabContent({ tabID, value, children }: TabContentProps) {

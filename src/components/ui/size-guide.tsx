@@ -1,10 +1,8 @@
-import { type ReactNode } from 'react'
 import { cva } from 'cva'
 
 export type availableSizes = 'S' | 'M' | 'L' | 'XL' | '2XL'
 
 interface SizeGuideProps {
-  title: string | ReactNode
   current: availableSizes
   available: availableSizes[]
 }
@@ -36,14 +34,13 @@ const sizeItem = cva(
   }
 )
 
-export function SizeGuide({ title, current, available }: SizeGuideProps) {
+export function SizeGuide({ current, available }: SizeGuideProps) {
   const sizes: availableSizes[] = ['S', 'M', 'L', 'XL', '2XL']
 
   const normalized = available.reduce((acc, size) => ({ ...acc, [size]: undefined }), {})
 
   return (
     <div>
-      <p className="mb-2">{title}</p>
       <ul className="flex">
         {sizes.map((size) => (
           <li
