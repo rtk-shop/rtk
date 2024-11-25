@@ -64,9 +64,7 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
 
           callback(settlements)
         })
-        .catch((err) => {
-          console.log('WALLE', err)
-          // todo handle
+        .catch(() => {
           callback([])
         })
     })
@@ -131,7 +129,7 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
             setSelectValue(newValue)
             switch (action) {
               case 'select-option':
-                if (newValue) handleSelectChange(newValue.label)
+                if (newValue) handleSelectChange(newValue.value)
                 break
               case 'clear':
                 handleSelectChange('')
