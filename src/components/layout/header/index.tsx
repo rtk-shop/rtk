@@ -43,7 +43,14 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
             <Icon name="common/menu" className="text-[27px] text-slate-100 lg:text-black" />
           </IconButton>
           <Link href={routeNames.root} className="ml-10 mr-8 hidden w-36 lg:block">
-            <Image width={75} height={50} src="/assets/logo.svg" alt="логотип" priority={true} />
+            {/* temp */}
+            <Image
+              width={75}
+              height={50}
+              src="/svg-icons/common/logo.svg"
+              alt="логотип"
+              priority={true}
+            />
           </Link>
           <nav>
             <ul className="hidden items-center *:px-4 *:py-2 lg:flex">

@@ -1,7 +1,17 @@
 export interface SpritesMap {
   action: 'circle-minus' | 'circle-plus' | 'edit' | 'search' | 'share' | 'trash' | 'warning'
   checkout: 'box-taped' | 'letter'
-  common: 'arrow' | 'cart' | 'check' | 'emptycart' | 'grid' | 'heart' | 'menu' | 'user' | 'xmark'
+  common:
+    | 'arrow'
+    | 'cart'
+    | 'check'
+    | 'emptycart'
+    | 'grid'
+    | 'heart'
+    | 'logo'
+    | 'menu'
+    | 'user'
+    | 'xmark'
 }
 export const SPRITES_META: {
   [Key in keyof SpritesMap]: {
@@ -72,7 +82,7 @@ export const SPRITES_META: {
     }
   },
   common: {
-    filePath: 'common.1ba77b61.svg',
+    filePath: 'common.06d4fba6.svg',
     items: {
       arrow: {
         viewBox: '0 0 24 24',
@@ -103,6 +113,11 @@ export const SPRITES_META: {
         viewBox: '0 0 128 128',
         width: 128,
         height: 128
+      },
+      logo: {
+        viewBox: '0 0 75 41',
+        width: 75,
+        height: 41
       },
       menu: {
         viewBox: '0 0 448 512',
