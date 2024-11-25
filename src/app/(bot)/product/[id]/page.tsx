@@ -1,6 +1,6 @@
 import { Preview } from './preview'
 import { Details } from './details'
-// import { Info } from './info'
+import { Info } from './info'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
 import 'keen-slider/keen-slider.min.css'
@@ -23,7 +23,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
   const product = data?.product
 
   return (
-    <div className="mb-16">
+    <div className="mb-[69px]">
       <Preview images={product.images} />
       <Details
         id={product.id}
@@ -34,13 +34,13 @@ export default async function Product({ params }: { params: Promise<{ id: string
         basePrice={product.basePrice}
         currentPrice={product.currentPrice}
       />
-      {/* <Info
+      <Info
         gender={product.gender}
         description={product.description || ''}
-        dimensions={dimensions}
+        dimensions={'11x11x11'}
         color={product.colorName}
         category={product.category}
-      /> */}
+      />
     </div>
   )
 }

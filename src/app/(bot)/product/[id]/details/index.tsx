@@ -1,5 +1,4 @@
 import { cva } from 'cva'
-import { Delivery } from './delivery'
 import { SizeGuide } from '@/components/ui/size-guide'
 import { Controls } from './controls'
 import { formatPrice } from '@/lib/helpers'
@@ -30,7 +29,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
   return (
     <section className="px-1.5">
       {/*  */}
-      <h1 className="mb-1.5 mt-4 text-lg font-medium leading-5">{title}</h1>
+      <h1 className="mb-1.5 mt-4 text-xl font-medium leading-5">{title}</h1>
       {/*  */}
       <div className="mb-3 flex items-center">
         {withDiscount && (
@@ -46,12 +45,12 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
         )}
       </div>
       {/*  */}
-      <SizeGuide title={'Выберите размер'} current="L" available={['M', '2XL', 'L']} />
+      <p className="mb-2 font-medium">Выберите размер:</p>
+      <SizeGuide current="L" available={['M', '2XL', 'L']} />
       {/*  */}
       <AddToCartButton productID={id} inStock={inStock} />
       {/*  */}
       <Controls productID={id} />
-      <Delivery />
     </section>
   )
 }

@@ -24,7 +24,7 @@ export function Controls({ productID }: ControlsProps) {
 
   return (
     <div className="flex flex-wrap items-center">
-      <div className="basis-1/2">
+      <div className="relative basis-1/2 after:absolute after:right-0.5 after:top-2.5 after:h-7 after:w-0.5 after:bg-gray-300">
         <Button
           fullWidth
           color="secondary"
@@ -33,7 +33,7 @@ export function Controls({ productID }: ControlsProps) {
           Поделиться
         </Button>
       </div>
-      <div className="flex basis-1/2 items-center">
+      <div className="flex basis-1/2 items-center justify-center">
         <LikeButton width={21} height={21} liked={isLiked} onClick={handleLikeClick} />
         <span className="ml-1.5 select-none font-medium" onClick={handleLikeClick}>
           {isLiked ? 'Избранное' : 'В избранное'}
