@@ -8,7 +8,7 @@ interface SizeGuideProps {
 }
 
 const sizeItem = cva(
-  'relative mr-1.5 w-16 select-none rounded-lg border-2 py-1 text-center text-[14px] font-medium transition-all',
+  'relative mr-1.5 w-16 select-none rounded-lg border-2 py-1 text-center text-sm font-medium transition-all',
   {
     variants: {
       active: {

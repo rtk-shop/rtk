@@ -12,7 +12,7 @@ export interface TabsPorps {
 }
 
 const tab = cva(
-  'mr-2 select-none rounded-md border-2 px-3 py-1 text-center text-[14px] font-medium transition-all duration-300',
+  'mr-2 select-none rounded-md border-2 px-3 py-1 text-center text-sm font-medium transition-all duration-300',
   {
     variants: {
       active: {

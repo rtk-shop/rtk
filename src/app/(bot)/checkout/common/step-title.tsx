@@ -37,7 +37,7 @@ const expandIcon = cva('ml-auto text-[26px] transition-all duration-300', {
 })
 
 const stepBadge = cva(
-  'flex select-none content-center items-center justify-center rounded-full p-1 text-[14px] font-semibold leading-none text-white transition-colors',
+  'flex select-none content-center items-center justify-center rounded-full p-1 text-sm font-semibold leading-none text-white transition-colors',
   {
     variants: {
       expand: {

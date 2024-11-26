@@ -59,7 +59,7 @@ export function Categories() {
                   alt={`Изображение категории - ${t(`categories.${category.i18n}`)}`}
                 />
               </div>
-              <div className="text-center text-[14px] font-medium">
+              <div className="text-center text-sm font-medium">
                 <p>{t(`categories.${category.i18n}`)}</p>
               </div>
             </Link>

@@ -35,7 +35,7 @@ export function ErrorModal() {
         </div>
         <button
           onClick={handleModalAction}
-          className="absolute right-4 top-4 rounded-lg bg-slate-100 px-2 py-px text-[14px] text-gray-700"
+          className="absolute right-4 top-4 rounded-lg bg-slate-100 px-2 py-px text-sm text-gray-700"
         >
           {t('action')}
         </button>

@@ -57,7 +57,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               <li>
                 <Link
                   href={routeNames.root}
-                  className="header-nav-link relative text-[14px] font-semibold uppercase text-black no-underline"
+                  className="header-nav-link relative text-sm font-semibold uppercase text-black no-underline"
                 >
                   {t('header.catalog')}
                 </Link>

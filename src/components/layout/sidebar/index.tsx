@@ -26,7 +26,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <span className="text-lg font-medium text-white">{t('nouns.lang')}:</span>
               <LangSwitcher />
             </div>
-            <ul className="p-5 text-[14px] text-white *:flex *:justify-between">
+            <ul className="p-5 text-sm text-white *:flex *:justify-between">
               <li>
                 Телефон: <span>{process.env.NEXT_PUBLIC_CONTACT_PHONE}</span>
               </li>

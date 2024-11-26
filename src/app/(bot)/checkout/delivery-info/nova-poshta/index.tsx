@@ -170,7 +170,7 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
           <li
             key={baseLabel}
             onClick={() => handleCityQuikSet({ label, value })}
-            className="text-[14px] font-medium text-blue-700"
+            className="text-sm font-medium text-blue-700"
           >
             <span>{baseLabel}</span>
           </li>

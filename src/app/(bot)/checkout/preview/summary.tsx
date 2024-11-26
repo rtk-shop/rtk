@@ -36,7 +36,7 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
       <Button fullWidth color="accept" type="submit" loading={submitLoading || loading}>
         {t('submitOrder')}
       </Button>
-      <p className="mt-2 px-5 text-center text-[14px] leading-none text-gray-400">{t('offerta')}</p>
+      <p className="mt-2 px-5 text-center text-sm leading-none text-gray-400">{t('offerta')}</p>
     </div>
   )
 }

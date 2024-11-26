@@ -51,7 +51,7 @@ export function CartItem({ product, amount }: CartItemProps) {
         >
           {title}
         </Link>
-        <span className="text-[14px] font-medium text-gray-500">
+        <span className="text-sm font-medium text-gray-500">
           {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
         </span>
         <p className="text-[15px] font-semibold leading-none">
