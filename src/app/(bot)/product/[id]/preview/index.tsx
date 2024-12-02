@@ -5,7 +5,7 @@ import { Thumbs } from './thumbs'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { useKeenSlider } from 'keen-slider/react'
 
-interface PreviewProps {
+export interface PreviewProps {
   images: string[]
 }
 
@@ -35,7 +35,13 @@ export function Preview({ images }: PreviewProps) {
       <ul ref={sliderRef} className="keen-slider cursor-grab">
         {images.map((image, index) => (
           <li key={index} className="keen-slider__slide">
-            <ImagePlaceholder priority src={image} altText={`фото №${index + 1}`} />
+            <ImagePlaceholder
+              src={image}
+              priority
+              width={1080}
+              height={1350}
+              altText={`фото №${index + 1}`}
+            />
           </li>
         ))}
       </ul>

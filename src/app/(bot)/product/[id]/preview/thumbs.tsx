@@ -1,15 +1,15 @@
+import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { cva } from 'cva'
-import Image from 'next/image'
 
-const image = cva('rounded-lg border', {
+const image = cva('mr-1.5 max-w-16 shrink-0 rounded-lg border transition-colors last:mr-0', {
   variants: {
     active: {
-      true: 'border-black'
+      true: 'border-gray-500'
     }
   }
 })
 
-interface ThumbsProps {
+export interface ThumbsProps {
   activeIndex: number
   images: string[]
   onChange(index: number): void
@@ -22,15 +22,9 @@ export function Thumbs({ activeIndex, images, onChange }: ThumbsProps) {
         <li
           key={index}
           onClick={() => onChange(index)}
-          className="mr-1.5 max-w-16 shrink-0 last:mr-0"
+          className={image({ active: index === activeIndex })}
         >
-          <Image
-            src={url}
-            width={175}
-            height={175}
-            alt="Фото товара"
-            className={image({ active: index === activeIndex })}
-          />
+          <ImagePlaceholder src={url} altText="фото товара" width={52} height={65} />
         </li>
       ))}
     </ul>
