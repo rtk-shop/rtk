@@ -15,7 +15,8 @@ export function ProcessPlug({ text, onClose }: ProcessPlugProps) {
       </div>
       <Button
         onClick={onClose}
-        className="group mt-12 w-8/12 font-medium"
+        fullWidth
+        className="group mt-12 w-8/12 max-w-48 font-medium"
         startIcon={
           <Icon
             name="common/arrow"
