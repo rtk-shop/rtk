@@ -1,20 +1,15 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
-interface ControlsProps {
-  productID: string
-}
-
-export function Controls({ productID }: ControlsProps) {
+export function Controls({ productID }: { productID: string }) {
   const [{ products, add, remove }] = useFavoriteStore((state) => state)
 
   const isLiked = products.includes(productID)
 
-  const handleLikeClick = (): void => {
+  const handleLikeClick = () => {
     if (isLiked) {
       remove(productID)
     } else {
@@ -24,14 +19,11 @@ export function Controls({ productID }: ControlsProps) {
 
   return (
     <div className="flex flex-wrap items-center">
-      <div className="relative basis-1/2 after:absolute after:right-0.5 after:top-2.5 after:h-7 after:w-0.5 after:bg-gray-300">
-        <Button
-          fullWidth
-          color="secondary"
-          startIcon={<Icon name="action/share" className="mr-2.5 fill-black text-[21px]" />}
-        >
-          Поделиться
-        </Button>
+      <div className="relative basis-1/2 before:absolute before:-top-0.5 before:right-0.5 before:h-7 before:w-0.5 before:bg-gray-300">
+        <div className="flex justify-center">
+          <Icon name="action/share" className="mr-2.5 fill-black text-[21px]" />
+          <span className="font-medium">Поделиться</span>
+        </div>
       </div>
       <div className="flex basis-1/2 items-center justify-center">
         <LikeButton width={21} height={21} liked={isLiked} onClick={handleLikeClick} />
