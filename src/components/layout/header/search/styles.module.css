@@ -1,19 +1,20 @@
+/* compiled scss */
+
 .container {
   flex-grow: 1;
   position: relative;
-  @include _minXL {
+}
+@media (min-width: 1200px) {
+  .container {
     margin: 0 25px;
   }
 }
-
 .form {
   width: 100%;
   position: relative;
-  // vertical-align: bottom;
   display: flex;
   padding-right: 10px;
 }
-
 .search-input {
   font-size: 14px;
   font-weight: 500;
@@ -30,49 +31,49 @@
   -moz-transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
   -o-transition-duration: 0.4s;
-  &::placeholder {
-    color: #272727;
-    @include _minLG {
-      color: #8e8e8e;
-    }
+}
+.search-input::placeholder {
+  color: #272727;
+}
+@media (min-width: 900px) {
+  .search-input::placeholder {
+    color: #8e8e8e;
   }
-
-  @include _minLG {
+}
+@media (min-width: 900px) {
+  .search-input {
     width: 100%;
     border-color: #cacaca;
     background-color: #fff;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    &:focus {
-      border-color: #757575;
-
-      & + .searchButton {
-        color: #171717;
-      }
-    }
+  }
+  .search-input:focus {
+    border-color: #757575;
+  }
+  .search-input:focus + .searchButton {
+    color: #171717;
   }
 }
-
 .with-data {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-
 .searchButton {
   position: absolute;
   z-index: 475;
   right: 15px;
   color: #8e8e8e;
 }
-
 .search-icon {
   fill: currentColor;
   font-size: 19px;
-  @include _minMD {
+}
+@media (min-width: 600px) {
+  .search-icon {
     font-size: 22px;
   }
 }
-
 .overlay {
   display: none;
   position: fixed;
@@ -83,11 +84,9 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .overlay-show {
   display: block;
 }
-
 .dropdownBox {
   display: none;
   z-index: 460;
@@ -97,13 +96,14 @@
   border: 2px solid #cacaca;
   border-right: none;
   color: #171717;
+}
 
-  @include _minLG {
+@media (min-width: 900px) {
+  .dropdownBox {
     display: flex;
     align-items: center;
   }
 }
-
 .dropdown {
   padding: 0 15px 0 10px;
   font-size: 14px;

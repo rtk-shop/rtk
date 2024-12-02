@@ -10,7 +10,7 @@ import { Dropdown, type Option } from '@/components/ui/dropdown'
 //   SearchProductDocument
 // } from '../../graphql/product/_gen_/searchProduct.query'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 import { Icon } from '@/components/ui/icon'
 
 type FormValues = {
