@@ -4,6 +4,9 @@ export interface ImagePlaceholderProps {
   src: string
   altText: string
   priority?: boolean
+  fill?: boolean
+  width?: number | `${number}` | undefined
+  height?: number | `${number}` | undefined
 }
 
 const keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
@@ -20,21 +23,17 @@ const rgbDataURL = (r: number, g: number, b: number) =>
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`
 
-export function ImagePlaceholder({ src, altText, priority }: ImagePlaceholderProps) {
+export function ImagePlaceholder({ src, altText, priority, ...otherProps }: ImagePlaceholderProps) {
   return (
-    <div className="relative overflow-hidden rounded-[inherit] pt-[100%]">
-      <Image
-        fill
-        src={src}
-        alt={altText}
-        quality={100}
-        priority={priority}
-        placeholder="blur"
-        blurDataURL={rgbDataURL(246, 246, 246)}
-        style={{
-          objectFit: 'contain'
-        }}
-      />
-    </div>
+    <Image
+      src={src}
+      alt={altText}
+      quality={100}
+      priority={priority}
+      placeholder="blur"
+      className="rounded-[inherit] object-contain"
+      blurDataURL={rgbDataURL(246, 246, 246)}
+      {...otherProps}
+    />
   )
 }
