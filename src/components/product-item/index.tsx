@@ -71,7 +71,7 @@ export function ProductItem({
   }
 
   return (
-    <div className="relative mx-px my-2 md:mx-1">
+    <div className="relative mx-0.5 my-2">
       <div>
         <Link
           href={routeNames.product + id}
@@ -81,7 +81,7 @@ export function ProductItem({
         </Link>
       </div>
       <div className="px-2 py-1 pt-0 md:px-3">
-        <div className="flex items-center justify-between py-1">
+        <div className="flex h-12 items-center justify-between py-1">
           <div
             className={priceBlock({
               discount: basePrice !== price,
