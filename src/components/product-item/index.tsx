@@ -71,13 +71,13 @@ export function ProductItem({
   }
 
   return (
-    <div className="relative mx-0.5 my-2 md:mx-1">
+    <div className="relative mx-px my-2 md:mx-1">
       <div>
         <Link
           href={routeNames.product + id}
           className={`border-none focus:ring-0 ${!inStock ? 'opacity-50' : ''}`}
         >
-          <ImagePlaceholder src={url} altText={title} />
+          <ImagePlaceholder src={url} altText={title} width={500} height={625} />
         </Link>
       </div>
       <div className="px-2 py-1 pt-0 md:px-3">
