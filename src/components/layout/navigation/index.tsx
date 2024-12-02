@@ -19,7 +19,6 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
   const [favoriteAmount] = useFavoriteStore((state) => state.amount())
 
   const handleFavoritesClick = () => {
-    document.documentElement.classList.toggle('dark')
     console.log('favorite click')
   }
 
@@ -32,16 +31,12 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
   }
 
   return (
-    <div className="fixed bottom-0 z-40 w-screen">
-      <header className="bg-slate-200/30 backdrop-blur-md dark:bg-black/90">
-        <nav className="px-3 pb-1 pt-2">
+    <div className="fixed -bottom-px z-40 w-screen">
+      <header className="bg-black/80 backdrop-blur-md">
+        <nav className="px-3 pt-1">
           <ul className="flex w-full justify-between">
             <li>
-              <IconButton
-                disableRipple
-                onClick={onSidebarOpen}
-                className="text-[32px] text-teal-950 dark:text-white"
-              >
+              <IconButton disableRipple onClick={onSidebarOpen} className="text-[24px] text-white">
                 <Icon name="common/menu" />
               </IconButton>
             </li>
@@ -51,19 +46,16 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
                 <Badge content={favoriteAmount}>
                   <Icon
                     name="common/heart"
-                    className="bg-sl fill-transparent stroke-teal-950 text-[28px] dark:stroke-white"
+                    className="bg-sl fill-transparent stroke-white text-[22px]"
                   />
                 </Badge>
               </IconButton>
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={onCartOpen} disableRipple className="text-[28px]">
+              <IconButton onClick={onCartOpen} disableRipple className="text-[24px]">
                 <Badge content={cartAmount}>
-                  <Icon
-                    name="common/cart"
-                    className="fill-teal-700 stroke-teal-700 dark:fill-white dark:stroke-white"
-                  />
+                  <Icon name="common/cart" className="fill-white stroke-white" />
                 </Badge>
               </IconButton>
             </li>
@@ -72,7 +64,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
               <IconButton
                 onClick={handleCatalogClick}
                 disableRipple
-                className="text-[28px] text-teal-800 dark:text-white"
+                className="text-[24px] text-white"
               >
                 <Icon name="common/grid" />
               </IconButton>
@@ -80,7 +72,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
             {/*  */}
             <li>
               <IconButton
-                className="text-[28px] text-teal-950 dark:text-white"
+                className="text-[24px] text-white"
                 onClick={handleProfileClick}
                 disableRipple
               >
