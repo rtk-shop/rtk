@@ -1,8 +1,6 @@
-import { ReactNode, forwardRef, RefObject, MouseEvent } from 'react'
+import { type ReactNode, type MouseEvent, type RefObject, forwardRef } from 'react'
 import { cva } from 'cva'
-import { Loader } from '../loader'
-
-import styles from './styles.module.css'
+import { Loader } from './loader'
 
 const enum ButtonColor {
   primary = 'primary',
@@ -28,14 +26,14 @@ interface ButtonProps {
 }
 
 const button = cva(
-  'inline-flex cursor-pointer select-none items-center justify-center rounded-xl px-7 py-3.5 font-medium leading-none transition-all',
+  'inline-flex cursor-pointer select-none items-center justify-center rounded-xl px-7 py-3.5 font-medium leading-none transition-all disabled:pointer-events-none',
   {
     variants: {
       color: {
-        primary: 'border-r-black bg-black text-white ' + styles.primary,
+        primary: 'border-r-black bg-black text-white hover:bg-[#383838] active:bg-[#383838]',
         secondary: '',
-        accept: 'border-r-green-light bg-green-light text-white ' + styles.accept,
-        danger: 'bg-red-500 text-white ' + styles.danger
+        accept: 'border-r-green bg-green text-stone-800 hover:bg-[#0eff6d] active:bg-[#0eff6d]',
+        danger: 'bg-red-500 text-white hover:bg-[#0eff6d] active:bg-[#0eff6d]' // todo: pick color
       },
       disabled: {
         true: 'cursor-not-allowed opacity-75'
@@ -48,7 +46,14 @@ const button = cva(
     defaultVariants: {
       color: 'primary',
       fullWidth: false
-    }
+    },
+    compoundVariants: [
+      {
+        color: 'accept',
+        disabled: true,
+        className: 'text-stone-500'
+      }
+    ]
   }
 )
 
@@ -78,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {!loading && startIcon}
       {loading ? (
         <div className="flex size-[1lh] justify-center border-r-inherit">
-          <Loader adaptive />
+          <Loader adaptive color={color !== 'primary' ? 'light' : 'dark'} />
         </div>
       ) : (
         <span>{children}</span>
