@@ -9,7 +9,8 @@ module.exports = {
       },
       colors: {
         black: '#171717',
-        'green-light': '#32cd32'
+        'green-light': '#32cd32',
+        green: '#48ff90'
       },
       backgroundImage: {
         'cap-pattern':
