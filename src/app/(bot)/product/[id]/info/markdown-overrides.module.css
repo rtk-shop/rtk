@@ -1,0 +1,8 @@
+.markdown li {
+  list-style-type: disc;
+  margin-bottom: 3px;
+}
+
+.markdown ul {
+  padding-left: 11px;
+}

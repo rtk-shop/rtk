@@ -1,8 +1,14 @@
-export function Description({ text }: { text: string }) {
+import DOMPurify from 'dompurify'
+import styles from './markdown-overrides.module.css'
+
+export function Description({ textMarkdown }: { textMarkdown: string }) {
   return (
-    <div className="py-5 pl-1">
-      <h2 className="mb-3 text-2xl font-medium">Описание</h2>
-      <p>{text}</p>
+    <div className={styles.markdown}>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(textMarkdown, { USE_PROFILES: { html: true } })
+        }}
+      />
     </div>
   )
 }

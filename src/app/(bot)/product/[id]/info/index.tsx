@@ -1,10 +1,10 @@
 'use client'
-
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { Tabs, TabContent } from '@/components/ui/tabs'
 import { Properties } from './properties'
 import { Delivery } from './delivery'
-import { Description } from './description'
+import { Loader } from '@/components/ui/loader'
 
 interface InfoProps {
   gender: string
@@ -13,6 +13,15 @@ interface InfoProps {
   dimensions: string
   color: string
 }
+
+const DynamicDescription = dynamic(() => import('./description').then((mod) => mod.Description), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center">
+      <Loader color="dark" />
+    </div>
+  )
+})
 
 export function Info({ gender, description, dimensions, color, category }: InfoProps) {
   const [activeTab, setActiveTab] = useState(0)
@@ -41,7 +50,10 @@ export function Info({ gender, description, dimensions, color, category }: InfoP
           ]}
         />
         <TabContent tabID={0} value={activeTab}>
-          <Description text={description} />
+          <div className="py-5 pl-1">
+            <h2 className="mb-3 text-2xl font-medium">Описание</h2>
+            <DynamicDescription textMarkdown={description} />
+          </div>
         </TabContent>
         <TabContent tabID={1} value={activeTab}>
           <Properties
