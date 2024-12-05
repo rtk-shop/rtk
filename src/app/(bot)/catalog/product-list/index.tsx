@@ -11,7 +11,6 @@ interface ProductsProps {
   products:
     | Array<{
         id: string
-        slug: string
         title: string
         inStock: boolean
         currentPrice: number
@@ -67,7 +66,6 @@ export function ProductList({ totalPages, currentPage, products, onReset }: Prod
             <li key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
               <ProductItem
                 id={product.id}
-                slug={product.slug}
                 url={product.preview}
                 title={product.title}
                 price={product.currentPrice}

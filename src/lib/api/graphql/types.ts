@@ -191,7 +191,6 @@ export type Product = {
   preview: Scalars['String']['output']
   sizeName: Scalars['String']['output']
   sku: Scalars['String']['output']
-  slug: Scalars['String']['output']
   tag?: Maybe<ProductTag>
   title: Scalars['String']['output']
   updatedAt: Scalars['String']['output']

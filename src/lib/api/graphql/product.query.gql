@@ -5,7 +5,6 @@ query GetProduct($id: ID!) {
       id
       parentId
       title
-      slug
       sku
       gender
       currentPrice

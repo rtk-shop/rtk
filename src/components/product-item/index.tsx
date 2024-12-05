@@ -13,7 +13,6 @@ import type { ProductTag } from '@/types'
 
 interface ProductItemProps {
   id: string
-  slug: string
   url: string
   title: string
   price: number
@@ -37,7 +36,6 @@ const priceBlock = cva('basis-4/5 text-[18px] font-semibold leading-5 text-black
 
 export function ProductItem({
   id,
-  slug,
   url,
   title,
   price,

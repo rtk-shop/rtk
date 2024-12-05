@@ -11,7 +11,6 @@ export type CartProductsQuery = {
   cartProducts: Array<{
     __typename?: 'Product'
     id: string
-    slug: string
     title: string
     currentPrice: number
     preview: string
@@ -22,7 +21,6 @@ export const CartProductsDocument = gql`
   query CartProducts($input: [CartItem!]!) {
     cartProducts(input: $input) {
       id
-      slug
       title
       currentPrice
       preview

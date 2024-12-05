@@ -27,7 +27,6 @@ query Products(
     }
     products {
       id
-      slug
       title
       inStock
       currentPrice

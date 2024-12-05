@@ -15,7 +15,6 @@ export type GetProductQuery = {
         id: string
         parentId: string
         title: string
-        slug: string
         sku: string
         gender: Types.Gender
         currentPrice: number
@@ -51,7 +50,6 @@ export const GetProductDocument = gql`
         id
         parentId
         title
-        slug
         sku
         gender
         currentPrice
