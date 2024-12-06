@@ -9,7 +9,21 @@ const config: CodegenConfig = {
     'src/lib/api/graphql/types.ts': {
       plugins: ['typescript', 'fragment-matcher'],
       config: {
-        constEnums: true
+        constEnums: true,
+        scalars: {
+          HTML: {
+            input: 'string',
+            output: 'string'
+          },
+          Date: {
+            input: 'string',
+            output: 'string'
+          },
+          Upload: {
+            input: 'unknown',
+            output: 'unknown'
+          }
+        }
       }
     },
     'src/': {

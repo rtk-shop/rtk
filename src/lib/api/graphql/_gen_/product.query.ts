@@ -24,7 +24,7 @@ export type GetProductQuery = {
         preview: string
         category: Types.CategoryType
         inStock: boolean
-        description?: string | null
+        description: unknown
         colorName: string
         sizeName: string
         brandName: string

@@ -14,7 +14,7 @@ export type ProductsQueryVariables = Types.Exact<{
 export type ProductsQuery = {
   __typename?: 'Query'
   products: {
-    __typename?: 'ProductsResponse'
+    __typename?: 'ProductsPayload'
     priceRange: { __typename?: 'PriceRangeType'; gt: number; lt: number }
     pagination: { __typename?: 'Pagination'; totalPages: number; currentPage: number }
     products: Array<{

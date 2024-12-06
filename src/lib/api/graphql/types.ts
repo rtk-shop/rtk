@@ -16,13 +16,9 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean }
   Int: { input: number; output: number }
   Float: { input: number; output: number }
-  Date: { input: any; output: any }
-  Upload: { input: any; output: any }
-}
-
-export type AttachedRating = {
-  __typename?: 'AttachedRating'
-  rating: Scalars['Float']['output']
+  Date: { input: string; output: string }
+  HTML: { input: string; output: string }
+  Upload: { input: unknown; output: unknown }
 }
 
 export type CartItem = {
@@ -37,22 +33,17 @@ export type CartItemType = {
 }
 
 export const enum CategoryType {
-  Backpack = 'backpack',
-  Bag = 'bag',
-  Other = 'other',
-  Suitcase = 'suitcase',
-  Wallet = 'wallet'
-}
-
-export type DeleteProductResponse = {
-  __typename?: 'DeleteProductResponse'
-  message: Scalars['String']['output']
+  Backpack = 'BACKPACK',
+  Bag = 'BAG',
+  Other = 'OTHER',
+  Suitcase = 'SUITCASE',
+  Wallet = 'WALLET'
 }
 
 export const enum Gender {
-  Female = 'female',
-  Male = 'male',
-  Unisex = 'unisex'
+  Female = 'FEMALE',
+  Male = 'MALE',
+  Unisex = 'UNISEX'
 }
 
 export type GlobalData = {
@@ -62,30 +53,15 @@ export type GlobalData = {
   usdCourse: Scalars['Float']['output']
 }
 
-export type HideProductResponse = {
-  __typename?: 'HideProductResponse'
+export type HideProductPayload = {
+  __typename?: 'HideProductPayload'
   isHidden: Scalars['Boolean']['output']
-}
-
-export type HomeDataResponse = {
-  __typename?: 'HomeDataResponse'
-  featuredProducts: Array<Product>
-  sliderData: Array<HomeMainSlide>
-}
-
-export type HomeMainSlide = {
-  __typename?: 'HomeMainSlide'
-  actionURL: Scalars['String']['output']
-  color: Scalars['String']['output']
-  imageURL: Scalars['String']['output']
 }
 
 export type Mutation = {
   __typename?: 'Mutation'
-  createOrder: NewOrderResponse
-  deleteProduct?: Maybe<DeleteProductResponse>
-  hideProduct?: Maybe<HideProductResponse>
-  productRatingVote?: Maybe<ProductRatingVoteResponse>
+  createOrder: NewOrderPayload
+  hideProduct?: Maybe<HideProductPayload>
   setUsdCourse: GlobalData
 }
 
@@ -93,17 +69,9 @@ export type MutationCreateOrderArgs = {
   input: NewOrderInput
 }
 
-export type MutationDeleteProductArgs = {
-  id: Scalars['ID']['input']
-}
-
 export type MutationHideProductArgs = {
   id: Scalars['ID']['input']
   isHidden: Scalars['Boolean']['input']
-}
-
-export type MutationProductRatingVoteArgs = {
-  input: ProductRatingVoteInput
 }
 
 export type MutationSetUsdCourseArgs = {
@@ -120,8 +88,8 @@ export type NewOrderInput = {
   surname: Scalars['String']['input']
 }
 
-export type NewOrderResponse = {
-  __typename?: 'NewOrderResponse'
+export type NewOrderPayload = {
+  __typename?: 'NewOrderPayload'
   createdAt: Scalars['Date']['output']
   id: Scalars['Int']['output']
   price: Scalars['Int']['output']
@@ -147,11 +115,11 @@ export type Order = {
   supplier: Scalars['String']['output']
 }
 
-export type OrderByIdResult = NotFound | Order
-
 export type OrderFilter = {
   status: Scalars['String']['input']
 }
+
+export type OrderPayload = NotFound | Order
 
 export type Pagination = {
   __typename?: 'Pagination'
@@ -181,7 +149,7 @@ export type Product = {
   createdAt: Scalars['String']['output']
   currentPrice: Scalars['Float']['output']
   defaultSizeID: Scalars['Int']['output']
-  description?: Maybe<Scalars['String']['output']>
+  description: Scalars['HTML']['output']
   gender: Gender
   id: Scalars['ID']['output']
   images: Array<Scalars['String']['output']>
@@ -205,16 +173,6 @@ export type ProductColors = {
   title: Scalars['String']['output']
 }
 
-export type ProductDetails = {
-  __typename?: 'ProductDetails'
-  color: Scalars['String']['output']
-  delivery: Scalars['String']['output']
-  description: Scalars['String']['output']
-  dimensions: Scalars['String']['output']
-  images: Array<Scalars['String']['output']>
-  productID: Scalars['ID']['output']
-}
-
 export type ProductFilter = {
   category?: InputMaybe<Array<CategoryType>>
   gender?: InputMaybe<Array<Gender>>
@@ -225,26 +183,16 @@ export type ProductFilter = {
   tag?: InputMaybe<ProductTag>
 }
 
-export type ProductRatingVoteInput = {
-  productId: Scalars['String']['input']
-  rating: Scalars['Int']['input']
-}
-
-export type ProductRatingVoteResponse = {
-  __typename?: 'ProductRatingVoteResponse'
-  isSaved: Scalars['Boolean']['output']
-}
-
-export type ProductResult = NotFound | Product
+export type ProductPayload = NotFound | Product
 
 export const enum ProductTag {
-  New = 'new',
-  Stock = 'stock',
-  Top = 'top'
+  New = 'NEW',
+  Stock = 'STOCK',
+  Top = 'TOP'
 }
 
-export type ProductsResponse = {
-  __typename?: 'ProductsResponse'
+export type ProductsPayload = {
+  __typename?: 'ProductsPayload'
   pagination: Pagination
   priceRange: PriceRangeType
   products: Array<Product>
@@ -254,9 +202,8 @@ export type Query = {
   __typename?: 'Query'
   cartProducts: Array<Product>
   globalData: GlobalData
-  homeData?: Maybe<HomeDataResponse>
-  product: ProductResult
-  products: ProductsResponse
+  product: ProductPayload
+  products: ProductsPayload
   productsByID: Array<Product>
 }
 
@@ -300,8 +247,8 @@ export interface PossibleTypesResultData {
 }
 const result: PossibleTypesResultData = {
   possibleTypes: {
-    OrderByIdResult: ['NotFound', 'Order'],
-    ProductResult: ['NotFound', 'Product']
+    OrderPayload: ['NotFound', 'Order'],
+    ProductPayload: ['NotFound', 'Product']
   }
 }
 export default result
