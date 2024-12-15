@@ -121,6 +121,14 @@ export type OrderFilter = {
 
 export type OrderPayload = NotFound | Order
 
+export type PageInfo = {
+  __typename?: 'PageInfo'
+  endCursor?: Maybe<Scalars['String']['output']>
+  hasNextPage: Scalars['Boolean']['output']
+  hasPreviousPage: Scalars['Boolean']['output']
+  startCursor?: Maybe<Scalars['String']['output']>
+}
+
 export type Pagination = {
   __typename?: 'Pagination'
   currentPage: Scalars['Int']['output']
@@ -138,6 +146,7 @@ export type PriceRangeType = {
   lt: Scalars['Int']['output']
 }
 
+/** Общее представление продукта */
 export type Product = {
   __typename?: 'Product'
   amount: Scalars['Int']['output']
@@ -173,12 +182,25 @@ export type ProductColors = {
   title: Scalars['String']['output']
 }
 
+export type ProductConnection = {
+  __typename?: 'ProductConnection'
+  edges: Array<ProductEdge>
+  pageInfo: PageInfo
+  priceRange: PriceRangeType
+  totalCount: Scalars['Int']['output']
+}
+
+export type ProductEdge = {
+  __typename?: 'ProductEdge'
+  cursor: Scalars['String']['output']
+  node: Product
+}
+
 export type ProductFilter = {
   category?: InputMaybe<Array<CategoryType>>
   gender?: InputMaybe<Array<Gender>>
   instock?: InputMaybe<Scalars['Boolean']['input']>
   isHidden: Scalars['Boolean']['input']
-  page: Scalars['Int']['input']
   price?: InputMaybe<PriceRange>
   tag?: InputMaybe<ProductTag>
 }
@@ -205,6 +227,7 @@ export type Query = {
   product: ProductPayload
   products: ProductsPayload
   productsByID: Array<Product>
+  productsV2: ProductConnection
 }
 
 export type QueryCartProductsArgs = {
@@ -221,6 +244,13 @@ export type QueryProductsArgs = {
 
 export type QueryProductsByIdArgs = {
   ids: Array<Scalars['ID']['input']>
+}
+
+export type QueryProductsV2Args = {
+  after?: InputMaybe<Scalars['String']['input']>
+  before?: InputMaybe<Scalars['String']['input']>
+  limit: Scalars['Int']['input']
+  where?: InputMaybe<ProductFilter>
 }
 
 export const enum Role {

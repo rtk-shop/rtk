@@ -1,7 +1,9 @@
+// todo: enum's in upper case
+
 export const enum ProductTag {
-  new,
-  stock,
-  top
+  NEW,
+  STOCK,
+  TOP
 }
 
 export type P = {

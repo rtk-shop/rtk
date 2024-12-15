@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { cva } from 'cva'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
 import { ListSkeleton } from './product-list/skeleton'
-import { ErrorPlug } from '@/components/ui/error-plug'
 import { Backdrop } from '@/components/ui/backdrop'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
@@ -15,7 +14,11 @@ import {
   ProductsQuery,
   ProductsQueryVariables
 } from '@/lib/api/graphql/_gen_/products.query'
-// import { Controls } from './controls'
+import { Pagination } from '@/components/layout/pagination'
+
+import { FetchError } from './plugs/fetch-err'
+import { NoData } from './plugs/no-data'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type PriceRangeType = {
   gt: number
@@ -36,7 +39,6 @@ interface Params {
   tag?: ProductTag
   category?: CategoryType
   gender?: Gender
-  page: number
 }
 
 const filtersBox = cva(
@@ -55,12 +57,47 @@ export default function Catalog() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
   const [isOpen, setOpen] = useState(false)
 
-  const [params, setParams] = useState<Params>({
-    page: 1
-  })
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
-  const page = 1
-  const numOfPage = !isNaN(Number(page)) ? Number(page) : 1
+  const createQueryString = useCallback(
+    (name: 'after' | 'before', value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      if (name === 'before' && params.has('after')) {
+        params.delete('after')
+      }
+
+      if (name === 'after' && params.has('before')) {
+        params.delete('before')
+      }
+
+      // console.log('new params', params.toString())
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  const clearCursorSearchParams = () => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    params.delete('after')
+    params.delete('before')
+
+    return pathname + '?' + params.toString()
+  }
+
+  const after = searchParams.get('after')
+  const before = searchParams.get('before')
+
+  if (after && before) {
+    router.replace(pathname)
+  }
+
+  const [params, setParams] = useState<Params>()
 
   //   const [getProducts, { data, error, loading }] = useProductsLazyQuery({
   //     onCompleted: (data) => {
@@ -71,15 +108,19 @@ export default function Catalog() {
   //     }
   //   })
 
-  const [result, getProducts] = useQuery<ProductsQuery, ProductsQueryVariables>({
+  const [result] = useQuery<ProductsQuery, ProductsQueryVariables>({
     query: ProductsDocument,
-    pause: true,
+    // requestPolicy: 'network-only',
     variables: {
+      limit: 33,
+      after,
+      before,
       ...params
     }
   })
 
-  const { error, data, fetching: loading } = result
+  const { data, fetching, error } = result
+  // console.log(result)
 
   const formMethods = useForm<FormValues>({
     mode: 'onSubmit',
@@ -118,7 +159,6 @@ export default function Catalog() {
     const genderData = gender as unknown as Gender
 
     setParams({
-      page: numOfPage,
       price,
       instock,
       category: categoryData,
@@ -132,59 +172,68 @@ export default function Catalog() {
     return () => subscription.unsubscribe()
   }, [handleSubmit, watch])
 
-  useEffect(() => {
-    getProducts({
-      variables: {
-        page: numOfPage
-      }
-    })
-  }, [numOfPage, getProducts])
+  if (error) return <FetchError />
 
-  const handleFilterClick = (): void => {
+  if (!data && !fetching) return <NoData />
+
+  const handleFilterClick = () => {
     document.documentElement.style.position = 'fixed'
     setOpen(true)
   }
 
-  const handleDrawerClose = (): void => {
+  const handleDrawerClose = () => {
     document.documentElement.style.position = 'static'
     setOpen(false)
   }
 
-  const handleReset = (): void => {
+  const handleReset = () => {
     reset()
   }
 
-  if (error) {
-    console.log(error)
-
-    if (error.message === 'invalid page') {
-      // return <Redirect to={routeNames.catalog} />
-      console.log(error)
-    }
-    return <ErrorPlug />
+  const handleNextPage = () => {
+    // window.scrollTo({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // })
+    // setParams((prev) => ({ ...prev, before: null, after: data?.productsV2.pageInfo.endCursor }))
+    router.push(
+      pathname + '?' + createQueryString('after', data?.productsV2.pageInfo.endCursor || '')
+    )
   }
 
-  const totalPages = data?.products.pagination.totalPages
+  const handlePrevPage = () => {
+    router.push(
+      pathname + '?' + createQueryString('before', data?.productsV2.pageInfo.startCursor || ''),
+      {
+        scroll: false
+      }
+    )
+  }
+
+  const products = data?.productsV2.edges?.map((e) => e?.node)
 
   return (
-    <div>
+    <div className="mb-12">
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
           <div className={filtersBox({ isOpen })}>
             <Filters onReset={handleReset} priceRange={priceRange} />
           </div>
           <div className="w-full">
-            {loading ? (
+            {fetching ? (
               <ListSkeleton />
             ) : (
               <div className="h-full">
-                {/* <Controls onFilterClick={handleFilterClick} /> */}
-                <ProductList
-                  totalPages={totalPages ? totalPages : 1}
-                  currentPage={isNaN(numOfPage) ? 1 : numOfPage}
-                  products={data?.products.products}
-                  onReset={handleReset}
-                />
+                <ProductList products={products} onReset={handleReset} />
+                <div className="px-2 pb-4 pt-2.5">
+                  <Pagination
+                    onNext={handleNextPage}
+                    onPrev={handlePrevPage}
+                    hasNextPage={data?.productsV2.pageInfo.hasNextPage}
+                    hasPreviousPage={data?.productsV2.pageInfo.hasPreviousPage}
+                  />
+                </div>
               </div>
             )}
           </div>

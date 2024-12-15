@@ -1,38 +1,51 @@
 query Products(
-  $gender: [Gender!]
-  $instock: Boolean
-  $tag: ProductTag
-  $price: PriceRange
   $category: [CategoryType!]
-  $page: Int!
+  $gender: [Gender!]
+  $tag: ProductTag
+  $instock: Boolean
+  $price: PriceRange
+  $isHidden: Boolean = false
+  # pagination
+  $limit: Int!
+  $after: String
+  $before: String
 ) {
-  products(
-    filter: {
-      gender: $gender
-      isHidden: false # todo: make it optional
-      instock: $instock
-      tag: $tag
-      price: $price
+  productsV2(
+    limit: $limit
+    after: $after
+    before: $before
+    where: {
       category: $category
-      page: $page
+      gender: $gender
+      tag: $tag
+      instock: $instock
+      # 			other
+      isHidden: $isHidden
+      price: $price
     }
   ) {
+    totalCount
     priceRange {
       gt
       lt
     }
-    pagination {
-      totalPages
-      currentPage
+    pageInfo {
+      hasNextPage
+      startCursor
+      endCursor
+      hasPreviousPage
     }
-    products {
-      id
-      title
-      inStock
-      currentPrice
-      basePrice
-      tag
-      preview
+    edges {
+      cursor
+      node {
+        id
+        title
+        inStock
+        currentPrice
+        basePrice
+        tag
+        preview
+      }
     }
   }
 }

@@ -1,13 +1,9 @@
-import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
 import { ProductItem } from '@/components/product-item'
-import { Pagination } from '@/components/ui/pagination'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
 
 interface ProductsProps {
-  totalPages: number
-  currentPage: number
   products:
     | Array<{
         id: string
@@ -22,16 +18,7 @@ interface ProductsProps {
   onReset(): void
 }
 
-const pagination = cva('py-4', {
-  variants: {
-    visible: {
-      true: 'visible',
-      false: 'invisible'
-    }
-  }
-})
-
-export function ProductList({ totalPages, currentPage, products, onReset }: ProductsProps) {
+export function ProductList({ products, onReset }: ProductsProps) {
   const [favoriteItems] = useFavoriteStore((state) => state.products)
 
   const handlePagination = (page: number) => {
@@ -78,9 +65,6 @@ export function ProductList({ totalPages, currentPage, products, onReset }: Prod
           )
         })}
       </ul>
-      <div className={pagination({ visible: totalPages > 1 })}>
-        <Pagination total={totalPages} currentPage={currentPage} onChange={handlePagination} />
-      </div>
     </div>
   )
 }
