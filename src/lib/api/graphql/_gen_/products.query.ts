@@ -9,7 +9,7 @@ export type ProductsQueryVariables = Types.Exact<{
   instock?: Types.InputMaybe<Types.Scalars['Boolean']['input']>
   price?: Types.InputMaybe<Types.PriceRange>
   isHidden?: Types.InputMaybe<Types.Scalars['Boolean']['input']>
-  limit: Types.Scalars['Int']['input']
+  first: Types.Scalars['Int']['input']
   after?: Types.InputMaybe<Types.Scalars['String']['input']>
   before?: Types.InputMaybe<Types.Scalars['String']['input']>
 }>
@@ -52,12 +52,12 @@ export const ProductsDocument = gql`
     $instock: Boolean
     $price: PriceRange
     $isHidden: Boolean = false
-    $limit: Int!
+    $first: Int!
     $after: String
     $before: String
   ) {
     productsV2(
-      limit: $limit
+      first: $first
       after: $after
       before: $before
       where: {

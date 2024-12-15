@@ -6,12 +6,12 @@ query Products(
   $price: PriceRange
   $isHidden: Boolean = false
   # pagination
-  $limit: Int!
+  $first: Int!
   $after: String
   $before: String
 ) {
   productsV2(
-    limit: $limit
+    first: $first
     after: $after
     before: $before
     where: {

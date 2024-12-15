@@ -17,7 +17,6 @@ import {
 import { Pagination } from '@/components/layout/pagination'
 
 import { FetchError } from './plugs/fetch-err'
-import { NoData } from './plugs/no-data'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type PriceRangeType = {
@@ -112,7 +111,7 @@ export default function Catalog() {
     query: ProductsDocument,
     // requestPolicy: 'network-only',
     variables: {
-      limit: 33,
+      first: 33,
       after,
       before,
       ...params
@@ -174,8 +173,6 @@ export default function Catalog() {
 
   if (error) return <FetchError />
 
-  if (!data && !fetching) return <NoData />
-
   const handleFilterClick = () => {
     document.documentElement.style.position = 'fixed'
     setOpen(true)
@@ -211,7 +208,7 @@ export default function Catalog() {
     )
   }
 
-  const products = data?.productsV2.edges?.map((e) => e?.node)
+  const products = data?.productsV2.edges?.map((e) => e?.node) || []
 
   return (
     <div className="mb-12">

@@ -249,7 +249,7 @@ export type QueryProductsByIdArgs = {
 export type QueryProductsV2Args = {
   after?: InputMaybe<Scalars['String']['input']>
   before?: InputMaybe<Scalars['String']['input']>
-  limit: Scalars['Int']['input']
+  first: Scalars['Int']['input']
   where?: InputMaybe<ProductFilter>
 }
 
