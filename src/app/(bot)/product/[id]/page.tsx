@@ -36,7 +36,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
       />
       <Info
         gender={product.gender}
-        description={product.description || ''}
+        description={(product.description as string) || ''}
         dimensions={'11x11x11'}
         color={product.colorName}
         category={product.category}
