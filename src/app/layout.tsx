@@ -5,7 +5,7 @@ import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { UrqlProvider } from '@/providers/urql'
 
-import '@/styles/globals.scss'
+import '@/styles/globals.css'
 
 const proximanova = localFont({
   display: 'optional',
