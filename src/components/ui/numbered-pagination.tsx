@@ -1,15 +1,28 @@
 import { useState, useEffect } from 'react'
-import clsx from 'clsx'
-import styles from './styles.module.scss'
+import { cva } from 'cva'
 
-interface PaginationProps {
+const item = cva(
+  'm-1 flex size-9 cursor-pointer select-none items-center justify-center rounded-md font-medium transition-colors',
+  {
+    variants: {
+      current: {
+        true: 'bg-black text-white',
+        false: 'bg-gray-100 hover:bg-gray-200'
+      }
+    }
+  }
+)
+
+export function NumberedPagination({
+  total,
+  currentPage,
+  onChange
+}: {
   total: number
   currentPage: number
   onChange(page: number): void
-}
-
-export function Pagination({ total, currentPage, onChange }: PaginationProps) {
-  const [current, setCurrent] = useState<number>(currentPage > total ? total : currentPage)
+}) {
+  const [current, setCurrent] = useState(currentPage > total ? total : currentPage)
   const [items, setItems] = useState<(string | number)[]>([])
 
   const handlePaginationChange = (value: number | string) => {
@@ -64,13 +77,13 @@ export function Pagination({ total, currentPage, onChange }: PaginationProps) {
   }, [current, total])
 
   return (
-    <ul className={styles.list}>
+    <ul className="flex items-center justify-center">
       {items.map((page, ind) => {
         return (
           <li
             key={ind}
             onClick={() => handlePaginationChange(page)}
-            className={clsx(styles.item, current === page && styles.current)}
+            className={item({ current: current === page })}
           >
             {page}
           </li>
