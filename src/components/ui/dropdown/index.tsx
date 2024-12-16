@@ -2,7 +2,7 @@ import { type ReactNode, useState, useEffect, useRef } from 'react'
 import { Icon } from '../icon'
 import clsx from 'clsx'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 export type Option = {
   value: string

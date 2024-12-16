@@ -63,9 +63,10 @@
   padding: 7px 0;
   padding-left: 3px;
   border-radius: 6px;
-  &:hover {
-    background-color: #ededed;
-  }
+}
+
+.option:hover {
+  background-color: #ededed;
 }
 
 .option.selected {
