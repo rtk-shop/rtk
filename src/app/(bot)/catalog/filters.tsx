@@ -67,7 +67,7 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
           {isDirty && (
             <button
               onClick={handleReset}
-              className="rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
+              className="select-none rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
             >
               {t('verbs.clear')}
             </button>

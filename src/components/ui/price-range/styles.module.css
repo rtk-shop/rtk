@@ -1,0 +1,17 @@
+.rangeSlider :global(.rc-slider-track) {
+  background-color: #232323;
+}
+
+.rangeSlider > :global(.rc-slider-handle) {
+  border-color: #232323;
+  background-color: #fff;
+  &:hover {
+    border-color: #acacac;
+  }
+}
+
+.rangeSlider
+  :global(.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging) {
+  border-color: #232323;
+  box-shadow: 0 0 0 5px #232323;
+}

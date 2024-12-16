@@ -3,29 +3,21 @@ import { ProductItem } from '@/components/product-item'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
 
-interface ProductsProps {
-  products:
-    | Array<{
-        id: string
-        title: string
-        inStock: boolean
-        currentPrice: number
-        basePrice: number
-        tag?: keyof typeof ProductTag | null
-        preview: string
-      }>
-    | undefined
+export interface ProductsProps {
+  products: Array<{
+    id: string
+    title: string
+    inStock: boolean
+    currentPrice: number
+    basePrice: number
+    tag?: keyof typeof ProductTag | null
+    preview: string
+  }>
   onReset(): void
 }
 
 export function ProductList({ products, onReset }: ProductsProps) {
   const [favoriteItems] = useFavoriteStore((state) => state.products)
-
-  const handlePagination = (page: number) => {
-    console.log(`go page ${page}`)
-  }
-
-  if (products === undefined) return null
 
   if (!products.length) {
     return (

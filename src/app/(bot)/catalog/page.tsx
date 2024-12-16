@@ -53,7 +53,6 @@ const filtersBox = cva(
 )
 
 export default function Catalog() {
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 0])
   const [isOpen, setOpen] = useState(false)
 
   const router = useRouter()
@@ -86,26 +85,17 @@ export default function Catalog() {
     params.delete('after')
     params.delete('before')
 
-    return pathname + '?' + params.toString()
+    router.push(`${pathname}?${params.toString()}`)
   }
 
   const after = searchParams.get('after')
   const before = searchParams.get('before')
 
-  if (after && before) {
+  if (searchParams.has('after') && searchParams.has('before')) {
     router.replace(pathname)
   }
 
-  const [params, setParams] = useState<Params>()
-
-  //   const [getProducts, { data, error, loading }] = useProductsLazyQuery({
-  //     onCompleted: (data) => {
-  //       if (data?.products.priceRange) {
-  //         const { gt, lt } = data.products.priceRange
-  //         setPriceRange([gt, lt])
-  //       }
-  //     }
-  //   })
+  const [filterParams, setFilterParams] = useState<Params>()
 
   const [result] = useQuery<ProductsQuery, ProductsQueryVariables>({
     query: ProductsDocument,
@@ -114,12 +104,12 @@ export default function Catalog() {
       first: 33,
       after,
       before,
-      ...params
+      ...filterParams
     }
   })
 
   const { data, fetching, error } = result
-  // console.log(result)
+  // console.log(result.data?.productsV2.priceRange)
 
   const formMethods = useForm<FormValues>({
     mode: 'onSubmit',
@@ -157,7 +147,10 @@ export default function Catalog() {
     const tagData = tag as unknown as ProductTag
     const genderData = gender as unknown as Gender
 
-    setParams({
+    // new filter starts pagination from the beginning
+    clearCursorSearchParams()
+
+    setFilterParams({
       price,
       instock,
       category: categoryData,
@@ -188,11 +181,11 @@ export default function Catalog() {
   }
 
   const handleNextPage = () => {
-    // window.scrollTo({
-    //   top: 0,
-    //   left: 0,
-    //   behavior: 'smooth'
-    // })
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
     // setParams((prev) => ({ ...prev, before: null, after: data?.productsV2.pageInfo.endCursor }))
     router.push(
       pathname + '?' + createQueryString('after', data?.productsV2.pageInfo.endCursor || '')
@@ -209,13 +202,17 @@ export default function Catalog() {
   }
 
   const products = data?.productsV2.edges?.map((e) => e?.node) || []
+  const priceRange = result.data?.productsV2.priceRange
 
   return (
     <div className="mb-12">
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
           <div className={filtersBox({ isOpen })}>
-            <Filters onReset={handleReset} priceRange={priceRange} />
+            <Filters
+              onReset={handleReset}
+              priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
+            />
           </div>
           <div className="w-full">
             {fetching ? (
