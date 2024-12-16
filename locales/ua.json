@@ -28,6 +28,8 @@
       "maxLength70": "* максимум 70 символів"
     },
     "nouns": {
+      "categories": "Категорії",
+      "filters": "Фільтри",
       "price": "Ціна",
       "lang": "Мова",
       "name": "Ім'я",
@@ -36,14 +38,24 @@
       "city": "Місто",
       "warehouse": "Відділення",
       "cargoWarehouse": "Вантажне відділення",
-      "parcelAutomat": "Поштомат"
+      "parcelAutomat": "Поштомат",
+      "type": "Тип",
+      "unisex": "Унісекс",
+      "availability": "Наявність",
+      "inStock": "В наявності",
+      "outStock": "Немає у наявності",
+      "new": "Новинки",
+      "withDiscount": "Зі знижкою",
+      "top": "Топ"
     },
     "verbs": {
       "clear": "Очистити",
       "continue": "Продовжити"
     },
     "actions": {
-      "deleteAll": "Видалити все"
+      "deleteAll": "Видалити все",
+      "forFemale": "Для жінок",
+      "forMale": "Для чоловіків"
     }
   },
   "Checkout": {

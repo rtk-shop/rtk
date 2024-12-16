@@ -1,14 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckboxGroup } from '@/components/ui/checkbox-group'
 import { PriceRange } from '@/components/ui/price-range'
-import fieldProps, { FilterItem } from './fliters-data'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
-
+import {
+  type Option,
+  genderOptionsData,
+  availabilityOptionsData,
+  tagsOptionsData,
+  categoriesOptionsData
+} from './model/filters-data'
 import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
 
 export type FormValues = {
@@ -19,19 +23,13 @@ export type FormValues = {
   category: Array<Lowercase<keyof typeof CategoryType>>
 }
 
-import styles from './styles.module.scss'
-
-interface FiltersProps {
+export interface FiltersProps {
   priceRange: [number, number]
   onReset(): void
 }
 
 export function Filters({ priceRange, onReset }: FiltersProps) {
-  const t = (s: string) => s
-
-  const t2 = useTranslations('Common')
-
-  const { gender, availability, tags, categories } = fieldProps
+  const t = useTranslations('Common')
 
   const {
     formState: { isDirty },
@@ -44,15 +42,12 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
     setCurrentRange(priceRange)
   }, [priceRange])
 
-  const addI18 = (option: FilterItem) => ({
-    ...option,
-    label: t(option.label)
-  })
-
-  const addI18V2 = (option: FilterItem) => ({
-    ...option,
-    label: t2(option.label)
-  })
+  function addI18<T>(option: Option<T>) {
+    return {
+      ...option,
+      label: t(option.label)
+    }
+  }
 
   const handleReset = () => {
     setCurrentRange([0, 0]) // in this case RHF set field to undefined
@@ -64,42 +59,44 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
     setValue('priceRange', newRange, { shouldDirty: true })
   }
 
-  const genderOptions = gender.options.map(addI18)
-  const availabilityOptions = availability.options.map(addI18)
-  const tagsOptions = tags.options.map(addI18)
-  const categoriesOptions = categories.options.map(addI18V2)
-
   return (
     <aside className="relative px-2.5 pb-5 pt-2.5">
       <form>
         <div className="flex items-center justify-between py-4">
-          <p className="text-[21px] font-semibold">{t('filters.title')}</p>
+          <p className="text-[21px] font-semibold">{t('nouns.filters')}</p>
           {isDirty && (
-            <Button color="danger" onClick={handleReset} className="">
-              {t('filters.clear')}
-            </Button>
+            <button
+              onClick={handleReset}
+              className="rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
+            >
+              {t('verbs.clear')}
+            </button>
           )}
         </div>
         <div className="mb-2.5 h-0.5 bg-gray-200" />
-        <CheckboxGroup title={t('filters.name.type')} name="gender" options={genderOptions} />
         <CheckboxGroup
-          name="availability"
-          title={t('filters.name.availability')}
-          options={availabilityOptions}
+          title={t('nouns.type')}
+          name="gender"
+          options={genderOptionsData.map(addI18)}
         />
-        <div className={styles.tagSectionWrapper}>
-          <RadioGroup name="tag" options={tagsOptions} />
+        <CheckboxGroup
+          title={t('nouns.availability')}
+          name="availability"
+          options={availabilityOptionsData.map(addI18)}
+        />
+        <div className="px-2.5 py-2">
+          <RadioGroup name="tag" options={tagsOptionsData.map(addI18)} />
         </div>
         <PriceRange
+          title={t('nouns.price')}
           min={currentRange[0]}
           max={currentRange[1]}
           onSet={handlePriceRange}
-          title={t('filters.name.price')}
         />
         <CheckboxGroup
-          title={t('filters.name.category')}
+          title={t('nouns.categories')}
           name="category"
-          options={categoriesOptions}
+          options={categoriesOptionsData.map(addI18)}
         />
       </form>
     </aside>

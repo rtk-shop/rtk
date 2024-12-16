@@ -1,25 +1,23 @@
-// todo: enum's in upper case
-
 export const enum ProductTag {
   NEW,
   STOCK,
   TOP
 }
 
-export type P = {
-  id: string
-}
-
 export const enum Gender {
-  female,
-  male,
-  unisex
+  FEMALE,
+  MALE,
+  UNISEX
 }
 
 export const enum Category {
-  backpack,
-  bag,
-  suitcase,
-  wallet,
-  other
+  BACKPACK,
+  BAG,
+  SUITCASE,
+  WALLET,
+  OTHER
+}
+
+export type P = {
+  id: string
 }

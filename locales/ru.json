@@ -28,6 +28,8 @@
       "maxLength70": "* максимум 70 символов"
     },
     "nouns": {
+      "categories": "Категории",
+      "filters": "Фильтры",
       "price": "Цена",
       "lang": "Язык",
       "name": "Имя",
@@ -36,14 +38,24 @@
       "city": "Город",
       "warehouse": "Отделение",
       "cargoWarehouse": "Грузовое отделение",
-      "parcelAutomat": "Почтомат"
+      "parcelAutomat": "Почтомат",
+      "type": "Тип",
+      "unisex": "Унисекс",
+      "availability": "Наличие",
+      "inStock": "В наличии",
+      "outStock": "Нет в наличии",
+      "new": "Новинки",
+      "withDiscount": "Скидка",
+      "top": "Топ"
     },
     "verbs": {
       "clear": "Очистить",
       "continue": "Продолжить"
     },
     "actions": {
-      "deleteAll": "Удалить все"
+      "deleteAll": "Удалить все",
+      "forFemale": "Для женщин",
+      "forMale": "Для мужчин"
     }
   },
   "Checkout": {
