@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react'
 import clsx from 'clsx'
 import { Button } from '@/components/ui/button'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 interface EditModeProps {
   onExit(): void

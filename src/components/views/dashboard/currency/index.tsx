@@ -4,7 +4,7 @@ import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@/lib/helpers'
 import { EditMode } from './edit-mode'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 import { Icon } from '@/components/ui/icon'
 
 export function Currency() {

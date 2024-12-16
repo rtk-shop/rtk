@@ -20,16 +20,16 @@
   flex-direction: column;
   align-items: center;
   height: 122px;
+}
 
-  & p {
-    font-size: 15px;
-    margin-top: 8px;
-  }
+.warning p {
+  font-size: 15px;
+  margin-top: 8px;
 }
 
 .warningIcon {
   font-size: 60px;
-  fill: rgb(255, 39, 39);
+  fill: #ff2727;
 }
 
 .title {
@@ -52,12 +52,11 @@
   font-size: 22px;
   color: #808080;
   fill: #808080;
-  &:hover {
-    fill: #171717;
-  }
 }
 
-// EDIT MODE
+.editButton:hover {
+  fill: #171717;
+}
 
 .preview {
   margin-top: 9px;
@@ -73,13 +72,14 @@
   border-radius: 8px;
   text-align: center;
   font-size: 24px;
-  &:focus {
-    outline: none;
-  }
+}
+
+.currencyInput:focus {
+  outline: none;
 }
 
 .currencyErr {
-  color: rgb(255, 39, 39);
+  color: #ff2727;
 }
 
 .buttonsWrapper {
@@ -101,7 +101,7 @@
   font-weight: 500;
   user-select: none;
   margin: 0;
-  color: rgb(255, 39, 39);
+  color: #ff2727;
 }
 
 .showMessage {
