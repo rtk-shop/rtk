@@ -14,6 +14,7 @@ import {
   categoriesOptionsData
 } from './model/filters-data'
 import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
+import { Drawer } from '@/components/ui/drawer'
 
 export type FormValues = {
   gender: Array<Lowercase<keyof typeof Gender>>
@@ -24,11 +25,13 @@ export type FormValues = {
 }
 
 export interface FiltersProps {
+  open: boolean
   priceRange: [number, number]
   onReset(): void
+  onFiltersClose(): void
 }
 
-export function Filters({ priceRange, onReset }: FiltersProps) {
+export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersProps) {
   const t = useTranslations('Common')
 
   const {
@@ -60,45 +63,49 @@ export function Filters({ priceRange, onReset }: FiltersProps) {
   }
 
   return (
-    <aside className="relative px-2.5 pb-5 pt-2.5">
-      <form>
-        <div className="flex items-center justify-between py-4">
-          <p className="text-[21px] font-semibold">{t('nouns.filters')}</p>
-          {isDirty && (
-            <button
-              onClick={handleReset}
-              className="select-none rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
-            >
-              {t('verbs.clear')}
-            </button>
-          )}
+    <Drawer open={open} position="bottom" onClose={onFiltersClose}>
+      <section className="max-h-[470px] overflow-y-auto rounded-t-2xl">
+        <div className="bg-white px-4">
+          <form>
+            <div className="flex items-center justify-between py-4">
+              <p className="text-[21px] font-semibold">{t('nouns.filters')}</p>
+              {isDirty && (
+                <button
+                  onClick={handleReset}
+                  className="select-none rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
+                >
+                  {t('verbs.clear')}
+                </button>
+              )}
+            </div>
+            <div className="mb-2.5 h-0.5 bg-gray-200" />
+            <CheckboxGroup
+              title={t('nouns.type')}
+              name="gender"
+              options={genderOptionsData.map(addI18)}
+            />
+            <CheckboxGroup
+              title={t('nouns.availability')}
+              name="availability"
+              options={availabilityOptionsData.map(addI18)}
+            />
+            <div className="px-2.5 py-2">
+              <RadioGroup name="tag" options={tagsOptionsData.map(addI18)} />
+            </div>
+            <PriceRange
+              title={t('nouns.price')}
+              min={currentRange[0]}
+              max={currentRange[1]}
+              onSet={handlePriceRange}
+            />
+            <CheckboxGroup
+              title={t('nouns.categories')}
+              name="category"
+              options={categoriesOptionsData.map(addI18)}
+            />
+          </form>
         </div>
-        <div className="mb-2.5 h-0.5 bg-gray-200" />
-        <CheckboxGroup
-          title={t('nouns.type')}
-          name="gender"
-          options={genderOptionsData.map(addI18)}
-        />
-        <CheckboxGroup
-          title={t('nouns.availability')}
-          name="availability"
-          options={availabilityOptionsData.map(addI18)}
-        />
-        <div className="px-2.5 py-2">
-          <RadioGroup name="tag" options={tagsOptionsData.map(addI18)} />
-        </div>
-        <PriceRange
-          title={t('nouns.price')}
-          min={currentRange[0]}
-          max={currentRange[1]}
-          onSet={handlePriceRange}
-        />
-        <CheckboxGroup
-          title={t('nouns.categories')}
-          name="category"
-          options={categoriesOptionsData.map(addI18)}
-        />
-      </form>
-    </aside>
+      </section>
+    </Drawer>
   )
 }

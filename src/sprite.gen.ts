@@ -1,5 +1,14 @@
 export interface SpritesMap {
-  action: 'circle-minus' | 'circle-plus' | 'edit' | 'search' | 'share' | 'trash' | 'warning'
+  action:
+    | 'circle-minus'
+    | 'circle-plus'
+    | 'edit'
+    | 'filter'
+    | 'search'
+    | 'share'
+    | 'sort'
+    | 'trash'
+    | 'warning'
   checkout: 'box-taped' | 'letter'
   common:
     | 'arrow'
@@ -27,7 +36,7 @@ export const SPRITES_META: {
   }
 } = {
   action: {
-    filePath: 'action.6b23f06d.svg',
+    filePath: 'action.1b8a3f65.svg',
     items: {
       'circle-minus': {
         viewBox: '0 0 512 512',
@@ -44,6 +53,11 @@ export const SPRITES_META: {
         width: 512,
         height: 512
       },
+      filter: {
+        viewBox: '0 0 512 512',
+        width: 512,
+        height: 512
+      },
       search: {
         viewBox: '0 0 18 18',
         width: 18,
@@ -53,6 +67,11 @@ export const SPRITES_META: {
         viewBox: '0 0 512 512',
         width: 512,
         height: 512
+      },
+      sort: {
+        viewBox: '0 0 24 24',
+        width: 24,
+        height: 24
       },
       trash: {
         viewBox: '0 0 20 20',

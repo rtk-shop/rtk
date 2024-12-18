@@ -1,11 +1,9 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { cva } from 'cva'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
 import { ListSkeleton } from './product-list/skeleton'
-import { Backdrop } from '@/components/ui/backdrop'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
 import { useQuery } from 'urql'
@@ -15,6 +13,8 @@ import {
   ProductsQueryVariables
 } from '@/lib/api/graphql/_gen_/products.query'
 import { Pagination } from '@/components/layout/pagination'
+import { Controls } from './controls'
+import { ControlsSkeleton } from './skeletons/controls'
 
 import { FetchError } from './plugs/fetch-err'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -40,20 +40,8 @@ interface Params {
   gender?: Gender
 }
 
-const filtersBox = cva(
-  'scroll-bar fixed top-0 z-50 h-full w-full max-w-80 overflow-y-auto bg-white transition-all duration-200 lg:static lg:right-0 lg:max-w-64 desktop:max-w-80',
-  {
-    variants: {
-      isOpen: {
-        true: 'right-0',
-        false: '-right-full'
-      }
-    }
-  }
-)
-
 export default function Catalog() {
-  const [isOpen, setOpen] = useState(false)
+  const [isFiltersOpen, setFiltersOpen] = useState(false)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -166,16 +154,6 @@ export default function Catalog() {
 
   if (error) return <FetchError />
 
-  const handleFilterClick = () => {
-    document.documentElement.style.position = 'fixed'
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    document.documentElement.style.position = 'static'
-    setOpen(false)
-  }
-
   const handleReset = () => {
     reset()
   }
@@ -208,17 +186,21 @@ export default function Catalog() {
     <div className="mb-12">
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
-          <div className={filtersBox({ isOpen })}>
-            <Filters
-              onReset={handleReset}
-              priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
-            />
-          </div>
+          <Filters
+            open={isFiltersOpen}
+            onReset={handleReset}
+            onFiltersClose={() => setFiltersOpen(false)}
+            priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
+          />
           <div className="w-full">
             {fetching ? (
-              <ListSkeleton />
+              <>
+                <ControlsSkeleton />
+                <ListSkeleton />
+              </>
             ) : (
               <div className="h-full">
+                <Controls onFiltersClick={() => setFiltersOpen(true)} />
                 <ProductList products={products} onReset={handleReset} />
                 <div className="px-2 pb-4 pt-2.5">
                   <Pagination
@@ -232,7 +214,6 @@ export default function Catalog() {
             )}
           </div>
         </div>
-        <Backdrop open={isOpen} onClick={handleDrawerClose} />
       </FormProvider>
     </div>
   )
