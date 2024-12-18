@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
-import { ListSkeleton } from './product-list/skeleton'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
 import { useQuery } from 'urql'
@@ -15,6 +14,7 @@ import {
 import { Pagination } from '@/components/layout/pagination'
 import { Controls } from './controls'
 import { ControlsSkeleton } from './skeletons/controls'
+import { ListSkeleton } from './skeletons/list'
 
 import { FetchError } from './plugs/fetch-err'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
