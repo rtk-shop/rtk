@@ -3,17 +3,16 @@ import { cva } from 'cva'
 
 interface BadgeProps {
   max?: number
-  color?: string
   children: ReactNode
   content?: string | number
   className?: string
   dotClassName?: string
 }
 
-const container = cva('inline-flex relative shrink-0 align-middle')
+const container = cva('relative inline-flex align-middle')
 
 const dot = cva(
-  'text-white size-5 flex z-10 px-1.5 absolute flex-wrap rounded-full items-center font-medium text-xs leading-none content-center justify-center top-0 right-0 flex-row origin-center transition-transform',
+  'absolute right-0 top-0 z-10 flex size-5 origin-center flex-row flex-wrap content-center items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-medium leading-none text-white transition-transform',
   {
     variants: {
       intent: {
@@ -24,14 +23,7 @@ const dot = cva(
   }
 )
 
-export function Badge({
-  children,
-  content,
-  color = '#ff2727',
-  max = 100,
-  className,
-  dotClassName
-}: BadgeProps) {
+export function Badge({ children, content, max = 100, className, dotClassName }: BadgeProps) {
   let show = ''
 
   if (typeof content === 'number') {
@@ -47,16 +39,11 @@ export function Badge({
   }
 
   return (
-    <span className={container({ className })}>
+    <div className={container({ className })}>
       {children}
-      <span
-        className={dot({ intent: content ? 'in' : 'out', className: dotClassName })}
-        style={{
-          backgroundColor: color
-        }}
-      >
+      <span className={dot({ intent: content ? 'in' : 'out', className: dotClassName })}>
         {show}
       </span>
-    </span>
+    </div>
   )
 }
