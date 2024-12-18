@@ -14,7 +14,9 @@ interface PriceRangeProps {
   onSet(range: [number, number]): void
 }
 
-const priceInput = cva('mr-2 w-16 rounded-md border border-gray-300 px-1 py-0.5')
+const priceInput = cva(
+  'mr-2 w-20 rounded-md border border-gray-500 py-1.5 pl-1.5 pr-1 leading-none'
+)
 
 export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps) {
   const [isCollapsed, setCollapsed] = useState(true)
@@ -95,7 +97,7 @@ export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps
             <button
               onClick={handleSubmit}
               type="button"
-              className="w-16 rounded-sm border border-gray-200 bg-gray-100 py-0.5 font-medium text-slate-600"
+              className="w-20 rounded-sm bg-black py-1 font-medium text-white"
             >
               OK
             </button>
