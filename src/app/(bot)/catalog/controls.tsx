@@ -26,7 +26,7 @@ export function Controls({ onSortClick, onFiltersClick }: ControlsProps) {
             color="secondary"
             onClick={onSortClick}
             fullWidth
-            className="bg-gray-200 pb-2 pt-2"
+            className="bg-gray-200 pb-2 pt-2 font-normal"
             endIcon={<Icon name="action/sort" className="ml-1.5 text-[25px]" />}
           >
             Сортировать
@@ -37,7 +37,7 @@ export function Controls({ onSortClick, onFiltersClick }: ControlsProps) {
             color="secondary"
             onClick={onFiltersClick}
             fullWidth
-            className="bg-gray-200 pb-2 pt-2"
+            className="bg-gray-200 pb-2 pt-2 font-normal"
             startIcon={<Icon name="action/filter" className="mr-1.5" />}
           >
             Фильтр
