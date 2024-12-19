@@ -1,28 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Drawer } from '@/components/ui/drawer'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckboxGroup } from '@/components/ui/checkbox-group'
 import { PriceRange } from '@/components/ui/price-range'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
+import { countFiltersDirtyFields } from './model/helpers'
 import {
   type Option,
   genderOptionsData,
   availabilityOptionsData,
   tagsOptionsData,
   categoriesOptionsData
-} from './model/filters-data'
-import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
-import { Drawer } from '@/components/ui/drawer'
-
-export type FormValues = {
-  gender: Array<Lowercase<keyof typeof Gender>>
-  availability: Array<'inStock' | 'byOrder'>
-  tag: Lowercase<keyof typeof ProductTag> | null
-  priceRange: [number, number]
-  category: Array<Lowercase<keyof typeof CategoryType>>
-}
+} from './model/form-data'
+import { FormValues } from './model/types'
 
 export interface FiltersProps {
   open: boolean
@@ -35,9 +28,11 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
   const t = useTranslations('Common')
 
   const {
-    formState: { isDirty },
+    formState: { dirtyFields },
     setValue
   } = useFormContext<FormValues>()
+
+  const isDirty = countFiltersDirtyFields(dirtyFields) > 0
 
   const [currentRange, setCurrentRange] = useState(priceRange)
 

@@ -1,38 +1,27 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { useQuery } from 'urql'
+import { Pagination } from '@/components/layout/pagination'
+import { Controls } from './controls'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
-import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
-import type { CategoryType, ProductTag, Gender } from '@/lib/api/graphql/types'
-import { useQuery } from 'urql'
+import { ControlsSkeleton } from './skeletons/controls'
+import { ListSkeleton } from './skeletons/list'
+import { SortMenu } from './sort'
+import { FetchError } from './plugs/fetch-err'
+import type { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
+import type { FormValues, PriceRangeType } from './model/types'
+
 import {
   ProductsDocument,
   ProductsQuery,
   ProductsQueryVariables
 } from '@/lib/api/graphql/_gen_/products.query'
-import { Pagination } from '@/components/layout/pagination'
-import { Controls } from './controls'
-import { ControlsSkeleton } from './skeletons/controls'
-import { ListSkeleton } from './skeletons/list'
 
-import { FetchError } from './plugs/fetch-err'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
-type PriceRangeType = {
-  gt: number
-  lt: number
-}
-
-export type FormValues = {
-  gender: Array<Lowercase<keyof typeof Gender>>
-  availability: Array<'inStock' | 'byOrder'>
-  tag: Lowercase<keyof typeof ProductTag> | null
-  priceRange: [number, number]
-  category: Array<Lowercase<keyof typeof CategoryType>>
-}
-
-interface Params {
+type QueryFilters = {
   price?: PriceRangeType
   instock?: boolean
   tag?: ProductTag
@@ -40,8 +29,11 @@ interface Params {
   gender?: Gender
 }
 
+const LIMIT_PER_PAGE = 33
+
 export default function Catalog() {
   const [isFiltersOpen, setFiltersOpen] = useState(false)
+  const [isSortMenuOpen, setSortMenuOpen] = useState(false)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -83,13 +75,13 @@ export default function Catalog() {
     router.replace(pathname)
   }
 
-  const [filterParams, setFilterParams] = useState<Params>()
+  const [filterParams, setFilterParams] = useState<QueryFilters>()
 
   const [result] = useQuery<ProductsQuery, ProductsQueryVariables>({
     query: ProductsDocument,
     // requestPolicy: 'network-only',
     variables: {
-      first: 33,
+      first: LIMIT_PER_PAGE,
       after,
       before,
       ...filterParams
@@ -106,14 +98,15 @@ export default function Catalog() {
       availability: [],
       tag: null,
       priceRange: undefined,
-      category: []
+      category: [],
+      sortBy: 'default'
     }
   })
 
   const { watch, handleSubmit, reset } = formMethods
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('-- API --', data)
+    console.log('-- API -- [sortBy]', data.sortBy)
 
     const { gender, availability, tag, priceRange, category } = data
 
@@ -186,12 +179,14 @@ export default function Catalog() {
     <div className="mb-12">
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
+          <SortMenu open={isSortMenuOpen} onSortClose={() => setSortMenuOpen(false)} />
           <Filters
             open={isFiltersOpen}
             onReset={handleReset}
             onFiltersClose={() => setFiltersOpen(false)}
             priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
           />
+
           <div className="w-full">
             {fetching ? (
               <>
@@ -200,7 +195,10 @@ export default function Catalog() {
               </>
             ) : (
               <div className="h-full">
-                <Controls onFiltersClick={() => setFiltersOpen(true)} />
+                <Controls
+                  onSortClick={() => setSortMenuOpen(true)}
+                  onFiltersClick={() => setFiltersOpen(true)}
+                />
                 <ProductList products={products} onReset={handleReset} />
                 <div className="px-2 pb-4 pt-2.5">
                   <Pagination

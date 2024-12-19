@@ -1,4 +1,5 @@
 import type { Gender, ProductTag, Category } from '@/types'
+import { FormValues } from './types'
 
 export type Option<T> = {
   label: string
@@ -71,5 +72,22 @@ export const categoriesOptionsData: Option<keyof typeof Category>[] = [
   {
     label: 'categories.other',
     value: 'OTHER'
+  }
+]
+
+// Sort
+
+export const sortOptionsData: Option<FormValues['sortBy']>[] = [
+  {
+    label: 'Стандартно',
+    value: 'default'
+  },
+  {
+    label: 'По возростанию цены',
+    value: 'priceAsc'
+  },
+  {
+    label: 'По убыванию цены',
+    value: 'priceDesc'
   }
 ]
