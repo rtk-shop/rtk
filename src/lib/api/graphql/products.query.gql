@@ -10,7 +10,7 @@ query Products(
   $after: String
   $before: String
 ) {
-  productsV2(
+  products(
     first: $first
     after: $after
     before: $before

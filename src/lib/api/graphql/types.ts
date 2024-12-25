@@ -213,21 +213,13 @@ export const enum ProductTag {
   Top = 'TOP'
 }
 
-export type ProductsPayload = {
-  __typename?: 'ProductsPayload'
-  pagination: Pagination
-  priceRange: PriceRangeType
-  products: Array<Product>
-}
-
 export type Query = {
   __typename?: 'Query'
   cartProducts: Array<Product>
   globalData: GlobalData
   product: ProductPayload
-  products: ProductsPayload
+  products: ProductConnection
   productsByID: Array<Product>
-  productsV2: ProductConnection
 }
 
 export type QueryCartProductsArgs = {
@@ -239,18 +231,14 @@ export type QueryProductArgs = {
 }
 
 export type QueryProductsArgs = {
-  filter: ProductFilter
-}
-
-export type QueryProductsByIdArgs = {
-  ids: Array<Scalars['ID']['input']>
-}
-
-export type QueryProductsV2Args = {
   after?: InputMaybe<Scalars['String']['input']>
   before?: InputMaybe<Scalars['String']['input']>
   first: Scalars['Int']['input']
   where?: InputMaybe<ProductFilter>
+}
+
+export type QueryProductsByIdArgs = {
+  ids: Array<Scalars['ID']['input']>
 }
 
 export const enum Role {

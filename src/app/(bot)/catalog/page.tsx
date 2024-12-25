@@ -89,7 +89,7 @@ export default function Catalog() {
   })
 
   const { data, fetching, error } = result
-  // console.log(result.data?.productsV2.priceRange)
+  // console.log(result.data?.products.priceRange)
 
   const formMethods = useForm<FormValues>({
     mode: 'onSubmit',
@@ -157,23 +157,23 @@ export default function Catalog() {
       left: 0,
       behavior: 'smooth'
     })
-    // setParams((prev) => ({ ...prev, before: null, after: data?.productsV2.pageInfo.endCursor }))
+    // setParams((prev) => ({ ...prev, before: null, after: data?.products.pageInfo.endCursor }))
     router.push(
-      pathname + '?' + createQueryString('after', data?.productsV2.pageInfo.endCursor || '')
+      pathname + '?' + createQueryString('after', data?.products.pageInfo.endCursor || '')
     )
   }
 
   const handlePrevPage = () => {
     router.push(
-      pathname + '?' + createQueryString('before', data?.productsV2.pageInfo.startCursor || ''),
+      pathname + '?' + createQueryString('before', data?.products.pageInfo.startCursor || ''),
       {
         scroll: false
       }
     )
   }
 
-  const products = data?.productsV2.edges?.map((e) => e?.node) || []
-  const priceRange = result.data?.productsV2.priceRange
+  const products = data?.products.edges?.map((e) => e?.node) || []
+  const priceRange = result.data?.products.priceRange
 
   return (
     <div className="mb-12">
@@ -204,8 +204,8 @@ export default function Catalog() {
                   <Pagination
                     onNext={handleNextPage}
                     onPrev={handlePrevPage}
-                    hasNextPage={data?.productsV2.pageInfo.hasNextPage}
-                    hasPreviousPage={data?.productsV2.pageInfo.hasPreviousPage}
+                    hasNextPage={data?.products.pageInfo.hasNextPage}
+                    hasPreviousPage={data?.products.pageInfo.hasPreviousPage}
                   />
                 </div>
               </div>

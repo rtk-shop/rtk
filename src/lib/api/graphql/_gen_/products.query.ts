@@ -16,7 +16,7 @@ export type ProductsQueryVariables = Types.Exact<{
 
 export type ProductsQuery = {
   __typename?: 'Query'
-  productsV2: {
+  products: {
     __typename?: 'ProductConnection'
     totalCount: number
     priceRange: { __typename?: 'PriceRangeType'; gt: number; lt: number }
@@ -56,7 +56,7 @@ export const ProductsDocument = gql`
     $after: String
     $before: String
   ) {
-    productsV2(
+    products(
       first: $first
       after: $after
       before: $before
