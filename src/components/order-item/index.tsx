@@ -3,6 +3,7 @@ import type { OrderStatus } from '@/types/order'
 import { Icon } from '../ui/icon'
 import { cva } from 'cva'
 import { useTranslations } from 'next-intl'
+import { HeightExpander } from '../ui/height-expander'
 
 export interface OrderItemProps {
   id: string
@@ -29,8 +30,8 @@ export function OrderItem({ id, price, status, expandId, isExpanded, onExpand }:
   const t = useTranslations('Common.order')
 
   return (
-    <div className="rounded-xl border border-gray-300 py-2.5 pl-2">
-      <div onClick={() => onExpand(id)} className="grid grid-cols-8">
+    <div className="rounded-xl border border-gray-300">
+      <div onClick={() => onExpand(id)} className="grid grid-cols-8 py-2.5 pl-2">
         <div className="col-span-2 text-start">ID {id}</div>
         <div
           className="col-span-2 font-medium"
@@ -48,6 +49,12 @@ export function OrderItem({ id, price, status, expandId, isExpanded, onExpand }:
           />
         </div>
       </div>
+      <HeightExpander expanded={expandId === id && isExpanded}>
+        <div className="p-2">
+          <h3>Some text header</h3>
+          <p>Some paragraph text</p>
+        </div>
+      </HeightExpander>
     </div>
   )
 }
