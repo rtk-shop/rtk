@@ -1,0 +1,9 @@
+query UserOrders($userId: ID!) {
+  userOrders(userId: $userId) {
+    id
+    status
+    price
+    updatedAt
+    createdAt
+  }
+}

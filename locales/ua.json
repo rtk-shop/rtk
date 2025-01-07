@@ -17,6 +17,17 @@
       "emptyMsg": "Кошик порожній",
       "errorMsg": "Не вдалося отримати дані"
     },
+    "order": {
+      "statuses": {
+        "created": "Створено",
+        "viewed": "Переглянуто",
+        "accepted": "Прийнято",
+        "sent": "Надіслано",
+        "done": "Отримано",
+        "rejected": "Скасовано",
+        "returned": "Повернення"
+      }
+    },
     "validation": {
       "requiredField": "* обов'язкове поле",
       "wrongEmail": "* значення не схоже на email",

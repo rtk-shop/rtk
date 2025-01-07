@@ -1,3 +1,5 @@
+import type { OrderStatus } from '@/types/order'
+
 export const formatPrice = (num: number): string => {
   let dst: string
 
@@ -12,16 +14,12 @@ export const formatPrice = (num: number): string => {
 
 /**
  * @param src is a date-time string in RFC 3339 format
+ * @param options is a Intl.DateTimeFormatOptions instance,
+ * for example: { dateStyle: 'short', timeStyle: 'medium' }
  */
 export const formatDate = (src: string, options?: Intl.DateTimeFormatOptions): string => {
-  const initOptions: Intl.DateTimeFormatOptions = {
-    dateStyle: 'short',
-    timeStyle: 'medium'
-  }
   try {
-    return new Intl.DateTimeFormat('uk-UA', { ...initOptions, ...options }).format(
-      new Date(src.slice(0, -1))
-    )
+    return new Intl.DateTimeFormat('uk-UA', { ...options }).format(new Date(src.slice(0, -1)))
   } catch (error) {
     console.log(error)
     return 'invalid date'
@@ -39,6 +37,7 @@ export const getColorByTagName = (name: string): string => {
   }
 }
 
+// todo: add types
 export const getProductMainTagColor = (name: string): string => {
   switch (name) {
     case 'new':
@@ -49,5 +48,20 @@ export const getProductMainTagColor = (name: string): string => {
       return '#fd3b3b'
     default:
       return 'lightgray'
+  }
+}
+
+export const getOrderStatusColor = (status: keyof typeof OrderStatus): string => {
+  const cond = status as Lowercase<keyof typeof OrderStatus>
+
+  switch (cond) {
+    case 'done':
+      return '#0d840d'
+    case 'rejected':
+      return '#a2a2a2'
+    case 'returned':
+      return '#f00000'
+    default:
+      return ''
   }
 }

@@ -17,6 +17,17 @@
       "emptyMsg": "Корзина пуста",
       "errorMsg": "Не удалось получить данные"
     },
+    "order": {
+      "statuses": {
+        "created": "Создан",
+        "viewed": "Просмотрен",
+        "accepted": "Принят",
+        "sent": "Отправлен",
+        "done": "Получен",
+        "rejected": "Отменен",
+        "returned": "Возврат"
+      }
+    },
     "validation": {
       "requiredField": "* обязательное поле",
       "wrongEmail": "* значение не похоже на email",

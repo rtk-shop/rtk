@@ -104,15 +104,17 @@ export type Order = {
   __typename?: 'Order'
   cartItems: Array<CartItemType>
   cityId: Scalars['String']['output']
-  createdAt: Scalars['Date']['output']
+  createdAt: Scalars['String']['output']
   id: Scalars['ID']['output']
   postOfficeId: Scalars['String']['output']
+  price: Scalars['Int']['output']
   receiverEmail: Scalars['String']['output']
   receiverName: Scalars['String']['output']
   receiverPhone: Scalars['String']['output']
   receiverSurname: Scalars['String']['output']
-  status: Scalars['String']['output']
+  status: OrderStatus
   supplier: Scalars['String']['output']
+  updatedAt: Scalars['String']['output']
 }
 
 export type OrderFilter = {
@@ -120,6 +122,16 @@ export type OrderFilter = {
 }
 
 export type OrderPayload = NotFound | Order
+
+export const enum OrderStatus {
+  Accepted = 'ACCEPTED',
+  Created = 'CREATED',
+  Done = 'DONE',
+  Rejected = 'REJECTED',
+  Returned = 'RETURNED',
+  Sent = 'SENT',
+  Viewed = 'VIEWED'
+}
 
 export type PageInfo = {
   __typename?: 'PageInfo'
@@ -220,6 +232,7 @@ export type Query = {
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
+  userOrders: Array<Order>
 }
 
 export type QueryCartProductsArgs = {
@@ -239,6 +252,10 @@ export type QueryProductsArgs = {
 
 export type QueryProductsByIdArgs = {
   ids: Array<Scalars['ID']['input']>
+}
+
+export type QueryUserOrdersArgs = {
+  userId: Scalars['ID']['input']
 }
 
 export const enum Role {

@@ -1,3 +1,10 @@
+import { Orders } from './orders'
+
 export default function Profile() {
-  return <h1>Profile</h1>
+  return (
+    <div className="px-2">
+      <h1>Привет!</h1>
+      <Orders />
+    </div>
+  )
 }
