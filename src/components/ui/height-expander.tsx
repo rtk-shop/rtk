@@ -4,8 +4,8 @@ import { cva } from 'cva'
 const container = cva('grid transition-all duration-300 ease-out', {
   variants: {
     expanded: {
-      true: 'grid-rows-[1fr]',
-      false: 'grid-rows-[0fr]'
+      true: 'grid-rows-height-open',
+      false: 'grid-rows-height-closed'
     }
   }
 })
