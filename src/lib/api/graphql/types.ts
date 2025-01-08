@@ -103,12 +103,12 @@ export type NotFound = {
 export type Order = {
   __typename?: 'Order'
   cartItems: Array<CartItemType>
-  cityId: Scalars['String']['output']
+  cityName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
   id: Scalars['ID']['output']
-  postOfficeId: Scalars['String']['output']
+  parcelTrackId?: Maybe<Scalars['String']['output']>
+  postOfficeName: Scalars['String']['output']
   price: Scalars['Int']['output']
-  receiverEmail: Scalars['String']['output']
   receiverName: Scalars['String']['output']
   receiverPhone: Scalars['String']['output']
   receiverSurname: Scalars['String']['output']

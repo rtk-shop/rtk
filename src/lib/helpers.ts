@@ -19,11 +19,15 @@ export const formatPrice = (num: number): string => {
  */
 export const formatDate = (src: string, options?: Intl.DateTimeFormatOptions): string => {
   try {
-    return new Intl.DateTimeFormat('uk-UA', { ...options }).format(new Date(src.slice(0, -1)))
+    return new Intl.DateTimeFormat('uk-UA', { ...options }).format(new Date(src.slice(0, -1))) // remove "Z"
   } catch (error) {
     console.log(error)
     return 'invalid date'
   }
+}
+
+export const formatPhoneNumber = (phone: string): string => {
+  return '0' + phone.replace(/(\d{2})(\d{3})(\d{4})/g, '$1-$2-$3')
 }
 
 export const getColorByTagName = (name: string): string => {

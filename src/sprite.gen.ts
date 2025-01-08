@@ -2,6 +2,7 @@ export interface SpritesMap {
   action:
     | 'circle-minus'
     | 'circle-plus'
+    | 'copy'
     | 'edit'
     | 'filter'
     | 'search'
@@ -36,7 +37,7 @@ export const SPRITES_META: {
   }
 } = {
   action: {
-    filePath: 'action.1b8a3f65.svg',
+    filePath: 'action.4d3c4998.svg',
     items: {
       'circle-minus': {
         viewBox: '0 0 512 512',
@@ -46,6 +47,11 @@ export const SPRITES_META: {
       'circle-plus': {
         viewBox: '0 0 512 512',
         width: 512,
+        height: 512
+      },
+      copy: {
+        viewBox: '0 0 448 512',
+        width: 448,
         height: 512
       },
       edit: {

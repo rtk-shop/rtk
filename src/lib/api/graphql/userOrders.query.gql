@@ -3,6 +3,13 @@ query UserOrders($userId: ID!) {
     id
     status
     price
+    receiverName
+    receiverSurname
+    receiverPhone
+    supplier
+    cityName
+    postOfficeName
+    parcelTrackId
     updatedAt
     createdAt
   }

@@ -13,6 +13,13 @@ export type UserOrdersQuery = {
     id: string
     status: Types.OrderStatus
     price: number
+    receiverName: string
+    receiverSurname: string
+    receiverPhone: string
+    supplier: string
+    cityName: string
+    postOfficeName: string
+    parcelTrackId?: string | null
     updatedAt: string
     createdAt: string
   }>
@@ -24,6 +31,13 @@ export const UserOrdersDocument = gql`
       id
       status
       price
+      receiverName
+      receiverSurname
+      receiverPhone
+      supplier
+      cityName
+      postOfficeName
+      parcelTrackId
       updatedAt
       createdAt
     }

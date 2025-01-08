@@ -1,17 +1,26 @@
-import { formatPrice, getOrderStatusColor } from '@/lib/helpers'
-import type { OrderStatus } from '@/types/order'
-import { Icon } from '../ui/icon'
+import Image from 'next/image'
 import { cva } from 'cva'
+import { Icon } from '../ui/icon'
 import { useTranslations } from 'next-intl'
 import { HeightExpander } from '../ui/height-expander'
+import { IconButton } from '../ui/icon-button'
+import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
+import type { OrderStatus } from '@/types/order'
 
 export interface OrderItemProps {
   id: string
   status: keyof typeof OrderStatus
   price: number
+  receiverName: string
+  receiverSurname: string
+  receiverPhone: string
+  supplier: string
+  cityName: string
+  postOfficeName: string
+  parcelTrackId?: string | null
   updatedAt: string
   createdAt: string
-  //   meta
+  // controls
   expandId: string
   isExpanded: boolean
   onExpand(orderId: string): void
@@ -26,7 +35,22 @@ const expandIcon = cva('text-[26px] transition-all duration-300', {
   }
 })
 
-export function OrderItem({ id, price, status, expandId, isExpanded, onExpand }: OrderItemProps) {
+export function OrderItem({
+  id,
+  price,
+  status,
+  receiverName,
+  receiverSurname,
+  receiverPhone,
+  cityName,
+  postOfficeName,
+  parcelTrackId,
+  updatedAt,
+  createdAt,
+  expandId,
+  isExpanded,
+  onExpand
+}: OrderItemProps) {
   const t = useTranslations('Common.order')
 
   return (
@@ -50,9 +74,51 @@ export function OrderItem({ id, price, status, expandId, isExpanded, onExpand }:
         </div>
       </div>
       <HeightExpander expanded={expandId === id && isExpanded}>
-        <div className="p-2">
-          <h3>Some text header</h3>
-          <p>Some paragraph text</p>
+        {/* User info */}
+        <div className="p-2 pt-0">
+          <div className="mb-2 leading-snug">
+            <p className="mb-0.5 flex justify-between">
+              <span className="font-medium">Получатель</span>
+              <span className="text-sm text-gray-600">
+                от {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
+              </span>
+            </p>
+            <p>
+              {receiverName} {receiverSurname}
+            </p>
+            <p>{formatPhoneNumber(receiverPhone)}</p>
+          </div>
+          {/* Delivery */}
+          <div className="mb-3 leading-snug">
+            <p className="mb-0.5 font-medium">Информация о доставке</p>
+            <p className="flex items-center">
+              <span className="text-gray-500">Сервис: </span>
+              <Image
+                src="/icons/novaposta.svg"
+                width={26}
+                height={26}
+                alt="Нова пошта"
+                className="ml-1.5 mr-1"
+              />
+              <span>Нова пошта</span>
+            </p>
+            <p>
+              <span className="text-gray-500">Адрес:</span> {cityName}, {postOfficeName}
+            </p>
+            <div className="flex items-center">
+              <span className="mr-1 text-gray-500">Трекинг-номер:</span>
+              {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
+              {parcelTrackId && (
+                <IconButton className="ml-2 p-0 text-[22px] text-slate-600">
+                  <Icon name="action/copy" />
+                </IconButton>
+              )}
+            </div>
+          </div>
+          {/* Meta */}
+          <div className="text-sm text-gray-600">
+            <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
+          </div>
         </div>
       </HeightExpander>
     </div>
