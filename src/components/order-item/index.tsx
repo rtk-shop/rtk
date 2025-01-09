@@ -1,3 +1,4 @@
+import { type ReactElement } from 'react'
 import Image from 'next/image'
 import { cva } from 'cva'
 import { Icon } from '../ui/icon'
@@ -42,6 +43,7 @@ export function OrderItem({
   receiverName,
   receiverSurname,
   receiverPhone,
+  supplier,
   cityName,
   postOfficeName,
   parcelTrackId,
@@ -52,6 +54,39 @@ export function OrderItem({
   onExpand
 }: OrderItemProps) {
   const t = useTranslations('Common.order')
+
+  function genSupplierView(supplier: string): ReactElement | string {
+    switch (supplier) {
+      case 'nova':
+        return (
+          <>
+            <Image
+              src="/icons/novaposta.svg"
+              width={24}
+              height={26}
+              alt="Нова пошта"
+              className="ml-1.5 mr-1"
+            />
+            <span>Нова пошта</span>
+          </>
+        )
+      case 'ukrp':
+        return (
+          <>
+            <Image
+              src="/icons/urkposhta.svg"
+              width={21}
+              height={30}
+              alt="Укрпошта"
+              className="ml-1.5 mr-2"
+            />
+            <span>Укрпошта</span>
+          </>
+        )
+      default:
+        return supplier
+    }
+  }
 
   return (
     <div className="rounded-xl border border-gray-300">
@@ -93,14 +128,7 @@ export function OrderItem({
             <p className="mb-0.5 font-medium">Информация о доставке</p>
             <p className="flex items-center">
               <span className="text-gray-500">Сервис: </span>
-              <Image
-                src="/icons/novaposta.svg"
-                width={26}
-                height={26}
-                alt="Нова пошта"
-                className="ml-1.5 mr-1"
-              />
-              <span>Нова пошта</span>
+              {genSupplierView(supplier)}
             </p>
             <p>
               <span className="text-gray-500">Адрес:</span> {cityName}, {postOfficeName}
@@ -109,7 +137,7 @@ export function OrderItem({
               <span className="mr-1 text-gray-500">Трекинг-номер:</span>
               {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
               {parcelTrackId && (
-                <IconButton className="ml-2 p-0 text-[22px] text-slate-600">
+                <IconButton className="ml-2 pb-0 pl-0 pr-0 pt-0 text-[22px] text-slate-600">
                   <Icon name="action/copy" />
                 </IconButton>
               )}
