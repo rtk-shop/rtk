@@ -4,8 +4,8 @@ import { cva } from 'cva'
 import { Icon } from '../ui/icon'
 import { useTranslations } from 'next-intl'
 import { HeightExpander } from '../ui/height-expander'
-import { IconButton } from '../ui/icon-button'
 import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
+import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import type { OrderStatus } from '@/types/order'
 
 export interface OrderItemProps {
@@ -136,11 +136,7 @@ export function OrderItem({
             <div className="flex items-center">
               <span className="mr-1 text-gray-500">Трекинг-номер:</span>
               {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
-              {parcelTrackId && (
-                <IconButton className="ml-2 pb-0 pl-0 pr-0 pt-0 text-[22px] text-slate-600">
-                  <Icon name="action/copy" />
-                </IconButton>
-              )}
+              {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
             </div>
           </div>
           {/* Meta */}
