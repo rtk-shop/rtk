@@ -1,6 +1,6 @@
 export const enum OrderStatus {
   CREATED,
-  VIEWED,
+  PROCESSED,
   ACCEPTED,
   SENT,
   DONE,

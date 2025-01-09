@@ -20,7 +20,7 @@
     "order": {
       "statuses": {
         "created": "Створено",
-        "viewed": "Переглянуто",
+        "processed": "Опрацьовано",
         "accepted": "Прийнято",
         "sent": "В дорозі",
         "done": "Отримано",

@@ -127,10 +127,10 @@ export const enum OrderStatus {
   Accepted = 'ACCEPTED',
   Created = 'CREATED',
   Done = 'DONE',
+  Processed = 'PROCESSED',
   Rejected = 'REJECTED',
   Returned = 'RETURNED',
-  Sent = 'SENT',
-  Viewed = 'VIEWED'
+  Sent = 'SENT'
 }
 
 export type PageInfo = {
