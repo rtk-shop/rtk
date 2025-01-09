@@ -55,6 +55,8 @@ export function OrderItem({
 }: OrderItemProps) {
   const t = useTranslations('Common.order')
 
+  const isOrderExpanded = expandId === id && isExpanded
+
   function genSupplierView(supplier: string): ReactElement | string {
     switch (supplier) {
       case 'nova':
@@ -89,11 +91,11 @@ export function OrderItem({
   }
 
   return (
-    <div className="rounded-xl border border-gray-300">
-      <div onClick={() => onExpand(id)} className="grid grid-cols-8 py-2.5 pl-2">
+    <div className="rounded-xl border border-gray-600">
+      <div onClick={() => onExpand(id)} className="grid grid-cols-8 py-2.5 pl-2 font-medium">
         <div className="col-span-2 text-start">ID {id}</div>
         <div
-          className="col-span-2 font-medium"
+          className="col-span-2"
           style={{
             color: getOrderStatusColor(status)
           }}
@@ -102,13 +104,10 @@ export function OrderItem({
         </div>
         <div className="col-span-3 text-center">{formatPrice(price)} ₴</div>
         <div className="col-span-1 flex items-center justify-center">
-          <Icon
-            name="common/arrow"
-            className={expandIcon({ expand: expandId === id && isExpanded })}
-          />
+          <Icon name="common/arrow" className={expandIcon({ expand: isOrderExpanded })} />
         </div>
       </div>
-      <HeightExpander expanded={expandId === id && isExpanded}>
+      <HeightExpander expanded={isOrderExpanded}>
         {/* User info */}
         <div className="p-2 pt-0">
           <div className="mb-2 leading-snug">
