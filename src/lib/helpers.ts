@@ -61,10 +61,8 @@ export const getOrderStatusColor = (status: keyof typeof OrderStatus): string =>
   switch (cond) {
     case 'done':
       return '#0d840d'
-    case 'rejected':
-      return '#a2a2a2'
     case 'returned':
-      return '#f00000'
+      return '#a2a2a2'
     default:
       return ''
   }

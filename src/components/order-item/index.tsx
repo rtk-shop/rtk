@@ -109,7 +109,7 @@ export function OrderItem({
         >
           {t(`statuses.${status}`)}
         </div>
-        <div className="col-span-3 text-center">{formatPrice(price)} ₴</div>
+        <div className="col-span-3 text-center font-medium">{formatPrice(price)} ₴</div>
         <div className="col-span-1 flex items-center justify-center">
           <Icon name="common/arrow" className={expandIcon({ expand: isOrderExpanded })} />
         </div>
