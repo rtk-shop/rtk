@@ -18,6 +18,7 @@ export function Orders({}: {}) {
 
   const [result] = useQuery<UserOrdersQuery, UserOrdersQueryVariables>({
     query: UserOrdersDocument,
+    requestPolicy: 'network-only',
     variables: {
       userId: '1'
     }
@@ -49,7 +50,7 @@ export function Orders({}: {}) {
 
   if (fetching) {
     return (
-      <div className="h-[300px]">
+      <div className="h-[310px]">
         <OrderSkeletonList len={6} />
       </div>
     )
@@ -58,8 +59,8 @@ export function Orders({}: {}) {
   // console.log(result)
 
   return (
-    <section ref={containerRef} className="h-[300px] overflow-y-auto">
-      <ul className="">
+    <section ref={containerRef} className="h-[310px] overflow-y-auto">
+      <ul>
         {result.data?.userOrders.map((order, index) => (
           <li key={index} className="mb-3">
             <OrderItem
