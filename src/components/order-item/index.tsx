@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl'
 import { HeightExpander } from '../ui/height-expander'
 import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
+import { Button } from '../ui/button'
+import { orderStatus } from '@/lib/constants'
 import type { OrderStatus } from '@/types/order'
 
 export interface OrderItemProps {
@@ -28,6 +30,7 @@ export interface OrderItemProps {
   onExpand(orderId: string, index: number): void
 }
 
+// todo: share it
 const expandIcon = cva('text-[26px] transition-all duration-300', {
   variants: {
     expand: {
@@ -36,6 +39,12 @@ const expandIcon = cva('text-[26px] transition-all duration-300', {
     }
   }
 })
+
+const validStatusesForReject: string[] = [
+  orderStatus.created,
+  orderStatus.accepted,
+  orderStatus.processed
+]
 
 export function OrderItem({
   id,
@@ -130,7 +139,7 @@ export function OrderItem({
             <p>{formatPhoneNumber(receiverPhone)}</p>
           </div>
           {/* Delivery */}
-          <div className="mb-3 leading-snug">
+          <div className="mb-3.5 leading-snug">
             <p className="mb-0.5 font-medium">Информация о доставке</p>
             <p className="flex items-center">
               <span className="text-gray-500">Сервис: </span>
@@ -145,6 +154,14 @@ export function OrderItem({
               {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
             </div>
           </div>
+          {/* Controls */}
+          {validStatusesForReject.includes(status) && (
+            <div className="mb-2">
+              <Button className="pb-3 pt-3" fullWidth>
+                Отменить заказ
+              </Button>
+            </div>
+          )}
           {/* Meta */}
           <div className="text-sm text-gray-600">
             <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
