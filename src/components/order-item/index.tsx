@@ -28,6 +28,7 @@ export interface OrderItemProps {
   expandId: string
   isExpanded: boolean
   onExpand(orderId: string, index: number): void
+  onReject(orderId: string): void
 }
 
 // todo: share it
@@ -62,11 +63,16 @@ export function OrderItem({
   expandId,
   isExpanded,
   index,
-  onExpand
+  onExpand,
+  onReject
 }: OrderItemProps) {
   const t = useTranslations('Common.order')
 
   const isOrderExpanded = expandId === id && isExpanded
+
+  const handleRejectClick = () => {
+    onReject(id)
+  }
 
   function genSupplierView(supplier: string): ReactElement | string {
     switch (supplier) {
@@ -157,7 +163,7 @@ export function OrderItem({
           {/* Controls */}
           {validStatusesForReject.includes(status) && (
             <div className="mb-2">
-              <Button className="pb-3 pt-3" fullWidth>
+              <Button onClick={handleRejectClick} className="pb-3 pt-3" fullWidth>
                 Отменить заказ
               </Button>
             </div>

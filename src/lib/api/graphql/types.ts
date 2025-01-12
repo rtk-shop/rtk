@@ -62,6 +62,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   createOrder: NewOrderPayload
   hideProduct?: Maybe<HideProductPayload>
+  rejectOrder: RejectOrderPayload
   setUsdCourse: GlobalData
 }
 
@@ -72,6 +73,11 @@ export type MutationCreateOrderArgs = {
 export type MutationHideProductArgs = {
   id: Scalars['ID']['input']
   isHidden: Scalars['Boolean']['input']
+}
+
+export type MutationRejectOrderArgs = {
+  orderId: Scalars['ID']['input']
+  userId: Scalars['ID']['input']
 }
 
 export type MutationSetUsdCourseArgs = {
@@ -256,6 +262,11 @@ export type QueryProductsByIdArgs = {
 
 export type QueryUserOrdersArgs = {
   userId: Scalars['ID']['input']
+}
+
+export type RejectOrderPayload = {
+  __typename?: 'RejectOrderPayload'
+  success: Scalars['Boolean']['output']
 }
 
 export const enum Role {

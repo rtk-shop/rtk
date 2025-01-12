@@ -10,8 +10,14 @@ import {
   UserOrdersQueryVariables,
   UserOrdersDocument
 } from '@/lib/api/graphql/_gen_/userOrders.query'
+import { usePageState } from './model/page-state'
 
-export function Orders({}: {}) {
+export function Orders({ userId }: { userId: string }) {
+  const listRef = useRef<HTMLUListElement>(null)
+
+  const openRejectModal = usePageState((state) => state.onRejectOrderModal)
+  const setCurrentOrderId = usePageState((state) => state.setCurrentOrderId)
+
   const [expandedOrder, setExpandedOrder] = useState({
     id: '',
     expanded: false
@@ -21,11 +27,9 @@ export function Orders({}: {}) {
     query: UserOrdersDocument,
     requestPolicy: 'network-only',
     variables: {
-      userId: '1'
+      userId
     }
   })
-
-  const listRef = useRef<HTMLUListElement>(null)
 
   const { data, fetching, error } = result
 
@@ -47,6 +51,11 @@ export function Orders({}: {}) {
       id: orderId,
       expanded: true
     })
+  }
+
+  const handleOrderReject = (orderId: string) => {
+    openRejectModal(true)
+    setCurrentOrderId(orderId)
   }
 
   if (fetching) {
@@ -98,6 +107,7 @@ export function Orders({}: {}) {
               expandId={expandedOrder.id}
               isExpanded={expandedOrder.expanded}
               onExpand={handleOrderExpand}
+              onReject={handleOrderReject}
             />
           </li>
         ))}
