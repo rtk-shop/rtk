@@ -36,6 +36,7 @@ export function OrderRejectModal({ userId }: { userId: string }) {
   const handleCancelClick = () => {
     openRejectModal(false)
     setHasErr(false)
+    clearCurrentOrderId()
   }
 
   const { fetching } = rejectResult
@@ -57,8 +58,8 @@ export function OrderRejectModal({ userId }: { userId: string }) {
             Отменить
           </Button>
         </div>
-        <ErrorMessage show={hasErr}>
-          <p className="text-center">Ошибка, повторите попытку позже</p>
+        <ErrorMessage show={hasErr} align="center">
+          <span className="text-center">Ошибка, повторите попытку позже</span>
         </ErrorMessage>
       </div>
     </Drawer>
