@@ -1,6 +1,7 @@
 import { memo, type ReactNode } from 'react'
 import { cva } from 'cva'
 import { Icon } from '@/components/ui/icon'
+import { ExpandIcon } from '@/components/ui/expand-icon'
 
 interface StepTitleProps {
   step: number
@@ -23,15 +24,6 @@ const inner = cva('flex select-none items-center justify-start rounded-lg', {
   variants: {
     expand: {
       true: 'mb-5'
-    }
-  }
-})
-
-const expandIcon = cva('ml-auto text-[26px] transition-all duration-300', {
-  variants: {
-    expand: {
-      true: 'rotate-0',
-      false: 'rotate-180'
     }
   }
 })
@@ -71,7 +63,9 @@ export const StepTitle = memo(function StepTitle({
         </div>
         {/*  */}
         <h2 className="ml-2 font-medium">{children}</h2>
-        <Icon name="common/arrow" className={expandIcon({ expand: isEdit })} />
+        <div className="ml-auto">
+          <ExpandIcon expanded={isEdit} />
+        </div>
       </div>
     </div>
   )

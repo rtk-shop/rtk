@@ -1,5 +1,3 @@
-import { cva } from 'cva'
-import { Icon } from '../ui/icon'
 import { useTranslations } from 'next-intl'
 import { HeightExpander } from '../ui/height-expander'
 import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
@@ -7,6 +5,7 @@ import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '../ui/button'
 import { orderStatus } from '@/lib/constants'
 import { Supplier } from './supplier'
+import { ExpandIcon } from '@/components/ui/expand-icon'
 import type { OrderType } from '@/types/order'
 
 export interface OrderItemProps {
@@ -17,16 +16,6 @@ export interface OrderItemProps {
   onExpand(orderId: string, index: number): void
   onReject(orderId: string): void
 }
-
-// todo: share it
-const expandIcon = cva('text-[26px] transition-all duration-300', {
-  variants: {
-    expand: {
-      true: 'rotate-0',
-      false: 'rotate-180'
-    }
-  }
-})
 
 const validStatusesForReject: string[] = [
   orderStatus.created,
@@ -84,7 +73,7 @@ export function OrderItem({
         </div>
         <div className="col-span-3 text-center font-medium">{formatPrice(price)} ₴</div>
         <div className="col-span-1 flex items-center justify-center">
-          <Icon name="common/arrow" className={expandIcon({ expand: isOrderExpanded })} />
+          <ExpandIcon expanded={isOrderExpanded} />
         </div>
       </div>
       <HeightExpander expanded={isOrderExpanded}>
