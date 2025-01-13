@@ -1,5 +1,7 @@
 mutation RejectOrde($userId: ID!, $orderId: ID!) {
   rejectOrder(userId: $userId, orderId: $orderId) {
-    success
+    id
+    status
+    updatedAt
   }
 }

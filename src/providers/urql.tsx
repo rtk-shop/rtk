@@ -1,12 +1,7 @@
 'use client'
 
-import {
-  UrqlProvider as Provider,
-  ssrExchange,
-  cacheExchange,
-  fetchExchange,
-  createClient
-} from '@urql/next'
+import { UrqlProvider as Provider, ssrExchange, fetchExchange, createClient, gql } from '@urql/next'
+import { cacheExchange } from '@/cache'
 import { type ReactNode, useMemo } from 'react'
 
 export function UrqlProvider({ children }: { children: ReactNode }) {

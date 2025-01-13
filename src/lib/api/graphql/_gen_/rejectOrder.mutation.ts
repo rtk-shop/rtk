@@ -9,13 +9,20 @@ export type RejectOrdeMutationVariables = Types.Exact<{
 
 export type RejectOrdeMutation = {
   __typename?: 'Mutation'
-  rejectOrder: { __typename?: 'RejectOrderPayload'; success: boolean }
+  rejectOrder: {
+    __typename?: 'RejectOrderPayload'
+    id: string
+    status: Types.OrderStatus
+    updatedAt: string
+  }
 }
 
 export const RejectOrdeDocument = gql`
   mutation RejectOrde($userId: ID!, $orderId: ID!) {
     rejectOrder(userId: $userId, orderId: $orderId) {
-      success
+      id
+      status
+      updatedAt
     }
   }
 `

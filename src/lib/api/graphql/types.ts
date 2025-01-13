@@ -266,7 +266,9 @@ export type QueryUserOrdersArgs = {
 
 export type RejectOrderPayload = {
   __typename?: 'RejectOrderPayload'
-  success: Scalars['Boolean']['output']
+  id: Scalars['ID']['output']
+  status: OrderStatus
+  updatedAt: Scalars['String']['output']
 }
 
 export const enum Role {

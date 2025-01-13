@@ -25,7 +25,6 @@ export function Orders({ userId }: { userId: string }) {
 
   const [result] = useQuery<UserOrdersQuery, UserOrdersQueryVariables>({
     query: UserOrdersDocument,
-    requestPolicy: 'network-only',
     variables: {
       userId
     }
