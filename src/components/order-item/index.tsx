@@ -1,5 +1,3 @@
-import { type ReactElement } from 'react'
-import Image from 'next/image'
 import { cva } from 'cva'
 import { Icon } from '../ui/icon'
 import { useTranslations } from 'next-intl'
@@ -8,22 +6,11 @@ import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from 
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '../ui/button'
 import { orderStatus } from '@/lib/constants'
-import type { OrderStatus } from '@/types/order'
+import { Supplier } from './supplier'
+import type { OrderType } from '@/types/order'
 
 export interface OrderItemProps {
-  id: string
-  status: keyof typeof OrderStatus
-  price: number
-  receiverName: string
-  receiverSurname: string
-  receiverPhone: string
-  supplier: string
-  cityName: string
-  postOfficeName: string
-  parcelTrackId?: string | null
-  updatedAt: string
-  createdAt: string
-  // controls
+  order: OrderType
   index: number
   expandId: string
   isExpanded: boolean
@@ -48,18 +35,7 @@ const validStatusesForReject: string[] = [
 ]
 
 export function OrderItem({
-  id,
-  price,
-  status,
-  receiverName,
-  receiverSurname,
-  receiverPhone,
-  supplier,
-  cityName,
-  postOfficeName,
-  parcelTrackId,
-  updatedAt,
-  createdAt,
+  order,
   expandId,
   isExpanded,
   index,
@@ -68,43 +44,25 @@ export function OrderItem({
 }: OrderItemProps) {
   const t = useTranslations('Common.order')
 
+  const {
+    id,
+    price,
+    status,
+    receiverName,
+    receiverSurname,
+    receiverPhone,
+    supplier,
+    cityName,
+    postOfficeName,
+    parcelTrackId,
+    updatedAt,
+    createdAt
+  } = order
+
   const isOrderExpanded = expandId === id && isExpanded
 
   const handleRejectClick = () => {
     onReject(id)
-  }
-
-  function genSupplierView(supplier: string): ReactElement | string {
-    switch (supplier) {
-      case 'nova':
-        return (
-          <>
-            <Image
-              src="/icons/novaposta.svg"
-              width={24}
-              height={26}
-              alt="Нова пошта"
-              className="ml-1.5 mr-1"
-            />
-            <span>Нова пошта</span>
-          </>
-        )
-      case 'ukrp':
-        return (
-          <>
-            <Image
-              src="/icons/urkposhta.svg"
-              width={21}
-              height={30}
-              alt="Укрпошта"
-              className="ml-1.5 mr-2"
-            />
-            <span>Укрпошта</span>
-          </>
-        )
-      default:
-        return supplier
-    }
   }
 
   return (
@@ -149,7 +107,7 @@ export function OrderItem({
             <p className="mb-0.5 font-medium">Информация о доставке</p>
             <p className="flex items-center">
               <span className="text-gray-500">Сервис: </span>
-              {genSupplierView(supplier)}
+              <Supplier supplier={supplier} />
             </p>
             <p>
               <span className="text-gray-500">Адрес:</span> {cityName}, {postOfficeName}

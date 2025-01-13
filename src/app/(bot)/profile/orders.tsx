@@ -102,8 +102,8 @@ export function Orders({ userId }: { userId: string }) {
         {data?.userOrders.map((order, index) => (
           <li key={index} className="mb-3">
             <OrderItem
-              {...order}
               index={index}
+              order={{ ...order }}
               expandId={expandedOrder.id}
               isExpanded={expandedOrder.expanded}
               onExpand={handleOrderExpand}
