@@ -1,8 +1,6 @@
 import { type ReactNode, useState, useEffect, useRef } from 'react'
-import { Icon } from '../icon'
-import clsx from 'clsx'
-
-import styles from './styles.module.css'
+import { cva } from 'cva'
+import { ExpandIcon } from './expand-icon'
 
 export type Option = {
   value: string
@@ -15,9 +13,39 @@ export interface DropdownProps {
   selected?: Option
   onClose?: () => void
   onChange?: (value: Option['value']) => void
-  rootStyles?: string
+  anchor?: 'left' | 'right'
   defaultValue?: string
 }
+
+const withValue = cva('mr-1.5 select-none font-medium', {
+  variants: {
+    withDefault: {
+      true: 'text-gray-400',
+      false: ''
+    }
+  }
+})
+
+const list = cva(
+  'absolute top-[115%] z-50 min-w-36 rounded-lg bg-white px-2 py-2 shadow-md animate-in fade-in zoom-in',
+  {
+    variants: {
+      anchor: {
+        left: 'left-0',
+        right: 'right-0'
+      }
+    }
+  }
+)
+
+const optionStyles = cva('select-none rounded-md py-1.5 pl-2 font-medium', {
+  variants: {
+    selected: {
+      true: 'bg-gray-100',
+      false: ''
+    }
+  }
+})
 
 export function Dropdown({
   selected,
@@ -25,8 +53,8 @@ export function Dropdown({
   options,
   onClose,
   onChange,
-  rootStyles,
-  defaultValue
+  defaultValue,
+  anchor = 'left'
 }: DropdownProps) {
   const [open, setOpen] = useState(false)
   const [current, setCurrent] = useState<Option | undefined>(selected)
@@ -57,26 +85,23 @@ export function Dropdown({
   return (
     <div
       ref={rootRef}
-      className={clsx(styles.dropdown, rootStyles)}
       onClick={() => setOpen((v) => !v)}
+      className="relative z-40 flex items-center justify-between rounded-lg bg-gray-100 py-1 pl-3 pr-2"
     >
       <div
-        className={clsx({
-          [styles.show]: true,
-          [styles.default]: current?.value === defaultValue
+        className={withValue({
+          withDefault: current?.value === defaultValue
         })}
       >
-        {current?.title || <span className={styles.placeholder}>{placeholder}</span>}
+        {current?.title || <span className="text-gray-400">{placeholder}</span>}
       </div>
       {open && (
-        <ul className={styles.list} style={{ width: rootRef.current?.offsetWidth }}>
+        // rootRef.current?.offsetWidth
+        <ul className={list({ anchor })}>
           {options.map((option, ind) => (
             <li
               key={ind}
-              className={clsx({
-                [styles.option]: true,
-                [styles.selected]: option.value === current?.value
-              })}
+              className={optionStyles({ selected: option.value === current?.value })}
               onClick={() => handleSelect(option)}
             >
               {option.title}
@@ -84,13 +109,7 @@ export function Dropdown({
           ))}
         </ul>
       )}
-      <Icon
-        name="common/arrow"
-        className={clsx({
-          [styles.expandIcon]: true,
-          [styles.collapsed]: open
-        })}
-      />
+      <ExpandIcon expanded={open} />
     </div>
   )
 }

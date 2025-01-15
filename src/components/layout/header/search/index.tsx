@@ -128,7 +128,7 @@ export function Search() {
             selected={optios.find((o) => o.value === category)}
             options={optios}
             onChange={handleCategoryChange}
-            rootStyles={styles.dropdown}
+            // rootStyles={styles.dropdown}
             defaultValue="all"
           />
         </div>
