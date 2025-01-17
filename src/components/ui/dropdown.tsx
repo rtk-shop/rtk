@@ -2,17 +2,17 @@ import { type ReactNode, useState, useEffect, useRef } from 'react'
 import { cva } from 'cva'
 import { ExpandIcon } from './expand-icon'
 
-export type Option = {
-  value: string
+export type Option<T> = {
+  value: T
   title: string | ReactNode
 }
 
-export interface DropdownProps {
-  options: Option[]
+export interface DropdownProps<T> {
+  options: Option<T>[]
   placeholder?: string | ReactNode
-  selected?: Option
+  selected?: Option<T>
   onClose?: () => void
-  onChange?: (value: Option['value']) => void
+  onChange?: (value: Option<T>['value']) => void
   anchor?: 'left' | 'right'
   defaultValue?: string
 }
@@ -47,7 +47,7 @@ const optionStyles = cva('select-none rounded-md py-1.5 pl-2 font-medium', {
   }
 })
 
-export function Dropdown({
+export function Dropdown<T>({
   selected,
   placeholder,
   options,
@@ -55,9 +55,9 @@ export function Dropdown({
   onChange,
   defaultValue,
   anchor = 'left'
-}: DropdownProps) {
+}: DropdownProps<T>) {
   const [open, setOpen] = useState(false)
-  const [current, setCurrent] = useState<Option | undefined>(selected)
+  const [current, setCurrent] = useState<Option<T> | undefined>(selected)
 
   const rootRef = useRef<HTMLDivElement>(null)
 
@@ -77,7 +77,7 @@ export function Dropdown({
     }
   }, [open, onClose])
 
-  const handleSelect = (option: Option) => {
+  const handleSelect = (option: Option<T>) => {
     setCurrent({ ...option })
     onChange && onChange(option.value)
   }
