@@ -59,17 +59,18 @@ export function Orders({ userId }: { userId: string }) {
 
   if (fetching) {
     return (
-      <div className="h-[305px]">
-        <OrderSkeletonList len={6} />
+      <div className="">
+        <OrderSkeletonList len={16} />
       </div>
     )
   }
 
   if (data?.userOrders.length === 0) {
     return (
-      <div className="h-[305px] pb-3">
-        <div className="flex h-full items-center justify-center rounded-lg bg-slate-100">
-          <p className="text-lg text-gray-400">Список закакоз пуст</p>
+      <div className="h-full pb-3">
+        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
+          <Icon name="common/emptycart" className="mb-3 text-[230px]" />
+          <p className="text-lg">Список закакоз пуст</p>
         </div>
       </div>
     )
@@ -77,7 +78,7 @@ export function Orders({ userId }: { userId: string }) {
 
   if (error) {
     return (
-      <div className="h-[305px] pb-3">
+      <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
           <Icon name="action/warning" className="mb-1 text-[39px]" />
           <p className="text-lg">Ошибка получения данных</p>
@@ -85,19 +86,10 @@ export function Orders({ userId }: { userId: string }) {
       </div>
     )
   }
-  if (data?.userOrders.length === 0) {
-    return (
-      <div className="h-[305px] pb-3">
-        <div className="flex h-full items-center justify-center rounded-lg bg-slate-100 animate-in fade-in">
-          <p className="text-lg text-gray-400">Список закакоз пуст</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <section>
-      <ul ref={listRef} className="h-[305px] overflow-y-auto">
+      <ul ref={listRef} className="overflow-y-auto">
         {data?.userOrders.map((order, index) => (
           <li key={index} className="mb-3">
             <OrderItem

@@ -1,41 +1,34 @@
-import { cva } from 'cva'
+'use client'
+
 import { setUserLocale } from '@/lib/locale'
 import { useLocale } from 'next-intl'
-import { locales, type Locale } from '@/i18n/config'
-
-const island = cva('absolute z-10 h-full w-2/4 bg-green transition-transform', {
-  variants: {
-    lang: {
-      ua: 'translate-x-full',
-      ru: 'translate-x-0'
-    }
-  }
-})
+import { type Locale } from '@/i18n/config'
+import { Dropdown, type Option } from '@/components/ui/dropdown'
 
 export function LangSwitcher() {
   const locale = useLocale()
 
-  const handleLangSelect = async (lang: Locale) => {
+  const options: Option<Locale>[] = [
+    {
+      title: 'Українська',
+      value: 'ua'
+    },
+    {
+      title: 'Русский',
+      value: 'ru'
+    }
+  ]
+
+  const handleChange = (lang: Locale) => {
     setUserLocale(lang)
   }
 
-  const view: Record<Locale, string> = {
-    ua: 'Ua',
-    ru: 'Ru'
-  }
-
   return (
-    <div className="relative flex bg-white">
-      {locales.map((lang) => (
-        <div
-          key={lang}
-          onClick={() => handleLangSelect(lang)}
-          className="z-20 cursor-pointer select-none px-4 py-1 text-base font-medium"
-        >
-          {view[lang]}
-        </div>
-      ))}
-      <div className={island({ lang: locale as Locale })} />
-    </div>
+    <Dropdown
+      anchor="right"
+      options={options}
+      onChange={handleChange}
+      selected={options.find((o) => o.value === locale)}
+    />
   )
 }
