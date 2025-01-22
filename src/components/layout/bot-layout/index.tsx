@@ -7,7 +7,6 @@ import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
 import { useCartStore } from '@/providers/cart-store-provider'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
-import Script from 'next/script'
 import { usePathname } from 'next/navigation'
 
 export function BotLayout({ children }: { children: ReactNode }) {
@@ -55,15 +54,6 @@ export function BotLayout({ children }: { children: ReactNode }) {
         <Navigation onCartOpen={handleCartOpen} onSidebarOpen={handleOpenDrawer} />
       )}
       {children}
-      <Script
-        src="https://telegram.org/js/telegram-web-app.js?56"
-        onLoad={() => {
-          console.log('*'.repeat(30))
-          console.log(Telegram.WebApp)
-          console.log('*'.repeat(30))
-        }}
-        strategy="lazyOnload"
-      />
     </div>
   )
 }
