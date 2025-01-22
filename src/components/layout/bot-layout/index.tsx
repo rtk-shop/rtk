@@ -1,18 +1,27 @@
 'use client'
 
 import { type ReactNode, useCallback, useEffect, useState } from 'react'
+import { routeNames } from '@/lib/constants'
 import { Navigation } from '@/components/layout/navigation'
 import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
 import { useCartStore } from '@/providers/cart-store-provider'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
+import Script from 'next/script'
+import { usePathname } from 'next/navigation'
 
 export function BotLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname()
+
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const [isCartOpen, setCartOpen] = useState(false)
 
   const [, storeApi] = useCartStore((state) => state)
   const [, favoriteApi] = useFavoriteStore((state) => state)
+
+  const noNavbarPaths = [routeNames.root] as string[]
+
+  const shouldShowNavbar = !noNavbarPaths.includes(pathname)
 
   // INFO: I'll keep persistent client state
   // until it get implemented on back-end
@@ -42,8 +51,19 @@ export function BotLayout({ children }: { children: ReactNode }) {
     <div>
       <Cart isOpen={isCartOpen} onClose={handleCartClose} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseDrawer} />
-      <Navigation onCartOpen={handleCartOpen} onSidebarOpen={handleOpenDrawer} />
+      {shouldShowNavbar && (
+        <Navigation onCartOpen={handleCartOpen} onSidebarOpen={handleOpenDrawer} />
+      )}
       {children}
+      <Script
+        src="https://telegram.org/js/telegram-web-app.js?56"
+        onLoad={() => {
+          console.log('*'.repeat(30))
+          console.log(Telegram.WebApp)
+          console.log('*'.repeat(30))
+        }}
+        strategy="lazyOnload"
+      />
     </div>
   )
 }
