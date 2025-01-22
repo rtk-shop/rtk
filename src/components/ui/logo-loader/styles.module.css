@@ -1,0 +1,25 @@
+.letter {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  animation: fade 0.5s forwards;
+}
+
+.letter:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.letter:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.letter:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

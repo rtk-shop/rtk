@@ -1,10 +1,9 @@
-'use client'
 import { RadioGroup } from '@/components/ui/radio-group'
-import { novaDeliveryTypeOptions } from './(bot)/checkout/model/constants'
+import { novaDeliveryTypeOptions } from '../checkout/model/constants'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Icon } from '@/components/ui/icon'
 
-export default function Page() {
+export default function Sandbox() {
   const formMethods = useForm({
     mode: 'onBlur',
     defaultValues: {

@@ -34,7 +34,7 @@ export function Search() {
   //   fetchPolicy: 'network-only'
   // })
 
-  const optios: Option[] = [
+  const optios: Option<'all' | 'bag' | 'suitcase'>[] = [
     {
       title: 'Все категории',
       value: 'all'
