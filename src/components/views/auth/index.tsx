@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { LogIn } from './logIn'
-import { SignUp } from './signUp'
 import { LangSwitcher } from '@/components/lang-switcher'
 
 export function AuthView() {
-  const [logInMode, setLogInMode] = useState(true)
+  const [_, setLogInMode] = useState(true)
 
   const handleModeChange = () => {
     setLogInMode((prev) => !prev)
@@ -17,11 +16,7 @@ export function AuthView() {
           <div className="absolute right-4 top-4">
             <LangSwitcher />
           </div>
-          {logInMode ? (
-            <LogIn onSignUp={handleModeChange} />
-          ) : (
-            <SignUp onLogIn={handleModeChange} />
-          )}
+          <LogIn onSignUp={handleModeChange} />
         </div>
         <div className="grow bg-gray-300 bg-suitcases bg-cover bg-center bg-no-repeat lg:size-full lg:basis-2/5" />
       </div>
