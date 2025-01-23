@@ -1,5 +1,7 @@
 import { OrderStatus } from '@/types/order'
 
+export const isDevMode = process.env.NODE_ENV === 'development'
+
 export const routeNames = {
   root: '/',
   catalog: '/catalog',
