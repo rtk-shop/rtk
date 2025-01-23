@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <NextIntlClientProvider messages={messages}>
           <UrqlProvider>
             <main>{children}</main>
-            <Toaster position="bottom-right" richColors expand />
+            <Toaster position="bottom-center" richColors expand />
           </UrqlProvider>
         </NextIntlClientProvider>
         <div id="app-drawers" />
