@@ -1,19 +1,29 @@
-import { NextResponse } from 'next/server'
 import { decodeJwt } from 'jose'
-import type { SuccessfulAuthorization, SessionData } from '@/types'
+import type { SessionTokenData, RefreshTokenData } from '@/types'
 
-export function decrypt(input?: string) {
-  if (!input) return
+export const SESSION_COOKIE_NAME = 'w_auth'
+export const REFRESH_COOKIE_NAME = 'rft'
+
+export function parseSessionToken(token?: string) {
+  if (!token) return null
   try {
-    return decodeJwt<SessionData>(input)
+    return decodeJwt<SessionTokenData>(token)
   } catch (error) {
-    return
+    return null
+  }
+}
+
+export function parseRefreshToken(token?: string) {
+  if (!token) return null
+  try {
+    return decodeJwt<RefreshTokenData>(token)
+  } catch (error) {
+    return null
   }
 }
 
 type RefreshResp = {
-  refreshCookie: string
-  accessToken: string
+  setCookieHeader: string
 }
 
 export async function refreshSession(cookie?: {
@@ -32,36 +42,25 @@ export async function refreshSession(cookie?: {
       headers
     })
 
-    if (resp.ok) {
-      const cookies = resp.headers.getSetCookie()
-      const refreshCookie = cookies.find((c) => c.startsWith('rfr='))
-
-      if (!refreshCookie) return null
-
-      const data = (await resp.json()) as SuccessfulAuthorization
-
-      return {
-        refreshCookie,
-        accessToken: data.accessToken
-      }
+    if (!resp.ok) {
+      const errorMessage = await resp.text()
+      throw new Error(errorMessage)
     }
 
-    return null
+    const setCookieHeader = resp.headers.get('Set-Cookie')
+    if (!setCookieHeader) throw new Error('response has no «Set-Cookie» header')
+
+    const cookies = resp.headers.getSetCookie()
+
+    const refreshCookie = cookies.find((c) => c.startsWith(`${REFRESH_COOKIE_NAME}=`))
+    const sessionCookie = cookies.find((c) => c.startsWith(`${SESSION_COOKIE_NAME}=`))
+
+    if (!refreshCookie || !sessionCookie)
+      throw new Error(`no ${REFRESH_COOKIE_NAME} and ${SESSION_COOKIE_NAME} cookies`)
+
+    return { setCookieHeader }
   } catch (error) {
     console.log(error)
     return null
   }
-}
-
-export function setSessionCookie(res: NextResponse, accessToken: string) {
-  const token = decrypt(accessToken)
-  if (!token) throw new Error('failed to create session cookie: wrong access token')
-
-  const tokenExp = token.exp as number
-
-  res.cookies.set('session', accessToken, {
-    expires: tokenExp * 1000, // add epoch to jwt exp seconds
-    path: '/',
-    httpOnly: false
-  })
 }

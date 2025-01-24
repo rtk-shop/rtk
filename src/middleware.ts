@@ -1,67 +1,67 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { decrypt, refreshSession, setSessionCookie } from '@/lib/session'
 import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
 import { routeNames } from '@/lib/constants'
-import { parse } from 'cookie'
+import {
+  parseSessionToken,
+  parseRefreshToken,
+  refreshSession,
+  REFRESH_COOKIE_NAME,
+  SESSION_COOKIE_NAME
+} from '@/lib/session'
 
-const protectedRoutes = [routeNames.dashboard, routeNames.product]
-const publicRoutes = [routeNames.auth, routeNames.root]
+const publicRoutes = [routeNames.root]
+const protectedRoutes = [routeNames.catalog, routeNames.product, routeNames.checkout]
 
 export default async function middleware(req: NextRequest) {
-  // 1. Check if the current route is protected or public
   const path = req.nextUrl.pathname
+
+  // 1. Check if the current route is protected or public
   const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
-  const isPublicRoute = publicRoutes.some((route) => path.startsWith(route))
+  const isPublicRoute = publicRoutes.some((route) => {
+    if (route === '/') {
+      return path === '/'
+    }
+    return path.startsWith(route)
+  })
 
-  // 2. Get the session from the cookie
-  const cookie = cookies().get('session')?.value
-  const refreshCookie = cookies().get('rfr')
+  // 2. Get the session from the cookies
+  const sessionToken = cookies().get(SESSION_COOKIE_NAME)?.value
+  const refreshCookie = cookies().get(REFRESH_COOKIE_NAME)
 
-  const session = decrypt(cookie)
+  const session = parseSessionToken(sessionToken)
 
   // 3. If there is no session, refresh it
   if (!session) {
-    const refreshAuthData = await refreshSession(refreshCookie)
+    // prevent to many redirects error on /refresh failed
+    if (isProtectedRoute) {
+      const refreshedSessionData = await refreshSession(refreshCookie)
 
-    // if refresh token is invalid, delete it
-    if (isProtectedRoute || !refreshAuthData) {
-      const res = NextResponse.next()
-      res.cookies.delete('rfr')
-      return res
+      // if refresh token is invalid, delete it
+      if (!refreshedSessionData) {
+        const resp = NextResponse.redirect(new URL(routeNames.root, req.nextUrl))
+        resp.cookies.delete(REFRESH_COOKIE_NAME)
+
+        return resp
+      }
+
+      const resp = NextResponse.next()
+      resp.headers.set('Set-Cookie', refreshedSessionData.setCookieHeader)
+
+      return resp
     }
-
-    const res = NextResponse.next()
-
-    const uglyCookie = parse(refreshAuthData.refreshCookie) as { rfr: string; 'Max-Age': string }
-
-    if (!uglyCookie) {
-      res.cookies.delete('rfr')
-      return res
-    }
-
-    setSessionCookie(res, refreshAuthData.accessToken)
-    res.cookies.set({
-      name: 'rfr',
-      value: uglyCookie.rfr,
-      maxAge: +uglyCookie['Max-Age'],
-      sameSite: 'lax',
-      httpOnly: true,
-      path: '/'
-    })
-
-    return res
   }
 
-  // 4. Redirect to /login if the user is not authenticated
-  if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/auth', req.nextUrl))
-  }
+  // 4. Check session corruption
+  if (isProtectedRoute) {
+    const refreshToken = parseRefreshToken(refreshCookie?.value)
 
-  // 5. Redirect to /dashboard if the user is authenticated
-  // if (isPublicRoute && session?.userId && !req.nextUrl.pathname.startsWith('/dashboard')) {
-  if (isPublicRoute && session?.userId) {
-    // return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
-    return NextResponse.next()
+    if (session?.userId !== refreshToken?.userId) {
+      const resp = NextResponse.redirect(new URL(routeNames.root, req.nextUrl))
+      resp.cookies.delete(SESSION_COOKIE_NAME)
+      resp.cookies.delete(REFRESH_COOKIE_NAME)
+
+      return resp
+    }
   }
 
   return NextResponse.next()
@@ -69,5 +69,5 @@ export default async function middleware(req: NextRequest) {
 
 // Routes Middleware should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)']
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico)$).*)']
 }

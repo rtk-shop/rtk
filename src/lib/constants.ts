@@ -7,8 +7,6 @@ export const routeNames = {
   catalog: '/catalog',
   product: '/product/',
   profile: '/profile',
-  dashboard: '/dashboard',
-  auth: '/auth',
   checkout: '/checkout'
 } as const
 

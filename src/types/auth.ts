@@ -1,9 +1,12 @@
-export type SuccessfulAuthorization = {
-  accessToken: string
-}
+export type UserRole = 'admin' | 'manager' | 'customer'
 
-export type SessionData = {
-  role: 'admin' | 'manager' | 'customer'
+export type SessionTokenData = {
+  role: UserRole
   userId: string
   firstName: string
+}
+
+export type RefreshTokenData = {
+  userId: string
+  refreshId: string
 }
