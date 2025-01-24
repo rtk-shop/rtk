@@ -9,7 +9,7 @@ import {
   SESSION_COOKIE_NAME
 } from '@/lib/session'
 
-const publicRoutes = [routeNames.root]
+// const publicRoutes = [routeNames.root]
 const protectedRoutes = [routeNames.catalog, routeNames.product, routeNames.checkout]
 
 export default async function middleware(req: NextRequest) {
@@ -17,12 +17,12 @@ export default async function middleware(req: NextRequest) {
 
   // 1. Check if the current route is protected or public
   const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
-  const isPublicRoute = publicRoutes.some((route) => {
-    if (route === '/') {
-      return path === '/'
-    }
-    return path.startsWith(route)
-  })
+  // const isPublicRoute = publicRoutes.some((route) => {
+  //   if (route === '/') {
+  //     return path === '/'
+  //   }
+  //   return path.startsWith(route)
+  // })
 
   // 2. Get the session from the cookies
   const sessionToken = cookies().get(SESSION_COOKIE_NAME)?.value
