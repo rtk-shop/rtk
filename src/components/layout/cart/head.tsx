@@ -14,7 +14,7 @@ export function CartHead({ onCartClose }: { onCartClose(): void }) {
         <IconButton
           disableRipple
           onClick={onCartClose}
-          className="-rotate-90 fill-gray-700 !p-0 text-[33px]"
+          className="-rotate-90 fill-gray-700 p-0! text-[33px]"
         >
           <Icon name="common/arrow" />
         </IconButton>

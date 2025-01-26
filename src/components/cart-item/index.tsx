@@ -36,7 +36,7 @@ export function CartItem({ product, amount }: CartItemProps) {
   }
 
   return (
-    <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 after:last:hidden">
+    <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 last:after:hidden">
       <div className="relative mr-2 w-full max-w-32">
         <Link href={routeNames.product + id} className="rounded-lg">
           <ImagePlaceholder src={preview} altText={title} width={216} height={270} />
@@ -61,7 +61,7 @@ export function CartItem({ product, amount }: CartItemProps) {
           <IconButton
             disableRipple
             onClick={handleProductRemove}
-            className="rounded-lg !bg-gray-100 px-3 text-lg !text-gray-500 active:text-black"
+            className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
           >
             <Icon name="action/trash" />
           </IconButton>

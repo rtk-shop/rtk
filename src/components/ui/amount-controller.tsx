@@ -26,7 +26,7 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
         onClick={handleSubClick}
         disabled={amount <= 1}
         aria-label="удалить одну единицу данного продукта"
-        className="!p-2 text-[25px] !text-gray-500 active:scale-110"
+        className="p-2! text-[25px] text-gray-500! active:scale-110"
       >
         <Icon name="action/circle-minus" />
       </IconButton>
@@ -38,7 +38,7 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
         onClick={handleAddClick}
         disabled={!!max && amount >= max}
         aria-label="добавить одну единицу данного продукта"
-        className="!p-2 text-[25px] !text-gray-500 active:scale-110"
+        className="p-2! text-[25px] text-gray-500! active:scale-110"
       >
         <Icon name="action/circle-plus" />
       </IconButton>
