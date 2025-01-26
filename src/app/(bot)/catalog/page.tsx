@@ -200,7 +200,7 @@ export default function Catalog() {
                   onFiltersClick={() => setFiltersOpen(true)}
                 />
                 <ProductList products={products} onReset={handleReset} />
-                <div className="px-2 pb-4 pt-2.5">
+                <div className="px-2 pt-2.5 pb-4">
                   <Pagination
                     onNext={handleNextPage}
                     onPrev={handlePrevPage}

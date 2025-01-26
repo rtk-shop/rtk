@@ -26,14 +26,15 @@ interface ButtonProps {
 }
 
 const button = cva(
-  'inline-flex cursor-pointer select-none items-center justify-center rounded-xl px-7 py-3.5 font-medium leading-none transition-all disabled:pointer-events-none',
+  'inline-flex cursor-pointer items-center justify-center rounded-xl px-7 py-3.5 leading-none font-medium transition-all select-none disabled:pointer-events-none',
   {
     variants: {
       color: {
         primary: 'border-r-black bg-black text-white hover:bg-[#383838] active:bg-[#383838]',
         secondary: '',
-        accept: 'border-r-green bg-green text-stone-800 hover:bg-[#0eff6d] active:bg-[#0eff6d]',
-        danger: 'bg-red-500 text-white hover:bg-[#0eff6d] active:bg-[#0eff6d]' // todo: pick color
+        accept:
+          'border-r-green-lime bg-green-lime text-stone-800 hover:bg-[#48ff90] active:bg-[#48ff90]',
+        danger: 'bg-red-500 text-white' // todo: pick color
       },
       disabled: {
         true: 'cursor-not-allowed opacity-75'

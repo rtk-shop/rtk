@@ -10,11 +10,6 @@ module.exports = {
       spacing: {
         '1e': '1em'
       },
-      colors: {
-        black: '#171717',
-        'green-light': '#32cd32',
-        green: '#48ff90'
-      },
       backgroundImage: {
         'cap-pattern':
           'linear-gradient(90deg, #fa8bff 0%, #2bff88 26%, #000000 65%, #000000 90%, #2bff88 99%)',
