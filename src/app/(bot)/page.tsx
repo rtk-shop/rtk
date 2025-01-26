@@ -13,7 +13,7 @@ export default function Page() {
 
   const [authorize] = useWebAppAuth<{ initData: string }>({
     onSuccess() {
-      // router.replace(routeNames.catalog)
+      router.replace(routeNames.catalog)
     },
     onError(errorMsg) {
       switch (errorMsg.trim()) {
