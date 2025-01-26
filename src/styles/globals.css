@@ -3,9 +3,21 @@
 @config '../../tailwind.config.js';
 
 @theme {
+  /* COLORS */
   --color-black: #171717;
   --color-green-light: #32cd32;
   --color-green-lime: #0eff6d;
+
+  /* ANIMATIONS */
+  --animate-fade-in-2s: fade-in-plain 0.5s ease-in-out 2s forwards;
+  @keyframes fade-in-plain {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 /*

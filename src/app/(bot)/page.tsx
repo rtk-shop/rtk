@@ -13,7 +13,7 @@ export default function Page() {
 
   const [authorize] = useWebAppAuth<{ initData: string }>({
     onSuccess() {
-      router.replace(routeNames.catalog)
+      // router.replace(routeNames.catalog)
     },
     onError(errorMsg) {
       switch (errorMsg.trim()) {
@@ -52,12 +52,7 @@ export default function Page() {
   return (
     <div className="flex h-dvh flex-col items-center justify-center">
       <LogoLoader size={180} />
-      <div
-        className="mt-6 animate-fade-in opacity-0"
-        style={{
-          animationDelay: '2s'
-        }}
-      >
+      <div className="animate-fade-in-2s mt-6 opacity-0">
         <Loader color="dark" />
       </div>
     </div>
