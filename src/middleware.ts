@@ -10,7 +10,12 @@ import {
 } from '@/lib/session'
 
 // const publicRoutes = [routeNames.root]
-const protectedRoutes = [routeNames.catalog, routeNames.product, routeNames.checkout]
+const protectedRoutes = [
+  routeNames.catalog,
+  routeNames.product,
+  routeNames.checkout,
+  routeNames.profile
+]
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
