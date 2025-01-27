@@ -37,15 +37,6 @@ module.exports = {
         'height-open': '1fr',
         'height-closed': '0fr'
       }
-    },
-    screens: {
-      sm: '450px',
-      md: '600px',
-      tablet: '800px',
-      lg: '900px',
-      laptop: '1000px',
-      xl: '1200px',
-      desktop: '1400px'
     }
   },
   plugins: [require('tailwindcss-animate'), require('tailwind-gradient-mask-image')]
