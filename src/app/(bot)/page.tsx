@@ -34,7 +34,7 @@ export default function Page() {
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram) {
       window.Telegram.WebApp.ready()
-      Telegram.WebApp.expand()
+      window.Telegram.WebApp.expand()
       // Telegram.WebApp.setHeaderColor('#ffffff')
 
       const initData = isDevMode
