@@ -15,6 +15,10 @@ const protectedRoutes = [routeNames.catalog, routeNames.product, routeNames.chec
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
 
+  if (process.env.NODE_ENV === 'production' && path === '/sandbox') {
+    return NextResponse.redirect(new URL(routeNames.root, req.url))
+  }
+
   // 1. Check if the current route is protected or public
   const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
   // const isPublicRoute = publicRoutes.some((route) => {
