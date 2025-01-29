@@ -1,4 +1,4 @@
-mutation RejectOrde($orderId: ID!) {
+mutation RejectOrder($orderId: ID!) {
   rejectOrder(orderId: $orderId) {
     id
     status

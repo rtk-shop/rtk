@@ -2,11 +2,11 @@ import * as Types from '../types'
 
 import { gql } from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-export type RejectOrdeMutationVariables = Types.Exact<{
+export type RejectOrderMutationVariables = Types.Exact<{
   orderId: Types.Scalars['ID']['input']
 }>
 
-export type RejectOrdeMutation = {
+export type RejectOrderMutation = {
   __typename?: 'Mutation'
   rejectOrder: {
     __typename?: 'RejectOrderPayload'
@@ -16,8 +16,8 @@ export type RejectOrdeMutation = {
   }
 }
 
-export const RejectOrdeDocument = gql`
-  mutation RejectOrde($orderId: ID!) {
+export const RejectOrderDocument = gql`
+  mutation RejectOrder($orderId: ID!) {
     rejectOrder(orderId: $orderId) {
       id
       status

@@ -13,9 +13,9 @@ import {
 } from './graphql/_gen_/createOrder.mutation'
 
 import {
-  RejectOrdeMutation,
-  RejectOrdeMutationVariables,
-  RejectOrdeDocument
+  RejectOrderMutation,
+  RejectOrderMutationVariables,
+  RejectOrderDocument
 } from './graphql/_gen_/rejectOrder.mutation'
 
 export function useCartQuery(options: Omit<UseQueryArgs<CartProductsQueryVariables>, 'query'>) {
@@ -30,7 +30,7 @@ export function useCreateOrderMutation() {
 }
 
 export function useRejectOrderMutation() {
-  return useMutation<RejectOrdeMutation, RejectOrdeMutationVariables>(RejectOrdeDocument)
+  return useMutation<RejectOrderMutation, RejectOrderMutationVariables>(RejectOrderDocument)
 }
 
 export type WebAppAuthParams = {

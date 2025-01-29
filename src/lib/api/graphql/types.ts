@@ -70,10 +70,10 @@ export type Mutation = {
   createOrder: NewOrderPayload
   hideProduct?: Maybe<HideProductPayload>
   /**
-   * rejectOrder - отменяет заказ учитывая контекст авторизации
+   * rejectOrder - отменяет ордера учитывая контекст авторизации
    *
-   * CUSTOMER - может отменить только собственные ордера
-   * MANAGER, ADMIN - могут отменить любые ордера
+   * CUSTOMER - только собственные ордера
+   * MANAGER, ADMIN - могут отменить ордера любого пользователя
    */
   rejectOrder: RejectOrderPayload
   removeFavouriteProduct: RemoveFavouritePayload
@@ -260,6 +260,12 @@ export type Query = {
   products: ProductConnection
   productsByID: Array<Product>
   userFavouriteProducts: Array<Product>
+  /**
+   * userOrders - получение ордеров учитывая контекст авторизации
+   *
+   * CUSTOMER - только собственные ордера
+   * MANAGER, ADMIN - могут получить ордера всех пользователей
+   */
   userOrders: Array<Order>
 }
 

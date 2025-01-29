@@ -10,6 +10,7 @@ const config: CodegenConfig = {
       plugins: ['typescript', 'fragment-matcher'],
       config: {
         constEnums: true,
+        omitDescriptions: true,
         scalars: {
           HTML: {
             input: 'string',
