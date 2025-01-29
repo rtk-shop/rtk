@@ -21,6 +21,12 @@ export type Scalars = {
   Upload: { input: unknown; output: unknown }
 }
 
+export type AddFavouritePayload = {
+  __typename?: 'AddFavouritePayload'
+  productId: Scalars['ID']['output']
+  productTitle: Scalars['String']['output']
+}
+
 export type CartItem = {
   amount: Scalars['Int']['input']
   productId: Scalars['ID']['input']
@@ -60,10 +66,22 @@ export type HideProductPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  addFavouriteProduct: AddFavouritePayload
   createOrder: NewOrderPayload
   hideProduct?: Maybe<HideProductPayload>
+  /**
+   * rejectOrder - отменяет заказ учитывая контекст авторизации
+   *
+   * CUSTOMER - может отменить только собственные ордера
+   * MANAGER, ADMIN - могут отменить любые ордера
+   */
   rejectOrder: RejectOrderPayload
+  removeFavouriteProduct: RemoveFavouritePayload
   setUsdCourse: GlobalData
+}
+
+export type MutationAddFavouriteProductArgs = {
+  productId: Scalars['ID']['input']
 }
 
 export type MutationCreateOrderArgs = {
@@ -77,7 +95,10 @@ export type MutationHideProductArgs = {
 
 export type MutationRejectOrderArgs = {
   orderId: Scalars['ID']['input']
-  userId: Scalars['ID']['input']
+}
+
+export type MutationRemoveFavouriteProductArgs = {
+  productId: Scalars['ID']['input']
 }
 
 export type MutationSetUsdCourseArgs = {
@@ -238,6 +259,7 @@ export type Query = {
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
+  userFavouriteProducts: Array<Product>
   userOrders: Array<Order>
 }
 
@@ -271,6 +293,11 @@ export type RejectOrderPayload = {
   updatedAt: Scalars['String']['output']
 }
 
+export type RemoveFavouritePayload = {
+  __typename?: 'RemoveFavouritePayload'
+  productId: Scalars['ID']['output']
+}
+
 export const enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
@@ -280,7 +307,6 @@ export const enum Role {
 export type User = {
   __typename?: 'User'
   createdAt: Scalars['String']['output']
-  email: Scalars['String']['output']
   firstName: Scalars['String']['output']
   id: Scalars['ID']['output']
   phone: Scalars['String']['output']

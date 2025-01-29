@@ -1,5 +1,5 @@
-mutation RejectOrde($userId: ID!, $orderId: ID!) {
-  rejectOrder(userId: $userId, orderId: $orderId) {
+mutation RejectOrde($orderId: ID!) {
+  rejectOrder(orderId: $orderId) {
     id
     status
     updatedAt

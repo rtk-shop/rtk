@@ -7,7 +7,7 @@ import { useRejectOrderMutation } from '@/lib/api/hooks'
 import { usePageState } from '../model/page-state'
 import { ErrorMessage } from '@/components/ui/error-message'
 
-export function OrderRejectModal({ userId }: { userId: string }) {
+export function OrderRejectModal() {
   const [hasErr, setHasErr] = useState(false)
 
   const isOpen = usePageState((state) => state.isRejectOrderModalOpen)
@@ -21,7 +21,6 @@ export function OrderRejectModal({ userId }: { userId: string }) {
     if (!currentOrderId) return
 
     const result = await rejectOrder({
-      userId, // todo: temp
       orderId: currentOrderId
     })
 
@@ -43,7 +42,7 @@ export function OrderRejectModal({ userId }: { userId: string }) {
 
   return (
     <Drawer open={isOpen} position="bottom" onClose={handleCancelClick}>
-      <div className="rounded-t-2xl bg-white px-4 pb-3 pt-7">
+      <div className="rounded-t-2xl bg-white px-4 pt-7 pb-3">
         <h3 className="mb-4 text-center text-lg font-medium">Вы подтверждаете отмену заказа?</h3>
         <div className="mb-3 flex">
           <Button loading={fetching} onClick={handleConfirmClick} fullWidth>

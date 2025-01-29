@@ -4,8 +4,6 @@ import { Orders } from './orders'
 import { useTranslations } from 'next-intl'
 
 export default function Profile() {
-  const tempUserId = '1'
-
   const t = useTranslations('Common')
 
   return (
@@ -20,10 +18,10 @@ export default function Profile() {
         {/* mt-auto */}
         <div className="h-full">
           <h2 className="mb-2 text-xl font-medium">Мои заказы</h2>
-          <Orders userId={tempUserId} />
+          <Orders />
         </div>
       </div>
-      <OrderRejectModal userId={tempUserId} />
+      <OrderRejectModal />
     </div>
   )
 }
