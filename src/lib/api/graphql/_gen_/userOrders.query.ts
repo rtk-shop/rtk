@@ -3,7 +3,7 @@ import * as Types from '../types'
 import { gql } from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type UserOrdersQueryVariables = Types.Exact<{
-  userId: Types.Scalars['ID']['input']
+  userId?: Types.InputMaybe<Types.Scalars['ID']['input']>
 }>
 
 export type UserOrdersQuery = {
@@ -26,7 +26,7 @@ export type UserOrdersQuery = {
 }
 
 export const UserOrdersDocument = gql`
-  query UserOrders($userId: ID!) {
+  query UserOrders($userId: ID) {
     userOrders(userId: $userId) {
       id
       status

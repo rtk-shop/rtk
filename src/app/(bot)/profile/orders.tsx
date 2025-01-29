@@ -5,7 +5,6 @@ import { usePageState } from './model/page-state'
 import { useQuery } from 'urql'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order-item'
-import { useSession } from '@/hooks/useSession'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
 import {
   UserOrdersQuery,
@@ -14,8 +13,6 @@ import {
 } from '@/lib/api/graphql/_gen_/userOrders.query'
 
 export function Orders() {
-  const sessionData = useSession()
-
   const listRef = useRef<HTMLUListElement>(null)
 
   const openRejectModal = usePageState((state) => state.onRejectOrderModal)
@@ -27,10 +24,7 @@ export function Orders() {
   })
 
   const [result] = useQuery<UserOrdersQuery, UserOrdersQueryVariables>({
-    query: UserOrdersDocument,
-    variables: {
-      userId: sessionData?.userId || ''
-    }
+    query: UserOrdersDocument
   })
 
   const { data, fetching, error } = result

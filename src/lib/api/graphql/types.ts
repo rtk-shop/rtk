@@ -283,7 +283,7 @@ export type QueryProductsByIdArgs = {
 }
 
 export type QueryUserOrdersArgs = {
-  userId: Scalars['ID']['input']
+  userId?: InputMaybe<Scalars['ID']['input']>
 }
 
 export type RejectOrderPayload = {
