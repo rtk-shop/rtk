@@ -1,5 +1,5 @@
 import { gql } from 'urql'
-import { RejectOrdeMutation } from '@/lib/api/graphql/_gen_/rejectOrder.mutation'
+import { RejectOrderMutation } from '@/lib/api/graphql/_gen_/rejectOrder.mutation'
 import type { DataFields, Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
 
 export const rejectOrderCacheMutation = (
@@ -18,7 +18,7 @@ export const rejectOrderCacheMutation = (
     }
   `
 
-  const resData = result.rejectOrder as RejectOrdeMutation['rejectOrder']
+  const resData = result.rejectOrder as RejectOrderMutation['rejectOrder']
 
   cache.writeFragment(fragment, {
     id: resData.id,
