@@ -19,7 +19,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
   const [favoriteAmount] = useFavoriteStore((state) => state.amount())
 
   const handleFavoritesClick = () => {
-    console.log('favorite click')
+    router.push(routeNames.favourites)
   }
 
   const handleCatalogClick = () => {

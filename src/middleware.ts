@@ -14,7 +14,8 @@ const protectedRoutes = [
   routeNames.catalog,
   routeNames.product,
   routeNames.checkout,
-  routeNames.profile
+  routeNames.profile,
+  routeNames.favourites
 ]
 
 export default async function middleware(req: NextRequest) {

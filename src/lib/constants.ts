@@ -7,7 +7,8 @@ export const routeNames = {
   catalog: '/catalog',
   product: '/product/',
   profile: '/profile',
-  checkout: '/checkout'
+  checkout: '/checkout',
+  favourites: '/favourites'
 } as const
 
 export const orderStatus: { [p in Lowercase<keyof typeof OrderStatus>]: p } = {
