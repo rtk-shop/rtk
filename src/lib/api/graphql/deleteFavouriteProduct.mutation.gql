@@ -1,0 +1,5 @@
+mutation RemoveFavouriteProduct($productId: ID!) {
+  removeFavouriteProduct(productId: $productId) {
+    productId
+  }
+}

@@ -1,0 +1,12 @@
+query UserFavouriteProducts {
+  userFavouriteProducts {
+    __typename
+    id
+    title
+    inStock
+    currentPrice
+    basePrice
+    tag
+    preview
+  }
+}

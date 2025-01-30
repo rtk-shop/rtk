@@ -3,12 +3,15 @@ import { type ReactNode } from 'react'
 import { BotLayout } from '@/components/layout/bot-layout'
 import { CartStoreProvider } from '@/providers/cart-store-provider'
 import { FavoriteStoreProvider } from '@/providers/favorite-store-provider'
+import { getFavoriteProducts } from '@/lib/api'
 
-export default function WebAppLayout({ children }: { children: ReactNode }) {
+export default async function WebAppLayout({ children }: { children: ReactNode }) {
+  const favorites = await getFavoriteProducts()
+
   return (
     <div>
       <Script strategy="beforeInteractive" src="https://telegram.org/js/telegram-web-app.js?56" />
-      <FavoriteStoreProvider>
+      <FavoriteStoreProvider favoritesID={favorites}>
         <CartStoreProvider>
           <BotLayout>{children}</BotLayout>
         </CartStoreProvider>

@@ -1,0 +1,6 @@
+mutation AddFavouriteProduct($productId: ID!) {
+  addFavouriteProduct(productId: $productId) {
+    productId
+    productTitle
+  }
+}

@@ -10,13 +10,19 @@ export type FavoriteStoreApi = ReturnType<typeof createFavoriteStore>
 export const FavoriteStoreContext = createContext<FavoriteStoreApi | undefined>(undefined)
 
 export interface FavoriteStoreProviderProps {
+  favoritesID: string[]
   children: ReactNode
 }
 
-export const FavoriteStoreProvider = ({ children }: FavoriteStoreProviderProps) => {
+export const FavoriteStoreProvider = ({ children, favoritesID }: FavoriteStoreProviderProps) => {
+  //
+
   const storeRef = useRef<FavoriteStoreApi>()
+
   if (!storeRef.current) {
-    storeRef.current = createFavoriteStore()
+    storeRef.current = createFavoriteStore({
+      products: favoritesID
+    })
   }
 
   return (

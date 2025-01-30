@@ -1,36 +1,56 @@
 import { useQuery, useMutation, UseQueryArgs } from 'urql'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  CartProductsQuery,
-  CartProductsQueryVariables,
-  CartProductsDocument
-} from './graphql/_gen_/cartProducts.query'
 
-import {
-  CreateOrderMutation,
-  CreateOrderMutationVariables,
-  CreateOrderDocument
-} from './graphql/_gen_/createOrder.mutation'
+import * as rejectOrder from './graphql/_gen_/rejectOrder.mutation'
+import * as cartProducts from './graphql/_gen_/cartProducts.query'
+import * as createOrder from './graphql/_gen_/createOrder.mutation'
+import * as addFavouriteProduct from './graphql/_gen_/addFavouriteProduct.mutation'
+import * as removeFavouriteProduct from './graphql/_gen_/removeFavouriteProduct.mutation'
+import * as favouriteQuery from '@/lib/api/graphql/_gen_/userFavouriteProducts.query'
 
-import {
-  RejectOrderMutation,
-  RejectOrderMutationVariables,
-  RejectOrderDocument
-} from './graphql/_gen_/rejectOrder.mutation'
-
-export function useCartQuery(options: Omit<UseQueryArgs<CartProductsQueryVariables>, 'query'>) {
-  return useQuery<CartProductsQuery, CartProductsQueryVariables>({
-    query: CartProductsDocument,
+export function useCartQuery(
+  options: Omit<UseQueryArgs<cartProducts.CartProductsQueryVariables>, 'query'>
+) {
+  return useQuery<cartProducts.CartProductsQuery, cartProducts.CartProductsQueryVariables>({
+    query: cartProducts.CartProductsDocument,
     ...options
   })
 }
 
 export function useCreateOrderMutation() {
-  return useMutation<CreateOrderMutation, CreateOrderMutationVariables>(CreateOrderDocument)
+  return useMutation<createOrder.CreateOrderMutation, createOrder.CreateOrderMutationVariables>(
+    createOrder.CreateOrderDocument
+  )
 }
 
 export function useRejectOrderMutation() {
-  return useMutation<RejectOrderMutation, RejectOrderMutationVariables>(RejectOrderDocument)
+  return useMutation<rejectOrder.RejectOrderMutation, rejectOrder.RejectOrderMutationVariables>(
+    rejectOrder.RejectOrderDocument
+  )
+}
+
+export function useAddProductToFavorite() {
+  return useMutation<
+    addFavouriteProduct.AddFavouriteProductMutation,
+    addFavouriteProduct.AddFavouriteProductMutationVariables
+  >(addFavouriteProduct.AddFavouriteProductDocument)
+}
+
+export function useRemoveProductFromFavorites() {
+  return useMutation<
+    removeFavouriteProduct.RemoveFavouriteProductMutation,
+    removeFavouriteProduct.RemoveFavouriteProductMutationVariables
+  >(removeFavouriteProduct.RemoveFavouriteProductDocument)
+}
+
+export function useFavoriteProductsQuery() {
+  return useQuery<
+    favouriteQuery.UserFavouriteProductsQuery,
+    favouriteQuery.UserFavouriteProductsQueryVariables
+  >({
+    requestPolicy: 'cache-first',
+    query: favouriteQuery.UserFavouriteProductsDocument
+  })
 }
 
 export type WebAppAuthParams = {

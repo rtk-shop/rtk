@@ -1,8 +1,8 @@
+import { type ReactElement } from 'react'
+import { cva } from 'cva'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Icon } from '../ui/icon'
-import { type ReactElement } from 'react'
-import { cva } from 'cva'
 import { LikeButton } from '@/components/ui/like-button'
 import { IconButton } from '@/components/ui/icon-button'
 import { routeNames } from '@/lib/constants'
@@ -10,6 +10,7 @@ import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import type { ProductTag } from '@/types'
+import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
 
 interface ProductItemProps {
   id: string
@@ -23,7 +24,7 @@ interface ProductItemProps {
   withDelete?: boolean
 }
 
-const priceBlock = cva('basis-4/5 text-[18px] font-semibold leading-5 text-black', {
+const priceBlock = cva('basis-4/5 text-[18px] leading-5 font-semibold text-black', {
   variants: {
     discount: {
       true: 'text-red-600'
@@ -47,11 +48,20 @@ export function ProductItem({
 }: ProductItemProps) {
   const [{ add, remove }] = useFavoriteStore((state) => state)
 
+  const [addResult, addFavorite] = useAddProductToFavorite()
+  const [removeResult, removeFavorite] = useRemoveProductFromFavorites()
+
   const handleActionClick = () => {
     if (isFavorite) {
       remove(id)
+      removeFavorite({
+        productId: id
+      })
     } else {
       add(id)
+      addFavorite({
+        productId: id
+      })
     }
   }
 
@@ -108,14 +118,14 @@ export function ProductItem({
         <Link
           href={routeNames.product + id}
           title={title}
-          className="clear-both line-clamp-2 h-[34px] text-ellipsis whitespace-normal text-[13px] font-semibold leading-4 text-black no-underline md:h-9 md:text-sm md:font-medium"
+          className="clear-both line-clamp-2 h-[34px] text-[13px] leading-4 font-semibold text-ellipsis whitespace-normal text-black no-underline md:h-9 md:text-sm md:font-medium"
         >
           {title}
         </Link>
       </div>
       {tag && (
         <div
-          className="font-semibolds absolute right-2 top-2 flex w-10 select-none items-center justify-center rounded-md p-1 text-center text-xs text-white"
+          className="font-semibolds absolute top-2 right-2 flex w-10 items-center justify-center rounded-md p-1 text-center text-xs text-white select-none"
           style={{
             backgroundColor: getProductMainTagColor(tag)
           }}
