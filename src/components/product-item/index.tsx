@@ -9,16 +9,16 @@ import { routeNames } from '@/lib/constants'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
-import type { ProductTag } from '@/types'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
+import type { ProductTag } from '@/types'
 
-interface ProductItemProps {
+export interface ProductItemProps {
   id: string
-  url: string
   title: string
-  price: number
   inStock: boolean
+  currentPrice: number
   basePrice: number
+  preview: string
   tag?: keyof typeof ProductTag | null
   withDelete?: boolean
 }
@@ -40,9 +40,9 @@ export const ProductItem = memo(function ProductItem(props: ProductItemProps) {
 
 function ProductItemInner({
   id,
-  url,
+  preview,
   title,
-  price,
+  currentPrice,
   inStock,
   tag,
   basePrice,
@@ -78,7 +78,7 @@ function ProductItemInner({
       case 'top':
         return <Image width={18} height={18} src="/icons/fire.png" alt="смайлик - огонь" />
       case 'stock':
-        return <span>-{Math.round(((basePrice - price) * 100) / basePrice)}%</span>
+        return <span>-{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%</span>
       default:
         return null
     }
@@ -91,30 +91,33 @@ function ProductItemInner({
           href={routeNames.product + id}
           className={`border-none focus:ring-0 ${!inStock ? 'opacity-50' : ''}`}
         >
-          <ImagePlaceholder src={url} altText={title} width={500} height={625} />
+          <ImagePlaceholder src={preview} altText={title} width={500} height={625} />
         </Link>
       </div>
       <div className="px-2 py-1 pt-0 md:px-3">
         <div className="flex h-12 items-center justify-between py-1">
           <div
             className={priceBlock({
-              discount: basePrice !== price,
+              discount: basePrice !== currentPrice,
               outStock: !inStock
             })}
           >
-            {basePrice !== price && (
+            {basePrice !== currentPrice && (
               <p className="text-[13px] font-medium text-gray-400 line-through">
                 {formatPrice(basePrice)} <span>₴</span>
               </p>
             )}
             <span>
-              {formatPrice(price)} <span className="font-normal">₴</span>
+              {formatPrice(currentPrice)} <span className="font-normal">₴</span>
             </span>
           </div>
           <div>
             {withDelete ? (
-              <IconButton onClick={handleActionClick} className="p-1.5">
-                <Icon name="action/trash" className="text-[22px]" />
+              <IconButton
+                onClick={handleActionClick}
+                className="p-1! pb-1.5! text-[25px] text-gray-500!"
+              >
+                <Icon name="action/trash" className="text-[16px]" />
               </IconButton>
             ) : (
               <LikeButton liked={isFavourite} onClick={handleActionClick} />

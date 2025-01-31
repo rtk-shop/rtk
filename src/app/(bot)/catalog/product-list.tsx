@@ -39,9 +39,9 @@ export function ProductList({ products, onReset }: ProductsProps) {
           <li key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
             <ProductItem
               id={product.id}
-              url={product.preview}
+              preview={product.preview}
               title={product.title}
-              price={product.currentPrice}
+              currentPrice={product.currentPrice}
               inStock={product.inStock}
               tag={product.tag}
               basePrice={product.basePrice}
