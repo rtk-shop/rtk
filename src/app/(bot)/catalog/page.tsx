@@ -9,11 +9,11 @@ import { Controls } from './controls'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
 import { ControlsSkeleton } from './skeletons/controls'
-import { ListSkeleton } from './skeletons/list'
 import { SortMenu } from './sort'
+import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
-import type { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 import type { FormValues, PriceRangeType } from './model/types'
+import type { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 
 import {
   ProductsDocument,
@@ -191,7 +191,7 @@ export default function Catalog() {
             {fetching ? (
               <>
                 <ControlsSkeleton />
-                <ListSkeleton />
+                <ProductListSkeleton />
               </>
             ) : (
               <div className="h-full">

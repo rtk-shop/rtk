@@ -1,3 +1,4 @@
+import { type ReactElement } from 'react'
 import { ProductItem, type ProductItemProps } from '../product-item'
 import { Button } from '../ui/button'
 import { Icon } from '../ui/icon'
@@ -9,9 +10,21 @@ export interface ProductList {
   skeletonLen: number
   error: unknown
   refetch(): void
+  noDataMsg: string | ReactElement
+  errMsg: string | ReactElement
+  actionButtonText: string
 }
 
-export function ProductList({ data, fetching, error, skeletonLen, refetch }: ProductList) {
+export function ProductList({
+  data,
+  fetching,
+  error,
+  skeletonLen,
+  noDataMsg,
+  errMsg,
+  actionButtonText,
+  refetch
+}: ProductList) {
   if (fetching) return <ProductListSkeleton len={skeletonLen || 8} />
 
   if (error) {
@@ -19,8 +32,8 @@ export function ProductList({ data, fetching, error, skeletonLen, refetch }: Pro
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
           <Icon name="action/warning" className="mb-1 text-[47px]" />
-          <p className="mb-3 text-lg">Ошибка получения данных</p>
-          <Button onClick={refetch}>Повторить</Button>
+          <p className="mb-3 text-lg">{errMsg}</p>
+          <Button onClick={refetch}>{actionButtonText}</Button>
         </div>
       </div>
     )
@@ -31,7 +44,7 @@ export function ProductList({ data, fetching, error, skeletonLen, refetch }: Pro
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg text-gray-500">
           <Icon name="common/emptycart" className="mb-4 text-[230px]" />
-          <p className="text-lg font-semibold">Список избранного пуст</p>
+          <p className="text-lg font-semibold">{noDataMsg}</p>
         </div>
       </div>
     )

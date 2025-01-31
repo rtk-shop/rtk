@@ -17,6 +17,9 @@ export function Products() {
       error={error}
       skeletonLen={favouriteAmount}
       refetch={refetch}
+      noDataMsg={'Список избранного пуст'}
+      errMsg={'Ошибка получения данных'}
+      actionButtonText={'Повторить'}
     />
   )
 }
