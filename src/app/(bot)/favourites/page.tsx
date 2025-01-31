@@ -5,7 +5,7 @@ import { Icon } from '@/components/ui/icon'
 import { ProductItem } from '@/components/product-item'
 import { useFavoriteProductsQuery } from '@/lib/api/hooks'
 
-export function ListSkeleton({ count = 6 }: { count?: number }) {
+function ListSkeleton({ count = 6 }: { count?: number }) {
   return (
     <div className="lg:px-2.5">
       <ul className="flex flex-wrap">
