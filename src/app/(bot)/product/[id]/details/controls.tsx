@@ -5,9 +5,9 @@ import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 
 export function Controls({ productID }: { productID: string }) {
-  const [{ products, add, remove }] = useFavoriteStore((state) => state)
+  const [{ inFavourites, add, remove }] = useFavoriteStore((state) => state)
 
-  const isLiked = products.includes(productID)
+  const isLiked = inFavourites(productID)
 
   const handleLikeClick = () => {
     if (isLiked) {
@@ -27,7 +27,7 @@ export function Controls({ productID }: { productID: string }) {
       </div>
       <div className="flex basis-1/2 items-center justify-center">
         <LikeButton width={21} height={21} liked={isLiked} onClick={handleLikeClick} />
-        <span className="ml-1.5 select-none font-medium" onClick={handleLikeClick}>
+        <span className="ml-1.5 font-medium select-none" onClick={handleLikeClick}>
           {isLiked ? 'Избранное' : 'В избранное'}
         </span>
       </div>

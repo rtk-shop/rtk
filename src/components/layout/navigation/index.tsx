@@ -16,7 +16,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
   const router = useRouter()
 
   const [cartAmount] = useCartStore((state) => state.cartAmount())
-  const [favoriteAmount] = useFavoriteStore((state) => state.amount())
+  const [favoriteAmount] = useFavoriteStore((state) => state.amount)
 
   const handleFavoritesClick = () => {
     router.push(routeNames.favourites)

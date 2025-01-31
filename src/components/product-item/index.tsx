@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react'
+import { memo, type ReactElement } from 'react'
 import { cva } from 'cva'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -20,7 +20,6 @@ interface ProductItemProps {
   inStock: boolean
   basePrice: number
   tag?: keyof typeof ProductTag | null
-  isFavorite: boolean
   withDelete?: boolean
 }
 
@@ -35,7 +34,11 @@ const priceBlock = cva('basis-4/5 text-[18px] leading-5 font-semibold text-black
   }
 })
 
-export function ProductItem({
+export const ProductItem = memo(function ProductItem(props: ProductItemProps) {
+  return <ProductItemInner {...props} />
+})
+
+function ProductItemInner({
   id,
   url,
   title,
@@ -43,16 +46,19 @@ export function ProductItem({
   inStock,
   tag,
   basePrice,
-  isFavorite,
   withDelete = false
 }: ProductItemProps) {
-  const [{ add, remove }] = useFavoriteStore((state) => state)
+  const [add] = useFavoriteStore((state) => state.add)
+  const [remove] = useFavoriteStore((state) => state.remove)
+  const [inFavourites] = useFavoriteStore((state) => state.inFavourites)
+
+  const isFavourite = inFavourites(id)
 
   const [addResult, addFavorite] = useAddProductToFavorite()
   const [removeResult, removeFavorite] = useRemoveProductFromFavorites()
 
   const handleActionClick = () => {
-    if (isFavorite) {
+    if (isFavourite) {
       remove(id)
       removeFavorite({
         productId: id
@@ -111,7 +117,7 @@ export function ProductItem({
                 <Icon name="action/trash" className="text-[22px]" />
               </IconButton>
             ) : (
-              <LikeButton liked={isFavorite} onClick={handleActionClick} />
+              <LikeButton liked={isFavourite} onClick={handleActionClick} />
             )}
           </div>
         </div>

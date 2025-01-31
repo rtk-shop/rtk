@@ -1,36 +1,53 @@
 import { create } from 'zustand'
 
 type FavoriteState = {
-  products: string[]
+  amount: number
+  products: Set<string>
 }
 
 type FavoriteActions = {
-  amount: () => number
   add: (id: string) => void
   remove: (id: string) => void
+  inFavourites: (id: string) => boolean
 }
 
 export type FavoriteStore = FavoriteState & FavoriteActions
 
-export const defaultInitState: FavoriteState = {
-  products: []
-}
+export const createFavoriteStore = (products: string[]) => {
+  const store = create<FavoriteStore>((set, get) => ({
+    amount: products.length,
+    products: new Set<string>([...products]),
 
-export const createFavoriteStore = (initState: FavoriteState = defaultInitState) => {
-  return create<FavoriteStore>((set, get) => ({
-    ...initState,
-    amount: () => get().products.length,
-    add: (id: string) =>
-      set((state) => ({
-        products: [id, ...state.products]
-      })),
-    remove: (id: string) =>
-      set((state) => ({
-        products: state.products.filter((favorite) => favorite !== id)
-      })),
-    clear: () =>
-      set(() => ({
-        products: []
-      }))
+    inFavourites: (id: string): boolean => {
+      return get().products.has(id)
+    },
+
+    add: (id: string) => {
+      set((state) => {
+        state.products.add(id)
+        return {
+          amount: state.products.size
+        }
+      })
+    },
+
+    remove: (id: string) => {
+      return set((state) => {
+        state.products.delete(id)
+        return {
+          amount: state.products.size
+        }
+      })
+    },
+
+    clear: () => {
+      set({ products: new Set<string>(), amount: 0 })
+    }
   }))
+
+  store.subscribe(
+    (state) => state.amount // We only follow the amount
+  )
+
+  return store
 }
