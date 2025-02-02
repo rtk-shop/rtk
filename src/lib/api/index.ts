@@ -3,7 +3,7 @@ import { SESSION_COOKIE_NAME } from '../session'
 
 import { registerUrql } from '@urql/next/rsc'
 import { ssrExchange } from '@urql/next'
-import { cacheExchange, createClient, fetchExchange } from 'urql'
+import { cacheExchange, createClient, fetchExchange, gql } from 'urql'
 import { authExchange } from '@urql/exchange-auth'
 
 import * as GetProduct from './graphql/_gen_/product.query'
@@ -67,11 +67,19 @@ export async function getProduct(id: string) {
   return result.data
 }
 
-export async function getFavoriteProducts(): Promise<string[]> {
-  const result = await getClient().query<
-    FavouriteProducts.UserFavouriteProductsQuery,
-    FavouriteProducts.UserFavouriteProductsQueryVariables
-  >(FavouriteProducts.UserFavouriteProductsDocument, {})
+export async function getFavouriteProductsId(): Promise<string[]> {
+  // INFO: __typename Product has only id field
+  const result = await getClient().query<FavouriteProducts.UserFavouriteProductsQuery>(
+    gql`
+      query UserFavouriteProducts {
+        userFavouriteProducts {
+          __typename
+          id
+        }
+      }
+    `,
+    {}
+  )
 
   let productIDs: string[] = []
 

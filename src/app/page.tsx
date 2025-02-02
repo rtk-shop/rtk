@@ -42,6 +42,8 @@ export default function Page() {
         : window.Telegram.WebApp.initData
 
       const timer = setTimeout(() => {
+        console.log('call useWebAppAuth.success ##')
+
         authorize({ initData })
       }, 2000)
 

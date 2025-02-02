@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react'
+import Script from 'next/script'
 import localFont from 'next/font/local'
 import { Toaster } from 'sonner'
 import { getLocale, getMessages } from 'next-intl/server'
@@ -31,6 +32,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale}>
       <body className={proximanova.variable}>
+        <Script strategy="beforeInteractive" src="https://telegram.org/js/telegram-web-app.js?56" />
         <NextIntlClientProvider messages={messages}>
           <UrqlProvider>
             <main>{children}</main>
