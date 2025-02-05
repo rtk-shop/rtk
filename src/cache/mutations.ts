@@ -98,18 +98,24 @@ export const addCartItem = (
       cartProducts {
         id
         quantity
+        product {
+          id
+        }
       }
     }
   `
   const resp = result.addCartItem
 
-  const isInCahe = cache.resolve({ __typename: 'CartProduct', id: resp.productId }, 'id')
-  if (isInCahe) {
+  const cacheEntity = cache.resolve({ __typename: 'CartProduct', id: resp.productId }, 'id')
+  if (cacheEntity) {
     cache.writeFragment(
       gql`
         fragment _ on CartProduct {
           id
           quantity
+          product {
+            id
+          }
         }
       `,
       {
@@ -122,7 +128,15 @@ export const addCartItem = (
       if (!data) return data
       return {
         cartProducts: [
-          { __typename: 'CartProduct', id: resp.productId, quantity: resp.quantity },
+          {
+            __typename: 'CartProduct',
+            id: resp.productId,
+            quantity: resp.quantity,
+            product: {
+              __typename: 'Product',
+              id: resp.productId
+            }
+          },
           ...data.cartProducts
         ]
       }
