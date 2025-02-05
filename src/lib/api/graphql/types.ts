@@ -28,8 +28,14 @@ export type AddFavouritePayload = {
 }
 
 export type CartItem = {
-  amount: Scalars['Int']['input']
+  __typename?: 'CartItem'
+  productId: Scalars['ID']['output']
+  quantity: Scalars['Int']['output']
+}
+
+export type CartItemInput = {
   productId: Scalars['ID']['input']
+  quantity: Scalars['Int']['input']
 }
 
 export type CartItemType = {
@@ -38,12 +44,23 @@ export type CartItemType = {
   id: Scalars['String']['output']
 }
 
+export type CartProduct = {
+  __typename?: 'CartProduct'
+  product: Product
+  quantity: Scalars['Int']['output']
+}
+
 export const enum CategoryType {
   Backpack = 'BACKPACK',
   Bag = 'BAG',
   Other = 'OTHER',
   Suitcase = 'SUITCASE',
   Wallet = 'WALLET'
+}
+
+export type ClearCartPayload = {
+  __typename?: 'ClearCartPayload'
+  cartId: Scalars['ID']['output']
 }
 
 export const enum Gender {
@@ -66,9 +83,13 @@ export type HideProductPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  addCartItem: CartItem
   addFavouriteProduct: AddFavouritePayload
+  clearCart: ClearCartPayload
   createOrder: NewOrderPayload
   hideProduct?: Maybe<HideProductPayload>
+  /** reduceCartItemQuantity - reduces cart item quantity by one */
+  reduceCartItemQuantity: CartItem
   /**
    * rejectOrder - отменяет ордера учитывая контекст авторизации
    *
@@ -76,8 +97,13 @@ export type Mutation = {
    * MANAGER, ADMIN - могут отменить ордера любого пользователя
    */
   rejectOrder: RejectOrderPayload
+  removeCartItem: RemoveCartItemPayload
   removeFavouriteProduct: RemoveFavouritePayload
   setUsdCourse: GlobalData
+}
+
+export type MutationAddCartItemArgs = {
+  input: CartItemInput
 }
 
 export type MutationAddFavouriteProductArgs = {
@@ -93,8 +119,16 @@ export type MutationHideProductArgs = {
   isHidden: Scalars['Boolean']['input']
 }
 
+export type MutationReduceCartItemQuantityArgs = {
+  productId: Scalars['ID']['input']
+}
+
 export type MutationRejectOrderArgs = {
   orderId: Scalars['ID']['input']
+}
+
+export type MutationRemoveCartItemArgs = {
+  productId: Scalars['ID']['input']
 }
 
 export type MutationRemoveFavouriteProductArgs = {
@@ -106,7 +140,7 @@ export type MutationSetUsdCourseArgs = {
 }
 
 export type NewOrderInput = {
-  cartItems: Array<CartItem>
+  cartItems: Array<CartItemInput>
   cityName: Scalars['String']['input']
   name: Scalars['String']['input']
   phone: Scalars['String']['input']
@@ -254,7 +288,7 @@ export const enum ProductTag {
 
 export type Query = {
   __typename?: 'Query'
-  cartProducts: Array<Product>
+  cartProducts: Array<CartProduct>
   globalData: GlobalData
   product: ProductPayload
   products: ProductConnection
@@ -267,10 +301,6 @@ export type Query = {
    * MANAGER, ADMIN - могут получить ордера всех пользователей
    */
   userOrders: Array<Order>
-}
-
-export type QueryCartProductsArgs = {
-  input: Array<CartItem>
 }
 
 export type QueryProductArgs = {
@@ -297,6 +327,11 @@ export type RejectOrderPayload = {
   id: Scalars['ID']['output']
   status: OrderStatus
   updatedAt: Scalars['String']['output']
+}
+
+export type RemoveCartItemPayload = {
+  __typename?: 'RemoveCartItemPayload'
+  productId: Scalars['ID']['output']
 }
 
 export type RemoveFavouritePayload = {

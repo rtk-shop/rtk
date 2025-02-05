@@ -1,8 +1,11 @@
-query CartProducts($input: [CartItem!]!) {
-  cartProducts(input: $input) {
-    id
-    title
-    currentPrice
-    preview
+query CartProducts {
+  cartProducts {
+    quantity
+    product {
+      id
+      title
+      currentPrice
+      preview
+    }
   }
 }

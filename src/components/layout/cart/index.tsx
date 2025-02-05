@@ -4,9 +4,7 @@ import { Summary } from './summary'
 import { ProcessPlug } from './plug'
 import { ListSkeleton } from './list-skeleton'
 import { CartHead } from './head'
-import { CartItem, CartItemType } from '@/components/cart-item'
-import { useCartStore } from '@/providers/cart-store-provider'
-import { normalizedView } from '@/stores/cart/store'
+import { CartItem } from '@/components/cart-item'
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
 import { useCartQuery } from '@/lib/api/hooks'
@@ -28,20 +26,10 @@ export const Cart = memo(function Cart({ isOpen, onClose }: CartProps) {
 })
 
 export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): void }) {
-  const router = useRouter()
   const t = useTranslations('Common')
 
-  const [cartItems] = useCartStore((state) => state.cartItems)
-  const itemsMap = normalizedView(cartItems)
-
-  const isCartEmpty = !cartItems.length
-
-  const [result] = useCartQuery({
-    pause: !isOpen || isCartEmpty,
-    variables: {
-      input: [...cartItems]
-    }
-  })
+  const router = useRouter()
+  const [result] = useCartQuery()
 
   const { data, fetching, error } = result
 
@@ -50,26 +38,31 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
     router.push(routeNames.checkout)
   }
 
-  if (isCartEmpty) {
-    return <ProcessPlug text={t('cart.emptyMsg')} onClose={onClose} />
-  }
+  const cartPrice = 111
+  // const cartPrice =
+  //   data?.cartProducts.reduce((acc, p) => p.currentPrice * itemsMap[p.id] + acc, 0) || 0
 
   if (error) {
     return <ProcessPlug text={t('cart.errorMsg')} onClose={onClose} />
   }
 
-  const cartPrice =
-    data?.cartProducts.reduce((acc, p) => p.currentPrice * itemsMap[p.id] + acc, 0) || 0
+  if (!fetching && !data?.cartProducts.length) {
+    return <ProcessPlug text={t('cart.emptyMsg')} onClose={onClose} />
+  }
 
   return (
     <div className="flex h-full flex-col">
       <CartHead onCartClose={onClose} />
       {fetching ? (
-        <ListSkeleton itemsAmount={cartItems.length} />
+        <ListSkeleton itemsAmount={3} />
       ) : (
         <ul className="scroll-bar grow overflow-y-auto px-2.5 pt-5">
-          {data?.cartProducts.map((product: CartItemType) => (
-            <CartItem key={product.id} amount={itemsMap[product.id]} product={product} />
+          {data?.cartProducts.map((cartItem) => (
+            <CartItem
+              key={cartItem.product.id}
+              quantity={cartItem.quantity}
+              product={cartItem.product}
+            />
           ))}
         </ul>
       )}

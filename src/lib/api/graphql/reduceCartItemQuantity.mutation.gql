@@ -1,0 +1,6 @@
+mutation ReduceCartItemQuantity($productId: ID!) {
+  reduceCartItemQuantity(productId: $productId) {
+    productId
+    quantity
+  }
+}

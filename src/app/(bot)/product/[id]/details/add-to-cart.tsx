@@ -2,25 +2,34 @@
 
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
-import { useCartStore } from '@/providers/cart-store-provider'
+import { toast } from 'sonner'
+import { useAddCartItemMutation } from '@/lib/api/hooks'
 
 export function AddToCartButton({ productID, inStock }: { productID: string; inStock: boolean }) {
-  const [{ addItem }] = useCartStore((state) => state)
+  const [result, addCartItem] = useAddCartItemMutation()
 
   const handleClick = () => {
-    addItem({
+    addCartItem({
       productId: productID,
-      amount: 1
+      quantity: 1
+    }).then((result) => {
+      if (result.error) {
+        toast.error('Не удалось добавить товар в корзину')
+        return
+      }
+
+      toast.success('Товар добавлен в корзину')
     })
   }
 
   return (
-    <div className="mb-2.5 mt-5">
+    <div className="mt-5 mb-2.5">
       <Button
         fullWidth
         color="secondary"
+        loading={result.fetching}
         onClick={handleClick}
-        className="group rounded-xl border-none bg-black py-3 font-medium leading-none text-white"
+        className="group rounded-xl border-none bg-black py-3 leading-none font-medium text-white"
         disabled={!inStock}
         startIcon={
           <Icon

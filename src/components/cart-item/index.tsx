@@ -4,9 +4,14 @@ import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
 import { formatPrice } from '@/lib/helpers'
 import { routeNames } from '@/lib/constants'
-import { useCartStore } from '@/providers/cart-store-provider'
 import { useTranslations } from 'next-intl'
 import { Icon } from '../ui/icon'
+import { toast } from 'sonner'
+import {
+  useAddCartItemMutation,
+  useRemoveCartItemMutation,
+  useReduceCartItemQuantityMutation
+} from '@/lib/api/hooks'
 
 export type CartItemType = {
   id: string
@@ -15,24 +20,47 @@ export type CartItemType = {
   preview: string
 }
 
-interface CartItemProps {
-  amount: number
-  product: CartItemType
-}
-
-export function CartItem({ product, amount }: CartItemProps) {
+export function CartItem({ product, quantity }: { quantity: number; product: CartItemType }) {
   const t = useTranslations('Common')
 
-  const [{ remove, updateAmount }] = useCartStore((state) => state)
+  const [addItemMeta, addCartItem] = useAddCartItemMutation()
+  const [reduceItemMeta, reduceCartItem] = useReduceCartItemQuantityMutation()
+  const [removeItemMeta, removeCartItem] = useRemoveCartItemMutation()
 
   const { id, title, preview, currentPrice } = product
 
-  const handleAmountChange = (_: string, n: number): void => {
-    updateAmount(id, n)
+  const handleAmountChange = (type: 'add' | 'sub', _: number): void => {
+    if (type === 'add') {
+      addCartItem({
+        productId: id,
+        quantity: 1
+      }).then((result) => {
+        if (result.error) {
+          toast.error('Не удалось добавить товар')
+          return
+        }
+      })
+    } else {
+      reduceCartItem({
+        productId: id
+      }).then((result) => {
+        if (result.error) {
+          toast.error('Не удалось вычесть товар')
+          return
+        }
+      })
+    }
   }
 
-  const handleProductRemove = () => {
-    remove(id)
+  const handleRemoveClick = () => {
+    removeCartItem({
+      productId: id
+    }).then((result) => {
+      if (result.error) {
+        toast.error('Не удалось удалить товар')
+        return
+      }
+    })
   }
 
   return (
@@ -42,25 +70,26 @@ export function CartItem({ product, amount }: CartItemProps) {
           <ImagePlaceholder src={preview} altText={title} width={216} height={270} />
         </Link>
       </div>
-      <div className="w-full min-w-0 max-w-md pt-3">
+      <div className="w-full max-w-md min-w-0 pt-3">
         <Link
           title={title}
           href={routeNames.product + id}
-          className="clear-both mb-2 line-clamp-2 h-[33px] text-ellipsis whitespace-normal text-sm font-semibold leading-4 text-black no-underline"
+          className="clear-both mb-2 line-clamp-2 h-[33px] text-sm leading-4 font-semibold text-ellipsis whitespace-normal text-black no-underline"
         >
           {title}
         </Link>
         <span className="text-sm font-medium text-gray-500">
           {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
         </span>
-        <p className="text-[15px] font-semibold leading-none">
-          {amount}&nbsp;шт:&nbsp;&nbsp;{formatPrice(amount * currentPrice)}&nbsp;₴
+        <p className="text-[15px] leading-none font-semibold">
+          {quantity}&nbsp;шт:&nbsp;&nbsp;{formatPrice(quantity * currentPrice)}&nbsp;₴
         </p>
         <div className="mt-6 flex justify-between">
-          <AmountController min={1} max={100} amount={amount} onChange={handleAmountChange} />
+          <AmountController min={1} max={100} amount={quantity} onChange={handleAmountChange} />
           <IconButton
             disableRipple
-            onClick={handleProductRemove}
+            loading={removeItemMeta.fetching}
+            onClick={handleRemoveClick}
             className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
           >
             <Icon name="action/trash" />

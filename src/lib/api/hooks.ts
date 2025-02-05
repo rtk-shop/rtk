@@ -7,9 +7,13 @@ import * as createOrder from './graphql/_gen_/createOrder.mutation'
 import * as addFavouriteProduct from './graphql/_gen_/addFavouriteProduct.mutation'
 import * as removeFavouriteProduct from './graphql/_gen_/removeFavouriteProduct.mutation'
 import * as favouriteQuery from '@/lib/api/graphql/_gen_/userFavouriteProducts.query'
+import * as addCartItem from '@/lib/api/graphql/_gen_/addCartItem.mutation'
+import * as removeCartItem from '@/lib/api/graphql/_gen_/removeCartItem.mutation'
+import * as reduceCartItem from '@/lib/api/graphql/_gen_/reduceCartItemQuantity.mutation'
+import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
 
 export function useCartQuery(
-  options: Omit<UseQueryArgs<cartProducts.CartProductsQueryVariables>, 'query'>
+  options?: Omit<UseQueryArgs<cartProducts.CartProductsQueryVariables>, 'query'>
 ) {
   return useQuery<cartProducts.CartProductsQuery, cartProducts.CartProductsQueryVariables>({
     query: cartProducts.CartProductsDocument,
@@ -51,6 +55,30 @@ export function useFavoriteProductsQuery() {
     requestPolicy: 'cache-first',
     query: favouriteQuery.UserFavouriteProductsDocument
   })
+}
+
+export function useAddCartItemMutation() {
+  return useMutation<addCartItem.AddCartItemMutation, addCartItem.AddCartItemMutationVariables>(
+    addCartItem.AddCartItemDocument
+  )
+}
+
+export function useRemoveCartItemMutation() {
+  return useMutation<
+    removeCartItem.RemoveCartItemMutation,
+    removeCartItem.RemoveCartItemMutationVariables
+  >(removeCartItem.RemoveCartItemDocument)
+}
+
+export function useReduceCartItemQuantityMutation() {
+  return useMutation<
+    reduceCartItem.ReduceCartItemQuantityMutation,
+    reduceCartItem.ReduceCartItemQuantityMutationVariables
+  >(reduceCartItem.ReduceCartItemQuantityDocument)
+}
+
+export function useClearCartMutation() {
+  return useMutation<clearCart.ClearCartMutation>(clearCart.ClearCartDocument)
 }
 
 export type WebAppAuthParams = {
