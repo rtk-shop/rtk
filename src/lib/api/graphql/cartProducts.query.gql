@@ -1,5 +1,6 @@
 query CartProducts {
   cartProducts {
+    id
     quantity
     product {
       id

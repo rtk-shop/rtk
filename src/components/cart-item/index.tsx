@@ -88,7 +88,6 @@ export function CartItem({ product, quantity }: { quantity: number; product: Car
           <AmountController min={1} max={100} amount={quantity} onChange={handleAmountChange} />
           <IconButton
             disableRipple
-            loading={removeItemMeta.fetching}
             onClick={handleRemoveClick}
             className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
           >

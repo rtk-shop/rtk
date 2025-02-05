@@ -46,6 +46,7 @@ export type CartItemType = {
 
 export type CartProduct = {
   __typename?: 'CartProduct'
+  id: Scalars['ID']['output']
   product: Product
   quantity: Scalars['Int']['output']
 }

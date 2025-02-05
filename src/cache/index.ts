@@ -1,5 +1,13 @@
 import { cacheExchange as Exchange } from '@urql/exchange-graphcache'
-import { rejectOrder, addFavouriteProduct, removeFavouriteProduct } from './mutations'
+import {
+  rejectOrder,
+  addFavouriteProduct,
+  removeFavouriteProduct,
+  addCartItem,
+  reduceCartItemQuantity,
+  removeCartItem,
+  clearCart
+} from './mutations'
 
 export const cacheExchange = Exchange({
   optimistic: {
@@ -14,6 +22,12 @@ export const cacheExchange = Exchange({
         __typename: 'AddFavouritePayload',
         productId: args.productId
       }
+    },
+    removeCartItem(args, _cache, _info) {
+      return {
+        __typename: 'RemoveCartItemPayload',
+        productId: args.productId
+      }
     }
   },
   updates: {
@@ -21,7 +35,11 @@ export const cacheExchange = Exchange({
     Mutation: {
       rejectOrder,
       addFavouriteProduct,
-      removeFavouriteProduct
+      removeFavouriteProduct,
+      addCartItem,
+      reduceCartItemQuantity,
+      removeCartItem,
+      clearCart
     }
   }
 })

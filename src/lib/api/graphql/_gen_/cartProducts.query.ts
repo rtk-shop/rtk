@@ -8,6 +8,7 @@ export type CartProductsQuery = {
   __typename?: 'Query'
   cartProducts: Array<{
     __typename?: 'CartProduct'
+    id: string
     quantity: number
     product: {
       __typename?: 'Product'
@@ -22,6 +23,7 @@ export type CartProductsQuery = {
 export const CartProductsDocument = gql`
   query CartProducts {
     cartProducts {
+      id
       quantity
       product {
         id
