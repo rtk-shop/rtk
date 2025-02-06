@@ -4,24 +4,15 @@ import { Summary } from './summary'
 // import { Promo } from './promo'
 import { useCartQuery } from '@/lib/api/hooks'
 import { usePageState } from '../model/state'
-import { type CartItem, normalizedView } from '@/stores/cart/store'
 
 interface PreviewProps {
   submitLoading: boolean
-  cartItems: CartItem[]
 }
 
-export function Preview({ submitLoading, cartItems }: PreviewProps) {
-  const itemsMap = normalizedView(cartItems)
-
+export function Preview({ submitLoading }: PreviewProps) {
   const onErrorModal = usePageState((state) => state.onErrorModal)
 
-  const [result] = useCartQuery({
-    pause: !cartItems.length,
-    variables: {
-      input: [...cartItems]
-    }
-  })
+  const [result] = useCartQuery()
 
   const { error, fetching, data } = result
 
@@ -34,7 +25,10 @@ export function Preview({ submitLoading, cartItems }: PreviewProps) {
     )
   }
 
-  const cartPrice = data?.cartProducts.reduce((acc, p) => p.currentPrice * itemsMap[p.id] + acc, 0)
+  const cartPrice = data?.cartProducts.reduce(
+    (acc, item) => item.product.currentPrice * item.quantity + acc,
+    0
+  )
 
   return (
     <section className="pt-4">

@@ -38,9 +38,12 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
     router.push(routeNames.checkout)
   }
 
-  const cartPrice = 111
-  // const cartPrice =
-  //   data?.cartProducts.reduce((acc, p) => p.currentPrice * itemsMap[p.id] + acc, 0) || 0
+  let productsAmount = 0
+
+  const cartPrice = data?.cartProducts.reduce((acc, item) => {
+    productsAmount += item.quantity
+    return item.product.currentPrice * item.quantity + acc
+  }, 0)
 
   if (error) {
     return <ProcessPlug text={t('cart.errorMsg')} onClose={onClose} />
@@ -52,9 +55,9 @@ export function CartInner({ isOpen, onClose }: { isOpen: boolean; onClose(): voi
 
   return (
     <div className="flex h-full flex-col">
-      <CartHead onCartClose={onClose} />
+      <CartHead quantity={productsAmount} onCartClose={onClose} />
       {fetching ? (
-        <ListSkeleton itemsAmount={3} />
+        <ListSkeleton len={3} />
       ) : (
         <ul className="scroll-bar grow overflow-y-auto px-2.5 pt-5">
           {data?.cartProducts.map((cartItem) => (

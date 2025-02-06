@@ -3,9 +3,9 @@ import { routeNames } from '@/lib/constants'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
 import { useRouter } from 'next/navigation'
-import { useCartStore } from '@/providers/cart-store-provider'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { Icon } from '@/components/ui/icon'
+import { useCartQuery } from '@/lib/api/hooks'
 
 interface NavigationProps {
   onSidebarOpen(): void
@@ -15,8 +15,10 @@ interface NavigationProps {
 export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }: NavigationProps) {
   const router = useRouter()
 
-  const [cartAmount] = useCartStore((state) => state.cartAmount())
+  const [result] = useCartQuery()
   const [favoriteAmount] = useFavoriteStore((state) => state.amount)
+
+  const cartAmount = result.data?.cartProducts.reduce((acc, item) => item.quantity + acc, 0)
 
   const handleFavoritesClick = () => {
     router.push(routeNames.favourites)

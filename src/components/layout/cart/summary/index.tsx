@@ -5,11 +5,11 @@ import { useTranslations } from 'next-intl'
 
 interface SummaryProps {
   loading: boolean
-  totalSum: number
+  totalSum: number | undefined
   onCheckout(): void
 }
 
-export function Summary({ loading, totalSum, onCheckout }: SummaryProps) {
+export function Summary({ loading, totalSum = 0, onCheckout }: SummaryProps) {
   const t = useTranslations('Common')
 
   if (loading) return <Skeleton />
@@ -19,7 +19,7 @@ export function Summary({ loading, totalSum, onCheckout }: SummaryProps) {
   }
 
   return (
-    <div className="bg-gray-50 px-4 pb-5 pt-4">
+    <div className="bg-gray-50 px-4 pt-4 pb-5">
       <p className="mb-2 flex justify-between text-lg font-semibold">
         <span>{t('cart.total')}:</span>
         <span>

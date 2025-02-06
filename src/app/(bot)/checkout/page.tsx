@@ -7,13 +7,11 @@ import { Preview } from './preview'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
-import { useCartStore } from '@/providers/cart-store-provider'
 import { OrderSuccessModal } from './modals/order-success'
 import { ErrorModal } from './modals/error'
 import { usePageState } from './model/state'
 
 export default function Checkout() {
-  const [cartItems] = useCartStore((state) => state.cartItems)
   const onSucessModal = usePageState((state) => state.onSucessModal)
   const onErrorModal = usePageState((state) => state.onErrorModal)
 
@@ -34,7 +32,7 @@ export default function Checkout() {
     const { ['np-delivery-type']: removedKey, ...requestValues } = values
 
     const res = await createOrder({
-      cartItems,
+      cartItems: [], // todo: remove from request body
       ...requestValues
     })
 
@@ -56,7 +54,7 @@ export default function Checkout() {
             {/*  */}
             <DeliveryInfo />
             {/*  */}
-            <Preview cartItems={cartItems} submitLoading={orderResult.fetching} />
+            <Preview submitLoading={orderResult.fetching} />
           </div>
         </form>
       </FormProvider>

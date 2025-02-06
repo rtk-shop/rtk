@@ -5,13 +5,11 @@ import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
 import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
-import { useCartStore } from '@/providers/cart-store-provider'
 import { usePageState } from '../model/state'
 
 export function OrderSuccessModal() {
   const t = useTranslations('Checkout.successModal')
   const router = useRouter()
-  const [clear] = useCartStore((state) => state.clear)
 
   const isOpen = usePageState((state) => state.successOrderModalOpen)
   const onSucessModal = usePageState((state) => state.onSucessModal)
@@ -22,13 +20,13 @@ export function OrderSuccessModal() {
 
   const handleComplete = () => {
     router.replace(routeNames.profile)
-    clear()
+    // todo: clear cart here
     onSucessModal(false)
   }
 
   return (
     <Drawer open={isOpen} position="bottom" onClose={handleComplete}>
-      <div className="rounded-t-2xl bg-white px-4 pb-7 pt-7">
+      <div className="rounded-t-2xl bg-white px-4 pt-7 pb-7">
         <Image
           src="/icons/tada.webp"
           width={100}

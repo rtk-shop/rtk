@@ -1,10 +1,10 @@
 import { CartItem, type CartItemType } from '@/components/cart-item'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
-import { useCartStore } from '@/providers/cart-store-provider'
-import { normalizedView } from '@/stores/cart/store'
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useClearCartMutation } from '@/lib/api/hooks'
+import { toast } from 'sonner'
 
 interface CartItemsProps {
   loading: boolean
@@ -16,33 +16,32 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
 
   const t = useTranslations()
 
-  const [cartItems] = useCartStore((state) => state.cartItems)
-  const [clearCart] = useCartStore((state) => state.clear)
-  const itemsMap = normalizedView(cartItems)
+  const [clearMeta, clearCart] = useClearCartMutation()
 
-  const handleClearAllClick = (): void => {
-    router.replace(routeNames.catalog)
-    clearCart()
+  const handleClearClick = () => {
+    clearCart().then((result) => {
+      if (result.error) {
+        toast.error('Не удалось очистить корзину')
+        return
+      }
+      router.replace(routeNames.catalog)
+    })
   }
 
   return (
     <div>
-      <div className="flex items-center justify-between px-2 pb-4 pt-4">
+      <div className="flex items-center justify-between px-2 pt-4 pb-4">
         <h2 className="font-medium">{t('Checkout.preview.yourOrder')}</h2>
-        <button
-          color="secondary"
-          className="text-[13px] text-gray-500"
-          onClick={handleClearAllClick}
-        >
+        <button color="secondary" className="text-[13px] text-gray-500" onClick={handleClearClick}>
           {t('Common.actions.deleteAll')}
         </button>
       </div>
       {loading ? (
-        <ListSkeleton max={3} itemsAmount={cartItems.length} />
+        <ListSkeleton len={1} />
       ) : (
-        <ul className="scroll-bar max-h-[400px] overflow-y-auto overflow-x-hidden pt-4">
-          {cartProducts.map((product) => (
-            <CartItem key={product.id} amount={itemsMap[product.id]} product={product} />
+        <ul className="scroll-bar max-h-[400px] overflow-x-hidden overflow-y-auto pt-4">
+          {cartProducts.map((item) => (
+            <CartItem key={item.product.id} quantity={item.quantity} product={item.product} />
           ))}
         </ul>
       )}

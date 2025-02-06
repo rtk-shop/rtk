@@ -14,13 +14,16 @@ import {
 } from '@/lib/api/hooks'
 
 export type CartItemType = {
-  id: string
-  title: string
-  currentPrice: number
-  preview: string
+  quantity: number
+  product: {
+    id: string
+    title: string
+    currentPrice: number
+    preview: string
+  }
 }
 
-export function CartItem({ product, quantity }: { quantity: number; product: CartItemType }) {
+export function CartItem({ product, quantity }: CartItemType) {
   const t = useTranslations('Common')
 
   const [addItemMeta, addCartItem] = useAddCartItemMutation()
