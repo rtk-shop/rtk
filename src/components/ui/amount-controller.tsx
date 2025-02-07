@@ -1,14 +1,22 @@
 import { Icon } from './icon'
 import { IconButton } from './icon-button'
+import { Loader } from './loader'
 
 interface AddSubInputProps {
   amount: number
   min: number
   max?: number
+  loading?: boolean
   onChange(type: 'add' | 'sub', n: number): void
 }
 
-export function AmountController({ min, max, amount, onChange }: AddSubInputProps) {
+export function AmountController({
+  min,
+  max,
+  amount,
+  onChange,
+  loading = false
+}: AddSubInputProps) {
   const handleAddClick = (): void => {
     if (amount >= Number(max)) return
     onChange('add', amount + 1)
@@ -24,21 +32,30 @@ export function AmountController({ min, max, amount, onChange }: AddSubInputProp
       <IconButton
         disableRipple
         onClick={handleSubClick}
-        disabled={amount <= 1}
+        disabled={loading || amount <= 1}
         aria-label="удалить одну единицу данного продукта"
-        className="p-2! text-[25px] text-gray-500! active:scale-110"
+        className="p-2! text-[25px] text-gray-500! active:not-disabled:scale-110"
       >
         <Icon name="action/circle-minus" />
       </IconButton>
-      <div className="w-7 select-none text-center text-[18px] font-medium">
-        <span>{amount}</span>
+
+      <div className="w-7 text-center text-lg font-medium select-none">
+        {loading ? (
+          <div className="flex justify-center">
+            <div className="w-4">
+              <Loader adaptive color="dark" />
+            </div>
+          </div>
+        ) : (
+          <span>{amount}</span>
+        )}
       </div>
       <IconButton
         disableRipple
         onClick={handleAddClick}
-        disabled={!!max && amount >= max}
+        disabled={loading || (!!max && amount >= max)}
         aria-label="добавить одну единицу данного продукта"
-        className="p-2! text-[25px] text-gray-500! active:scale-110"
+        className="p-2! text-[25px] text-gray-500! active:not-disabled:scale-110"
       >
         <Icon name="action/circle-plus" />
       </IconButton>
