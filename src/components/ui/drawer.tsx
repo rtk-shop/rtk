@@ -7,15 +7,15 @@ interface DrawerProps {
   open: boolean
   fullWidth?: boolean
   position?: 'left' | 'right' | 'bottom'
-  onClose(): void
+  onClose?(): void
   children?: ReactNode
 }
 
 const container = cva('fixed z-50 overflow-auto transition-transform will-change-transform', {
   variants: {
     position: {
-      right: 'right-0 top-0 h-dvh',
-      left: 'left-0 top-0 h-dvh',
+      right: 'top-0 right-0 h-dvh',
+      left: 'top-0 left-0 h-dvh',
       bottom: 'bottom-0 w-full'
     },
 
@@ -88,7 +88,7 @@ export function Drawer({
 
   const onCloseMiddleware = () => {
     document.documentElement.style.overflowY = 'auto'
-    onClose()
+    onClose && onClose()
   }
 
   useEffect(() => {
