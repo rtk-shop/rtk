@@ -18,13 +18,19 @@ export default function Page() {
     onError(errorMsg) {
       switch (errorMsg.trim()) {
         case 'user hash corrupted':
-          toast.error('Данные телеграм повреждены/скомпрометированы')
+          toast.error('Данные телеграм повреждены', {
+            duration: 7000
+          })
           break
         case 'auth time expired':
-          toast.warning('Время для авторизации исчерпано')
+          toast.warning('Время для авторизации исчерпано', {
+            duration: 7000
+          })
           break
         default:
-          toast.error('Приложеник вне контекста Telegram')
+          toast.warning('Приложеник вне контекста Telegram', {
+            duration: 8000
+          })
           console.error(errorMsg)
           break
       }

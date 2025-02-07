@@ -21,7 +21,10 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
   const handleClearClick = () => {
     clearCart().then((result) => {
       if (result.error) {
-        toast.error('Не удалось очистить корзину')
+        toast.error('Не удалось очистить корзину', {
+          duration: 2000,
+          richColors: true
+        })
         return
       }
       router.replace(routeNames.catalog)

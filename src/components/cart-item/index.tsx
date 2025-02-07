@@ -28,7 +28,7 @@ export function CartItem({ product, quantity }: CartItemType) {
 
   const [addItemMeta, addCartItem] = useAddCartItemMutation()
   const [reduceItemMeta, reduceCartItem] = useReduceCartItemQuantityMutation()
-  const [removeItemMeta, removeCartItem] = useRemoveCartItemMutation()
+  const [_, removeCartItem] = useRemoveCartItemMutation()
 
   const { id, title, preview, currentPrice } = product
 
@@ -39,8 +39,10 @@ export function CartItem({ product, quantity }: CartItemType) {
         quantity: 1
       }).then((result) => {
         if (result.error) {
-          toast.error('Не удалось добавить товар')
-          return
+          toast.error('Не удалось изменить количество', {
+            duration: 2000,
+            richColors: true
+          })
         }
       })
     } else {
@@ -48,8 +50,10 @@ export function CartItem({ product, quantity }: CartItemType) {
         productId: id
       }).then((result) => {
         if (result.error) {
-          toast.error('Не удалось вычесть товар')
-          return
+          toast.error('Не удалось изменить количество', {
+            duration: 2000,
+            richColors: true
+          })
         }
       })
     }
@@ -60,7 +64,10 @@ export function CartItem({ product, quantity }: CartItemType) {
       productId: id
     }).then((result) => {
       if (result.error) {
-        toast.error('Не удалось удалить товар')
+        toast.error('Не удалось удалить товар', {
+          duration: 2000,
+          richColors: true
+        })
         return
       }
     })

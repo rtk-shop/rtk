@@ -14,11 +14,20 @@ export function AddToCartButton({ productID, inStock }: { productID: string; inS
       quantity: 1
     }).then((result) => {
       if (result.error) {
-        toast.error('Не удалось добавить товар в корзину')
+        toast.error('Не удалось добавить товар в корзину', {
+          duration: 1500,
+          richColors: true
+        })
         return
       }
 
-      toast.success('Товар добавлен в корзину')
+      toast.success('Товар добавлен в корзину', {
+        duration: 1500,
+        cancel: {
+          label: 'OK',
+          onClick: console.log
+        }
+      })
     })
   }
 

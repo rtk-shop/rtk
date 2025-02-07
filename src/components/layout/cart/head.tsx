@@ -13,7 +13,10 @@ export function CartHead({ quantity, onCartClose }: { quantity: number; onCartCl
   const handleClearClick = () => {
     clearCart().then((result) => {
       if (result.error) {
-        toast.error('Не удалось очистить корзину')
+        toast.error('Не удалось очистить корзину', {
+          duration: 2000,
+          richColors: true
+        })
         return
       }
     })
@@ -33,7 +36,11 @@ export function CartHead({ quantity, onCartClose }: { quantity: number; onCartCl
         {clearMeta.fetching ? (
           <Loader color="dark" />
         ) : (
-          <button onClick={handleClearClick} className="text-[13px] font-medium text-red-500">
+          <button
+            type="button"
+            onClick={handleClearClick}
+            className="text-[13px] font-medium text-red-500"
+          >
             {t('verbs.clear')} ({quantity})
           </button>
         )}
