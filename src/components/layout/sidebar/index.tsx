@@ -1,23 +1,21 @@
 import { Drawer } from '@/components/ui/drawer'
 import { SidebarHead } from './head'
 import { Categories } from './categories'
-// import { LangSwitcher } from '@/components/lang-switcher'
+import { useAppState } from '@/stores/app/store'
 // import { useTranslations } from 'next-intl'
 
-interface SidebarProps {
-  isOpen: boolean
-  onClose(): void
-}
-
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar() {
   // const t = useTranslations('Common')
 
+  const isSidebarOpen = useAppState((state) => state.isSidebarOpen)
+  const closeSidebar = useAppState((state) => state.closeSidebar)
+
   return (
-    <Drawer open={isOpen} position="left" onClose={onClose}>
+    <Drawer open={isSidebarOpen} position="left" onClose={closeSidebar}>
       <div className="h-full w-80">
         <div className="flex h-full flex-col overflow-y-auto bg-black/60 backdrop-blur-lg">
           {/*  */}
-          <SidebarHead onClose={onClose} />
+          <SidebarHead onClose={closeSidebar} />
           {/*  */}
           <Categories />
           {/*  */}

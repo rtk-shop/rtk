@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { routeNames } from '@/lib/constants'
 import { Badge } from '@/components/ui/badge'
 import { IconButton } from '@/components/ui/icon-button'
@@ -6,14 +5,13 @@ import { useRouter } from 'next/navigation'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { Icon } from '@/components/ui/icon'
 import { useCartQuery } from '@/lib/api/hooks'
+import { useAppState } from '@/stores/app/store'
 
-interface NavigationProps {
-  onSidebarOpen(): void
-  onCartOpen(): void
-}
-
-export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }: NavigationProps) {
+export function Navigation() {
   const router = useRouter()
+
+  const openCart = useAppState((state) => state.openCart)
+  const openSidebar = useAppState((state) => state.openSidebar)
 
   const [result] = useCartQuery()
   const [favoriteAmount] = useFavoriteStore((state) => state.amount)
@@ -38,7 +36,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
         <nav className="px-3 pt-1">
           <ul className="flex w-full justify-between">
             <li>
-              <IconButton disableRipple onClick={onSidebarOpen} className="text-[24px] text-white">
+              <IconButton disableRipple onClick={openSidebar} className="text-[24px] text-white">
                 <Icon name="common/menu" />
               </IconButton>
             </li>
@@ -55,7 +53,7 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={onCartOpen} disableRipple className="text-[24px]">
+              <IconButton onClick={openCart} disableRipple className="text-[24px]">
                 <Badge content={cartAmount}>
                   <Icon name="common/cart" className="fill-white stroke-white" />
                 </Badge>
@@ -88,4 +86,4 @@ export const Navigation = memo(function Navigation({ onSidebarOpen, onCartOpen }
       </header>
     </div>
   )
-})
+}
