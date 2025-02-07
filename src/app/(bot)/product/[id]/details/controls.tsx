@@ -3,17 +3,41 @@
 import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
+import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
+import { toast } from 'sonner'
 
-export function Controls({ productID }: { productID: string }) {
-  const [{ inFavourites, add, remove }] = useFavoriteStore((state) => state)
+export function Controls({ productId }: { productId: string }) {
+  const [favoriteStore] = useFavoriteStore((state) => state)
+  const [_, addFavorite] = useAddProductToFavorite()
+  const [__, removeFavorite] = useRemoveProductFromFavorites()
 
-  const isLiked = inFavourites(productID)
+  const isFavourite = favoriteStore.inFavourites(productId)
 
   const handleLikeClick = () => {
-    if (isLiked) {
-      remove(productID)
+    if (isFavourite) {
+      favoriteStore.remove(productId)
+      removeFavorite({ productId }).then((result) => {
+        if (result.error) {
+          favoriteStore.add(productId)
+
+          toast.error('Не удалось убрать избранное', {
+            duration: 2000,
+            richColors: true
+          })
+        }
+      })
     } else {
-      add(productID)
+      favoriteStore.add(productId)
+      addFavorite({ productId }).then((result) => {
+        if (result.error) {
+          favoriteStore.remove(productId)
+
+          toast.error('Не удалось добавить в избранное', {
+            duration: 2000,
+            richColors: true
+          })
+        }
+      })
     }
   }
 
@@ -26,9 +50,9 @@ export function Controls({ productID }: { productID: string }) {
         </div>
       </div>
       <div className="flex basis-1/2 items-center justify-center">
-        <LikeButton width={21} height={21} liked={isLiked} onClick={handleLikeClick} />
+        <LikeButton width={21} height={21} liked={isFavourite} onClick={handleLikeClick} />
         <span className="ml-1.5 font-medium select-none" onClick={handleLikeClick}>
-          {isLiked ? 'Избранное' : 'В избранное'}
+          {isFavourite ? 'Избранное' : 'В избранное'}
         </span>
       </div>
     </div>

@@ -29,7 +29,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
   return (
     <section className="px-1.5">
       {/*  */}
-      <h1 className="mb-1.5 mt-4 text-xl font-medium leading-5">{title}</h1>
+      <h1 className="mt-4 mb-1.5 text-xl leading-5 font-medium">{title}</h1>
       {/*  */}
       <div className="mb-3 flex items-center">
         {withDiscount && (
@@ -39,7 +39,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
         <p className={priceTitle({ withDiscount })}>{formatPrice(currentPrice)} грн</p>
         {/*  */}
         {withDiscount && (
-          <span className="w-12 bg-green-light px-1 text-center text-[13px] font-medium text-white">
+          <span className="bg-green-light w-12 px-1 text-center text-[13px] font-medium text-white">
             -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%
           </span>
         )}
@@ -50,7 +50,7 @@ export function Details({ id, sku, title, currentPrice, tags, inStock, basePrice
       {/*  */}
       <AddToCartButton productID={id} inStock={inStock} />
       {/*  */}
-      <Controls productID={id} />
+      <Controls productId={id} />
     </section>
   )
 }

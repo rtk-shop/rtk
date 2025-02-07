@@ -11,6 +11,7 @@ import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
 import type { ProductTag } from '@/types'
+import { toast } from 'sonner'
 
 export interface ProductItemProps {
   id: string
@@ -54,19 +55,37 @@ function ProductItemInner({
 
   const isFavourite = inFavourites(id)
 
-  const [addResult, addFavorite] = useAddProductToFavorite()
-  const [removeResult, removeFavorite] = useRemoveProductFromFavorites()
+  const [_, addFavorite] = useAddProductToFavorite()
+  const [__, removeFavorite] = useRemoveProductFromFavorites()
 
   const handleActionClick = () => {
     if (isFavourite) {
       remove(id)
       removeFavorite({
         productId: id
+      }).then((result) => {
+        if (result.error) {
+          add(id)
+
+          toast.error('Не удалось убрать избранное', {
+            duration: 2000,
+            richColors: true
+          })
+        }
       })
     } else {
       add(id)
       addFavorite({
         productId: id
+      }).then((result) => {
+        if (result.error) {
+          remove(id)
+
+          toast.error('Не удалось добавить в избранное', {
+            duration: 2000,
+            richColors: true
+          })
+        }
       })
     }
   }
