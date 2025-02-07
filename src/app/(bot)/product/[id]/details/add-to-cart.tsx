@@ -25,7 +25,7 @@ export function AddToCartButton({ productID, inStock }: { productID: string; inS
         duration: 1500,
         cancel: {
           label: 'OK',
-          onClick: console.log
+          onClick: () => {}
         }
       })
     })
@@ -35,16 +35,12 @@ export function AddToCartButton({ productID, inStock }: { productID: string; inS
     <div className="mt-5 mb-2.5">
       <Button
         fullWidth
-        color="secondary"
         loading={result.fetching}
         onClick={handleClick}
-        className="group rounded-xl border-none bg-black py-3 leading-none font-medium text-white"
+        className="h-[53px]"
         disabled={!inStock}
         startIcon={
-          <Icon
-            name="common/cart"
-            className="mr-2.5 fill-white text-[30px] transition-all group-active:scale-125"
-          />
+          <Icon name="common/cart" className="mr-2.5 fill-white text-[30px] transition-all" />
         }
       >
         {inStock ? 'Добавить в корзину' : 'Нет в наличии'}

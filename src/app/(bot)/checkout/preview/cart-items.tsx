@@ -1,4 +1,4 @@
-import { CartItem, type CartItemType } from '@/components/cart-item'
+import { CartItem, type CartItemProps } from '@/components/cart-item'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
 import { routeNames } from '@/lib/constants'
 import { useRouter } from 'next/navigation'
@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 interface CartItemsProps {
   loading: boolean
-  cartProducts: CartItemType[]
+  cartProducts: CartItemProps[]
 }
 
 export function CartItems({ loading, cartProducts }: CartItemsProps) {

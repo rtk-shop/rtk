@@ -1,3 +1,4 @@
+import { gql } from 'urql'
 import { cacheExchange as Exchange } from '@urql/exchange-graphcache'
 import {
   rejectOrder,
@@ -28,6 +29,25 @@ export const cacheExchange = Exchange({
       return {
         __typename: 'RemoveCartItemPayload',
         productId: args.productId
+      }
+    },
+    reduceCartItemQuantity(args, cache, _info) {
+      const cacheEntity = cache.readFragment(
+        gql`
+          fragment _ on CartProduct {
+            id
+            quantity
+          }
+        `,
+        {
+          id: args.productId
+        }
+      ) as { id: string; quantity: number }
+
+      return {
+        __typename: 'CartItem',
+        productId: args.productId,
+        quantity: cacheEntity.quantity - 1
       }
     }
   },

@@ -13,7 +13,7 @@ import {
   useReduceCartItemQuantityMutation
 } from '@/lib/api/hooks'
 
-export type CartItemType = {
+export type CartItemProps = {
   quantity: number
   product: {
     id: string
@@ -23,12 +23,12 @@ export type CartItemType = {
   }
 }
 
-export function CartItem({ product, quantity }: CartItemType) {
+export function CartItem({ product, quantity }: CartItemProps) {
   const t = useTranslations('Common')
 
   const [addItemMeta, addCartItem] = useAddCartItemMutation()
-  const [reduceItemMeta, reduceCartItem] = useReduceCartItemQuantityMutation()
-  const [_, removeCartItem] = useRemoveCartItemMutation()
+  const [_, reduceCartItem] = useReduceCartItemQuantityMutation()
+  const [__, removeCartItem] = useRemoveCartItemMutation()
 
   const { id, title, preview, currentPrice } = product
 
@@ -95,7 +95,13 @@ export function CartItem({ product, quantity }: CartItemType) {
           {quantity}&nbsp;шт:&nbsp;&nbsp;{formatPrice(quantity * currentPrice)}&nbsp;₴
         </p>
         <div className="mt-6 flex justify-between">
-          <AmountController min={1} max={100} amount={quantity} onChange={handleAmountChange} />
+          <AmountController
+            min={1}
+            max={100}
+            amount={quantity}
+            onChange={handleAmountChange}
+            loading={addItemMeta.fetching}
+          />
           <IconButton
             disableRipple
             onClick={handleRemoveClick}
