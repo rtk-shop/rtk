@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useAppState } from '@/stores/app/store'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
@@ -25,6 +26,14 @@ export type CartItemProps = {
 
 export function CartItem({ product, quantity }: CartItemProps) {
   const t = useTranslations('Common')
+  const router = useRouter()
+
+  const closeCart = useAppState((state) => state.closeCart)
+
+  const handleRedirect = () => {
+    router.push(routeNames.product + id)
+    closeCart()
+  }
 
   const [addItemMeta, addCartItem] = useAddCartItemMutation()
   const [_, reduceCartItem] = useReduceCartItemQuantityMutation()
@@ -76,18 +85,17 @@ export function CartItem({ product, quantity }: CartItemProps) {
   return (
     <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 last:after:hidden">
       <div className="relative mr-2 w-full max-w-32">
-        <Link href={routeNames.product + id} className="rounded-lg">
+        <div onClick={handleRedirect} className="rounded-lg">
           <ImagePlaceholder src={preview} altText={title} width={216} height={270} />
-        </Link>
+        </div>
       </div>
       <div className="w-full max-w-md min-w-0 pt-3">
-        <Link
-          title={title}
-          href={routeNames.product + id}
+        <p
+          onClick={handleRedirect}
           className="clear-both mb-2 line-clamp-2 h-[33px] text-sm leading-4 font-semibold text-ellipsis whitespace-normal text-black no-underline"
         >
           {title}
-        </Link>
+        </p>
         <span className="text-sm font-medium text-gray-500">
           {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
         </span>
