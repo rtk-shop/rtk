@@ -4,7 +4,6 @@ mutation CreateOrder(
   $phone: String!
   $cityName: String!
   $postOfficeName: String!
-  $cartItems: [CartItemInput!]!
   $supplier: String!
 ) {
   createOrder(
@@ -14,7 +13,6 @@ mutation CreateOrder(
       phone: $phone
       cityName: $cityName
       postOfficeName: $postOfficeName
-      cartItems: $cartItems
       supplier: $supplier
     }
   ) {

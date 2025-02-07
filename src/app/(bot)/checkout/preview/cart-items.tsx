@@ -32,7 +32,7 @@ export function CartItems({ loading, cartProducts }: CartItemsProps) {
     <div>
       <div className="flex items-center justify-between px-2 pt-4 pb-4">
         <h2 className="font-medium">{t('Checkout.preview.yourOrder')}</h2>
-        <button color="secondary" className="text-[13px] text-gray-500" onClick={handleClearClick}>
+        <button type="button" className="text-[13px] text-gray-500" onClick={handleClearClick}>
           {t('Common.actions.deleteAll')}
         </button>
       </div>

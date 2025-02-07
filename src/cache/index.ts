@@ -6,7 +6,8 @@ import {
   addCartItem,
   reduceCartItemQuantity,
   removeCartItem,
-  clearCart
+  clearCart,
+  createOrder
 } from './mutations'
 
 export const cacheExchange = Exchange({
@@ -39,7 +40,8 @@ export const cacheExchange = Exchange({
       addCartItem,
       reduceCartItemQuantity,
       removeCartItem,
-      clearCart
+      clearCart,
+      createOrder
     }
   }
 })

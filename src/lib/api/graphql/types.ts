@@ -38,12 +38,6 @@ export type CartItemInput = {
   quantity: Scalars['Int']['input']
 }
 
-export type CartItemType = {
-  __typename?: 'CartItemType'
-  amount: Scalars['Int']['output']
-  id: Scalars['String']['output']
-}
-
 export type CartProduct = {
   __typename?: 'CartProduct'
   id: Scalars['ID']['output']
@@ -141,7 +135,6 @@ export type MutationSetUsdCourseArgs = {
 }
 
 export type NewOrderInput = {
-  cartItems: Array<CartItemInput>
   cityName: Scalars['String']['input']
   name: Scalars['String']['input']
   phone: Scalars['String']['input']
@@ -154,7 +147,7 @@ export type NewOrderPayload = {
   __typename?: 'NewOrderPayload'
   createdAt: Scalars['Date']['output']
   id: Scalars['Int']['output']
-  price: Scalars['Int']['output']
+  price: Scalars['Float']['output']
 }
 
 export type NotFound = {
@@ -164,13 +157,13 @@ export type NotFound = {
 
 export type Order = {
   __typename?: 'Order'
-  cartItems: Array<CartItemType>
+  cartProducts: Array<CartProduct>
   cityName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
   id: Scalars['ID']['output']
   parcelTrackId?: Maybe<Scalars['String']['output']>
   postOfficeName: Scalars['String']['output']
-  price: Scalars['Int']['output']
+  price: Scalars['Float']['output']
   receiverName: Scalars['String']['output']
   receiverPhone: Scalars['String']['output']
   receiverSurname: Scalars['String']['output']

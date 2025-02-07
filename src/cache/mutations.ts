@@ -217,3 +217,27 @@ export const clearCart = (
     }
   })
 }
+
+export const createOrder = (
+  _result: DataFields,
+  _args: Variables,
+  cache: Cache,
+  _info: ResolveInfo
+): void => {
+  const CartProducts = gql`
+    {
+      cartProducts {
+        id
+        quantity
+      }
+    }
+  `
+
+  // clear cart after order creation
+  cache.updateQuery({ query: CartProducts }, (data) => {
+    if (!data) return data
+    return {
+      cartProducts: []
+    }
+  })
+}

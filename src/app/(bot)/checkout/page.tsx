@@ -31,10 +31,7 @@ export default function Checkout() {
     // delete meta form data
     const { ['np-delivery-type']: removedKey, ...requestValues } = values
 
-    const res = await createOrder({
-      cartItems: [], // todo: remove from request body
-      ...requestValues
-    })
+    const res = await createOrder({ ...requestValues })
 
     if (res.error) {
       onErrorModal(true, { kind: 'submit' })
