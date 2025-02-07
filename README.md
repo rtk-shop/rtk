@@ -1,5 +1,7 @@
 This is a [Next.js 14](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+The `/font` directory contains custom font.
+
 ## Getting Started
 
 Run the development server:
@@ -22,4 +24,4 @@ Some generally accepted approaches and practices implemented in this project
 
 - [Localization](https://next-intl.dev)
 
-The `/font` directory contains custom font.
+- [Domain entities state cache based](https://commerce.nearform.com/open-source/urql/docs/graphcache/normalized-caching/)
