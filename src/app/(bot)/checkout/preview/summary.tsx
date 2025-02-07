@@ -2,6 +2,7 @@ import ContentLoader from 'react-content-loader'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
+import { useFormContext } from 'react-hook-form'
 
 interface SummaryProps {
   loading: boolean
@@ -10,10 +11,15 @@ interface SummaryProps {
 }
 
 export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) {
-  const t = useTranslations('Checkout.preview')
+  const t = useTranslations('Checkout')
+  const {
+    formState: { errors }
+  } = useFormContext()
+
+  const hasErr = !!Object.keys(errors).length
 
   return (
-    <div className="px-2.5 pb-2 pt-4">
+    <div className="px-2.5 pt-4 pb-2">
       <div className="mb-4">
         {loading ? (
           <ContentLoader
@@ -27,16 +33,29 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
             <rect x="71%" y="0" rx="6" ry="6" width="120" height="27" />
           </ContentLoader>
         ) : (
-          <p className="flex items-center justify-between text-lg font-medium leading-none">
-            <span>{t('total')}:</span>
+          <p className="flex items-center justify-between text-lg leading-none font-medium">
+            <span>{t('preview.total')}:</span>
             <span>{formatPrice(totalSum)} грн</span>
           </p>
         )}
       </div>
-      <Button fullWidth color="accept" type="submit" loading={submitLoading || loading}>
-        {t('submitOrder')}
+      <Button
+        fullWidth
+        color="accept"
+        disabled={hasErr}
+        type="submit"
+        loading={submitLoading || loading}
+      >
+        {t('preview.submitOrder')}
       </Button>
-      <p className="mt-2 px-5 text-center text-sm leading-none text-gray-400">{t('offerta')}</p>
+      {hasErr && (
+        <p className="text-md mt-2 px-5 text-center leading-none font-semibold text-red-600">
+          {t('fillForm')}
+        </p>
+      )}
+      <p className="mt-2 px-5 text-center text-sm leading-none text-gray-400">
+        {t('preview.offerta')}
+      </p>
     </div>
   )
 }

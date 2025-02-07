@@ -52,7 +52,7 @@ const button = cva(
       {
         color: 'accept',
         disabled: true,
-        className: 'text-stone-500'
+        className: 'text-stone-600!'
       }
     ]
   }

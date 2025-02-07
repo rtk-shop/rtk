@@ -20,7 +20,7 @@ const container = cva('relative rounded-lg px-2.5 py-5', {
   }
 })
 
-const inner = cva('flex select-none items-center justify-start rounded-lg', {
+const inner = cva('flex items-center justify-start rounded-lg select-none', {
   variants: {
     expand: {
       true: 'mb-5'
@@ -29,7 +29,7 @@ const inner = cva('flex select-none items-center justify-start rounded-lg', {
 })
 
 const stepBadge = cva(
-  'flex select-none content-center items-center justify-center rounded-full p-1 text-sm font-semibold leading-none text-white transition-colors',
+  'flex content-center items-center justify-center rounded-full p-1 text-sm leading-none font-semibold text-white transition-colors select-none',
   {
     variants: {
       expand: {
