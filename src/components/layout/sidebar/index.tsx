@@ -19,6 +19,11 @@ export function Sidebar() {
           {/*  */}
           <Categories />
           {/*  */}
+          {process.env.NODE_ENV === 'development' && (
+            <a className="mt-2 text-center font-medium text-white underline" href="/sandbox">
+              SANDBOX
+            </a>
+          )}
           <div className="flex grow flex-col justify-end"></div>
           <ul className="p-5 text-sm text-white *:flex *:justify-between">
             <li>
