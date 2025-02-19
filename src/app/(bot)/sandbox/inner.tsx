@@ -47,10 +47,14 @@ export default function PageInner() {
           <Button onClick={handlePopUp}>Show native popup</Button>
         </li>
         <li>
-          <Button onClick={handleAlert}>Show native alter</Button>
+          <Button hapticFeedback="heavy" onClick={handleAlert}>
+            Show native alter
+          </Button>
         </li>
         <li>
-          <Button onClick={handleConfirmClick}>Show native confirm</Button>
+          <Button hapticFeedback="soft" onClick={handleConfirmClick}>
+            Show native confirm
+          </Button>
         </li>
         <li>
           <Button onClick={handleQRScanClick}>Show native QR scan</Button>

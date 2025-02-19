@@ -1,4 +1,4 @@
-import { type ReactNode, type MouseEvent, type RefObject, forwardRef } from 'react'
+import { type ReactNode, type RefObject, forwardRef } from 'react'
 import { cva } from 'cva'
 import { Loader } from './loader'
 
@@ -9,7 +9,7 @@ const enum ButtonColor {
   danger = 'danger'
 }
 
-interface ButtonProps {
+export interface ButtonProps {
   to?: string
   type?: 'button' | 'reset' | 'submit'
   color?: keyof typeof ButtonColor
@@ -21,7 +21,8 @@ interface ButtonProps {
   fullWidth?: boolean
   tabIndex?: number
   ref?: RefObject<HTMLButtonElement> | null
-  onClick?(event: MouseEvent<HTMLButtonElement>): void
+  onClick?(): void
+  hapticFeedback?: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft'
   className?: string
 }
 
@@ -66,17 +67,30 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     startIcon,
     endIcon,
     type = 'button',
+    hapticFeedback,
     fullWidth,
     className,
     disabled,
+    onClick,
     ...otherProps
   },
   ref
 ) {
+  const clickHandler = () => {
+    if (hapticFeedback) {
+      if (typeof window !== 'undefined' && window.Telegram) {
+        window.Telegram.WebApp.HapticFeedback.impactOccurred(hapticFeedback)
+      }
+    }
+
+    onClick && onClick()
+  }
+
   return (
     <button
       ref={ref}
       type={type}
+      onClick={clickHandler}
       className={button({ color, disabled, fullWidth, class: className })}
       disabled={loading || disabled}
       {...otherProps}
