@@ -30,7 +30,7 @@ export function AmountController({
   return (
     <div className="flex items-center rounded-lg bg-gray-100">
       <IconButton
-        disableRipple
+        hapticFeedback="soft"
         onClick={handleSubClick}
         disabled={loading || amount <= 1}
         aria-label="удалить одну единицу данного продукта"
@@ -51,7 +51,7 @@ export function AmountController({
         )}
       </div>
       <IconButton
-        disableRipple
+        hapticFeedback="soft"
         onClick={handleAddClick}
         disabled={loading || (!!max && amount >= max)}
         aria-label="добавить одну единицу данного продукта"

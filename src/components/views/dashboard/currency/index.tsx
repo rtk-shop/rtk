@@ -53,7 +53,7 @@ export function Currency() {
       <p className={styles.changedAt}>
         Изменено: <span>{data && formatDate(data.globalData.updatedAt)}</span>
       </p>
-      <IconButton disableRipple onClick={() => setEditMode(true)} className={styles.editButton}>
+      <IconButton onClick={() => setEditMode(true)} className={styles.editButton}>
         <Icon name="action/edit" />
       </IconButton>
     </div>

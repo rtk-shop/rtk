@@ -25,11 +25,7 @@ export function CartHead({ quantity, onCartClose }: { quantity: number; onCartCl
   return (
     <div className="sticky top-0 z-50 bg-gray-50 py-4 pr-3 pl-2.5">
       <div className="flex items-center justify-between">
-        <IconButton
-          disableRipple
-          onClick={onCartClose}
-          className="-rotate-90 fill-gray-700 p-0! text-[33px]"
-        >
+        <IconButton onClick={onCartClose} className="-rotate-90 fill-gray-700 p-0! text-[33px]">
           <Icon name="common/arrow" />
         </IconButton>
         <p className="ml-8 text-xl font-medium text-black">{t('cart.topControls.title')}</p>

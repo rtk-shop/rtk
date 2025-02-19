@@ -111,7 +111,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
             loading={addItemMeta.fetching}
           />
           <IconButton
-            disableRipple
+            hapticFeedback="light"
             onClick={handleRemoveClick}
             className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
           >

@@ -7,11 +7,7 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
       <div className="w-14 text-[47px] text-white">
         <Icon name="common/logo" />
       </div>
-      <IconButton
-        disableRipple
-        onClick={onClose}
-        className="text-sm text-white hover:text-gray-300"
-      >
+      <IconButton onClick={onClose} className="text-sm text-white hover:text-gray-300">
         <Icon name="common/xmark" />
       </IconButton>
     </div>

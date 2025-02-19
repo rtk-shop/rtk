@@ -39,10 +39,10 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
       {/*  */}
       <header className="flex-wrap bg-black shadow-md lg:bg-white">
         <div className="m-auto flex max-w-[1700px] items-center px-0 py-2.5 lg:px-4 xl:py-3">
-          <IconButton disableRipple onClick={onDrawerOpen}>
+          <IconButton onClick={onDrawerOpen}>
             <Icon name="common/menu" className="text-[27px] text-slate-100 lg:text-black" />
           </IconButton>
-          <Link href={routeNames.root} className="ml-10 mr-8 hidden w-36 lg:block">
+          <Link href={routeNames.root} className="mr-8 ml-10 hidden w-36 lg:block">
             {/* temp */}
             <Image
               width={75}
@@ -57,7 +57,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               <li>
                 <Link
                   href={routeNames.root}
-                  className="header-nav-link relative text-sm font-semibold uppercase text-black no-underline"
+                  className="header-nav-link relative text-sm font-semibold text-black uppercase no-underline"
                 >
                   {t('header.catalog')}
                 </Link>
@@ -67,7 +67,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
           {/*  */}
           <Search />
           {/*  */}
-          <IconButton className="hidden p-3 md:block" onClick={handleFavoritesClick} disableRipple>
+          <IconButton className="hidden p-3 md:block" onClick={handleFavoritesClick}>
             <Badge content={favoriteAmount}>
               <Icon
                 name="common/heart"
@@ -75,7 +75,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               />
             </Badge>
           </IconButton>
-          <IconButton className="hidden p-3 md:block" onClick={handleProfileClick} disableRipple>
+          <IconButton className="hidden p-3 md:block" onClick={handleProfileClick}>
             <Badge content={0} max={5}>
               <Icon
                 name="common/user"
@@ -83,7 +83,7 @@ export const Header = memo(function Header({ currency, onDrawerOpen, onCartOpen 
               />
             </Badge>
           </IconButton>
-          <IconButton onClick={handleCartClick} disableRipple>
+          <IconButton onClick={handleCartClick}>
             <Badge content={cartAmount}>
               <Icon
                 name="common/cart"

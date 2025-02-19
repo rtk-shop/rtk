@@ -3,11 +3,10 @@ import { IconButton } from '@/components/ui/icon-button'
 
 import styles from './styles.module.css'
 
-interface LikeButtonProps {
+export interface LikeButtonProps {
   liked: boolean
   width?: number
   height?: number
-  disableRipple?: boolean
   className?: string
   onClick: (e: MouseEvent) => void
 }

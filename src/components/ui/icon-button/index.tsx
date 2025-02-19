@@ -4,25 +4,27 @@ import { Loader } from '../loader'
 
 import styles from './styles.module.css'
 
-interface IconButtonProps {
+export interface IconButtonProps {
   to?: string
   type?: 'button' | 'reset' | 'submit'
   children: ReactNode
   loading?: boolean
   disabled?: boolean // TODO: disabled styles
-  disableRipple?: boolean
+  withRipple?: boolean
   className?: string
+  hapticFeedback?: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft'
   onClick?(event: MouseEvent<HTMLButtonElement>): void
 }
 
 const button = cva(
-  'relative m-0 inline-flex flex-initial cursor-pointer select-none items-center justify-center overflow-visible rounded-full border-none bg-transparent p-3 text-center align-middle text-2xl text-inherit no-underline outline-0'
+  'relative m-0 inline-flex flex-initial cursor-pointer items-center justify-center overflow-visible rounded-full border-none bg-transparent p-3 text-center align-middle text-2xl text-inherit no-underline outline-0 select-none'
 )
 
 export function IconButton({
   loading,
   children,
-  disableRipple = false,
+  withRipple = false,
+  hapticFeedback,
   type = 'button',
   onClick,
   className,
@@ -31,7 +33,7 @@ export function IconButton({
   const rippleEl = useRef<HTMLSpanElement | null>(null)
 
   const handleRippleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    if (!disableRipple) {
+    if (withRipple) {
       const button = event.currentTarget
       const circle = document.createElement('span')
       const diameter = Math.max(button.clientWidth, button.clientHeight)
@@ -50,6 +52,12 @@ export function IconButton({
       button.appendChild(circle)
     }
 
+    if (hapticFeedback) {
+      if (typeof window !== 'undefined' && window.Telegram) {
+        window.Telegram.WebApp.HapticFeedback.impactOccurred(hapticFeedback)
+      }
+    }
+
     if (onClick) {
       onClick(event)
     }
@@ -63,7 +71,7 @@ export function IconButton({
       {...otherProps}
     >
       {loading ? (
-        <div className="flex size-1e justify-center border-r-black">
+        <div className="size-1e flex justify-center border-r-black">
           <Loader adaptive color="dark" />
         </div>
       ) : (

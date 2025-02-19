@@ -36,13 +36,13 @@ export function Navigation() {
         <nav className="px-3 pt-1">
           <ul className="flex w-full justify-between">
             <li>
-              <IconButton disableRipple onClick={openSidebar} className="text-[24px] text-white">
+              <IconButton onClick={openSidebar} className="text-[24px] text-white">
                 <Icon name="common/menu" />
               </IconButton>
             </li>
             {/*  */}
             <li>
-              <IconButton className="" onClick={handleFavoritesClick} disableRipple>
+              <IconButton className="" onClick={handleFavoritesClick}>
                 <Badge content={favoriteAmount}>
                   <Icon
                     name="common/heart"
@@ -53,7 +53,7 @@ export function Navigation() {
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={openCart} disableRipple className="text-[24px]">
+              <IconButton onClick={openCart} className="text-[24px]">
                 <Badge content={cartAmount}>
                   <Icon name="common/cart" className="fill-white stroke-white" />
                 </Badge>
@@ -61,21 +61,13 @@ export function Navigation() {
             </li>
             {/*  */}
             <li>
-              <IconButton
-                onClick={handleCatalogClick}
-                disableRipple
-                className="text-[24px] text-white"
-              >
+              <IconButton onClick={handleCatalogClick} className="text-[24px] text-white">
                 <Icon name="common/grid" />
               </IconButton>
             </li>
             {/*  */}
             <li>
-              <IconButton
-                className="text-[24px] text-white"
-                onClick={handleProfileClick}
-                disableRipple
-              >
+              <IconButton className="text-[24px] text-white" onClick={handleProfileClick}>
                 <Badge content={0} max={5}>
                   <Icon name="common/user" />
                 </Badge>
