@@ -49,6 +49,12 @@ export const cacheExchange = Exchange({
         productId: args.productId,
         quantity: cacheEntity.quantity - 1
       }
+    },
+    clearCart(_args, _cache, _info) {
+      return {
+        __typename: 'ClearCartPayload',
+        cartId: -1 // info: because backed desno provide cartID for client
+      }
     }
   },
   updates: {

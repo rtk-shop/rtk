@@ -1,14 +1,13 @@
 import { IconButton } from '@/components/ui/icon-button'
-import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/ui/icon'
-import { useClearCartMutation } from '@/lib/api/hooks'
 import { toast } from 'sonner'
-import { Loader } from '@/components/ui/loader'
+import { useTranslations } from 'next-intl'
+import { useClearCartMutation } from '@/lib/api/hooks'
 
 export function CartHead({ quantity, onCartClose }: { quantity: number; onCartClose(): void }) {
   const t = useTranslations('Common')
 
-  const [clearMeta, clearCart] = useClearCartMutation()
+  const [_, clearCart] = useClearCartMutation()
 
   const handleClearClick = () => {
     clearCart().then((result) => {
@@ -29,17 +28,13 @@ export function CartHead({ quantity, onCartClose }: { quantity: number; onCartCl
           <Icon name="common/arrow" />
         </IconButton>
         <p className="ml-8 text-xl font-medium text-black">{t('cart.topControls.title')}</p>
-        {clearMeta.fetching ? (
-          <Loader color="dark" />
-        ) : (
-          <button
-            type="button"
-            onClick={handleClearClick}
-            className="text-[13px] font-medium text-red-500"
-          >
-            {t('verbs.clear')} ({quantity})
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={handleClearClick}
+          className="text-[13px] font-medium text-red-500"
+        >
+          {t('verbs.clear')} ({quantity})
+        </button>
       </div>
     </div>
   )

@@ -6,17 +6,17 @@ import { useTranslations } from 'next-intl'
 import { useClearCartMutation } from '@/lib/api/hooks'
 import { toast } from 'sonner'
 
-interface CartItemsProps {
+export function CartItems({
+  loading,
+  cartProducts
+}: {
   loading: boolean
   cartProducts: CartItemProps[]
-}
-
-export function CartItems({ loading, cartProducts }: CartItemsProps) {
+}) {
   const router = useRouter()
-
   const t = useTranslations()
 
-  const [clearMeta, clearCart] = useClearCartMutation()
+  const [_, clearCart] = useClearCartMutation()
 
   const handleClearClick = () => {
     clearCart().then((result) => {
