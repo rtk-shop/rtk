@@ -1,4 +1,4 @@
-import { type ReactNode, type RefObject, forwardRef } from 'react'
+import React from 'react'
 import { cva } from 'cva'
 import { Loader } from './loader'
 
@@ -13,14 +13,14 @@ export interface ButtonProps {
   to?: string
   type?: 'button' | 'reset' | 'submit'
   color?: keyof typeof ButtonColor
-  children: ReactNode
-  startIcon?: ReactNode
-  endIcon?: ReactNode
+  children: React.ReactNode
+  startIcon?: React.ReactNode
+  endIcon?: React.ReactNode
   loading?: boolean
   disabled?: boolean
   fullWidth?: boolean
   tabIndex?: number
-  ref?: RefObject<HTMLButtonElement> | null
+  ref?: React.RefObject<HTMLButtonElement> | null
   onClick?(): void
   hapticFeedback?: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft'
   className?: string
@@ -59,7 +59,10 @@ const button = cva(
   }
 )
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+export const Button = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps
+>(function Button(
   {
     loading,
     children,
