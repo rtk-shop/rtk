@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { cva } from 'cva'
+import { FormatPrice } from '../ui/format-price'
 import { HeightExpander } from '../ui/height-expander'
-import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '../ui/button'
 import { orderStatus } from '@/lib/constants'
 import { Supplier } from './supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
+import { formatDate, formatPhoneNumber, getOrderStatusColor } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
 import type { OrderType } from '@/types/order'
 
@@ -76,7 +77,9 @@ export function OrderItem({
         >
           {t(`statuses.${status.toLowerCase()}`)}
         </div>
-        <div className="col-span-3 text-center font-medium">{formatPrice(price)} ₴</div>
+        <div className="col-span-3 text-center">
+          <FormatPrice price={price} />
+        </div>
         <div className="col-span-1 flex items-center justify-center">
           <ExpandIcon expanded={isOrderExpanded} />
         </div>
@@ -135,7 +138,9 @@ export function OrderItem({
                     {product.title}
                   </p>
                   <p className="text-sm font-medium">
-                    <span className="mr-3">Цена: {formatPrice(priceAtOrder)} ₴</span>
+                    <span className="mr-3">
+                      Цена: <FormatPrice price={priceAtOrder} />
+                    </span>
                     <span> {quantity}шт.</span>
                   </p>
                 </div>

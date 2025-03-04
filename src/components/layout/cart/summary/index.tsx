@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from './skeleton'
-import { formatPrice } from '@/lib/helpers'
+import { FormatPrice } from '@/components/ui/format-price'
 import { useTranslations } from 'next-intl'
 
 interface SummaryProps {
@@ -23,7 +23,7 @@ export function Summary({ loading, totalSum = 0, onCheckout }: SummaryProps) {
       <p className="mb-2 flex justify-between text-lg font-semibold">
         <span>{t('cart.total')}:</span>
         <span>
-          {formatPrice(totalSum)} <span className="font-normal">₴</span>
+          <FormatPrice price={totalSum} />
         </span>
       </p>
       <Button color="accept" fullWidth onClick={handleButtonClick}>

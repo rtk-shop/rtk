@@ -6,8 +6,9 @@ import { Icon } from '../ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { IconButton } from '@/components/ui/icon-button'
 import { routeNames } from '@/lib/constants'
+import { FormatPrice } from '@/components/ui/format-price'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
-import { formatPrice, getProductMainTagColor } from '@/lib/helpers'
+import { getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
 import type { ProductTag } from '@/types'
@@ -24,7 +25,7 @@ export interface ProductItemProps {
   withDelete?: boolean
 }
 
-const priceBlock = cva('basis-4/5 text-[18px] leading-5 font-semibold text-black', {
+const priceBlock = cva('basis-4/5 text-[18px] leading-5 text-black', {
   variants: {
     discount: {
       true: 'text-red-600'
@@ -122,12 +123,12 @@ function ProductItemInner({
             })}
           >
             {basePrice !== currentPrice && (
-              <p className="text-[13px] font-medium text-gray-400 line-through">
-                {formatPrice(basePrice)} <span>₴</span>
+              <p className="text-[13px] text-gray-400 line-through">
+                <FormatPrice price={basePrice} />
               </p>
             )}
             <span>
-              {formatPrice(currentPrice)} <span className="font-normal">₴</span>
+              <FormatPrice price={currentPrice} />
             </span>
           </div>
           <div>

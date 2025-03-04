@@ -3,9 +3,9 @@ import { useAppState } from '@/stores/app/store'
 import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
-import { formatPrice } from '@/lib/helpers'
 import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
+import { FormatPrice } from '@/components/ui/format-price'
 import { Icon } from '../ui/icon'
 import { toast } from 'sonner'
 import {
@@ -97,10 +97,11 @@ export function CartItem({ product, quantity }: CartItemProps) {
           {title}
         </p>
         <span className="text-sm font-medium text-gray-500">
-          {t('nouns.price')}:&nbsp;&nbsp;{formatPrice(currentPrice)}&nbsp;₴
+          {t('nouns.price')}: <FormatPrice price={currentPrice} />
         </span>
         <p className="text-[15px] leading-none font-semibold">
-          {quantity}&nbsp;шт:&nbsp;&nbsp;{formatPrice(quantity * currentPrice)}&nbsp;₴
+          {quantity}&nbsp;шт:&nbsp;&nbsp;
+          <FormatPrice price={quantity * currentPrice} />
         </p>
         <div className="mt-6 flex justify-between">
           <AmountController
