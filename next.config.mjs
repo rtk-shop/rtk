@@ -36,7 +36,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com'
+        hostname: 's3.rtkstore.org'
       }
     ]
   }
