@@ -11,12 +11,12 @@ export const routeNames = {
   favourites: '/favourites'
 } as const
 
-export const orderStatus: { [p in Lowercase<keyof typeof OrderStatus>]: p } = {
-  created: 'created',
-  processed: 'processed',
-  accepted: 'accepted',
-  returned: 'returned',
-  rejected: 'rejected',
-  sent: 'sent',
-  done: 'done'
+export const orderStatus: { [p in Lowercase<keyof typeof OrderStatus>]: Uppercase<p> } = {
+  created: 'CREATED',
+  processed: 'PROCESSED',
+  accepted: 'ACCEPTED',
+  sent: 'SENT',
+  done: 'DONE',
+  rejected: 'REJECTED',
+  returned: 'RETURNED'
 }

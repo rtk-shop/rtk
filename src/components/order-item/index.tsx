@@ -1,4 +1,5 @@
-import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { cva } from 'cva'
 import { HeightExpander } from '../ui/height-expander'
 import { formatDate, formatPhoneNumber, formatPrice, getOrderStatusColor } from '@/lib/helpers'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
@@ -6,14 +7,15 @@ import { Button } from '../ui/button'
 import { orderStatus } from '@/lib/constants'
 import { Supplier } from './supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
+import { useTranslations } from 'next-intl'
 import type { OrderType } from '@/types/order'
 
 export interface OrderItemProps {
   order: OrderType
-  index: number
-  expandId: string
+  currentIndex: number
+  expandIndex: number
   isExpanded: boolean
-  onExpand(orderId: string, index: number): void
+  onExpand(index: number): void
   onReject(orderId: string): void
 }
 
@@ -23,11 +25,19 @@ const validStatusesForReject: string[] = [
   orderStatus.processed
 ]
 
+const productList = cva('pt-2', {
+  variants: {
+    disabled: {
+      true: 'opacity-40'
+    }
+  }
+})
+
 export function OrderItem({
   order,
-  expandId,
+  expandIndex,
   isExpanded,
-  index,
+  currentIndex,
   onExpand,
   onReject
 }: OrderItemProps) {
@@ -48,7 +58,7 @@ export function OrderItem({
     createdAt
   } = order
 
-  const isOrderExpanded = expandId === id && isExpanded
+  const isOrderExpanded = expandIndex === currentIndex && isExpanded
 
   const handleRejectClick = () => {
     onReject(id)
@@ -56,12 +66,7 @@ export function OrderItem({
 
   return (
     <div className="rounded-xl bg-slate-100">
-      <div
-        onClick={() => {
-          onExpand(id, index)
-        }}
-        className="grid grid-cols-8 py-2.5 pl-2"
-      >
+      <div onClick={() => onExpand(currentIndex)} className="grid grid-cols-8 py-2.5 pl-2">
         <div className="col-span-2 text-start">ID {id}</div>
         <div
           className="col-span-2 font-medium"
@@ -69,7 +74,7 @@ export function OrderItem({
             color: getOrderStatusColor(status)
           }}
         >
-          {t(`statuses.${status}`)}
+          {t(`statuses.${status.toLowerCase()}`)}
         </div>
         <div className="col-span-3 text-center font-medium">{formatPrice(price)} ₴</div>
         <div className="col-span-1 flex items-center justify-center">
@@ -110,11 +115,33 @@ export function OrderItem({
           {/* Controls */}
           {validStatusesForReject.includes(status) && (
             <div className="mb-2">
-              <Button onClick={handleRejectClick} className="pb-3 pt-3" fullWidth>
+              <Button onClick={handleRejectClick} className="pt-3 pb-3" fullWidth>
                 Отменить заказ
               </Button>
             </div>
           )}
+          {/* Products */}
+          <ul className={productList({ disabled: status === orderStatus.rejected })}>
+            {order.products.map(({ id, quantity, priceAtOrder, product }) => (
+              <li key={id} className="mb-2.5 flex items-center">
+                <Image
+                  src={product.preview}
+                  width={50}
+                  height={55}
+                  alt={'изображение товара ' + product.title}
+                />
+                <div className="ml-2 min-w-0 flex-[1_1_100%] self-start pt-1">
+                  <p className="overflow-hidden font-medium text-ellipsis whitespace-nowrap">
+                    {product.title}
+                  </p>
+                  <p className="text-sm font-medium">
+                    <span className="mr-3">Цена: {formatPrice(priceAtOrder)} ₴</span>
+                    <span> {quantity}шт.</span>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
           {/* Meta */}
           <div className="text-sm text-gray-600">
             <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>

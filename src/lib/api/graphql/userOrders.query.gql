@@ -12,5 +12,15 @@ query UserOrders($userId: ID) {
     parcelTrackId
     updatedAt
     createdAt
+    products {
+      id
+      quantity
+      priceAtOrder
+      product {
+        id
+        title
+        preview
+      }
+    }
   }
 }

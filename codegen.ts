@@ -11,6 +11,9 @@ const config: CodegenConfig = {
       config: {
         constEnums: true,
         omitDescriptions: true,
+        // namingConvention: {
+        //   enumValues: 'change-case-all#upperCase'
+        // },
         scalars: {
           HTML: {
             input: 'string',

@@ -82,14 +82,14 @@ export type Mutation = {
   addFavouriteProduct: AddFavouritePayload
   clearCart: ClearCartPayload
   createOrder: NewOrderPayload
+  createProduct: NewProductPayload
   hideProduct?: Maybe<HideProductPayload>
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
   /**
-   * rejectOrder - отменяет ордера учитывая контекст авторизации
-   *
-   * CUSTOMER - только собственные ордера
-   * MANAGER, ADMIN - могут отменить ордера любого пользователя
+   * rejectOrder - cancels orders with authorization.
+   *  - CUSTOMER - cancels only own orders
+   *  - MANAGER, ADMIN - can cancel orders of any user
    */
   rejectOrder: RejectOrderPayload
   removeCartItem: RemoveCartItemPayload
@@ -107,6 +107,10 @@ export type MutationAddFavouriteProductArgs = {
 
 export type MutationCreateOrderArgs = {
   input: NewOrderInput
+}
+
+export type MutationCreateProductArgs = {
+  input: NewProductInput
 }
 
 export type MutationHideProductArgs = {
@@ -150,6 +154,32 @@ export type NewOrderPayload = {
   price: Scalars['Float']['output']
 }
 
+export type NewProductInput = {
+  /** amount - non zero and max=999 */
+  amount: Scalars['Int']['input']
+  basePrice: Scalars['Float']['input']
+  brandName: Scalars['String']['input']
+  category: CategoryType
+  currentPrice: Scalars['Float']['input']
+  defaultSizeID: Scalars['Int']['input']
+  description: Scalars['HTML']['input']
+  gender: Gender
+  images: Array<Scalars['Upload']['input']>
+  preview: Scalars['Upload']['input']
+  sizeName: Scalars['String']['input']
+  sku: Scalars['String']['input']
+  tag?: InputMaybe<ProductTag>
+  title: Scalars['String']['input']
+}
+
+export type NewProductPayload = {
+  __typename?: 'NewProductPayload'
+  basePrice: Scalars['Float']['output']
+  currentPrice: Scalars['Float']['output']
+  id: Scalars['ID']['output']
+  title: Scalars['String']['output']
+}
+
 export type NotFound = {
   __typename?: 'NotFound'
   message: Scalars['String']['output']
@@ -157,13 +187,14 @@ export type NotFound = {
 
 export type Order = {
   __typename?: 'Order'
-  cartProducts: Array<CartProduct>
   cityName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
   id: Scalars['ID']['output']
   parcelTrackId?: Maybe<Scalars['String']['output']>
   postOfficeName: Scalars['String']['output']
+  /** price - represent a SQL numeric(8, 2) type, which max value is 999999.99 */
   price: Scalars['Float']['output']
+  products: Array<OrderProduct>
   receiverName: Scalars['String']['output']
   receiverPhone: Scalars['String']['output']
   receiverSurname: Scalars['String']['output']
@@ -177,6 +208,14 @@ export type OrderFilter = {
 }
 
 export type OrderPayload = NotFound | Order
+
+export type OrderProduct = {
+  __typename?: 'OrderProduct'
+  id: Scalars['ID']['output']
+  priceAtOrder: Scalars['Float']['output']
+  product: Product
+  quantity: Scalars['Int']['output']
+}
 
 export const enum OrderStatus {
   Accepted = 'ACCEPTED',
@@ -203,17 +242,16 @@ export type Pagination = {
 }
 
 export type PriceRange = {
-  gt: Scalars['Int']['input']
-  lt: Scalars['Int']['input']
+  gt: Scalars['Float']['input']
+  lt: Scalars['Float']['input']
 }
 
 export type PriceRangeType = {
   __typename?: 'PriceRangeType'
-  gt: Scalars['Int']['output']
-  lt: Scalars['Int']['output']
+  gt: Scalars['Float']['output']
+  lt: Scalars['Float']['output']
 }
 
-/** Общее представление продукта */
 export type Product = {
   __typename?: 'Product'
   amount: Scalars['Int']['output']
@@ -289,10 +327,9 @@ export type Query = {
   productsByID: Array<Product>
   userFavouriteProducts: Array<Product>
   /**
-   * userOrders - получение ордеров учитывая контекст авторизации
-   *
-   * CUSTOMER - только собственные ордера
-   * MANAGER, ADMIN - могут получить ордера всех пользователей
+   * userOrders - getting orders of the user with authorization.
+   *   - CUSTOMER - only own orders
+   *   - MANAGER, ADMIN - can receive orders from all users
    */
   userOrders: Array<Order>
 }

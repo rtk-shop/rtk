@@ -22,6 +22,13 @@ export type UserOrdersQuery = {
     parcelTrackId?: string | null
     updatedAt: string
     createdAt: string
+    products: Array<{
+      __typename?: 'OrderProduct'
+      id: string
+      quantity: number
+      priceAtOrder: number
+      product: { __typename?: 'Product'; id: string; title: string; preview: string }
+    }>
   }>
 }
 
@@ -40,6 +47,16 @@ export const UserOrdersDocument = gql`
       parcelTrackId
       updatedAt
       createdAt
+      products {
+        id
+        quantity
+        priceAtOrder
+        product {
+          id
+          title
+          preview
+        }
+      }
     }
   }
 `

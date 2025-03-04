@@ -19,8 +19,8 @@ export function Orders() {
   const setCurrentOrderId = usePageState((state) => state.setCurrentOrderId)
 
   const [expandedOrder, setExpandedOrder] = useState({
-    id: '',
-    expanded: false
+    index: 0,
+    expanded: true
   })
 
   const [result] = useQuery<UserOrdersQuery, UserOrdersQueryVariables>({
@@ -29,7 +29,7 @@ export function Orders() {
 
   const { data, fetching, error } = result
 
-  const handleOrderExpand = (orderId: string, index: number) => {
+  const handleOrderExpand = (index: number) => {
     if (listRef.current) {
       listRef.current.scroll({
         top: index * 46 + (index > 0 ? 12 : 0),
@@ -38,13 +38,13 @@ export function Orders() {
       })
     }
 
-    if (expandedOrder.id === orderId) {
+    if (expandedOrder.index === index) {
       setExpandedOrder((prev) => ({ ...prev, expanded: !prev.expanded }))
       return
     }
 
     setExpandedOrder({
-      id: orderId,
+      index: index,
       expanded: true
     })
   }
@@ -90,9 +90,9 @@ export function Orders() {
         {data?.userOrders.map((order, index) => (
           <li key={index} className="mb-3">
             <OrderItem
-              index={index}
+              currentIndex={index}
               order={{ ...order }}
-              expandId={expandedOrder.id}
+              expandIndex={expandedOrder.index}
               isExpanded={expandedOrder.expanded}
               onExpand={handleOrderExpand}
               onReject={handleOrderReject}
