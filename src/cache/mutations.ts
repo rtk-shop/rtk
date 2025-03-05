@@ -240,4 +240,7 @@ export const createOrder = (
       cartProducts: []
     }
   })
+
+  // trigger user orders query
+  cache.invalidate('Query', 'userOrders')
 }

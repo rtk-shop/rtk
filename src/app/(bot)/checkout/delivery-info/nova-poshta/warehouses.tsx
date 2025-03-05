@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import AsyncSelect from 'react-select/async'
 import { usePageState } from '../../model/state'
-import { useWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
 import { providerNames, warehouseTypeLocale } from '../../model/constants'
-import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from 'react-virtualized'
+import AsyncSelect from 'react-select/async'
 import type { MenuListProps, GroupBase } from 'react-select'
 import type { ListRowProps } from 'react-virtualized'
 import type { Warehouse } from '../../model/types'
+import type { FormValues } from '../../model/validation-schema'
+import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from 'react-virtualized'
 
 type WarehousesOption = {
   label: string
@@ -71,11 +72,9 @@ export function Warehouses({ cityId, onSelect }: WarehousesProps) {
   const t = useTranslations()
   const onErrorModal = usePageState((state) => state.onErrorModal)
 
-  const values = useWatch({
-    name: ['np-delivery-type']
-  })
+  const { getValues, resetField } = useFormContext<FormValues>()
 
-  const warehouseType = values[0]
+  const warehouseType = getValues()['np-delivery-type']
 
   const [warehouses, setWarehouses] = useState<WarehousesOption[]>([])
   const [selectValue, setSelectValue] = useState<WarehousesOption | null>(null)
@@ -84,6 +83,11 @@ export function Warehouses({ cityId, onSelect }: WarehousesProps) {
     error: false,
     loading: true
   })
+
+  useEffect(() => {
+    setSelectValue(null)
+    resetField('postOfficeName')
+  }, [cityId, resetField])
 
   useEffect(() => {
     const params = new URLSearchParams({

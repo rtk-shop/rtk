@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import { RadioGroup, type RadioOption } from '@/components/ui/radio-group'
 import { ScrollMask } from '@/components/ui/scroll-mask'
 import { useTranslations } from 'next-intl'
@@ -27,7 +27,7 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
   const [cityId, setCityId] = useState('')
   const [selectValue, setSelectValue] = useState<CityOption | null>(null)
 
-  const { setValue } = useFormContext<FormValues>()
+  const { setValue, resetField } = useFormContext<FormValues>()
 
   const memCitiesOptions: CityOption[] = useMemo(
     () =>
@@ -41,6 +41,18 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
   useEffect(() => {
     setCityId(selectValue ? selectValue.value : '')
   }, [selectValue])
+
+  const deliveryTypeValue = useWatch({
+    name: 'np-delivery-type'
+  })
+
+  useEffect(() => {
+    if (deliveryTypeValue) {
+      resetField('cityName')
+      setSelectValue(null)
+      resetField('postOfficeName')
+    }
+  }, [deliveryTypeValue, resetField])
 
   const fetchOptions = (inputValue: string, callback: (options: CityOption[]) => void) => {
     return new Promise<CityOption[]>((resolve) => {
@@ -76,9 +88,14 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
     debouncedLoadOptions(inputValue, callback)
   }
 
-  const handleSelectChange = (cityId: string) => {
-    setCityId(cityId)
-    setValue('cityName', cityId)
+  const handleSelectChange = (city: CityOption | null) => {
+    if (city) {
+      setCityId(city.value)
+      setValue('cityName', city.label)
+    } else {
+      setCityId('')
+      setValue('cityName', '')
+    }
   }
 
   const handleWarehouseChange = (warehouseName: string) => {
@@ -129,10 +146,10 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
             setSelectValue(newValue)
             switch (action) {
               case 'select-option':
-                if (newValue) handleSelectChange(newValue.value)
+                if (newValue) handleSelectChange(newValue)
                 break
               case 'clear':
-                handleSelectChange('')
+                handleSelectChange(null)
                 break
             }
           }}

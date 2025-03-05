@@ -10,7 +10,7 @@ import { Supplier } from './supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { formatDate, formatPhoneNumber, getOrderStatusColor } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
-import { OrderStatus, type OrderType } from '@/types/order'
+import { type OrderType } from '@/types/order'
 
 export interface OrderItemProps {
   order: OrderType
@@ -70,8 +70,6 @@ export function OrderItem({
   const handleRejectClick = () => {
     onReject(id)
   }
-
-  console.log('order status', status)
 
   return (
     <div className="rounded-xl bg-slate-100">
