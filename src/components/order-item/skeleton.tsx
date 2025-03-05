@@ -15,10 +15,10 @@ export function OrderItemSkeleton({ expanded = false }: { expanded?: boolean }) 
         viewBox="0 0 580 490"
         uniqueKey={uniqueId}
       >
-        <rect x="2%" y="20" rx="4" ry="4" width="63" height="20" />
-        <rect x="26%" y="20" rx="4" ry="4" width="95" height="20" />
-        <rect x="58%" y="20" rx="4" ry="4" width="129" height="20" />
-        <circle cx="94%" cy="32" r="13" />
+        <rect x="2%" y="22" rx="4" ry="4" width="63" height="20" />
+        <rect x="26%" y="22" rx="4" ry="4" width="95" height="20" />
+        <rect x="58%" y="22" rx="4" ry="4" width="129" height="20" />
+        <circle cx="94%" cy="30" r="13" />
 
         <rect x="2%" y="86" rx="6" ry="6" width="201" height="28" />
         <rect x="2%" y="140" rx="6" ry="6" width="380" height="20" />
