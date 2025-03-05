@@ -39,10 +39,10 @@ export function Orders() {
       })
     }
 
-    if (expandedOrder.index === index) {
-      setExpandedOrder((prev) => ({ ...prev, expanded: !prev.expanded }))
-      return
-    }
+    // if (expandedOrder.index === index) {
+    //   setExpandedOrder((prev) => ({ ...prev, expanded: !prev.expanded }))
+    //   return
+    // }
 
     setExpandedOrder({
       index: index,
@@ -91,6 +91,7 @@ export function Orders() {
   return (
     <section>
       <ul ref={listRef} className="overflow-y-auto">
+        {/* <OrderItemSkeleton /> */}
         {data?.userOrders.map((order, index) => (
           <li key={index} className="mb-3">
             <OrderItem

@@ -74,7 +74,7 @@ export function OrderItem({
   return (
     <div className="rounded-xl bg-slate-100">
       <div onClick={() => onExpand(currentIndex)} className="grid grid-cols-8 py-2.5 pl-2">
-        <div className="col-span-2 text-start">ID {id}</div>
+        <div className="col-span-2 self-center text-start text-sm font-medium">№{id}</div>
         <div
           className="col-span-2 font-medium"
           style={{
