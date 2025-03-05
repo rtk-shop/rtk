@@ -6,6 +6,7 @@ import { useQuery } from 'urql'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order-item'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
+import { OrderItemSkeleton } from '@/components/order-item/skeleton'
 import {
   UserOrdersQuery,
   UserOrdersQueryVariables,
@@ -57,7 +58,10 @@ export function Orders() {
   if (fetching) {
     return (
       <div className="">
-        <OrderSkeletonList len={16} />
+        <div className="mb-2.5">
+          <OrderItemSkeleton expanded />
+        </div>
+        <OrderSkeletonList len={6} />
       </div>
     )
   }

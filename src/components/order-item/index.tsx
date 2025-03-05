@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { cva } from 'cva'
+import { useRouter } from 'next/navigation'
 import { FormatPrice } from '../ui/format-price'
 import { HeightExpander } from '../ui/height-expander'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '../ui/button'
-import { orderStatus } from '@/lib/constants'
+import { orderStatus, routeNames } from '@/lib/constants'
 import { Supplier } from './supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { formatDate, formatPhoneNumber, getOrderStatusColor } from '@/lib/helpers'
@@ -43,6 +44,7 @@ export function OrderItem({
   onReject
 }: OrderItemProps) {
   const t = useTranslations('Common.order')
+  const router = useRouter()
 
   const {
     id,
@@ -60,6 +62,10 @@ export function OrderItem({
   } = order
 
   const isOrderExpanded = expandIndex === currentIndex && isExpanded
+
+  const handleProductRedirect = (productId: string) => {
+    router.push(routeNames.product + productId)
+  }
 
   const handleRejectClick = () => {
     onReject(id)
@@ -115,26 +121,26 @@ export function OrderItem({
               {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
             </div>
           </div>
-          {/* Controls */}
-          {validStatusesForReject.includes(status) && (
-            <div className="mb-2">
-              <Button onClick={handleRejectClick} className="pt-3 pb-3" fullWidth>
-                Отменить заказ
-              </Button>
-            </div>
-          )}
           {/* Products */}
           <ul className={productList({ disabled: status === orderStatus.rejected })}>
             {order.products.map(({ id, quantity, priceAtOrder, product }) => (
               <li key={id} className="mb-2.5 flex items-center">
                 <Image
                   src={product.preview}
-                  width={50}
+                  width={44}
                   height={55}
+                  style={{
+                    width: 44,
+                    height: 55
+                  }}
                   alt={'изображение товара ' + product.title}
+                  onClick={() => handleProductRedirect(product.id)}
                 />
-                <div className="ml-2 min-w-0 flex-[1_1_100%] self-start pt-1">
-                  <p className="overflow-hidden font-medium text-ellipsis whitespace-nowrap">
+                <div className="ml-2 min-w-0 flex-[1_1_100%] self-start pt-0.5">
+                  <p
+                    onClick={() => handleProductRedirect(product.id)}
+                    className="overflow-hidden font-medium text-ellipsis whitespace-nowrap"
+                  >
                     {product.title}
                   </p>
                   <p className="text-sm font-medium">
@@ -147,9 +153,22 @@ export function OrderItem({
               </li>
             ))}
           </ul>
+          {/* Controls */}
+          {validStatusesForReject.includes(status) && (
+            <div className="mb-2">
+              <Button
+                onClick={handleRejectClick}
+                color="secondary"
+                fullWidth
+                className="bg-gray-200 pt-3 pb-3"
+              >
+                Отменить заказ
+              </Button>
+            </div>
+          )}
           {/* Meta */}
           <div className="text-sm text-gray-600">
-            <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}</p>
+            <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short' })}</p>
           </div>
         </div>
       </HeightExpander>
