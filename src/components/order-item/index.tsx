@@ -11,7 +11,6 @@ import { ExpandIcon } from '@/components/ui/expand-icon'
 import { formatDate, formatPhoneNumber, getOrderStatusColor } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
 import { OrderStatus, type OrderType } from '@/types/order'
-import { keyof } from 'valibot'
 
 export interface OrderItemProps {
   order: OrderType
