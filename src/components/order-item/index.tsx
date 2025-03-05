@@ -10,7 +10,8 @@ import { Supplier } from './supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { formatDate, formatPhoneNumber, getOrderStatusColor } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
-import type { OrderType } from '@/types/order'
+import { OrderStatus, type OrderType } from '@/types/order'
+import { keyof } from 'valibot'
 
 export interface OrderItemProps {
   order: OrderType
@@ -29,8 +30,8 @@ const validStatusesForReject: string[] = [
 
 const productList = cva('pt-2', {
   variants: {
-    disabled: {
-      true: 'opacity-40'
+    status: {
+      [orderStatus.rejected]: 'opacity-40'
     }
   }
 })
@@ -70,6 +71,8 @@ export function OrderItem({
   const handleRejectClick = () => {
     onReject(id)
   }
+
+  console.log('order status', status)
 
   return (
     <div className="rounded-xl bg-slate-100">
@@ -122,7 +125,7 @@ export function OrderItem({
             </div>
           </div>
           {/* Products */}
-          <ul className={productList({ disabled: status === orderStatus.rejected })}>
+          <ul className={productList({ status: status === 'REJECTED' ? status : null })}>
             {order.products.map(({ id, quantity, priceAtOrder, product }) => (
               <li key={id} className="mb-2.5 flex items-center">
                 <Image
