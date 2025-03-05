@@ -1,4 +1,5 @@
 import type { OrderStatus } from '@/types/order'
+import { orderStatus } from './constants'
 
 export const formatPrice = (num: number): string => {
   let dst: string
@@ -56,12 +57,10 @@ export const getProductMainTagColor = (name: string): string => {
 }
 
 export const getOrderStatusColor = (status: keyof typeof OrderStatus): string => {
-  const cond = status as Lowercase<keyof typeof OrderStatus>
-
-  switch (cond) {
-    case 'done':
+  switch (status) {
+    case orderStatus.done:
       return '#0d840d'
-    case 'returned':
+    case orderStatus.returned:
       return '#a2a2a2'
     default:
       return ''
