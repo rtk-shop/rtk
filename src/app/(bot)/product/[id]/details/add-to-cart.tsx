@@ -25,7 +25,7 @@ export function AddToCartButton({ productID, inStock }: { productID: string; inS
       }
 
       toast.success('Товар добавлен в корзину', {
-        duration: 1500,
+        duration: 2000,
         cancel: {
           label: 'В корзину',
           onClick: () => {

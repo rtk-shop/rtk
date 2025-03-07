@@ -16,11 +16,11 @@ import { type DeliveryValues, deliverySchema } from '../model/validation-schema'
 import type { PopularCity } from '../model/types'
 
 const deliveryService = cva(
-  'relative h-20 rounded-lg border border-gray-300 before:invisible before:absolute before:left-1.5 before:top-1.5 before:size-4 before:rounded-full before:bg-lime-500 after:invisible after:absolute after:left-[11px] after:top-2 after:h-2.5 after:w-1.5 after:rotate-45 after:border-b-2 after:border-r-2 after:border-b-white after:border-r-white'
+  'relative h-20 rounded-lg border border-gray-300 before:invisible before:absolute before:top-1.5 before:left-1.5 before:size-4 before:rounded-full before:bg-lime-500 after:invisible after:absolute after:top-2 after:left-[11px] after:h-2.5 after:w-1.5 after:rotate-45 after:border-r-2 after:border-b-2 after:border-r-white after:border-b-white'
 )
 
 const peerStyles = cva(
-  'peer-checked:border-green-light peer-checked:bg-green-light/20 peer-checked:before:visible peer-checked:after:visible peer-disabled:opacity-55'
+  'peer-checked:border-green-light peer-checked:bg-green-light/20 peer-disabled:opacity-55 peer-checked:before:visible peer-checked:after:visible'
 )
 
 export function DeliveryInfo() {
@@ -138,7 +138,7 @@ export function DeliveryInfo() {
               </label>
             </li>
           </ul>
-          <p className="mb-2 mt-1 text-end text-[13px] leading-none">
+          <p className="mt-1 mb-2 text-end text-[13px] leading-none">
             * {t('Checkout.delivery.unavailable')}
           </p>
           {/*  */}
