@@ -62,16 +62,23 @@
       "outStock": "Нет в наличии",
       "new": "Новинки",
       "withDiscount": "Скидка",
-      "top": "Топ"
+      "top": "Топ",
+      "polypropylene": "Полипропилен",
+      "textile": "Ткань",
+      "covers": "Чехлы",
+      "sling": "Слинг"
     },
     "verbs": {
       "clear": "Очистить",
       "continue": "Продолжить"
     },
     "actions": {
+      "showAll": "Смотреть все",
       "deleteAll": "Удалить все",
       "forFemale": "Для женщин",
-      "forMale": "Для мужчин"
+      "forMale": "Для мужчин",
+      "forDocs": "Для документов",
+      "forLaptop": "Для ноутбука"
     }
   },
   "Checkout": {

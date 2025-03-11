@@ -62,16 +62,23 @@
       "outStock": "Немає у наявності",
       "new": "Новинки",
       "withDiscount": "Зі знижкою",
-      "top": "Топ"
+      "top": "Топ",
+      "polypropylene": "Поліпропілен",
+      "textile": "Тканина",
+      "covers": "Чохли",
+      "sling": "Слінг"
     },
     "verbs": {
       "clear": "Очистити",
       "continue": "Продовжити"
     },
     "actions": {
+      "showAll": "Дивитись усі",
       "deleteAll": "Видалити все",
       "forFemale": "Для жінок",
-      "forMale": "Для чоловіків"
+      "forMale": "Для чоловіків",
+      "forDocs": "Для паперів",
+      "forLaptop": "Для ноутбуків"
     }
   },
   "Checkout": {
