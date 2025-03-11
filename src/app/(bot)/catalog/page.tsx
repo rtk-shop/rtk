@@ -59,14 +59,14 @@ export default function Catalog() {
     [searchParams]
   )
 
-  const clearCursorSearchParams = () => {
+  const clearCursorSearchParams = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString())
 
     params.delete('after')
     params.delete('before')
 
     router.push(`${pathname}?${params.toString()}`)
-  }
+  }, [router, pathname, searchParams])
 
   const after = searchParams.get('after')
   const before = searchParams.get('before')
@@ -105,45 +105,48 @@ export default function Catalog() {
 
   const { watch, handleSubmit, reset } = formMethods
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('-- API -- [sortBy]', data.sortBy)
+  const onSubmit: SubmitHandler<FormValues> = useCallback(
+    (data) => {
+      console.log('-- API -- [sortBy]', data.sortBy)
 
-    const { gender, availability, tag, priceRange, category } = data
+      const { gender, availability, tag, priceRange, category } = data
 
-    let price: PriceRangeType | undefined
+      let price: PriceRangeType | undefined
 
-    if (priceRange) {
-      const [gt, lt] = priceRange
-      price = { gt, lt }
-    }
+      if (priceRange) {
+        const [gt, lt] = priceRange
+        price = { gt, lt }
+      }
 
-    let instock: boolean | undefined
+      let instock: boolean | undefined
 
-    if (availability.length === 1) {
-      const map = { inStock: true, byOrder: false }
-      instock = map[availability[0]]
-    }
+      if (availability.length === 1) {
+        const map = { inStock: true, byOrder: false }
+        instock = map[availability[0]]
+      }
 
-    const categoryData = category as unknown as CategoryType
-    const tagData = tag as unknown as ProductTag
-    const genderData = gender as unknown as Gender
+      const categoryData = category as unknown as CategoryType
+      const tagData = tag as unknown as ProductTag
+      const genderData = gender as unknown as Gender
 
-    // new filter starts pagination from the beginning
-    clearCursorSearchParams()
+      // new filter starts pagination from the beginning
+      clearCursorSearchParams()
 
-    setFilterParams({
-      price,
-      instock,
-      category: categoryData,
-      tag: tagData,
-      gender: genderData
-    })
-  }
+      setFilterParams({
+        price,
+        instock,
+        category: categoryData,
+        tag: tagData,
+        gender: genderData
+      })
+    },
+    [clearCursorSearchParams]
+  )
 
   useEffect(() => {
     const subscription = watch(() => handleSubmit(onSubmit)())
     return () => subscription.unsubscribe()
-  }, [handleSubmit, watch])
+  }, [handleSubmit, watch, onSubmit])
 
   if (error) return <FetchError />
 

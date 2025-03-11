@@ -14,7 +14,6 @@ export const enum Category {
   BACKPACK,
   BAG,
   SUITCASE,
-  WALLET,
   OTHER
 }
 

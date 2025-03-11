@@ -1,4 +1,4 @@
-import { OrderStatus } from '@/types/order'
+import type { OrderStatus, Category } from '@/types'
 
 export const isDevMode = process.env.NODE_ENV === 'development'
 
@@ -19,4 +19,11 @@ export const orderStatus: { [p in Lowercase<keyof typeof OrderStatus>]: Uppercas
   done: 'DONE',
   rejected: 'REJECTED',
   returned: 'RETURNED'
+}
+
+export const category: { [p in Lowercase<keyof typeof Category>]: Uppercase<p> } = {
+  suitcase: 'SUITCASE',
+  bag: 'BAG',
+  backpack: 'BACKPACK',
+  other: 'OTHER'
 }
