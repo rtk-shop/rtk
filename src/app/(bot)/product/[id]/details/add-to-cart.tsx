@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
-import { useRouter } from 'next/navigation'
-import { routeNames } from '@/lib/constants'
+import { useAppState } from '@/stores/app/store'
 
 export function AddToCartButton({ productID, inStock }: { productID: string; inStock: boolean }) {
-  const router = useRouter()
+  const openCart = useAppState((state) => state.openCart)
   const [result, addCartItem] = useAddCartItemMutation()
 
   const handleClick = () => {
@@ -29,7 +28,7 @@ export function AddToCartButton({ productID, inStock }: { productID: string; inS
         cancel: {
           label: 'В корзину',
           onClick: () => {
-            router.push(routeNames.checkout)
+            openCart()
           }
         }
       })
