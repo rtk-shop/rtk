@@ -9,7 +9,10 @@
     "start": "next start",
     "lint": "next lint",
     "gen": "graphql-codegen",
-    "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\""
+    "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\"",
+    "bun": "bun --bun next dev",
+    "bun_build": "bun --bun next build",
+    "bun_start": "bun --bun next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
