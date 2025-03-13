@@ -1,5 +1,5 @@
 {
-  "name": "rbk-app",
+  "name": "rtk-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -55,7 +55,7 @@
     "@graphql-codegen/typescript-operations": "^4.5.1",
     "@graphql-codegen/typescript-urql": "^4.0.0",
     "@neodx/svg": "^0.7.1",
-    "@tailwindcss/postcss": "^4.0.12",
+    "@tailwindcss/postcss": "^4.0.13",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.10.2",
     "@types/react": "^18",
@@ -68,7 +68,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.0.12",
+    "tailwindcss": "^4.0.13",
     "telegram-webapps": "^8.0.4",
     "typescript": "^5"
   }

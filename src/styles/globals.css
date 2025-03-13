@@ -15,6 +15,8 @@
   --breakpoint-xl: 1200px;
   --breakpoint-desktop: 1400px;
 
+  --spacing-1e: 1em;
+
   /* ANIMATIONS */
   --animate-fade-in-2s: fade-in-plain 0.5s ease-in-out 2s forwards;
   @keyframes fade-in-plain {
@@ -75,8 +77,9 @@
 
 @layer utilities {
   body {
-    font-family: var(--font-proximanova), 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family:
+      var(--font-proximanova), 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+      'Droid Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.5;
     background-color: #fefefe;
     color: #171717;
@@ -87,10 +90,6 @@
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-
-  a {
-    text-decoration: none;
   }
 
   .hide {
