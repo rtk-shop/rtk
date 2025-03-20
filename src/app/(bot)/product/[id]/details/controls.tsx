@@ -1,5 +1,3 @@
-'use client'
-
 import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'

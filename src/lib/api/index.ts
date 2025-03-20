@@ -58,11 +58,11 @@ const makeClient = () => {
 
 const { getClient } = registerUrql(makeClient)
 
-export async function getProduct(id: string) {
+export async function getProduct(id: string, size?: string) {
   const result = await getClient().query<
     GetProduct.GetProductQuery,
     GetProduct.GetProductQueryVariables
-  >(GetProduct.GetProductDocument, { id })
+  >(GetProduct.GetProductDocument, { id, size })
 
   return result.data
 }

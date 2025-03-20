@@ -4,6 +4,7 @@ import { gql } from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type GetProductQueryVariables = Types.Exact<{
   id: Types.Scalars['ID']['input']
+  size?: Types.InputMaybe<Types.Scalars['String']['input']>
 }>
 
 export type GetProductQuery = {
@@ -31,20 +32,15 @@ export type GetProductQuery = {
         images: Array<string>
         isHidden: boolean
         defaultSizeID: number
+        availableSizes: Array<string>
         updatedAt: string
         createdAt: string
-        availableColors?: Array<{
-          __typename?: 'ProductColors'
-          id: string
-          title: string
-          color: string
-        }> | null
       }
 }
 
 export const GetProductDocument = gql`
-  query GetProduct($id: ID!) {
-    product(id: $id) {
+  query GetProduct($id: ID!, $size: String) {
+    product(id: $id, size: $size) {
       __typename
       ... on Product {
         id
@@ -66,13 +62,9 @@ export const GetProductDocument = gql`
         images
         isHidden
         defaultSizeID
+        availableSizes
         updatedAt
         createdAt
-        availableColors {
-          id
-          title
-          color
-        }
       }
       ... on NotFound {
         message

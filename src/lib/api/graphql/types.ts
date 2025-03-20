@@ -82,6 +82,7 @@ export type Mutation = {
   clearCart: ClearCartPayload
   createOrder: NewOrderPayload
   createProduct: NewProductPayload
+  createProductSizeVariation: NewSizeVariationPayload
   hideProduct?: Maybe<HideProductPayload>
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
@@ -110,6 +111,10 @@ export type MutationCreateOrderArgs = {
 
 export type MutationCreateProductArgs = {
   input: NewProductInput
+}
+
+export type MutationCreateProductSizeVariationArgs = {
+  input: NewSizeVariation
 }
 
 export type MutationHideProductArgs = {
@@ -159,11 +164,10 @@ export type NewProductInput = {
   basePrice: Scalars['Float']['input']
   brandName: Scalars['String']['input']
   category: CategoryType
-  currentPrice: Scalars['Float']['input']
   defaultSizeID: Scalars['Int']['input']
   description: Scalars['HTML']['input']
   gender: Gender
-  images: Array<Scalars['Upload']['input']>
+  images: Array<ProductImageInput>
   preview: Scalars['Upload']['input']
   sizeName: Scalars['String']['input']
   sku: Scalars['String']['input']
@@ -177,6 +181,21 @@ export type NewProductPayload = {
   currentPrice: Scalars['Float']['output']
   id: Scalars['ID']['output']
   title: Scalars['String']['output']
+}
+
+export type NewSizeVariation = {
+  amount: Scalars['Int']['input']
+  basePrice: Scalars['Float']['input']
+  productId: Scalars['ID']['input']
+  size: Scalars['String']['input']
+}
+
+export type NewSizeVariationPayload = {
+  __typename?: 'NewSizeVariationPayload'
+  amount: Scalars['Int']['output']
+  basePrice: Scalars['Float']['output']
+  productId: Scalars['ID']['output']
+  size: Scalars['String']['output']
 }
 
 export type NotFound = {
@@ -255,6 +274,7 @@ export type Product = {
   __typename?: 'Product'
   amount: Scalars['Int']['output']
   availableColors?: Maybe<Array<ProductColors>>
+  availableSizes: Array<Scalars['String']['output']>
   basePrice: Scalars['Float']['output']
   brandName: Scalars['String']['output']
   category: CategoryType
@@ -309,6 +329,12 @@ export type ProductFilter = {
   tag?: InputMaybe<ProductTag>
 }
 
+export type ProductImageInput = {
+  image: Scalars['Upload']['input']
+  /** order - starts from 1 not from zero-index */
+  order: Scalars['Int']['input']
+}
+
 export type ProductPayload = NotFound | Product
 
 export const enum ProductTag {
@@ -335,6 +361,7 @@ export type Query = {
 
 export type QueryProductArgs = {
   id: Scalars['ID']['input']
+  size?: InputMaybe<Scalars['String']['input']>
 }
 
 export type QueryProductsArgs = {
