@@ -8,11 +8,14 @@ import { Locale, defaultLocale } from '@/i18n/config'
 const COOKIE_NAME = 'USER_LOCALE'
 
 export async function getUserLocale() {
-  return cookies().get(COOKIE_NAME)?.value || defaultLocale
+  const cookieStore = await cookies()
+  return cookieStore.get(COOKIE_NAME)?.value || defaultLocale
 }
 
 export async function setUserLocale(locale: Locale) {
-  cookies().set(COOKIE_NAME, locale, {
+  const cookieStore = await cookies()
+
+  cookieStore.set(COOKIE_NAME, locale, {
     maxAge: 90 * 24 * 60 * 60 // 30 days
   })
 }

@@ -32,6 +32,9 @@ const nextConfig = {
 
     return config
   },
+  devIndicators: {
+    position: 'top-right'
+  },
   images: {
     remotePatterns: [
       {

@@ -15,7 +15,7 @@ export interface FavoriteStoreProviderProps {
 }
 
 export const FavoriteStoreProvider = ({ children, favoritesID }: FavoriteStoreProviderProps) => {
-  const storeRef = useRef<FavoriteStoreApi>()
+  const storeRef = useRef<FavoriteStoreApi>(null)
 
   if (!storeRef.current) {
     storeRef.current = createFavoriteStore(favoritesID)

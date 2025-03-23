@@ -34,9 +34,11 @@ export default async function middleware(req: NextRequest) {
   //   return path.startsWith(route)
   // })
 
+  const cookieStore = await cookies()
+
   // 2. Get the session from the cookies
-  const sessionToken = cookies().get(SESSION_COOKIE_NAME)?.value
-  const refreshCookie = cookies().get(REFRESH_COOKIE_NAME)
+  const sessionToken = cookieStore.get(SESSION_COOKIE_NAME)?.value
+  const refreshCookie = cookieStore.get(REFRESH_COOKIE_NAME)
 
   const session = parseSessionToken(sessionToken)
 

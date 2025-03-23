@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic'
-
-const SandboxInner =
-  process.env.NODE_ENV === 'development'
-    ? dynamic(() => import('./inner'), { ssr: false })
-    : () => null
+import { lazy } from 'react'
 
 export default function Sandbox() {
-  return <SandboxInner />
+  if (process.env.NODE_ENV === 'development') {
+    const SandboxInner = lazy(() => import('./inner'))
+    return <SandboxInner />
+  }
+
+  return <></>
 }
