@@ -2,7 +2,7 @@ import { Icon } from './icon'
 import { IconButton } from './icon-button'
 import { Loader } from './loader'
 
-interface AddSubInputProps {
+export interface AmountControllerProps {
   amount: number
   min: number
   max?: number
@@ -16,7 +16,7 @@ export function AmountController({
   amount,
   onChange,
   loading = false
-}: AddSubInputProps) {
+}: AmountControllerProps) {
   const handleAddClick = (): void => {
     if (amount >= Number(max)) return
     onChange('add', amount + 1)
@@ -34,7 +34,7 @@ export function AmountController({
         onClick={handleSubClick}
         disabled={loading || amount <= 1}
         aria-label="удалить одну единицу данного продукта"
-        className="p-2! text-[25px] text-gray-500! active:not-disabled:scale-110"
+        className="p-2! text-[25px] text-black active:not-disabled:scale-110"
       >
         <Icon name="action/circle-minus" />
       </IconButton>
@@ -55,7 +55,7 @@ export function AmountController({
         onClick={handleAddClick}
         disabled={loading || (!!max && amount >= max)}
         aria-label="добавить одну единицу данного продукта"
-        className="p-2! text-[25px] text-gray-500! active:not-disabled:scale-110"
+        className="p-2! text-[25px] !text-black active:not-disabled:scale-110"
       >
         <Icon name="action/circle-plus" />
       </IconButton>
