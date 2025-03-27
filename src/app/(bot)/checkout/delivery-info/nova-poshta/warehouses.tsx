@@ -1,3 +1,4 @@
+import useSWR, { Fetcher } from 'swr'
 import { useEffect, useState } from 'react'
 import { usePageState } from '../../model/state'
 import { useFormContext } from 'react-hook-form'
@@ -63,12 +64,17 @@ export const VirtualizedList = ({
   )
 }
 
-export interface WarehousesProps {
-  cityId: string
-  onSelect(id: string): void
-}
+const fetcher: Fetcher<WarehousesOption[], string> = (url) =>
+  fetch(url).then((res) =>
+    res.json().then((data) =>
+      data.map((w: Warehouse) => ({
+        value: w.warehouse_id,
+        label: w.name
+      }))
+    )
+  )
 
-export function Warehouses({ cityId, onSelect }: WarehousesProps) {
+export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: string): void }) {
   const t = useTranslations()
   const onErrorModal = usePageState((state) => state.onErrorModal)
 
@@ -76,48 +82,35 @@ export function Warehouses({ cityId, onSelect }: WarehousesProps) {
 
   const warehouseType = getValues()['np-delivery-type']
 
-  const [warehouses, setWarehouses] = useState<WarehousesOption[]>([])
   const [selectValue, setSelectValue] = useState<WarehousesOption | null>(null)
-
-  const [warehousesMeta, setWarehousesMeta] = useState({
-    error: false,
-    loading: true
-  })
 
   useEffect(() => {
     setSelectValue(null)
     resetField('postOfficeName')
   }, [cityId, resetField])
 
-  useEffect(() => {
-    const params = new URLSearchParams({
-      provider: providerNames.novaPoshta,
-      city_id: cityId,
-      warehouse_type: warehouseType
-    })
+  const params = new URLSearchParams({
+    provider: providerNames.novaPoshta,
+    city_id: cityId,
+    warehouse_type: warehouseType
+  })
 
-    const fetchData = async () => {
-      const resp = await fetch(`${process.env.NEXT_PUBLIC_DELIVERY_API}/warehouses?${params}`)
-      const data = await resp.json()
-
-      const options = data.map((w: Warehouse) => ({
-        value: w.warehouse_id,
-        label: w.name
-      }))
-
-      setWarehouses(options)
-      setWarehousesMeta((prev) => ({ ...prev, loading: false }))
+  const { data, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_DELIVERY_API}/warehouses?${params}`,
+    fetcher,
+    {
+      fallbackData: [],
+      onError() {
+        onErrorModal(true)
+      }
     }
+  )
 
-    fetchData().catch((error) => {
-      setWarehousesMeta((prev) => ({ ...prev, loading: false, error: true }))
-      onErrorModal(true)
-    })
-  }, [cityId, warehouseType, onErrorModal])
+  console.log(data)
 
   const filterWarehouses = (inputValue: string) =>
     new Promise<WarehousesOption[]>((resolve) => {
-      const res = warehouses.filter((w) => w.label.toLowerCase().includes(inputValue.toLowerCase()))
+      const res = data.filter((w) => w.label.toLowerCase().includes(inputValue.toLowerCase()))
       resolve(res)
     })
 
@@ -128,7 +121,7 @@ export function Warehouses({ cityId, onSelect }: WarehousesProps) {
         components={{ MenuList: VirtualizedList }}
         cacheOptions
         isClearable
-        isLoading={warehousesMeta.loading}
+        isLoading={isLoading}
         value={selectValue}
         onChange={(newValue, { action }) => {
           setSelectValue(newValue)
@@ -141,7 +134,7 @@ export function Warehouses({ cityId, onSelect }: WarehousesProps) {
               break
           }
         }}
-        defaultOptions={warehouses}
+        defaultOptions={data}
         loadOptions={filterWarehouses}
         placeholder={t('Checkout.delivery.warehousePlaceholder')}
         styles={{

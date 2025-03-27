@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import useSWR, { Fetcher } from 'swr'
 import { cva } from 'cva'
 import { usePageState } from '../model/state'
 import { StepTitle } from '../common/step-title'
@@ -23,6 +23,8 @@ const peerStyles = cva(
   'peer-checked:border-green-light peer-checked:bg-green-light/20 peer-disabled:opacity-55 peer-checked:before:visible peer-checked:after:visible'
 )
 
+const fetcher: Fetcher<PopularCity[], string> = (url) => fetch(url).then((res) => res.json())
+
 export function DeliveryInfo() {
   const t = useTranslations()
   const { register } = useFormContext<DeliveryValues>()
@@ -36,44 +38,20 @@ export function DeliveryInfo() {
     name: ['cityName', 'postOfficeName', 'supplier']
   })
 
+  const { data, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_DELIVERY_API}/popular-cities`,
+    fetcher,
+    {
+      fallbackData: [],
+      onError() {
+        onErrorModal(true)
+      }
+    }
+  )
+
   const supplier = values[2]
 
   const [animatedRef, animatedEl] = useElementSize()
-
-  const [popularCities, setPopularCities] = useState<PopularCity[]>([])
-  const [citiesMeta, setCitiesMeta] = useState({
-    error: false,
-    loading: true
-  })
-
-  useEffect(() => {
-    const controller = new AbortController()
-    const { signal } = controller
-
-    const fetchData = async () => {
-      const resp = await fetch(process.env.NEXT_PUBLIC_DELIVERY_API + '/popular-cities', {
-        signal,
-        cache: 'default'
-      })
-      const data = await resp.json()
-
-      setPopularCities(data)
-      setCitiesMeta({
-        loading: false,
-        error: false
-      })
-    }
-
-    fetchData().catch((error) => {
-      console.warn('fetch popular_citiest:', error.message)
-      setCitiesMeta((prev) => ({ ...prev, loading: false, error: true }))
-      onErrorModal(true)
-    })
-
-    return () => {
-      // controller.abort()
-    }
-  }, [onErrorModal])
 
   let isValuesValid = false
 
@@ -143,7 +121,7 @@ export function DeliveryInfo() {
           </p>
           {/*  */}
           <ShowBlock as="nova" current={supplier}>
-            <NovaPoshta popularCitiesLoad={citiesMeta.loading} popularCities={popularCities} />
+            <NovaPoshta popularCitiesLoad={isLoading} popularCities={data} />
           </ShowBlock>
           <ShowBlock as="ukr" current={supplier}>
             <UkrPoshta />
