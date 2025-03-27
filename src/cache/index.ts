@@ -1,15 +1,9 @@
 import { gql } from 'urql'
 import { cacheExchange as Exchange } from '@urql/exchange-graphcache'
-import {
-  rejectOrder,
-  addFavouriteProduct,
-  removeFavouriteProduct,
-  addCartItem,
-  reduceCartItemQuantity,
-  removeCartItem,
-  clearCart,
-  createOrder
-} from './mutations'
+
+import { addCartItem, removeCartItem, reduceCartItemQuantity, clearCart } from './mutations/cart'
+import { createOrder, rejectOrder } from './mutations/order'
+import { addFavouriteProduct, removeFavouriteProduct } from './mutations/favourites'
 
 export const cacheExchange = Exchange({
   optimistic: {
