@@ -106,8 +106,6 @@ export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: 
     }
   )
 
-  console.log(data)
-
   const filterWarehouses = (inputValue: string) =>
     new Promise<WarehousesOption[]>((resolve) => {
       const res = data.filter((w) => w.label.toLowerCase().includes(inputValue.toLowerCase()))

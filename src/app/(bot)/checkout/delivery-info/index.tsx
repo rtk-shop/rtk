@@ -3,9 +3,8 @@ import useSWR, { Fetcher } from 'swr'
 import { cva } from 'cva'
 import { usePageState } from '../model/state'
 import { StepTitle } from '../common/step-title'
-import { Expander } from '../common/expander'
+import { DynamicExpander } from '@/components/ui/dynamic-expander'
 import { Button } from '@/components/ui/button'
-import { useElementSize } from '@/hooks'
 import { ShowBlock } from '../common/show-block'
 import { NovaPoshta } from './nova-poshta'
 import { UkrPoshta } from './ukr-poshta'
@@ -51,8 +50,6 @@ export function DeliveryInfo() {
 
   const supplier = values[2]
 
-  const [animatedRef, animatedEl] = useElementSize()
-
   let isValuesValid = false
 
   try {
@@ -73,8 +70,8 @@ export function DeliveryInfo() {
         {t('Checkout.delivery.title')}
       </StepTitle>
 
-      <Expander open={isDeliveryOpen} openHeightPx={animatedEl.height}>
-        <div ref={animatedRef} className="px-2.5 pb-3">
+      <DynamicExpander open={isDeliveryOpen}>
+        <div className="px-2.5 pb-3">
           <ul className="flex">
             <li className="mr-2 w-full">
               <label>
@@ -131,7 +128,7 @@ export function DeliveryInfo() {
             {t('Common.verbs.continue')}
           </Button>
         </div>
-      </Expander>
+      </DynamicExpander>
     </section>
   )
 }
