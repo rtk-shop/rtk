@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { useWatch } from 'react-hook-form'
 import { customerInfoSchema } from './model/validation-schema'
-import { DynamicExpander } from '@/components/ui/dynamic-expander'
+import { HeightExpander } from '@/components/ui/height-expander'
 import { useTranslations } from 'next-intl'
 import type { CustomerInfoValues } from './model/validation-schema'
 
@@ -43,7 +43,7 @@ export function CustomerInfo() {
       <StepTitle step={1} isEdit={isInfoOpen} onEdit={onInfoSection} valid={isValid}>
         {t('Checkout.customer.title')}
       </StepTitle>
-      <DynamicExpander open={isInfoOpen}>
+      <HeightExpander expanded={isInfoOpen}>
         <div className="px-4 pb-4">
           <ul>
             <li>
@@ -60,7 +60,7 @@ export function CustomerInfo() {
             {t('Common.verbs.continue')}
           </Button>
         </div>
-      </DynamicExpander>
+      </HeightExpander>
     </section>
   )
 }

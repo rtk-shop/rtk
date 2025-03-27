@@ -7,18 +7,45 @@ const container = cva(
   {
     variants: {
       open: {
-        true: 'opacity-100',
-        false: 'opacity-0'
+        true: '',
+        false: ''
+      },
+      withOpacity: {
+        true: '',
+        false: ''
       }
-    }
+    },
+    compoundVariants: [
+      {
+        open: true,
+        withOpacity: true,
+        className: 'opacity-100'
+      },
+      {
+        open: false,
+        withOpacity: true,
+        className: 'opacity-0'
+      }
+    ]
   }
 )
 
-export function DynamicExpander({ open, children }: { open: boolean; children: ReactNode }) {
+export function DynamicExpander({
+  open,
+  children,
+  withOpacity = false
+}: {
+  open: boolean
+  children: ReactNode
+  withOpacity?: boolean
+}) {
   const [animatedRef, animatedEl] = useElementSize()
 
   return (
-    <div className={container({ open })} style={{ height: open ? animatedEl.height : 0 }}>
+    <div
+      className={container({ open, withOpacity })}
+      style={{ height: open ? animatedEl.height : 0 }}
+    >
       <div ref={animatedRef}>{children}</div>
     </div>
   )

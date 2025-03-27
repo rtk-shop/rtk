@@ -14,13 +14,16 @@ module.exports = {
         checkoutPromo: "url('/assets/balloons-pattern.jpg')"
       },
       transitionProperty: {
-        expand: 'height, opacity'
+        expand: 'height, opacity',
+        'expand-grid': 'grid-template-rows, opacity'
       },
       transitionDuration: {
-        expand: '400ms, 200ms'
+        expand: '400ms, 200ms',
+        'expand-grid': '400ms, 200ms'
       },
       transitionDelay: {
-        expand: '0ms, 220ms'
+        expand: '0ms, 200ms',
+        'expand-grid': '0ms, 200ms'
       },
       borderRadius: {
         lg: 'var(--radius)',
