@@ -13,7 +13,6 @@ export type GetProductQuery = {
     | {
         __typename: 'Product'
         id: string
-        parentId: string
         title: string
         sku: string
         gender: Types.Gender
@@ -30,7 +29,6 @@ export type GetProductQuery = {
         brandName: string
         images: Array<string>
         isHidden: boolean
-        defaultSizeID: number
         updatedAt: string
         createdAt: string
         availableSizes: Array<{ __typename?: 'SizeVariation'; size: string; productId: string }>
@@ -43,7 +41,6 @@ export const GetProductDocument = gql`
       __typename
       ... on Product {
         id
-        parentId
         title
         sku
         gender
@@ -60,7 +57,6 @@ export const GetProductDocument = gql`
         brandName
         images
         isHidden
-        defaultSizeID
         updatedAt
         createdAt
         availableSizes {

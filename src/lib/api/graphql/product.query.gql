@@ -3,7 +3,6 @@ query GetProduct($id: ID!) {
     __typename
     ... on Product {
       id
-      parentId
       title
       sku
       gender
@@ -20,7 +19,6 @@ query GetProduct($id: ID!) {
       brandName
       images
       isHidden
-      defaultSizeID
       updatedAt
       createdAt
       availableSizes {

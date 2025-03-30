@@ -31,7 +31,6 @@ export type CartItem = {
   __typename?: 'CartItem'
   productId: Scalars['ID']['output']
   quantity: Scalars['Int']['output']
-  size: Scalars['String']['output']
 }
 
 export type CartItemInput = {
@@ -41,6 +40,7 @@ export type CartItemInput = {
 
 export type CartProduct = {
   __typename?: 'CartProduct'
+  /** id - is a reference to product.ID */
   id: Scalars['ID']['output']
   product: Product
   quantity: Scalars['Int']['output']
@@ -282,14 +282,12 @@ export type Product = {
   colorName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
   currentPrice: Scalars['Float']['output']
-  defaultSizeID: Scalars['Int']['output']
   description: Scalars['HTML']['output']
   gender: Gender
   id: Scalars['ID']['output']
   images: Array<Scalars['String']['output']>
   inStock: Scalars['Boolean']['output']
   isHidden: Scalars['Boolean']['output']
-  parentId: Scalars['ID']['output']
   preview: Scalars['String']['output']
   sizeName: Scalars['String']['output']
   sku: Scalars['String']['output']
