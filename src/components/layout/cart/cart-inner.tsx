@@ -10,11 +10,11 @@ import { useTranslations } from 'next-intl'
 import { useAppState } from '@/stores/app/store'
 
 export function CartInner() {
+  const router = useRouter()
   const t = useTranslations('Common')
 
   const closeCart = useAppState((state) => state.closeCart)
 
-  const router = useRouter()
   const [result] = useCartQuery()
 
   const { data, fetching, error } = result
@@ -47,11 +47,7 @@ export function CartInner() {
       ) : (
         <ul className="scroll-bar grow overflow-y-auto px-2.5 pt-5">
           {data?.cartProducts.map((cartItem) => (
-            <CartItem
-              key={cartItem.product.id}
-              quantity={cartItem.quantity}
-              product={cartItem.product}
-            />
+            <CartItem key={cartItem.id} quantity={cartItem.quantity} product={cartItem.product} />
           ))}
         </ul>
       )}

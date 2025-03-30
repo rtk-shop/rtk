@@ -17,21 +17,10 @@ const priceTitle = cva('text-[23px] font-medium', {
   }
 })
 
-export default async function Product({
-  params,
-  searchParams
-}: {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
+export default async function Product({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id
-  const { size } = await searchParams
 
-  const sizeParam = Array.isArray(size) ? undefined : size
-
-  const resp = await getProduct(id, sizeParam)
-
-  console.log(searchParams)
+  const resp = await getProduct(id)
 
   if (resp?.product.__typename === 'NotFound') {
     return notFound()
@@ -44,9 +33,13 @@ export default async function Product({
   const product = resp?.product
 
   const withDiscount = product.basePrice !== product.currentPrice
-
+  // className="mb-[69px]"
   return (
-    <div className="mb-[69px]">
+    <div
+    // style={{
+    //   paddingBottom: 'var(--tg-safe-area-inset-bottom)'
+    // }}
+    >
       {/*  */}
       <Preview images={product.images} />
       {/*  */}

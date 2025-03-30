@@ -2,11 +2,16 @@ import { cva } from 'cva'
 import { category } from '@/lib/constants'
 import { Category } from '@/types'
 
+export type SizeItem = {
+  size: string
+  productId: string
+}
+
 export interface SizeGuideProps {
   current: string
   category: keyof typeof Category
-  available: string[]
-  onSelect(size: string): void
+  available: SizeItem[]
+  onSelect(target: SizeItem): void
 }
 
 export const SIZE_VARIATIONS = {
@@ -47,20 +52,19 @@ const sizeItem = cva(
 export function SizeGuide({ category, current, available, onSelect }: SizeGuideProps) {
   const sizes = SIZE_VARIATIONS[category]
 
-  const availableSet = new Set([...available])
+  const sizeMap = new Map(available.map((s) => [s.size, s.productId]))
 
   return (
     <div>
       <ul className="flex">
         {sizes.map((size, ind) => {
-          const inStock = availableSet.has(size)
-
+          const inStock = sizeMap.has(size)
           return (
             <li
               key={ind}
               onClick={() => {
                 if (inStock) {
-                  onSelect(size)
+                  onSelect({ size, productId: sizeMap.get(size)! })
                 }
               }}
               className={sizeItem({

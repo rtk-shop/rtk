@@ -31,6 +31,7 @@ export type CartItem = {
   __typename?: 'CartItem'
   productId: Scalars['ID']['output']
   quantity: Scalars['Int']['output']
+  size: Scalars['String']['output']
 }
 
 export type CartItemInput = {
@@ -274,7 +275,7 @@ export type Product = {
   __typename?: 'Product'
   amount: Scalars['Int']['output']
   availableColors?: Maybe<Array<ProductColors>>
-  availableSizes: Array<Scalars['String']['output']>
+  availableSizes: Array<SizeVariation>
   basePrice: Scalars['Float']['output']
   brandName: Scalars['String']['output']
   category: CategoryType
@@ -361,7 +362,6 @@ export type Query = {
 
 export type QueryProductArgs = {
   id: Scalars['ID']['input']
-  size?: InputMaybe<Scalars['String']['input']>
 }
 
 export type QueryProductsArgs = {
@@ -400,6 +400,12 @@ export const enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
   Manager = 'MANAGER'
+}
+
+export type SizeVariation = {
+  __typename?: 'SizeVariation'
+  productId: Scalars['String']['output']
+  size: Scalars['String']['output']
 }
 
 export type User = {

@@ -20,15 +20,19 @@ export type CartItemProps = {
     id: string
     title: string
     currentPrice: number
+    basePrice: number
     preview: string
+    sizeName: string
   }
 }
 
 export function CartItem({ product, quantity }: CartItemProps) {
-  const t = useTranslations('Common')
   const router = useRouter()
+  const t = useTranslations('Common')
 
   const closeCart = useAppState((state) => state.closeCart)
+
+  const { id, title, preview, currentPrice, sizeName } = product
 
   const handleRedirect = () => {
     router.push(routeNames.product + id)
@@ -38,8 +42,6 @@ export function CartItem({ product, quantity }: CartItemProps) {
   const [addItemMeta, addCartItem] = useAddCartItemMutation()
   const [_, reduceCartItem] = useReduceCartItemQuantityMutation()
   const [__, removeCartItem] = useRemoveCartItemMutation()
-
-  const { id, title, preview, currentPrice } = product
 
   const handleAmountChange = (type: 'add' | 'sub', _: number): void => {
     if (type === 'add') {
@@ -68,7 +70,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
     }
   }
 
-  const handleRemoveClick = () => {
+  const handleRemoveCartItem = () => {
     removeCartItem({
       productId: id
     }).then((result) => {
@@ -113,7 +115,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
           />
           <IconButton
             hapticFeedback="light"
-            onClick={handleRemoveClick}
+            onClick={handleRemoveCartItem}
             className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
           >
             <Icon name="action/trash" />

@@ -15,7 +15,9 @@ export type CartProductsQuery = {
       id: string
       title: string
       currentPrice: number
+      basePrice: number
       preview: string
+      sizeName: string
     }
   }>
 }
@@ -29,7 +31,9 @@ export const CartProductsDocument = gql`
         id
         title
         currentPrice
+        basePrice
         preview
+        sizeName
       }
     }
   }

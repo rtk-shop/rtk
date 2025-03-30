@@ -6,7 +6,9 @@ query CartProducts {
       id
       title
       currentPrice
+      basePrice
       preview
+      sizeName
     }
   }
 }

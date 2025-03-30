@@ -1,5 +1,5 @@
-query GetProduct($id: ID!, $size: String) {
-  product(id: $id, size: $size) {
+query GetProduct($id: ID!) {
+  product(id: $id) {
     __typename
     ... on Product {
       id
@@ -21,14 +21,12 @@ query GetProduct($id: ID!, $size: String) {
       images
       isHidden
       defaultSizeID
-      availableSizes
       updatedAt
       createdAt
-      # availableColors {
-      #   id
-      #   title
-      #   color
-      # }
+      availableSizes {
+        size
+        productId
+      }
     }
     ... on NotFound {
       message
