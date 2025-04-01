@@ -39,13 +39,17 @@ export function Details({ productId, inStock, category, sizeName, availableSizes
 
   return (
     <section className="px-1.5">
-      <p className="mb-2 font-medium">Выберите размер:</p>
-      <SizeGuide
-        category={category}
-        current={sizeName}
-        available={availableSizes}
-        onSelect={handleSizeChange}
-      />
+      {sizeName !== 'none' && (
+        <>
+          <p className="mb-2 font-medium">Выберите размер:</p>
+          <SizeGuide
+            category={category}
+            current={sizeName}
+            available={availableSizes}
+            onSelect={handleSizeChange}
+          />
+        </>
+      )}
       <AddToCartButton productId={productId} inStock={inStock} />
       <Controls productId={productId} />
     </section>

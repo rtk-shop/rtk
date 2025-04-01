@@ -99,9 +99,17 @@ export function CartItem({ product, quantity }: CartItemProps) {
           {title}
         </p>
         <span className="text-sm font-medium text-gray-500">
-          {t('nouns.price')}: <FormatPrice price={currentPrice} />
+          {sizeName === 'none' ? (
+            <>
+              {t('nouns.price')}: <FormatPrice price={currentPrice} />
+            </>
+          ) : (
+            <>
+              {t('nouns.size')} — <span className="text-base text-gray-600">{sizeName}</span>
+            </>
+          )}
         </span>
-        <p className="text-[15px] leading-none font-semibold">
+        <p className="leading-none font-semibold">
           {quantity}&nbsp;шт:&nbsp;&nbsp;
           <FormatPrice price={quantity * currentPrice} />
         </p>
@@ -116,7 +124,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
           <IconButton
             hapticFeedback="light"
             onClick={handleRemoveCartItem}
-            className="rounded-lg bg-gray-100! px-3 text-lg text-gray-500! active:text-black"
+            className="rounded-lg bg-gray-100! px-3 text-lg text-gray-600!"
           >
             <Icon name="action/trash" />
           </IconButton>
