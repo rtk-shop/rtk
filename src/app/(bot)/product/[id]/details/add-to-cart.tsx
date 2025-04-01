@@ -2,10 +2,8 @@ import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
-import { useAppState } from '@/stores/app/store'
 
 export function AddToCartButton({ productId, inStock }: { productId: string; inStock: boolean }) {
-  const openCart = useAppState((state) => state.openCart)
   const [result, addCartItem] = useAddCartItemMutation()
 
   const handleClick = () => {
@@ -20,16 +18,6 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
         })
         return
       }
-
-      toast.success('Товар добавлен в корзину', {
-        duration: 2000,
-        cancel: {
-          label: 'В корзину',
-          onClick: () => {
-            openCart()
-          }
-        }
-      })
     })
   }
 
