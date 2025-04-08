@@ -8,7 +8,7 @@ import { formatPrice } from '@/lib/helpers'
 
 import 'keen-slider/keen-slider.min.css'
 
-const priceTitle = cva('text-[23px] font-medium', {
+const priceTitle = cva('text-[27px] font-medium', {
   variants: {
     withDiscount: {
       true: 'mx-1.5 text-red-600',
@@ -41,22 +41,21 @@ export default async function Product({ params }: { params: Promise<{ id: string
     // }}
     >
       {/*  */}
-      <Preview images={product.images} />
+      <Preview
+        images={product.images}
+        currentPrice={product.currentPrice}
+        basePrice={product.basePrice}
+      />
       {/*  */}
       <section className="px-1.5">
         <h1 className="mt-4 mb-1.5 text-xl leading-5 font-medium">{product.title}</h1>
-        <div className="mb-3 flex items-center">
+        <div className="flex items-center">
           {withDiscount && (
             <span className="text-lg text-gray-500 line-through">
               {formatPrice(product.basePrice)}
             </span>
           )}
           <p className={priceTitle({ withDiscount })}>{formatPrice(product.currentPrice)} грн</p>
-          {withDiscount && (
-            <span className="bg-green-light w-12 px-1 text-center text-[13px] font-medium text-white">
-              -{Math.round(((product.basePrice - product.currentPrice) * 100) / product.basePrice)}%
-            </span>
-          )}
         </div>
       </section>
       <Details
@@ -68,7 +67,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
       />
       <Info
         gender={product.gender}
-        description={(product.description as string) || ''}
+        description={product.description as string}
         dimensions={'11x11x11'}
         color={product.colorName}
         category={product.category}
