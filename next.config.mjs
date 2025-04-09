@@ -32,6 +32,9 @@ const nextConfig = {
 
     return config
   },
+  experimental: {
+    optimizePackageImports: ['react-select', 'react-hook-form']
+  },
   devIndicators: {
     position: 'top-right'
   },
