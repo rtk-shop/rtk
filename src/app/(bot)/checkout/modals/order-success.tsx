@@ -20,7 +20,6 @@ export function OrderSuccessModal() {
 
   const handleComplete = () => {
     router.replace(routeNames.profile)
-    // todo: clear cart here
     onSucessModal(false)
   }
 
