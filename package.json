@@ -11,8 +11,8 @@
     "gen": "graphql-codegen",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\"",
     "bun": "bun --bun next dev",
-    "bun_build": "bun --bun next build",
-    "bun_start": "bun --bun next start"
+    "bun-build": "bun --bun next build",
+    "bun-start": "bun --bun next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
