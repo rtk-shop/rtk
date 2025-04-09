@@ -27,3 +27,7 @@ export const category: { [p in Lowercase<keyof typeof Category>]: Uppercase<p> }
   backpack: 'BACKPACK',
   other: 'OTHER'
 }
+
+export const catalogSearchParamsNames = {
+  category: 'ca'
+} as const

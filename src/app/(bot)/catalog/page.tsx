@@ -25,7 +25,7 @@ type QueryFilters = {
   price?: PriceRangeType
   instock?: boolean
   tag?: ProductTag
-  category?: CategoryType
+  category?: CategoryType[] | CategoryType
   gender?: Gender
 }
 

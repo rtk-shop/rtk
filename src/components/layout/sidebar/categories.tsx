@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import { routeNames } from '@/lib/constants'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useAppState } from '@/stores/app/store'
+import { category, routeNames, catalogSearchParamsNames } from '@/lib/constants'
 
 const categoriesValues: Array<{
   img: string
@@ -11,32 +12,40 @@ const categoriesValues: Array<{
 }> = [
   {
     img: '/assets/backpack.webp',
-    to: routeNames.catalog,
+    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.backpack}`,
     i18n: 'backpacks'
   },
   {
     img: '/assets/suitcase.webp',
-    to: routeNames.catalog,
+    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.suitcase}`,
     i18n: 'suitcases',
     sub: ['nouns.polypropylene', 'nouns.textile', 'nouns.covers']
   },
   {
     img: '/assets/bag.webp',
-    to: routeNames.catalog,
+    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.bag}`,
     i18n: 'bags',
     sub: ['nouns.sling', 'actions.forDocs', 'actions.forLaptop']
   }
 ]
 
 export function Categories() {
+  const router = useRouter()
   const t = useTranslations('Common')
+
+  const closeSidebar = useAppState((state) => state.closeSidebar)
+
+  const handleRedirect = (path: string) => {
+    closeSidebar()
+    router.replace(path)
+  }
 
   return (
     <section className="">
       <ul className="relative flex flex-col">
         {categoriesValues.map((category, ind) => (
           <li key={ind} className="mb-2.5 flex">
-            <Link href={category.to} className="flex items-center">
+            <div onClick={() => handleRedirect(category.to)} className="flex items-center">
               <div className="size-36">
                 <Image
                   priority
@@ -53,13 +62,13 @@ export function Categories() {
                   {category.sub &&
                     category.sub.map((el, index) => (
                       <li key={index}>
-                        <li key={index}>- {t(el)}</li>
+                        <p key={index}>- {t(el)}</p>
                       </li>
                     ))}
                   <li className="list-none text-gray-300 underline">{t('actions.showAll')}</li>
                 </ul>
               </div>
-            </Link>
+            </div>
           </li>
         ))}
       </ul>
