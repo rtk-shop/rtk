@@ -8,7 +8,7 @@ import { Loader } from '@/components/ui/loader'
 
 interface InfoProps {
   gender: string
-  description: string
+  description?: string
   category: string
   dimensions: string
   color: string
@@ -52,7 +52,7 @@ export function Info({ gender, description, dimensions, color, category }: InfoP
         <TabContent tabID={0} value={activeTab}>
           <div className="py-5 pl-1">
             <h2 className="mb-3 text-2xl font-medium">Описание</h2>
-            <DynamicDescription textMarkdown={description} />
+            <DynamicDescription textMarkdown={description || ''} />
           </div>
         </TabContent>
         <TabContent tabID={1} value={activeTab}>
