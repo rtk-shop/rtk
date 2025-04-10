@@ -1,4 +1,4 @@
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@repo/ui'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { useFormContext } from 'react-hook-form'
