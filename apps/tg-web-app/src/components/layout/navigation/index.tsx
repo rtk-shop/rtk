@@ -1,5 +1,6 @@
 import { routeNames } from '@/lib/constants'
-import { Badge } from '@/components/ui/badge'
+// import { Badge } from '@/components/ui/badge'
+import { Badge } from '@repo/ui'
 import { IconButton } from '@/components/ui/icon-button'
 import { useRouter } from 'next/navigation'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'

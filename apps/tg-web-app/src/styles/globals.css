@@ -2,6 +2,8 @@
 
 @config '../../tailwind.config.js';
 
+@import '@repo/ui/styles.css';
+
 @theme {
   --color-black: #171717;
   --color-green-light: #32cd32;
