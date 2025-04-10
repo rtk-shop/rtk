@@ -9,17 +9,6 @@ const withNextIntl = createNextIntlPlugin()
 // const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
 // const __dirname = path.dirname(__filename) // get the name of the director
 
-// import os from 'os'
-
-// const interfaces = os.networkInterfaces()
-
-// const localIps = Object.values(interfaces)
-//   .flat()
-//   .filter((iface) => iface.family === 'IPv4' && !iface.internal)
-//   .map((iface) => `http://${iface.address}:8080`)
-
-// const allowedDevOrigins = ['http://localhost:3000', ...localIps]
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack(config, options) {
@@ -42,9 +31,6 @@ const nextConfig: NextConfig = {
     }
 
     return config
-  },
-  experimental: {
-    optimizePackageImports: ['react-select', 'react-hook-form']
   },
   images: {
     remotePatterns: [
