@@ -2,7 +2,7 @@ import { cva } from 'cva'
 import { PatternFormat } from 'react-number-format'
 import type { Path, FieldValues } from 'react-hook-form'
 import { Controller, useFormContext } from 'react-hook-form'
-import { ErrorMessage } from './error-message'
+import { ErrorMessage } from '@repo/ui'
 import { useTranslations } from 'next-intl'
 
 interface PhoneInputProps<T extends FieldValues> {
@@ -12,7 +12,7 @@ interface PhoneInputProps<T extends FieldValues> {
 }
 
 const inpEl = cva(
-  'mb-1 flex h-11 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-800 dark:bg-gray-950 dark:ring-offset-gray-950 dark:file:text-gray-50 dark:placeholder:text-gray-400 md:text-sm',
+  'mb-1 flex h-11 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 md:text-sm dark:border-gray-800 dark:bg-gray-950 dark:ring-offset-gray-950 dark:file:text-gray-50 dark:placeholder:text-gray-400',
   {
     variants: {
       error: {
@@ -40,7 +40,7 @@ export function PhoneInput<T extends FieldValues>({
   return (
     <div>
       {label && (
-        <span className="mb-1 select-none pl-1 text-[15px] font-medium text-gray-800">{label}</span>
+        <span className="mb-1 pl-1 text-[15px] font-medium text-gray-800 select-none">{label}</span>
       )}
       <Controller
         name={name}

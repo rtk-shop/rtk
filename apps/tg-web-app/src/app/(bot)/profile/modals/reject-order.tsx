@@ -5,7 +5,7 @@ import { Drawer } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import { useRejectOrderMutation } from '@/lib/api/hooks'
 import { usePageState } from '../model/page-state'
-import { ErrorMessage } from '@/components/ui/error-message'
+import { ErrorMessage } from '@repo/ui'
 
 export function OrderRejectModal() {
   const [hasErr, setHasErr] = useState(false)

@@ -1,10 +1,10 @@
 import { type ReactNode } from 'react'
 import { cva } from 'cva'
 
-const msg = cva('h-6 select-none pl-2.5 text-[13px] font-medium leading-none text-red-600', {
+const msg = cva('h-6 pl-2.5 text-[13px] leading-none font-medium text-red-600 select-none', {
   variants: {
     show: {
-      true: 'visible duration-300 animate-in fade-in',
+      true: 'animate-in fade-in visible duration-300',
       false: 'invisible'
     },
     align: {
