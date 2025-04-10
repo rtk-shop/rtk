@@ -1,8 +1,7 @@
+import type { Config } from 'tailwindcss'
 // import baseConfig from '../../tailwind.config'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ['selector'],
+const config: Config = {
   future: {
     hoverOnlyWhenSupported: true
   },
@@ -40,3 +39,5 @@ module.exports = {
   },
   plugins: [require('tailwindcss-animate'), require('tailwind-gradient-mask-image')]
 }
+
+export default config
