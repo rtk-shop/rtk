@@ -1,11 +1,11 @@
 {
-  "name": "appo",
+  "name": "repo",
   "private": true,
   "packageManager": "pnpm@10.8.0",
   "scripts": {
     "dev": "turbo run dev",
-    "dev:app": "turbo run dev --filter=@app/app",
-    "dev:admin": "turbo run dev --filter=@my-monorepo/admin"
+    "dev:tg": "turbo run dev --filter=web-app --filter=@repo/ui",
+    "dev:admin": "turbo run dev --filter=admin --filter=@repo/ui"
   },
   "devDependencies": {
     "turbo": "^2.5.0"
