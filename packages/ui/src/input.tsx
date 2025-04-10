@@ -1,7 +1,7 @@
 import { cva } from 'cva'
-import { ErrorMessage } from '@repo/ui'
-import { Path, FieldValues, useFormContext } from 'react-hook-form'
+import { ErrorMessage } from './error-message'
 import { useTranslations } from 'next-intl'
+import { Path, FieldValues, useFormContext } from 'react-hook-form'
 
 export interface InputProps<T extends FieldValues> {
   name: Path<T>
@@ -14,7 +14,7 @@ export interface InputProps<T extends FieldValues> {
 }
 
 const inpEl = cva(
-  'mb-1 flex h-11 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 md:text-sm dark:border-gray-800 dark:bg-gray-950 dark:ring-offset-gray-950 dark:file:text-gray-50 dark:placeholder:text-gray-400',
+  'mb-1 flex h-11 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 md:text-sm',
   {
     variants: {
       error: {
