@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
-@config "../tailwind.config.js";
+@config "../tailwind.config.ts";
+
+@import '@repo/tailwind-config/styles.css';
 
 @source "./";
