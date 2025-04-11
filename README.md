@@ -1,5 +1,4 @@
-This is a [Next.js 14](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+This is a [Next.js 15](https://nextjs.org/) project
 The `/font` directory contains custom font.
 
 ## Getting Started
