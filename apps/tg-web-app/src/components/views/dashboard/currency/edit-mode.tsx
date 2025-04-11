@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import clsx from 'clsx'
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 
 import styles from './styles.module.css'
 

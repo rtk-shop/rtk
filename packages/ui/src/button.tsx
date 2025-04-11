@@ -2,7 +2,7 @@ import React from 'react'
 import { cva } from 'cva'
 import { Loader } from './loader'
 
-const enum ButtonColor {
+export const enum ButtonColor {
   primary = 'primary',
   secondary = 'secondary',
   accept = 'accept',

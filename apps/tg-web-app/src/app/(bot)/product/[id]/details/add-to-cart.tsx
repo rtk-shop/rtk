@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'

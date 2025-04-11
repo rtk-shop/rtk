@@ -1,5 +1,5 @@
 import ContentLoader from 'react-content-loader'
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 import { formatPrice } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'

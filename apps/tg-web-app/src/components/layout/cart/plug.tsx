@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 import { Icon } from '@/components/ui/icon'
 
 interface ProcessPlugProps {

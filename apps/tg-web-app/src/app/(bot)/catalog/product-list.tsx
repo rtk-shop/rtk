@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 import { ProductItem } from '@/components/product-item'
 import type { ProductTag } from '@/types'
 

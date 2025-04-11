@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@repo/ui'
 import { Skeleton } from './skeleton'
 import { FormatPrice } from '@/components/ui/format-price'
 import { useTranslations } from 'next-intl'

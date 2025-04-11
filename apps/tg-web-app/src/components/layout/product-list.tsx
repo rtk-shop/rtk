@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react'
 import { ProductItem, type ProductItemProps } from '../product-item'
-import { Button } from '../ui/button'
+import { Button } from '@repo/ui'
 import { Icon } from '../ui/icon'
 import { ProductListSkeleton } from './product-list-skeleton'
 
