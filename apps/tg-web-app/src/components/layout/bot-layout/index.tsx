@@ -9,11 +9,11 @@ import { Sidebar } from '@/components/layout/sidebar'
 
 export function BotLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <main>
       <Cart />
       <Sidebar />
       <Navigation />
       {children}
-    </div>
+    </main>
   )
 }
