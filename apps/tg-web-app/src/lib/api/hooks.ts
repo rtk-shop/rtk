@@ -11,6 +11,18 @@ import * as addCartItem from '@/lib/api/graphql/_gen_/addCartItem.mutation'
 import * as removeCartItem from '@/lib/api/graphql/_gen_/removeCartItem.mutation'
 import * as reduceCartItem from '@/lib/api/graphql/_gen_/reduceCartItemQuantity.mutation'
 import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
+import * as productsQuery from '@/lib/api/graphql/_gen_/products.query'
+
+export function useProductsQuery({
+  variables
+}: {
+  variables: productsQuery.ProductsQueryVariables
+}) {
+  return useQuery<productsQuery.ProductsQuery, productsQuery.ProductsQueryVariables>({
+    query: productsQuery.ProductsDocument,
+    variables
+  })
+}
 
 export function useCartQuery(
   options?: Omit<UseQueryArgs<cartProducts.CartProductsQueryVariables>, 'query'>

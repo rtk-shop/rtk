@@ -3,23 +3,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { useQuery } from 'urql'
 import { Pagination } from '@/components/layout/pagination'
 import { Controls } from './controls'
 import { Filters } from './filters'
 import { ProductList } from './product-list'
+import { useAutoSubmit } from '@/hooks'
 import { ControlsSkeleton } from './skeletons/controls'
 import { SortMenu } from './sort'
+import { useProductsQuery } from '@/lib/api/hooks'
 import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
 import type { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
-
-import {
-  ProductsDocument,
-  ProductsQuery,
-  ProductsQueryVariables
-} from '@/lib/api/graphql/_gen_/products.query'
 
 type QueryFilters = {
   price?: PriceRangeType
@@ -77,9 +72,7 @@ export default function Catalog() {
 
   const [filterParams, setFilterParams] = useState<QueryFilters>()
 
-  const [result] = useQuery<ProductsQuery, ProductsQueryVariables>({
-    query: ProductsDocument,
-    // requestPolicy: 'network-only',
+  const [result] = useProductsQuery({
     variables: {
       first: LIMIT_PER_PAGE,
       after,
@@ -103,7 +96,7 @@ export default function Catalog() {
     }
   })
 
-  const { watch, handleSubmit, reset } = formMethods
+  const { watch, handleSubmit, trigger, reset } = formMethods
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     (data) => {
@@ -143,15 +136,30 @@ export default function Catalog() {
     [clearCursorSearchParams]
   )
 
-  useEffect(() => {
-    const subscription = watch(() => handleSubmit(onSubmit)())
-    return () => subscription.unsubscribe()
-  }, [handleSubmit, watch, onSubmit])
+  // useEffect(() => {
+  //   const subscription = watch(() => handleSubmit(onSubmit)())
+  //   // const subscription = watch(() => console.log('wathc'))
+
+  //   // console.log('wathc')
+
+  //   return () => {
+  //     console.log(subscription)
+  //     subscription.unsubscribe()
+  //   }
+  // }, [handleSubmit, watch, onSubmit])
+
+  useAutoSubmit({
+    watch,
+    trigger,
+    onSubmit: handleSubmit(onSubmit),
+    debounceTime: 10
+  })
 
   if (error) return <FetchError />
 
   const handleReset = () => {
-    reset()
+    // reset({}, { keepDefaultValues: true })
+    handleSubmit(onSubmit)()
   }
 
   const handleNextPage = () => {
@@ -184,8 +192,8 @@ export default function Catalog() {
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
           <SortMenu open={isSortMenuOpen} onSortClose={() => setSortMenuOpen(false)} />
           <Filters
-            open={isFiltersOpen}
             onReset={handleReset}
+            open={isFiltersOpen}
             onFiltersClose={() => setFiltersOpen(false)}
             priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
           />
@@ -202,7 +210,7 @@ export default function Catalog() {
                   onSortClick={() => setSortMenuOpen(true)}
                   onFiltersClick={() => setFiltersOpen(true)}
                 />
-                <ProductList products={products} onReset={handleReset} />
+                <ProductList products={products} />
                 <div className="px-2 pt-2.5 pb-4">
                   <Pagination
                     onNext={handleNextPage}

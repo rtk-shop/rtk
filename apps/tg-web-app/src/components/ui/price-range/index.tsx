@@ -15,7 +15,7 @@ interface PriceRangeProps {
 }
 
 const priceInput = cva(
-  'mr-2 w-20 rounded-md border border-gray-500 py-1.5 pl-1.5 pr-1 leading-none'
+  'mr-2 w-20 rounded-md border border-gray-500 py-1.5 pr-1 pl-1.5 leading-none'
 )
 
 export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps) {
@@ -80,7 +80,7 @@ export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps
     <div>
       <CollapseHead title={title} collapsed={isCollapsed} onCollapse={handleCollapse} />
       <Collapse open={isCollapsed}>
-        <div className="pb-8 pl-3 pr-4 pt-5">
+        <div className="pt-5 pr-4 pb-8 pl-3">
           <div className="mb-5 flex items-center">
             <input
               type="number"

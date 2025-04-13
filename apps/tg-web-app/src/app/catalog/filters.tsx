@@ -30,6 +30,7 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
   const {
     formState: { dirtyFields },
     setValue
+    // reset
   } = useFormContext<FormValues>()
 
   const isDirty = countFiltersDirtyFields(dirtyFields) > 0
@@ -67,7 +68,7 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
               {isDirty && (
                 <button
                   onClick={handleReset}
-                  className="select-none rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white"
+                  className="rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white select-none"
                 >
                   {t('verbs.clear')}
                 </button>

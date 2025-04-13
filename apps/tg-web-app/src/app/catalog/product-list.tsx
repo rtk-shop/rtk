@@ -1,5 +1,6 @@
 import { Button } from '@repo/ui'
 import { ProductItem } from '@/components/product-item'
+import { useFormContext } from 'react-hook-form'
 import type { ProductTag } from '@/types'
 
 export interface ProductsProps {
@@ -12,10 +13,11 @@ export interface ProductsProps {
     tag?: keyof typeof ProductTag | null
     preview: string
   }>
-  onReset(): void
 }
 
-export function ProductList({ products, onReset }: ProductsProps) {
+export function ProductList({ products }: ProductsProps) {
+  const { reset } = useFormContext()
+
   if (!products.length) {
     return (
       <div className="flex h-screen justify-center">
@@ -24,7 +26,7 @@ export function ProductList({ products, onReset }: ProductsProps) {
           <p className="mb-5 max-w-64 font-medium">
             Извините, но по вашему запросу ничего не найдено
           </p>
-          <Button color="primary" onClick={onReset} fullWidth>
+          <Button color="primary" onClick={reset} fullWidth>
             Смотреть все
           </Button>
         </div>
