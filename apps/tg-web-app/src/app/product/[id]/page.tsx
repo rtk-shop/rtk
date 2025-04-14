@@ -4,7 +4,7 @@ import { Details } from './details'
 import { Info } from './info'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
-import { formatPrice } from '@/lib/helpers'
+import { formatPrice } from '@repo/utils'
 
 import 'keen-slider/keen-slider.min.css'
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Loader } from '@/components/ui/loader'
 import { IconButton } from '@/components/ui/icon-button'
-import { formatDate } from '@/lib/helpers'
+import { formatDate } from '@repo/utils'
 import { EditMode } from './edit-mode'
 
 import styles from './styles.module.css'

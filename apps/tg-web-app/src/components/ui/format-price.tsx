@@ -1,4 +1,4 @@
-import { formatPrice } from '@/lib/helpers'
+import { formatPrice } from '@repo/utils'
 
 export function FormatPrice({ price, currency = '₴' }: { price: number; currency?: string }) {
   const num = formatPrice(price)
