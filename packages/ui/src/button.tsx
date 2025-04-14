@@ -27,7 +27,7 @@ export interface ButtonProps {
 }
 
 const button = cva(
-  'flex cursor-pointer items-center justify-center rounded-xl px-7 py-3.5 leading-none font-medium transition-all select-none disabled:pointer-events-none',
+  'cursor-pointer rounded-xl px-7 py-3 font-medium transition-all select-none disabled:pointer-events-none',
   {
     variants: {
       color: {
@@ -98,15 +98,17 @@ export const Button = React.forwardRef<
       disabled={loading || disabled}
       {...otherProps}
     >
-      {!loading && startIcon}
       {loading ? (
         <div className="flex size-[1lh] justify-center border-r-inherit">
           <Loader adaptive color={color !== 'primary' ? 'light' : 'dark'} />
         </div>
       ) : (
-        <span>{children}</span>
+        <div className="flex items-center justify-center">
+          {startIcon}
+          <span>{children}</span>
+          {endIcon}
+        </div>
       )}
-      {!loading && endIcon}
     </button>
   )
 })
