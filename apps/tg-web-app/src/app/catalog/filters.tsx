@@ -67,6 +67,7 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
               <p className="text-[21px] font-semibold">{t('nouns.filters')}</p>
               {isDirty && (
                 <button
+                  type="button"
                   onClick={handleReset}
                   className="rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white select-none"
                 >

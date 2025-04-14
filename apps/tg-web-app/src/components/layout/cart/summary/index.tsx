@@ -26,7 +26,7 @@ export function Summary({ loading, totalSum = 0, onCheckout }: SummaryProps) {
           <FormatPrice price={totalSum} />
         </span>
       </p>
-      <Button color="accept" fullWidth onClick={handleButtonClick}>
+      <Button fullWidth onClick={handleButtonClick}>
         {t('cart.makeOrder')}
       </Button>
     </div>

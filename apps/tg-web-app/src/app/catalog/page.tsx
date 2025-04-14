@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Pagination } from '@/components/layout/pagination'
@@ -136,29 +136,17 @@ export default function Catalog() {
     [clearCursorSearchParams]
   )
 
-  // useEffect(() => {
-  //   const subscription = watch(() => handleSubmit(onSubmit)())
-  //   // const subscription = watch(() => console.log('wathc'))
-
-  //   // console.log('wathc')
-
-  //   return () => {
-  //     console.log(subscription)
-  //     subscription.unsubscribe()
-  //   }
-  // }, [handleSubmit, watch, onSubmit])
-
   useAutoSubmit({
     watch,
     trigger,
     onSubmit: handleSubmit(onSubmit),
-    debounceTime: 10
+    debounceTime: 0
   })
 
   if (error) return <FetchError />
 
   const handleReset = () => {
-    // reset({}, { keepDefaultValues: true })
+    reset()
     handleSubmit(onSubmit)()
   }
 

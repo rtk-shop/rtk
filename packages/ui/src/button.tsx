@@ -27,7 +27,7 @@ export interface ButtonProps {
 }
 
 const button = cva(
-  'inline-flex cursor-pointer items-center justify-center rounded-xl px-7 py-3.5 leading-none font-medium transition-all select-none disabled:pointer-events-none',
+  'flex cursor-pointer items-center justify-center rounded-xl px-7 py-3.5 leading-none font-medium transition-all select-none disabled:pointer-events-none',
   {
     variants: {
       color: {
