@@ -1,12 +1,7 @@
 import { Button } from '@repo/ui'
 import { Icon } from '@/components/ui/icon'
 
-interface ProcessPlugProps {
-  text: string
-  onClose(): void
-}
-
-export function ProcessPlug({ text, onClose }: ProcessPlugProps) {
+export function ProcessPlug({ text, onClose }: { text: string; onClose(): void }) {
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <div className="fill-gray-400 px-4">
@@ -16,7 +11,7 @@ export function ProcessPlug({ text, onClose }: ProcessPlugProps) {
       <Button
         onClick={onClose}
         fullWidth
-        className="group mt-12 w-8/12 max-w-48 font-medium"
+        className="group mt-12 max-w-48 !py-3"
         startIcon={
           <Icon
             name="common/arrow"

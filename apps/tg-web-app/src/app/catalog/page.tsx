@@ -198,7 +198,7 @@ export default function Catalog() {
                   onSortClick={() => setSortMenuOpen(true)}
                   onFiltersClick={() => setFiltersOpen(true)}
                 />
-                <ProductList products={products} />
+                <ProductList products={products} onReset={handleReset} />
                 <div className="px-2 pt-2.5 pb-4">
                   <Pagination
                     onNext={handleNextPage}

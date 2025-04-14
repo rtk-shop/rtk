@@ -21,24 +21,24 @@ export function Controls({ onSortClick, onFiltersClick }: ControlsProps) {
   return (
     <section className="py-3">
       <div className="flex">
-        <Badge content={isSortDirty} className="w-full" dotClassName="right-3 top-1">
+        <Badge content={isSortDirty} className="w-full pr-0.5" dotClassName="right-3 top-1">
           <Button
             color="secondary"
-            onClick={onSortClick}
             fullWidth
-            className="bg-gray-200 !py-2"
-            endIcon={<Icon name="action/sort" className="ml-1.5 text-[25px]" />}
+            onClick={onSortClick}
+            className="bg-gray-200 !px-1 !py-2"
+            endIcon={<Icon name="action/sort" className="text-[25px]" />}
           >
             Сортировать
           </Button>
         </Badge>
-        <Badge content={filtersDirtyCount} className="ml-1 w-full" dotClassName="right-3 top-1">
+        <Badge content={filtersDirtyCount} className="w-full pl-0.5" dotClassName="right-3 top-1">
           <Button
             color="secondary"
-            onClick={onFiltersClick}
             fullWidth
-            className="bg-gray-200 !py-2"
-            startIcon={<Icon name="action/filter" className="mr-1.5" />}
+            onClick={onFiltersClick}
+            className="bg-gray-200 !px-1 !py-2"
+            startIcon={<Icon name="action/filter" className="mr-1" />}
           >
             Фильтр
           </Button>

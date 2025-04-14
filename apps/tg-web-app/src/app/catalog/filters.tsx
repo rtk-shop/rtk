@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Icon } from '@/components/ui/icon'
 import { Drawer } from '@/components/ui/drawer'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckboxGroup } from '@/components/ui/checkbox-group'
+import { IconButton } from '@/components/ui/icon-button'
 import { PriceRange } from '@/components/ui/price-range'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
@@ -30,7 +32,6 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
   const {
     formState: { dirtyFields },
     setValue
-    // reset
   } = useFormContext<FormValues>()
 
   const isDirty = countFiltersDirtyFields(dirtyFields) > 0
@@ -60,22 +61,39 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
 
   return (
     <Drawer open={open} position="bottom" onClose={onFiltersClose}>
-      <section className="max-h-[470px] overflow-y-auto rounded-t-2xl">
+      <section className="max-h-[510px] overflow-y-auto rounded-t-2xl">
         <div className="bg-white px-4">
           <form>
-            <div className="flex items-center justify-between py-4">
-              <p className="text-[21px] font-semibold">{t('nouns.filters')}</p>
+            <div className="relative py-4">
+              <p className="text-center text-xl font-semibold">{t('nouns.filters')}</p>
               {isDirty && (
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white select-none"
+                  className="absolute top-4.5 left-1 rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white select-none"
                 >
                   {t('verbs.clear')}
                 </button>
               )}
+              <div className="absolute top-3 right-1">
+                <IconButton onClick={onFiltersClose} className="text-sm text-black">
+                  <Icon name="common/xmark" />
+                </IconButton>
+              </div>
             </div>
-            <div className="mb-2.5 h-0.5 bg-gray-200" />
+            <div className="mb-2.5 h-0.5 bg-gray-100" />
+            <CheckboxGroup
+              title={t('nouns.categories')}
+              name="category"
+              options={categoriesOptionsData.map(addI18)}
+            />
+            <PriceRange
+              title={t('nouns.price')}
+              min={currentRange[0]}
+              max={currentRange[1]}
+              onSet={handlePriceRange}
+            />
+            <RadioGroup name="tag" options={tagsOptionsData.map(addI18)} />
             <CheckboxGroup
               title={t('nouns.type')}
               name="gender"
@@ -85,20 +103,6 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
               title={t('nouns.availability')}
               name="availability"
               options={availabilityOptionsData.map(addI18)}
-            />
-            <div className="px-2.5 py-2">
-              <RadioGroup name="tag" options={tagsOptionsData.map(addI18)} />
-            </div>
-            <PriceRange
-              title={t('nouns.price')}
-              min={currentRange[0]}
-              max={currentRange[1]}
-              onSet={handlePriceRange}
-            />
-            <CheckboxGroup
-              title={t('nouns.categories')}
-              name="category"
-              options={categoriesOptionsData.map(addI18)}
             />
           </form>
         </div>
