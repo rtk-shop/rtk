@@ -14,7 +14,7 @@ import { useProductsQuery } from '@/lib/api/hooks'
 import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
-import type { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
+import { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 
 type QueryFilters = {
   price?: PriceRangeType
@@ -71,7 +71,9 @@ export default function Catalog() {
     router.replace(pathname)
   }
 
-  const [filterParams, setFilterParams] = useState<QueryFilters>()
+  const [filterParams, setFilterParams] = useState<QueryFilters>({
+    sortBy: ProductFilterSortBy.Default
+  })
 
   const [result] = useProductsQuery({
     variables: {
