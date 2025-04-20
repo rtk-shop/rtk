@@ -46,7 +46,6 @@ const button = cva(
       }
     },
     defaultVariants: {
-      color: 'primary',
       fullWidth: false
     },
     compoundVariants: [
@@ -66,7 +65,7 @@ export const Button = React.forwardRef<
   {
     loading,
     children,
-    color,
+    color = 'primary',
     startIcon,
     endIcon,
     type = 'button',
@@ -99,8 +98,10 @@ export const Button = React.forwardRef<
       {...otherProps}
     >
       {loading ? (
-        <div className="flex size-[1lh] justify-center border-r-inherit">
-          <Loader adaptive color={color !== 'primary' ? 'light' : 'dark'} />
+        <div className="flex justify-center border-r-inherit">
+          <div className="size-[1lh]">
+            <Loader adaptive color={color !== 'primary' ? 'light' : 'dark'} />
+          </div>
         </div>
       ) : (
         <div className="flex items-center justify-center">
