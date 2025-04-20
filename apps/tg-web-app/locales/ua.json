@@ -67,11 +67,16 @@
       "polypropylene": "Поліпропілен",
       "textile": "Тканина",
       "covers": "Чохли",
-      "sling": "Слінг"
+      "sling": "Слінг",
+      "sort": "Сортування",
+      "filter": "Фільтр"
     },
     "verbs": {
       "clear": "Очистити",
       "continue": "Продовжити"
+    },
+    "adjectives": {
+      "standard": "Стандартно"
     },
     "actions": {
       "showAll": "Дивитись усі",
@@ -79,7 +84,10 @@
       "forFemale": "Для жінок",
       "forMale": "Для чоловіків",
       "forDocs": "Для паперів",
-      "forLaptop": "Для ноутбуків"
+      "forLaptop": "Для ноутбуків",
+      "sort": "Сортувати",
+      "priceASC": "За зростанням ціни",
+      "priceDESC": "За спаданням ціни"
     }
   },
   "Checkout": {

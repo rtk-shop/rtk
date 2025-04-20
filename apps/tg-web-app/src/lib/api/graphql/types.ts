@@ -325,7 +325,16 @@ export type ProductFilter = {
   instock?: InputMaybe<Scalars['Boolean']['input']>
   isHidden: Scalars['Boolean']['input']
   price?: InputMaybe<PriceRange>
+  sortBy: ProductFilterSortBy
   tag?: InputMaybe<ProductTag>
+}
+
+export const enum ProductFilterSortBy {
+  Default = 'DEFAULT',
+  /** PRICE_ASC - from cheap to expensive */
+  PriceAsc = 'PRICE_ASC',
+  /** PRICE_DESC - from expensive to cheap */
+  PriceDesc = 'PRICE_DESC'
 }
 
 export type ProductImageInput = {

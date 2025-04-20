@@ -1,6 +1,7 @@
 import type { Gender, ProductTag, Category } from '@/types'
 import { FormValues } from './types'
 import { category } from '@/lib/constants'
+import { ProductFilterSortBy } from '@/lib/api/graphql/types'
 
 export type Option<T> = {
   label: string
@@ -74,15 +75,15 @@ export const categoriesOptionsData: Option<keyof typeof Category>[] = [
 
 export const sortOptionsData: Option<FormValues['sortBy']>[] = [
   {
-    label: 'Стандартно',
-    value: 'default'
+    label: 'adjectives.standard',
+    value: ProductFilterSortBy.Default
   },
   {
-    label: 'По возростанию цены',
-    value: 'priceAsc'
+    label: 'actions.priceASC',
+    value: ProductFilterSortBy.PriceAsc
   },
   {
-    label: 'По убыванию цены',
-    value: 'priceDesc'
+    label: 'actions.priceDESC',
+    value: ProductFilterSortBy.PriceDesc
   }
 ]

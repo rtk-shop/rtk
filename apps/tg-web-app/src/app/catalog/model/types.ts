@@ -6,7 +6,7 @@ export type FormValues = {
   tag: keyof typeof ProductTag | null
   priceRange: [number, number]
   category: Array<keyof typeof Category>
-  sortBy: 'default' | 'priceAsc' | 'priceDesc'
+  sortBy: 'DEFAULT' | 'PRICE_ASC' | 'PRICE_DESC'
 }
 
 export type PriceRangeType = {

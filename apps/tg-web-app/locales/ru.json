@@ -67,11 +67,16 @@
       "polypropylene": "Полипропилен",
       "textile": "Ткань",
       "covers": "Чехлы",
-      "sling": "Слинг"
+      "sling": "Слинг",
+      "sort": "Сортировка",
+      "filter": "Фильтр"
     },
     "verbs": {
       "clear": "Очистить",
       "continue": "Продолжить"
+    },
+    "adjectives": {
+      "standard": "Стандартно"
     },
     "actions": {
       "showAll": "Смотреть все",
@@ -79,7 +84,10 @@
       "forFemale": "Для женщин",
       "forMale": "Для мужчин",
       "forDocs": "Для документов",
-      "forLaptop": "Для ноутбука"
+      "forLaptop": "Для ноутбука",
+      "sort": "Сортировать",
+      "priceASC": "По возрастанию цены",
+      "priceDESC": "По убыванию цены"
     }
   },
   "Checkout": {

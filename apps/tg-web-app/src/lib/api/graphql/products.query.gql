@@ -5,6 +5,7 @@ query Products(
   $instock: Boolean
   $price: PriceRange
   $isHidden: Boolean = false
+  $sortBy: ProductFilterSortBy!
   # pagination
   $first: Int!
   $after: String
@@ -19,9 +20,9 @@ query Products(
       gender: $gender
       tag: $tag
       instock: $instock
-      # 			other
       isHidden: $isHidden
       price: $price
+      sortBy: $sortBy
     }
   ) {
     totalCount

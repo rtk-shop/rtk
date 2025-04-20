@@ -14,7 +14,7 @@ import { useProductsQuery } from '@/lib/api/hooks'
 import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
-import type { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
+import type { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 
 type QueryFilters = {
   price?: PriceRangeType
@@ -22,6 +22,7 @@ type QueryFilters = {
   tag?: ProductTag
   category?: CategoryType[] | CategoryType
   gender?: Gender
+  sortBy: ProductFilterSortBy
 }
 
 const LIMIT_PER_PAGE = 33
@@ -92,7 +93,7 @@ export default function Catalog() {
       tag: null,
       priceRange: undefined,
       category: [],
-      sortBy: 'default'
+      sortBy: 'DEFAULT'
     }
   })
 
@@ -100,9 +101,7 @@ export default function Catalog() {
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     (data) => {
-      console.log('-- API -- [sortBy]', data.sortBy)
-
-      const { gender, availability, tag, priceRange, category } = data
+      const { gender, availability, tag, priceRange, category, sortBy } = data
 
       let price: PriceRangeType | undefined
 
@@ -121,6 +120,7 @@ export default function Catalog() {
       const categoryData = category as unknown as CategoryType
       const tagData = tag as unknown as ProductTag
       const genderData = gender as unknown as Gender
+      const sortByData = sortBy as ProductFilterSortBy
 
       // new filter starts pagination from the beginning
       clearCursorSearchParams()
@@ -130,7 +130,8 @@ export default function Catalog() {
         instock,
         category: categoryData,
         tag: tagData,
-        gender: genderData
+        gender: genderData,
+        sortBy: sortByData
       })
     },
     [clearCursorSearchParams]

@@ -9,6 +9,7 @@ export type ProductsQueryVariables = Types.Exact<{
   instock?: Types.InputMaybe<Types.Scalars['Boolean']['input']>
   price?: Types.InputMaybe<Types.PriceRange>
   isHidden?: Types.InputMaybe<Types.Scalars['Boolean']['input']>
+  sortBy: Types.ProductFilterSortBy
   first: Types.Scalars['Int']['input']
   after?: Types.InputMaybe<Types.Scalars['String']['input']>
   before?: Types.InputMaybe<Types.Scalars['String']['input']>
@@ -52,6 +53,7 @@ export const ProductsDocument = gql`
     $instock: Boolean
     $price: PriceRange
     $isHidden: Boolean = false
+    $sortBy: ProductFilterSortBy!
     $first: Int!
     $after: String
     $before: String
@@ -67,6 +69,7 @@ export const ProductsDocument = gql`
         instock: $instock
         isHidden: $isHidden
         price: $price
+        sortBy: $sortBy
       }
     ) {
       totalCount
