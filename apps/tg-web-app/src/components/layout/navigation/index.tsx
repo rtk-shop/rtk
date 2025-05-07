@@ -1,3 +1,5 @@
+'use client'
+
 import { routeNames } from '@/lib/constants'
 import { Badge } from '@repo/ui'
 import { IconButton } from '@/components/ui/icon-button'
@@ -31,8 +33,13 @@ export function Navigation() {
   }
 
   return (
-    <div className="fixed -bottom-px z-40 w-screen">
-      <header className="bg-black/80 backdrop-blur-md">
+    <div className="fixed bottom-0 z-40 w-screen">
+      <header
+        className="bg-black/80 backdrop-blur-md"
+        style={{
+          paddingBottom: 'calc(var(--tg-safe-area-inset-bottom, 0px) - 10px)'
+        }}
+      >
         <nav className="px-3 pt-1">
           <ul className="flex w-full justify-between">
             <li>

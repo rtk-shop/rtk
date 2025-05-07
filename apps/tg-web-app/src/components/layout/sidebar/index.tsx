@@ -1,3 +1,5 @@
+'use client'
+
 import { Drawer } from '@/components/ui/drawer'
 import { SidebarHead } from './head'
 import { Categories } from './categories'

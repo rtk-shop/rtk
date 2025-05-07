@@ -1,3 +1,5 @@
+'use client'
+
 import { Drawer } from '@/components/ui/drawer'
 import { CartInner } from './cart-inner'
 import { useAppState } from '@/stores/app/store'
