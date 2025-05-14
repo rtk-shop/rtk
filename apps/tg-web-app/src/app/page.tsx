@@ -1,25 +1,37 @@
 'use client'
 
 import { useEffect } from 'react'
-import Cookies from 'js-cookie'
 import { Loader } from '@/components/ui/loader'
 import { LogoLoader } from '@/components/ui/logo-loader'
 import { useWebAppAuth } from '@/lib/api/hooks'
 import { useRouter } from 'next/navigation'
-import { isDevMode, routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/constants'
 import { toast } from 'sonner'
-import { CAME_FROM_COOKIE_NAME } from '@/lib/session'
+import { validateStartParam, startupCommandsPatterns } from '@/lib/web-app'
 
 export default function Page() {
   const router = useRouter()
 
   const [authorize] = useWebAppAuth<{ initData: string }>({
     onSuccess() {
-      const cameFrom = Cookies.get(CAME_FROM_COOKIE_NAME)
+      if (typeof window !== 'undefined' && window.Telegram) {
+        // DOCS: https://docs.telegram-mini-apps.com/platform/start-parameter
+        const command = window.Telegram.WebApp.initDataUnsafe.start_param
 
-      if (cameFrom && cameFrom !== routeNames.root) {
-        Cookies.remove(CAME_FROM_COOKIE_NAME)
-        router.replace(cameFrom)
+        if (command) {
+          if (!validateStartParam(command)) {
+            console.warn('invalid start_param', command)
+            router.replace(routeNames.catalog)
+
+            return
+          }
+
+          if (command.includes(startupCommandsPatterns.product)) {
+            const productId = command.split('_')[1]
+            router.replace(routeNames.product + productId)
+          }
+        }
+
         return
       }
 
@@ -49,15 +61,11 @@ export default function Page() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram) {
-      const initData = isDevMode
-        ? process.env.NEXT_PUBLIC_TG_INIT_DATA || ''
-        : window.Telegram.WebApp.initData
+      const initData = window.Telegram.WebApp.initData //  process.env.NEXT_PUBLIC_TG_INIT_DATA
 
       const timer = setTimeout(() => {
-        console.log('call useWebAppAuth.success ##')
-
         authorize({ initData })
-      }, 2000)
+      }, 1000)
 
       return () => clearTimeout(timer)
     }
