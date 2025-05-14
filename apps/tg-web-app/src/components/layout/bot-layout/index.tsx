@@ -30,7 +30,7 @@ export function BotLayout({ children }: { children: ReactNode }) {
         paddingBottom: 'calc(48px + var(--tg-safe-area-inset-bottom, 0px))'
       }}
     >
-      <Cart />
+      {!noNavbarPaths.includes(pathname) && <Cart />}
       <Sidebar />
       {!noNavbarPaths.includes(pathname) && <Navigation />}
       {children}
