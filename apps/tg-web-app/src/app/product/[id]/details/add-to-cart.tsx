@@ -33,7 +33,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
           <Icon name="common/cart" className="mr-2.5 fill-white text-[30px] transition-all" />
         }
       >
-        {inStock ? 'Добавить в корзину' : 'Нет в наличии'}
+        Добавить в корзину
       </Button>
     </div>
   )
