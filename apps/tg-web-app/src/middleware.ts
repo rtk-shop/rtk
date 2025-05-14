@@ -6,7 +6,8 @@ import {
   parseRefreshToken,
   refreshSession,
   REFRESH_COOKIE_NAME,
-  SESSION_COOKIE_NAME
+  SESSION_COOKIE_NAME,
+  CAME_FROM_COOKIE_NAME
 } from '@/lib/session'
 
 // const publicRoutes = [routeNames.root]
@@ -24,6 +25,8 @@ export default async function middleware(req: NextRequest) {
   if (process.env.NODE_ENV === 'production' && path === '/sandbox') {
     return NextResponse.redirect(new URL(routeNames.root, req.url))
   }
+
+  console.log('from:', path)
 
   // 1. Check if the current route is protected or public
   const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
@@ -51,6 +54,7 @@ export default async function middleware(req: NextRequest) {
       // if refresh token is invalid, delete it
       if (!refreshedSessionData) {
         const resp = NextResponse.redirect(new URL(routeNames.root, req.nextUrl))
+        resp.cookies.set(CAME_FROM_COOKIE_NAME, path)
         resp.cookies.delete(REFRESH_COOKIE_NAME)
 
         return resp

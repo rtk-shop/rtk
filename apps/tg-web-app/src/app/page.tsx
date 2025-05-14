@@ -1,18 +1,28 @@
 'use client'
 
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { Loader } from '@/components/ui/loader'
 import { LogoLoader } from '@/components/ui/logo-loader'
 import { useWebAppAuth } from '@/lib/api/hooks'
 import { useRouter } from 'next/navigation'
 import { isDevMode, routeNames } from '@/lib/constants'
 import { toast } from 'sonner'
+import { CAME_FROM_COOKIE_NAME } from '@/lib/session'
 
 export default function Page() {
   const router = useRouter()
 
   const [authorize] = useWebAppAuth<{ initData: string }>({
     onSuccess() {
+      const cameFrom = Cookies.get(CAME_FROM_COOKIE_NAME)
+
+      if (cameFrom && cameFrom !== routeNames.root) {
+        Cookies.remove(CAME_FROM_COOKIE_NAME)
+        router.replace(cameFrom)
+        return
+      }
+
       router.replace(routeNames.catalog)
     },
     onError(errorMsg) {

@@ -3,6 +3,7 @@ import type { SessionTokenData, RefreshTokenData } from '@/types'
 
 export const SESSION_COOKIE_NAME = 'w_auth'
 export const REFRESH_COOKIE_NAME = 'rft'
+export const CAME_FROM_COOKIE_NAME = 'cf'
 
 export function parseSessionToken(token?: string) {
   if (!token) return null
