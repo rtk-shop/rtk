@@ -1,9 +1,9 @@
-import type { TgAuthWidgetUserData } from "@/types/user";
+import type { TgAuthWidgetUserData } from '@/types/user'
 
 declare global {
   interface Window {
-    onTelegramWidgetAuth?: (user: TgAuthWidgetUserData) => void;
+    onTelegramWidgetAuth?: (user: TgAuthWidgetUserData) => void
   }
 }
 
-export {};
+export {}
