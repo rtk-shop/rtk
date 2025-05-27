@@ -49,17 +49,17 @@
     "urql": "^4.2.2",
     "use-debounce": "^10.0.4",
     "valibot": "^1.1.0",
-    "zustand": "^5.0.4"
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.6",
     "@graphql-codegen/client-preset": "^4.8.1",
     "@graphql-codegen/fragment-matcher": "^5.1.0",
-    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.1",
     "@graphql-codegen/typescript-operations": "^4.6.1",
-    "@graphql-codegen/typescript-urql": "^4.0.0",
+    "@graphql-codegen/typescript-urql": "^4.0.1",
     "@neodx/svg": "^0.7.1",
-    "@tailwindcss/postcss": "^4.1.6",
+    "@tailwindcss/postcss": "^4.1.7",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.15.18",
     "@types/react": "^19.1.4",
@@ -72,7 +72,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.1.6",
+    "tailwindcss": "^4.1.7",
     "telegram-webapps": "^8.0.5",
     "typescript": "^5.8.3"
   }
