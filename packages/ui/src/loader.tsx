@@ -7,7 +7,7 @@ const loader = cva('aspect-square animate-spin rounded-full border-solid', {
       false: 'w-10 border-[6px]'
     },
     color: {
-      dark: 'border-white border-r-black',
+      dark: 'border-black border-r-white',
       light: 'border-white border-r-inherit'
     }
   },
