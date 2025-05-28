@@ -1,6 +1,6 @@
 import { useRef, ReactNode, MouseEvent } from 'react'
 import { cva } from 'cva'
-import { Loader } from '../loader'
+import { Loader } from '@repo/ui'
 
 import styles from './styles.module.css'
 

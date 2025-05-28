@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Loader } from '@/components/ui/loader'
+import { Loader } from '@repo/ui'
 import { LogoLoader } from '@/components/ui/logo-loader'
 import { useWebAppAuth } from '@/lib/api/hooks'
 import { useRouter } from 'next/navigation'
@@ -29,10 +29,9 @@ export default function Page() {
           if (command.includes(startupCommandsPatterns.product)) {
             const productId = command.split('_')[1]
             router.replace(routeNames.product + productId)
+            return
           }
         }
-
-        return
       }
 
       router.replace(routeNames.catalog)

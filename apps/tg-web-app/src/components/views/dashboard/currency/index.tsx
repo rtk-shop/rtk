@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Loader } from '@/components/ui/loader'
+import { Loader } from '@repo/ui'
 import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@repo/utils'
 import { EditMode } from './edit-mode'

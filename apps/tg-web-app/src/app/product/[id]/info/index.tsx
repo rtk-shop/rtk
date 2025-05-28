@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Tabs, TabContent } from '@/components/ui/tabs'
 import { Properties } from './properties'
 import { Delivery } from './delivery'
-import { Loader } from '@/components/ui/loader'
+import { Loader } from '@repo/ui'
 
 interface InfoProps {
   gender: string

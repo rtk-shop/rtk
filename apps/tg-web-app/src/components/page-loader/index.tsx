@@ -1,4 +1,4 @@
-import { Loader } from '@/components/ui/loader'
+import { Loader } from '@repo/ui'
 
 export function PageLoader() {
   return (

@@ -1,6 +1,6 @@
 import { Icon } from './icon'
 import { IconButton } from './icon-button'
-import { Loader } from './loader'
+import { Loader } from '@repo/ui'
 
 export interface AmountControllerProps {
   amount: number
