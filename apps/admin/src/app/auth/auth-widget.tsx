@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import type { TgAuthWidgetUserData } from '@/types/user'
 
-export function AuthWidget() {
+export function AuthWidget({ onAuth }: { onAuth(user: TgAuthWidgetUserData): void }) {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     window.onTelegramWidgetAuth = (user) => {
-      console.log('user ->', user)
+      onAuth({ ...user })
     }
 
     const script = document.createElement('script')
@@ -30,9 +31,5 @@ export function AuthWidget() {
     }
   }, [])
 
-  return (
-    <div className="flex items-center justify-center" ref={containerRef}>
-      {/* <p>Widget</p> */}
-    </div>
-  )
+  return <div className="flex items-center justify-center" ref={containerRef} />
 }

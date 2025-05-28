@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 import { Roboto } from 'next/font/google'
 
 import '@/styles/globals.css'
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>{children}</body>
+      <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
     </html>
   )
 }
