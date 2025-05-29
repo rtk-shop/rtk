@@ -22,8 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>{children}</body>
-      <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+      <body className={roboto.variable}>
+        <main>{children}</main>
+        <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+      </body>
     </html>
   )
 }

@@ -4,6 +4,8 @@ import useSWRMutation from 'swr/mutation'
 import { toast } from 'sonner'
 import { AuthWidget } from './auth-widget'
 import { Loader } from '@repo/ui'
+import { useRouter } from 'next/navigation'
+import { routeNames } from '@/lib/constants'
 import type { TgAuthWidgetUserData } from '@/types/user'
 
 const mutator = async (url: string, { arg }: { arg: TgAuthWidgetUserData }): Promise<string> => {
@@ -11,7 +13,8 @@ const mutator = async (url: string, { arg }: { arg: TgAuthWidgetUserData }): Pro
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(arg),
-    cache: 'no-store'
+    cache: 'no-store',
+    credentials: 'include'
   })
 
   const respText = await resp.text()
@@ -22,12 +25,14 @@ const mutator = async (url: string, { arg }: { arg: TgAuthWidgetUserData }): Pro
 }
 
 export default function Auth() {
+  const router = useRouter()
+
   const { trigger, isMutating } = useSWRMutation(
     process.env.NEXT_PUBLIC_API_HOST + '/tg-oauth',
     mutator,
     {
-      onSuccess(data) {
-        console.log('log in', data)
+      onSuccess() {
+        router.replace(routeNames.dashboard)
       },
       onError(err) {
         switch (err.message.trim()) {
