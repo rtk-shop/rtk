@@ -9,17 +9,13 @@ import {
   SESSION_COOKIE_NAME
 } from '@/lib/session'
 
-const protectedRoutes = [routeNames.root, routeNames.dashboard]
+const protectedRoutes = [routeNames.root, routeNames.dashboard] as string[]
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
 
-  if (process.env.NODE_ENV === 'production' && path === '/sandbox') {
-    return NextResponse.redirect(new URL(routeNames.root, req.url))
-  }
-
   // 1. Check if the current route is protected or public
-  const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
+  const isProtectedRoute = protectedRoutes.includes(path)
 
   const cookieStore = await cookies()
 
