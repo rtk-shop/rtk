@@ -17,12 +17,15 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       jose:
         specifier: ^6.0.11
         version: 6.0.11
       next:
         specifier: 15.3.2
-        version: 15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.2(@babel/core@7.27.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -36,6 +39,9 @@ importers:
         specifier: ^2.3.3
         version: 2.3.3(react@19.1.0)
     devDependencies:
+      '@neodx/svg':
+        specifier: ^0.7.1
+        version: 0.7.1(eslint@8.57.1)(prettier@3.5.3)
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.3
@@ -8159,31 +8165,6 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      '@next/env': 15.3.2
-      '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.15
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001713
-      postcss: 8.4.31
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      styled-jsx: 5.1.6(react@19.1.0)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 15.3.2
-      '@next/swc-darwin-x64': 15.3.2
-      '@next/swc-linux-arm64-gnu': 15.3.2
-      '@next/swc-linux-arm64-musl': 15.3.2
-      '@next/swc-linux-x64-gnu': 15.3.2
-      '@next/swc-linux-x64-musl': 15.3.2
-      '@next/swc-win32-arm64-msvc': 15.3.2
-      '@next/swc-win32-x64-msvc': 15.3.2
-      sharp: 0.34.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
@@ -8889,11 +8870,6 @@ snapshots:
       react: 19.1.0
     optionalDependencies:
       '@babel/core': 7.27.3
-
-  styled-jsx@5.1.6(react@19.1.0):
-    dependencies:
-      client-only: 0.0.1
-      react: 19.1.0
 
   stylis@4.2.0: {}
 
