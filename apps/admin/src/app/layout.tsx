@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Toaster } from 'sonner'
 import { Roboto } from 'next/font/google'
+import { UrqlProvider } from '@/providers/urql'
 
 import '@/styles/globals.css'
 
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <main>{children}</main>
-        <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+        <UrqlProvider>
+          <main>{children}</main>
+          <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+        </UrqlProvider>
       </body>
     </html>
   )
