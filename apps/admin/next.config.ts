@@ -2,6 +2,9 @@ import type { NextConfig } from 'next'
 // import svg from '@neodx/svg/webpack'
 
 const nextConfig: NextConfig = {
+  experimental: {
+    optimizePackageImports: ['urql', '@urql/exchange-auth']
+  },
   /*
     @neodx/svg does not support turbopack.
     Run without --turbopack, comment out after use
