@@ -1,0 +1,13 @@
+query DashboardStats {
+  dashboardStats {
+    users {
+      count
+    }
+    orders {
+      count
+    }
+    products {
+      count
+    }
+  }
+}

@@ -1,13 +1,9 @@
-import { Users } from './stats/users'
-import { Orders } from './stats/orders'
-import { Products } from './stats/products'
+import { Stats } from './stats'
 
 export default function Dashboard() {
   return (
-    <div className="flex p-[20px]">
-      <Users />
-      <Orders />
-      <Products />
+    <div>
+      <Stats />
     </div>
   )
 }
