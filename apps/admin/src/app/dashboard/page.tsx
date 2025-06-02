@@ -1,13 +1,13 @@
-import { Icon } from '@/components/ui/icon'
+import { Users } from './stats/users'
+import { Orders } from './stats/orders'
+import { Products } from './stats/products'
 
 export default function Dashboard() {
   return (
-    <div>
-      <div>Dashboard</div>
-
-      <div className="text-6xl text-orange-500">
-        <Icon name="common/user" />
-      </div>
+    <div className="flex p-[20px]">
+      <Users />
+      <Orders />
+      <Products />
     </div>
   )
 }
