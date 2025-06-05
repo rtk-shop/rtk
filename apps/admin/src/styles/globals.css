@@ -7,6 +7,9 @@
     We're using a specific component class to prevent potential style conflicts and utilize the [data-axis] attribute.
     Set icon size to 1em based on its aspect ratio, so we can use `font-size` to scale it
   */
+
+  @apply box-content inline-block fill-current text-inherit select-none;
+
   &[data-axis*='x'] {
     @apply w-[1em];
   }

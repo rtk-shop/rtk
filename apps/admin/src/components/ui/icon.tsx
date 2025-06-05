@@ -19,11 +19,7 @@ export function Icon({ name, className, ...props }: IconProps) {
 
   return (
     <svg
-      className={clsx(
-        'icon',
-        'box-content inline-block fill-current text-inherit select-none',
-        className
-      )}
+      className={clsx('icon', className)}
       viewBox={viewBox}
       data-axis={axis}
       focusable="false"
