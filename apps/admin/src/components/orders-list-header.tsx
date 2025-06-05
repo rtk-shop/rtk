@@ -5,7 +5,7 @@ const headerItem = cva('flex items-center font-medium text-gray-700')
 
 const items = [
   {
-    title: 'ID',
+    title: 'Заказ',
     icon: <Icon name="common/menu" className="text-black" />,
     className: 'col-span-2'
   },

@@ -6,14 +6,19 @@ import { Orders } from './orders'
 
 export default function Dashboard() {
   return (
-    <div className="p-[10px]">
+    <div className="flex h-dvh flex-col p-[10px]">
       <div className="mb-5">
         <Suspense fallback={<StatsSkeleton />}>
           <Stats />
         </Suspense>
       </div>
-      <OrdersHeader />
-      <Orders />
+      <div className="flex grow">
+        {/* mt-auto */}
+        <div className="w-full">
+          <OrdersHeader />
+          <Orders />
+        </div>
+      </div>
     </div>
   )
 }

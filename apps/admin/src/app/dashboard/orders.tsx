@@ -27,8 +27,8 @@ export function Orders() {
   if (error) {
     return (
       <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg text-gray-700">
-          <Icon name="common/warning" className="mb-1 text-[39px]" />
+        <div className="flex h-full flex-col items-center justify-center rounded-lg">
+          <Icon name="common/warning" className="mb-1 text-5xl text-amber-500" />
           <p className="text-lg">Ошибка получения данных</p>
         </div>
       </div>
