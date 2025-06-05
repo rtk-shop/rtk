@@ -229,6 +229,12 @@ export type Order = {
   updatedAt: Scalars['String']['output']
 }
 
+export type OrderEdge = {
+  __typename?: 'OrderEdge'
+  cursor: Scalars['String']['output']
+  node: Order
+}
+
 export type OrderFilter = {
   status: Scalars['String']['input']
 }
@@ -251,6 +257,17 @@ export const enum OrderStatus {
   Rejected = 'REJECTED',
   Returned = 'RETURNED',
   Sent = 'SENT'
+}
+
+export type OrdersConnection = {
+  __typename?: 'OrdersConnection'
+  edges: Array<OrderEdge>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']['output']
+}
+
+export type OrdersFilter = {
+  status?: InputMaybe<OrderStatus>
 }
 
 export type OrdersStats = {
@@ -375,6 +392,7 @@ export type Query = {
   cartProducts: Array<CartProduct>
   dashboardStats: DashboardStats
   globalData: GlobalData
+  orders: OrdersConnection
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
@@ -385,6 +403,13 @@ export type Query = {
    *   - MANAGER, ADMIN - can receive orders from all users
    */
   userOrders: Array<Order>
+}
+
+export type QueryOrdersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  before?: InputMaybe<Scalars['String']['input']>
+  first: Scalars['Int']['input']
+  where?: InputMaybe<OrdersFilter>
 }
 
 export type QueryProductArgs = {

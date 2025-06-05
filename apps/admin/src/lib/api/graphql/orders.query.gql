@@ -1,0 +1,21 @@
+query Orders($first: Int!, $status: OrderStatus) {
+  orders(first: $first, where: { status: $status }) {
+    pageInfo {
+      hasNextPage
+      startCursor
+      endCursor
+      hasPreviousPage
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+        price
+        receiverName
+        status
+        createdAt
+      }
+    }
+  }
+}

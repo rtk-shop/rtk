@@ -1,5 +1,14 @@
 export interface SpritesMap {
-  common: 'arrow' | 'box-taped' | 'calendar' | 'menu' | 'signal' | 'tags' | 'user' | 'warehouse'
+  common:
+    | 'arrow'
+    | 'box-taped'
+    | 'calendar'
+    | 'menu'
+    | 'signal'
+    | 'tags'
+    | 'user'
+    | 'warehouse'
+    | 'warning'
 }
 export const SPRITES_META: {
   [Key in keyof SpritesMap]: {
@@ -15,7 +24,7 @@ export const SPRITES_META: {
   }
 } = {
   common: {
-    filePath: 'common.ab788683.svg',
+    filePath: 'common.b202cf5b.svg',
     items: {
       arrow: {
         viewBox: '0 0 24 24',
@@ -55,6 +64,11 @@ export const SPRITES_META: {
       warehouse: {
         viewBox: '0 0 640 512',
         width: 640,
+        height: 512
+      },
+      warning: {
+        viewBox: '0 0 512 512',
+        width: 512,
         height: 512
       }
     }
