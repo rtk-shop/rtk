@@ -9,8 +9,8 @@ export default async function Stats() {
   return (
     <div className="flex">
       <Users count={data?.dashboardStats.users.count} />
-      <Orders count={data?.dashboardStats.orders.count} />
       <Products count={data?.dashboardStats.products.count} />
+      <Orders count={data?.dashboardStats.orders.count} />
     </div>
   )
 }
