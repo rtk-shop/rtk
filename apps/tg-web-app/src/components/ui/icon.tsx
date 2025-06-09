@@ -1,13 +1,11 @@
 import clsx from 'clsx'
-import type { SVGProps } from 'react'
-import { SPRITES_META, type SpritesMap } from '@/sprite.gen'
 import { getIconMeta } from '@/lib/get-icon-meta'
+import type { SVGProps } from 'react'
+import { type SpritesMap } from '@/sprite.gen'
 
-// Our icon will extend an SVG element and accept all its props
-export interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref'> {
   name: AnyIconName
 }
-
 // Merging all possible icon names as `sprite/icon` string
 export type AnyIconName = { [Key in keyof SpritesMap]: IconName<Key> }[keyof SpritesMap]
 
@@ -19,7 +17,6 @@ export function Icon({ name, className, ...props }: IconProps) {
 
   return (
     <svg
-      // "icon" isn't inlined because of data-axis attribute
       className={clsx('icon', className)}
       viewBox={viewBox}
       /**
@@ -33,7 +30,6 @@ export function Icon({ name, className, ...props }: IconProps) {
       aria-hidden
       {...props}
     >
-      {/* For example, "/sprites/common.svg#favourite". Change a base path if you don't store sprites under the "/sprites". */}
       <use href={`/sprites/${filePath}#${iconName}`} />
     </svg>
   )
