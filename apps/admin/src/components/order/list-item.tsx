@@ -6,15 +6,20 @@ export function OrderListItem({
   id,
   date,
   price,
-  status
+  status,
+  onClick
 }: {
   id: string
   date: string
   price: number
   status: OrderStatus
+  onClick(): void
 }) {
   return (
-    <li className="grid cursor-pointer grid-cols-12 gap-2 px-1 py-4.5 text-sm odd:bg-gray-50 hover:bg-gray-200 sm:rounded-xl sm:px-4 sm:py-4 sm:text-base">
+    <li
+      onClick={onClick}
+      className="grid cursor-pointer grid-cols-12 gap-2 px-1 py-4.5 text-sm odd:bg-gray-50 hover:bg-gray-200 sm:rounded-xl sm:px-4 sm:py-4 sm:text-base"
+    >
       <span className="col-span-2">{id}</span>
       <span className="col-span-4 overflow-hidden text-center text-ellipsis whitespace-nowrap">
         {formatDate(date, { dateStyle: 'short', timeStyle: 'short' })}

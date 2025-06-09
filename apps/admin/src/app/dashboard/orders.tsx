@@ -1,13 +1,17 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { Icon } from '@/components/ui/icon'
 import { OrderListItem } from '@/components/order/list-item'
 import { useOrders } from '@/lib/api/hooks'
 import { OrdersSkeleton } from './skeletons/orders'
+import { routeNames } from '@/lib/constants'
 
 const FIRST = 7
 
 export function Orders() {
+  const router = useRouter()
+
   const [result] = useOrders({
     variables: {
       first: FIRST
@@ -35,6 +39,10 @@ export function Orders() {
     )
   }
 
+  const handleOrderClick = (orderId: string) => {
+    router.push(routeNames.order + orderId)
+  }
+
   const orders = data?.orders.edges?.map((e) => e?.node) || []
 
   return (
@@ -47,6 +55,7 @@ export function Orders() {
             date={order.createdAt}
             price={order.price}
             status={order.status}
+            onClick={() => handleOrderClick(order.id)}
           />
         ))}
       </ul>

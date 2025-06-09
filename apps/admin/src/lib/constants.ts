@@ -3,7 +3,8 @@ import { OrderStatus } from '@/types/order'
 export const routeNames = {
   root: '/',
   auth: '/auth',
-  dashboard: '/dashboard'
+  dashboard: '/dashboard',
+  order: '/order/'
 } as const
 
 export const orderStatus: { [p in Lowercase<OrderStatus>]: Uppercase<p> } = {
