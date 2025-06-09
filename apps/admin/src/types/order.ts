@@ -1,9 +1,10 @@
-export const enum OrderStatus {
+const enum orderStatus {
   CREATED,
   PROCESSED,
-  ACCEPTED,
   SENT,
   DONE,
   REJECTED,
   RETURNED
 }
+
+export type OrderStatus = keyof typeof orderStatus

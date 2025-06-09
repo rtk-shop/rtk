@@ -250,7 +250,6 @@ export type OrderProduct = {
 }
 
 export const enum OrderStatus {
-  Accepted = 'ACCEPTED',
   Created = 'CREATED',
   Done = 'DONE',
   Processed = 'PROCESSED',
