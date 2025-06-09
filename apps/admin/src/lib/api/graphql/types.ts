@@ -391,6 +391,7 @@ export type Query = {
   cartProducts: Array<CartProduct>
   dashboardStats: DashboardStats
   globalData: GlobalData
+  order: OrderPayload
   orders: OrdersConnection
   product: ProductPayload
   products: ProductConnection
@@ -402,6 +403,10 @@ export type Query = {
    *   - MANAGER, ADMIN - can receive orders from all users
    */
   userOrders: Array<Order>
+}
+
+export type QueryOrderArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type QueryOrdersArgs = {
