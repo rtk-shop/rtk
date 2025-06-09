@@ -11,7 +11,7 @@ const items = [
   },
   {
     title: 'Дата',
-    icon: <Icon name="common/calendar" className="text-yellow-600" />,
+    icon: <Icon name="common/calendar" className="text-orange-400" />,
     className: 'justify-center col-span-4'
   },
   {
