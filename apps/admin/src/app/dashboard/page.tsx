@@ -6,7 +6,7 @@ import { Orders } from './orders'
 
 export default function Dashboard() {
   return (
-    <div className="flex h-dvh flex-col p-[10px]">
+    <div className="flex h-dvh flex-col p-[8px]">
       <div className="mb-5">
         <Suspense fallback={<StatsSkeleton />}>
           <Stats />
