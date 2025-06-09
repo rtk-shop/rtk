@@ -6,7 +6,7 @@ import { HeightExpander } from '../ui/height-expander'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '@repo/ui'
 import { orderStatus, routeNames } from '@/lib/constants'
-import { Supplier } from './supplier'
+import { DeliverySupplier } from '@repo/ui'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { getOrderStatusColor } from '@/lib/helpers'
 import { formatDate, formatPhoneNumber } from '@repo/utils'
@@ -110,8 +110,8 @@ export function OrderItem({
           <div className="mb-3.5 leading-snug">
             <p className="mb-0.5 font-medium">Информация о доставке</p>
             <p className="flex items-center">
-              <span className="text-gray-500">Сервис: </span>
-              <Supplier supplier={supplier} />
+              <span className="mr-1 text-gray-500">Сервис: </span>
+              <DeliverySupplier supplier={supplier} />
             </p>
             <p>
               <span className="text-gray-500">Адрес:</span> {cityName}, {postOfficeName}
