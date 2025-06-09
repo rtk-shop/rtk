@@ -1,0 +1,15 @@
+{
+  "name": "@repo/assets",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsc index.ts"
+  },
+  "files": [
+    "shared/*",
+    "index.ts"
+  ],
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
