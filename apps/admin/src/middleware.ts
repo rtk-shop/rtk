@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import { routeNames } from '@/lib/constants'
+import { routeNames, checkProtectedRoute } from '@/lib/routes'
 import {
   parseSessionToken,
   parseRefreshToken,
@@ -9,13 +9,11 @@ import {
   SESSION_COOKIE_NAME
 } from '@/lib/session'
 
-const protectedRoutes = [routeNames.root, routeNames.dashboard] as string[]
-
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
 
   // 1. Check if the current route is protected or public
-  const isProtectedRoute = protectedRoutes.includes(path)
+  const isProtectedRoute = checkProtectedRoute(path)
 
   const cookieStore = await cookies()
 
