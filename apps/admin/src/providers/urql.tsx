@@ -2,7 +2,7 @@
 
 import jsCookie from 'js-cookie'
 import { cacheExchange } from '@/cache'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { SESSION_COOKIE_NAME } from '@/lib/session'
 import { authExchange } from '@urql/exchange-auth'
 import { createClient, fetchExchange, UrqlProvider as Provider, ssrExchange } from '@urql/next'

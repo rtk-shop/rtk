@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getOrder } from '@/lib/api/actions'
+import { getOrder } from '@/app/actions'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
 import { notFound } from 'next/navigation'

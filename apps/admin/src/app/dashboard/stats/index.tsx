@@ -1,7 +1,7 @@
+import { getDashboardStats } from '@/app/actions'
 import { Orders } from './orders'
 import { Products } from './products'
 import { Users } from './users'
-import { getDashboardStats } from '@/lib/api/actions'
 
 export default async function Stats() {
   const data = await getDashboardStats()

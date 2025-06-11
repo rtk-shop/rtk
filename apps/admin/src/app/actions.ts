@@ -1,8 +1,8 @@
 'use server'
 
-import { getClient } from './urql-ssr'
-import * as dashboardStats from './graphql/_gen_/dashboard-stats.query'
-import * as order from './graphql/_gen_/order.query'
+import { getClient } from '@/lib/api/urql-ssr'
+import * as dashboardStats from '@/lib/api/graphql/_gen_/dashboard-stats.query'
+import * as order from '@/lib/api/graphql/_gen_/order.query'
 
 export async function getDashboardStats() {
   const result = await getClient().query<

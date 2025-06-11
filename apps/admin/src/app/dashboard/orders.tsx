@@ -5,7 +5,7 @@ import { Icon } from '@/components/ui/icon'
 import { OrderListItem } from '@/components/order/list-item'
 import { useOrders } from '@/lib/api/hooks'
 import { OrdersSkeleton } from './skeletons/orders'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 
 const FIRST = 7
 
