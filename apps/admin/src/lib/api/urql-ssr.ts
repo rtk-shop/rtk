@@ -1,9 +1,10 @@
+import { headers } from 'next/headers'
 import { cookies } from 'next/headers'
 import { registerUrql } from '@urql/next/rsc'
 import { ssrExchange } from '@urql/next'
 import { cacheExchange, createClient, fetchExchange } from 'urql'
 import { authExchange } from '@urql/exchange-auth'
-import { REFRESH_COOKIE_NAME, SESSION_COOKIE_NAME } from '../session'
+import { DIRECT_SESSION_HEADER, SESSION_COOKIE_NAME } from '../session'
 
 const makeClient = () => {
   return createClient({
@@ -13,7 +14,17 @@ const makeClient = () => {
       ssrExchange({ isClient: false }),
       authExchange(async (utils) => {
         const cookieStore = await cookies()
-        const session = cookieStore.get(SESSION_COOKIE_NAME)?.value
+
+        let session: string | unknown
+
+        const cookieSession = cookieStore.get(SESSION_COOKIE_NAME)?.value
+
+        if (!cookieSession) {
+          const headersList = await headers()
+          session = headersList.get(DIRECT_SESSION_HEADER)
+        } else {
+          session = cookieSession
+        }
 
         return {
           addAuthToOperation(operation) {
@@ -23,12 +34,10 @@ const makeClient = () => {
               Authorization: `Bearer ${session}`
             })
           },
-          didAuthError(error, _operation) {
-            return error.graphQLErrors.some((e) => e.extensions?.code === '401')
+          didAuthError() {
+            return false
           },
-          async refreshAuth() {
-            console.log('call to /refresh')
-          }
+          async refreshAuth() {}
         }
       }),
       fetchExchange

@@ -6,7 +6,8 @@ import {
   parseRefreshToken,
   refreshSession,
   REFRESH_COOKIE_NAME,
-  SESSION_COOKIE_NAME
+  SESSION_COOKIE_NAME,
+  DIRECT_SESSION_HEADER
 } from '@/lib/session'
 
 export default async function middleware(req: NextRequest) {
@@ -27,10 +28,10 @@ export default async function middleware(req: NextRequest) {
   if (!session) {
     // prevent to many redirects error on /refresh failed
     if (isProtectedRoute) {
-      const refreshedSessionData = await refreshSession(refreshCookie)
+      const sessionData = await refreshSession(refreshCookie)
 
       // if refresh token is invalid, delete it
-      if (!refreshedSessionData) {
+      if (!sessionData) {
         const resp = NextResponse.redirect(new URL(routeNames.auth, req.nextUrl))
         resp.cookies.delete(REFRESH_COOKIE_NAME)
 
@@ -38,7 +39,8 @@ export default async function middleware(req: NextRequest) {
       }
 
       const resp = NextResponse.next()
-      resp.headers.set('Set-Cookie', refreshedSessionData.setCookieHeader)
+      resp.headers.set('Set-Cookie', sessionData.setCookieHeader)
+      resp.headers.set(DIRECT_SESSION_HEADER, sessionData.sessionToken)
 
       return resp
     }
