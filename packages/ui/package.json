@@ -1,16 +1,24 @@
 {
   "name": "@repo/ui",
   "version": "1.0.0",
-  "types": "src/index.ts",
+  "module": "true",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     "./styles.css": "./dist/index.css",
-    ".": "./src/index.ts"
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./types/global": {
+      "types": "./src/global.d.ts"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch"
+    "tsc": "tsc",
+    "dev": "tsc && tailwindcss -i ./src/styles.css -o ./dist/index.css --watch"
   },
   "packageManager": "pnpm@10.8.0",
   "dependencies": {

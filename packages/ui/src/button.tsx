@@ -58,26 +58,20 @@ const button = cva(
   }
 )
 
-export const Button = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps
->(function Button(
-  {
-    loading,
-    children,
-    color = 'primary',
-    startIcon,
-    endIcon,
-    type = 'button',
-    hapticFeedback,
-    fullWidth,
-    className,
-    disabled,
-    onClick,
-    ...otherProps
-  },
-  ref
-) {
+export function Button({
+  loading,
+  children,
+  color = 'primary',
+  startIcon,
+  endIcon,
+  type = 'button',
+  hapticFeedback,
+  fullWidth,
+  className,
+  disabled,
+  onClick,
+  ...otherProps
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps) {
   const clickHandler = () => {
     if (hapticFeedback) {
       if (typeof window !== 'undefined' && window.Telegram) {
@@ -90,7 +84,7 @@ export const Button = React.forwardRef<
 
   return (
     <button
-      ref={ref}
+      ref={otherProps.ref}
       type={type}
       onClick={clickHandler}
       className={button({ color, disabled, fullWidth, class: className })}
@@ -112,4 +106,4 @@ export const Button = React.forwardRef<
       )}
     </button>
   )
-})
+}
