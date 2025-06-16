@@ -1,3 +1,7 @@
+'use client'
+
+// Why 'use client' https://github.com/react-hook-form/react-hook-form/issues/11284#issuecomment-1850995149
+
 import { cva } from 'cva'
 import { ErrorMessage } from './error-message'
 import { useTranslations } from 'next-intl'
