@@ -33,17 +33,14 @@ const instockBadge = cva(
 export default async function Product({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id
 
-  const resp = await getProduct(id)
+  const { error, data } = await getProduct(id)
 
-  if (resp?.product.__typename === 'NotFound') {
-    return notFound()
-  }
+  if (error) throw new Error(error.message)
+  if (!data) throw new Error('unexpected error [no data, no error]')
 
-  if (!(resp?.product.__typename === 'Product')) {
-    return notFound()
-  }
+  const product = data.product
 
-  const product = resp?.product
+  if (product.__typename === 'NotFound') notFound()
 
   const withDiscount = product.basePrice !== product.currentPrice
   return (

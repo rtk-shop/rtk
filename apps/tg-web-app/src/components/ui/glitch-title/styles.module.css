@@ -1,4 +1,4 @@
-.nf {
+.box {
   font-size: 100px;
   letter-spacing: -4px;
   animation: glitch 1s linear infinite;
@@ -18,14 +18,14 @@
   }
 }
 
-.nf::before,
-.nf::after {
+.box::before,
+.box::after {
   content: attr(title);
   position: absolute;
   left: 0;
 }
 
-.nf::before {
+.box::before {
   animation: glitchTop 1s linear infinite;
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
@@ -45,7 +45,7 @@
   }
 }
 
-.nf::after {
+.box::after {
   animation: glitchBotom 1.5s linear infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);

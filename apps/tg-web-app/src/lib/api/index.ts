@@ -10,7 +10,7 @@ export async function getProduct(id: string) {
     GetProduct.GetProductQueryVariables
   >(GetProduct.GetProductDocument, { id })
 
-  return result.data
+  return result
 }
 
 export async function getFavouriteProductsId(): Promise<string[]> {
