@@ -1,6 +1,6 @@
 import { CartItem, type CartItemProps } from '@/components/cart-item'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useClearCartMutation } from '@/lib/api/hooks'

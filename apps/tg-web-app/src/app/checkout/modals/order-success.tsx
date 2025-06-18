@@ -3,7 +3,7 @@ import { Icon } from '@/components/ui/icon'
 import { useEffect } from 'react'
 import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { useTranslations } from 'next-intl'
 import { usePageState } from '../model/state'
 

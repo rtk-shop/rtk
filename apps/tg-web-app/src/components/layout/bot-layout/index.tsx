@@ -4,7 +4,7 @@ import { useEffect, type ReactNode } from 'react'
 import { Navigation } from '@/components/layout/navigation'
 import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { usePathname } from 'next/navigation'
 
 const noNavbarPaths = [routeNames.root] as string[]

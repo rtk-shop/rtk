@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { Cap } from './cap'
 import { Icon } from '@/components/ui/icon'
 import { Badge } from '@repo/ui'

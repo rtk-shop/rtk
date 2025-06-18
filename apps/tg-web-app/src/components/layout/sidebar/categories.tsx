@@ -2,7 +2,8 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useAppState } from '@/stores/app/store'
-import { category, routeNames, catalogSearchParamsNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
+import { category, catalogSearchParamsNames } from '@/lib/constants'
 
 const categoriesValues: Array<{
   img: string

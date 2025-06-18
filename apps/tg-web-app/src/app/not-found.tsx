@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { useTranslations } from 'next-intl'
 
 import styles from '@/styles/not-found.module.css'

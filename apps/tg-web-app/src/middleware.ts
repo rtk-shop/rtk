@@ -1,38 +1,20 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { routeNames } from '@/lib/constants'
+import { routeNames, checkProtectedRoute } from '@/lib/routes'
 import {
   parseSessionToken,
   parseRefreshToken,
   refreshSession,
   REFRESH_COOKIE_NAME,
-  SESSION_COOKIE_NAME
+  SESSION_COOKIE_NAME,
+  DIRECT_SESSION_HEADER
 } from '@/lib/session'
-
-// const publicRoutes = [routeNames.root]
-const protectedRoutes = [
-  routeNames.catalog,
-  routeNames.product,
-  routeNames.checkout,
-  routeNames.profile,
-  routeNames.favourites
-]
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
 
-  if (process.env.NODE_ENV === 'production' && path === '/sandbox') {
-    return NextResponse.redirect(new URL(routeNames.root, req.url))
-  }
-
   // 1. Check if the current route is protected or public
-  const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route))
-  // const isPublicRoute = publicRoutes.some((route) => {
-  //   if (route === '/') {
-  //     return path === '/'
-  //   }
-  //   return path.startsWith(route)
-  // })
+  const isProtectedRoute = checkProtectedRoute(path)
 
   const cookieStore = await cookies()
 
@@ -46,10 +28,10 @@ export default async function middleware(req: NextRequest) {
   if (!session) {
     // prevent to many redirects error on /refresh failed
     if (isProtectedRoute) {
-      const refreshedSessionData = await refreshSession(refreshCookie)
+      const sessionData = await refreshSession(refreshCookie)
 
       // if refresh token is invalid, delete it
-      if (!refreshedSessionData) {
+      if (!sessionData) {
         const resp = NextResponse.redirect(new URL(routeNames.root, req.nextUrl))
         resp.cookies.delete(REFRESH_COOKIE_NAME)
 
@@ -57,7 +39,8 @@ export default async function middleware(req: NextRequest) {
       }
 
       const resp = NextResponse.next()
-      resp.headers.set('Set-Cookie', refreshedSessionData.setCookieHeader)
+      resp.headers.set('Set-Cookie', sessionData.setCookieHeader)
+      resp.headers.set(DIRECT_SESSION_HEADER, sessionData.sessionToken)
 
       return resp
     }
@@ -79,7 +62,6 @@ export default async function middleware(req: NextRequest) {
   return NextResponse.next()
 }
 
-// Routes Middleware should not run on
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico)$).*)']
 }

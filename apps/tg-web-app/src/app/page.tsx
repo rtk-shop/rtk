@@ -5,7 +5,7 @@ import { Loader } from '@repo/ui'
 import { LogoLoader } from '@/components/ui/logo-loader'
 import { useWebAppAuth } from '@/lib/api/hooks'
 import { useRouter } from 'next/navigation'
-import { routeNames } from '@/lib/constants'
+import { routeNames } from '@/lib/routes'
 import { toast } from 'sonner'
 import { validateStartParam, startupCommandsPatterns } from '@/lib/web-app'
 
