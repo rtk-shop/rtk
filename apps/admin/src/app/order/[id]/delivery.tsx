@@ -1,3 +1,5 @@
+import { DeliverySupplier } from '@repo/ui'
+
 export function Delivery({
   city,
   postOffice,
@@ -11,8 +13,12 @@ export function Delivery({
 }) {
   return (
     <section className="basis-full rounded-xl bg-gray-100 p-4 sm:basis-1/2">
-      <h2 className="mb-2 text-lg font-medium">Доставка</h2>
+      <h2 className="mb-2 text-lg font-medium">Доставк</h2>
       <div>
+        <p className="flex items-center">
+          <span className="mr-1 text-gray-500">Сервис:</span>
+          <DeliverySupplier supplier={supplier} />
+        </p>
         <p className="flex items-center">
           <span className="mr-1 text-gray-500">Населенный пункт:</span>
           {city}
@@ -25,7 +31,6 @@ export function Delivery({
           <span className="mr-1 text-gray-500">Трекинг ID:</span>
           <span>{parcelTrackId ? parcelTrackId : '—'.repeat(10)}</span>
         </p>
-        <p>{supplier}</p>
       </div>
     </section>
   )
