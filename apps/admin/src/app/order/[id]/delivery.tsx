@@ -19,15 +19,15 @@ export function Delivery({
           <span className="mr-1 text-gray-500">Сервис:</span>
           <DeliverySupplier supplier={supplier} />
         </p>
-        <p className="flex items-center">
+        <p>
           <span className="mr-1 text-gray-500">Населенный пункт:</span>
           {city}
         </p>
-        <p className="flex items-center">
+        <p>
           <span className="mr-1 text-gray-500">Отделение:</span>
           {postOffice}
         </p>
-        <p className="flex items-center">
+        <p>
           <span className="mr-1 text-gray-500">Трекинг ID:</span>
           <span>{parcelTrackId ? parcelTrackId : '—'.repeat(10)}</span>
         </p>
