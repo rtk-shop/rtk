@@ -20,6 +20,9 @@ query OrderByID($id: ID!) {
         priceAtOrder
         product {
           id
+          title
+          preview
+          currentPrice
         }
       }
     }

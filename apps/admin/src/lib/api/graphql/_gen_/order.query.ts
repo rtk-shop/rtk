@@ -29,7 +29,13 @@ export type OrderByIdQuery = {
           id: string
           quantity: number
           priceAtOrder: number
-          product: { __typename?: 'Product'; id: string }
+          product: {
+            __typename?: 'Product'
+            id: string
+            title: string
+            preview: string
+            currentPrice: number
+          }
         }>
       }
 }
@@ -57,6 +63,9 @@ export const OrderByIdDocument = gql`
           priceAtOrder
           product {
             id
+            title
+            preview
+            currentPrice
           }
         }
       }

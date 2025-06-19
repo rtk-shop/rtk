@@ -3,8 +3,9 @@ import { getOrder } from '@/app/actions'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
 import { notFound } from 'next/navigation'
-import { formatDate } from '@repo/utils'
+import { formatDate, formatPrice } from '@repo/utils'
 import { StatusBadge } from '@/components/order/status-badge'
+import { OrderProduct } from '@/components/order-product'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -26,7 +27,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   return (
     <div className="p-2.5">
       <div className="mb-2.5 flex items-center">
-        <h1 className="mr-2.5 text-xl font-medium">Заказ №{order.id}</h1>
+        <Link href="/dashboard" className="mr-2.5 text-xl font-medium">
+          Заказ №{order.id}
+        </Link>
         <StatusBadge status={order.status} />
       </div>
       <p>
@@ -37,8 +40,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <span className="font-medium">Обновлен: </span>&nbsp;
         {formatDate(order.updatedAt, { dateStyle: 'short', timeStyle: 'short' })}
       </p>
-
-      <div className="flex flex-col py-2 sm:flex-row">
+      <div className="mb-2.5 flex flex-col py-2 sm:flex-row">
         <Receiver
           name={order.receiverName}
           surname={order.receiverSurname}
@@ -51,9 +53,26 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           parcelTrackId={order.parcelTrackId}
         />
       </div>
-      <Link className="bg-gray-300" href="/dashboard">
-        /dashboard
-      </Link>
+
+      <section>
+        <div className="mb-3 flex items-center justify-between font-medium">
+          <h2 className="text-2xl">Товары</h2>
+          <span className="text-lg">Итого {formatPrice(order.price)}₴</span>
+        </div>
+        <div>
+          <ul>
+            {order.products.map(({ id, quantity, priceAtOrder, product }) => (
+              <li key={id} className="mb-2.5">
+                <OrderProduct
+                  quantity={quantity}
+                  priceAtOrder={priceAtOrder}
+                  product={{ ...product }}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </div>
   )
 }
