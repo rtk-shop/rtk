@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { cva } from 'cva'
-import { ImagePlaceholder } from '@/components/ui/image-placeholder'
+import { ImagePlaceholder } from '@repo/ui'
 import { useKeenSlider } from 'keen-slider/react'
 
 const dot = cva('mx-0.5 size-2 rounded-full', {
@@ -52,10 +52,11 @@ export function Preview({
           <li key={index} className="keen-slider__slide">
             <ImagePlaceholder
               src={image}
+              quality={100}
               priority
               width={1080}
               height={1350}
-              altText={`фото №${index + 1}`}
+              alt={`фото №${index + 1}`}
             />
           </li>
         ))}

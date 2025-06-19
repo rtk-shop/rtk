@@ -1,4 +1,4 @@
-import { memo, type ReactElement } from 'react'
+import { memo } from 'react'
 import { cva } from 'cva'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,7 +7,7 @@ import { LikeButton } from '@/components/ui/like-button'
 import { IconButton } from '@/components/ui/icon-button'
 import { routeNames } from '@/lib/routes'
 import { FormatPrice } from '@/components/ui/format-price'
-import { ImagePlaceholder } from '@/components/ui/image-placeholder'
+import { ImagePlaceholder } from '@repo/ui'
 import { getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
@@ -91,7 +91,7 @@ function ProductItemInner({
     }
   }
 
-  function genTagView(productTag: string): ReactElement | null {
+  function genTagView(productTag: string) {
     switch (productTag) {
       case 'new':
         return <span>New</span>
@@ -111,7 +111,7 @@ function ProductItemInner({
           href={routeNames.product + id}
           className={`border-none focus:ring-0 ${!inStock ? 'opacity-50' : ''}`}
         >
-          <ImagePlaceholder src={preview} altText={title} width={500} height={625} />
+          <ImagePlaceholder src={preview} alt={title} width={500} height={625} />
         </Link>
       </div>
       <div className="px-2 py-1 pt-0 md:px-3">

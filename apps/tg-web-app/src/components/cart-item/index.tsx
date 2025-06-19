@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { useAppState } from '@/stores/app/store'
 import { IconButton } from '@/components/ui/icon-button'
-import { ImagePlaceholder } from '@/components/ui/image-placeholder'
+import { ImagePlaceholder } from '@repo/ui'
 import { AmountController } from '@/components/ui/amount-controller'
 import { routeNames } from '@/lib/routes'
 import { useTranslations } from 'next-intl'
@@ -88,7 +88,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
     <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 last:after:hidden">
       <div className="relative mr-2 w-full max-w-32">
         <div onClick={handleRedirect} className="rounded-lg">
-          <ImagePlaceholder src={preview} altText={title} width={216} height={270} />
+          <ImagePlaceholder src={preview} alt={title} width={216} height={270} />
         </div>
       </div>
       <div className="w-full max-w-md min-w-0 pt-3">
