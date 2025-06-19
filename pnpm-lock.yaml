@@ -197,7 +197,7 @@ importers:
         version: 5.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-select:
         specifier: ^5.10.1
-        version: 5.10.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 5.10.1(@types/react@19.1.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -224,7 +224,7 @@ importers:
         version: 1.1.0(typescript@5.8.3)
       zustand:
         specifier: ^5.0.5
-        version: 5.0.5(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
+        version: 5.0.5(@types/react@19.1.4)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     devDependencies:
       '@graphql-codegen/cli':
         specifier: ^5.0.7
@@ -257,11 +257,11 @@ importers:
         specifier: ^22.15.32
         version: 22.15.32
       '@types/react':
-        specifier: ^19.1.8
-        version: 19.1.8
+        specifier: 19.1.4
+        version: 19.1.4
       '@types/react-dom':
-        specifier: ^19.1.6
-        version: 19.1.6(@types/react@19.1.8)
+        specifier: 19.1.5
+        version: 19.1.5(@types/react@19.1.4)
       '@types/react-virtualized':
         specifier: ^9.22.2
         version: 9.22.2
@@ -319,6 +319,9 @@ importers:
       cva:
         specifier: npm:class-variance-authority@^0.7.1
         version: class-variance-authority@0.7.1
+      next:
+        specifier: ^15.3.3
+        version: 15.3.3(@babel/core@7.27.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -1754,8 +1757,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react-dom@19.1.6':
-    resolution: {integrity: sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==}
+  '@types/react-dom@19.1.5':
+    resolution: {integrity: sha512-CMCjrWucUBZvohgZxkjd6S9h0nZxXjzus6yDfUb+xLxYM7VvjKNH1tQrE9GWLql1XoOP4/Ds3bwFqShHUYraGg==}
     peerDependencies:
       '@types/react': ^19.0.0
 
@@ -1770,8 +1773,8 @@ packages:
   '@types/react@19.1.0':
     resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
 
-  '@types/react@19.1.8':
-    resolution: {integrity: sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g==}
+  '@types/react@19.1.4':
+    resolution: {integrity: sha512-EB1yiiYdvySuIITtD5lhW4yPyJ31RkJkkDw794LaQYrxCSaQV/47y5o1FMC4zF9ZyjUjzJMZwbovEnT5yHTW6g==}
 
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
@@ -5218,7 +5221,7 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0)':
+  '@emotion/react@11.14.0(@types/react@19.1.4)(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.0
       '@emotion/babel-plugin': 11.13.5
@@ -5230,7 +5233,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 19.1.0
     optionalDependencies:
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
     transitivePeerDependencies:
       - supports-color
 
@@ -6539,24 +6542,24 @@ snapshots:
     dependencies:
       '@types/react': 19.1.0
 
-  '@types/react-dom@19.1.6(@types/react@19.1.8)':
+  '@types/react-dom@19.1.5(@types/react@19.1.4)':
     dependencies:
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
 
-  '@types/react-transition-group@4.4.12(@types/react@19.1.8)':
+  '@types/react-transition-group@4.4.12(@types/react@19.1.4)':
     dependencies:
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
 
   '@types/react-virtualized@9.22.2':
     dependencies:
       '@types/prop-types': 15.7.14
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
 
   '@types/react@19.1.0':
     dependencies:
       csstype: 3.1.3
 
-  '@types/react@19.1.8':
+  '@types/react@19.1.4':
     dependencies:
       csstype: 3.1.3
 
@@ -8820,19 +8823,19 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  react-select@5.10.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-select@5.10.1(@types/react@19.1.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@babel/runtime': 7.27.0
       '@emotion/cache': 11.14.0
-      '@emotion/react': 11.14.0(@types/react@19.1.8)(react@19.1.0)
+      '@emotion/react': 11.14.0(@types/react@19.1.4)(react@19.1.0)
       '@floating-ui/dom': 1.6.13
-      '@types/react-transition-group': 4.4.12(@types/react@19.1.8)
+      '@types/react-transition-group': 4.4.12(@types/react@19.1.4)
       memoize-one: 6.0.0
       prop-types: 15.8.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       react-transition-group: 4.4.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      use-isomorphic-layout-effect: 1.2.0(@types/react@19.1.8)(react@19.1.0)
+      use-isomorphic-layout-effect: 1.2.0(@types/react@19.1.4)(react@19.1.0)
     transitivePeerDependencies:
       - '@types/react'
       - supports-color
@@ -9505,11 +9508,11 @@ snapshots:
       intl-messageformat: 10.7.16
       react: 19.1.0
 
-  use-isomorphic-layout-effect@1.2.0(@types/react@19.1.8)(react@19.1.0):
+  use-isomorphic-layout-effect@1.2.0(@types/react@19.1.4)(react@19.1.0):
     dependencies:
       react: 19.1.0
     optionalDependencies:
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
 
   use-sync-external-store@1.5.0(react@19.1.0):
     dependencies:
@@ -9673,8 +9676,8 @@ snapshots:
 
   zod@3.22.4: {}
 
-  zustand@5.0.5(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
+  zustand@5.0.5(@types/react@19.1.4)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
     optionalDependencies:
-      '@types/react': 19.1.8
+      '@types/react': 19.1.4
       react: 19.1.0
       use-sync-external-store: 1.5.0(react@19.1.0)
