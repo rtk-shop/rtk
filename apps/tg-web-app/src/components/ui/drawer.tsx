@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, ReactNode } from 'react'
 import { cva } from 'cva'
 import { createPortal } from 'react-dom'
 import { Backdrop } from './backdrop'
@@ -8,7 +8,7 @@ interface DrawerProps {
   fullWidth?: boolean
   position?: 'left' | 'right' | 'bottom'
   onClose?(): void
-  children?: ReactNode
+  children: ReactNode
 }
 
 const container = cva('fixed z-50 overflow-auto transition-transform will-change-transform', {
