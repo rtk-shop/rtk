@@ -4,7 +4,7 @@ import { type SpritesMap } from '@/sprite.gen'
 import { getIconMeta } from '@/lib/icons-meta'
 
 // Our icon will extend an SVG element and accept all its props
-export interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref'> {
   name: AnyIconName
 }
 
