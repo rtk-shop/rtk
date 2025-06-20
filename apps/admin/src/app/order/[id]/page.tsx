@@ -1,29 +1,42 @@
+'use client'
+
 import Link from 'next/link'
-import { getOrder } from '@/app/actions'
+import { useParams } from 'next/navigation'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
-import { notFound } from 'next/navigation'
 import { formatDate, formatPrice } from '@repo/utils'
 import { StatusBadge } from '@/components/order/status-badge'
 import { OrderProduct } from '@/components/order-product'
 import { Controls } from './controls'
+import { useOrder } from '@/lib/api/hooks'
+import { Loader } from '@repo/ui'
 
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default function Page() {
+  const params = useParams<{ id: string }>()
 
-  const result = await getOrder(id)
+  const [{ fetching, data, error }] = useOrder({
+    variables: {
+      id: params.id
+    }
+  })
 
-  if (result.error) {
-    throw new Error(result.error.message)
+  if (fetching) {
+    return (
+      <div className="flex h-dvh items-center justify-center">
+        <Loader color="dark" />
+      </div>
+    )
   }
 
-  if (!result.data) {
-    throw new Error('unexpected error [no data, no error]')
+  if (error || !data) {
+    return <div>error</div>
   }
 
-  const order = result.data.order
+  if (data?.order.__typename === 'NotFound') {
+    return <div>not fonud</div>
+  }
 
-  if (order.__typename === 'NotFound') notFound()
+  const { order } = data
 
   return (
     <div className="p-2.5">
@@ -55,7 +68,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         />
       </div>
       <Controls orderId={order.id} />
-
       <section>
         <div className="mb-3 flex items-center justify-between font-medium">
           <h2 className="text-2xl">Товары</h2>
