@@ -92,6 +92,7 @@ export type Mutation = {
   createProduct: NewProductPayload
   createProductSizeVariation: NewSizeVariationPayload
   hideProduct?: Maybe<HideProductPayload>
+  processOrder: ProcessOrderPayload
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
   /**
@@ -128,6 +129,10 @@ export type MutationCreateProductSizeVariationArgs = {
 export type MutationHideProductArgs = {
   id: Scalars['ID']['input']
   isHidden: Scalars['Boolean']['input']
+}
+
+export type MutationProcessOrderArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type MutationReduceCartItemQuantityArgs = {
@@ -298,6 +303,13 @@ export type PriceRangeType = {
   __typename?: 'PriceRangeType'
   gt: Scalars['Float']['output']
   lt: Scalars['Float']['output']
+}
+
+export type ProcessOrderPayload = {
+  __typename?: 'ProcessOrderPayload'
+  orderId: Scalars['ID']['output']
+  status: OrderStatus
+  updatedAt: Scalars['String']['output']
 }
 
 export type Product = {

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { formatDate, formatPrice } from '@repo/utils'
 import { StatusBadge } from '@/components/order/status-badge'
 import { OrderProduct } from '@/components/order-product'
+import { Controls } from './controls'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -53,6 +54,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           parcelTrackId={order.parcelTrackId}
         />
       </div>
+      <Controls orderId={order.id} />
 
       <section>
         <div className="mb-3 flex items-center justify-between font-medium">

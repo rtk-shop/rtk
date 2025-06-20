@@ -1,3 +1,11 @@
 import { cacheExchange as Exchange } from '@urql/exchange-graphcache'
 
-export const cacheExchange = Exchange()
+import { processOrder } from './mutations/order'
+
+export const cacheExchange = Exchange({
+  updates: {
+    Mutation: {
+      processOrder
+    }
+  }
+})

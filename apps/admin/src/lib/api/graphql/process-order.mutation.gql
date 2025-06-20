@@ -1,0 +1,7 @@
+mutation ProcessOrder($id: ID!) {
+  processOrder(id: $id) {
+    orderId
+    status
+    updatedAt
+  }
+}
