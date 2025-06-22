@@ -67,7 +67,7 @@ export default function Page() {
           parcelTrackId={order.parcelTrackId}
         />
       </div>
-      <Controls orderId={order.id} />
+      <Controls orderId={order.id} status={order.status} />
       <section>
         <div className="mb-3 flex items-center justify-between font-medium">
           <h2 className="text-2xl">Товары</h2>

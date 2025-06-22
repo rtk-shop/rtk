@@ -1,10 +1,17 @@
 import { ProcessOrderButton } from './process'
+import type { OrderStatus } from '@/types/order'
 
-export function Controls({ orderId }: { orderId: string }) {
+export function Controls({ orderId, status }: { orderId: string; status: OrderStatus }) {
   return (
-    <section>
-      <h2>Contorls</h2>
-      <ProcessOrderButton orderId={orderId} />
+    <section className="rounded-xl bg-gray-100 px-3 py-6">
+      {status === 'CREATED' && <ProcessOrderButton orderId={orderId} />}
+      {status === 'PROCESSED' && (
+        <div>
+          <div>
+            <h2>Other controls</h2>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

@@ -30,8 +30,8 @@ export function ProcessOrderButton({ orderId }: { orderId: string }) {
   }
 
   return (
-    <div>
-      <Button loading={fetching} onClick={handleClick}>
+    <div className="flex justify-center">
+      <Button fullWidth loading={fetching} className="max-w-60" onClick={handleClick}>
         Принять в обработку
       </Button>
     </div>
