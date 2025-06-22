@@ -22,11 +22,11 @@ export const SIZE_VARIATIONS = {
 }
 
 const sizeItem = cva(
-  'relative mr-1.5 w-16 rounded-lg border-2 py-1 text-center text-sm font-medium transition-all select-none',
+  'relative mr-1.5 w-16 rounded-2xl border-2 py-1.5 text-center text-sm font-medium transition-all select-none',
   {
     variants: {
       active: {
-        true: 'border-black',
+        true: 'border-stone-800 bg-stone-800 text-white',
         false: 'border-gray-200'
       },
       unavailable: {
@@ -38,7 +38,7 @@ const sizeItem = cva(
         unavailable: true,
         active: false,
         className:
-          'border-gray-200 bg-gray-200 after:absolute after:top-3 after:left-3.5 after:h-0.5 after:w-8 after:rotate-45 after:bg-red-600/60'
+          'border-gray-200 bg-gray-200 after:absolute after:top-3.5 after:left-3.5 after:h-0.5 after:w-8 after:rotate-45 after:bg-red-600/60'
       },
       {
         unavailable: false,

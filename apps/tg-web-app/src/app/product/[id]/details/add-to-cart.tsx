@@ -22,7 +22,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
   }
 
   return (
-    <div className="mt-5 mb-2.5">
+    <div className="mt-5 mb-2.5 px-2">
       <Button
         fullWidth
         loading={fetching}
