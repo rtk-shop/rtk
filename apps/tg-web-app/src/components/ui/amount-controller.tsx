@@ -43,7 +43,7 @@ export function AmountController({
         {loading ? (
           <div className="flex justify-center">
             <div className="w-4">
-              <Loader adaptive color="dark" />
+              <Loader adaptive color="secondary" />
             </div>
           </div>
         ) : (

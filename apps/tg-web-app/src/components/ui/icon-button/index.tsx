@@ -72,7 +72,7 @@ export function IconButton({
     >
       {loading ? (
         <div className="size-1e flex justify-center border-r-black">
-          <Loader adaptive color="dark" />
+          <Loader adaptive color="secondary" />
         </div>
       ) : (
         <span className="flex w-full">{children}</span>

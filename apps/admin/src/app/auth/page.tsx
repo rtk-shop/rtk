@@ -63,7 +63,10 @@ export default function Auth() {
 
   return (
     <div className="flex h-dvh items-center justify-center">
-      <div>{isMutating ? <Loader color="dark" /> : <AuthWidget onAuth={handleOAuthStart} />}</div>
+      <span onClick={() => handleOAuthStart(TEMP)}>auth</span>
+      <div>
+        {isMutating ? <Loader color="secondary" /> : <AuthWidget onAuth={handleOAuthStart} />}
+      </div>
     </div>
   )
 }

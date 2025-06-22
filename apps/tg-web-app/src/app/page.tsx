@@ -74,7 +74,7 @@ export default function Page() {
     <div className="flex h-dvh flex-col items-center justify-center">
       <LogoLoader size={180} />
       <div className="animate-fade-in-2s mt-6 opacity-0">
-        <Loader color="dark" />
+        <Loader color="secondary" />
       </div>
     </div>
   )

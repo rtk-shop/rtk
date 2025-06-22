@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
 
 export function AddToCartButton({ productId, inStock }: { productId: string; inStock: boolean }) {
-  const [result, addCartItem] = useAddCartItemMutation()
+  const [{ fetching }, addCartItem] = useAddCartItemMutation()
 
   const handleClick = () => {
     addCartItem({
@@ -25,7 +25,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
     <div className="mt-5 mb-2.5">
       <Button
         fullWidth
-        loading={result.fetching}
+        loading={fetching}
         onClick={handleClick}
         className="h-[53px]"
         disabled={!inStock}

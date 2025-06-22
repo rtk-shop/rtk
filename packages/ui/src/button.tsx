@@ -31,11 +31,10 @@ const button = cva(
   {
     variants: {
       color: {
-        primary: 'border-r-black bg-black text-white hover:bg-[#383838] active:bg-[#383838]',
+        primary: 'bg-black text-white hover:bg-[#383838] active:bg-[#383838]',
         secondary: '',
-        accept:
-          'border-r-green-lime bg-green-lime text-stone-800 hover:bg-[#48ff90] active:bg-[#48ff90]',
-        danger: 'bg-red-500 text-white' // todo: pick color
+        accept: 'bg-green-lime text-stone-800 hover:bg-[#48ff90] active:bg-[#48ff90]',
+        danger: 'bg-red-500 text-white'
       },
       disabled: {
         true: 'cursor-not-allowed opacity-75'
@@ -92,9 +91,9 @@ export function Button({
       {...otherProps}
     >
       {loading ? (
-        <div className="flex justify-center border-r-inherit">
+        <div className="flex justify-center">
           <div className="size-[1lh]">
-            <Loader adaptive color={color !== 'primary' ? 'light' : 'dark'} />
+            <Loader adaptive color={color} />
           </div>
         </div>
       ) : (

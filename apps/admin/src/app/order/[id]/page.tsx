@@ -23,7 +23,7 @@ export default function Page() {
   if (fetching) {
     return (
       <div className="flex h-dvh items-center justify-center">
-        <Loader color="dark" />
+        <Loader color="secondary" />
       </div>
     )
   }

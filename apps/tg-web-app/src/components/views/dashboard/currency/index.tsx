@@ -36,7 +36,7 @@ export function Currency() {
     return (
       <div className={styles.container}>
         <div className={styles.loading}>
-          <Loader color="dark" />
+          <Loader color="secondary" />
         </div>
       </div>
     )

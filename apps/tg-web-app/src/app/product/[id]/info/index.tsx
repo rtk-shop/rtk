@@ -18,7 +18,7 @@ const DynamicDescription = dynamic(() => import('./description').then((mod) => m
   ssr: false,
   loading: () => (
     <div className="flex justify-center">
-      <Loader color="dark" />
+      <Loader color="secondary" />
     </div>
   )
 })
