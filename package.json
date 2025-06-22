@@ -1,7 +1,7 @@
 {
   "name": "repo",
   "private": true,
-  "packageManager": "pnpm@10.8.0",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "dev": "turbo run dev",
     "dev:tg": "turbo run dev --filter=web-app --filter=@repo/ui",

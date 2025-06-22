@@ -1,36 +1,34 @@
 import type { NextConfig } from 'next'
-import svg from '@neodx/svg/webpack'
 import createNextIntlPlugin from 'next-intl/plugin'
+// import svg from '@neodx/svg/webpack'
 
 const withNextIntl = createNextIntlPlugin()
 
-// import path from 'path'
-// import { fileURLToPath } from 'url'
-// const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
-// const __dirname = path.dirname(__filename) // get the name of the director
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  webpack(config, options) {
-    if (options.isServer) {
-      config.plugins.push(
-        svg({
-          root: 'public/svg-icons',
-          output: 'public/sprites',
-          group: true,
-          fileName: '{name}.{hash:8}.svg',
-          metadata: {
-            path: 'src/sprite.gen.ts',
-            runtime: {
-              size: true,
-              viewBox: true
-            }
-          }
-        })
-      )
-    }
+  // webpack(config, options) {
+  //   if (options.isServer) {
+  //     config.plugins.push(
+  //       svg({
+  //         root: 'public/svg-icons',
+  //         output: 'public/sprites',
+  //         group: true,
+  //         fileName: '{name}.{hash:8}.svg',
+  //         metadata: {
+  //           path: 'src/sprite.gen.ts',
+  //           runtime: {
+  //             size: true,
+  //             viewBox: true
+  //           }
+  //         }
+  //       })
+  //     )
+  //   }
 
-    return config
+  //   return config
+  // },
+  experimental: {
+    optimizePackageImports: ['urql', '@urql/exchange-auth']
   },
   images: {
     remotePatterns: [

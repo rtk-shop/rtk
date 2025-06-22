@@ -4,16 +4,12 @@
   "private": true,
   "scripts": {
     "check-types": "tsc --noEmit",
-    "dev": "next dev -p 3000",
-    "turbo": "next dev --turbo",
+    "dev": "next dev -p 3000 --turbopack",
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "next lint",
     "gen": "graphql-codegen",
-    "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\"",
-    "bun": "bun --bun next dev",
-    "bun-build": "bun --bun next build",
-    "bun-start": "bun --bun next start"
+    "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
