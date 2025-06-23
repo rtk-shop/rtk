@@ -83,7 +83,17 @@ export function OrderItem({
             color: getOrderStatusColor(status)
           }}
         >
-          {t(`statuses.${status.toLowerCase()}`)}
+          {status === 'CREATED' ? (
+            <div className="flex items-center">
+              <span className="relative mr-2 flex size-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
+              </span>
+              <span>{t(`statuses.${status.toLowerCase()}`)}</span>
+            </div>
+          ) : (
+            t(`statuses.${status.toLowerCase()}`)
+          )}
         </div>
         <div className="col-span-3 text-center">
           <FormatPrice price={price} />
@@ -129,6 +139,7 @@ export function OrderItem({
               <li key={id} className="mb-2.5 flex items-center">
                 <Image
                   src={product.preview}
+                  className="rounded-lg"
                   width={44}
                   height={55}
                   style={{

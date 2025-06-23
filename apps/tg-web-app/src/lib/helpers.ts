@@ -28,8 +28,6 @@ export const getProductMainTagColor = (name: string): string => {
 
 export const getOrderStatusColor = (status: keyof typeof OrderStatus): string => {
   switch (status) {
-    case orderStatus.done:
-      return '#0d840d'
     case orderStatus.returned:
       return '#a2a2a2'
     default:
