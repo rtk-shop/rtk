@@ -45,7 +45,7 @@ export function OrderItem({
   onExpand,
   onReject
 }: OrderItemProps) {
-  const t = useTranslations('Common.order')
+  const t = useTranslations('Common')
   const router = useRouter()
 
   const {
@@ -89,10 +89,10 @@ export function OrderItem({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
               </span>
-              <span>{t(`statuses.${status.toLowerCase()}`)}</span>
+              <span>{t(`order.statuses.${status.toLowerCase()}`)}</span>
             </div>
           ) : (
-            t(`statuses.${status.toLowerCase()}`)
+            t(`order.statuses.${status.toLowerCase()}`)
           )}
         </div>
         <div className="col-span-3 text-center">
@@ -107,9 +107,10 @@ export function OrderItem({
         <div className="p-2 pt-0">
           <div className="mb-2 leading-snug">
             <p className="mb-0.5 flex justify-between">
-              <span className="font-medium">Получатель</span>
+              <span className="font-medium">{t('order.receiver')}</span>
               <span className="text-sm text-gray-600">
-                от {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
+                {t('order.from')}&nbsp;
+                {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
               </span>
             </p>
             <p>
@@ -119,16 +120,17 @@ export function OrderItem({
           </div>
           {/* Delivery */}
           <div className="mb-3.5 leading-snug">
-            <p className="mb-0.5 font-medium">Информация о доставке</p>
+            <p className="mb-0.5 font-medium">{t('order.delivery.title')}</p>
             <p className="flex items-center">
-              <span className="mr-1 text-gray-500">Сервис: </span>
+              <span className="mr-1 text-gray-500">{t('order.delivery.service')}: </span>
               <DeliverySupplier supplier={supplier} />
             </p>
             <p>
-              <span className="text-gray-500">Адрес:</span> {cityName}, {postOfficeName}
+              <span className="text-gray-500">{t('order.delivery.address')}:</span> {cityName},{' '}
+              {postOfficeName}
             </p>
             <div className="flex items-center">
-              <span className="mr-1 text-gray-500">Трекинг-номер:</span>
+              <span className="mr-1 text-gray-500">{t('order.delivery.tracking')}:</span>
               {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
               {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
             </div>
@@ -158,7 +160,7 @@ export function OrderItem({
                   </p>
                   <p className="text-sm font-medium">
                     <span className="mr-3">
-                      Цена: <FormatPrice price={priceAtOrder} />
+                      {t('nouns.price')}: <FormatPrice price={priceAtOrder} />
                     </span>
                     <span> {quantity}шт.</span>
                   </p>
@@ -175,13 +177,15 @@ export function OrderItem({
                 fullWidth
                 className="bg-gray-200 pt-3 pb-3"
               >
-                Отменить заказ
+                {t('order.reject')}
               </Button>
             </div>
           )}
           {/* Meta */}
           <div className="text-sm text-gray-600">
-            <p>Обновлено: {formatDate(updatedAt, { dateStyle: 'short' })}</p>
+            <p>
+              {t('adjectives.updated')}: {formatDate(updatedAt, { dateStyle: 'short' })}
+            </p>
           </div>
         </div>
       </HeightExpander>
