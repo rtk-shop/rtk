@@ -37,9 +37,6 @@ const nextConfig: NextConfig = {
         hostname: 's3.rtkstore.org'
       }
     ]
-  },
-  devIndicators: {
-    position: 'top-right'
   }
 }
 
