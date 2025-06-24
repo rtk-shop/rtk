@@ -54,7 +54,9 @@ export function Input<T extends FieldValues>({
         type={type}
         autoComplete={autoComplete}
         className={inpEl({ error: isErr })}
-        {...register(name)}
+        {...register(name, {
+          valueAsNumber: type === 'number'
+        })}
         {...restProps}
       />
       <ErrorMessage show={isErr}>{message}</ErrorMessage>
