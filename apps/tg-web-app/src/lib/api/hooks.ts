@@ -1,5 +1,4 @@
 import { useQuery, useMutation, UseQueryArgs } from 'urql'
-import { useCallback, useEffect, useRef, useState } from 'react'
 
 import * as rejectOrder from './graphql/_gen_/rejectOrder.mutation'
 import * as cartProducts from './graphql/_gen_/cartProducts.query'
@@ -91,49 +90,4 @@ export function useReduceCartItemQuantityMutation() {
 
 export function useClearCartMutation() {
   return useMutation<clearCart.ClearCartMutation>(clearCart.ClearCartDocument)
-}
-
-export type WebAppAuthParams = {
-  onSuccess: () => void
-  onError: (error: string) => void
-}
-
-export type WebAppReturnValues<T> = [(bodyData: T) => void, { loading: boolean }]
-
-export function useWebAppAuth<T>({ onSuccess, onError }: WebAppAuthParams): WebAppReturnValues<T> {
-  const [loading, setLoading] = useState(false)
-
-  const callbacksRef = useRef({ onSuccess, onError })
-
-  useEffect(() => {
-    callbacksRef.current = { onSuccess, onError }
-  }, [onSuccess, onError])
-
-  const query = useCallback(async (bodyData: T) => {
-    setLoading(true)
-
-    try {
-      const response = await fetch(process.env.NEXT_PUBLIC_API_HOST + '/webapp-auth', {
-        method: 'POST',
-        body: JSON.stringify(bodyData),
-        cache: 'no-cache',
-        credentials: 'include'
-      })
-
-      if (!response.ok) {
-        const errorText = await response.text()
-        throw new Error(errorText)
-      }
-
-      setLoading(false)
-      callbacksRef.current.onSuccess?.()
-    } catch (error) {
-      setLoading(false)
-      callbacksRef.current.onError?.(
-        error instanceof Error ? error.message : 'An unknown error occurred'
-      )
-    }
-  }, [])
-
-  return [query, { loading }]
 }

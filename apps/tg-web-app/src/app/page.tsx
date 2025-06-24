@@ -1,18 +1,33 @@
 'use client'
 
 import { useEffect } from 'react'
+import useSWRMutation from 'swr/mutation'
 import { Loader } from '@repo/ui'
 import { LogoLoader } from '@/components/ui/logo-loader'
-import { useWebAppAuth } from '@/lib/api/hooks'
 import { useRouter } from 'next/navigation'
 import { routeNames } from '@/lib/routes'
 import { toast } from 'sonner'
 import { validateStartParam, startupCommandsPatterns } from '@/lib/web-app'
 
+const mutator = async (url: string, { arg }: { arg: { initData: string } }): Promise<string> => {
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(arg),
+    cache: 'no-store'
+  })
+
+  const respText = await resp.text()
+
+  if (!resp.ok) throw new Error(respText)
+
+  return respText
+}
+
 export default function Page() {
   const router = useRouter()
 
-  const [authorize] = useWebAppAuth<{ initData: string }>({
+  const { trigger } = useSWRMutation(process.env.NEXT_PUBLIC_API_HOST + '/webapp-auth', mutator, {
     onSuccess() {
       if (typeof window !== 'undefined' && window.Telegram) {
         // DOCS: https://docs.telegram-mini-apps.com/platform/start-parameter
@@ -36,23 +51,23 @@ export default function Page() {
 
       router.replace(routeNames.catalog)
     },
-    onError(errorMsg) {
-      switch (errorMsg.trim()) {
+    onError(err) {
+      switch (err.message.trim()) {
         case 'user hash corrupted':
-          toast.error('Данные телеграм повреждены', {
+          toast.error('Дані телеграм пошкоджено', {
             duration: 7000
           })
           break
         case 'auth time expired':
-          toast.warning('Время для авторизации исчерпано', {
+          toast.warning('Час для авторизації вичерпаний', {
             duration: 7000
           })
           break
         default:
-          toast.warning('Приложеник вне контекста Telegram', {
+          toast.warning('Помилка, спробуйте пізніше', {
             duration: 8000
           })
-          console.error(errorMsg)
+          console.error(err.message)
           break
       }
     }
@@ -63,12 +78,12 @@ export default function Page() {
       const initData = window.Telegram.WebApp.initData //  process.env.NEXT_PUBLIC_TG_INIT_DATA
 
       const timer = setTimeout(() => {
-        authorize({ initData })
-      }, 1000)
+        trigger({ initData })
+      }, 1500)
 
       return () => clearTimeout(timer)
     }
-  }, [authorize])
+  }, [trigger])
 
   return (
     <div className="flex h-dvh flex-col items-center justify-center">
