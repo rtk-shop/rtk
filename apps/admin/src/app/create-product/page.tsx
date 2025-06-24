@@ -4,6 +4,7 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { FormValues, validationSchema } from './lib/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
+import { Select, type SelectOption } from '@/components/ui/select'
 
 export default function Page() {
   const formMethods = useForm<FormValues>({
@@ -18,6 +19,25 @@ export default function Page() {
     }
   })
 
+  const genderOptions: SelectOption[] = [
+    {
+      title: 'Male',
+      value: 'male'
+    },
+    {
+      title: 'Female',
+      value: 'female'
+    },
+    {
+      title: 'Unisex',
+      value: 'unisex'
+    }
+  ]
+
+  const handleChange = (value: string) => {
+    console.log('v', value)
+  }
+
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
     console.log('values', values)
   }
@@ -29,9 +49,24 @@ export default function Page() {
           <div className="px-2.5 py-5 pb-3">
             <Input name="title" label="Название" />
             <Input name="sku" label="Код учета (SKU)" />
-            <Input name="basePrice" label="Цена" type="number" />
-            <Input name="amount" label="Количество" type="number" />
-            <Button type="submit">Save</Button>
+            <div className="flex">
+              <div className="mr-12">
+                <Input name="basePrice" label="Цена" type="number" />
+              </div>
+              <div>
+                <Input name="amount" label="Количество" type="number" />
+              </div>
+            </div>
+            <div>
+              <Select
+                placeholder="Выбрать гендер"
+                options={genderOptions}
+                onValueChange={handleChange}
+              />
+            </div>
+            <Button fullWidth type="submit">
+              Создать
+            </Button>
           </div>
         </form>
       </FormProvider>
