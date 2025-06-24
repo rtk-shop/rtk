@@ -2,10 +2,16 @@ export const routeNames = {
   root: '/',
   auth: '/auth',
   dashboard: '/dashboard',
-  order: '/order/'
+  order: '/order/',
+  createProduct: '/create-product'
 } as const
 
-const protectedRoutes = [routeNames.root, routeNames.dashboard, routeNames.order]
+const protectedRoutes = [
+  routeNames.root,
+  routeNames.dashboard,
+  routeNames.order,
+  routeNames.createProduct
+]
 
 function buildRegexRoutes(routes: string[]) {
   return routes.map((route) => {

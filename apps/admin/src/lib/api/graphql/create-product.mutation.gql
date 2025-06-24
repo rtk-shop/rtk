@@ -1,0 +1,38 @@
+mutation CreateProduct(
+  $title: String!
+  $sku: String!
+  $basePrice: Float!
+  $amount: Int!
+  $gender: Gender!
+  $category: CategoryType!
+  $preview: Upload!
+  $images: [ProductImageInput!]!
+  $description: HTML!
+  $sizeName: String!
+  $brandName: String!
+  $defaultSizeID: Int!
+  $tag: ProductTag
+) {
+  createProduct(
+    input: {
+      title: $title
+      sku: $sku
+      basePrice: $basePrice
+      amount: $amount
+      gender: $gender
+      category: $category
+      preview: $preview
+      images: $images
+      description: $description
+      sizeName: $sizeName
+      brandName: $brandName
+      defaultSizeID: $defaultSizeID
+      tag: $tag
+    }
+  ) {
+    id
+    title
+    currentPrice
+    basePrice
+  }
+}
