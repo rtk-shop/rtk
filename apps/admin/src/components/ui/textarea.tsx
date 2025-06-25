@@ -30,7 +30,7 @@ export function Textarea({ name, label, disabled, defaultValue, ...otherProps }:
         control={control}
         disabled={disabled}
         defaultValue={defaultValue}
-        render={({ field }) => <TextareaRoot {...field} {...otherProps} id={uniqueId} />}
+        render={({ field }) => <TextareaRoot {...otherProps} id={uniqueId} {...field} />}
       />
       <ErrorMessage show={isErr}>{message}</ErrorMessage>
     </>
