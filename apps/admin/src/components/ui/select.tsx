@@ -1,4 +1,7 @@
 import { type ReactNode } from 'react'
+import { ErrorMessage } from '@repo/ui'
+import { useTranslations } from 'next-intl'
+import { useFormContext, Controller } from 'react-hook-form'
 import {
   Select as SelectRoot,
   SelectContent,
@@ -13,23 +16,51 @@ export type SelectOption = {
 }
 
 export interface SelectProps {
+  name: string
+  disabled?: boolean
   placeholder?: ReactNode
   options: SelectOption[]
   defaultValue?: string
-  onValueChange?: (value: SelectOption['value']) => void
 }
 
-export function Select({ placeholder, options, defaultValue, onValueChange }: SelectProps) {
+export function Select({ name, placeholder, disabled, options, defaultValue }: SelectProps) {
+  const t = useTranslations()
+
+  const {
+    control,
+    formState: { errors }
+  } = useFormContext()
+
+  const isErr = !!(errors && errors[name])
+  const message = isErr && t(errors[name]?.message as string)
+
   return (
-    <SelectRoot onValueChange={onValueChange} defaultValue={defaultValue}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map(({ value, title }) => (
-          <SelectItem value={value}>{title}</SelectItem>
-        ))}
-      </SelectContent>
-    </SelectRoot>
+    <>
+      <Controller
+        name={name}
+        control={control}
+        disabled={disabled}
+        defaultValue={defaultValue}
+        render={({ field }) => (
+          <SelectRoot
+            onValueChange={field.onChange}
+            disabled={field.disabled}
+            defaultValue={field.value}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map(({ value, title }, index) => (
+                <SelectItem key={value + index} value={value}>
+                  {title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </SelectRoot>
+        )}
+      />
+      <ErrorMessage show={isErr}>{message}</ErrorMessage>
+    </>
   )
 }
