@@ -8,7 +8,7 @@ const validationMessages = {
 
 // $preview: Upload!
 // $images: [ProductImageInput!]!
-// $description: HTML!
+
 // $sizeName: String!
 // $brandName: String!
 // $defaultSizeID: Int!
@@ -41,6 +41,12 @@ export const baseFields = v.object({
       productCategory.other
     ],
     'Common.validation.requiredField'
+  ),
+  description: v.pipe(
+    v.string('Common.validation.requiredField'),
+    v.trim(),
+    v.nonEmpty('Common.validation.requiredField'),
+    v.minLength(15, validationMessages.minLength15)
   )
 })
 

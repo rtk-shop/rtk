@@ -4,6 +4,7 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { FormValues, validationSchema } from './lib/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
+import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions } from './lib/form-values'
 
@@ -18,7 +19,8 @@ export default function Page() {
       basePrice: 722,
       gender: 'MALE',
       amount: 3,
-      category: 'SUITCASE'
+      category: 'SUITCASE',
+      description: 'My beaifyle description '
     }
   })
 
@@ -47,6 +49,11 @@ export default function Page() {
             <div className="w-[300px]">
               <Select name="category" placeholder="Выбрать категорию" options={categoryOptions} />
             </div>
+            <Textarea
+              name="description"
+              label="Описание"
+              placeholder="Опишите товар используя разметку HTML..."
+            />
             <Button fullWidth type="submit">
               Создать
             </Button>
