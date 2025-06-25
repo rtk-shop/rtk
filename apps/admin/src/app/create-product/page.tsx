@@ -6,6 +6,8 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
 import { Select, type SelectOption } from '@/components/ui/select'
 
+import { productGender } from '@/lib/constants'
+
 export default function Page() {
   const formMethods = useForm<FormValues>({
     mode: 'onBlur',
@@ -15,28 +17,25 @@ export default function Page() {
       title: 'External changing data without sending a snapshot',
       sku: 'P13t16t',
       basePrice: 722,
+      gender: 'MALE',
       amount: 3
     }
   })
 
   const genderOptions: SelectOption[] = [
     {
-      title: 'Male',
-      value: 'male'
+      title: 'Женский',
+      value: productGender.female
     },
     {
-      title: 'Female',
-      value: 'female'
+      title: 'Мужской',
+      value: productGender.male
     },
     {
-      title: 'Unisex',
-      value: 'unisex'
+      title: 'Унисекс',
+      value: productGender.unisex
     }
   ]
-
-  const handleChange = (value: string) => {
-    console.log('v', value)
-  }
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
     console.log('values', values)
@@ -57,12 +56,8 @@ export default function Page() {
                 <Input name="amount" label="Количество" type="number" />
               </div>
             </div>
-            <div>
-              <Select
-                placeholder="Выбрать гендер"
-                options={genderOptions}
-                onValueChange={handleChange}
-              />
+            <div className="w-[300px]">
+              <Select name="gender" placeholder="Выбрать гендер" options={genderOptions} />
             </div>
             <Button fullWidth type="submit">
               Создать

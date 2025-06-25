@@ -1,4 +1,5 @@
-import { OrderStatus } from '@/types/order'
+import type { OrderStatus } from '@/types/order'
+import { ProductGender } from '@/types/product'
 
 export const orderStatus: { [p in Lowercase<OrderStatus>]: Uppercase<p> } = {
   created: 'CREATED',
@@ -7,4 +8,10 @@ export const orderStatus: { [p in Lowercase<OrderStatus>]: Uppercase<p> } = {
   done: 'DONE',
   rejected: 'REJECTED',
   returned: 'RETURNED'
+}
+
+export const productGender: { [p in Lowercase<ProductGender>]: Uppercase<p> } = {
+  male: 'MALE',
+  female: 'FEMALE',
+  unisex: 'UNISEX'
 }
