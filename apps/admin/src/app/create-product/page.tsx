@@ -4,9 +4,8 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { FormValues, validationSchema } from './lib/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
-import { Select, type SelectOption } from '@/components/ui/select'
-
-import { productGender } from '@/lib/constants'
+import { Select } from '@/components/ui/select'
+import { genderOptions, categoryOptions } from './lib/form-values'
 
 export default function Page() {
   const formMethods = useForm<FormValues>({
@@ -18,24 +17,10 @@ export default function Page() {
       sku: 'P13t16t',
       basePrice: 722,
       gender: 'MALE',
-      amount: 3
+      amount: 3,
+      category: 'SUITCASE'
     }
   })
-
-  const genderOptions: SelectOption[] = [
-    {
-      title: 'Женский',
-      value: productGender.female
-    },
-    {
-      title: 'Мужской',
-      value: productGender.male
-    },
-    {
-      title: 'Унисекс',
-      value: productGender.unisex
-    }
-  ]
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
     console.log('values', values)
@@ -58,6 +43,9 @@ export default function Page() {
             </div>
             <div className="w-[300px]">
               <Select name="gender" placeholder="Выбрать гендер" options={genderOptions} />
+            </div>
+            <div className="w-[300px]">
+              <Select name="category" placeholder="Выбрать категорию" options={categoryOptions} />
             </div>
             <Button fullWidth type="submit">
               Создать
