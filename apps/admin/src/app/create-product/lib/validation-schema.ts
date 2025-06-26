@@ -1,5 +1,5 @@
 import * as v from 'valibot'
-import { productGender, productCategory, productTags } from '@/lib/constants'
+import { productGender, productCategory, productTag } from '@/lib/constants'
 
 const validationMessages = {
   minLength3: '* минимум 3 символов',
@@ -24,7 +24,7 @@ export const baseFields = v.object({
     v.nonEmpty('Common.validation.requiredField'),
     v.minLength(3, validationMessages.minLength3)
   ),
-  tag: v.optional(v.picklist([productTags.top, productTags.new, productGender.unisex])),
+  tag: v.optional(v.picklist([productTag.top, productTag.new, productTag.stock])),
   basePrice: v.pipe(v.number('Common.validation.requiredField'), v.minValue(1)),
   amount: v.pipe(v.number('Common.validation.requiredField'), v.minValue(1), v.maxValue(999)),
   gender: v.picklist(

@@ -23,7 +23,7 @@ export const productCategory: { [p in Lowercase<ProductCategory>]: Uppercase<p> 
   other: 'OTHER'
 }
 
-export const productTags: { [p in Lowercase<ProductTag>]: Uppercase<p> } = {
+export const productTag: { [p in Lowercase<ProductTag>]: Uppercase<p> } = {
   new: 'NEW',
   top: 'TOP',
   stock: 'STOCK'
