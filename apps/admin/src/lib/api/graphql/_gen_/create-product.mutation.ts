@@ -14,8 +14,6 @@ export type CreateProductMutationVariables = Types.Exact<{
   description: Types.Scalars['HTML']['input']
   sizeName: Types.Scalars['String']['input']
   brandName: Types.Scalars['String']['input']
-  defaultSizeID: Types.Scalars['Int']['input']
-  tag?: Types.InputMaybe<Types.ProductTag>
 }>
 
 export type CreateProductMutation = {
@@ -42,8 +40,6 @@ export const CreateProductDocument = gql`
     $description: HTML!
     $sizeName: String!
     $brandName: String!
-    $defaultSizeID: Int!
-    $tag: ProductTag
   ) {
     createProduct(
       input: {
@@ -58,8 +54,6 @@ export const CreateProductDocument = gql`
         description: $description
         sizeName: $sizeName
         brandName: $brandName
-        defaultSizeID: $defaultSizeID
-        tag: $tag
       }
     ) {
       id

@@ -10,8 +10,6 @@ mutation CreateProduct(
   $description: HTML!
   $sizeName: String!
   $brandName: String!
-  $defaultSizeID: Int!
-  $tag: ProductTag
 ) {
   createProduct(
     input: {
@@ -26,8 +24,6 @@ mutation CreateProduct(
       description: $description
       sizeName: $sizeName
       brandName: $brandName
-      defaultSizeID: $defaultSizeID
-      tag: $tag
     }
   ) {
     id

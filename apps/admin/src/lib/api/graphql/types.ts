@@ -177,14 +177,12 @@ export type NewProductInput = {
   basePrice: Scalars['Float']['input']
   brandName: Scalars['String']['input']
   category: CategoryType
-  defaultSizeID: Scalars['Int']['input']
   description: Scalars['HTML']['input']
   gender: Gender
   images: Array<ProductImageInput>
   preview: Scalars['Upload']['input']
   sizeName: Scalars['String']['input']
   sku: Scalars['String']['input']
-  tag?: InputMaybe<ProductTag>
   title: Scalars['String']['input']
 }
 

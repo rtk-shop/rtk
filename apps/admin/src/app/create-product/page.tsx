@@ -8,8 +8,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions, tagOptions } from './lib/form-values'
 import { SelectSize } from './size'
+import { useCreateProductMutation } from '@/lib/api/hooks'
 
 export default function Page() {
+  const [_, createProduct] = useCreateProductMutation()
+
   const formMethods = useForm<FormValues>({
     mode: 'onBlur',
     shouldFocusError: false,
@@ -22,15 +25,17 @@ export default function Page() {
       amount: 3,
       category: 'OTHER',
       description: 'My beaifyle description',
-      brandName: 'Brand',
-      defaultSizeID: 1
+      brandName: 'Brand'
     }
   })
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
     if (values.category === 'OTHER') values.sizeName = 'none'
-
     console.log('values', values)
+
+    const res = await createProduct({ ...values })
+
+    console.log('api res', res)
   }
 
   return (
@@ -48,9 +53,7 @@ export default function Page() {
                 <Input name="amount" label="Количество" type="number" />
               </div>
             </div>
-            <div className="w-[300px]">
-              <Select name="tag" placeholder="Выбрать тэг" options={tagOptions} />
-            </div>
+
             <div className="w-[300px]">
               <Select name="gender" placeholder="Выбрать гендер" options={genderOptions} />
             </div>
