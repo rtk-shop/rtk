@@ -22,7 +22,8 @@ export default function Page() {
       amount: 3,
       category: 'OTHER',
       description: 'My beaifyle description',
-      brandName: 'Brand'
+      brandName: 'Brand',
+      defaultSizeID: 1
     }
   })
 
@@ -59,6 +60,7 @@ export default function Page() {
             {/*  */}
             <SelectSize />
             <Input name="brandName" label="Бренд" />
+            <Input name="defaultSizeID" type="number" label="Размер по умолчанию (временно)" />
             {/*  */}
             <Textarea
               name="description"
