@@ -7,6 +7,7 @@ import { Button, Input } from '@repo/ui'
 import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions } from './lib/form-values'
+import { SelectSize } from './size'
 
 export default function Page() {
   const formMethods = useForm<FormValues>({
@@ -20,11 +21,13 @@ export default function Page() {
       gender: 'MALE',
       amount: 3,
       category: 'SUITCASE',
-      description: 'My beaifyle description '
+      description: 'My beaifyle description'
     }
   })
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
+    if (values.category === 'OTHER') values.sizeName = 'none'
+
     console.log('values', values)
   }
 
@@ -49,6 +52,9 @@ export default function Page() {
             <div className="w-[300px]">
               <Select name="category" placeholder="Выбрать категорию" options={categoryOptions} />
             </div>
+            {/*  */}
+            <SelectSize />
+            {/*  */}
             <Textarea
               name="description"
               label="Описание"

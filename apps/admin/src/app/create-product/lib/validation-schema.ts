@@ -9,7 +9,6 @@ const validationMessages = {
 // $preview: Upload!
 // $images: [ProductImageInput!]!
 
-// $sizeName: String!
 // $brandName: String!
 // $defaultSizeID: Int!
 // $tag: ProductTag
@@ -33,15 +32,6 @@ export const baseFields = v.object({
     [productGender.male, productGender.female, productGender.unisex],
     'Common.validation.requiredField'
   ),
-  category: v.picklist(
-    [
-      productCategory.suitcase,
-      productCategory.backpack,
-      productCategory.bag,
-      productCategory.other
-    ],
-    'Common.validation.requiredField'
-  ),
   description: v.pipe(
     v.string('Common.validation.requiredField'),
     v.trim(),
@@ -50,6 +40,28 @@ export const baseFields = v.object({
   )
 })
 
-export const validationSchema = v.intersect([baseFields])
+export const categorySchema = v.pipe(
+  v.object({
+    category: v.picklist(
+      [
+        productCategory.suitcase,
+        productCategory.backpack,
+        productCategory.bag,
+        productCategory.other
+      ],
+      'Common.validation.requiredField'
+    ),
+    sizeName: v.optional(v.string())
+  }),
+  v.forward(
+    v.check(
+      (input) => input.category === 'OTHER' || !!input.sizeName,
+      'Common.validation.requiredField'
+    ),
+    ['sizeName']
+  )
+)
+
+export const validationSchema = v.intersect([baseFields, categorySchema])
 
 export type FormValues = v.InferOutput<typeof validationSchema>
