@@ -1,5 +1,5 @@
 import type { OrderStatus } from '@/types/order'
-import type { ProductGender, ProductCategory } from '@/types/product'
+import type { ProductGender, ProductCategory, ProductTag } from '@/types/product'
 
 export const orderStatus: { [p in Lowercase<OrderStatus>]: Uppercase<p> } = {
   created: 'CREATED',
@@ -21,4 +21,10 @@ export const productCategory: { [p in Lowercase<ProductCategory>]: Uppercase<p> 
   backpack: 'BACKPACK',
   bag: 'BAG',
   other: 'OTHER'
+}
+
+export const productTags: { [p in Lowercase<ProductTag>]: Uppercase<p> } = {
+  new: 'NEW',
+  top: 'TOP',
+  stock: 'STOCK'
 }

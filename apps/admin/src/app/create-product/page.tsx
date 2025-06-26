@@ -6,7 +6,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
 import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
-import { genderOptions, categoryOptions } from './lib/form-values'
+import { genderOptions, categoryOptions, tagOptions } from './lib/form-values'
 import { SelectSize } from './size'
 
 export default function Page() {
@@ -46,6 +46,9 @@ export default function Page() {
               <div>
                 <Input name="amount" label="Количество" type="number" />
               </div>
+            </div>
+            <div className="w-[300px]">
+              <Select name="tag" placeholder="Выбрать тэг" options={tagOptions} />
             </div>
             <div className="w-[300px]">
               <Select name="gender" placeholder="Выбрать гендер" options={genderOptions} />

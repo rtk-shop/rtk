@@ -1,5 +1,5 @@
 import { SelectOption } from '@/components/ui/select'
-import { productGender, productCategory } from '@/lib/constants'
+import { productGender, productCategory, productTags } from '@/lib/constants'
 
 export const genderOptions: SelectOption[] = [
   {
@@ -32,5 +32,20 @@ export const categoryOptions: SelectOption[] = [
   {
     title: 'Другое',
     value: productCategory.other
+  }
+]
+
+export const tagOptions: SelectOption[] = [
+  {
+    title: 'Новинка',
+    value: productTags.new
+  },
+  {
+    title: 'Топ',
+    value: productTags.top
+  },
+  {
+    title: 'Акция',
+    value: productTags.stock
   }
 ]
