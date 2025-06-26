@@ -9,7 +9,6 @@ const validationMessages = {
 // $preview: Upload!
 // $images: [ProductImageInput!]!
 
-// $brandName: String!
 // $defaultSizeID: Int!
 // $tag: ProductTag
 
@@ -31,6 +30,12 @@ export const baseFields = v.object({
   gender: v.picklist(
     [productGender.male, productGender.female, productGender.unisex],
     'Common.validation.requiredField'
+  ),
+  brandName: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty('Common.validation.requiredField'),
+    v.minLength(3, validationMessages.minLength3)
   ),
   description: v.pipe(
     v.string('Common.validation.requiredField'),

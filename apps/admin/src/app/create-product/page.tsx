@@ -20,8 +20,9 @@ export default function Page() {
       basePrice: 722,
       gender: 'MALE',
       amount: 3,
-      category: 'SUITCASE',
-      description: 'My beaifyle description'
+      category: 'OTHER',
+      description: 'My beaifyle description',
+      brandName: 'Brand'
     }
   })
 
@@ -54,6 +55,7 @@ export default function Page() {
             </div>
             {/*  */}
             <SelectSize />
+            <Input name="brandName" label="Бренд" />
             {/*  */}
             <Textarea
               name="description"
