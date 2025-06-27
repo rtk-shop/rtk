@@ -8,6 +8,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions, tagOptions } from './lib/form-values'
 import { SelectSize } from './size'
+import { Images } from './images'
+import { Preview } from './preview'
 import { useCreateProductMutation } from '@/lib/api/hooks'
 
 export default function Page() {
@@ -70,6 +72,8 @@ export default function Page() {
               label="Описание"
               placeholder="Опишите товар используя разметку HTML..."
             />
+            <Images />
+            <Preview />
             <Button fullWidth type="submit">
               Создать
             </Button>

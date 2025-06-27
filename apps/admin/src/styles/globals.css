@@ -4,6 +4,8 @@
 
 @import 'tw-animate-css';
 
+@config '../../tailwind.config.ts';
+
 /*
     ---break---
   */

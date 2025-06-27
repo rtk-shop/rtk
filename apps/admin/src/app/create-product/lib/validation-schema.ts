@@ -65,6 +65,25 @@ export const categorySchema = v.pipe(
   )
 )
 
-export const validationSchema = v.intersect([baseFields, categorySchema])
+export const imagesSchema = v.pipe(
+  v.object({
+    preview: v.instance(File),
+    images: v.pipe(
+      v.array(
+        v.object({
+          img: v.instance(File),
+          order: v.number()
+        })
+      ),
+      v.minLength(2, 'Добавьте хотя бы два изображения')
+    )
+  }),
+  v.check((input) => {
+    const orders = input.images.map((img) => img.order)
+    return new Set(orders).size === orders.length
+  }, 'Порядок изображений должен быть уникальным')
+)
+
+export const validationSchema = v.intersect([baseFields, imagesSchema, categorySchema])
 
 export type FormValues = v.InferOutput<typeof validationSchema>
