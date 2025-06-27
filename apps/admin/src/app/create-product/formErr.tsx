@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 
-export function Images() {
+export function FormError() {
   const {
     formState: { errors }
   } = useFormContext()

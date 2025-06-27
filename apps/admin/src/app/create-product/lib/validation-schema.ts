@@ -71,11 +71,11 @@ export const imagesSchema = v.pipe(
     images: v.pipe(
       v.array(
         v.object({
-          img: v.instance(File),
+          image: v.instance(File),
           order: v.number()
         })
       ),
-      v.minLength(2, 'Добавьте хотя бы два изображения')
+      v.minLength(2, 'Добавьте как минимум два изображения')
     )
   }),
   v.check((input) => {

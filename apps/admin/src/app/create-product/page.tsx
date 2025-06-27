@@ -6,10 +6,11 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
 import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
-import { genderOptions, categoryOptions, tagOptions } from './lib/form-values'
+import { genderOptions, categoryOptions } from './lib/form-values'
 import { SelectSize } from './size'
-import { Images } from './images'
+import { FormError } from './formErr'
 import { Preview } from './preview'
+import { Images } from './images'
 import { useCreateProductMutation } from '@/lib/api/hooks'
 
 export default function Page() {
@@ -20,14 +21,24 @@ export default function Page() {
     shouldFocusError: false,
     resolver: valibotResolver(validationSchema),
     defaultValues: {
-      title: 'External changing data without sending a snapshot',
+      title: '[TEST] External changing data without sending a snapshot',
       sku: 'P13t16t',
       basePrice: 722,
       gender: 'MALE',
       amount: 3,
       category: 'OTHER',
       description: 'My beaifyle description',
-      brandName: 'Brand'
+      brandName: 'Brand',
+      images: [
+        {
+          image: undefined,
+          order: 1
+        },
+        {
+          image: undefined,
+          order: 2
+        }
+      ]
     }
   })
 
@@ -41,7 +52,7 @@ export default function Page() {
   }
 
   return (
-    <div className="mb-16 min-h-dvh bg-gray-100">
+    <div className="mb-16 min-h-dvh">
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div className="px-2.5 py-5 pb-3">
@@ -72,8 +83,15 @@ export default function Page() {
               label="Описание"
               placeholder="Опишите товар используя разметку HTML..."
             />
-            <Images />
-            <Preview />
+            <FormError />
+            <div className="flex">
+              <div className="mr-10 w-full max-w-[270px]">
+                <Preview />
+              </div>
+              <div className="w-full">
+                <Images />
+              </div>
+            </div>
             <Button fullWidth type="submit">
               Создать
             </Button>

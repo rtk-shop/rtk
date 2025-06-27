@@ -1,10 +1,10 @@
-import { useState, type MouseEvent } from 'react'
+import { type ReactNode, useState, type MouseEvent } from 'react'
 import { cva } from 'cva'
 import { useDropzone } from 'react-dropzone'
 import { ErrorMessage } from '@repo/ui'
 import { useFormContext } from 'react-hook-form'
 import { Button } from '@/components/ui/shadcn/button'
-import { TrashIcon } from 'lucide-react'
+import { TrashIcon, ImageIcon } from 'lucide-react'
 
 const MAX_FILE_SIZE_MB = 5
 
@@ -42,7 +42,7 @@ export const dropzoneFeedbackColor = (props: {
   if (props.isError) return '#ff1744'
 }
 
-export function PreviewDropzone({ name }: { name: string }) {
+export function ProductPhotoDropzone({ name, info }: { name: string; info?: ReactNode }) {
   const { setValue } = useFormContext()
 
   const [file, setFile] = useState<UploadedFile | null>(null)
@@ -70,6 +70,9 @@ export function PreviewDropzone({ name }: { name: string }) {
           setError('Некорректное соотношение сторон изображения')
           return
         }
+
+        // const { preview, ...rawFile } = file
+
         setValue(name, file)
       }
     }
@@ -104,7 +107,7 @@ export function PreviewDropzone({ name }: { name: string }) {
     <>
       <div
         {...getRootProps()}
-        className="relative mt-6 aspect-4/5 w-[270px] rounded-xl border-2 border-gray-300"
+        className="relative aspect-4/5 w-full rounded-xl border-2 border-gray-300"
         style={{
           borderStyle: file?.size ? 'solid' : 'dashed',
           borderColor: dropzoneFeedbackColor({
@@ -123,14 +126,10 @@ export function PreviewDropzone({ name }: { name: string }) {
             className="size-full rounded-xl"
           />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center">
-            <div className="select-none">
-              <p className="my-2 px-2 text-center text-gray-500">Превью фото товара</p>
-              <ul className="list-disc pl-[20%] text-sm text-gray-400">
-                <li>Размер до {MAX_FILE_SIZE_MB} Mb</li>
-                <li>Формат jpeg | png</li>
-                <li>Соотношение 4:5</li>
-              </ul>
+          <div className="flex h-full items-center justify-center">
+            <div className="flex flex-col items-center select-none">
+              <ImageIcon className="size-20 text-gray-300" />
+              {info}
             </div>
           </div>
         )}
@@ -140,7 +139,7 @@ export function PreviewDropzone({ name }: { name: string }) {
           </Button>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="">
         <ErrorMessage show={!!error}>{error}</ErrorMessage>
       </div>
     </>
