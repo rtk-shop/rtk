@@ -14,7 +14,8 @@ const mutator = async (url: string, { arg }: { arg: { initData: string } }): Pro
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(arg),
-    cache: 'no-store'
+    cache: 'no-store',
+    credentials: 'include'
   })
 
   const respText = await resp.text()
