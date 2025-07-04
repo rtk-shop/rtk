@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Icon } from '@/components/ui/icon'
 import { OrderListItem } from '@/components/order/list-item'
 import { useOrders } from '@/lib/api/hooks'
 import { OrdersSkeleton } from './skeletons/orders'
 import { routeNames } from '@/lib/routes'
+import { TriangleAlert } from 'lucide-react'
 
 const FIRST = 7
 
@@ -32,7 +32,7 @@ export function Orders() {
     return (
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg">
-          <Icon name="common/warning" className="mb-1 text-5xl text-amber-500" />
+          <TriangleAlert strokeWidth={1.5} className="mb-1 size-14 text-amber-500" />
           <p className="text-lg">Ошибка получения данных</p>
         </div>
       </div>

@@ -120,9 +120,6 @@ importers:
       '@graphql-codegen/typescript-urql':
         specifier: ^4.0.1
         version: 4.0.1(graphql-tag@2.12.6(graphql@16.11.0))(graphql@16.11.0)
-      '@neodx/svg':
-        specifier: ^0.7.1
-        version: 0.7.1(eslint@8.57.1)(prettier@3.5.3)
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.3

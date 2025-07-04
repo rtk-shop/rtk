@@ -1,27 +1,27 @@
-import { Icon } from '@/components/ui/icon'
 import { cva } from 'cva'
+import { Banknote, CalendarDays, ChartNoAxesColumnIncreasing, Hash } from 'lucide-react'
 
 const headerItem = cva('flex items-center font-medium text-gray-700')
 
 const items = [
   {
     title: 'Заказ',
-    icon: <Icon name="common/menu" className="text-black" />,
+    icon: <Hash strokeWidth={1.5} className="size-7" />,
     className: 'col-span-2'
   },
   {
     title: 'Дата',
-    icon: <Icon name="common/calendar" className="text-orange-400" />,
+    icon: <CalendarDays strokeWidth={1.5} className="size-7 text-orange-400" />,
     className: 'justify-center col-span-4'
   },
   {
     title: 'Сумма',
-    icon: <Icon className="text-green-600" name="common/tags" />,
+    icon: <Banknote strokeWidth={1.5} className="size-7 text-green-600" />,
     className: 'justify-center col-span-3'
   },
   {
     title: 'Статус',
-    icon: <Icon name="common/signal" className="text-green-600" />,
+    icon: <ChartNoAxesColumnIncreasing strokeWidth={1.5} className="size-7" />,
     className: 'justify-end col-span-3'
   }
 ]
@@ -31,7 +31,7 @@ export function OrdersHeader() {
     <ul className="grid grid-cols-12 gap-2 sm:px-4">
       {items.map(({ title, icon, className }, index) => (
         <li key={index} className={headerItem({ class: className })}>
-          <div className="text-2xl sm:mr-2">{icon}</div>
+          <div className="sm:mr-2">{icon}</div>
           <span className="hidden sm:block">{title}</span>
         </li>
       ))}

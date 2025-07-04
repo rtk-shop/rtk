@@ -65,6 +65,11 @@ export type DashboardStats = {
   users: UsersStats
 }
 
+export type DeleteProductPayload = {
+  __typename?: 'DeleteProductPayload'
+  id: Scalars['ID']['output']
+}
+
 export const enum Gender {
   Female = 'FEMALE',
   Male = 'MALE',
@@ -91,6 +96,7 @@ export type Mutation = {
   createOrder: NewOrderPayload
   createProduct: NewProductPayload
   createProductSizeVariation: NewSizeVariationPayload
+  deleteProduct: DeleteProductPayload
   hideProduct?: Maybe<HideProductPayload>
   processOrder: ProcessOrderPayload
   /** reduceCartItemQuantity - reduces cart item quantity by one */
@@ -124,6 +130,10 @@ export type MutationCreateProductArgs = {
 
 export type MutationCreateProductSizeVariationArgs = {
   input: NewSizeVariation
+}
+
+export type MutationDeleteProductArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type MutationHideProductArgs = {
