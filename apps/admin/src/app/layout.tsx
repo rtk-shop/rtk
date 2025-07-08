@@ -4,6 +4,8 @@ import { Roboto } from 'next/font/google'
 import { UrqlProvider } from '@/providers/urql'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
+import { SidebarProvider } from '@/components/ui/shadcn/sidebar'
+import { AppSidebar } from '@/components/layout/sidebar'
 
 import '@/styles/globals.css'
 
@@ -30,8 +32,11 @@ export default async function RootLayout({
       <body className={roboto.variable}>
         <NextIntlClientProvider messages={messages}>
           <UrqlProvider>
-            <main>{children}</main>
-            <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+            <SidebarProvider defaultOpen>
+              <AppSidebar />
+              <main>{children}</main>
+              <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+            </SidebarProvider>
           </UrqlProvider>
         </NextIntlClientProvider>
       </body>
