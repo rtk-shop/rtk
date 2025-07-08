@@ -34,7 +34,7 @@ export default async function RootLayout({
           <UrqlProvider>
             <SidebarProvider defaultOpen>
               <AppSidebar />
-              <main>{children}</main>
+              <div className="w-full">{children}</div>
               <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
             </SidebarProvider>
           </UrqlProvider>

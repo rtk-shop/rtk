@@ -69,6 +69,10 @@ body {
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-sidebar: var(--sidebar);
+
+  /* Sidebar */
+  --sidebar-width: 16rem;
+  --sidebar-width-icon: 3rem;
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);

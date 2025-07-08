@@ -40,7 +40,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Пользователи',
-          url: routeNames.dashboard,
+          url: '#',
           icon: Users
         },
         {
