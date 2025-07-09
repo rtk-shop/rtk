@@ -1,6 +1,6 @@
 'use client'
 
-import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
+import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form'
 import { FormValues, validationSchema } from './lib/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button, Input } from '@repo/ui'
@@ -8,13 +8,27 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions } from './lib/form-values'
 import { SelectSize } from './size'
-import { FormError } from './formErr'
 import { Preview } from './preview'
 import { Images } from './images'
 import { useCreateProductMutation } from '@/lib/api/hooks'
+import { Header } from '@/components/layout/header'
+import { description } from './lib/data'
+
+export function FormError() {
+  const {
+    formState: { errors }
+  } = useFormContext()
+
+  return (
+    <div>
+      <h2>Form errors</h2>
+      <code>{JSON.stringify(errors)}</code>
+    </div>
+  )
+}
 
 export default function Page() {
-  const [_, createProduct] = useCreateProductMutation()
+  const [{ fetching }, createProduct] = useCreateProductMutation()
 
   const formMethods = useForm<FormValues>({
     mode: 'onBlur',
@@ -24,10 +38,10 @@ export default function Page() {
       title: '[TEST] External changing data without sending a snapshot',
       sku: 'P13t16t',
       basePrice: 722,
-      gender: 'MALE',
+      // gender: 'MALE',
       amount: 3,
-      category: 'OTHER',
-      description: 'My beaifyle description',
+      // category: 'OTHER',
+      description,
       brandName: 'Brand',
       images: [
         {
@@ -53,48 +67,69 @@ export default function Page() {
 
   return (
     <div className="mb-16 min-h-dvh">
+      <Header></Header>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
-          <div className="px-2.5 py-5 pb-3">
-            <Input name="title" label="Название" />
-            <Input name="sku" label="Код учета (SKU)" />
-            <div className="flex">
-              <div className="mr-12">
-                <Input name="basePrice" label="Цена" type="number" />
+          <div className="flex flex-wrap px-2.5 pb-3">
+            <div className="mb-5 basis-full xl:mb-0 xl:basis-1/2 xl:p-4">
+              <Input name="title" label="Название" />
+              <div className="max-w-40">
+                <Input name="sku" label="Код учета (SKU)" />
               </div>
-              <div>
-                <Input name="amount" label="Количество" type="number" />
+              <div className="flex items-center">
+                <div className="mr-12">
+                  <Input name="basePrice" label="Цена" type="number" />
+                </div>
+                <div>
+                  <Input name="amount" label="Количество" type="number" />
+                </div>
               </div>
-            </div>
 
-            <div className="w-[300px]">
-              <Select name="gender" placeholder="Выбрать гендер" options={genderOptions} />
-            </div>
-            <div className="w-[300px]">
-              <Select name="category" placeholder="Выбрать категорию" options={categoryOptions} />
-            </div>
-            {/*  */}
-            <SelectSize />
-            <Input name="brandName" label="Бренд" />
-            <Input name="defaultSizeID" type="number" label="Размер по умолчанию (временно)" />
-            {/*  */}
-            <Textarea
-              name="description"
-              label="Описание"
-              placeholder="Опишите товар используя разметку HTML..."
-            />
-            <FormError />
-            <div className="flex">
-              <div className="mr-10 w-full max-w-[270px]">
-                <Preview />
+              <div className="mb-4 xl:flex">
+                <div className="mr-4 w-full max-w-64">
+                  <Select
+                    name="category"
+                    label="Категория"
+                    placeholder="Выбрать категорию"
+                    options={categoryOptions}
+                  />
+                </div>
+                <div className="w-[200px]">
+                  <Select
+                    name="gender"
+                    label="Гендер"
+                    placeholder="Выбрать гендер"
+                    options={genderOptions}
+                  />
+                </div>
               </div>
-              <div className="w-full">
-                <Images />
+              {/*  */}
+              <SelectSize />
+              <Input name="brandName" label="Бренд" />
+              {/*  */}
+              <Textarea
+                name="description"
+                label="Описание"
+                className="h-44 xl:h-60"
+                placeholder="Опишите товар используя разметку HTML..."
+              />
+              <div className="flex justify-center">
+                <Button fullWidth type="submit" className="xl:max-w-73" loading={fetching}>
+                  Создать
+                </Button>
+              </div>
+              {/* <FormError /> */}
+            </div>
+            <div className="basis-full xl:basis-1/2 xl:p-4">
+              <div className="flex">
+                <div className="mr-10 w-full max-w-[270px]">
+                  <Preview />
+                </div>
+                <div className="w-full">
+                  <Images />
+                </div>
               </div>
             </div>
-            <Button fullWidth type="submit">
-              Создать
-            </Button>
           </div>
         </form>
       </FormProvider>

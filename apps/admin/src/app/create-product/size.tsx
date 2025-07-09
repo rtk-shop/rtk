@@ -15,16 +15,19 @@ export function SelectSize() {
     name: 'category'
   })
 
-  const options: SelectOption[] = SIZE_VARIATIONS[category].map((size) => ({
-    title: size,
-    value: size
-  }))
+  const options: SelectOption[] = SIZE_VARIATIONS[category || productCategory.other].map(
+    (size) => ({
+      title: size,
+      value: size
+    })
+  )
 
   return (
     <div className="w-[190px]">
       <Select
         name="sizeName"
-        disabled={category === 'OTHER'}
+        label="Размер"
+        disabled={category === 'OTHER' || !category}
         placeholder="Укажите размер"
         options={options}
       />
