@@ -2,15 +2,17 @@
 
 // Why 'use client' https://github.com/react-hook-form/react-hook-form/issues/11284#issuecomment-1850995149
 
+import { type ReactNode, useId } from 'react'
 import { cva } from 'cva'
 import { ErrorMessage } from './error-message'
 import { useTranslations } from 'next-intl'
 import { Path, FieldValues, useFormContext } from 'react-hook-form'
+import { Label } from './label'
 
 export interface InputProps<T extends FieldValues> {
   name: Path<T>
   type?: 'text' | 'password' | 'file' | 'number'
-  label?: string
+  label?: ReactNode
   disabled?: boolean
   maxLength?: number
   placeholder?: string
@@ -18,7 +20,7 @@ export interface InputProps<T extends FieldValues> {
 }
 
 const inpEl = cva(
-  'mb-1 flex h-11 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 md:text-sm',
+  'mb-1 flex h-9 w-full rounded-md border border-gray-200 px-3 py-1 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-950 placeholder:text-gray-500 focus-visible:border-gray-400 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-60 md:text-sm',
   {
     variants: {
       error: {
@@ -35,6 +37,7 @@ export function Input<T extends FieldValues>({
   autoComplete = 'off',
   ...restProps
 }: InputProps<T>) {
+  const uniqueId = useId()
   const t = useTranslations()
 
   const {
@@ -47,10 +50,9 @@ export function Input<T extends FieldValues>({
 
   return (
     <div>
-      {label && (
-        <span className="mb-1 pl-1 text-[15px] font-medium text-gray-800 select-none">{label}</span>
-      )}
+      {label && <Label htmlFor={uniqueId}>{label}</Label>}
       <input
+        id={uniqueId}
         type={type}
         autoComplete={autoComplete}
         className={inpEl({ error: isErr })}

@@ -2,8 +2,7 @@ import { useId, type ReactNode } from 'react'
 import { Textarea as TextareaRoot } from '@/components/ui/shadcn/textarea'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
-import { ErrorMessage } from '@repo/ui'
-import { Label } from './label'
+import { ErrorMessage, Label } from '@repo/ui'
 
 export type TextareaProps = Omit<React.ComponentProps<'textarea'>, 'name'> & {
   name: string
