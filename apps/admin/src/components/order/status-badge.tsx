@@ -1,57 +1,85 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { cva } from 'cva'
 import { orderStatus } from '@/lib/constants'
+import { Ban, PackageCheck, PackageX, Timer } from 'lucide-react'
 import type { OrderStatus } from '@/types/order'
 
-const view = cva(
-  'rounded-xl px-2 py-1.5 text-xs font-medium whitespace-nowrap sm:px-3.5 sm:!text-sm',
-  {
-    variants: {
-      status: {
-        [orderStatus.sent]: 'bg-blue-100 text-blue-800',
-        [orderStatus.rejected]: 'bg-gray-200 text-gray-500',
-        [orderStatus.returned]: 'bg-red-100 text-red-500',
-        [orderStatus.processed]: 'bg-yellow-100 text-amber-600',
-        [orderStatus.done]: 'bg-green-100 text-green-700',
-        [orderStatus.created]: '!p-0'
-      }
+const view = cva('rounded-lg text-xs whitespace-nowrap', {
+  variants: {
+    status: {
+      [orderStatus.sent]: '',
+      [orderStatus.rejected]: '',
+      [orderStatus.returned]: '',
+      [orderStatus.processed]: '',
+      [orderStatus.done]: '',
+      [orderStatus.created]: ''
     }
   }
-)
+})
 
 export function StatusBadge({ status }: { status: OrderStatus }) {
-  let statusName: ReactNode | string
+  let statusName: ReactNode
 
   switch (status) {
     case orderStatus.created:
       statusName = (
-        <div>
-          <div className="flex items-center justify-end">
-            <span className="relative mr-2 flex size-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
-            </span>
-            <span>Создан</span>
-          </div>
-        </div>
+        <>
+          <span className="relative mr-2 flex size-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
+          </span>
+          <span>Создан</span>
+        </>
       )
       break
     case orderStatus.processed:
-      statusName = 'В обработке'
+      statusName = (
+        <>
+          <Timer className="mr-1 size-4" />
+          <span className="leading-none">В обработке</span>
+        </>
+      )
       break
     case orderStatus.sent:
-      statusName = 'В дороге'
+      statusName = (
+        <>
+          <span className="relative mr-2 flex size-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex size-3 rounded-full bg-blue-500"></span>
+          </span>
+          <span>В дороге</span>
+        </>
+      )
       break
     case orderStatus.done:
-      statusName = 'Получен'
+      statusName = (
+        <>
+          <PackageCheck className="mr-1 size-4 text-green-700" />
+          <span className="leading-none">Получен</span>
+        </>
+      )
       break
     case orderStatus.rejected:
-      statusName = 'Отменен'
+      statusName = (
+        <>
+          <Ban className="mr-1 size-3.5 text-gray-500" />
+          <span className="leading-none">Отменен</span>
+        </>
+      )
       break
     case orderStatus.returned:
-      statusName = 'Возврат'
+      statusName = (
+        <>
+          <PackageX className="mr-1 size-4 text-red-500" />
+          <span className="leading-none">Возврат</span>
+        </>
+      )
       break
   }
 
-  return <span className={view({ status })}>{statusName}</span>
+  return (
+    <div className={view({ status })}>
+      <div className="flex items-center">{statusName}</div>
+    </div>
+  )
 }
