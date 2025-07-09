@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { ErrorMessage } from '@repo/ui'
+import { ErrorMessage, Label } from '@repo/ui'
 import { useTranslations } from 'next-intl'
 import { useFormContext, Controller } from 'react-hook-form'
 import {
@@ -18,12 +18,13 @@ export type SelectOption = {
 export interface SelectProps {
   name: string
   disabled?: boolean
+  label?: ReactNode
   placeholder?: ReactNode
   options: SelectOption[]
   defaultValue?: string
 }
 
-export function Select({ name, placeholder, disabled, options, defaultValue }: SelectProps) {
+export function Select({ name, placeholder, disabled, label, options, defaultValue }: SelectProps) {
   const t = useTranslations()
 
   const {
@@ -36,6 +37,7 @@ export function Select({ name, placeholder, disabled, options, defaultValue }: S
 
   return (
     <>
+      {label && <Label>{label}</Label>}
       <Controller
         name={name}
         control={control}
