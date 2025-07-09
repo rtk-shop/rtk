@@ -24,7 +24,7 @@ export function StatusBadge({ status }: { status: OrderStatus }) {
     case orderStatus.created:
       statusName = (
         <>
-          <span className="relative mr-2 flex size-3">
+          <span className="relative mr-1.5 flex size-3">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
           </span>
@@ -43,7 +43,7 @@ export function StatusBadge({ status }: { status: OrderStatus }) {
     case orderStatus.sent:
       statusName = (
         <>
-          <span className="relative mr-2 flex size-3">
+          <span className="relative mr-1.5 flex size-3">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
             <span className="relative inline-flex size-3 rounded-full bg-blue-500"></span>
           </span>
