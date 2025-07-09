@@ -4,16 +4,31 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader
+  SidebarHeader,
+  useSidebar
 } from '@/components/ui/shadcn/sidebar'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
-// import { TeamSwitcher } from '@/components/layout/team-switcher'
+import { AppLogo } from '@/components/ui/logo'
+import { cva } from 'class-variance-authority'
+
+const head = cva('max-w-20', {
+  variants: {
+    open: {
+      true: 'mb-6 p-4',
+      false: 'mb-2 p-2'
+    }
+  }
+})
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { open } = useSidebar()
+
   return (
     <Sidebar collapsible="icon" variant="floating" {...props}>
-      <SidebarHeader>{/* <TeamSwitcher teams={sidebarData.teams} /> */}</SidebarHeader>
+      <SidebarHeader className={head({ open })}>
+        <AppLogo size="max" />
+      </SidebarHeader>
       <SidebarContent>
         {sidebarData.navGroups.map((props) => (
           <NavGroup key={props.title} {...props} />
