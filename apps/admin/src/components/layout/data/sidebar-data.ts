@@ -1,5 +1,5 @@
 import { routeNames } from '@/lib/routes'
-import { LayoutDashboard, Users, PackagePlus } from 'lucide-react'
+import { LayoutDashboard, Boxes, Users, PackagePlus } from 'lucide-react'
 
 interface BaseNavItem {
   title: string
@@ -28,6 +28,8 @@ export interface SidebarData {
   navGroups: NavGroup[]
 }
 
+// <SquareLibrary /> products
+
 export const sidebarData: SidebarData = {
   navGroups: [
     {
@@ -37,6 +39,11 @@ export const sidebarData: SidebarData = {
           title: 'Панель',
           url: routeNames.dashboard,
           icon: LayoutDashboard
+        },
+        {
+          title: 'Заказы',
+          url: '#',
+          icon: Boxes
         },
         {
           title: 'Пользователи',
