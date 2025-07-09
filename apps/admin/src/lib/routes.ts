@@ -3,6 +3,7 @@ export const routeNames = {
   auth: '/auth',
   dashboard: '/dashboard',
   order: '/order/',
+  orders: '/orders',
   createProduct: '/create-product'
 } as const
 
@@ -10,6 +11,7 @@ const protectedRoutes = [
   routeNames.root,
   routeNames.dashboard,
   routeNames.order,
+  routeNames.orders,
   routeNames.createProduct
 ]
 

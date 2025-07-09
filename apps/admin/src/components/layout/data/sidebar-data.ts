@@ -42,7 +42,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Заказы',
-          url: '#',
+          url: routeNames.orders,
           icon: Boxes
         },
         {
