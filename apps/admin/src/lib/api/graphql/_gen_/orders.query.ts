@@ -3,8 +3,10 @@ import * as Types from '../types'
 import { gql } from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type OrdersQueryVariables = Types.Exact<{
-  first: Types.Scalars['Int']['input']
   status?: Types.InputMaybe<Types.OrderStatus>
+  first: Types.Scalars['Int']['input']
+  after?: Types.InputMaybe<Types.Scalars['String']['input']>
+  before?: Types.InputMaybe<Types.Scalars['String']['input']>
 }>
 
 export type OrdersQuery = {
@@ -26,7 +28,7 @@ export type OrdersQuery = {
         __typename?: 'Order'
         id: string
         price: number
-        receiverName: string
+        cityName: string
         status: Types.OrderStatus
         createdAt: string
       }
@@ -35,8 +37,8 @@ export type OrdersQuery = {
 }
 
 export const OrdersDocument = gql`
-  query Orders($first: Int!, $status: OrderStatus) {
-    orders(first: $first, where: { status: $status }) {
+  query Orders($status: OrderStatus, $first: Int!, $after: String, $before: String) {
+    orders(first: $first, after: $after, before: $before, where: { status: $status }) {
       pageInfo {
         hasNextPage
         startCursor
@@ -49,7 +51,7 @@ export const OrdersDocument = gql`
         node {
           id
           price
-          receiverName
+          cityName
           status
           createdAt
         }

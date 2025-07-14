@@ -1,5 +1,11 @@
-query Orders($first: Int!, $status: OrderStatus) {
-  orders(first: $first, where: { status: $status }) {
+query Orders(
+  $status: OrderStatus
+  # pagination
+  $first: Int!
+  $after: String
+  $before: String
+) {
+  orders(first: $first, after: $after, before: $before, where: { status: $status }) {
     pageInfo {
       hasNextPage
       startCursor
@@ -12,7 +18,7 @@ query Orders($first: Int!, $status: OrderStatus) {
       node {
         id
         price
-        receiverName
+        cityName
         status
         createdAt
       }

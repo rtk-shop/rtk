@@ -22,6 +22,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@tanstack/react-table": "^8.21.3",
     "@urql/exchange-auth": "^2.2.1",
     "@urql/exchange-graphcache": "^7.2.3",
     "@urql/next": "^1.1.5",
