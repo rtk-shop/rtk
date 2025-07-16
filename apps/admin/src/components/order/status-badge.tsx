@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import { cva } from 'cva'
 import { orderStatus } from '@/lib/constants'
-import { Ban, PackageCheck, PackageX, Timer } from 'lucide-react'
+import { Timer, PackageCheck, PackageX, CircleX } from 'lucide-react'
 import type { OrderStatus } from '@/types/order'
 
 const view = cva('rounded-lg text-xs whitespace-nowrap', {
@@ -62,7 +62,7 @@ export function StatusBadge({ status }: { status: OrderStatus }) {
     case orderStatus.rejected:
       statusName = (
         <>
-          <Ban className="mr-1 size-3.5 text-gray-500" />
+          <CircleX className="mr-1 size-4 text-gray-500" />
           <span className="leading-none">Отменен</span>
         </>
       )
