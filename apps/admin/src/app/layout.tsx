@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { SidebarProvider } from '@/components/ui/shadcn/sidebar'
 import { AppSidebar } from '@/components/layout/sidebar'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import '@/styles/globals.css'
 
@@ -30,15 +31,17 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={roboto.variable}>
-        <NextIntlClientProvider messages={messages}>
-          <UrqlProvider>
-            <SidebarProvider defaultOpen>
-              <AppSidebar />
-              <div className="w-full">{children}</div>
-              <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
-            </SidebarProvider>
-          </UrqlProvider>
-        </NextIntlClientProvider>
+        <NuqsAdapter>
+          <NextIntlClientProvider messages={messages}>
+            <UrqlProvider>
+              <SidebarProvider defaultOpen>
+                <AppSidebar />
+                <div className="w-full">{children}</div>
+                <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
+              </SidebarProvider>
+            </UrqlProvider>
+          </NextIntlClientProvider>
+        </NuqsAdapter>
       </body>
     </html>
   )

@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { columns } from './columns'
 import {
@@ -13,22 +14,22 @@ import {
   TableRow
 } from '@/components/ui/shadcn/table'
 import { useOrders } from '@/lib/api/hooks'
-import { Order } from './types'
+import type { Order } from './types'
 import { TablePagination } from './pagination'
 import { routeNames } from '@/lib/routes'
 
 export function OrderTable() {
   const router = useRouter()
-  const [first, setFirst] = useState(10)
-  const [cursor, setCursor] = useState<{ before?: string; after?: string }>({
-    before: undefined,
-    after: undefined
+
+  const [pagination, setPagination] = useQueryStates({
+    first: parseAsInteger.withDefault(15),
+    after: parseAsString,
+    before: parseAsString
   })
 
   const [result] = useOrders({
     variables: {
-      first,
-      ...cursor
+      ...pagination
     }
   })
 
@@ -41,38 +42,50 @@ export function OrderTable() {
   const table = useReactTable({
     columns,
     data,
-    // state: {
-    //   pagination
-    // },
+    state: {
+      pagination: {
+        pageSize: pagination.first,
+        pageIndex: 0
+      }
+    },
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    pageCount: Math.ceil((result.data?.orders.totalCount as number) / first)
+    pageCount: Math.ceil((result.data?.orders.totalCount as number) / pagination.first)
   })
 
   const handlePageSizeChange = (size: number) => {
-    setFirst(size)
+    setPagination({
+      first: size
+    })
   }
 
   const handleNextPage = () => {
     if (result.data?.orders.pageInfo.hasNextPage) {
       const newAfter = result.data.orders.pageInfo.endCursor as string
 
-      setCursor({
-        before: undefined,
+      setPagination({
+        before: null,
         after: newAfter
       })
     }
   }
 
   const handlePrevPage = () => {
-    if (result.data?.orders.pageInfo.hasNextPage) {
+    if (result.data?.orders.pageInfo.hasPreviousPage) {
       const newBefore = result.data.orders.pageInfo.startCursor as string
 
-      setCursor({
+      setPagination({
         before: newBefore,
-        after: undefined
+        after: null
       })
     }
+  }
+
+  const handleFirstPage = () => {
+    setPagination({
+      before: null,
+      after: null
+    })
   }
 
   const handleOrderClick = (orderId: string) => {
@@ -131,6 +144,7 @@ export function OrderTable() {
         pageInfo={result.data?.orders.pageInfo}
         onNextPage={handleNextPage}
         onPrevPage={handlePrevPage}
+        onFirstPage={handleFirstPage}
       />
     </div>
   )
