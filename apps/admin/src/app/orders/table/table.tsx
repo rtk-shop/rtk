@@ -17,6 +17,7 @@ import { useOrders } from '@/lib/api/hooks'
 import type { Order } from './types'
 import { TablePagination } from './pagination'
 import { routeNames } from '@/lib/routes'
+import { TableToolbar } from './toolbar'
 
 export function OrderTable() {
   const router = useRouter()
@@ -95,6 +96,7 @@ export function OrderTable() {
   return (
     <div>
       <h2 className="mb-2">История заказов</h2>
+      <TableToolbar table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
