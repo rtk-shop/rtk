@@ -9,7 +9,7 @@ const config: CodegenConfig = {
     'src/lib/api/graphql/types.ts': {
       plugins: ['typescript', 'fragment-matcher'],
       config: {
-        constEnums: true,
+        constEnums: false,
         omitDescriptions: true,
         scalars: {
           HTML: {

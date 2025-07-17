@@ -2,8 +2,24 @@
 
 import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
-import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import {
+  parseAsArrayOf,
+  parseAsInteger,
+  parseAsString,
+  parseAsStringEnum,
+  useQueryState,
+  useQueryStates
+} from 'nuqs'
+import {
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedMinMaxValues,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  useReactTable
+} from '@tanstack/react-table'
 import { columns } from './columns'
 import {
   Table,
@@ -19,6 +35,8 @@ import { TablePagination } from './pagination'
 import { routeNames } from '@/lib/routes'
 import { TableToolbar } from './toolbar'
 
+import { OrderStatus } from '@/lib/api/graphql/types'
+
 export function OrderTable() {
   const router = useRouter()
 
@@ -28,28 +46,76 @@ export function OrderTable() {
     before: parseAsString
   })
 
+  const [statusFilter, setStatusFilter] = useQueryState(
+    'status',
+    parseAsArrayOf(parseAsStringEnum<OrderStatus>(Object.values(OrderStatus))).withDefault([])
+  )
+
+  const ordersFilter = useMemo(
+    () => ({
+      status: statusFilter.length > 0 ? statusFilter : null
+    }),
+    [statusFilter]
+  )
+
   const [result] = useOrders({
     variables: {
-      ...pagination
+      ...pagination,
+      ...ordersFilter
     }
   })
-
-  result.data?.orders.pageInfo
 
   const data = useMemo(() => {
     return result.data?.orders.edges.map((edge) => edge.node) || []
   }, [result.data?.orders])
 
+  const columnFilters = useMemo<ColumnFiltersState>(() => {
+    const filters: ColumnFiltersState = []
+
+    if (statusFilter.length > 0) {
+      filters.push({ id: 'status', value: statusFilter })
+    }
+
+    return filters
+  }, [statusFilter])
+
+  // Кастомный обработчик изменения фильтров таблицы
+  const handleColumnFiltersChange = (updaterOrValue: unknown) => {
+    const newFilters =
+      typeof updaterOrValue === 'function' ? updaterOrValue(columnFilters) : updaterOrValue
+
+    // Синхронизируем изменения обратно в URL
+    for (const filter of newFilters) {
+      switch (filter.id) {
+        case 'status':
+          setStatusFilter(filter.value || [])
+          break
+      }
+    }
+
+    // Проверяем удаленные фильтры
+    const activeFilterIds = new Set(newFilters.map((f: any) => f.id))
+    if (!activeFilterIds.has('status') && statusFilter.length > 0) {
+      setStatusFilter([])
+    }
+  }
+
   const table = useReactTable({
     columns,
     data,
     state: {
+      columnFilters,
       pagination: {
         pageSize: pagination.first,
         pageIndex: 0
       }
     },
     getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    onColumnFiltersChange: handleColumnFiltersChange,
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
     manualPagination: true,
     pageCount: Math.ceil((result.data?.orders.totalCount as number) / pagination.first)
   })

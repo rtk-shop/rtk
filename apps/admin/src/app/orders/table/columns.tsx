@@ -14,7 +14,12 @@ export const columns = [
   }),
   columnHelper.accessor('status', {
     header: 'Статус',
-    cell: (props) => <StatusBadge status={props.getValue()} />
+    cell: (props) => <StatusBadge status={props.getValue()} />,
+    filterFn: (row, columnId, filterValue) => {
+      if (!filterValue || filterValue.length === 0) return true
+      const rowValue = row.getValue(columnId)
+      return filterValue.includes(rowValue)
+    }
   }),
   columnHelper.accessor('cityName', {
     header: 'Населенный пункт',

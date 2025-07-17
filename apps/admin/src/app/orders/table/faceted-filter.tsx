@@ -1,5 +1,5 @@
 import React from 'react'
-import { cva } from 'class-variance-authority'
+import { cva } from 'cva'
 import { Column } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/shadcn/badge'
 import { Button } from '@/components/ui/shadcn/button'

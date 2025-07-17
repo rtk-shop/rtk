@@ -46,7 +46,7 @@ export type CartProduct = {
   quantity: Scalars['Int']['output']
 }
 
-export const enum CategoryType {
+export enum CategoryType {
   Backpack = 'BACKPACK',
   Bag = 'BAG',
   Other = 'OTHER',
@@ -70,7 +70,7 @@ export type DeleteProductPayload = {
   id: Scalars['ID']['output']
 }
 
-export const enum Gender {
+export enum Gender {
   Female = 'FEMALE',
   Male = 'MALE',
   Unisex = 'UNISEX'
@@ -262,7 +262,7 @@ export type OrderProduct = {
   quantity: Scalars['Int']['output']
 }
 
-export const enum OrderStatus {
+export enum OrderStatus {
   Created = 'CREATED',
   Done = 'DONE',
   Processed = 'PROCESSED',
@@ -279,7 +279,7 @@ export type OrdersConnection = {
 }
 
 export type OrdersFilter = {
-  status?: InputMaybe<OrderStatus>
+  status?: InputMaybe<Array<OrderStatus>>
 }
 
 export type OrdersStats = {
@@ -378,7 +378,7 @@ export type ProductFilter = {
   tag?: InputMaybe<ProductTag>
 }
 
-export const enum ProductFilterSortBy {
+export enum ProductFilterSortBy {
   Default = 'DEFAULT',
   /** PRICE_ASC - from cheap to expensive */
   PriceAsc = 'PRICE_ASC',
@@ -394,7 +394,7 @@ export type ProductImageInput = {
 
 export type ProductPayload = NotFound | Product
 
-export const enum ProductTag {
+export enum ProductTag {
   New = 'NEW',
   Stock = 'STOCK',
   Top = 'TOP'
@@ -472,7 +472,7 @@ export type RemoveFavouritePayload = {
   productId: Scalars['ID']['output']
 }
 
-export const enum Role {
+export enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
   Manager = 'MANAGER'
