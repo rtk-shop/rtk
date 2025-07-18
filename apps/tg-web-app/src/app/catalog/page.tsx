@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Pagination } from '@/components/layout/pagination'
 import { Controls } from './controls'
@@ -15,6 +14,7 @@ import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
 import { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
+import { parseAsString, useQueryStates } from 'nuqs'
 
 type QueryFilters = {
   price?: PriceRangeType
@@ -25,51 +25,14 @@ type QueryFilters = {
   sortBy: ProductFilterSortBy
 }
 
-const LIMIT_PER_PAGE = 33
-
-export default function Catalog() {
+export default function Page() {
   const [isFiltersOpen, setFiltersOpen] = useState(false)
   const [isSortMenuOpen, setSortMenuOpen] = useState(false)
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const createQueryString = useCallback(
-    (name: 'after' | 'before', value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      if (name === 'before' && params.has('after')) {
-        params.delete('after')
-      }
-
-      if (name === 'after' && params.has('before')) {
-        params.delete('before')
-      }
-
-      // console.log('new params', params.toString())
-
-      return params.toString()
-    },
-    [searchParams]
-  )
-
-  const clearCursorSearchParams = useCallback(() => {
-    const params = new URLSearchParams(searchParams.toString())
-
-    params.delete('after')
-    params.delete('before')
-
-    router.push(`${pathname}?${params.toString()}`)
-  }, [router, pathname, searchParams])
-
-  const after = searchParams.get('after')
-  const before = searchParams.get('before')
-
-  if (searchParams.has('after') && searchParams.has('before')) {
-    router.replace(pathname)
-  }
+  const [pagination, setPagination] = useQueryStates({
+    after: parseAsString,
+    before: parseAsString
+  })
 
   const [filterParams, setFilterParams] = useState<QueryFilters>({
     sortBy: ProductFilterSortBy.Default
@@ -77,9 +40,8 @@ export default function Catalog() {
 
   const [result] = useProductsQuery({
     variables: {
-      first: LIMIT_PER_PAGE,
-      after,
-      before,
+      first: 20,
+      ...pagination,
       ...filterParams
     }
   })
@@ -101,43 +63,37 @@ export default function Catalog() {
 
   const { watch, handleSubmit, trigger, reset } = formMethods
 
-  const onSubmit: SubmitHandler<FormValues> = useCallback(
-    (data) => {
-      const { gender, availability, tag, priceRange, category, sortBy } = data
+  const onSubmit: SubmitHandler<FormValues> = useCallback((data) => {
+    const { gender, availability, tag, priceRange, category, sortBy } = data
 
-      let price: PriceRangeType | undefined
+    let price: PriceRangeType | undefined
 
-      if (priceRange) {
-        const [gt, lt] = priceRange
-        price = { gt, lt }
-      }
+    if (priceRange) {
+      const [gt, lt] = priceRange
+      price = { gt, lt }
+    }
 
-      let instock: boolean | undefined
+    let instock: boolean | undefined
 
-      if (availability.length === 1) {
-        const map = { inStock: true, byOrder: false }
-        instock = map[availability[0]]
-      }
+    if (availability.length === 1) {
+      const map = { inStock: true, byOrder: false }
+      instock = map[availability[0]]
+    }
 
-      const categoryData = category as unknown as CategoryType
-      const tagData = tag as unknown as ProductTag
-      const genderData = gender as unknown as Gender
-      const sortByData = sortBy as ProductFilterSortBy
+    const categoryData = category as unknown as CategoryType
+    const tagData = tag as unknown as ProductTag
+    const genderData = gender as unknown as Gender
+    const sortByData = sortBy as ProductFilterSortBy
 
-      // new filter starts pagination from the beginning
-      clearCursorSearchParams()
-
-      setFilterParams({
-        price,
-        instock,
-        category: categoryData,
-        tag: tagData,
-        gender: genderData,
-        sortBy: sortByData
-      })
-    },
-    [clearCursorSearchParams]
-  )
+    setFilterParams({
+      price,
+      instock,
+      category: categoryData,
+      tag: tagData,
+      gender: genderData,
+      sortBy: sortByData
+    })
+  }, [])
 
   useAutoSubmit({
     watch,
@@ -159,19 +115,22 @@ export default function Catalog() {
       left: 0,
       behavior: 'smooth'
     })
-    // setParams((prev) => ({ ...prev, before: null, after: data?.products.pageInfo.endCursor }))
-    router.push(
-      pathname + '?' + createQueryString('after', data?.products.pageInfo.endCursor || '')
-    )
+
+    if (data?.products.pageInfo.endCursor) {
+      setPagination({
+        after: data.products.pageInfo.endCursor,
+        before: null
+      })
+    }
   }
 
   const handlePrevPage = () => {
-    router.push(
-      pathname + '?' + createQueryString('before', data?.products.pageInfo.startCursor || ''),
-      {
-        scroll: false
-      }
-    )
+    if (data?.products.pageInfo.startCursor) {
+      setPagination({
+        before: data.products.pageInfo.startCursor,
+        after: null
+      })
+    }
   }
 
   const products = data?.products.edges?.map((e) => e?.node) || []
@@ -204,8 +163,8 @@ export default function Catalog() {
                 <ProductList products={products} onReset={handleReset} />
                 <div className="px-2 pt-2.5 pb-4">
                   <Pagination
-                    onNext={handleNextPage}
-                    onPrev={handlePrevPage}
+                    onNextPage={handleNextPage}
+                    onPrevPage={handlePrevPage}
                     hasNextPage={data?.products.pageInfo.hasNextPage}
                     hasPreviousPage={data?.products.pageInfo.hasPreviousPage}
                   />

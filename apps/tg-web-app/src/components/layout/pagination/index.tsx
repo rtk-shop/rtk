@@ -2,15 +2,15 @@ import { Icon } from '@/components/ui/icon'
 import { cva } from 'cva'
 
 export interface PaginationProps {
-  hasNextPage: boolean | undefined
-  hasPreviousPage: boolean | undefined
+  hasNextPage?: boolean
+  hasPreviousPage?: boolean
   startCursor?: string
   endCursor?: string | null
-  onNext(): void
-  onPrev(): void
+  onNextPage(): void
+  onPrevPage(): void
 }
 
-const navButton = cva('flex select-none items-center rounded-lg bg-gray-100 px-3 py-1 leading-7', {
+const navButton = cva('flex items-center rounded-lg bg-gray-100 px-3 py-1 leading-7 select-none', {
   variants: {
     visible: {
       true: 'visible',
@@ -28,13 +28,18 @@ const arrowIcon = cva('fill-black text-[27px]', {
   }
 })
 
-export function Pagination({ hasPreviousPage, hasNextPage, onNext, onPrev }: PaginationProps) {
+export function Pagination({
+  hasPreviousPage,
+  hasNextPage,
+  onNextPage,
+  onPrevPage
+}: PaginationProps) {
   const handleNextClick = () => {
-    if (hasNextPage) onNext()
+    if (hasNextPage) onNextPage()
   }
 
   const handlePrevClick = () => {
-    if (hasPreviousPage) onPrev()
+    if (hasPreviousPage) onPrevPage()
   }
 
   return (
