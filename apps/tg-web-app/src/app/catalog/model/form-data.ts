@@ -1,7 +1,6 @@
-import type { Gender, ProductTag, Category } from '@/types'
+import type { ProductTag } from '@/types'
 import { FormValues } from './types'
-import { category } from '@/lib/constants'
-import { ProductFilterSortBy } from '@/lib/api/graphql/types'
+import { ProductFilterSortBy, Gender, CategoryType } from '@/lib/api/graphql/types'
 
 export type Option<T> = {
   label: string
@@ -9,18 +8,18 @@ export type Option<T> = {
   disabled?: boolean
 }
 
-export const genderOptionsData: Option<keyof typeof Gender>[] = [
+export const genderOptionsData: Option<Gender>[] = [
   {
     label: 'actions.forFemale',
-    value: 'FEMALE'
+    value: Gender.Female
   },
   {
     label: 'actions.forMale',
-    value: 'MALE'
+    value: Gender.Male
   },
   {
     label: 'nouns.unisex',
-    value: 'UNISEX'
+    value: Gender.Unisex
   }
 ]
 
@@ -54,22 +53,22 @@ export const tagsOptionsData: Option<keyof typeof ProductTag>[] = [
   }
 ]
 
-export const categoriesOptionsData: Option<keyof typeof Category>[] = [
+export const categoriesOptionsData: Option<CategoryType>[] = [
   {
     label: 'categories.suitcases',
-    value: category.suitcase
+    value: CategoryType.Suitcase
   },
   {
     label: 'categories.bags',
-    value: category.bag
+    value: CategoryType.Bag
   },
   {
     label: 'categories.backpacks',
-    value: category.backpack
+    value: CategoryType.Backpack
   },
   {
     label: 'categories.other',
-    value: category.other
+    value: CategoryType.Other
   }
 ]
 

@@ -46,7 +46,7 @@ export type CartProduct = {
   quantity: Scalars['Int']['output']
 }
 
-export const enum CategoryType {
+export enum CategoryType {
   Backpack = 'BACKPACK',
   Bag = 'BAG',
   Other = 'OTHER',
@@ -58,7 +58,19 @@ export type ClearCartPayload = {
   cartId: Scalars['ID']['output']
 }
 
-export const enum Gender {
+export type DashboardStats = {
+  __typename?: 'DashboardStats'
+  orders: OrdersStats
+  products: ProductsStats
+  users: UsersStats
+}
+
+export type DeleteProductPayload = {
+  __typename?: 'DeleteProductPayload'
+  id: Scalars['ID']['output']
+}
+
+export enum Gender {
   Female = 'FEMALE',
   Male = 'MALE',
   Unisex = 'UNISEX'
@@ -84,7 +96,9 @@ export type Mutation = {
   createOrder: NewOrderPayload
   createProduct: NewProductPayload
   createProductSizeVariation: NewSizeVariationPayload
+  deleteProduct: DeleteProductPayload
   hideProduct?: Maybe<HideProductPayload>
+  processOrder: ProcessOrderPayload
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
   /**
@@ -118,9 +132,17 @@ export type MutationCreateProductSizeVariationArgs = {
   input: NewSizeVariation
 }
 
+export type MutationDeleteProductArgs = {
+  id: Scalars['ID']['input']
+}
+
 export type MutationHideProductArgs = {
   id: Scalars['ID']['input']
   isHidden: Scalars['Boolean']['input']
+}
+
+export type MutationProcessOrderArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type MutationReduceCartItemQuantityArgs = {
@@ -165,14 +187,12 @@ export type NewProductInput = {
   basePrice: Scalars['Float']['input']
   brandName: Scalars['String']['input']
   category: CategoryType
-  defaultSizeID: Scalars['Int']['input']
   description: Scalars['HTML']['input']
   gender: Gender
   images: Array<ProductImageInput>
   preview: Scalars['Upload']['input']
   sizeName: Scalars['String']['input']
   sku: Scalars['String']['input']
-  tag?: InputMaybe<ProductTag>
   title: Scalars['String']['input']
 }
 
@@ -222,6 +242,12 @@ export type Order = {
   updatedAt: Scalars['String']['output']
 }
 
+export type OrderEdge = {
+  __typename?: 'OrderEdge'
+  cursor: Scalars['String']['output']
+  node: Order
+}
+
 export type OrderFilter = {
   status: Scalars['String']['input']
 }
@@ -236,14 +262,30 @@ export type OrderProduct = {
   quantity: Scalars['Int']['output']
 }
 
-export const enum OrderStatus {
-  Accepted = 'ACCEPTED',
+export enum OrderStatus {
   Created = 'CREATED',
   Done = 'DONE',
   Processed = 'PROCESSED',
   Rejected = 'REJECTED',
   Returned = 'RETURNED',
   Sent = 'SENT'
+}
+
+export type OrdersConnection = {
+  __typename?: 'OrdersConnection'
+  edges: Array<OrderEdge>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']['output']
+}
+
+export type OrdersFilter = {
+  status?: InputMaybe<Array<OrderStatus>>
+}
+
+export type OrdersStats = {
+  __typename?: 'OrdersStats'
+  /** count — all orders with DONE status */
+  count: Scalars['Int']['output']
 }
 
 export type PageInfo = {
@@ -269,6 +311,13 @@ export type PriceRangeType = {
   __typename?: 'PriceRangeType'
   gt: Scalars['Float']['output']
   lt: Scalars['Float']['output']
+}
+
+export type ProcessOrderPayload = {
+  __typename?: 'ProcessOrderPayload'
+  orderId: Scalars['ID']['output']
+  status: OrderStatus
+  updatedAt: Scalars['String']['output']
 }
 
 export type Product = {
@@ -329,7 +378,7 @@ export type ProductFilter = {
   tag?: InputMaybe<ProductTag>
 }
 
-export const enum ProductFilterSortBy {
+export enum ProductFilterSortBy {
   Default = 'DEFAULT',
   /** PRICE_ASC - from cheap to expensive */
   PriceAsc = 'PRICE_ASC',
@@ -345,16 +394,25 @@ export type ProductImageInput = {
 
 export type ProductPayload = NotFound | Product
 
-export const enum ProductTag {
+export enum ProductTag {
   New = 'NEW',
   Stock = 'STOCK',
   Top = 'TOP'
 }
 
+export type ProductsStats = {
+  __typename?: 'ProductsStats'
+  /** count — all products available for sale */
+  count: Scalars['Int']['output']
+}
+
 export type Query = {
   __typename?: 'Query'
   cartProducts: Array<CartProduct>
+  dashboardStats: DashboardStats
   globalData: GlobalData
+  order: OrderPayload
+  orders: OrdersConnection
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
@@ -365,6 +423,17 @@ export type Query = {
    *   - MANAGER, ADMIN - can receive orders from all users
    */
   userOrders: Array<Order>
+}
+
+export type QueryOrderArgs = {
+  id: Scalars['ID']['input']
+}
+
+export type QueryOrdersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  before?: InputMaybe<Scalars['String']['input']>
+  first: Scalars['Int']['input']
+  where?: InputMaybe<OrdersFilter>
 }
 
 export type QueryProductArgs = {
@@ -403,7 +472,7 @@ export type RemoveFavouritePayload = {
   productId: Scalars['ID']['output']
 }
 
-export const enum Role {
+export enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
   Manager = 'MANAGER'
@@ -423,6 +492,11 @@ export type User = {
   phone: Scalars['String']['output']
   role: Scalars['String']['output']
   updatedAt: Scalars['String']['output']
+}
+
+export type UsersStats = {
+  __typename?: 'UsersStats'
+  count: Scalars['Int']['output']
 }
 
 export interface PossibleTypesResultData {

@@ -14,14 +14,12 @@ import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
 import { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
-import { parseAsString, useQueryStates } from 'nuqs'
+import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryStates } from 'nuqs'
 
 type QueryFilters = {
   price?: PriceRangeType
   instock?: boolean
   tag?: ProductTag
-  category?: CategoryType[] | CategoryType
-  gender?: Gender
   sortBy: ProductFilterSortBy
 }
 
@@ -38,11 +36,19 @@ export default function Page() {
     sortBy: ProductFilterSortBy.Default
   })
 
+  const [filters, setFilters] = useQueryStates({
+    category: parseAsArrayOf(
+      parseAsStringEnum<CategoryType>(Object.values(CategoryType))
+    ).withDefault([]),
+    gender: parseAsArrayOf(parseAsStringEnum<Gender>(Object.values(Gender))).withDefault([])
+  })
+
   const [result] = useProductsQuery({
     variables: {
       first: 20,
       ...pagination,
-      ...filterParams
+      ...filterParams,
+      ...filters
     }
   })
 
@@ -52,11 +58,9 @@ export default function Page() {
   const formMethods = useForm<FormValues>({
     mode: 'onSubmit',
     defaultValues: {
-      gender: [],
       availability: [],
       tag: null,
       priceRange: undefined,
-      category: [],
       sortBy: 'DEFAULT'
     }
   })
@@ -80,17 +84,15 @@ export default function Page() {
       instock = map[availability[0]]
     }
 
-    const categoryData = category as unknown as CategoryType
+    setFilters({ category, gender })
+
     const tagData = tag as unknown as ProductTag
-    const genderData = gender as unknown as Gender
     const sortByData = sortBy as ProductFilterSortBy
 
     setFilterParams({
       price,
       instock,
-      category: categoryData,
       tag: tagData,
-      gender: genderData,
       sortBy: sortByData
     })
   }, [])
