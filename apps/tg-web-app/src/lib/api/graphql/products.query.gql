@@ -5,7 +5,7 @@ query Products(
   $instock: Boolean
   $price: PriceRange
   $isHidden: Boolean = false
-  $sortBy: ProductFilterSortBy!
+  $sortBy: ProductFilterSortBy
   # pagination
   $first: Int!
   $after: String

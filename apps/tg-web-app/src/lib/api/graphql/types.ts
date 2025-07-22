@@ -374,7 +374,7 @@ export type ProductFilter = {
   instock?: InputMaybe<Scalars['Boolean']['input']>
   isHidden: Scalars['Boolean']['input']
   price?: InputMaybe<PriceRange>
-  sortBy: ProductFilterSortBy
+  sortBy?: InputMaybe<ProductFilterSortBy>
   tag?: InputMaybe<ProductTag>
 }
 

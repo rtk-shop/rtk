@@ -13,13 +13,15 @@ import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
 import * as productsQuery from '@/lib/api/graphql/_gen_/products.query'
 
 export function useProductsQuery({
-  variables
+  variables,
+  ...options
 }: {
-  variables: productsQuery.ProductsQueryVariables
-}) {
+  variables?: productsQuery.ProductsQueryVariables
+} & Omit<UseQueryArgs<productsQuery.ProductsQueryVariables>, 'query' | 'variables'> = {}) {
   return useQuery<productsQuery.ProductsQuery, productsQuery.ProductsQueryVariables>({
     query: productsQuery.ProductsDocument,
-    variables
+    variables,
+    ...options
   })
 }
 

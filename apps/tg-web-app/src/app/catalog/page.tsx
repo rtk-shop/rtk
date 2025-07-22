@@ -14,14 +14,14 @@ import { ProductListSkeleton } from '@/components/layout/product-list-skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
 import { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
-import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryStates } from 'nuqs'
-
-type QueryFilters = {
-  price?: PriceRangeType
-  instock?: boolean
-  tag?: ProductTag
-  sortBy: ProductFilterSortBy
-}
+import {
+  parseAsArrayOf,
+  parseAsBoolean,
+  parseAsString,
+  parseAsStringEnum,
+  parseAsStringLiteral,
+  useQueryStates
+} from 'nuqs'
 
 export default function Page() {
   const [isFiltersOpen, setFiltersOpen] = useState(false)
@@ -32,18 +32,24 @@ export default function Page() {
     before: parseAsString
   })
 
-  const [filterParams, setFilterParams] = useState<QueryFilters>({
-    sortBy: ProductFilterSortBy.Default
-  })
+  const [filterParams, setFilterParams] = useState<{
+    price?: PriceRangeType
+  }>()
 
   const [filters, setFilters] = useQueryStates({
     category: parseAsArrayOf(
       parseAsStringEnum<CategoryType>(Object.values(CategoryType))
     ).withDefault([]),
-    gender: parseAsArrayOf(parseAsStringEnum<Gender>(Object.values(Gender))).withDefault([])
+    gender: parseAsArrayOf(parseAsStringEnum<Gender>(Object.values(Gender))).withDefault([]),
+    tag: parseAsStringLiteral(Object.values(ProductTag)),
+    instock: parseAsBoolean,
+    sortBy: parseAsStringLiteral<ProductFilterSortBy>(
+      Object.values(ProductFilterSortBy)
+    ).withDefault(ProductFilterSortBy.Default)
   })
 
   const [result] = useProductsQuery({
+    requestPolicy: 'network-only',
     variables: {
       first: 20,
       ...pagination,
@@ -61,41 +67,38 @@ export default function Page() {
       availability: [],
       tag: null,
       priceRange: undefined,
-      sortBy: 'DEFAULT'
+      sortBy: ProductFilterSortBy.Default
     }
   })
 
   const { watch, handleSubmit, trigger, reset } = formMethods
 
-  const onSubmit: SubmitHandler<FormValues> = useCallback((data) => {
-    const { gender, availability, tag, priceRange, category, sortBy } = data
+  const onSubmit: SubmitHandler<FormValues> = useCallback(
+    (values) => {
+      const { availability, priceRange } = values
 
-    let price: PriceRangeType | undefined
+      let price: PriceRangeType | undefined
 
-    if (priceRange) {
-      const [gt, lt] = priceRange
-      price = { gt, lt }
-    }
+      if (priceRange) {
+        const [gt, lt] = priceRange
+        price = { gt, lt }
+      }
 
-    let instock: boolean | undefined
+      let instock: boolean | null = null
 
-    if (availability.length === 1) {
-      const map = { inStock: true, byOrder: false }
-      instock = map[availability[0]]
-    }
+      if (availability.length === 1) {
+        const map = { inStock: true, byOrder: false }
+        instock = map[availability[0]]
+      }
 
-    setFilters({ category, gender })
+      setFilters({ ...values })
 
-    const tagData = tag as unknown as ProductTag
-    const sortByData = sortBy as ProductFilterSortBy
-
-    setFilterParams({
-      price,
-      instock,
-      tag: tagData,
-      sortBy: sortByData
-    })
-  }, [])
+      setFilterParams({
+        price
+      })
+    },
+    [setFilters]
+  )
 
   useAutoSubmit({
     watch,
