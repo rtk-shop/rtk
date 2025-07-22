@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['urql', '@urql/exchange-auth']
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
