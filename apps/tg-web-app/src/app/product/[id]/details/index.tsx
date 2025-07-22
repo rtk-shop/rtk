@@ -4,12 +4,12 @@ import { useRouter } from 'next/navigation'
 import { SizeGuide, type SizeItem } from '@/components/ui/size-guide'
 import { Controls } from './controls'
 import { AddToCartButton } from './add-to-cart'
-import { Category } from '@/types'
+import { CategoryType } from '@/lib/api/graphql/types'
 import { routeNames } from '@/lib/routes'
 
 export interface DetailsProps {
   productId: string
-  category: keyof typeof Category
+  category: CategoryType
   sizeName: string
   inStock: boolean
   availableSizes: Array<{ size: string; productId: string }>

@@ -1,34 +1,21 @@
-import type { OrderStatus } from '@/types/order'
-import { orderStatus } from './constants'
+import { ProductTag, OrderStatus } from '@/lib/api/graphql/types'
 
-export const getColorByTagName = (name: string): string => {
-  switch (name) {
-    case 'new':
-      return '#32CD32'
-    case 'best price':
-      return '#FFA500'
-    default:
-      return 'lightgray'
-  }
-}
-
-// todo: add types
-export const getProductMainTagColor = (name: string): string => {
-  switch (name) {
-    case 'new':
+export const getProductMainTagColor = (tag: ProductTag): string => {
+  switch (tag) {
+    case ProductTag.New:
       return '#6EBE90'
-    case 'top':
+    case ProductTag.Top:
       return '#a3f271'
-    case 'stock':
+    case ProductTag.Stock:
       return '#fd3b3b'
     default:
       return 'lightgray'
   }
 }
 
-export const getOrderStatusColor = (status: keyof typeof OrderStatus): string => {
+export const getOrderStatusColor = (status: OrderStatus): string => {
   switch (status) {
-    case orderStatus.returned:
+    case OrderStatus.Returned:
       return '#a2a2a2'
     default:
       return ''

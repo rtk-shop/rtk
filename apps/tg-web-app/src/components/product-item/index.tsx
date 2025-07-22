@@ -11,8 +11,8 @@ import { ImagePlaceholder } from '@repo/ui'
 import { getProductMainTagColor } from '@/lib/helpers'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
-import type { ProductTag } from '@/types'
 import { toast } from 'sonner'
+import { ProductTag } from '@/lib/api/graphql/types'
 
 export interface ProductItemProps {
   id: string
@@ -21,7 +21,7 @@ export interface ProductItemProps {
   currentPrice: number
   basePrice: number
   preview: string
-  tag?: keyof typeof ProductTag | null
+  tag?: ProductTag | null
   withDelete?: boolean
 }
 
@@ -91,13 +91,13 @@ function ProductItemInner({
     }
   }
 
-  function genTagView(productTag: string) {
-    switch (productTag) {
-      case 'new':
+  function genTagView(tag: ProductTag) {
+    switch (tag) {
+      case ProductTag.New:
         return <span>New</span>
-      case 'top':
+      case ProductTag.Top:
         return <Image width={18} height={18} src="/icons/fire.png" alt="смайлик - огонь" />
-      case 'stock':
+      case ProductTag.Stock:
         return <span>-{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%</span>
       default:
         return null

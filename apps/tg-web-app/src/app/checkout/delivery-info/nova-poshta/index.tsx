@@ -120,7 +120,7 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
     }
   })
 
-  const radioOptions = novaDeliveryTypeOptions.map((option: RadioOption) => ({
+  const radioOptions = novaDeliveryTypeOptions.map((option) => ({
     ...option,
     label: t(`Common.nouns.${option.label}`)
   }))

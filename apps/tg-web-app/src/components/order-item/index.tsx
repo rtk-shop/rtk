@@ -6,13 +6,13 @@ import { HeightExpander } from '../ui/height-expander'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '@repo/ui'
 import { routeNames } from '@/lib/routes'
-import { orderStatus } from '@/lib/constants'
 import { DeliverySupplier } from '@repo/ui'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { getOrderStatusColor } from '@/lib/helpers'
 import { formatDate, formatPhoneNumber } from '@repo/utils'
 import { useTranslations } from 'next-intl'
 import { type OrderType } from '@/types/order'
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export interface OrderItemProps {
   order: OrderType
@@ -23,16 +23,12 @@ export interface OrderItemProps {
   onReject(orderId: string): void
 }
 
-const validStatusesForReject: string[] = [
-  orderStatus.created,
-  orderStatus.accepted,
-  orderStatus.processed
-]
+const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
 const productList = cva('pt-2', {
   variants: {
     status: {
-      [orderStatus.rejected]: 'opacity-40'
+      [OrderStatus.Rejected]: 'opacity-40'
     }
   }
 })

@@ -1,6 +1,5 @@
-import type { ProductTag } from '@/types'
-import { FormValues } from './types'
-import { ProductFilterSortBy, Gender, CategoryType } from '@/lib/api/graphql/types'
+import { availability } from './types'
+import { ProductFilterSortBy, Gender, CategoryType, ProductTag } from '@/lib/api/graphql/types'
 
 export type Option<T> = {
   label: string
@@ -23,8 +22,7 @@ export const genderOptionsData: Option<Gender>[] = [
   }
 ]
 
-// todo: better values
-export const availabilityOptionsData: Option<'inStock' | 'byOrder'>[] = [
+export const availabilityOptionsData: Option<availability>[] = [
   {
     label: 'nouns.inStock',
     value: 'inStock'
@@ -35,20 +33,20 @@ export const availabilityOptionsData: Option<'inStock' | 'byOrder'>[] = [
   }
 ]
 
-export const tagsOptionsData: Option<keyof typeof ProductTag>[] = [
+export const tagsOptionsData: Option<ProductTag>[] = [
   {
     label: 'nouns.top',
-    value: 'TOP',
+    value: ProductTag.Top,
     disabled: false
   },
   {
     label: 'nouns.new',
-    value: 'NEW',
+    value: ProductTag.New,
     disabled: false
   },
   {
     label: 'nouns.withDiscount',
-    value: 'STOCK',
+    value: ProductTag.Stock,
     disabled: false
   }
 ]
@@ -72,7 +70,7 @@ export const categoriesOptionsData: Option<CategoryType>[] = [
   }
 ]
 
-export const sortOptionsData: Option<FormValues['sortBy']>[] = [
+export const sortOptionsData: Option<ProductFilterSortBy>[] = [
   {
     label: 'adjectives.standard',
     value: ProductFilterSortBy.Default

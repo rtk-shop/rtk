@@ -1,6 +1,6 @@
 import { Button } from '@repo/ui'
 import { ProductItem } from '@/components/product-item'
-import type { ProductTag } from '@/types'
+import { ProductTag } from '@/lib/api/graphql/types'
 
 export interface ProductsProps {
   products: Array<{
@@ -9,7 +9,7 @@ export interface ProductsProps {
     inStock: boolean
     currentPrice: number
     basePrice: number
-    tag?: keyof typeof ProductTag | null
+    tag?: ProductTag | null
     preview: string
   }>
   onReset(): void

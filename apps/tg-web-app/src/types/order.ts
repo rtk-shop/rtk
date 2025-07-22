@@ -1,16 +1,8 @@
-export const enum OrderStatus {
-  CREATED,
-  PROCESSED,
-  ACCEPTED,
-  SENT,
-  DONE,
-  REJECTED,
-  RETURNED
-}
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export type OrderType = {
   id: string
-  status: keyof typeof OrderStatus
+  status: OrderStatus
   price: number
   receiverName: string
   receiverSurname: string

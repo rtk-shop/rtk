@@ -1,6 +1,5 @@
 import { cva } from 'cva'
-import { category } from '@/lib/constants'
-import { Category } from '@/types'
+import { CategoryType } from '@/lib/api/graphql/types'
 
 export type SizeItem = {
   size: string
@@ -9,16 +8,16 @@ export type SizeItem = {
 
 export interface SizeGuideProps {
   current: string
-  category: keyof typeof Category
+  category: CategoryType
   available: SizeItem[]
   onSelect(target: SizeItem): void
 }
 
 export const SIZE_VARIATIONS = {
-  [category.suitcase]: ['S', 'M', 'L'],
-  [category.backpack]: ['S', 'M'],
-  [category.bag]: ['S', 'M'],
-  [category.other]: []
+  [CategoryType.Suitcase]: ['S', 'M', 'L'],
+  [CategoryType.Backpack]: ['S', 'M'],
+  [CategoryType.Bag]: ['S', 'M'],
+  [CategoryType.Other]: []
 }
 
 const sizeItem = cva(

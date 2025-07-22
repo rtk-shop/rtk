@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useAppState } from '@/stores/app/store'
 import { routeNames } from '@/lib/routes'
-import { category, catalogSearchParamsNames } from '@/lib/constants'
+import { CategoryType } from '@/lib/api/graphql/types'
 
 const categoriesValues: Array<{
   img: string
@@ -13,18 +13,18 @@ const categoriesValues: Array<{
 }> = [
   {
     img: '/assets/backpack.webp',
-    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.backpack}`,
+    to: routeNames.catalog + `?category=${CategoryType.Backpack}`,
     i18n: 'backpacks'
   },
   {
     img: '/assets/suitcase.webp',
-    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.suitcase}`,
+    to: routeNames.catalog + `?category=${CategoryType.Suitcase}`,
     i18n: 'suitcases',
     sub: ['nouns.polypropylene', 'nouns.textile', 'nouns.covers']
   },
   {
     img: '/assets/bag.webp',
-    to: routeNames.catalog + `?${catalogSearchParamsNames.category}=${category.bag}`,
+    to: routeNames.catalog + `?category=${CategoryType.Bag}`,
     i18n: 'bags',
     sub: ['nouns.sling', 'actions.forDocs', 'actions.forLaptop']
   }
