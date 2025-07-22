@@ -1,29 +1,29 @@
-import { orderStatus } from '@/lib/constants'
 import type { FacetedFilterOption } from './faceted-filter'
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export const statuses: FacetedFilterOption[] = [
   {
     label: 'Создан',
-    value: orderStatus.created
+    value: OrderStatus.Created
   },
   {
     label: 'В обработке',
-    value: orderStatus.processed
+    value: OrderStatus.Processed
   },
   {
     label: 'В дороге',
-    value: orderStatus.sent
+    value: OrderStatus.Sent
   },
   {
     label: 'Получен',
-    value: orderStatus.done
+    value: OrderStatus.Done
   },
   {
     label: 'Отменен',
-    value: orderStatus.rejected
+    value: OrderStatus.Rejected
   },
   {
     label: 'Возврат',
-    value: orderStatus.returned
+    value: OrderStatus.Returned
   }
 ]

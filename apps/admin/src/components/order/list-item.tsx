@@ -1,6 +1,6 @@
 import { formatDate, formatPrice } from '@repo/utils'
 import { StatusBadge } from './status-badge'
-import type { OrderStatus } from '@/types/order'
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export function OrderListItem({
   id,

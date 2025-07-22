@@ -13,8 +13,9 @@ import { Images } from './images'
 import { useCreateProductMutation } from '@/lib/api/hooks'
 import { Header } from '@/components/layout/header'
 import { description } from './lib/data'
+import { CategoryType } from '@/lib/api/graphql/types'
 
-export function FormError() {
+function FormError() {
   const {
     formState: { errors }
   } = useFormContext()
@@ -57,7 +58,7 @@ export default function Page() {
   })
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
-    if (values.category === 'OTHER') values.sizeName = 'none'
+    if (values.category === CategoryType.Other) values.sizeName = 'none'
     console.log('values', values)
 
     const res = await createProduct({ ...values })

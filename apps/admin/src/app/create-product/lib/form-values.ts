@@ -1,51 +1,55 @@
-import { SelectOption } from '@/components/ui/select'
-import { productGender, productCategory, productTag } from '@/lib/constants'
+import { CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 
-export const genderOptions: SelectOption[] = [
+export type Option<T> = {
+  title: string
+  value: T
+}
+
+export const genderOptions: Option<Gender>[] = [
   {
     title: 'Женский',
-    value: productGender.female
+    value: Gender.Female
   },
   {
     title: 'Мужской',
-    value: productGender.male
+    value: Gender.Male
   },
   {
     title: 'Унисекс',
-    value: productGender.unisex
+    value: Gender.Unisex
   }
 ]
 
-export const categoryOptions: SelectOption[] = [
+export const categoryOptions: Option<CategoryType>[] = [
   {
     title: 'Чемоданы',
-    value: productCategory.suitcase
+    value: CategoryType.Suitcase
   },
   {
     title: 'Рюкзаки',
-    value: productCategory.backpack
+    value: CategoryType.Backpack
   },
   {
     title: 'Сумки',
-    value: productCategory.bag
+    value: CategoryType.Bag
   },
   {
     title: 'Другое',
-    value: productCategory.other
+    value: CategoryType.Other
   }
 ]
 
-export const tagOptions: SelectOption[] = [
+export const tagOptions: Option<ProductTag>[] = [
   {
     title: 'Новинка',
-    value: productTag.new
+    value: ProductTag.New
   },
   {
     title: 'Топ',
-    value: productTag.top
+    value: ProductTag.Top
   },
   {
     title: 'Акция',
-    value: productTag.stock
+    value: ProductTag.Stock
   }
 ]

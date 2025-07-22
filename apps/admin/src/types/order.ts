@@ -1,10 +1,3 @@
-const enum orderStatus {
-  CREATED,
-  PROCESSED,
-  SENT,
-  DONE,
-  REJECTED,
-  RETURNED
+export type Order = {
+  id: string
 }
-
-export type OrderStatus = keyof typeof orderStatus

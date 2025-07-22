@@ -1,6 +1,6 @@
-import { formatPrice, formatDate } from '@repo/utils'
-import { Order } from './types'
+import { formatDate } from '@repo/utils'
 import { StatusBadge } from '@/components/order/status-badge'
+import type { Order } from './types'
 
 import { createColumnHelper } from '@tanstack/react-table'
 import { FormatPrice } from '@/components/ui/format-price'

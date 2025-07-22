@@ -1,13 +1,10 @@
 import * as v from 'valibot'
-import { productGender, productCategory, productTag } from '@/lib/constants'
+import { CategoryType, Gender } from '@/lib/api/graphql/types'
 
 const validationMessages = {
   minLength3: '* минимум 3 символов',
   minLength15: '* минимум 15 символов'
 }
-
-// $preview: Upload!
-// $images: [ProductImageInput!]!
 
 export const baseFields = v.object({
   title: v.pipe(
@@ -25,10 +22,7 @@ export const baseFields = v.object({
   // tag: v.optional(v.picklist([productTag.top, productTag.new, productTag.stock])),
   basePrice: v.pipe(v.number('Common.validation.requiredField'), v.minValue(1)),
   amount: v.pipe(v.number('Common.validation.requiredField'), v.minValue(1), v.maxValue(999)),
-  gender: v.picklist(
-    [productGender.male, productGender.female, productGender.unisex],
-    'Common.validation.requiredField'
-  ),
+  gender: v.picklist(Object.values(Gender), 'Common.validation.requiredField'),
   brandName: v.pipe(
     v.string(),
     v.trim(),
@@ -45,15 +39,7 @@ export const baseFields = v.object({
 
 export const categorySchema = v.pipe(
   v.object({
-    category: v.picklist(
-      [
-        productCategory.suitcase,
-        productCategory.backpack,
-        productCategory.bag,
-        productCategory.other
-      ],
-      'Common.validation.requiredField'
-    ),
+    category: v.picklist(Object.values(CategoryType), 'Common.validation.requiredField'),
     sizeName: v.optional(v.string())
   }),
   v.forward(
@@ -87,3 +73,5 @@ export const imagesSchema = v.pipe(
 export const validationSchema = v.intersect([baseFields, imagesSchema, categorySchema])
 
 export type FormValues = v.InferOutput<typeof validationSchema>
+
+type x = FormValues['sizeName']

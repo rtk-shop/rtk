@@ -1,11 +1,11 @@
 import { ProcessOrderButton } from './process'
-import type { OrderStatus } from '@/types/order'
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export function Controls({ orderId, status }: { orderId: string; status: OrderStatus }) {
   return (
     <section className="rounded-xl bg-gray-100 px-3 py-6">
-      {status === 'CREATED' && <ProcessOrderButton orderId={orderId} />}
-      {status === 'PROCESSED' && (
+      {status === OrderStatus.Created && <ProcessOrderButton orderId={orderId} />}
+      {status === OrderStatus.Processed && (
         <div>
           <div>
             <h2>Other controls</h2>
