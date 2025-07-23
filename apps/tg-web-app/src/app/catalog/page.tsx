@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Pagination } from '@/components/layout/pagination'
 import { Controls } from './controls'
@@ -27,16 +27,13 @@ export default function Page() {
   const [isFiltersOpen, setFiltersOpen] = useState(false)
   const [isSortMenuOpen, setSortMenuOpen] = useState(false)
 
-  const [pagination, setPagination] = useQueryStates({
-    after: parseAsString,
-    before: parseAsString
-  })
-
   const [filterParams, setFilterParams] = useState<{
     price?: PriceRangeType
   }>()
 
   const [filters, setFilters] = useQueryStates({
+    after: parseAsString,
+    before: parseAsString,
     category: parseAsArrayOf(
       parseAsStringEnum<CategoryType>(Object.values(CategoryType))
     ).withDefault([]),
@@ -48,14 +45,18 @@ export default function Page() {
     ).withDefault(ProductFilterSortBy.Default)
   })
 
-  const [result] = useProductsQuery({
-    requestPolicy: 'network-only',
-    variables: {
+  const queryVariables = useMemo(
+    () => ({
       first: 20,
-      ...pagination,
       ...filterParams,
       ...filters
-    }
+    }),
+    [filters, filterParams]
+  )
+
+  const [result] = useProductsQuery({
+    requestPolicy: 'network-only',
+    variables: queryVariables
   })
 
   const { data, fetching, error } = result
@@ -65,17 +66,34 @@ export default function Page() {
     mode: 'onSubmit',
     defaultValues: {
       availability: [],
+      category: [],
+      gender: [],
       tag: null,
       priceRange: undefined,
       sortBy: ProductFilterSortBy.Default
     }
   })
 
-  const { watch, handleSubmit, trigger, reset } = formMethods
+  const { watch, handleSubmit, trigger, reset, setValue } = formMethods
+
+  useEffect(() => {
+    setValue('tag', filters.tag, { shouldDirty: true })
+    setValue('sortBy', filters.sortBy, { shouldDirty: true })
+    setValue('category', filters.category, { shouldDirty: true })
+    setValue('gender', filters.gender, { shouldDirty: true })
+
+    //   if (filters.instock === true) {
+    //     setValue('availability', ['inStock'])
+    //   } else if (filters.instock === false) {
+    //     setValue('availability', ['byOrder'])
+    //   } else {
+    //     setValue('availability', [])
+    //   }
+  }, [filters, setValue])
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
     (values) => {
-      const { availability, priceRange } = values
+      const { availability, priceRange, ...restFilters } = values
 
       let price: PriceRangeType | undefined
 
@@ -91,7 +109,7 @@ export default function Page() {
         instock = map[availability[0]]
       }
 
-      setFilters({ ...values })
+      setFilters({ ...restFilters, instock, after: null, before: null })
 
       setFilterParams({
         price
@@ -104,7 +122,7 @@ export default function Page() {
     watch,
     trigger,
     onSubmit: handleSubmit(onSubmit),
-    debounceTime: 0
+    debounceTime: 100
   })
 
   if (error) return <FetchError />
@@ -122,19 +140,21 @@ export default function Page() {
     })
 
     if (data?.products.pageInfo.endCursor) {
-      setPagination({
+      setFilters((prev) => ({
+        ...prev,
         after: data.products.pageInfo.endCursor,
         before: null
-      })
+      }))
     }
   }
 
   const handlePrevPage = () => {
     if (data?.products.pageInfo.startCursor) {
-      setPagination({
+      setFilters((prev) => ({
+        ...prev,
         before: data.products.pageInfo.startCursor,
         after: null
-      })
+      }))
     }
   }
 
