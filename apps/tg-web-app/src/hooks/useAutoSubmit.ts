@@ -1,11 +1,6 @@
 import { useDebouncedCallback } from 'use-debounce'
 import { useCallback, useEffect, useState } from 'react'
-import {
-  type UseFormWatch,
-  type FieldValues,
-  type UseFormTrigger,
-  type Path
-} from 'react-hook-form'
+import type { UseFormWatch, FieldValues, UseFormTrigger, Path } from 'react-hook-form'
 
 export interface AutoSubmitProps<T extends FieldValues> {
   trigger: UseFormTrigger<T>
