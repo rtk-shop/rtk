@@ -24,8 +24,10 @@ import {
 } from 'nuqs'
 
 export default function Page() {
-  const [isFiltersOpen, setFiltersOpen] = useState(false)
-  const [isSortMenuOpen, setSortMenuOpen] = useState(false)
+  const [controls, setControls] = useState({
+    isFiltersOpen: false,
+    isSortMenuOpen: false
+  })
 
   const [filterParams, setFilterParams] = useState<{
     price?: PriceRangeType
@@ -55,12 +57,19 @@ export default function Page() {
   )
 
   const [result] = useProductsQuery({
-    requestPolicy: 'network-only',
+    requestPolicy: 'cache-and-network',
     variables: queryVariables
   })
 
   const { data, fetching, error } = result
-  // console.log(result.data?.products.priceRange)
+
+  const products = useMemo(
+    () => data?.products.edges?.map((e) => e?.node) || [],
+    [data?.products.edges]
+  )
+
+  const priceRange = useMemo(() => data?.products.priceRange, [data?.products.priceRange])
+  const pageInfo = useMemo(() => data?.products.pageInfo, [data?.products.pageInfo])
 
   const formMethods = useForm<FormValues>({
     mode: 'onSubmit',
@@ -77,18 +86,23 @@ export default function Page() {
   const { watch, handleSubmit, trigger, reset, setValue } = formMethods
 
   useEffect(() => {
-    setValue('tag', filters.tag, { shouldDirty: true })
-    setValue('sortBy', filters.sortBy, { shouldDirty: true })
-    setValue('category', filters.category, { shouldDirty: true })
-    setValue('gender', filters.gender, { shouldDirty: true })
+    const updates = [
+      { key: 'tag', value: filters.tag },
+      { key: 'sortBy', value: filters.sortBy },
+      { key: 'category', value: filters.category },
+      { key: 'gender', value: filters.gender }
+    ] as const
 
-    //   if (filters.instock === true) {
-    //     setValue('availability', ['inStock'])
-    //   } else if (filters.instock === false) {
-    //     setValue('availability', ['byOrder'])
-    //   } else {
-    //     setValue('availability', [])
-    //   }
+    updates.forEach(({ key, value }) => {
+      setValue(key, value, { shouldDirty: true })
+    })
+
+    // if (filters.instock !== null && filters.instock !== undefined) {
+    //   const availability = filters.instock ? ['inStock'] : ['byOrder']
+    //   setValue('availability', availability, { shouldDirty: true })
+    // } else {
+    //   setValue('availability', [], { shouldDirty: true })
+    // }
   }, [filters, setValue])
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
@@ -125,51 +139,63 @@ export default function Page() {
     debounceTime: 100
   })
 
-  if (error) return <FetchError />
-
-  const handleReset = () => {
-    reset()
-    handleSubmit(onSubmit)()
-  }
-
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth'
     })
 
-    if (data?.products.pageInfo.endCursor) {
+    if (pageInfo?.endCursor) {
       setFilters((prev) => ({
         ...prev,
-        after: data.products.pageInfo.endCursor,
+        after: pageInfo.endCursor,
         before: null
       }))
     }
-  }
+  }, [pageInfo?.endCursor, setFilters])
 
-  const handlePrevPage = () => {
-    if (data?.products.pageInfo.startCursor) {
+  const handlePrevPage = useCallback(() => {
+    if (pageInfo?.startCursor) {
       setFilters((prev) => ({
         ...prev,
-        before: data.products.pageInfo.startCursor,
+        before: pageInfo.startCursor,
         after: null
       }))
     }
-  }
+  }, [pageInfo?.startCursor, setFilters])
 
-  const products = data?.products.edges?.map((e) => e?.node) || []
-  const priceRange = result.data?.products.priceRange
+  const handleReset = useCallback(() => {
+    reset()
+    setTimeout(() => {
+      handleSubmit(onSubmit)()
+    }, 0)
+  }, [reset, handleSubmit, onSubmit])
+
+  if (error) return <FetchError />
 
   return (
     <div className="mb-12">
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
-          <SortMenu open={isSortMenuOpen} onSortClose={() => setSortMenuOpen(false)} />
+          <SortMenu
+            open={controls.isSortMenuOpen}
+            onSortClose={() =>
+              setControls((prev) => ({
+                ...prev,
+                isSortMenuOpen: false
+              }))
+            }
+          />
           <Filters
             onReset={handleReset}
-            open={isFiltersOpen}
-            onFiltersClose={() => setFiltersOpen(false)}
+            open={controls.isFiltersOpen}
+            onFiltersClose={() =>
+              setControls((prev) => ({
+                ...prev,
+                isFiltersOpen: false
+              }))
+            }
             priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
           />
 
@@ -182,16 +208,16 @@ export default function Page() {
             ) : (
               <div className="h-full">
                 <Controls
-                  onSortClick={() => setSortMenuOpen(true)}
-                  onFiltersClick={() => setFiltersOpen(true)}
+                  onSortClick={() => setControls({ isSortMenuOpen: true, isFiltersOpen: false })}
+                  onFiltersClick={() => setControls({ isFiltersOpen: true, isSortMenuOpen: false })}
                 />
                 <ProductList products={products} onReset={handleReset} />
                 <div className="px-2 pt-2.5 pb-4">
                   <Pagination
                     onNextPage={handleNextPage}
                     onPrevPage={handlePrevPage}
-                    hasNextPage={data?.products.pageInfo.hasNextPage}
-                    hasPreviousPage={data?.products.pageInfo.hasPreviousPage}
+                    hasNextPage={pageInfo?.hasNextPage}
+                    hasPreviousPage={pageInfo?.hasPreviousPage}
                   />
                 </div>
               </div>
