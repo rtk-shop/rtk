@@ -30,7 +30,6 @@ export type ProductsQuery = {
     }
     edges: Array<{
       __typename?: 'ProductEdge'
-      cursor: string
       node: {
         __typename?: 'Product'
         id: string
@@ -84,7 +83,6 @@ export const ProductsDocument = gql`
         hasPreviousPage
       }
       edges {
-        cursor
         node {
           id
           title
