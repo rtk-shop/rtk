@@ -1,8 +1,7 @@
 'use client'
 
-import { setUserLocale } from '@/lib/locale'
+import { setUserLocale, type Locale } from '@/lib/localization'
 import { useLocale } from 'next-intl'
-import { type Locale } from '@/i18n/config'
 import { Dropdown, type Option } from '@/components/ui/dropdown'
 
 export function LangSwitcher() {

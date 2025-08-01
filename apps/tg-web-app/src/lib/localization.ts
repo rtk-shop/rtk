@@ -1,11 +1,13 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { Locale, defaultLocale } from '@/i18n/config'
 
-// In this example the locale is read from a cookie. You could alternatively
-// also read it from a database, backend service, or any other source.
-const COOKIE_NAME = 'USER_LOCALE'
+export type Locale = (typeof locales)[number]
+const locales = ['ru', 'ua'] as const
+
+const COOKIE_NAME = 'u_lng'
+
+const defaultLocale: Locale = 'ua'
 
 export async function getUserLocale() {
   const cookieStore = await cookies()
