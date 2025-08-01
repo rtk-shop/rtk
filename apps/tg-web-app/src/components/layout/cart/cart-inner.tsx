@@ -1,17 +1,16 @@
 import { Summary } from './summary'
-import { ProcessPlug } from './plug'
+import { EmptyCartPlug } from './empty-cart-plug'
+import { ErrorCartPlug } from './error-cart-plug'
 import { ListSkeleton } from './list-skeleton'
 import { CartHead } from './head'
 import { CartItem } from '@/components/cart-item'
 import { routeNames } from '@/lib/routes'
 import { useRouter } from 'next/navigation'
 import { useCartQuery } from '@/lib/api/hooks'
-import { useTranslations } from 'next-intl'
 import { useAppState } from '@/stores/app/store'
 
 export function CartInner() {
   const router = useRouter()
-  const t = useTranslations('Common')
 
   const closeCart = useAppState((state) => state.closeCart)
 
@@ -31,13 +30,9 @@ export function CartInner() {
     return item.product.currentPrice * item.quantity + acc
   }, 0)
 
-  if (error) {
-    return <ProcessPlug text={t('cart.errorMsg')} onClose={closeCart} />
-  }
+  if (error) return <ErrorCartPlug />
 
-  if (!fetching && !data?.cartProducts.length) {
-    return <ProcessPlug text={t('cart.emptyMsg')} onClose={closeCart} />
-  }
+  if (!fetching && !data?.cartProducts.length) return <EmptyCartPlug />
 
   return (
     <div className="flex h-full flex-col">
