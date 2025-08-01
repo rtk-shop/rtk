@@ -1,33 +1,39 @@
 import { Button } from '@repo/ui'
 import { Skeleton } from './skeleton'
-import { FormatPrice } from '@/components/ui/format-price'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useAppState } from '@/stores/app/store'
+import { routeNames } from '@/lib/routes'
+import { FormatPrice } from '@/components/ui/format-price'
 
-interface SummaryProps {
+export function Summary({
+  loading,
+  totalSum = 0
+}: {
   loading: boolean
   totalSum: number | undefined
-  onCheckout(): void
-}
-
-export function Summary({ loading, totalSum = 0, onCheckout }: SummaryProps) {
-  const t = useTranslations('Common')
+}) {
+  const router = useRouter()
+  const t = useTranslations('Common.cart')
+  const closeCart = useAppState((state) => state.closeCart)
 
   if (loading) return <Skeleton />
 
   const handleButtonClick = (): void => {
-    onCheckout()
+    closeCart()
+    router.push(routeNames.checkout)
   }
 
   return (
     <div className="bg-gray-50 px-4 pt-4 pb-5">
       <p className="mb-2 flex justify-between text-lg font-semibold">
-        <span>{t('cart.total')}:</span>
+        <span>{t('total')}:</span>
         <span>
           <FormatPrice price={totalSum} />
         </span>
       </p>
       <Button fullWidth onClick={handleButtonClick}>
-        {t('cart.makeOrder')}
+        {t('makeOrder')}
       </Button>
     </div>
   )

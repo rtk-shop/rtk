@@ -1,27 +1,15 @@
+import { CartHead } from './head'
 import { Summary } from './summary'
 import { EmptyCartPlug } from './empty-cart-plug'
 import { ErrorCartPlug } from './error-cart-plug'
 import { ListSkeleton } from './list-skeleton'
-import { CartHead } from './head'
 import { CartItem } from '@/components/cart-item'
-import { routeNames } from '@/lib/routes'
-import { useRouter } from 'next/navigation'
 import { useCartQuery } from '@/lib/api/hooks'
-import { useAppState } from '@/stores/app/store'
 
 export function CartInner() {
-  const router = useRouter()
-
-  const closeCart = useAppState((state) => state.closeCart)
-
   const [result] = useCartQuery()
 
   const { data, fetching, error } = result
-
-  const handleCheckout = (): void => {
-    closeCart()
-    router.push(routeNames.checkout)
-  }
 
   let productsAmount = 0
 
@@ -36,7 +24,7 @@ export function CartInner() {
 
   return (
     <div className="flex h-full flex-col">
-      <CartHead quantity={productsAmount} onCartClose={closeCart} />
+      <CartHead quantity={productsAmount} />
       {fetching ? (
         <ListSkeleton len={3} />
       ) : (
@@ -46,7 +34,7 @@ export function CartInner() {
           ))}
         </ul>
       )}
-      <Summary loading={fetching} totalSum={cartPrice} onCheckout={handleCheckout} />
+      <Summary loading={fetching} totalSum={cartPrice} />
     </div>
   )
 }
