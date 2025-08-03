@@ -28,7 +28,7 @@ export function EmptyCartPlug() {
         <Button
           onClick={closeCart}
           color="secondary"
-          className="flex items-center rounded-md bg-gray-100 !py-1.5 !pr-3 !pl-2 leading-4 text-gray-700"
+          className="flex items-center rounded-md bg-slate-100 !py-1 !pr-3 !pl-2 text-sm leading-4 text-gray-700"
           startIcon={<Icon name="common/arrow" className="-rotate-90 text-[23px]" />}
         >
           Назад
