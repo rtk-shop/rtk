@@ -8,7 +8,7 @@ export type CreateOrderMutationVariables = Types.Exact<{
   phone: Types.Scalars['String']['input']
   cityName: Types.Scalars['String']['input']
   postOfficeName: Types.Scalars['String']['input']
-  supplier: Types.Scalars['String']['input']
+  supplier: Types.SupplierService
 }>
 
 export type CreateOrderMutation = {
@@ -23,7 +23,7 @@ export const CreateOrderDocument = gql`
     $phone: String!
     $cityName: String!
     $postOfficeName: String!
-    $supplier: String!
+    $supplier: SupplierService!
   ) {
     createOrder(
       input: {

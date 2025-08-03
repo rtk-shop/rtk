@@ -170,7 +170,7 @@ export type NewOrderInput = {
   name: Scalars['String']['input']
   phone: Scalars['String']['input']
   postOfficeName: Scalars['String']['input']
-  supplier: Scalars['String']['input']
+  supplier: SupplierService
   surname: Scalars['String']['input']
 }
 
@@ -238,7 +238,7 @@ export type Order = {
   receiverPhone: Scalars['String']['output']
   receiverSurname: Scalars['String']['output']
   status: OrderStatus
-  supplier: Scalars['String']['output']
+  supplier: SupplierService
   updatedAt: Scalars['String']['output']
 }
 
@@ -482,6 +482,11 @@ export type SizeVariation = {
   __typename?: 'SizeVariation'
   productId: Scalars['String']['output']
   size: Scalars['String']['output']
+}
+
+export enum SupplierService {
+  Novap = 'NOVAP',
+  Ukrp = 'UKRP'
 }
 
 export type User = {

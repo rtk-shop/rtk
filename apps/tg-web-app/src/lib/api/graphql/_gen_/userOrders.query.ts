@@ -16,7 +16,7 @@ export type UserOrdersQuery = {
     receiverName: string
     receiverSurname: string
     receiverPhone: string
-    supplier: string
+    supplier: Types.SupplierService
     cityName: string
     postOfficeName: string
     parcelTrackId?: string | null

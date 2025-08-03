@@ -4,7 +4,7 @@ mutation CreateOrder(
   $phone: String!
   $cityName: String!
   $postOfficeName: String!
-  $supplier: String!
+  $supplier: SupplierService!
 ) {
   createOrder(
     input: {

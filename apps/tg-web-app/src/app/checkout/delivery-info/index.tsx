@@ -11,6 +11,7 @@ import { UkrPoshta } from './ukr-poshta'
 import { parse } from 'valibot'
 import { useFormContext, useWatch } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
+import { SupplierService } from '@/lib/api/graphql/types'
 import { type DeliveryValues, deliverySchema } from '../model/validation-schema'
 import type { PopularCity } from '../model/types'
 
@@ -77,7 +78,7 @@ export function DeliveryInfo() {
               <label>
                 <input
                   type="radio"
-                  value="nova"
+                  value={SupplierService.Novap}
                   className="peer hidden"
                   {...register('supplier')}
                 />
@@ -97,7 +98,7 @@ export function DeliveryInfo() {
                 <input
                   disabled
                   type="radio"
-                  value="ukr"
+                  value={SupplierService.Ukrp}
                   className="peer hidden"
                   {...register('supplier')}
                 />
@@ -117,10 +118,10 @@ export function DeliveryInfo() {
             * {t('Checkout.delivery.unavailable')}
           </p>
           {/*  */}
-          <ShowBlock as="nova" current={supplier}>
+          <ShowBlock as={SupplierService.Novap} current={supplier}>
             <NovaPoshta popularCitiesLoad={isLoading} popularCities={data} />
           </ShowBlock>
-          <ShowBlock as="ukr" current={supplier}>
+          <ShowBlock as={SupplierService.Ukrp} current={supplier}>
             <UkrPoshta />
           </ShowBlock>
           {/*  */}

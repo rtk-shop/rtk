@@ -9,6 +9,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
 import { OrderSuccessModal } from './modals/order-success'
 import { ErrorModal } from './modals/error'
+import { SupplierService } from '@/lib/api/graphql/types'
 import { usePageState } from './model/state'
 
 export default function Checkout() {
@@ -22,7 +23,7 @@ export default function Checkout() {
     shouldFocusError: false,
     resolver: valibotResolver(validationSchema),
     defaultValues: {
-      supplier: 'nova',
+      supplier: SupplierService.Novap,
       'np-delivery-type': '1'
     }
   })
