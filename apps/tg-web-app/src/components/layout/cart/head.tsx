@@ -29,7 +29,12 @@ export function CartHead({ quantity }: { quantity: number }) {
         <IconButton onClick={closeCart} className="-rotate-90 fill-gray-700 p-0! text-[35px]">
           <Icon name="common/arrow" />
         </IconButton>
-        <p className="ml-8 text-xl font-medium text-black">{t('cart.topControls.title')}</p>
+        <div className="ml-8 flex items-center">
+          <Icon name="common/cart" className="stroke-black text-[22px]" />
+          <div className="ml-0.5 self-end">
+            <p className="text-xl leading-none font-medium">{t('cart.topControls.title')}</p>
+          </div>
+        </div>
         <button
           type="button"
           onClick={handleClearClick}
