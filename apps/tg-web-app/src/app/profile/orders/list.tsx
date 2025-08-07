@@ -59,23 +59,23 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
     )
   }
 
-  if (!orders.length) {
-    return (
-      <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
-          <Icon name="common/emptycart" className="mb-3 text-[230px]" />
-          <p className="text-lg">Список закакоз пуст</p>
-        </div>
-      </div>
-    )
-  }
-
   if (error) {
     return (
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
           <Icon name="action/warning" className="mb-1 text-[39px]" />
           <p className="text-lg">Ошибка получения данных</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!orders.length) {
+    return (
+      <div className="h-full pb-3">
+        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
+          <Icon name="common/emptycart" className="mb-3 text-[230px]" />
+          <p className="text-lg">Список закакоз пуст</p>
         </div>
       </div>
     )
