@@ -1,19 +1,18 @@
-'use client'
-
-import { useRef, useState } from 'react'
-import { usePageState } from './model/page-state'
-import { useQuery } from 'urql'
+import { memo, useRef, useState } from 'react'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order-item'
-import OrderSkeletonList from '@/components/ui/order-skeleton-list'
+import { usePageState } from '../model/page-state'
 import { OrderItemSkeleton } from '@/components/order-item/skeleton'
-import {
-  UserOrdersQuery,
-  UserOrdersQueryVariables,
-  UserOrdersDocument
-} from '@/lib/api/graphql/_gen_/userOrders.query'
+import { type OrderType } from '@/types/order'
+import OrderSkeletonList from '@/components/ui/order-skeleton-list'
 
-export function Orders() {
+export interface OrdersListProps {
+  fetching: boolean
+  error: unknown | undefined
+  orders: OrderType[]
+}
+
+export const OrdersList = memo(function OrdersList({ fetching, error, orders }: OrdersListProps) {
   const listRef = useRef<HTMLUListElement>(null)
 
   const openRejectModal = usePageState((state) => state.onRejectOrderModal)
@@ -23,12 +22,6 @@ export function Orders() {
     index: 0,
     expanded: true
   })
-
-  const [result] = useQuery<UserOrdersQuery, UserOrdersQueryVariables>({
-    query: UserOrdersDocument
-  })
-
-  const { data, fetching, error } = result
 
   const handleOrderExpand = (index: number) => {
     if (listRef.current) {
@@ -66,7 +59,7 @@ export function Orders() {
     )
   }
 
-  if (data?.userOrders.length === 0) {
+  if (!orders.length) {
     return (
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
@@ -89,22 +82,19 @@ export function Orders() {
   }
 
   return (
-    <section>
-      <ul ref={listRef} className="overflow-y-auto">
-        {/* <OrderItemSkeleton expanded /> */}
-        {data?.userOrders.map((order, index) => (
-          <li key={index} className="mb-3">
-            <OrderItem
-              currentIndex={index}
-              order={{ ...order }}
-              expandIndex={expandedOrder.index}
-              isExpanded={expandedOrder.expanded}
-              onExpand={handleOrderExpand}
-              onReject={handleOrderReject}
-            />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul ref={listRef} className="h-full overflow-y-auto">
+      {orders.map((order, index) => (
+        <li key={index} className="mb-3">
+          <OrderItem
+            currentIndex={index}
+            order={{ ...order }}
+            expandIndex={expandedOrder.index}
+            isExpanded={expandedOrder.expanded}
+            onExpand={handleOrderExpand}
+            onReject={handleOrderReject}
+          />
+        </li>
+      ))}
+    </ul>
   )
-}
+})

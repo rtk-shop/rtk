@@ -422,7 +422,7 @@ export type Query = {
    *   - CUSTOMER - only own orders
    *   - MANAGER, ADMIN - can receive orders from all users
    */
-  userOrders: Array<Order>
+  userOrders: UserOrdersConnection
 }
 
 export type QueryOrderArgs = {
@@ -452,6 +452,9 @@ export type QueryProductsByIdArgs = {
 }
 
 export type QueryUserOrdersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  before?: InputMaybe<Scalars['String']['input']>
+  first: Scalars['Int']['input']
   userId?: InputMaybe<Scalars['ID']['input']>
 }
 
@@ -497,6 +500,13 @@ export type User = {
   phone: Scalars['String']['output']
   role: Scalars['String']['output']
   updatedAt: Scalars['String']['output']
+}
+
+export type UserOrdersConnection = {
+  __typename?: 'UserOrdersConnection'
+  edges: Array<OrderEdge>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']['output']
 }
 
 export type UsersStats = {

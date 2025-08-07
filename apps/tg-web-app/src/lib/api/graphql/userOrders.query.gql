@@ -1,25 +1,42 @@
-query UserOrders($userId: ID) {
-  userOrders(userId: $userId) {
-    id
-    status
-    price
-    receiverName
-    receiverSurname
-    receiverPhone
-    supplier
-    cityName
-    postOfficeName
-    parcelTrackId
-    updatedAt
-    createdAt
-    products {
-      id
-      quantity
-      priceAtOrder
-      product {
+query UserOrders(
+  $userId: ID
+  # pagination
+  $first: Int!
+  $after: String
+  $before: String
+) {
+  userOrders(userId: $userId, first: $first, after: $after, before: $before) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      startCursor
+      endCursor
+      hasPreviousPage
+    }
+    edges {
+      node {
         id
-        title
-        preview
+        status
+        price
+        receiverName
+        receiverSurname
+        receiverPhone
+        supplier
+        cityName
+        postOfficeName
+        parcelTrackId
+        updatedAt
+        createdAt
+        products {
+          id
+          quantity
+          priceAtOrder
+          product {
+            id
+            title
+            preview
+          }
+        }
       }
     }
   }
