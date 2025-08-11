@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { cva } from 'cva'
 import { useRouter } from 'next/navigation'
 import { FormatPrice } from '../ui/format-price'
@@ -13,6 +12,7 @@ import { formatDate, formatPhoneNumber } from '@repo/utils'
 import { useTranslations } from 'next-intl'
 import { type OrderType } from '@/types/order'
 import { OrderStatus } from '@/lib/api/graphql/types'
+import { OrderProductItem } from '../order-product-item'
 
 export interface OrderItemProps {
   order: OrderType
@@ -55,10 +55,6 @@ export function OrderItem({
   } = order
 
   const isOrderExpanded = expandIndex === currentIndex && isExpanded
-
-  const handleProductRedirect = (productId: string) => {
-    router.push(routeNames.product + productId)
-  }
 
   const handleDetailsClick = () => {
     router.push(routeNames.order + order.id)
@@ -129,34 +125,12 @@ export function OrderItem({
           {/* Products */}
           <ul className={productList({ status: status === 'REJECTED' ? status : null })}>
             {order.products.map(({ id, quantity, priceAtOrder, product }) => (
-              <li key={id} className="mb-2.5 flex items-center">
-                <Image
-                  src={product.preview}
-                  className="rounded-lg"
-                  width={44}
-                  height={55}
-                  style={{
-                    width: 44,
-                    height: 55
-                  }}
-                  alt={'изображение товара ' + product.title}
-                  onClick={() => handleProductRedirect(product.id)}
-                />
-                <div className="ml-2 min-w-0 flex-[1_1_100%] self-start pt-0.5">
-                  <p
-                    onClick={() => handleProductRedirect(product.id)}
-                    className="overflow-hidden font-medium text-ellipsis whitespace-nowrap"
-                  >
-                    {product.title}
-                  </p>
-                  <p className="text-sm font-medium">
-                    <span className="mr-3">
-                      {t('nouns.price')}: <FormatPrice price={priceAtOrder} />
-                    </span>
-                    <span> {quantity}шт.</span>
-                  </p>
-                </div>
-              </li>
+              <OrderProductItem
+                key={id}
+                quantity={quantity}
+                priceAtOrder={priceAtOrder}
+                product={product}
+              />
             ))}
           </ul>
           {/* Controls */}
