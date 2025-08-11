@@ -1,7 +1,6 @@
 import { memo, useRef, useState } from 'react'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order-item'
-import { usePageState } from '../model/page-state'
 import { OrderItemSkeleton } from '@/components/order-item/skeleton'
 import { type OrderType } from '@/types/order'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
@@ -14,9 +13,6 @@ export interface OrdersListProps {
 
 export const OrdersList = memo(function OrdersList({ fetching, error, orders }: OrdersListProps) {
   const listRef = useRef<HTMLUListElement>(null)
-
-  const openRejectModal = usePageState((state) => state.onRejectOrderModal)
-  const setCurrentOrderId = usePageState((state) => state.setCurrentOrderId)
 
   const [expandedOrder, setExpandedOrder] = useState({
     index: 0,
@@ -41,11 +37,6 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
       index: index,
       expanded: true
     })
-  }
-
-  const handleOrderReject = (orderId: string) => {
-    openRejectModal(true)
-    setCurrentOrderId(orderId)
   }
 
   if (fetching) {
@@ -91,7 +82,6 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
             expandIndex={expandedOrder.index}
             isExpanded={expandedOrder.expanded}
             onExpand={handleOrderExpand}
-            onReject={handleOrderReject}
           />
         </li>
       ))}

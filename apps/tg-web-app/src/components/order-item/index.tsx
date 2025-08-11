@@ -20,10 +20,7 @@ export interface OrderItemProps {
   expandIndex: number
   isExpanded: boolean
   onExpand(index: number): void
-  onReject(orderId: string): void
 }
-
-const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
 const productList = cva('pt-2', {
   variants: {
@@ -38,14 +35,12 @@ export function OrderItem({
   expandIndex,
   isExpanded,
   currentIndex,
-  onExpand,
-  onReject
+  onExpand
 }: OrderItemProps) {
   const t = useTranslations('Common')
   const router = useRouter()
 
   const {
-    id,
     price,
     status,
     receiverName,
@@ -65,14 +60,14 @@ export function OrderItem({
     router.push(routeNames.product + productId)
   }
 
-  const handleRejectClick = () => {
-    onReject(id)
+  const handleDetailsClick = () => {
+    router.push(routeNames.order + order.id)
   }
 
   return (
     <div className="rounded-xl bg-slate-100">
       <div onClick={() => onExpand(currentIndex)} className="grid grid-cols-8 py-2.5 pl-2">
-        <div className="col-span-2 self-center text-start text-sm font-medium">№{id}</div>
+        <div className="col-span-2 self-center text-start text-sm font-medium">№{order.id}</div>
         <div
           className="col-span-2 font-medium"
           style={{
@@ -165,18 +160,16 @@ export function OrderItem({
             ))}
           </ul>
           {/* Controls */}
-          {validStatusesForReject.includes(status) && (
-            <div className="mb-2">
-              <Button
-                onClick={handleRejectClick}
-                color="secondary"
-                fullWidth
-                className="bg-gray-200 pt-3 pb-3"
-              >
-                {t('order.reject')}
-              </Button>
-            </div>
-          )}
+          <div className="mb-2">
+            <Button
+              color="secondary"
+              fullWidth
+              onClick={handleDetailsClick}
+              className="bg-gray-200 pt-3 pb-3"
+            >
+              {t('order.details')}
+            </Button>
+          </div>
           {/* Meta */}
           <div className="text-sm text-gray-600">
             <p>

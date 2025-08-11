@@ -2,6 +2,7 @@ export const routeNames = {
   root: '/',
   catalog: '/catalog',
   product: '/product/',
+  order: '/order/',
   profile: '/profile',
   checkout: '/checkout',
   favourites: '/favourites'
@@ -11,6 +12,7 @@ const protectedRoutes = [
   routeNames.catalog,
   routeNames.product,
   routeNames.profile,
+  routeNames.order,
   routeNames.checkout,
   routeNames.favourites
 ]
