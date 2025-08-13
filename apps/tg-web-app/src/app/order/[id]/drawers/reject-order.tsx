@@ -1,44 +1,29 @@
-'use client'
-
-import { useState } from 'react'
 import { Button } from '@repo/ui'
 import { Drawer } from '@/components/ui/drawer'
 import { useRejectOrderMutation } from '@/lib/api/hooks'
-import { usePageState } from '../model/page-state'
+import { usePageState } from '../state'
 import { ErrorMessage } from '@repo/ui'
 
-export function OrderRejectModal() {
-  const [hasErr, setHasErr] = useState(false)
-
-  const isOpen = usePageState((state) => state.isRejectOrderModalOpen)
-  const currentOrderId = usePageState((state) => state.currentOrderId)
-  const clearCurrentOrderId = usePageState((state) => state.clearCurrentOrderId)
-  const openRejectModal = usePageState((state) => state.onRejectOrderModal)
+export function OrderRejectModal({ orderId }: { orderId: string }) {
+  const isOpen = usePageState((state) => state.isRejectModalOpen)
+  const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
 
   const [rejectResult, rejectOrder] = useRejectOrderMutation()
 
   const handleConfirmClick = async () => {
-    if (!currentOrderId) return
-
-    const result = await rejectOrder({
-      orderId: currentOrderId
-    })
+    const result = await rejectOrder({ orderId })
 
     if (result.data && !result.error) {
-      openRejectModal(false)
-      clearCurrentOrderId()
-    } else {
-      setHasErr(true)
+      setRejectModalOpen(false)
+      return
     }
   }
 
   const handleCancelClick = () => {
-    openRejectModal(false)
-    setHasErr(false)
-    clearCurrentOrderId()
+    setRejectModalOpen(false)
   }
 
-  const { fetching } = rejectResult
+  const { fetching, error } = rejectResult
 
   return (
     <Drawer open={isOpen} position="bottom" onClose={handleCancelClick}>
@@ -57,7 +42,7 @@ export function OrderRejectModal() {
             Отменить
           </Button>
         </div>
-        <ErrorMessage show={hasErr} align="center">
+        <ErrorMessage show={!!error} align="center">
           <span className="text-center">Ошибка, повторите попытку позже</span>
         </ErrorMessage>
       </div>

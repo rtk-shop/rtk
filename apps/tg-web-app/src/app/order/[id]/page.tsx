@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         supplier={order.supplier}
         parcelTrackId={order.parcelTrackId}
       />
-      <OrderControls orderPrice={order.price} />
+      <OrderControls orderId={order.id} orderPrice={order.price} status={order.status} />
       <OrderProducts products={order.products} />
     </div>
   )

@@ -1,6 +1,5 @@
-import { LangSwitcher } from '@/components/lang-switcher'
-import { OrderRejectModal } from './modals/reject-order'
 import { Orders } from './orders'
+import { LangSwitcher } from '@/components/lang-switcher'
 import { useTranslations } from 'next-intl'
 
 export default function Profile() {
@@ -18,7 +17,6 @@ export default function Profile() {
           <Orders />
         </div>
       </div>
-      <OrderRejectModal />
     </div>
   )
 }

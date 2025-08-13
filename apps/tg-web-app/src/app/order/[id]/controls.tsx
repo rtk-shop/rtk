@@ -1,15 +1,22 @@
 'use client'
-import { FormatPrice } from '@/components/ui/format-price'
-// const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
-// const openRejectModal = usePageState((state) => state.onRejectOrderModal)
-// const setCurrentOrderId = usePageState((state) => state.setCurrentOrderId)
+import { FormatPrice } from '@/components/ui/format-price'
+import { OrderRejectModal } from './drawers/reject-order'
+import { Button } from '@repo/ui'
+import { usePageState } from './state'
+import { OrderStatus } from '@/lib/api/graphql/types'
+
+const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
 export interface OrderControlsProps {
+  orderId: string
+  status: OrderStatus
   orderPrice: number
 }
 
-export function OrderControls({ orderPrice }: OrderControlsProps) {
+export function OrderControls({ orderId, orderPrice, status }: OrderControlsProps) {
+  const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
+
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -18,6 +25,24 @@ export function OrderControls({ orderPrice }: OrderControlsProps) {
           <FormatPrice price={orderPrice} />
         </div>
       </div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-medium">Статус</h2>
+        <div>{status}</div>
+      </div>
+      <div>
+        {validStatusesForReject.includes(status) && (
+          <Button
+            color="secondary"
+            fullWidth
+            onClick={() => setRejectModalOpen(true)}
+            className="bg-gray-200 pt-3 pb-3"
+          >
+            Отменить заказ
+          </Button>
+        )}
+      </div>
+
+      <OrderRejectModal orderId={orderId} />
     </section>
   )
 }
