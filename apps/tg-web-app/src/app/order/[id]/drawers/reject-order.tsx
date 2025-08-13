@@ -1,7 +1,7 @@
 import { Button } from '@repo/ui'
 import { Drawer } from '@/components/ui/drawer'
 import { useRejectOrderMutation } from '@/lib/api/hooks'
-import { usePageState } from '../state'
+import { usePageState } from '../lib/state'
 import { ErrorMessage } from '@repo/ui'
 
 export function OrderRejectModal({ orderId }: { orderId: string }) {

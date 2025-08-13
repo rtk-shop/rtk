@@ -3,8 +3,9 @@
 import { FormatPrice } from '@/components/ui/format-price'
 import { OrderRejectModal } from './drawers/reject-order'
 import { Button } from '@repo/ui'
-import { usePageState } from './state'
+import { usePageState } from './lib/state'
 import { OrderStatus } from '@/lib/api/graphql/types'
+import { PaymentDrawer } from './drawers/payment'
 
 const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
@@ -16,6 +17,7 @@ export interface OrderControlsProps {
 
 export function OrderControls({ orderId, orderPrice, status }: OrderControlsProps) {
   const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
+  const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
 
   return (
     <section>
@@ -30,6 +32,9 @@ export function OrderControls({ orderId, orderPrice, status }: OrderControlsProp
         <div>{status}</div>
       </div>
       <div>
+        <Button color="accept" fullWidth className="mb-4" onClick={() => setPaymentModalOpen(true)}>
+          Оплатить заказ
+        </Button>
         {validStatusesForReject.includes(status) && (
           <Button
             color="secondary"
@@ -43,6 +48,7 @@ export function OrderControls({ orderId, orderPrice, status }: OrderControlsProp
       </div>
 
       <OrderRejectModal orderId={orderId} />
+      <PaymentDrawer orderId={orderId} orderPrice={orderPrice} />
     </section>
   )
 }
