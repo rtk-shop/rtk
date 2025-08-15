@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button'
 import { routeNames } from '@/lib/routes'
 import { DeliverySupplier } from '@repo/ui'
 import { ExpandIcon } from '@/components/ui/expand-icon'
-import { getOrderStatusColor } from '@/lib/helpers'
 import { formatDate, formatPhoneNumber } from '@repo/utils'
 import { useTranslations } from 'next-intl'
 import { type OrderType } from '@/types/order'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { OrderProductItem } from '../order-product-item'
+import { OrderStatusBadge } from '../order/status-badge'
 
 export interface OrderItemProps {
   order: OrderType
@@ -64,23 +64,8 @@ export function OrderItem({
     <div className="rounded-xl bg-slate-100">
       <div onClick={() => onExpand(currentIndex)} className="grid grid-cols-8 py-2.5 pl-2">
         <div className="col-span-2 self-center text-start text-sm font-medium">№{order.id}</div>
-        <div
-          className="col-span-2 font-medium"
-          style={{
-            color: getOrderStatusColor(status)
-          }}
-        >
-          {status === 'CREATED' ? (
-            <div className="flex items-center">
-              <span className="relative mr-2 flex size-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
-              </span>
-              <span>{t(`order.statuses.${status.toLowerCase()}`)}</span>
-            </div>
-          ) : (
-            t(`order.statuses.${status.toLowerCase()}`)
-          )}
+        <div className="col-span-2">
+          <OrderStatusBadge status={status} />
         </div>
         <div className="col-span-3 text-center">
           <FormatPrice price={price} />

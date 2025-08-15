@@ -12,12 +12,3 @@ export const getProductMainTagColor = (tag: ProductTag): string => {
       return 'lightgray'
   }
 }
-
-export const getOrderStatusColor = (status: OrderStatus): string => {
-  switch (status) {
-    case OrderStatus.Returned:
-      return '#a2a2a2'
-    default:
-      return ''
-  }
-}
