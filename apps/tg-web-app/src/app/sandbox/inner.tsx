@@ -7,6 +7,8 @@ import { Icon } from '@/components/ui/icon'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 import { IconButton } from '@/components/ui/icon-button'
+import { OrderStatusBadge } from '@/components/order/status-badge'
+import { OrderStatus } from '@/lib/api/graphql/types'
 
 export default function PageInner() {
   const formMethods = useForm({
@@ -42,6 +44,14 @@ export default function PageInner() {
   return (
     <div>
       <h1>Sandbox</h1>
+
+      <OrderStatusBadge status={OrderStatus.Created} />
+      <OrderStatusBadge status={OrderStatus.Sent} />
+      <OrderStatusBadge status={OrderStatus.Processed} />
+      <OrderStatusBadge status={OrderStatus.Done} />
+      <OrderStatusBadge status={OrderStatus.Rejected} />
+      <OrderStatusBadge status={OrderStatus.Returned} />
+
       <ul className="flex flex-col justify-center *:m-auto *:mb-4">
         <li>
           <Button onClick={handlePopUp}>Show native popup</Button>

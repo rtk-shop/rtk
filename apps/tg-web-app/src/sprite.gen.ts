@@ -22,6 +22,7 @@ export interface SpritesMap {
     | 'menu'
     | 'user'
     | 'xmark'
+  profile: 'package-check' | 'package-x' | 'timer'
 }
 export const SPRITES_META: {
   [Key in keyof SpritesMap]: {
@@ -158,6 +159,26 @@ export const SPRITES_META: {
         viewBox: '0 0 20 20',
         width: 20,
         height: 20
+      }
+    }
+  },
+  profile: {
+    filePath: 'profile.8b220eb3.svg',
+    items: {
+      'package-check': {
+        viewBox: '0 0 24 24',
+        width: 24,
+        height: 24
+      },
+      'package-x': {
+        viewBox: '0 0 24 24',
+        width: 24,
+        height: 24
+      },
+      timer: {
+        viewBox: '0 0 24 24',
+        width: 24,
+        height: 24
       }
     }
   }
