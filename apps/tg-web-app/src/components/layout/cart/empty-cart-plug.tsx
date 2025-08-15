@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { useAppState } from '@/stores/app/store'
 import { useTranslations } from 'next-intl'

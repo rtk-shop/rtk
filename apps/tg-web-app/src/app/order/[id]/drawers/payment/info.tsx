@@ -1,4 +1,5 @@
-import { Button, Loader } from '@repo/ui'
+import { Loader } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { cva } from 'cva'
 import { usePageState } from '../../lib/state'
 import { usePaymentInfo } from '../../lib/api'

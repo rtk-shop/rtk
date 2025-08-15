@@ -1,7 +1,7 @@
-import { Button } from '@repo/ui'
-import { Icon } from '@/components/ui/icon'
+import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
+import { Icon } from '@/components/ui/icon'
 
 export function AddToCartButton({ productId, inStock }: { productId: string; inStock: boolean }) {
   const [{ fetching }, addCartItem] = useAddCartItemMutation()

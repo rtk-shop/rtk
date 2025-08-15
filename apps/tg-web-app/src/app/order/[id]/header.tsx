@@ -1,7 +1,7 @@
 'use client'
 
 import { Icon } from '@/components/ui/icon'
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { formatDate } from '@repo/utils'
 import { useRouter } from 'next/navigation'
 

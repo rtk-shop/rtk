@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { Drawer } from '@/components/ui/drawer'
 import { useRejectOrderMutation } from '@/lib/api/hooks'
 import { usePageState } from '../lib/state'

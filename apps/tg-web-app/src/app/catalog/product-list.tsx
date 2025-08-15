@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { ProductItem } from '@/components/product-item'
 import { ProductTag } from '@/lib/api/graphql/types'
 

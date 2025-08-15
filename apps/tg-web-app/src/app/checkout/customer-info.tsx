@@ -1,7 +1,7 @@
 import { parse } from 'valibot'
 import { usePageState } from './model/state'
 import { StepTitle } from './common/step-title'
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { Input } from '@repo/ui'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { useWatch } from 'react-hook-form'

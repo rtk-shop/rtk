@@ -5,7 +5,7 @@ import { novaDeliveryTypeOptions } from '../checkout/model/constants'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Icon } from '@/components/ui/icon'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { IconButton } from '@/components/ui/icon-button'
 
 export default function PageInner() {

@@ -3,7 +3,7 @@
 import { useForm, FormProvider, SubmitHandler, useFormContext } from 'react-hook-form'
 import { FormValues, validationSchema } from './lib/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { Button, Input } from '@repo/ui'
+import { Input } from '@repo/ui'
 import { Textarea } from '@/components/ui/textarea'
 import { Select } from '@/components/ui/select'
 import { genderOptions, categoryOptions } from './lib/form-values'
@@ -115,9 +115,14 @@ export default function Page() {
                 placeholder="Опишите товар используя разметку HTML..."
               />
               <div className="flex justify-center">
-                <Button fullWidth type="submit" className="xl:max-w-73" loading={fetching}>
+                <button
+                  // fullWidth
+                  // loading={fetching}
+                  type="submit"
+                  className="xl:max-w-73"
+                >
                   Создать
-                </Button>
+                </button>
               </div>
               {/* <FormError /> */}
             </div>

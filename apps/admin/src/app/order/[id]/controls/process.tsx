@@ -1,5 +1,4 @@
 import { toast } from 'sonner'
-import { Button } from '@repo/ui'
 import { useProcessOrderMutation } from '@/lib/api/hooks'
 
 export function ProcessOrderButton({ orderId }: { orderId: string }) {
@@ -31,9 +30,13 @@ export function ProcessOrderButton({ orderId }: { orderId: string }) {
 
   return (
     <div className="flex justify-center">
-      <Button fullWidth loading={fetching} className="max-w-60" onClick={handleClick}>
+      <button
+        // loading={fetching}
+        className="max-w-60"
+        onClick={handleClick}
+      >
         Принять в обработку
-      </Button>
+      </button>
     </div>
   )
 }

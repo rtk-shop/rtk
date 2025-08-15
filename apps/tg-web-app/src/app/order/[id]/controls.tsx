@@ -2,7 +2,7 @@
 
 import { FormatPrice } from '@/components/ui/format-price'
 import { OrderRejectModal } from './drawers/reject-order'
-import { Button } from '@repo/ui'
+import { Button } from '@/components/ui/button'
 import { usePageState } from './lib/state'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { PaymentDrawer } from './drawers/payment'
