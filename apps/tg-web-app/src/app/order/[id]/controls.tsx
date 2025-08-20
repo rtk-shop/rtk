@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { usePageState } from './lib/state'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { PaymentDrawer } from './drawers/payment'
+import { OrderStatusBadge } from '@/components/order/status-badge'
+import { formatDate } from '@repo/utils'
 
 const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
@@ -13,23 +15,26 @@ export interface OrderControlsProps {
   orderId: string
   status: OrderStatus
   orderPrice: number
+  updatedAt: string
 }
 
-export function OrderControls({ orderId, orderPrice, status }: OrderControlsProps) {
+export function OrderControls({ orderId, orderPrice, status, updatedAt }: OrderControlsProps) {
   const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
   const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
 
   return (
-    <section>
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-medium">Сумма</h2>
-        <div>
-          <FormatPrice price={orderPrice} />
+    <section className="mb-4">
+      <div className="mb-3 grid grid-cols-2 border-b-2">
+        <div className="h-22 border-r-2 p-3">
+          <h2 className="text-lg font-medium">Сумма:</h2>
+          <div>
+            <FormatPrice size="XXL" currency="грн." price={orderPrice} />
+          </div>
         </div>
-      </div>
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-medium">Статус</h2>
-        <div>{status}</div>
+        <div className="h-22 p-3">
+          <h2 className="text-lg font-medium">Статус:</h2>
+          <OrderStatusBadge size="XL" status={status} />
+        </div>
       </div>
       <div>
         <Button color="accept" fullWidth className="mb-4" onClick={() => setPaymentModalOpen(true)}>
@@ -46,6 +51,9 @@ export function OrderControls({ orderId, orderPrice, status }: OrderControlsProp
           </Button>
         )}
       </div>
+      <p className="my-1 text-sm text-gray-400">
+        Оновлено {formatDate(updatedAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
+      </p>
 
       <OrderRejectModal orderId={orderId} />
       <PaymentDrawer orderId={orderId} orderPrice={orderPrice} />
