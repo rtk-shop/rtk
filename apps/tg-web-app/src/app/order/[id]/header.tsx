@@ -1,7 +1,7 @@
 'use client'
 
 import { Icon } from '@/components/ui/icon'
-import { Button } from '@/components/ui/button'
+import { IconButton } from '@/components/ui/icon-button'
 import { formatDate } from '@repo/utils'
 import { useRouter } from 'next/navigation'
 
@@ -20,14 +20,12 @@ export function OrderHeader({ orderId, createdAt }: { orderId: string; createdAt
           Від {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
         </p>
       </div>
-      <Button
+      <IconButton
         onClick={handleButtonClick}
-        color="secondary"
-        className="flex items-center rounded-md bg-slate-100 !py-1.5 !pr-3 !pl-2 text-sm leading-4 text-gray-800"
-        startIcon={<Icon name="common/arrow" className="-rotate-90 text-[23px]" />}
+        className="mr-2 !rounded-lg !bg-black !p-2.5 !text-sm text-white"
       >
-        Назад
-      </Button>
+        <Icon name="common/xmark" />
+      </IconButton>
     </div>
   )
 }
