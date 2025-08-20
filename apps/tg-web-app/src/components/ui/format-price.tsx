@@ -1,11 +1,32 @@
 import { formatPrice } from '@repo/utils'
+import { cva } from 'cva'
 
-export function FormatPrice({ price, currency = '₴' }: { price: number; currency?: string }) {
-  const num = formatPrice(price)
+const priceView = cva('font-medium', {
+  variants: {
+    size: {
+      normal: 'text-base',
+      XL: 'text-lg',
+      XXL: 'text-xl'
+    }
+  },
+  defaultVariants: {
+    size: 'normal'
+  }
+})
 
+export function FormatPrice({
+  price,
+  size,
+  currency = '₴'
+}: {
+  price: number
+  currency?: string
+  size?: 'normal' | 'XL' | 'XXL'
+}) {
   return (
-    <span>
-      <span className="font-medium">{num}</span> {currency}
+    <span className={priceView({ size })}>
+      {formatPrice(price)}
+      <span style={{ marginLeft: 3 }}>{currency}</span>
     </span>
   )
 }
