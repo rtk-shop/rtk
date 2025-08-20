@@ -1,4 +1,5 @@
 import { DeliverySupplier } from '@repo/ui'
+import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 
 export function Delivery({
   city,
@@ -27,10 +28,11 @@ export function Delivery({
           <span className="mr-1.5 text-gray-500">Отделение:</span>
           {postOffice}
         </p>
-        <p>
+        <div className="flex items-center">
           <span className="mr-1.5 text-gray-500">Трекинг ID:</span>
-          <span>{parcelTrackId ? parcelTrackId : '—'.repeat(10)}</span>
-        </p>
+          {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
+          {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
+        </div>
       </div>
     </section>
   )

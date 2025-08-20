@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, ReactNode, MouseEvent } from 'react'
 import { cva } from 'cva'
 import { Loader } from '@repo/ui'

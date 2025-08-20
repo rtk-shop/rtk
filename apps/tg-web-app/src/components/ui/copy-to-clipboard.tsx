@@ -1,3 +1,5 @@
+'use client'
+
 import { useCopyToClipboard } from '@/hooks'
 import { Icon } from './icon'
 import { IconButton } from './icon-button'
@@ -16,7 +18,7 @@ export function CopyToClipboard({ what }: { what: string }) {
   }
 
   return (
-    <IconButton onClick={handleClick} className="ml-2 pb-0 pl-0 pr-0 pt-0 text-[22px]">
+    <IconButton onClick={handleClick} className="ml-2 pt-0 pr-0 pb-0 pl-0 text-[22px]">
       {copiedText ? <Icon name="common/check" /> : <Icon name="action/copy" />}
     </IconButton>
   )
