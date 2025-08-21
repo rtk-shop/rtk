@@ -17,19 +17,19 @@ export function Summary({
   const t = useTranslations('Common.cart')
   const closeCart = useAppState((state) => state.closeCart)
 
-  if (loading) return <Skeleton />
-
-  const handleButtonClick = (): void => {
+  const handleButtonClick = () => {
     closeCart()
     router.push(routeNames.checkout)
   }
+
+  if (loading) return <Skeleton />
 
   return (
     <div className="bg-gray-50 px-4 pt-4 pb-5">
       <p className="mb-2 flex justify-between text-lg font-semibold">
         <span>{t('total')}:</span>
         <span>
-          <FormatPrice price={totalSum} />
+          <FormatPrice size="XL" price={totalSum} currency="грн" />
         </span>
       </p>
       <Button fullWidth onClick={handleButtonClick}>
