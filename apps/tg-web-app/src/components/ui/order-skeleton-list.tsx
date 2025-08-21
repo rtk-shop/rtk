@@ -1,4 +1,4 @@
-import { OrderItemSkeleton } from '../order-item/skeleton'
+import { OrderItemSkeleton } from '../order/item/skeleton'
 
 export default function OrderSkeletonList({ len = 8 }: { len?: number }) {
   return (

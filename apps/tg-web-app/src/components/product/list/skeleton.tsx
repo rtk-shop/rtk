@@ -1,4 +1,4 @@
-import { ProductSkeleton } from '../product-item/skeleton'
+import { ProductSkeleton } from '@/components/product/item/skeleton'
 
 export function ProductListSkeleton({ len = 6 }: { len?: number }) {
   return (

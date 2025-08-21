@@ -6,7 +6,7 @@ import { AmountController } from '@/components/ui/amount-controller'
 import { routeNames } from '@/lib/routes'
 import { useTranslations } from 'next-intl'
 import { FormatPrice } from '@/components/ui/format-price'
-import { Icon } from '../ui/icon'
+import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
 import {
   useAddCartItemMutation,

@@ -1,7 +1,7 @@
 import { cva } from 'cva'
 import { useRouter } from 'next/navigation'
-import { FormatPrice } from '../ui/format-price'
-import { HeightExpander } from '../ui/height-expander'
+import { FormatPrice } from '../../ui/format-price'
+import { HeightExpander } from '../../ui/height-expander'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { Button } from '@/components/ui/button'
 import { routeNames } from '@/lib/routes'
@@ -11,8 +11,8 @@ import { formatDate, formatPhoneNumber } from '@repo/utils'
 import { useTranslations } from 'next-intl'
 import { type OrderType } from '@/types/order'
 import { OrderStatus } from '@/lib/api/graphql/types'
-import { OrderProductItem } from '../order-product-item'
-import { OrderStatusBadge } from '../order/status-badge'
+import { OrderProductItem } from '../../order-product-item'
+import { OrderStatusBadge } from '../status-badge'
 
 export interface OrderItemProps {
   order: OrderType

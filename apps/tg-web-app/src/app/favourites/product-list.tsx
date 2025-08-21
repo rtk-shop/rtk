@@ -2,7 +2,7 @@
 
 import { useFavoriteProductsQuery } from '@/lib/api/hooks'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
-import { ProductList } from '@/components/layout/product-list'
+import { ProductList } from '@/components/product/list'
 
 export function Products() {
   const [favouriteAmount] = useFavoriteStore((state) => state.amount)

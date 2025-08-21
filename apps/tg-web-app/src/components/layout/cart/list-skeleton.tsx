@@ -1,4 +1,4 @@
-import { CartItemSkeleton } from '@/components/cart-item/skeleton'
+import { CartItemSkeleton } from '@/components/cart/item/skeleton'
 
 export function ListSkeleton({ len = 4 }: { len?: number }) {
   return (

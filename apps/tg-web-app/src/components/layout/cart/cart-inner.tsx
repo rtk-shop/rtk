@@ -3,7 +3,7 @@ import { Summary } from './summary'
 import { EmptyCartPlug } from './empty-cart-plug'
 import { ErrorCartPlug } from './error-cart-plug'
 import { ListSkeleton } from './list-skeleton'
-import { CartItem } from '@/components/cart-item'
+import { CartItem } from '@/components/cart/item'
 import { useCartQuery } from '@/lib/api/hooks'
 
 export function CartInner() {

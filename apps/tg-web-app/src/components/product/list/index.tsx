@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react'
-import { ProductItem, type ProductItemProps } from '../product-item'
+import { ProductItem, type ProductItemProps } from '@/components/product/item'
 import { Button } from '@/components/ui/button'
-import { Icon } from '../ui/icon'
-import { ProductListSkeleton } from './product-list-skeleton'
+import { Icon } from '@/components/ui/icon'
+import { ProductListSkeleton } from './skeleton'
 
 export interface ProductList {
   data: ProductItemProps[] | undefined

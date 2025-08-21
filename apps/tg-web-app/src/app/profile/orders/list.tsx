@@ -1,7 +1,7 @@
 import { memo, useRef, useState } from 'react'
 import { Icon } from '@/components/ui/icon'
-import { OrderItem } from '@/components/order-item'
-import { OrderItemSkeleton } from '@/components/order-item/skeleton'
+import { OrderItem } from '@/components/order/item'
+import { OrderItemSkeleton } from '@/components/order/item/skeleton'
 import { type OrderType } from '@/types/order'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
 
