@@ -113,7 +113,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
           {quantity}&nbsp;шт:&nbsp;&nbsp;
           <FormatPrice price={quantity * currentPrice} />
         </p>
-        <div className="mt-6 flex justify-between">
+        <div className="mt-4 flex justify-between">
           <AmountController
             min={1}
             max={100}
