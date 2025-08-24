@@ -1,10 +1,12 @@
+'use client'
+
 import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
 import { toast } from 'sonner'
 
-export function Controls({ productId }: { productId: string }) {
+export function SubControls({ productId }: { productId: string }) {
   const [favoriteStore] = useFavoriteStore((state) => state)
   const [_, addFavorite] = useAddProductToFavorite()
   const [__, removeFavorite] = useRemoveProductFromFavorites()

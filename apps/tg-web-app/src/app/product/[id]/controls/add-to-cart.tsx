@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
@@ -22,7 +24,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
   }
 
   return (
-    <div className="mt-5 mb-2.5 px-2">
+    <div className="mt-5 mb-2.5">
       <Button
         fullWidth
         loading={fetching}

@@ -2,33 +2,16 @@
 
 import { useRouter } from 'next/navigation'
 import { SizeGuide, type SizeItem } from '@/components/ui/size-guide'
-import { Controls } from './controls'
-import { AddToCartButton } from './add-to-cart'
 import { CategoryType } from '@/lib/api/graphql/types'
 import { routeNames } from '@/lib/routes'
 
 export interface DetailsProps {
-  productId: string
   category: CategoryType
   sizeName: string
-  inStock: boolean
   availableSizes: Array<{ size: string; productId: string }>
 }
 
-// export function useUpdateURL() {
-//   const router = useRouter()
-
-//   return (state: Record<string, string>) => {
-//     const newParams = new URLSearchParams(window.location.search)
-//     Object.entries(state).forEach(([key, value]) => {
-//       newParams.set(key, value)
-//     })
-//     router.push(`?${newParams.toString()}`, { scroll: false })
-//   }
-// }
-// const updateURL = useUpdateURL()
-
-export function Details({ productId, inStock, category, sizeName, availableSizes }: DetailsProps) {
+export function Sizes({ category, sizeName, availableSizes }: DetailsProps) {
   const router = useRouter()
 
   const handleSizeChange = (size: SizeItem) => {
@@ -38,7 +21,7 @@ export function Details({ productId, inStock, category, sizeName, availableSizes
   }
 
   return (
-    <section className="px-1.5">
+    <section>
       {sizeName !== 'none' && (
         <>
           <p className="mb-2 font-medium">Выберите размер:</p>
@@ -50,8 +33,6 @@ export function Details({ productId, inStock, category, sizeName, availableSizes
           />
         </>
       )}
-      <AddToCartButton productId={productId} inStock={inStock} />
-      <Controls productId={productId} />
     </section>
   )
 }
