@@ -9,7 +9,8 @@ import { PaymentDrawer } from './drawers/payment'
 import { OrderStatusBadge } from '@/components/order/status-badge'
 import { formatDate } from '@repo/utils'
 
-const validStatusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
+const statusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
+const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
 
 export interface OrderControlsProps {
   orderId: string
@@ -37,10 +38,16 @@ export function OrderControls({ orderId, orderPrice, status, updatedAt }: OrderC
         </div>
       </div>
       <div>
-        <Button color="accept" fullWidth className="mb-4" onClick={() => setPaymentModalOpen(true)}>
+        <Button
+          color="accept"
+          fullWidth
+          className="mb-4"
+          disabled={!statusesForPayment.includes(status)}
+          onClick={() => setPaymentModalOpen(true)}
+        >
           Оплатить заказ
         </Button>
-        {validStatusesForReject.includes(status) && (
+        {statusesForReject.includes(status) && (
           <Button
             color="secondary"
             fullWidth
@@ -52,9 +59,8 @@ export function OrderControls({ orderId, orderPrice, status, updatedAt }: OrderC
         )}
       </div>
       <p className="my-1 text-sm text-gray-400">
-        Оновлено {formatDate(updatedAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
+        Оновлено {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}
       </p>
-
       <OrderRejectModal orderId={orderId} />
       <PaymentDrawer orderId={orderId} orderPrice={orderPrice} />
     </section>

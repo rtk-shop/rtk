@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Drawer } from '@/components/ui/drawer'
 import { useRejectOrderMutation } from '@/lib/api/hooks'
@@ -5,6 +6,7 @@ import { usePageState } from '../lib/state'
 import { ErrorMessage } from '@repo/ui'
 
 export function OrderRejectModal({ orderId }: { orderId: string }) {
+  const router = useRouter()
   const isOpen = usePageState((state) => state.isRejectModalOpen)
   const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
 
@@ -15,6 +17,7 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
 
     if (result.data && !result.error) {
       setRejectModalOpen(false)
+      router.refresh()
       return
     }
   }
