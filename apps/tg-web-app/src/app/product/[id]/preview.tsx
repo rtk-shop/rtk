@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import { cva } from 'cva'
 import { ImagePlaceholder } from '@repo/ui'
 import { useKeenSlider } from 'keen-slider/react'
@@ -14,15 +14,7 @@ const dot = cva('mx-0.5 size-2 rounded-full', {
   }
 })
 
-export function Preview({
-  images,
-  basePrice,
-  currentPrice
-}: {
-  images: string[]
-  basePrice: number
-  currentPrice: number
-}) {
+export function Preview({ images, tag }: { images: string[]; tag: ReactNode }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const [sliderRef, _instanceRef] = useKeenSlider({
@@ -36,8 +28,6 @@ export function Preview({
       setCurrentIndex(slider.track.details.rel)
     }
   })
-
-  const withDiscount = basePrice !== currentPrice
 
   // const handlePaginationChange = (index: number): void => {
   //   if (instanceRef.current) {
@@ -66,13 +56,7 @@ export function Preview({
           <li key={index} className={dot({ active: currentIndex === index })} />
         ))}
       </ul>
-      {withDiscount && (
-        <div className="absolute top-5 right-5">
-          <span className="bg-red-600 px-2 py-0.5 text-center text-sm font-medium text-white">
-            -{Math.round(((basePrice - currentPrice) * 100) / basePrice)}%
-          </span>
-        </div>
-      )}
+      <div className="absolute top-5 right-5">{tag}</div>
     </div>
   )
 }

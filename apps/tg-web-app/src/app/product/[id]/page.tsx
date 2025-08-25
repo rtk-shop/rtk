@@ -5,6 +5,7 @@ import { Sizes } from './sizes'
 import { Info } from './info'
 import { AddToCartButton } from './controls/add-to-cart'
 import { SubControls } from './controls/sub-controls'
+import { TagBadge } from '@/components/product/tag-badge'
 import { FormatPrice } from '@/components/ui/format-price'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
@@ -38,8 +39,15 @@ export default async function Product({ params }: { params: Promise<{ id: string
     <div>
       <Preview
         images={product.images}
-        currentPrice={product.currentPrice}
-        basePrice={product.basePrice}
+        tag={
+          product.tag && (
+            <TagBadge
+              tag={product.tag}
+              currentPrice={product.currentPrice}
+              basePrice={product.basePrice}
+            />
+          )
+        }
       />
       <div className="px-1.5">
         <section>
