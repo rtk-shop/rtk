@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { toast } from 'sonner'
 import { memo } from 'react'
 import { cva } from 'cva'
 import { Icon } from '@/components/ui/icon'
@@ -9,7 +10,6 @@ import { FormatPrice } from '@/components/ui/format-price'
 import { ImagePlaceholder } from '@repo/ui'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
-import { toast } from 'sonner'
 import { ProductTag } from '@/lib/api/graphql/types'
 import { TagBadge } from '../tag-badge'
 
@@ -24,16 +24,30 @@ export interface ProductItemProps {
   withDelete?: boolean
 }
 
-const priceBlock = cva('basis-4/5 text-[18px] leading-5 text-black', {
+const priceBlock = cva('basis-4/5 text-lg', {
   variants: {
     discount: {
-      true: 'text-red-600'
+      true: 'text-red-500',
+      false: 'text-black'
     },
-    outStock: {
-      true: 'opacity-50'
+    inStock: {
+      true: '',
+      false: 'opacity-50'
     }
   }
 })
+
+const titleStyles = cva(
+  'clear-both line-clamp-2 h-[34px] text-[13px] leading-4 font-semibold text-ellipsis whitespace-normal no-underline md:h-9 md:text-sm md:font-medium',
+  {
+    variants: {
+      inStock: {
+        true: 'text-black',
+        false: 'text-gray-400'
+      }
+    }
+  }
+)
 
 export const ProductItem = memo(function ProductItem(props: ProductItemProps) {
   return <ProductItemInner {...props} />
@@ -104,18 +118,18 @@ function ProductItemInner({
         <div className="flex h-12 items-center justify-between py-1">
           <div
             className={priceBlock({
-              discount: basePrice !== currentPrice,
-              outStock: !inStock
+              inStock,
+              discount: currentPrice < basePrice
             })}
           >
-            {basePrice !== currentPrice && (
-              <p className="text-[13px] text-gray-400 line-through">
-                <FormatPrice price={basePrice} />
-              </p>
+            {currentPrice < basePrice && (
+              <div className="text-[13px] leading-none text-gray-400 line-through">
+                <FormatPrice size="inherit" price={basePrice} />
+              </div>
             )}
-            <span>
-              <FormatPrice price={currentPrice} />
-            </span>
+            <div className="leading-none">
+              <FormatPrice size="inherit" price={currentPrice} />
+            </div>
           </div>
           <div>
             {withDelete ? (
@@ -130,11 +144,7 @@ function ProductItemInner({
             )}
           </div>
         </div>
-        <Link
-          href={routeNames.product + id}
-          title={title}
-          className="clear-both line-clamp-2 h-[34px] text-[13px] leading-4 font-semibold text-ellipsis whitespace-normal text-black no-underline md:h-9 md:text-sm md:font-medium"
-        >
+        <Link href={routeNames.product + id} title={title} className={titleStyles({ inStock })}>
           {title}
         </Link>
       </div>
