@@ -9,15 +9,15 @@ export type Option<T> = {
 
 export const genderOptionsData: Option<Gender>[] = [
   {
-    label: 'actions.forFemale',
+    label: 'gender.female',
     value: Gender.Female
   },
   {
-    label: 'actions.forMale',
+    label: 'gender.male',
     value: Gender.Male
   },
   {
-    label: 'nouns.unisex',
+    label: 'gender.unisex',
     value: Gender.Unisex
   }
 ]
@@ -53,15 +53,15 @@ export const tagsOptionsData: Option<ProductTag>[] = [
 
 export const categoriesOptionsData: Option<CategoryType>[] = [
   {
-    label: 'categories.suitcases',
+    label: 'categories.suitcase',
     value: CategoryType.Suitcase
   },
   {
-    label: 'categories.bags',
+    label: 'categories.bag',
     value: CategoryType.Bag
   },
   {
-    label: 'categories.backpacks',
+    label: 'categories.backpack',
     value: CategoryType.Backpack
   },
   {

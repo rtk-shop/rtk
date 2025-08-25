@@ -14,18 +14,18 @@ const categoriesValues: Array<{
   {
     img: '/assets/backpack.webp',
     to: routeNames.catalog + `?category=${CategoryType.Backpack}`,
-    i18n: 'backpacks'
+    i18n: 'backpack'
   },
   {
     img: '/assets/suitcase.webp',
     to: routeNames.catalog + `?category=${CategoryType.Suitcase}`,
-    i18n: 'suitcases',
+    i18n: 'suitcase',
     sub: ['nouns.polypropylene', 'nouns.textile', 'nouns.covers']
   },
   {
     img: '/assets/bag.webp',
     to: routeNames.catalog + `?category=${CategoryType.Bag}`,
-    i18n: 'bags',
+    i18n: 'bag',
     sub: ['nouns.sling', 'actions.forDocs', 'actions.forLaptop']
   }
 ]

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { SizeGuide, type SizeItem } from '@/components/ui/size-guide'
 import { CategoryType } from '@/lib/api/graphql/types'
 import { routeNames } from '@/lib/routes'
+import { useTranslations } from 'next-intl'
 
 export interface DetailsProps {
   category: CategoryType
@@ -12,6 +13,7 @@ export interface DetailsProps {
 }
 
 export function Sizes({ category, sizeName, availableSizes }: DetailsProps) {
+  const t = useTranslations('Product')
   const router = useRouter()
 
   const handleSizeChange = (size: SizeItem) => {
@@ -24,7 +26,7 @@ export function Sizes({ category, sizeName, availableSizes }: DetailsProps) {
     <section>
       {sizeName !== 'none' && (
         <>
-          <p className="mb-2 font-medium">Выберите размер:</p>
+          <p className="mb-2 font-medium">{t('sizes')}:</p>
           <SizeGuide
             category={category}
             current={sizeName}

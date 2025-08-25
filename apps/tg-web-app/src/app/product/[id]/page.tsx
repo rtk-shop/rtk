@@ -6,6 +6,7 @@ import { Info } from './info'
 import { AddToCartButton } from './controls/add-to-cart'
 import { SubControls } from './controls/sub-controls'
 import { TagBadge } from '@/components/product/tag-badge'
+import { Delivery } from './delivery'
 import { FormatPrice } from '@/components/ui/format-price'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
@@ -77,10 +78,12 @@ export default async function Product({ params }: { params: Promise<{ id: string
         <Info
           gender={product.gender}
           description={product.description as string}
-          dimensions={'11x11x11'}
+          dimensions={'110x81x21'} // todo
+          weightKG={1.1} // todo
           color={product.colorName}
           category={product.category}
         />
+        <Delivery category={product.category} />
       </div>
     </div>
   )

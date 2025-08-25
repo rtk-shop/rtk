@@ -1,16 +1,19 @@
 'use client'
+
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { Tabs, TabContent } from '@/components/ui/tabs'
-import { Properties } from './properties'
-import { Delivery } from './delivery'
 import { Loader } from '@repo/ui'
+import { Properties } from './properties'
+import { Tabs, TabContent } from '@/components/ui/tabs'
+import { CategoryType, Gender } from '@/lib/api/graphql/types'
+import { useTranslations } from 'next-intl'
 
-interface InfoProps {
-  gender: string
+export interface InfoProps {
+  gender: Gender
   description?: string
-  category: string
+  category: CategoryType
   dimensions: string
+  weightKG: number
   color: string
 }
 
@@ -23,7 +26,8 @@ const DynamicDescription = dynamic(() => import('./description').then((mod) => m
   )
 })
 
-export function Info({ gender, description, dimensions, color, category }: InfoProps) {
+export function Info({ gender, description, dimensions, color, weightKG, category }: InfoProps) {
+  const t = useTranslations('Product')
   const [activeTab, setActiveTab] = useState(0)
 
   const handleTabChange = (tabIndex: number) => {
@@ -31,44 +35,35 @@ export function Info({ gender, description, dimensions, color, category }: InfoP
   }
 
   return (
-    <section className="mt-5 px-1.5">
+    <section className="mt-5">
       <div>
         <Tabs
           activeTab={activeTab}
           onChange={handleTabChange}
           tabs={[
             {
-              label: 'Описание'
+              label: t('description')
             },
             {
-              label: 'Подробности'
-            },
-            {
-              label: 'Опт',
-              disabled: true
+              label: t('details')
             }
           ]}
         />
         <TabContent tabID={0} value={activeTab}>
           <div className="py-5 pl-1">
-            <h2 className="mb-3 text-2xl font-medium">Описание</h2>
             <DynamicDescription textMarkdown={description || ''} />
           </div>
         </TabContent>
         <TabContent tabID={1} value={activeTab}>
           <Properties
             gender={gender}
-            weight={''}
+            weightKG={weightKG}
             dimensions={dimensions}
             color={color}
             category={category}
           />
         </TabContent>
-        <TabContent tabID={2} value={activeTab}>
-          <div>Опт #3</div>
-        </TabContent>
       </div>
-      <Delivery />
     </section>
   )
 }

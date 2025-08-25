@@ -3,9 +3,11 @@
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 import { useAddCartItemMutation } from '@/lib/api/hooks'
 
 export function AddToCartButton({ productId, inStock }: { productId: string; inStock: boolean }) {
+  const t = useTranslations('Product')
   const [{ fetching }, addCartItem] = useAddCartItemMutation()
 
   const handleButtonClick = () => {
@@ -14,7 +16,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
       quantity: 1
     }).then((result) => {
       if (result.error) {
-        toast.error('Не удалось добавить товар в корзину', {
+        toast.error(t('toasts.addToCartErr'), {
           duration: 1500,
           richColors: true
         })
@@ -33,7 +35,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
         disabled={!inStock}
         startIcon={<Icon name="common/cart" className="mr-2.5 fill-white text-[26px]" />}
       >
-        Добавить в корзину
+        {t('addToCart')}
       </Button>
     </div>
   )

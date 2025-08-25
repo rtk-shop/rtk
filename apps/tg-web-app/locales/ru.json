@@ -2,11 +2,16 @@
   "Common": {
     "categories": {
       "all": "Все категории",
-      "suitcases": "Чемоданы",
-      "bags": "Сумки",
-      "wallets": "Кошельки",
-      "backpacks": "Рюкзаки",
+      "suitcase": "Чемоданы",
+      "bag": "Сумки",
+      "wallet": "Кошельки",
+      "backpack": "Рюкзаки",
       "other": "Другое"
+    },
+    "gender": {
+      "female": "Для женщин",
+      "male": "Для мужчин",
+      "unisex": "Unisex"
     },
     "cart": {
       "topControls": {
@@ -61,6 +66,7 @@
     "nouns": {
       "size": "Размер",
       "categories": "Категории",
+      "category": "Категория",
       "filters": "Фильтры",
       "price": "Цена",
       "lang": "Язык",
@@ -73,7 +79,6 @@
       "cargoWarehouse": "Грузовое отделение",
       "parcelAutomat": "Почтомат",
       "type": "Тип",
-      "unisex": "Унисекс",
       "availability": "Наличие",
       "inStock": "В наличии",
       "outStock": "Нет в наличии",
@@ -85,7 +90,8 @@
       "covers": "Чехлы",
       "sling": "Слинг",
       "sort": "Сортировка",
-      "filter": "Фильтр"
+      "filter": "Фильтр",
+      "weight": "Вес"
     },
     "verbs": {
       "clear": "Очистить",
@@ -98,8 +104,6 @@
     "actions": {
       "showAll": "Смотреть все",
       "deleteAll": "Удалить все",
-      "forFemale": "Для женщин",
-      "forMale": "Для мужчин",
       "forDocs": "Для документов",
       "forLaptop": "Для ноутбука",
       "sort": "Сортировать",
@@ -134,6 +138,22 @@
       "subTitle": "На данный момент создать заказ не возможно",
       "submitMessage": "Не удалось создать заказ, проверьте правильно ли вы ввели данные",
       "action": "Закрыть"
+    }
+  },
+  "Product": {
+    "sizes": "Выберите размер",
+    "addToCart": "Добавить в корзину",
+    "share": "Поделиться",
+    "favourite": "Избранное",
+    "toFavourite": "В избранное",
+    "description": "Описание",
+    "details": "Подробности",
+    "deliveryTitle": "Способы доставки",
+    "delivery": "По тарифам перевозчика",
+    "toasts": {
+      "addToCartErr": "Не удалось добавить товар в корзину",
+      "addFavourite": "Не удалось добавить в избранное",
+      "delFavourite": "Не удалось удалить из избранного"
     }
   },
   "Profile": {

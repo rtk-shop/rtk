@@ -1,12 +1,14 @@
 'use client'
 
 import { Icon } from '@/components/ui/icon'
+import { toast } from 'sonner'
 import { LikeButton } from '@/components/ui/like-button'
+import { useTranslations } from 'next-intl'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { useAddProductToFavorite, useRemoveProductFromFavorites } from '@/lib/api/hooks'
-import { toast } from 'sonner'
 
 export function SubControls({ productId }: { productId: string }) {
+  const t = useTranslations('Product')
   const [favoriteStore] = useFavoriteStore((state) => state)
   const [_, addFavorite] = useAddProductToFavorite()
   const [__, removeFavorite] = useRemoveProductFromFavorites()
@@ -19,8 +21,7 @@ export function SubControls({ productId }: { productId: string }) {
       removeFavorite({ productId }).then((result) => {
         if (result.error) {
           favoriteStore.add(productId)
-
-          toast.error('Не удалось убрать избранное', {
+          toast.error(t('toasts.delFavourite'), {
             duration: 2000,
             richColors: true
           })
@@ -32,7 +33,7 @@ export function SubControls({ productId }: { productId: string }) {
         if (result.error) {
           favoriteStore.remove(productId)
 
-          toast.error('Не удалось добавить в избранное', {
+          toast.error(t('toasts.addFavourite'), {
             duration: 2000,
             richColors: true
           })
@@ -45,15 +46,15 @@ export function SubControls({ productId }: { productId: string }) {
     <div className="flex flex-wrap items-center">
       <div className="relative basis-1/2 before:absolute before:-top-0.5 before:right-0.5 before:h-7 before:w-0.5 before:bg-gray-300">
         <div className="flex justify-center">
-          <Icon name="action/share" className="mr-2.5 fill-black text-[21px]" />
-          <span className="font-medium">Поделиться</span>
+          <Icon name="action/share" className="mr-2 fill-black text-[21px]" />
+          <p className="font-medium">{t('share')}</p>
         </div>
       </div>
       <div className="flex basis-1/2 items-center justify-center">
         <LikeButton width={21} height={21} liked={isFavourite} onClick={handleLikeClick} />
-        <span className="ml-1.5 font-medium select-none" onClick={handleLikeClick}>
-          {isFavourite ? 'Избранное' : 'В избранное'}
-        </span>
+        <p className="ml-1 leading-none font-medium select-none" onClick={handleLikeClick}>
+          {isFavourite ? t('favourite') : t('toFavourite')}
+        </p>
       </div>
     </div>
   )

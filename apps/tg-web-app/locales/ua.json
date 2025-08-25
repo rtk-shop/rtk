@@ -2,11 +2,16 @@
   "Common": {
     "categories": {
       "all": "Усі категорії",
-      "suitcases": "Валізи",
-      "bags": "Сумки",
-      "wallets": "Гаманці",
-      "backpacks": "Рюкзаки",
+      "suitcase": "Валізи",
+      "bag": "Сумки",
+      "wallet": "Гаманці",
+      "backpack": "Рюкзаки",
       "other": "Інше"
+    },
+    "gender": {
+      "female": "Для жінок",
+      "male": "Для чоловіків",
+      "unisex": "Unisex"
     },
     "cart": {
       "topControls": {
@@ -61,6 +66,7 @@
     "nouns": {
       "size": "Розмір",
       "categories": "Категорії",
+      "category": "Категорія",
       "filters": "Фільтри",
       "price": "Ціна",
       "lang": "Мова",
@@ -73,7 +79,6 @@
       "cargoWarehouse": "Вантажне відділення",
       "parcelAutomat": "Поштомат",
       "type": "Тип",
-      "unisex": "Унісекс",
       "availability": "Наявність",
       "inStock": "В наявності",
       "outStock": "Немає у наявності",
@@ -85,7 +90,8 @@
       "covers": "Чохли",
       "sling": "Слінг",
       "sort": "Сортування",
-      "filter": "Фільтр"
+      "filter": "Фільтр",
+      "weight": "Вага"
     },
     "verbs": {
       "clear": "Очистити",
@@ -98,8 +104,6 @@
     "actions": {
       "showAll": "Дивитись усі",
       "deleteAll": "Видалити все",
-      "forFemale": "Для жінок",
-      "forMale": "Для чоловіків",
       "forDocs": "Для паперів",
       "forLaptop": "Для ноутбуків",
       "sort": "Сортувати",
@@ -134,6 +138,22 @@
       "subTitle": "На даний момент створити замовлення неможливо",
       "submitMessage": "Не вдалося створити замовлення, перевірте коректність даних",
       "action": "Закрити"
+    }
+  },
+  "Product": {
+    "sizes": "Оберіть розмір",
+    "addToCart": "Додати до кошику",
+    "share": "Поділитися",
+    "favourite": "Обране",
+    "toFavourite": "До обраного",
+    "description": "Опис",
+    "details": "Подробиці",
+    "deliveryTitle": "Способи доставки",
+    "delivery": "За тарифами перевізника",
+    "toasts": {
+      "addToCartErr": "Не вдалось додати товар до кошика",
+      "addFavourite": "Не вдалось додати в обране",
+      "delFavourite": "Не вдалося видалити з обраного"
     }
   },
   "Profile": {
