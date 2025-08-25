@@ -6,7 +6,8 @@ const priceView = cva('font-medium', {
     size: {
       normal: 'text-base',
       XL: 'text-lg',
-      XXL: 'text-xl'
+      XXL: 'text-xl',
+      inherit: ''
     }
   },
   defaultVariants: {
@@ -21,7 +22,7 @@ export function FormatPrice({
 }: {
   price: number
   currency?: string
-  size?: 'normal' | 'XL' | 'XXL'
+  size?: 'normal' | 'XL' | 'XXL' | 'inherit'
 }) {
   return (
     <span className={priceView({ size })}>
