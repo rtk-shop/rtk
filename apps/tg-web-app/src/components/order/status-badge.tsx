@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type ReactElement } from 'react'
 import { cva } from 'cva'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { Icon } from '@/components/ui/icon'
@@ -43,7 +43,7 @@ export function OrderStatusBadge({
 }) {
   const t = useTranslations('Common.order.statuses')
 
-  let statusIcon: ReactNode
+  let statusIcon: ReactElement
 
   switch (status) {
     case OrderStatus.Created:
