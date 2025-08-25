@@ -5,16 +5,16 @@ import { Sizes } from './sizes'
 import { Info } from './info'
 import { AddToCartButton } from './controls/add-to-cart'
 import { SubControls } from './controls/sub-controls'
+import { FormatPrice } from '@/components/ui/format-price'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
-import { formatPrice } from '@repo/utils'
 
 import 'keen-slider/keen-slider.min.css'
 
-const priceTitle = cva('text-[30px] font-medium', {
+const priceTitle = cva('text-2xl', {
   variants: {
     withDiscount: {
-      true: 'mx-1.5 text-red-600',
+      true: 'leading-none text-red-600',
       false: 'text-black'
     }
   }
@@ -32,7 +32,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
 
   if (product.__typename === 'NotFound') notFound()
 
-  const withDiscount = product.basePrice !== product.currentPrice
+  const withDiscount = product.basePrice > product.currentPrice
 
   return (
     <div>
@@ -44,16 +44,19 @@ export default async function Product({ params }: { params: Promise<{ id: string
       <div className="px-1.5">
         <section>
           {/*  */}
-          <h1 className="mt-4 mb-1.5 text-[21px] leading-5 font-medium">{product.title}</h1>
-          <InstockBadge inStock={product.inStock} />
-          {/*  */}
-          <div className="flex items-center">
-            {withDiscount && (
-              <span className="text-lg text-gray-500 line-through">
-                {formatPrice(product.basePrice)}
-              </span>
-            )}
-            <p className={priceTitle({ withDiscount })}>{formatPrice(product.currentPrice)} грн</p>
+          <h1 className="mt-4 mb-2.5 text-[21px] leading-5 font-medium">{product.title}</h1>
+          <div className="mb-2.5 flex items-center justify-between pr-2.5">
+            <InstockBadge inStock={product.inStock} />
+            <div>
+              {withDiscount && (
+                <div className="text-end leading-none text-gray-500 line-through">
+                  <FormatPrice price={product.basePrice} />
+                </div>
+              )}
+              <div className={priceTitle({ withDiscount })}>
+                <FormatPrice size="inherit" price={product.currentPrice} />
+              </div>
+            </div>
           </div>
         </section>
         <Sizes

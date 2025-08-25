@@ -18,7 +18,7 @@ export function InstockBadge({ inStock }: { inStock: boolean }) {
   const t = useTranslations('Common.nouns')
 
   return (
-    <div className="flex items-center pt-2 pb-0.5">
+    <div className="flex items-center pb-0.5">
       <div className={badge({ inStock })}>
         {inStock ? (
           <Icon name="common/check" className="text-xs" />
