@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 import styles from './markdown-overrides.module.css'
 
 export function Description({ textMarkdown }: { textMarkdown: string }) {

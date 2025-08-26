@@ -10,6 +10,8 @@ import { Delivery } from './delivery'
 import { FormatPrice } from '@/components/ui/format-price'
 import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
+import { Description } from './info/description'
+import { Properties } from './info/properties'
 
 import 'keen-slider/keen-slider.min.css'
 
@@ -52,7 +54,6 @@ export default async function Product({ params }: { params: Promise<{ id: string
       />
       <div className="px-1.5">
         <section>
-          {/*  */}
           <h1 className="mt-4 mb-2.5 text-[21px] leading-5 font-medium">{product.title}</h1>
           <div className="mb-2.5 flex items-center justify-between pr-2.5">
             <InstockBadge inStock={product.inStock} />
@@ -76,12 +77,16 @@ export default async function Product({ params }: { params: Promise<{ id: string
         <AddToCartButton productId={product.id} inStock={product.inStock} />
         <SubControls productId={product.id} />
         <Info
-          gender={product.gender}
-          description={product.description as string}
-          dimensions={'110x81x21'} // todo
-          weightKG={1.1} // todo
-          color={product.colorName}
-          category={product.category}
+          description={<Description textMarkdown={product.description as string} />}
+          properties={
+            <Properties
+              gender={product.gender}
+              weightKG={1.1} // todo
+              dimensions={'110x81x21'} // todo
+              color={product.colorName}
+              category={product.category}
+            />
+          }
         />
         <Delivery category={product.category} />
       </div>
