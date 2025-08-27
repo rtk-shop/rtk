@@ -1,7 +1,6 @@
 import { Loader } from '@repo/ui'
-import { Button } from '@/components/ui/button'
 import { cva } from 'cva'
-import { usePageState } from '../../lib/state'
+import { Button } from '@/components/ui/button'
 import { usePaymentInfo } from '../../lib/api'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 import { formatPrice } from '@repo/utils'
@@ -9,7 +8,7 @@ import { Icon } from '@/components/ui/icon'
 
 const paymentTitle = cva('leading-none font-medium text-gray-400')
 
-export function PaymentInfo({
+export default function PaymentInfo({
   orderId,
   orderPrice,
   onClose
@@ -18,9 +17,7 @@ export function PaymentInfo({
   orderPrice: number
   onClose(): void
 }) {
-  const isOpen = usePageState((state) => state.isPaymentModalOpen)
-
-  const { data, error, isLoading } = usePaymentInfo(isOpen)
+  const { data, error, isLoading } = usePaymentInfo()
 
   if (isLoading) {
     return (

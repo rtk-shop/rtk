@@ -15,9 +15,9 @@ const fetcher: Fetcher<PaymentInfoResponse, string> = (url) =>
     return res.json().then((data) => data)
   })
 
-export function usePaymentInfo(pause: boolean) {
+export function usePaymentInfo() {
   return useSWR<PaymentInfoResponse>(
-    pause ? `${process.env.NEXT_PUBLIC_API_HOST}/payment-receiver` : null,
+    `${process.env.NEXT_PUBLIC_API_HOST}/payment-receiver`,
     fetcher,
     { shouldRetryOnError: false }
   )
