@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   if (order.__typename === 'NotFound') notFound()
 
   return (
-    <div className="h-dvh bg-gray-100 px-2 py-2">
+    <div className="bg-gray-100 px-2 pt-2">
       <OrderHeader orderId={order.id} createdAt={order.createdAt} />
       <Receiver
         name={order.receiverName}

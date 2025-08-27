@@ -175,7 +175,7 @@ export default function Page() {
   if (error) return <FetchError />
 
   return (
-    <div className="mb-12">
+    <div>
       <FormProvider {...formMethods}>
         <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
           <SortMenu

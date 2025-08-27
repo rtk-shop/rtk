@@ -43,7 +43,7 @@ export function Checkout() {
   }
 
   return (
-    <div className="mb-16 min-h-dvh bg-gray-100">
+    <div className="bg-gray-100">
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div className="px-2.5 py-5 pb-3">
