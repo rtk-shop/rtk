@@ -28,9 +28,7 @@ export function InstockBadge({ inStock }: { inStock: boolean }) {
         )}
       </div>
       <div>
-        <span className="text-sm font-medium text-gray-700">
-          {inStock ? t('inStock') : t('outStock')}
-        </span>
+        <span className="text-sm font-medium">{inStock ? t('inStock') : t('outStock')}</span>
       </div>
     </div>
   )
