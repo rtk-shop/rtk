@@ -10,8 +10,8 @@ export function Receiver({
   phone: string
 }) {
   return (
-    <section className="mb-4 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
-      <h2 className="mb-2 text-lg">Отримувач</h2>
+    <section className="mb-2 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
+      <h2 className="mb-1.5 text-lg">Отримувач</h2>
       <div className="text-sm">
         <p>
           <span className="mr-1.5 text-gray-500">Имя:</span>

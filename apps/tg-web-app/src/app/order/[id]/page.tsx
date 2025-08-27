@@ -32,15 +32,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         supplier={order.supplier}
         parcelTrackId={order.parcelTrackId}
       />
-      <div className="mb-4 rounded-xl bg-white px-3 py-3 shadow-sm">
-        <OrderControls
-          orderId={order.id}
-          orderPrice={order.price}
-          status={order.status}
-          updatedAt={order.updatedAt}
-        />
-        <OrderProducts products={order.products} />
-      </div>
+      <OrderControls
+        payed={order.id !== '1024' ? false : true} // todo
+        orderId={order.id}
+        orderPrice={order.price}
+        status={order.status}
+        updatedAt={order.updatedAt}
+      />
+      <OrderProducts products={order.products} />
     </div>
   )
 }

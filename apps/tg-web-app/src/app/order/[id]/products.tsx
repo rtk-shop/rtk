@@ -14,7 +14,7 @@ export function OrderProducts({ products }: OrderProductsProps) {
   const t = useTranslations('Common')
 
   return (
-    <section>
+    <section className="rounded-lg bg-white p-3 shadow-sm">
       <h2 className="text-xl font-medium">Товары:</h2>
       <ul className="pt-2">
         {products.map(({ id, quantity, priceAtOrder, product }) => (

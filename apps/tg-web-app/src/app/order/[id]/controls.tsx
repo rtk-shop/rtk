@@ -2,6 +2,7 @@
 
 import { FormatPrice } from '@/components/ui/format-price'
 import { OrderRejectModal } from './drawers/reject-order'
+import { Icon } from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import { usePageState } from './lib/state'
 import { OrderStatus } from '@/lib/api/graphql/types'
@@ -17,36 +18,59 @@ export interface OrderControlsProps {
   status: OrderStatus
   orderPrice: number
   updatedAt: string
+  payed?: boolean // todo
 }
 
-export function OrderControls({ orderId, orderPrice, status, updatedAt }: OrderControlsProps) {
+export function OrderControls({
+  orderId,
+  orderPrice,
+  status,
+  updatedAt,
+  payed = false
+}: OrderControlsProps) {
   const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
   const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
 
   return (
     <section className="mb-4">
-      <div className="mb-3 grid grid-cols-2 border-b-2">
-        <div className="h-22 border-r-2 p-3">
-          <h2 className="text-lg font-medium">Сумма:</h2>
-          <div>
-            <FormatPrice size="XXL" currency="грн." price={orderPrice} />
+      <div className="mb-4 grid grid-cols-5 grid-rows-6 gap-2">
+        <div className="col-span-3 row-span-6 rounded-lg bg-white p-3 shadow-sm">
+          <p className="text-lg font-medium">Сумма:</p>
+          <FormatPrice size="XXL" currency="грн" price={orderPrice} />
+
+          <div className="mt-6">
+            {payed ? (
+              <div className="bg-green-lime/30 flex items-center justify-center rounded-lg py-1 select-none">
+                <div className="mr-1">
+                  <Icon
+                    name="common/check"
+                    className="rounded-full bg-green-500 p-1 text-sm text-white"
+                  />
+                </div>
+                <span className="pt-0.5 font-medium">Сплачено</span>
+              </div>
+            ) : (
+              <Button
+                color="accept"
+                fullWidth
+                className="rounded-lg pt-1.5 pb-1.5 text-sm"
+                disabled={!statusesForPayment.includes(status)}
+                onClick={() => setPaymentModalOpen(true)}
+              >
+                Оплатить заказ
+              </Button>
+            )}
           </div>
         </div>
-        <div className="h-22 p-3">
-          <h2 className="text-lg font-medium">Статус:</h2>
-          <OrderStatusBadge size="XL" status={status} />
+        <div className="col-span-2 col-start-4 row-span-3 rounded-lg bg-white p-2 shadow-sm">
+          <p className="mb-1 text-sm font-medium">Статус:</p>
+          <OrderStatusBadge status={status} />
+        </div>
+        <div className="col-span-2 col-start-4 row-span-3 rounded-lg bg-white p-2 shadow-sm">
+          Third
         </div>
       </div>
       <div>
-        <Button
-          color="accept"
-          fullWidth
-          className="mb-4"
-          disabled={!statusesForPayment.includes(status)}
-          onClick={() => setPaymentModalOpen(true)}
-        >
-          Оплатить заказ
-        </Button>
         {statusesForReject.includes(status) && (
           <Button
             color="secondary"
