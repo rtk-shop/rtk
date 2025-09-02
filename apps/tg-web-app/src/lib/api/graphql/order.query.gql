@@ -12,6 +12,7 @@ query OrderByID($id: ID!) {
       parcelTrackId
       status
       supplier
+      paymentMethod
       updatedAt
       createdAt
       products {

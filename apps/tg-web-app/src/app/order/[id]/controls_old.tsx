@@ -1,24 +1,23 @@
 'use client'
 
-import { FormatPrice } from '@/components/ui/format-price'
+import { type ReactNode } from 'react'
 import { OrderRejectModal } from './drawers/reject-order'
-import { Icon } from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import { usePageState } from './lib/state'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { PaymentDrawer } from './drawers/payment'
 import { OrderStatusBadge } from '@/components/order/status-badge'
 import { formatDate } from '@repo/utils'
+import { FormatPrice } from '@/components/ui/format-price'
 
 const statusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
-const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
 
 export interface OrderControlsProps {
   orderId: string
   status: OrderStatus
   orderPrice: number
   updatedAt: string
-  payed?: boolean // todo
+  payment: ReactNode
 }
 
 export function OrderControls({
@@ -26,10 +25,9 @@ export function OrderControls({
   orderPrice,
   status,
   updatedAt,
-  payed = false
+  payment
 }: OrderControlsProps) {
   const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
-  const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
 
   return (
     <section className="mb-4">
@@ -37,30 +35,7 @@ export function OrderControls({
         <div className="col-span-3 row-span-6 rounded-lg bg-white p-3 shadow-sm">
           <p className="text-lg font-medium">Сумма:</p>
           <FormatPrice size="XXL" currency="грн" price={orderPrice} />
-
-          <div className="mt-6">
-            {payed ? (
-              <div className="bg-green-lime/30 flex items-center justify-center rounded-lg py-1 select-none">
-                <div className="mr-1">
-                  <Icon
-                    name="common/check"
-                    className="rounded-full bg-green-500 p-1 text-sm text-white"
-                  />
-                </div>
-                <span className="pt-0.5 font-medium">Сплачено</span>
-              </div>
-            ) : (
-              <Button
-                color="accept"
-                fullWidth
-                className="rounded-lg pt-1.5 pb-1.5 text-sm"
-                disabled={!statusesForPayment.includes(status)}
-                onClick={() => setPaymentModalOpen(true)}
-              >
-                Оплатить заказ
-              </Button>
-            )}
-          </div>
+          {payment}
         </div>
         <div className="col-span-2 col-start-4 row-span-3 rounded-lg bg-white p-2 shadow-sm">
           <p className="mb-1 text-sm font-medium">Статус:</p>

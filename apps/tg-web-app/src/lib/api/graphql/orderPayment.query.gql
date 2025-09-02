@@ -1,0 +1,14 @@
+query GetOrderPayment($orderId: ID!) {
+  orderPayment(orderId: $orderId) {
+    __typename
+    ... on Payment {
+      id
+      price
+      status
+      orderId
+    }
+    ... on NotFound {
+      message
+    }
+  }
+}

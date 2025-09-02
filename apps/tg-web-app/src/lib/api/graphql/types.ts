@@ -98,6 +98,7 @@ export type Mutation = {
   createProductSizeVariation: NewSizeVariationPayload
   deleteProduct: DeleteProductPayload
   hideProduct?: Maybe<HideProductPayload>
+  initSoleProprietorPayment: SoleProprietorPaymentPayload
   processOrder: ProcessOrderPayload
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
@@ -139,6 +140,10 @@ export type MutationDeleteProductArgs = {
 export type MutationHideProductArgs = {
   id: Scalars['ID']['input']
   isHidden: Scalars['Boolean']['input']
+}
+
+export type MutationInitSoleProprietorPaymentArgs = {
+  orderId: Scalars['ID']['input']
 }
 
 export type MutationProcessOrderArgs = {
@@ -230,6 +235,7 @@ export type Order = {
   createdAt: Scalars['String']['output']
   id: Scalars['ID']['output']
   parcelTrackId?: Maybe<Scalars['String']['output']>
+  paymentMethod: OrderPaymentMethod
   postOfficeName: Scalars['String']['output']
   /** price - represent a SQL numeric(8, 2) type, which max value is 999999.99 */
   price: Scalars['Float']['output']
@@ -253,6 +259,11 @@ export type OrderFilter = {
 }
 
 export type OrderPayload = NotFound | Order
+
+export enum OrderPaymentMethod {
+  Delivery = 'DELIVERY',
+  Online = 'ONLINE'
+}
 
 export type OrderProduct = {
   __typename?: 'OrderProduct'
@@ -300,6 +311,22 @@ export type Pagination = {
   __typename?: 'Pagination'
   currentPage: Scalars['Int']['output']
   totalPages: Scalars['Int']['output']
+}
+
+export type Payment = {
+  __typename?: 'Payment'
+  id: Scalars['String']['output']
+  orderId: Scalars['ID']['output']
+  price: Scalars['Float']['output']
+  status: PaymentStatus
+}
+
+export type PaymentPayload = NotFound | Payment
+
+export enum PaymentStatus {
+  AwaitingConfirmation = 'AWAITING_CONFIRMATION',
+  Confirmed = 'CONFIRMED',
+  Rejected = 'REJECTED'
 }
 
 export type PriceRange = {
@@ -412,7 +439,9 @@ export type Query = {
   dashboardStats: DashboardStats
   globalData: GlobalData
   order: OrderPayload
+  orderPayment: PaymentPayload
   orders: OrdersConnection
+  payment: PaymentPayload
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
@@ -429,11 +458,19 @@ export type QueryOrderArgs = {
   id: Scalars['ID']['input']
 }
 
+export type QueryOrderPaymentArgs = {
+  orderId: Scalars['ID']['input']
+}
+
 export type QueryOrdersArgs = {
   after?: InputMaybe<Scalars['String']['input']>
   before?: InputMaybe<Scalars['String']['input']>
   first: Scalars['Int']['input']
   where?: InputMaybe<OrdersFilter>
+}
+
+export type QueryPaymentArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type QueryProductArgs = {
@@ -487,6 +524,13 @@ export type SizeVariation = {
   size: Scalars['String']['output']
 }
 
+export type SoleProprietorPaymentPayload = {
+  __typename?: 'SoleProprietorPaymentPayload'
+  createdAt: Scalars['String']['output']
+  id: Scalars['String']['output']
+  status: PaymentStatus
+}
+
 export enum SupplierService {
   Novap = 'NOVAP',
   Ukrp = 'UKRP'
@@ -522,6 +566,7 @@ export interface PossibleTypesResultData {
 const result: PossibleTypesResultData = {
   possibleTypes: {
     OrderPayload: ['NotFound', 'Order'],
+    PaymentPayload: ['NotFound', 'Payment'],
     ProductPayload: ['NotFound', 'Product']
   }
 }

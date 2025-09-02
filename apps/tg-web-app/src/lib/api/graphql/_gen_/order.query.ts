@@ -22,6 +22,7 @@ export type OrderByIdQuery = {
         parcelTrackId?: string | null
         status: Types.OrderStatus
         supplier: Types.SupplierService
+        paymentMethod: Types.OrderPaymentMethod
         updatedAt: string
         createdAt: string
         products: Array<{
@@ -49,6 +50,7 @@ export const OrderByIdDocument = gql`
         parcelTrackId
         status
         supplier
+        paymentMethod
         updatedAt
         createdAt
         products {

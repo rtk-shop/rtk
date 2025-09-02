@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation'
 import { OrderHeader } from './header'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
-import { OrderControls } from './controls'
+import { OrderControls } from './controls_old'
 import { OrderProducts } from './products'
+import { Payment } from './controls/payment'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -33,11 +34,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         parcelTrackId={order.parcelTrackId}
       />
       <OrderControls
-        payed={order.id !== '1024' ? false : true} // todo
         orderId={order.id}
         orderPrice={order.price}
         status={order.status}
         updatedAt={order.updatedAt}
+        payment={
+          <Payment orderId={order.id} status={order.status} paymentMethod={order.paymentMethod} />
+        }
       />
       <OrderProducts products={order.products} />
     </div>

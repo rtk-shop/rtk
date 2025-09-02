@@ -12,6 +12,7 @@ import * as reduceCartItem from '@/lib/api/graphql/_gen_/reduceCartItemQuantity.
 import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
 import * as productsQuery from '@/lib/api/graphql/_gen_/products.query'
 import * as userOrders from '@/lib/api/graphql/_gen_/userOrders.query'
+import * as orderPayment from '@/lib/api/graphql/_gen_/orderPayment.query'
 
 export function useProductsQuery({
   variables,
@@ -79,7 +80,7 @@ export function useFavoriteProductsQuery() {
     favouriteQuery.UserFavouriteProductsQuery,
     favouriteQuery.UserFavouriteProductsQueryVariables
   >({
-    requestPolicy: 'cache-first',
+    requestPolicy: 'cache-first', // todo in separate
     query: favouriteQuery.UserFavouriteProductsDocument
   })
 }
@@ -106,4 +107,13 @@ export function useReduceCartItemQuantityMutation() {
 
 export function useClearCartMutation() {
   return useMutation<clearCart.ClearCartMutation>(clearCart.ClearCartDocument)
+}
+
+export function useOrderPayment(
+  options: Omit<UseQueryArgs<orderPayment.GetOrderPaymentQueryVariables>, 'query'>
+) {
+  return useQuery<orderPayment.GetOrderPaymentQuery, orderPayment.GetOrderPaymentQueryVariables>({
+    query: orderPayment.GetOrderPaymentDocument,
+    ...options
+  })
 }
