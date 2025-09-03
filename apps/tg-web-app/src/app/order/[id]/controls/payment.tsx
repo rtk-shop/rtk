@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { usePageState } from '../lib/state'
 import { OrderStatus, OrderPaymentMethod, PaymentStatus } from '@/lib/api/graphql/types'
+import { Icon } from '@/components/ui/icon'
 import { useOrderPayment } from '@/lib/api/hooks'
 import { PaymentStatusBadge } from './status-badge'
 import { Loader } from '@repo/ui'
@@ -34,23 +35,17 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
     )
   }
 
-  if (error) {
+  if (!isDataDefined(data) || error) {
     return (
       <div className="mt-6 flex h-8 items-center justify-center">
-        <p>error</p>
+        <div className="flex items-center font-medium">
+          <Icon name="action/warning" className="mr-1 text-2xl text-red-700" />
+          <p>Ошибка</p>
+        </div>
       </div>
     )
   }
 
-  if (!isDataDefined(data)) {
-    return (
-      <div className="mt-6 flex h-8 items-center justify-center">
-        <p>no data</p>
-      </div>
-    )
-  }
-
-  console.log(data)
   return (
     <div>
       {paymentMethod === OrderPaymentMethod.Online && (
