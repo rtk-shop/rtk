@@ -17,7 +17,7 @@ export function PaymentDrawer({ orderId, orderPrice }: { orderId: string; orderP
 
   return (
     <Drawer open={isOpen} position="bottom" onClose={handleDrawerClose}>
-      <div className="h-[420px] rounded-t-2xl bg-white px-3 py-4">
+      <div className="h-[530px] rounded-t-2xl bg-white px-3 py-4">
         {isOpen && (
           <PaymentInfo orderId={orderId} orderPrice={orderPrice} onClose={handleDrawerClose} />
         )}
