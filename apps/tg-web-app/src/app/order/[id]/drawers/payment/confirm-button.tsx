@@ -30,7 +30,13 @@ export function ConfirmButton({ orderId, children, onSucess }: ConfirmButtonProp
   }
 
   return (
-    <Button fullWidth color="accept" loading={fetching} onClick={handleButtonClick}>
+    <Button
+      fullWidth
+      color="accept"
+      loading={fetching}
+      onClick={handleButtonClick}
+      className="mr-2"
+    >
       {children}
     </Button>
   )

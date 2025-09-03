@@ -18,7 +18,7 @@ export interface PaymentProps {
 }
 
 export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
-  const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
+  const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
   const [{ error, fetching, data }] = useOrderPayment({
     variables: { orderId: orderId },
@@ -56,7 +56,7 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
               fullWidth
               className="rounded-lg! pt-1.5 pb-1.5 text-sm"
               disabled={!statusesForPayment.includes(status)}
-              onClick={() => setPaymentModalOpen(true)}
+              onClick={() => setPaymentDrawer({ open: true, mode: 'payment' })}
             >
               Оплатить заказ
             </Button>

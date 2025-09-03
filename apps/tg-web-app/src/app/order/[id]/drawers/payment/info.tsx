@@ -8,18 +8,18 @@ import { isDataDefined } from '@/lib/api/helpers'
 import { Icon } from '@/components/ui/icon'
 import { Callout } from '@/components/ui/callout'
 import { ConfirmButton } from './confirm-button'
+import type { paymentDrawer } from '../../lib/state'
 
-const paymentTitle = cva('leading-none font-medium text-gray-400')
-
-export default function PaymentInfo({
-  orderId,
-  orderPrice,
-  onClose
-}: {
+export interface PaymentInfoProps {
+  mode: paymentDrawer['mode']
   orderId: string
   orderPrice: number
   onClose(): void
-}) {
+}
+
+const paymentTitle = cva('leading-none font-medium text-gray-400')
+
+export default function PaymentInfo({ mode, orderId, orderPrice, onClose }: PaymentInfoProps) {
   const { data, error, isLoading } = usePaymentInfo()
 
   if (isLoading) {
@@ -109,19 +109,23 @@ export default function PaymentInfo({
       <div className="mb-5">
         <Callout type="info">
           <div className="text-sm leading-4 font-medium">
-            <p>
-              Після того як Ви сплатили за реквізитами, повідомте про це нас, натиснувши на кнопку «
-              <span className="text-green-600">Платіж надіслано</span>»
-            </p>
-            <p className="pt-1">Ми його перевірено як можна швидше, та повідомимо про це.</p>
+            {mode === 'payment' && (
+              <p className="mb-1">
+                Після того як Ви сплатили за реквізитами, повідомте про це нас, натиснувши на кнопку
+                «<span className="text-green-600">Платіж надіслано</span>»
+              </p>
+            )}
+            <p>Ми перевіримо платіж як можна швидше, та повідомимо про це.</p>
           </div>
         </Callout>
       </div>
       <div className="flex justify-between">
-        <ConfirmButton orderId={orderId} onSucess={onClose}>
-          Платіж надіслано
-        </ConfirmButton>
-        <Button className="ml-2 py-1" onClick={onClose}>
+        {mode === 'payment' && (
+          <ConfirmButton orderId={orderId} onSucess={onClose}>
+            Платіж надіслано
+          </ConfirmButton>
+        )}
+        <Button fullWidth={mode === 'reminder'} onClick={onClose}>
           Згорнути
         </Button>
       </div>

@@ -8,18 +8,23 @@ const PaymentInfo = dynamic(() => import('./info'), {
 })
 
 export function PaymentDrawer({ orderId, orderPrice }: { orderId: string; orderPrice: number }) {
-  const isOpen = usePageState((state) => state.isPaymentModalOpen)
-  const setPaymentModalOpen = usePageState((state) => state.setPaymentModalOpen)
+  const paymentDrawer = usePageState((state) => state.paymentDrawer)
+  const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
   const handleDrawerClose = () => {
-    setPaymentModalOpen(false)
+    setPaymentDrawer({ open: false })
   }
 
   return (
-    <Drawer open={isOpen} position="bottom" onClose={handleDrawerClose}>
+    <Drawer open={paymentDrawer.open} position="bottom" onClose={handleDrawerClose}>
       <div className="h-[530px] rounded-t-2xl bg-white px-3 py-4">
-        {isOpen && (
-          <PaymentInfo orderId={orderId} orderPrice={orderPrice} onClose={handleDrawerClose} />
+        {paymentDrawer.open && (
+          <PaymentInfo
+            mode={paymentDrawer.mode}
+            orderId={orderId}
+            orderPrice={orderPrice}
+            onClose={handleDrawerClose}
+          />
         )}
       </div>
     </Drawer>
