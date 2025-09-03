@@ -1,5 +1,6 @@
 export interface SpritesMap {
   action:
+    | 'circle-info'
     | 'circle-minus'
     | 'circle-plus'
     | 'copy'
@@ -38,8 +39,13 @@ export const SPRITES_META: {
   }
 } = {
   action: {
-    filePath: 'action.4d3c4998.svg',
+    filePath: 'action.57289c92.svg',
     items: {
+      'circle-info': {
+        viewBox: '0 0 512 512',
+        width: 512,
+        height: 512
+      },
       'circle-minus': {
         viewBox: '0 0 512 512',
         width: 512,
