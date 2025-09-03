@@ -6,19 +6,19 @@ export type paymentDrawer = {
 }
 
 export type PageState = {
-  isRejectModalOpen: boolean
+  isRejectDrawerOpen: boolean
   paymentDrawer: paymentDrawer
 }
 
 export type PageActions = {
-  setRejectModalOpen(open: boolean): void
+  setRejectDrawerOpen(open: boolean): void
   setPaymentDrawer(state: Omit<paymentDrawer, 'mode'> & Partial<Pick<paymentDrawer, 'mode'>>): void
 }
 
 export type PageStore = PageState & PageActions
 
 const initState: PageState = {
-  isRejectModalOpen: false,
+  isRejectDrawerOpen: false,
   paymentDrawer: {
     open: false,
     mode: 'payment'
@@ -27,7 +27,7 @@ const initState: PageState = {
 
 export const usePageState = create<PageStore>()((set) => ({
   ...initState,
-  setRejectModalOpen: (open) => set({ isRejectModalOpen: open }),
+  setRejectDrawerOpen: (open) => set({ isRejectDrawerOpen: open }),
   setPaymentDrawer: (state) =>
     set((prev) => ({
       paymentDrawer: {

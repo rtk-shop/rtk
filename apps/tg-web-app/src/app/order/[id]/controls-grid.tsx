@@ -14,7 +14,7 @@ import { IconButton } from '@/components/ui/icon-button'
 
 const statusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
-export interface OrderControlsProps {
+export interface ControlsGridProps {
   orderId: string
   status: OrderStatus
   orderPrice: number
@@ -22,14 +22,14 @@ export interface OrderControlsProps {
   payment: ReactNode
 }
 
-export function OrderControls({
+export function ControlsGrid({
   orderId,
   orderPrice,
   status,
   updatedAt,
   payment
-}: OrderControlsProps) {
-  const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
+}: ControlsGridProps) {
+  const setRejectDrawerOpen = usePageState((state) => state.setRejectDrawerOpen)
   const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
   return (
@@ -61,7 +61,7 @@ export function OrderControls({
           <Button
             color="secondary"
             fullWidth
-            onClick={() => setRejectModalOpen(true)}
+            onClick={() => setRejectDrawerOpen(true)}
             className="bg-gray-200 pt-3 pb-3"
           >
             Отменить заказ

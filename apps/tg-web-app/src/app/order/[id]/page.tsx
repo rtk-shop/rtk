@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { OrderHeader } from './header'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
-import { OrderControls } from './controls_old'
+import { ControlsGrid } from './controls-grid'
 import { OrderProducts } from './products'
 import { Payment } from './controls/payment'
 
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         supplier={order.supplier}
         parcelTrackId={order.parcelTrackId}
       />
-      <OrderControls
+      <ControlsGrid
         orderId={order.id}
         orderPrice={order.price}
         status={order.status}

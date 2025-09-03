@@ -7,8 +7,8 @@ import { ErrorMessage } from '@repo/ui'
 
 export function OrderRejectModal({ orderId }: { orderId: string }) {
   const router = useRouter()
-  const isOpen = usePageState((state) => state.isRejectModalOpen)
-  const setRejectModalOpen = usePageState((state) => state.setRejectModalOpen)
+  const isRejectDrawerOpen = usePageState((state) => state.isRejectDrawerOpen)
+  const setRejectDrawerOpen = usePageState((state) => state.setRejectDrawerOpen)
 
   const [rejectResult, rejectOrder] = useRejectOrderMutation()
 
@@ -16,20 +16,20 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
     const result = await rejectOrder({ orderId })
 
     if (result.data && !result.error) {
-      setRejectModalOpen(false)
+      setRejectDrawerOpen(false)
       router.refresh()
       return
     }
   }
 
   const handleCancelClick = () => {
-    setRejectModalOpen(false)
+    setRejectDrawerOpen(false)
   }
 
   const { fetching, error } = rejectResult
 
   return (
-    <Drawer open={isOpen} position="bottom" onClose={handleCancelClick}>
+    <Drawer open={isRejectDrawerOpen} position="bottom" onClose={handleCancelClick}>
       <div className="rounded-t-2xl bg-white px-4 pt-7 pb-3">
         <h3 className="mb-4 text-center text-lg font-medium">Вы подтверждаете отмену заказа?</h3>
         <div className="mb-3 flex">
@@ -42,7 +42,7 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
             className="ml-2 bg-gray-200"
             color="secondary"
           >
-            Отменить
+            Згорнути
           </Button>
         </div>
         <ErrorMessage show={!!error} align="center">
