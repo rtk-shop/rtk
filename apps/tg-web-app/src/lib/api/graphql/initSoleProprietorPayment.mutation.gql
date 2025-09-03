@@ -1,0 +1,8 @@
+mutation InitSoleProprietorPayment($orderId: ID!) {
+  initSoleProprietorPayment(orderId: $orderId) {
+    __typename
+    id
+    status
+    createdAt
+  }
+}

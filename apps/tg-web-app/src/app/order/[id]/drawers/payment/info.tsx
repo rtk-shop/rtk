@@ -7,6 +7,7 @@ import { formatPrice } from '@repo/utils'
 import { isDataDefined } from '@/lib/api/helpers'
 import { Icon } from '@/components/ui/icon'
 import { Callout } from '@/components/ui/callout'
+import { ConfirmButton } from './confirm-button'
 
 const paymentTitle = cva('leading-none font-medium text-gray-400')
 
@@ -116,9 +117,14 @@ export default function PaymentInfo({
           </div>
         </Callout>
       </div>
-      <Button fullWidth onClick={onClose}>
-        Згорнути
-      </Button>
+      <div className="flex justify-between">
+        <ConfirmButton orderId={orderId} onSucess={onClose}>
+          Платіж надіслано
+        </ConfirmButton>
+        <Button className="ml-2 py-1" onClick={onClose}>
+          Згорнути
+        </Button>
+      </div>
     </div>
   )
 }

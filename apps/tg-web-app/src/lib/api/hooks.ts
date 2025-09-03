@@ -13,6 +13,7 @@ import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
 import * as productsQuery from '@/lib/api/graphql/_gen_/products.query'
 import * as userOrders from '@/lib/api/graphql/_gen_/userOrders.query'
 import * as orderPayment from '@/lib/api/graphql/_gen_/orderPayment.query'
+import * as initSoleProprietorPayment from '@/lib/api/graphql/_gen_/initSoleProprietorPayment.mutation'
 
 export function useProductsQuery({
   variables,
@@ -116,4 +117,11 @@ export function useOrderPayment(
     query: orderPayment.GetOrderPaymentDocument,
     ...options
   })
+}
+
+export function useInitSoleProprietorPaymentMutation() {
+  return useMutation<
+    initSoleProprietorPayment.InitSoleProprietorPaymentMutation,
+    initSoleProprietorPayment.InitSoleProprietorPaymentMutationVariables
+  >(initSoleProprietorPayment.InitSoleProprietorPaymentDocument)
 }
