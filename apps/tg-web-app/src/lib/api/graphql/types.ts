@@ -98,7 +98,7 @@ export type Mutation = {
   createProductSizeVariation: NewSizeVariationPayload
   deleteProduct: DeleteProductPayload
   hideProduct?: Maybe<HideProductPayload>
-  initSoleProprietorPayment: SoleProprietorPaymentPayload
+  initSoleProprietorPayment: Payment
   processOrder: ProcessOrderPayload
   /** reduceCartItemQuantity - reduces cart item quantity by one */
   reduceCartItemQuantity: CartItem
@@ -315,7 +315,7 @@ export type Pagination = {
 
 export type Payment = {
   __typename?: 'Payment'
-  id: Scalars['String']['output']
+  id: Scalars['ID']['output']
   orderId: Scalars['ID']['output']
   price: Scalars['Float']['output']
   status: PaymentStatus
@@ -522,13 +522,6 @@ export type SizeVariation = {
   __typename?: 'SizeVariation'
   productId: Scalars['String']['output']
   size: Scalars['String']['output']
-}
-
-export type SoleProprietorPaymentPayload = {
-  __typename?: 'SoleProprietorPaymentPayload'
-  createdAt: Scalars['String']['output']
-  id: Scalars['String']['output']
-  status: PaymentStatus
 }
 
 export enum SupplierService {

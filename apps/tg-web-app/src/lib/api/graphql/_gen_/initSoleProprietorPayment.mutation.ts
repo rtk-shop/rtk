@@ -9,20 +9,21 @@ export type InitSoleProprietorPaymentMutationVariables = Types.Exact<{
 export type InitSoleProprietorPaymentMutation = {
   __typename?: 'Mutation'
   initSoleProprietorPayment: {
-    __typename: 'SoleProprietorPaymentPayload'
+    __typename?: 'Payment'
     id: string
+    price: number
     status: Types.PaymentStatus
-    createdAt: string
+    orderId: string
   }
 }
 
 export const InitSoleProprietorPaymentDocument = gql`
   mutation InitSoleProprietorPayment($orderId: ID!) {
     initSoleProprietorPayment(orderId: $orderId) {
-      __typename
       id
+      price
       status
-      createdAt
+      orderId
     }
   }
 `

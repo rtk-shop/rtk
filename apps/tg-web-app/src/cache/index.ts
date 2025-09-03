@@ -4,6 +4,7 @@ import { cacheExchange as Exchange } from '@urql/exchange-graphcache'
 import { addCartItem, removeCartItem, reduceCartItemQuantity, clearCart } from './mutations/cart'
 import { createOrder, rejectOrder } from './mutations/order'
 import { addFavouriteProduct, removeFavouriteProduct } from './mutations/favourites'
+import { initSoleProprietorPayment } from './mutations/payment'
 
 export const cacheExchange = Exchange({
   optimistic: {
@@ -61,7 +62,8 @@ export const cacheExchange = Exchange({
       reduceCartItemQuantity,
       removeCartItem,
       clearCart,
-      createOrder
+      createOrder,
+      initSoleProprietorPayment
     }
   }
 })

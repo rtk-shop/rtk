@@ -1,8 +1,8 @@
 mutation InitSoleProprietorPayment($orderId: ID!) {
   initSoleProprietorPayment(orderId: $orderId) {
-    __typename
     id
+    price
     status
-    createdAt
+    orderId
   }
 }

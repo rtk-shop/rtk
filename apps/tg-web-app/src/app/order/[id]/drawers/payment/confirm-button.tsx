@@ -15,13 +15,13 @@ export function ConfirmButton({ orderId, children, onSucess }: ConfirmButtonProp
   const handleButtonClick = () => {
     initPayment({ orderId }).then((result) => {
       if (result.error) {
-        toast.error('Сталася помилка, спробуйте пізніше', {
+        toast.error('Сталася помилка, спробуйте пізніше!', {
           duration: 2000,
           richColors: true
         })
         return
       }
-      toast.success('Перевіряємо платіж', {
+      toast.success('Дякуємо, перевіряємо платіж!', {
         duration: 2500,
         richColors: true
       })
