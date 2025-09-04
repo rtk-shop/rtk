@@ -7,6 +7,7 @@ import { Icon } from '@/components/ui/icon'
 import { useOrderPayment } from '@/lib/api/hooks'
 import { PaymentStatusBadge } from './status-badge'
 import { Loader } from '@repo/ui'
+import { IconButton } from '@/components/ui/icon-button'
 import { isDataDefined } from '@/lib/api/helpers'
 
 const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
@@ -35,6 +36,8 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
     )
   }
 
+  if (paymentMethod !== OrderPaymentMethod.Online) return null
+
   if (!isDataDefined(data) || error) {
     return (
       <div className="mt-6 flex h-8 items-center justify-center">
@@ -47,23 +50,29 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
   }
 
   return (
-    <div>
-      {paymentMethod === OrderPaymentMethod.Online && (
-        <div className="mt-6">
-          {data?.orderPayment.__typename === 'NotFound' ? (
-            <Button
-              color="accept"
-              fullWidth
-              className="rounded-lg! pt-1.5 pb-1.5 text-sm"
-              disabled={!statusesForPayment.includes(status)}
-              onClick={() => setPaymentDrawer({ open: true, mode: 'payment' })}
+    <div className="mt-6">
+      {data?.orderPayment.__typename === 'NotFound' ? (
+        <Button
+          color="accept"
+          fullWidth
+          className="rounded-lg! pt-1.5 pb-1.5 text-sm"
+          disabled={!statusesForPayment.includes(status)}
+          onClick={() => setPaymentDrawer({ open: true, mode: 'payment' })}
+        >
+          Оплатить заказ
+        </Button>
+      ) : (
+        <>
+          <div className="absolute top-1 right-1">
+            <IconButton
+              className="text-xl"
+              onClick={() => setPaymentDrawer({ open: true, mode: 'reminder' })}
             >
-              Оплатить заказ
-            </Button>
-          ) : (
-            <PaymentStatusBadge status={data.orderPayment.status} />
-          )}
-        </div>
+              <Icon name="action/circle-info" />
+            </IconButton>
+          </div>
+          <PaymentStatusBadge status={data.orderPayment.status} />
+        </>
       )}
     </div>
   )

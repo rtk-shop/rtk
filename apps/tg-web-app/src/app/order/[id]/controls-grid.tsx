@@ -9,8 +9,6 @@ import { PaymentDrawer } from './drawers/payment'
 import { OrderStatusBadge } from '@/components/order/status-badge'
 import { formatDate } from '@repo/utils'
 import { FormatPrice } from '@/components/ui/format-price'
-import { Icon } from '@/components/ui/icon'
-import { IconButton } from '@/components/ui/icon-button'
 
 const statusesForReject: OrderStatus[] = [OrderStatus.Created, OrderStatus.Processed]
 
@@ -37,14 +35,6 @@ export function ControlsGrid({
       <div className="mb-4 grid grid-cols-5 grid-rows-6 gap-2">
         <div className="relative col-span-3 row-span-6 rounded-lg bg-white p-3 shadow-sm">
           <p className="text-lg font-medium">Сумма:</p>
-          <div className="absolute top-1 right-1">
-            <IconButton
-              className="text-xl"
-              onClick={() => setPaymentDrawer({ open: true, mode: 'reminder' })}
-            >
-              <Icon name="action/circle-info" />
-            </IconButton>
-          </div>
           <FormatPrice size="XXL" currency="грн" price={orderPrice} />
           {payment}
         </div>
