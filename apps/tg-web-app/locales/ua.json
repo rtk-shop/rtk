@@ -46,6 +46,10 @@
         "rejected": "Скасовано",
         "returned": "Повернуто"
       },
+      "paymentMethod": {
+        "online": "Онлайн",
+        "delivery": "При отриманні"
+      },
       "reject": "Скасувати замовлення",
       "details": "Докладніше"
     },

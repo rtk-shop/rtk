@@ -38,6 +38,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         orderPrice={order.price}
         status={order.status}
         updatedAt={order.updatedAt}
+        paymentMethod={order.paymentMethod}
         payment={
           <Payment orderId={order.id} status={order.status} paymentMethod={order.paymentMethod} />
         }

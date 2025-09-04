@@ -46,6 +46,10 @@
         "rejected": "Отменен",
         "returned": "Возврат"
       },
+      "paymentMethod": {
+        "online": "Онлайн",
+        "delivery": "При получении"
+      },
       "reject": "Отменить заказ",
       "details": "Подробнее"
     },
