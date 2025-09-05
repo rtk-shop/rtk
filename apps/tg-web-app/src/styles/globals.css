@@ -59,25 +59,6 @@
   scrollbar-width: none; /* Firefox */
 }
 
-@utility icon {
-  /*
-  Our base class for icons inherits the current text color and applies common styles.
-  We're using a specific component class to prevent potential style conflicts and utilize the [data-axis] attribute.
-  */
-  @apply box-content inline-block fill-current text-inherit select-none;
-
-  /* Set icon size to 1em based on its aspect ratio, so we can use `font-size` to scale it */
-  &[data-axis*='x'] {
-    /* scale horizontally */
-    @apply w-[1em];
-  }
-
-  &[data-axis*='y'] {
-    /* scale vertically */
-    @apply h-[1em];
-  }
-}
-
 @layer utilities {
   body {
     font-family:
@@ -173,5 +154,32 @@
 @layer base {
   :root {
     --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  /*
+  Our base class for icons inherits the current text color and applies common styles.
+  We're using a specific component class to prevent potential style conflicts.
+  */
+  .icon,
+  .icon-x,
+  .icon-y {
+    @apply box-content inline-block fill-current text-inherit select-none;
+    /** We need to align icons to the baseline, -0.125em is the 1/8 of the icon height */
+    vertical-align: -0.125em;
+  }
+
+  /* Set icon size to 1em based on its aspect ratio, so we can use `font-size` to scale it */
+  .icon,
+  .icon-x {
+    /* scale horizontally */
+    @apply w-[1em];
+  }
+
+  .icon,
+  .icon-y {
+    /* scale vertically */
+    @apply h-[1em];
   }
 }

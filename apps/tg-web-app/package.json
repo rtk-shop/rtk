@@ -24,7 +24,7 @@
     "deepmerge": "^4.3.1",
     "graphql": "^16.11.0",
     "isomorphic-dompurify": "^2.26.0",
-    "jose": "^6.0.11",
+    "jose": "^6.1.0",
     "js-cookie": "^3.0.5",
     "jsdom": "^26.1.0",
     "keen-slider": "^6.8.6",
@@ -39,14 +39,14 @@
     "react-number-format": "^5.4.4",
     "react-select": "^5.10.1",
     "react-virtualized": "^9.22.6",
-    "sonner": "^2.0.6",
-    "swr": "^2.3.4",
+    "sonner": "^2.0.7",
+    "swr": "^2.3.6",
     "tailwind-gradient-mask-image": "^1.2.0",
     "tailwindcss-animate": "^1.0.7",
     "urql": "^4.2.2",
     "use-debounce": "^10.0.5",
     "valibot": "^1.1.0",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.7",
@@ -55,8 +55,8 @@
     "@graphql-codegen/near-operation-file-preset": "^3.0.1",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@graphql-codegen/typescript-urql": "^4.0.1",
-    "@neodx/svg": "^0.7.1",
-    "@tailwindcss/postcss": "^4.1.11",
+    "@neodx/svg": "^0.8.0",
+    "@tailwindcss/postcss": "^4.1.12",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.15.32",
     "@types/react": "19.1.4",
@@ -69,7 +69,7 @@
     "postcss": "^8.5.6",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.1.11",
+    "tailwindcss": "^4.1.12",
     "telegram-webapps": "^8.0.5",
     "typescript": "^5.8.3"
   }
