@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import useSWRMutation from 'swr/mutation'
 import { Loader } from '@repo/ui'
 import { LogoLoader } from '@/components/ui/logo-loader'
@@ -74,21 +73,21 @@ export default function Page() {
     }
   })
 
-  useEffect(() => {
+  const handleLogoAnimationEnd = () => {
     if (typeof window !== 'undefined' && window.Telegram) {
-      const initData = window.Telegram.WebApp.initData //  process.env.NEXT_PUBLIC_TG_INIT_DATA
+      const initData = window.Telegram.WebApp.initData || process.env.NEXT_PUBLIC_TG_INIT_DATA || ''
 
-      const timer = setTimeout(() => {
+      if (initData) {
         trigger({ initData })
-      }, 1500)
-
-      return () => clearTimeout(timer)
+      } else {
+        toast.error('Не вдалося отримати дані від Telegram')
+      }
     }
-  }, [trigger])
+  }
 
   return (
     <div className="flex h-dvh flex-col items-center justify-center">
-      <LogoLoader size={180} />
+      <LogoLoader size={180} onAnimationEnd={handleLogoAnimationEnd} />
       <div className="animate-fade-in-2s mt-6 opacity-0">
         <Loader color="secondary" />
       </div>

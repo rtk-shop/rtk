@@ -1,6 +1,12 @@
 import styles from './styles.module.css'
 
-export function LogoLoader({ size = 100 }: { size?: number }) {
+export function LogoLoader({
+  size = 100,
+  onAnimationEnd
+}: {
+  size?: number
+  onAnimationEnd(): void
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,6 +21,7 @@ export function LogoLoader({ size = 100 }: { size?: number }) {
       />
       <path className={styles.letter} d="M47.87,1.4V9H42V39.48H32.08V9H26.23V1.4Z" />
       <path
+        onAnimationEnd={onAnimationEnd}
         className={styles.letter}
         d="M73.73,1.4,68.05,18.6l6.22,20.88H64L60,23.16V39.48h-9.9V1.4H60V16.2L64.44,1.4Z"
       />
