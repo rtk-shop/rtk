@@ -40,7 +40,11 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         updatedAt={order.updatedAt}
         paymentMethod={order.paymentMethod}
         payment={
-          <Payment orderId={order.id} status={order.status} paymentMethod={order.paymentMethod} />
+          <Payment
+            orderId={order.id}
+            status={order.status}
+            orderPaymentMethod={order.paymentMethod}
+          />
         }
       />
       <OrderProducts products={order.products} />

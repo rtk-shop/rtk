@@ -15,15 +15,15 @@ const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Se
 export interface PaymentProps {
   orderId: string
   status: OrderStatus
-  paymentMethod: OrderPaymentMethod
+  orderPaymentMethod: OrderPaymentMethod
 }
 
-export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
+export function Payment({ orderId, status, orderPaymentMethod }: PaymentProps) {
   const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
   const [{ error, fetching, data }] = useOrderPayment({
     variables: { orderId: orderId },
-    pause: paymentMethod !== OrderPaymentMethod.Online
+    pause: orderPaymentMethod !== OrderPaymentMethod.Online
   })
 
   if (fetching) {
@@ -36,7 +36,7 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
     )
   }
 
-  if (paymentMethod !== OrderPaymentMethod.Online) return null
+  if (orderPaymentMethod !== OrderPaymentMethod.Online) return null
 
   if (!isDataDefined(data) || error) {
     return (
@@ -59,7 +59,9 @@ export function Payment({ orderId, status, paymentMethod }: PaymentProps) {
           disabled={!statusesForPayment.includes(status)}
           onClick={() => setPaymentDrawer({ open: true, mode: 'payment' })}
         >
-          Оплатить заказ
+          {orderPaymentMethod === OrderPaymentMethod.Online
+            ? 'Оплатить заказ'
+            : 'Оплатить доставку'}
         </Button>
       ) : (
         <>
