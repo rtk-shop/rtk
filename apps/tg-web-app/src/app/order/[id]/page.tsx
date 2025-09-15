@@ -7,6 +7,7 @@ import { ControlsGrid } from './controls-grid'
 import { OrderProducts } from './products'
 import { Payment } from './controls/payment'
 import { calculateDeliveryCost } from './lib/utils'
+import { RejectOrderButton } from './controls/reject-button'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -25,7 +26,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   return (
     <div className="bg-gray-100 px-2 pt-2">
       <OrderHeader orderId={order.id} createdAt={order.createdAt} />
-      <h2>{deliveryCost}</h2>
       <Receiver
         name={order.receiverName}
         surname={order.receiverSurname}
@@ -41,18 +41,18 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         orderId={order.id}
         orderPrice={order.price}
         status={order.status}
-        updatedAt={order.updatedAt}
         deliveryCost={deliveryCost}
         paymentMethod={order.paymentMethod}
         payment={
           <Payment
             orderId={order.id}
-            status={order.status}
+            orderStatus={order.status}
             orderPaymentMethod={order.paymentMethod}
           />
         }
       />
       <OrderProducts products={order.products} />
+      <RejectOrderButton orderStatus={order.status} />
     </div>
   )
 }

@@ -17,7 +17,7 @@ export function OrderHeader({ orderId, createdAt }: { orderId: string; createdAt
       <div className="font-medium">
         <h1 className="text-xl">Заказ №{orderId}</h1>
         <p className="text-sm leading-none text-gray-400">
-          Від {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
+          Від {formatDate(createdAt, { dateStyle: 'short', timeStyle: 'short' })}
         </p>
       </div>
       <IconButton

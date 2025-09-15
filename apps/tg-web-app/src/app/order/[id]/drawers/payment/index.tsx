@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import { Drawer } from '@/components/ui/drawer'
 import { usePageState } from '../../lib/state'
