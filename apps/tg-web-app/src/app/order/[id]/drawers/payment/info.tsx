@@ -1,26 +1,36 @@
 import { Loader } from '@repo/ui'
 import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
-import { usePaymentInfo } from '../../lib/api'
+import { usePaymentReceiverInfo } from '../../lib/api'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
-import { formatPrice } from '@repo/utils'
 import { isDataDefined } from '@/lib/api/helpers'
 import { Icon } from '@/components/ui/icon'
 import { Callout } from '@/components/ui/callout'
 import { ConfirmButton } from './confirm-button'
 import type { paymentDrawer } from '../../lib/state'
+import { PaymentPurpose } from '@/lib/api/graphql/types'
+import { FormatPrice } from '@/components/ui/format-price'
 
 export interface PaymentInfoProps {
   mode: paymentDrawer['mode']
+  type: paymentDrawer['type']
   orderId: string
-  orderPrice: number
+  price: number
+  deliveryCost: number
   onClose(): void
 }
 
 const paymentTitle = cva('leading-none font-medium text-gray-400')
 
-export default function PaymentInfo({ mode, orderId, orderPrice, onClose }: PaymentInfoProps) {
-  const { data, error, isLoading } = usePaymentInfo()
+export default function PaymentInfo({
+  mode,
+  type,
+  orderId,
+  price,
+  deliveryCost,
+  onClose
+}: PaymentInfoProps) {
+  const { data, error, isLoading } = usePaymentReceiverInfo()
 
   if (isLoading) {
     return (
@@ -78,9 +88,18 @@ export default function PaymentInfo({ mode, orderId, orderPrice, onClose }: Paym
     },
     {
       title: 'Призначення платежу',
-      info: `Оплата за замовлення №${orderId}`
+      info:
+        type === PaymentPurpose.DeliveryAndOrder
+          ? `Оплата за замовлення №${orderId}`
+          : `Оплата за доставку замовлення №${orderId}`
     }
   ]
+
+  let totalSumm = deliveryCost + price
+
+  if (type === PaymentPurpose.Delivery) {
+    totalSumm = deliveryCost
+  }
 
   return (
     <div>
@@ -100,22 +119,29 @@ export default function PaymentInfo({ mode, orderId, orderPrice, onClose }: Paym
         ))}
       </ul>
       <div className="mb-4">
-        <p className={paymentTitle()}>Сума до сплати</p>
+        <p className={paymentTitle()}>
+          Сума до сплати&nbsp;
+          {type === PaymentPurpose.DeliveryAndOrder && (
+            <span className="text-lime-600">
+              +<FormatPrice price={deliveryCost} currency="грн" /> доставка
+            </span>
+          )}
+        </p>
         <div className="flex items-center">
-          <p className="font-medium">{formatPrice(orderPrice)} грн.</p>
-          <CopyToClipboard what={orderPrice.toString()} />
+          <FormatPrice price={totalSumm} currency="грн." />
+          <CopyToClipboard what={totalSumm.toString()} />
         </div>
       </div>
       <div className="mb-5">
         <Callout type="info">
           <div className="text-sm leading-4 font-medium">
             {mode === 'payment' && (
-              <p className="mb-1">
+              <p>
                 Після того як Ви сплатили за реквізитами, повідомте про це нас, натиснувши на кнопку
                 «<span className="text-green-600">Платіж надіслано</span>»
               </p>
             )}
-            <p>Ми перевіримо платіж як можна швидше, та повідомимо про це.</p>
+            <p className="mt-1">Ми перевіримо платіж як можна швидше!</p>
           </div>
         </Callout>
       </div>

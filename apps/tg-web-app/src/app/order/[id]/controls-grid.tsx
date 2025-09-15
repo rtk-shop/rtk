@@ -20,6 +20,7 @@ export interface ControlsGridProps {
   updatedAt: string
   payment: ReactNode
   paymentMethod: OrderPaymentMethod
+  deliveryCost: number
 }
 
 export function ControlsGrid({
@@ -28,9 +29,12 @@ export function ControlsGrid({
   status,
   updatedAt,
   payment,
-  paymentMethod
+  paymentMethod,
+  deliveryCost
 }: ControlsGridProps) {
   const setRejectDrawerOpen = usePageState((state) => state.setRejectDrawerOpen)
+
+  console.log('deliveryCost', deliveryCost)
 
   return (
     <section className="mb-4">
@@ -45,7 +49,7 @@ export function ControlsGrid({
           <OrderStatusBadge status={status} />
         </div>
         <div className="col-span-2 col-start-4 row-span-3 rounded-lg bg-white p-2 shadow-sm">
-          <p className="mb-1 text-sm font-medium text-gray-500">Тип оплаты:</p>
+          <p className="mb-1 text-sm font-medium text-gray-500">Оплата:</p>
           <OrderPaymentMethodBadge method={paymentMethod} />
         </div>
       </div>
@@ -65,7 +69,7 @@ export function ControlsGrid({
         Оновлено {formatDate(updatedAt, { dateStyle: 'short', timeStyle: 'short' })}
       </p>
       <OrderRejectModal orderId={orderId} />
-      <PaymentDrawer orderId={orderId} orderPrice={orderPrice} />
+      <PaymentDrawer orderId={orderId} deliveryCost={deliveryCost} orderPrice={orderPrice} />
     </section>
   )
 }

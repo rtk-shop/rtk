@@ -7,7 +7,15 @@ const PaymentInfo = dynamic(() => import('./info'), {
   loading: () => null
 })
 
-export function PaymentDrawer({ orderId, orderPrice }: { orderId: string; orderPrice: number }) {
+export function PaymentDrawer({
+  orderId,
+  orderPrice,
+  deliveryCost
+}: {
+  orderId: string
+  orderPrice: number
+  deliveryCost: number
+}) {
   const paymentDrawer = usePageState((state) => state.paymentDrawer)
   const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
@@ -21,8 +29,10 @@ export function PaymentDrawer({ orderId, orderPrice }: { orderId: string; orderP
         {paymentDrawer.open && (
           <PaymentInfo
             mode={paymentDrawer.mode}
+            type={paymentDrawer.type}
             orderId={orderId}
-            orderPrice={orderPrice}
+            price={orderPrice}
+            deliveryCost={deliveryCost}
             onClose={handleDrawerClose}
           />
         )}

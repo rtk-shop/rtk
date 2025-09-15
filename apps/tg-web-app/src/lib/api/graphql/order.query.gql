@@ -23,6 +23,7 @@ query OrderByID($id: ID!) {
           id
           title
           preview
+          category
         }
       }
     }

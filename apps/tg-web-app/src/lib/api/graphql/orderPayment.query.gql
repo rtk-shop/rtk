@@ -6,6 +6,7 @@ query GetOrderPayment($orderId: ID!) {
       price
       status
       orderId
+      purpose
     }
     ... on NotFound {
       message

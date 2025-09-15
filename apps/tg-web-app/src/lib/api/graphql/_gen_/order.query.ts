@@ -30,7 +30,13 @@ export type OrderByIdQuery = {
           id: string
           quantity: number
           priceAtOrder: number
-          product: { __typename?: 'Product'; id: string; title: string; preview: string }
+          product: {
+            __typename?: 'Product'
+            id: string
+            title: string
+            preview: string
+            category: Types.CategoryType
+          }
         }>
       }
 }
@@ -61,6 +67,7 @@ export const OrderByIdDocument = gql`
             id
             title
             preview
+            category
           }
         }
       }

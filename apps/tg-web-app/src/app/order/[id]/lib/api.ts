@@ -1,4 +1,5 @@
 import useSWR, { Fetcher } from 'swr'
+import * as orderPayment from '@/lib/api/graphql/_gen_/orderPayment.query'
 
 export type PaymentInfoResponse = {
   id: string
@@ -15,7 +16,7 @@ const fetcher: Fetcher<PaymentInfoResponse, string> = (url) =>
     return res.json().then((data) => data)
   })
 
-export function usePaymentInfo() {
+export function usePaymentReceiverInfo() {
   return useSWR<PaymentInfoResponse>(
     `${process.env.NEXT_PUBLIC_API_HOST}/payment-receiver`,
     fetcher,

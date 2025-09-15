@@ -2,28 +2,27 @@
 
 import { Button } from '@/components/ui/button'
 import { usePageState } from '../lib/state'
-import { OrderStatus, OrderPaymentMethod, PaymentStatus } from '@/lib/api/graphql/types'
 import { Icon } from '@/components/ui/icon'
 import { useOrderPayment } from '@/lib/api/hooks'
 import { PaymentStatusBadge } from './status-badge'
 import { Loader } from '@repo/ui'
 import { IconButton } from '@/components/ui/icon-button'
 import { isDataDefined } from '@/lib/api/helpers'
+import { OrderStatus, OrderPaymentMethod, PaymentPurpose } from '@/lib/api/graphql/types'
 
 const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
 
 export interface PaymentProps {
   orderId: string
-  status: OrderStatus
+  orderStatus: OrderStatus
   orderPaymentMethod: OrderPaymentMethod
 }
 
-export function Payment({ orderId, status, orderPaymentMethod }: PaymentProps) {
+export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentProps) {
   const setPaymentDrawer = usePageState((state) => state.setPaymentDrawer)
 
   const [{ error, fetching, data }] = useOrderPayment({
-    variables: { orderId: orderId },
-    pause: orderPaymentMethod !== OrderPaymentMethod.Online
+    variables: { orderId }
   })
 
   if (fetching) {
@@ -36,8 +35,6 @@ export function Payment({ orderId, status, orderPaymentMethod }: PaymentProps) {
     )
   }
 
-  if (orderPaymentMethod !== OrderPaymentMethod.Online) return null
-
   if (!isDataDefined(data) || error) {
     return (
       <div className="mt-6 flex h-8 items-center justify-center">
@@ -49,32 +46,49 @@ export function Payment({ orderId, status, orderPaymentMethod }: PaymentProps) {
     )
   }
 
+  const payment = data.orderPayment.__typename === 'Payment' ? data.orderPayment : null
+
   return (
     <div className="mt-6">
-      {data?.orderPayment.__typename === 'NotFound' ? (
+      {payment && orderStatus !== OrderStatus.Done ? (
+        <>
+          <div className="absolute top-1 right-1">
+            <IconButton
+              className="text-xl"
+              onClick={() =>
+                setPaymentDrawer({
+                  open: true,
+                  mode: 'reminder',
+                  type: payment.purpose
+                })
+              }
+            >
+              <Icon name="action/circle-info" />
+            </IconButton>
+          </div>
+          <PaymentStatusBadge status={payment.status} />
+        </>
+      ) : (
         <Button
           color="accept"
           fullWidth
           className="rounded-lg! pt-1.5 pb-1.5 text-sm"
-          disabled={!statusesForPayment.includes(status)}
-          onClick={() => setPaymentDrawer({ open: true, mode: 'payment' })}
+          disabled={!statusesForPayment.includes(orderStatus)}
+          onClick={() =>
+            setPaymentDrawer({
+              open: true,
+              mode: 'payment',
+              type:
+                orderPaymentMethod === OrderPaymentMethod.Online
+                  ? PaymentPurpose.DeliveryAndOrder
+                  : PaymentPurpose.Delivery
+            })
+          }
         >
           {orderPaymentMethod === OrderPaymentMethod.Online
             ? 'Оплатить заказ'
             : 'Оплатить доставку'}
         </Button>
-      ) : (
-        <>
-          <div className="absolute top-1 right-1">
-            <IconButton
-              className="text-xl"
-              onClick={() => setPaymentDrawer({ open: true, mode: 'reminder' })}
-            >
-              <Icon name="action/circle-info" />
-            </IconButton>
-          </div>
-          <PaymentStatusBadge status={data.orderPayment.status} />
-        </>
       )}
     </div>
   )

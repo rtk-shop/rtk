@@ -43,8 +43,8 @@ export function PaymentStatusBadge({ status }: { status: PaymentStatus }) {
 
   return (
     <div className={container({ status })}>
-      <div className="mr-1">{statusIcon}</div>
-      <span>{t(status.toLowerCase())}</span>
+      {statusIcon}
+      <span className="ml-1">{t(status.toLowerCase())}</span>
     </div>
   )
 }

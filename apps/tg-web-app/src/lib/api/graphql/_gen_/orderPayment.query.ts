@@ -16,6 +16,7 @@ export type GetOrderPaymentQuery = {
         price: number
         status: Types.PaymentStatus
         orderId: string
+        purpose: Types.PaymentPurpose
       }
 }
 
@@ -28,6 +29,7 @@ export const GetOrderPaymentDocument = gql`
         price
         status
         orderId
+        purpose
       }
       ... on NotFound {
         message

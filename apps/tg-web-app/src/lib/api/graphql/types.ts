@@ -318,10 +318,16 @@ export type Payment = {
   id: Scalars['ID']['output']
   orderId: Scalars['ID']['output']
   price: Scalars['Float']['output']
+  purpose: PaymentPurpose
   status: PaymentStatus
 }
 
 export type PaymentPayload = NotFound | Payment
+
+export enum PaymentPurpose {
+  Delivery = 'DELIVERY',
+  DeliveryAndOrder = 'DELIVERY_AND_ORDER'
+}
 
 export enum PaymentStatus {
   AwaitingConfirmation = 'AWAITING_CONFIRMATION',

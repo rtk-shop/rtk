@@ -1,8 +1,10 @@
 import { create } from 'zustand'
+import { PaymentPurpose } from '@/lib/api/graphql/types'
 
 export type paymentDrawer = {
   open: boolean
   mode: 'reminder' | 'payment'
+  type: PaymentPurpose
 }
 
 export type PageState = {
@@ -12,7 +14,9 @@ export type PageState = {
 
 export type PageActions = {
   setRejectDrawerOpen(open: boolean): void
-  setPaymentDrawer(state: Omit<paymentDrawer, 'mode'> & Partial<Pick<paymentDrawer, 'mode'>>): void
+  setPaymentDrawer(
+    state: Omit<paymentDrawer, 'mode' | 'type'> & Partial<Pick<paymentDrawer, 'mode' | 'type'>>
+  ): void
 }
 
 export type PageStore = PageState & PageActions
@@ -21,7 +25,8 @@ const initState: PageState = {
   isRejectDrawerOpen: false,
   paymentDrawer: {
     open: false,
-    mode: 'payment'
+    mode: 'payment',
+    type: PaymentPurpose.Delivery
   }
 }
 
