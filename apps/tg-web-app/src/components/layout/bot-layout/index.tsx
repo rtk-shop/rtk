@@ -27,6 +27,7 @@ export function BotLayout({ children }: { children: ReactNode }) {
   return (
     <main
       style={{
+        height: '100dvh',
         paddingBottom: 'calc(48px + var(--tg-safe-area-inset-bottom, 0px))'
       }}
     >
