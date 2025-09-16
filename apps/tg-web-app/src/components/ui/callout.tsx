@@ -11,7 +11,7 @@ export interface CalloutProps {
 const contaier = cva('flex rounded-lg px-2.5 py-3', {
   variants: {
     type: {
-      info: 'bg-green-lime/20',
+      info: 'bg-green-lime/30',
       warn: 'bg-amber-200'
     },
     invariant: {

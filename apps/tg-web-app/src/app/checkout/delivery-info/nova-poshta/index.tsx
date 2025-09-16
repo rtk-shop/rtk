@@ -2,22 +2,26 @@ import { useEffect, useState, useMemo } from 'react'
 import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext, useWatch } from 'react-hook-form'
-import { RadioGroup, type RadioOption } from '@/components/ui/radio-group'
+import { RadioGroup } from '@/components/ui/radio-group'
 import { ScrollMask } from '@/components/ui/scroll-mask'
 import { useTranslations } from 'next-intl'
-import { pupularCitiesNames, novaDeliveryTypeOptions, providerNames } from '../../model/constants'
 import type { PopularCity } from '../../model/types'
 import type { FormValues } from '../../model/validation-schema'
 import { useDebouncedCallback } from 'use-debounce'
 import { searchSettlements } from '../../model/api'
 import { SelectInput, NoOptionsMessage, LoadingMessage } from '../../model/select-customs'
+import {
+  pupularCitiesNames,
+  novaDeliveryTypeOptions,
+  paymentMethodOptions
+} from '../../model/constants'
 
 type CityOption = {
   label: string
   value: string
 }
 
-interface NovaPoshtaProps {
+export interface NovaPoshtaProps {
   popularCities: PopularCity[]
   popularCitiesLoad: boolean
 }
@@ -125,10 +129,19 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
     label: t(`Common.nouns.${option.label}`)
   }))
 
+  const radioPaymentOptions = paymentMethodOptions.map((option) => ({
+    ...option,
+    label: t(`Common.order.paymentMethod.${option.label}`)
+  }))
+
   return (
     <div>
       <div className="mb-3">
-        <p>Свайпни</p>
+        <div className="mb-2.5">
+          <p className="mb-0.5 text-sm font-medium">{t('Checkout.delivery.paymentMethod')}</p>
+          <RadioGroup direction="row" name="paymentMethod" options={radioPaymentOptions} />
+        </div>
+        <p className="mb-0.5 text-sm font-medium">{t('Checkout.delivery.warehouseType')}</p>
         <ScrollMask>
           <RadioGroup direction="row" name="np-delivery-type" options={radioOptions} />
         </ScrollMask>

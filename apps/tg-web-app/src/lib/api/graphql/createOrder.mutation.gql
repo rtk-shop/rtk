@@ -5,6 +5,7 @@ mutation CreateOrder(
   $cityName: String!
   $postOfficeName: String!
   $supplier: SupplierService!
+  $paymentMethod: OrderPaymentMethod!
 ) {
   createOrder(
     input: {
@@ -14,6 +15,7 @@ mutation CreateOrder(
       cityName: $cityName
       postOfficeName: $postOfficeName
       supplier: $supplier
+      paymentMethod: $paymentMethod
     }
   ) {
     id

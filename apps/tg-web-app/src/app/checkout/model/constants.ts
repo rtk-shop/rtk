@@ -1,3 +1,5 @@
+import { OrderPaymentMethod } from '@/lib/api/graphql/types'
+
 export const providerNames = {
   novaPoshta: 'nova_poshta'
 } as const
@@ -24,6 +26,19 @@ export const novaDeliveryTypeOptions = [
   {
     label: warehouseTypeLocale[3],
     value: '3',
+    disabled: false
+  }
+]
+
+export const paymentMethodOptions = [
+  {
+    label: 'online',
+    value: OrderPaymentMethod.Online,
+    disabled: false
+  },
+  {
+    label: 'delivery',
+    value: OrderPaymentMethod.Delivery,
     disabled: false
   }
 ]

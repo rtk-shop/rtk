@@ -173,6 +173,7 @@ export type MutationSetUsdCourseArgs = {
 export type NewOrderInput = {
   cityName: Scalars['String']['input']
   name: Scalars['String']['input']
+  paymentMethod: OrderPaymentMethod
   phone: Scalars['String']['input']
   postOfficeName: Scalars['String']['input']
   supplier: SupplierService

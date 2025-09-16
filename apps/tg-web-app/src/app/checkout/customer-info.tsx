@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl'
 import type { CustomerInfoValues } from './model/validation-schema'
 
 export function CustomerInfo() {
-  const t = useTranslations()
+  const t = useTranslations('Common')
 
   const isInfoOpen = usePageState((state) => state.isInfoOpen)
   const onInfoSection = usePageState((state) => state.onInfoSection)
@@ -41,23 +41,23 @@ export function CustomerInfo() {
   return (
     <section className="mb-7 rounded-lg bg-white">
       <StepTitle step={1} isEdit={isInfoOpen} onEdit={onInfoSection} valid={isValid}>
-        {t('Checkout.customer.title')}
+        {t('order.receiver')}
       </StepTitle>
       <HeightExpander expanded={isInfoOpen}>
         <div className="px-4 pb-4">
           <ul>
             <li>
-              <Input name="name" label={t('Common.nouns.name')} />
+              <Input name="name" label={t('nouns.name')} />
             </li>
             <li>
-              <Input name="surname" label={t('Common.nouns.surname')} />
+              <Input name="surname" label={t('nouns.surname')} />
             </li>
             <li>
-              <PhoneInput name="phone" label={t('Common.nouns.phone')} />
+              <PhoneInput name="phone" label={t('nouns.phone')} />
             </li>
           </ul>
           <Button color="accept" fullWidth disabled={!isValid} onClick={handleNextClick}>
-            {t('Common.verbs.continue')}
+            {t('verbs.continue')}
           </Button>
         </div>
       </HeightExpander>

@@ -9,7 +9,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
 import { OrderSuccessModal } from './modals/order-success'
 import { ErrorModal } from './modals/error'
-import { SupplierService } from '@/lib/api/graphql/types'
+import { SupplierService, OrderPaymentMethod } from '@/lib/api/graphql/types'
 import { usePageState } from './model/state'
 
 export function Checkout() {
@@ -24,6 +24,7 @@ export function Checkout() {
     resolver: valibotResolver(validationSchema),
     defaultValues: {
       supplier: SupplierService.Novap,
+      paymentMethod: OrderPaymentMethod.Online,
       'np-delivery-type': '1'
     }
   })

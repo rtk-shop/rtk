@@ -1,5 +1,5 @@
 import * as v from 'valibot'
-import { SupplierService } from '@/lib/api/graphql/types'
+import { SupplierService, OrderPaymentMethod } from '@/lib/api/graphql/types'
 
 export const customerInfoSchema = v.object({
   name: v.pipe(
@@ -27,7 +27,8 @@ export const deliverySchema = v.pipe(
     supplier: v.picklist(Object.values(SupplierService)),
     cityName: v.pipe(v.string(), v.minLength(1)),
     postOfficeName: v.pipe(v.string(), v.trim(), v.nonEmpty('Common.validation.requiredField')),
-    patronymic: v.optional(v.string())
+    patronymic: v.optional(v.string()),
+    paymentMethod: v.picklist(Object.values(OrderPaymentMethod))
   }),
   v.forward(
     v.check((input) => input.supplier !== SupplierService.Ukrp, 'CUSTOM'),

@@ -4,6 +4,7 @@ import { cva } from 'cva'
 import { usePageState } from '../model/state'
 import { StepTitle } from '../common/step-title'
 import { DynamicExpander } from '@/components/ui/dynamic-expander'
+import { Callout } from '@/components/ui/callout'
 import { Button } from '@/components/ui/button'
 import { ShowBlock } from '../common/show-block'
 import { NovaPoshta } from './nova-poshta'
@@ -27,7 +28,9 @@ const fetcher: Fetcher<PopularCity[], string> = (url) => fetch(url).then((res) =
 
 export function DeliveryInfo() {
   const t = useTranslations()
-  const { register } = useFormContext<DeliveryValues>()
+  const { register, formState } = useFormContext<DeliveryValues>()
+
+  console.log(formState.errors)
 
   const isDeliveryOpen = usePageState((state) => state.isDeliveryOpen)
   const onDeliverySection = usePageState((state) => state.onDeliverySection)
@@ -35,7 +38,7 @@ export function DeliveryInfo() {
   const onErrorModal = usePageState((state) => state.onErrorModal)
 
   const values = useWatch({
-    name: ['cityName', 'postOfficeName', 'supplier']
+    name: ['cityName', 'postOfficeName', 'supplier', 'paymentMethod']
   })
 
   const { data, isLoading } = useSWR(
@@ -57,8 +60,9 @@ export function DeliveryInfo() {
     parse(deliverySchema, {
       cityName: values[0],
       postOfficeName: values[1],
-      supplier: values[2]
-      // patronymic: values[3]
+      supplier: values[2],
+      paymentMethod: values[3]
+      // patronymic: values[4]
     })
     isValuesValid = true
   } catch (error) {
@@ -70,9 +74,15 @@ export function DeliveryInfo() {
       <StepTitle step={2} isEdit={isDeliveryOpen} onEdit={onDeliverySection} valid={isValuesValid}>
         {t('Checkout.delivery.title')}
       </StepTitle>
-
       <DynamicExpander open={isDeliveryOpen}>
         <div className="px-2.5 pb-3">
+          <div className="mb-3">
+            <Callout type="info">
+              <p className="text-sm leading-4 font-medium">
+                {t('Checkout.callouts.deliveryPayment')}
+              </p>
+            </Callout>
+          </div>
           <ul className="flex">
             <li className="mr-2 w-full">
               <label>
@@ -114,7 +124,7 @@ export function DeliveryInfo() {
               </label>
             </li>
           </ul>
-          <p className="mt-1 mb-2 text-end text-[13px] leading-none">
+          <p className="mt-1 text-end text-[13px] leading-none">
             * {t('Checkout.delivery.unavailable')}
           </p>
           {/*  */}
