@@ -76,7 +76,7 @@ const fetcher: Fetcher<WarehousesOption[], string> = (url) =>
 
 export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: string): void }) {
   const t = useTranslations()
-  const onErrorModal = usePageState((state) => state.onErrorModal)
+  const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
 
   const { getValues, resetField } = useFormContext<FormValues>()
 
@@ -101,7 +101,7 @@ export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: 
     {
       fallbackData: [],
       onError() {
-        onErrorModal(true)
+        onErrorDrawerOpen(true)
       }
     }
   )

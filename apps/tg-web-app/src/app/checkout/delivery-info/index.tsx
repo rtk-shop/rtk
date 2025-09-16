@@ -35,7 +35,7 @@ export function DeliveryInfo() {
   const isDeliveryOpen = usePageState((state) => state.isDeliveryOpen)
   const onDeliverySection = usePageState((state) => state.onDeliverySection)
   const closeDelivery = usePageState((state) => state.closeDelivery)
-  const onErrorModal = usePageState((state) => state.onErrorModal)
+  const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
 
   const values = useWatch({
     name: ['cityName', 'postOfficeName', 'supplier', 'paymentMethod']
@@ -47,7 +47,7 @@ export function DeliveryInfo() {
     {
       fallbackData: [],
       onError() {
-        onErrorModal(true)
+        onErrorDrawerOpen(true)
       }
     }
   )

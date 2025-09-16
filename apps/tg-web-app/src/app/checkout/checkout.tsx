@@ -7,14 +7,14 @@ import { Preview } from './preview'
 import { FormValues, validationSchema } from './model/validation-schema'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCreateOrderMutation } from '@/lib/api/hooks'
-import { OrderSuccessModal } from './modals/order-success'
-import { ErrorModal } from './modals/error'
+import { OrderSuccessDrawer } from './drawers/order-success'
+import { OrderErrorDrawer } from './drawers/error'
 import { SupplierService, OrderPaymentMethod } from '@/lib/api/graphql/types'
 import { usePageState } from './model/state'
 
 export function Checkout() {
-  const onSucessModal = usePageState((state) => state.onSucessModal)
-  const onErrorModal = usePageState((state) => state.onErrorModal)
+  const onSucessDrawerOpen = usePageState((state) => state.onSucessDrawerOpen)
+  const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
 
   const [orderResult, createOrder] = useCreateOrderMutation()
 
@@ -36,10 +36,10 @@ export function Checkout() {
     const res = await createOrder({ ...requestValues })
 
     if (res.error) {
-      onErrorModal(true, { kind: 'submit' })
+      onErrorDrawerOpen(true, { kind: 'submit' })
       console.log(res.error)
     } else {
-      onSucessModal(true)
+      onSucessDrawerOpen(true)
     }
   }
 
@@ -54,8 +54,8 @@ export function Checkout() {
           </div>
         </form>
       </FormProvider>
-      <OrderSuccessModal />
-      <ErrorModal />
+      <OrderSuccessDrawer />
+      <OrderErrorDrawer />
     </div>
   )
 }

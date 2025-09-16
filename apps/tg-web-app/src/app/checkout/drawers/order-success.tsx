@@ -7,12 +7,12 @@ import { routeNames } from '@/lib/routes'
 import { useTranslations } from 'next-intl'
 import { usePageState } from '../model/state'
 
-export function OrderSuccessModal() {
+export function OrderSuccessDrawer() {
   const t = useTranslations('Checkout.successModal')
   const router = useRouter()
 
-  const isOpen = usePageState((state) => state.successOrderModalOpen)
-  const onSucessModal = usePageState((state) => state.onSucessModal)
+  const isOpen = usePageState((state) => state.successOrderDrawerOpen)
+  const onSucessDrawerOpen = usePageState((state) => state.onSucessDrawerOpen)
 
   useEffect(() => {
     router.prefetch(routeNames.profile)
@@ -20,7 +20,7 @@ export function OrderSuccessModal() {
 
   const handleComplete = () => {
     router.replace(routeNames.profile)
-    onSucessModal(false)
+    onSucessDrawerOpen(false)
   }
 
   return (

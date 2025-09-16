@@ -10,14 +10,14 @@ interface PreviewProps {
 }
 
 export function Preview({ submitLoading }: PreviewProps) {
-  const onErrorModal = usePageState((state) => state.onErrorModal)
+  const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
 
   const [result] = useCartQuery()
 
   const { error, fetching, data } = result
 
   if (error) {
-    onErrorModal(true)
+    onErrorDrawerOpen(true)
     return (
       <div className="mt-20 flex justify-center px-4">
         <Icon name="common/emptycart" className="fill-black text-[280px]" />

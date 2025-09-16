@@ -4,24 +4,24 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { usePageState } from '../model/state'
 
-export function ErrorModal() {
+export function OrderErrorDrawer() {
   const t = useTranslations('Checkout.errorModal')
   const router = useRouter()
 
-  const isOpen = usePageState((state) => state.errorOrderModalOpen)
+  const isOpen = usePageState((state) => state.errorOrderDrawerOpen)
   const errorOptions = usePageState((state) => state.errorOptions)
-  const onErrorModal = usePageState((state) => state.onErrorModal)
+  const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
 
   const isSubmitErr = errorOptions?.kind !== 'submit'
 
   const handleModalAction = () => {
     if (isSubmitErr) router.back()
-    onErrorModal(false)
+    onErrorDrawerOpen(false)
   }
 
   return (
     <Drawer open={isOpen} position="bottom" onClose={handleModalAction}>
-      <div className="relative rounded-t-2xl bg-white px-4 pb-7 pt-9">
+      <div className="relative rounded-t-2xl bg-white px-4 pt-9 pb-7">
         <p>{isSubmitErr}</p>
         <div className="mb-2 flex justify-center">
           <Icon name="action/warning" className="text-[100px] text-yellow-500" />
@@ -35,7 +35,7 @@ export function ErrorModal() {
         </div>
         <button
           onClick={handleModalAction}
-          className="absolute right-4 top-4 rounded-lg bg-slate-100 px-2 py-px text-sm text-gray-700"
+          className="absolute top-4 right-4 rounded-lg bg-slate-100 px-2 py-px text-sm text-gray-700"
         >
           {t('action')}
         </button>
