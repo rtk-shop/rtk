@@ -183,7 +183,7 @@ export type NewOrderInput = {
 export type NewOrderPayload = {
   __typename?: 'NewOrderPayload'
   createdAt: Scalars['Date']['output']
-  id: Scalars['Int']['output']
+  id: Scalars['ID']['output']
   price: Scalars['Float']['output']
 }
 

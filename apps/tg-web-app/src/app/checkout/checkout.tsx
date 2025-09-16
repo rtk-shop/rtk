@@ -11,10 +11,12 @@ import { OrderSuccessDrawer } from './drawers/order-success'
 import { OrderErrorDrawer } from './drawers/error'
 import { SupplierService, OrderPaymentMethod } from '@/lib/api/graphql/types'
 import { usePageState } from './model/state'
+import { isDataDefined } from '@/lib/api/helpers'
 
 export function Checkout() {
   const onSucessDrawerOpen = usePageState((state) => state.onSucessDrawerOpen)
   const onErrorDrawerOpen = usePageState((state) => state.onErrorDrawerOpen)
+  const onSetNewOrderId = usePageState((state) => state.onSetNewOrderId)
 
   const [orderResult, createOrder] = useCreateOrderMutation()
 
@@ -35,10 +37,11 @@ export function Checkout() {
 
     const res = await createOrder({ ...requestValues })
 
-    if (res.error) {
+    if (!isDataDefined(res.data) || res.error) {
       onErrorDrawerOpen(true, { kind: 'submit' })
       console.log(res.error)
     } else {
+      onSetNewOrderId(res.data.createOrder.id)
       onSucessDrawerOpen(true)
     }
   }

@@ -14,7 +14,7 @@ export type CreateOrderMutationVariables = Types.Exact<{
 
 export type CreateOrderMutation = {
   __typename?: 'Mutation'
-  createOrder: { __typename?: 'NewOrderPayload'; id: number; price: number; createdAt: unknown }
+  createOrder: { __typename?: 'NewOrderPayload'; id: string; price: number; createdAt: unknown }
 }
 
 export const CreateOrderDocument = gql`

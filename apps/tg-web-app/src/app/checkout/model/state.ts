@@ -5,6 +5,7 @@ export type errorOptions = {
 }
 
 export type PageState = {
+  newOrderId: string | null
   isInfoOpen: boolean
   isDeliveryOpen: boolean
   successOrderDrawerOpen: boolean
@@ -19,11 +20,14 @@ export type PageActions = {
   onSucessDrawerOpen(open: boolean): void
   onErrorDrawerOpen(open: boolean, options?: errorOptions): void
   infoChecked(): void
+  onSetNewOrderId(id: string): void
+  reset(): void
 }
 
 export type PageStore = PageState & PageActions
 
-const initState = {
+const initState: PageState = {
+  newOrderId: null,
   isInfoOpen: false,
   isDeliveryOpen: false,
   successOrderDrawerOpen: false,
@@ -40,5 +44,7 @@ export const usePageState = create<PageStore>()((set) => ({
   onSucessDrawerOpen: (open) => set({ successOrderDrawerOpen: open }),
   onErrorDrawerOpen: (open, options = undefined) =>
     set({ errorOrderDrawerOpen: open, errorOptions: options }),
-  infoChecked: () => set({ isInfoOpen: false, isDeliveryOpen: true })
+  infoChecked: () => set({ isInfoOpen: false, isDeliveryOpen: true }),
+  onSetNewOrderId: (id) => set({ newOrderId: id }),
+  reset: () => set(initState)
 }))

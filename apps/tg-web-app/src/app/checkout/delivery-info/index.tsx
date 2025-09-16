@@ -28,9 +28,7 @@ const fetcher: Fetcher<PopularCity[], string> = (url) => fetch(url).then((res) =
 
 export function DeliveryInfo() {
   const t = useTranslations()
-  const { register, formState } = useFormContext<DeliveryValues>()
-
-  console.log(formState.errors)
+  const { register } = useFormContext<DeliveryValues>()
 
   const isDeliveryOpen = usePageState((state) => state.isDeliveryOpen)
   const onDeliverySection = usePageState((state) => state.onDeliverySection)
