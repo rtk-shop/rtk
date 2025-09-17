@@ -8,7 +8,7 @@ const container = cva(
   {
     variants: {
       tag: {
-        [ProductTag.New]: 'bg-emerald-500',
+        [ProductTag.New]: 'bg-black',
         [ProductTag.Top]: 'bg-tag-top',
         [ProductTag.Stock]: 'bg-red-500'
       }
