@@ -17,6 +17,8 @@ const protectedRoutes = [
   routeNames.favourites
 ]
 
+const noPannelRoutes = [routeNames.root]
+
 function buildRegexRoutes(routes: string[]) {
   return routes.map((route) => {
     const base = route.replace(/\/$/, '') // cut end "/"
@@ -26,7 +28,12 @@ function buildRegexRoutes(routes: string[]) {
 }
 
 const PROTECTED_PATH_REGEX = buildRegexRoutes(protectedRoutes)
+const NO_PANNEL_PATH_REGEX = buildRegexRoutes(noPannelRoutes)
 
 export const checkProtectedRoute = (path: string): boolean => {
   return PROTECTED_PATH_REGEX.some((regex) => regex.test(path))
+}
+
+export const checkNoPannelRoutes = (path: string): boolean => {
+  return NO_PANNEL_PATH_REGEX.some((regex) => regex.test(path))
 }

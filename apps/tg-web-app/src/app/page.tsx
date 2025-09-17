@@ -86,7 +86,7 @@ export default function Page() {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-center bg-white">
+    <div className="flex h-dvh flex-col items-center justify-center">
       <LogoLoader size={180} onAnimationEnd={handleLogoAnimationEnd} />
       <div className="animate-fade-in-2s mt-6 opacity-0">
         <Loader color="secondary" />

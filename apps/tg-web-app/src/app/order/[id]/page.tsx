@@ -24,35 +24,44 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const deliveryCost = calculateDeliveryCost(order.products)
 
   return (
-    <div className="h-full bg-gray-100 px-2 pt-2">
-      <OrderHeader orderId={order.id} createdAt={order.createdAt} />
-      <Receiver
-        name={order.receiverName}
-        surname={order.receiverSurname}
-        phone={order.receiverPhone}
-      />
-      <Delivery
-        city={order.cityName}
-        postOffice={order.postOfficeName}
-        supplier={order.supplier}
-        parcelTrackId={order.parcelTrackId}
-      />
-      <ControlsGrid
-        orderId={order.id}
-        orderPrice={order.price}
-        status={order.status}
-        deliveryCost={deliveryCost}
-        paymentMethod={order.paymentMethod}
-        payment={
-          <Payment
-            orderId={order.id}
-            orderStatus={order.status}
-            orderPaymentMethod={order.paymentMethod}
-          />
-        }
-      />
-      <OrderProducts products={order.products} />
-      <RejectOrderButton orderStatus={order.status} />
-    </div>
+    <>
+      <style precedence="high">
+        {`
+          body {
+            background-color: var(--color-gray-100);
+          }
+        `}
+      </style>
+      <div className="px-2 pt-2">
+        <OrderHeader orderId={order.id} createdAt={order.createdAt} />
+        <Receiver
+          name={order.receiverName}
+          surname={order.receiverSurname}
+          phone={order.receiverPhone}
+        />
+        <Delivery
+          city={order.cityName}
+          postOffice={order.postOfficeName}
+          supplier={order.supplier}
+          parcelTrackId={order.parcelTrackId}
+        />
+        <ControlsGrid
+          orderId={order.id}
+          orderPrice={order.price}
+          status={order.status}
+          deliveryCost={deliveryCost}
+          paymentMethod={order.paymentMethod}
+          payment={
+            <Payment
+              orderId={order.id}
+              orderStatus={order.status}
+              orderPaymentMethod={order.paymentMethod}
+            />
+          }
+        />
+        <OrderProducts products={order.products} />
+        <RejectOrderButton orderStatus={order.status} />
+      </div>
+    </>
   )
 }

@@ -47,18 +47,25 @@ export function Checkout() {
   }
 
   return (
-    <div className="h-full bg-gray-100">
+    <>
+      <style precedence="high">
+        {`
+          body {
+            background-color: var(--color-gray-100);
+          }
+        `}
+      </style>
       <FormProvider {...formMethods}>
-        <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
-          <div className="px-2.5 py-5 pb-3">
+        <div className="px-2.5 py-5 pb-3">
+          <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
             <CustomerInfo />
             <DeliveryInfo />
             <Preview submitLoading={orderResult.fetching} />
-          </div>
-        </form>
+          </form>
+        </div>
       </FormProvider>
       <OrderSuccessDrawer />
       <OrderErrorDrawer />
-    </div>
+    </>
   )
 }
