@@ -19,7 +19,7 @@ const navButton = cva('flex items-center rounded-lg bg-gray-100 px-3 py-1 leadin
   }
 })
 
-const arrowIcon = cva('fill-black text-[27px]', {
+const arrowIcon = cva('fill-black text-[27px] font-medium', {
   variants: {
     direction: {
       left: '-rotate-90',
@@ -50,7 +50,7 @@ export function Pagination({
       </button>
       {/*  */}
       <button onClick={handleNextClick} className={navButton({ visible: hasNextPage })}>
-        <span>Следующая страница</span>
+        <span>Дальше</span>
         <Icon name="common/arrow" className={arrowIcon({ direction: 'right' })} />
       </button>
     </div>

@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation'
 import { getProduct } from '@/lib/api'
 import { Description } from './info/description'
 import { Properties } from './info/properties'
+import { TelegramAppWidgets } from './telegram'
 
 import 'keen-slider/keen-slider.min.css'
 
@@ -90,6 +91,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
         />
         <Delivery category={product.category} />
       </div>
+      <TelegramAppWidgets />
     </div>
   )
 }

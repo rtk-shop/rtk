@@ -8,6 +8,7 @@ import { OrderProducts } from './products'
 import { Payment } from './controls/payment'
 import { calculateDeliveryCost } from './lib/utils'
 import { RejectOrderButton } from './controls/reject-button'
+import { TelegramAppWidgets } from './telegram'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -61,6 +62,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         />
         <OrderProducts products={order.products} />
         <RejectOrderButton orderStatus={order.status} />
+        <TelegramAppWidgets />
       </div>
     </>
   )

@@ -29,6 +29,7 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
     <div className="mt-5 mb-2">
       <Button
         fullWidth
+        hapticFeedback="soft"
         loading={fetching}
         onClick={handleButtonClick}
         className="h-[53px]"
