@@ -10,8 +10,9 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
     if (process.env.NODE_ENV === 'development') {
       router.push('/sandbox')
     } else {
-      router.push(routeNames.root)
+      router.push(routeNames.catalog)
     }
+    onClose()
   }
 
   return (
