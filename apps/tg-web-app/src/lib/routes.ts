@@ -5,7 +5,8 @@ export const routeNames = {
   order: '/order/',
   profile: '/profile',
   checkout: '/checkout',
-  favourites: '/favourites'
+  favourites: '/favourites',
+  terms: '/terms'
 } as const
 
 const protectedRoutes = [
