@@ -42,8 +42,9 @@ export function Categories() {
   }
 
   return (
-    <section className="">
-      <ul className="relative flex flex-col">
+    <section className="flex h-full flex-col justify-center">
+      {/* <div className="flex h-full flex-col justify-center bg-blue-800"> */}
+      <ul className="relative">
         {categoriesValues.map((category, ind) => (
           <li key={ind} className="mb-2.5 flex">
             <div onClick={() => handleRedirect(category.to)} className="flex items-center">
@@ -73,6 +74,7 @@ export function Categories() {
           </li>
         ))}
       </ul>
+      {/* </div> */}
     </section>
   )
 }
