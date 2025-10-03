@@ -31,11 +31,9 @@ export function BotLayout({ children }: { children: ReactNode }) {
           paddingBottom: `calc(${withPannel ? 48 : 0}px + var(--tg-safe-area-inset-bottom, 0px))`
         }}
       >
-        <div>
-          {withPannel && <Cart />}
-          <Sidebar />
-          {children}
-        </div>
+        {withPannel && <Cart />}
+        <Sidebar />
+        {children}
       </main>
       {withPannel && <Navigation />}
     </>

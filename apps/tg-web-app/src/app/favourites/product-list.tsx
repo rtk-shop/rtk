@@ -6,20 +6,27 @@ import { ProductList } from '@/components/product/list'
 
 export function Products() {
   const [favouriteAmount] = useFavoriteStore((state) => state.amount)
-  const [result, refetch] = useFavoriteProductsQuery()
+  const [result] = useFavoriteProductsQuery()
 
   const { data, fetching, error } = result
 
   return (
-    <ProductList
-      data={data?.userFavouriteProducts}
-      fetching={fetching}
-      error={error}
-      skeletonLen={favouriteAmount}
-      refetch={refetch}
-      noDataMsg={'Список избранного пуст'}
-      errMsg={'Ошибка получения данных'}
-      actionButtonText={'Повторить'}
-    />
+    <>
+      <style precedence="high">
+        {`
+          main {
+            height: ${!!data?.userFavouriteProducts.length ? 'auto' : '100dvh'};
+          }
+        `}
+      </style>
+      <ProductList
+        data={data?.userFavouriteProducts}
+        fetching={fetching}
+        error={error}
+        skeletonLen={favouriteAmount}
+        noDataMsg={'Список обраного порожній'}
+        errMsg={'В нас щось сталось, вже працюємо над цим!'}
+      />
+    </>
   )
 }

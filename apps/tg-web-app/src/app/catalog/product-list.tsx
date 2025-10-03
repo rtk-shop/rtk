@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
 import { ProductItem } from '@/components/product/item'
 import { ProductTag } from '@/lib/api/graphql/types'
+import { NoDataPlug } from './plugs/no-data'
 
 export interface ProductsProps {
   products: Array<{
@@ -16,20 +16,7 @@ export interface ProductsProps {
 }
 
 export function ProductList({ products, onReset }: ProductsProps) {
-  if (!products.length) {
-    return (
-      <div className="flex h-screen justify-center">
-        <div className="mt-60 text-center">
-          <p className="mb-5 max-w-60 text-lg font-medium">
-            Извините, но по вашему запросу ничего не найдено
-          </p>
-          <Button color="primary" onClick={onReset} fullWidth>
-            Смотреть все
-          </Button>
-        </div>
-      </div>
-    )
-  }
+  if (!products.length) return <NoDataPlug onActionClick={onReset} />
 
   return (
     <div className="lg:px-2.5">

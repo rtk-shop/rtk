@@ -1,18 +1,16 @@
-import { type ReactElement } from 'react'
+import { type ReactNode } from 'react'
 import { ProductItem, type ProductItemProps } from '@/components/product/item'
-import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { ProductListSkeleton } from './skeleton'
+import { ServerFetchError } from '@/components/ui/server-fetch-error'
 
 export interface ProductList {
   data: ProductItemProps[] | undefined
   fetching: boolean
   skeletonLen: number
   error: unknown
-  refetch(): void
-  noDataMsg: string | ReactElement
-  errMsg: string | ReactElement
-  actionButtonText: string
+  noDataMsg: ReactNode
+  errMsg: ReactNode
 }
 
 export function ProductList({
@@ -21,20 +19,14 @@ export function ProductList({
   error,
   skeletonLen,
   noDataMsg,
-  errMsg,
-  actionButtonText,
-  refetch
+  errMsg
 }: ProductList) {
   if (fetching) return <ProductListSkeleton len={skeletonLen || 8} />
 
   if (error) {
     return (
-      <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
-          <Icon name="action/warning" className="mb-1 text-[47px]" />
-          <p className="mb-3 text-lg">{errMsg}</p>
-          <Button onClick={refetch}>{actionButtonText}</Button>
-        </div>
+      <div className="h-full">
+        <ServerFetchError message={errMsg} />
       </div>
     )
   }
@@ -42,9 +34,9 @@ export function ProductList({
   if (!data?.length) {
     return (
       <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg text-gray-500">
+        <div className="flex h-full flex-col items-center justify-center rounded-lg text-black">
           <Icon name="common/emptycart" className="mb-4 text-[230px]" />
-          <p className="text-lg font-semibold">{noDataMsg}</p>
+          <p className="text-lg font-medium">{noDataMsg}</p>
         </div>
       </div>
     )

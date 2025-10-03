@@ -54,7 +54,7 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
     return (
       <div className="h-full pb-3">
         <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
-          <Icon name="action/warning" className="mb-1 text-[39px]" />
+          <Icon name="action/warning" className="mb-1 size-16" />
           <p className="text-lg">Ошибка получения данных</p>
         </div>
       </div>
