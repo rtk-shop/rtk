@@ -133,11 +133,8 @@ function ProductItemInner({
           </div>
           <div>
             {withDelete ? (
-              <IconButton
-                onClick={handleActionClick}
-                className="p-1! pb-1.5! text-[25px] text-gray-500!"
-              >
-                <Icon name="action/trash" className="text-[16px]" />
+              <IconButton onClick={handleActionClick} className="p-1! pb-1.5! text-red-600">
+                <Icon name="action/trash" className="size-5" />
               </IconButton>
             ) : (
               <LikeButton liked={isFavourite} onClick={handleActionClick} />
