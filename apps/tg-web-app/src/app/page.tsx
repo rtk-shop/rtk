@@ -41,9 +41,16 @@ export default function Page() {
             return
           }
 
+          // product_7
           if (command.includes(startupCommandsPatterns.product)) {
             const productId = command.split('_')[1]
             router.replace(routeNames.product + productId)
+            return
+          }
+          // order_7
+          if (command.includes(startupCommandsPatterns.order)) {
+            const orderId = command.split('_')[1]
+            router.replace(routeNames.order + orderId)
             return
           }
         }

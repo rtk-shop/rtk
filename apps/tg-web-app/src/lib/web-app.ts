@@ -4,5 +4,6 @@ export function validateStartParam(input: string): boolean {
 }
 
 export const startupCommandsPatterns = {
-  product: 'product_'
+  product: 'product_',
+  order: 'order_'
 } as const
