@@ -8,5 +8,4 @@ export type SessionTokenData = {
 
 export type RefreshTokenData = {
   userId: string
-  refreshId: string
 }
