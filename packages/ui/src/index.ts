@@ -1,6 +1,0 @@
-export * from './badge'
-export * from './error-message'
-export * from './loader'
-export * from './delivery-supplier'
-export * from './image-placeholder'
-export * from './label'
