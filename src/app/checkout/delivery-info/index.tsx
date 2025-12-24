@@ -17,7 +17,7 @@ import { type DeliveryValues, deliverySchema } from '../model/validation-schema'
 import type { PopularCity } from '../model/types'
 
 const deliveryService = cva(
-  'relative h-20 rounded-lg border border-gray-300 before:invisible before:absolute before:top-1.5 before:left-1.5 before:size-4 before:rounded-full before:bg-lime-500 after:invisible after:absolute after:top-2 after:left-[11px] after:h-2.5 after:w-1.5 after:rotate-45 after:border-r-2 after:border-b-2 after:border-r-white after:border-b-white'
+  'relative h-20 rounded-lg border border-gray-300 before:invisible before:absolute before:top-1.5 before:left-1.5 before:size-4 before:rounded-full before:bg-lime-500 after:invisible after:absolute after:top-2 after:left-2.75 after:h-2.5 after:w-1.5 after:rotate-45 after:border-r-2 after:border-b-2 after:border-r-white after:border-b-white'
 )
 
 const peerStyles = cva(
@@ -63,7 +63,7 @@ export function DeliveryInfo() {
       // patronymic: values[4]
     })
     isValuesValid = true
-  } catch (error) {
+  } catch {
     isValuesValid = false
   }
 

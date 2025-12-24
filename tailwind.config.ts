@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+// @ts-expect-error - there are no types for the plugin
+import tailwindGradientMaskImage from 'tailwind-gradient-mask-image'
 
 const config: Config = {
   future: {
@@ -36,7 +38,7 @@ const config: Config = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate'), require('tailwind-gradient-mask-image')]
+  plugins: [tailwindGradientMaskImage]
 }
 
 export default config

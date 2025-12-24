@@ -33,7 +33,7 @@ export function Checkout() {
 
   const handleSubmit: SubmitHandler<FormValues> = async (values) => {
     // delete meta form data
-    const { ['np-delivery-type']: removedKey, ...requestValues } = values
+    const { ['np-delivery-type']: _, ...requestValues } = values
 
     const res = await createOrder({ ...requestValues })
 

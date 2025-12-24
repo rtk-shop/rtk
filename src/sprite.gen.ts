@@ -21,7 +21,7 @@ export async function loadSvgSprite(url: URL | string, parent?: HTMLElement | nu
  */
 export function mountSvgSprite(svg: string, parent?: HTMLElement | null) {
   if (typeof window === 'undefined') return
-  // eslint-disable-next-line no-param-reassign
+
   parent ??= window.document.body
 
   if (parent.ownerDocument.readyState === 'loading') {

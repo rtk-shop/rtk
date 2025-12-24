@@ -30,7 +30,7 @@ export function CustomerInfo() {
       phone: values[2]
     })
     isValid = true
-  } catch (error) {
+  } catch {
     isValid = false
   }
 

@@ -14,7 +14,7 @@ type AppActions = {
 
 export type AppStore = AppState & AppActions
 
-export const useAppState = create<AppStore>((set, get) => ({
+export const useAppState = create<AppStore>((set, _get) => ({
   isCartOpen: false,
   isSidebarOpen: false,
 

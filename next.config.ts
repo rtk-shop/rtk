@@ -5,6 +5,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
+  reactCompiler: false,
   reactStrictMode: true,
   // webpack(config, options) {
   //   if (options.isServer) {
