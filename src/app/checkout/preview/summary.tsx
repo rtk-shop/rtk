@@ -1,4 +1,5 @@
 import ContentLoader from 'react-content-loader'
+import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
@@ -19,8 +20,8 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
   const hasErr = !!Object.keys(errors).length
 
   return (
-    <div className="px-2.5 pt-4 pb-2">
-      <div className="mb-4">
+    <Box className="px-2.5 pt-4 pb-2">
+      <Box className="mb-4">
         {loading ? (
           <ContentLoader
             backgroundColor="#eeeeee"
@@ -38,7 +39,7 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
             <span>{formatPrice(totalSum)} грн</span>
           </p>
         )}
-      </div>
+      </Box>
       <Button
         fullWidth
         color="accept"
@@ -56,6 +57,6 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
       <p className="mt-2 px-5 text-center text-sm leading-none text-gray-400">
         {t('preview.offerta')}
       </p>
-    </div>
+    </Box>
   )
 }

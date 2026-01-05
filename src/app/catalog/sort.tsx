@@ -1,4 +1,5 @@
 import { Drawer } from '@/components/ui/drawer'
+import { Box } from '@/components/ui/box'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { IconButton } from '@/components/ui/icon-button'
 import { Icon } from '@/components/ui/icon'
@@ -17,16 +18,16 @@ export function SortMenu({ open, onSortClose }: { open: boolean; onSortClose(): 
 
   return (
     <Drawer open={open} position="bottom" onClose={onSortClose}>
-      <section className="relative h-[470px] rounded-t-2xl bg-white px-4 pb-4">
+      <Box as="section" className="relative h-117.5 rounded-t-2xl bg-white px-4 pb-4">
         <p className="py-4 text-[21px] font-semibold">{t('nouns.sort')}</p>
-        <div className="absolute top-3 right-3">
+        <Box className="absolute top-3 right-3">
           <IconButton onClick={onSortClose} className="text-sm text-black">
             <Icon name="common/xmark" />
           </IconButton>
-        </div>
+        </Box>
         <div className="mb-5 h-0.5 bg-gray-100" />
         <RadioGroup name="sortBy" options={sortOptionsData.map(addI18)} />
-      </section>
+      </Box>
     </Drawer>
   )
 }

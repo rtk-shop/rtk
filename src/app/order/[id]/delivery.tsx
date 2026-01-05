@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { DeliverySupplier } from '@/components/ui/delivery-supplier'
 import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
 
@@ -13,9 +14,9 @@ export function Delivery({
   parcelTrackId?: string | null
 }) {
   return (
-    <section className="mb-2 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
+    <Box as="section" className="mb-2 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
       <h2 className="mb-1.5 text-lg">Информация о доставке</h2>
-      <div className="text-sm">
+      <Box className="text-sm">
         <p className="flex items-center">
           <span className="mr-1.5 text-gray-500">Сервис:</span>
           <DeliverySupplier supplier={supplier} />
@@ -28,12 +29,12 @@ export function Delivery({
           <span className="mr-1.5 text-gray-500">Отделение:</span>
           {postOffice}
         </p>
-        <div className="flex items-center">
+        <Box flex="row" align="center">
           <span className="mr-1.5 text-gray-500">Трекинг ID:</span>
           {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
           {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Box>
+    </Box>
   )
 }

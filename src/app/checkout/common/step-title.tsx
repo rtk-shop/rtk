@@ -1,4 +1,5 @@
 import { memo, type ReactNode } from 'react'
+import { Box } from '@/components/ui/box'
 import { cva } from 'cva'
 import { Icon } from '@/components/ui/icon'
 import { ExpandIcon } from '@/components/ui/expand-icon'
@@ -56,17 +57,16 @@ export const StepTitle = memo(function StepTitle({
   }
 
   return (
-    <div className={container({ expand: isEdit })} onClick={handleTitleClick}>
-      <div className={inner({ expand: isEdit })}>
-        <div className={stepBadge({ expand: isEdit, valid })}>
+    <Box className={container({ expand: isEdit })} onClick={handleTitleClick}>
+      <Box className={inner({ expand: isEdit })}>
+        <Box className={stepBadge({ expand: isEdit, valid })}>
           {valid ? <Icon name="common/check" className="text-base" /> : <span>{step}</span>}
-        </div>
-        {/*  */}
+        </Box>
         <h2 className="ml-2 font-medium">{children}</h2>
-        <div className="ml-auto">
+        <Box className="ml-auto">
           <ExpandIcon expanded={isEdit} />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 })

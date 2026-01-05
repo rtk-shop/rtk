@@ -1,4 +1,5 @@
 import { memo, useRef, useState } from 'react'
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order/item'
 import { OrderItemSkeleton } from '@/components/order/item/skeleton'
@@ -41,41 +42,51 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
 
   if (fetching) {
     return (
-      <div className="">
-        <div className="mb-2.5">
+      <Box>
+        <Box className="mb-2.5">
           <OrderItemSkeleton expanded />
-        </div>
+        </Box>
         <OrderSkeletonList len={6} />
-      </div>
+      </Box>
     )
   }
 
   if (error) {
     return (
-      <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
+      <Box className="h-full pb-3">
+        <Box
+          flex="col"
+          align="center"
+          justify="center"
+          className="h-full rounded-lg bg-slate-100 text-gray-500"
+        >
           <Icon name="action/warning" className="mb-1 size-16" />
           <p className="text-lg">Ошибка получения данных</p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   if (!orders.length) {
     return (
-      <div className="h-full pb-3">
-        <div className="flex h-full flex-col items-center justify-center rounded-lg bg-slate-100 text-gray-500">
+      <Box className="h-full pb-3">
+        <Box
+          flex="col"
+          align="center"
+          justify="center"
+          className="h-full rounded-lg bg-slate-100 text-gray-500"
+        >
           <Icon name="common/emptycart" className="mb-3 text-[230px]" />
           <p className="text-lg">Список закакоз пуст</p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   return (
     <ul ref={listRef} className="h-full overflow-y-auto">
       {orders.map((order, index) => (
-        <li key={index} className="mb-3">
+        <Box as="li" key={index} className="mb-3">
           <OrderItem
             currentIndex={index}
             order={{ ...order }}
@@ -83,7 +94,7 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
             isExpanded={expandedOrder.expanded}
             onExpand={handleOrderExpand}
           />
-        </li>
+        </Box>
       ))}
     </ul>
   )

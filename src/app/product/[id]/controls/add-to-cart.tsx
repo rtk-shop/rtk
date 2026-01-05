@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
@@ -26,18 +27,18 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
   }
 
   return (
-    <div className="mt-5 mb-2">
+    <Box className="mt-5 mb-2">
       <Button
         fullWidth
         hapticFeedback="soft"
         loading={fetching}
         onClick={handleButtonClick}
-        className="h-[53px]"
+        className="h-13.25"
         disabled={!inStock}
         startIcon={<Icon name="common/cart" className="mr-2.5 fill-white text-[26px]" />}
       >
         {t('addToCart')}
       </Button>
-    </div>
+    </Box>
   )
 }

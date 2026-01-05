@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { cva } from 'cva'
 
@@ -35,7 +36,7 @@ export interface PaginationProps {
 
 export function Pagination({ pageInfo, onPrevPage, onNextPage }: PaginationProps) {
   return (
-    <div className="flex items-center justify-between">
+    <Box flex="row" align="center" justify="center">
       <button
         type="button"
         disabled={!pageInfo?.hasPreviousPage}
@@ -53,6 +54,6 @@ export function Pagination({ pageInfo, onPrevPage, onNextPage }: PaginationProps
       >
         <Icon name="common/arrow" className={arrowIcon({ direction: 'next' })} />
       </button>
-    </div>
+    </Box>
   )
 }

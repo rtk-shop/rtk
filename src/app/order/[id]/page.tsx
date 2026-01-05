@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { getOrder } from '@/lib/api'
 import { notFound } from 'next/navigation'
 import { OrderHeader } from './header'
@@ -33,7 +34,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           }
         `}
       </style>
-      <div className="px-2 pt-2">
+      <Box className="px-2 pt-2">
         <OrderHeader orderId={order.id} createdAt={order.createdAt} />
         <Receiver
           name={order.receiverName}
@@ -63,7 +64,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <OrderProducts products={order.products} />
         <RejectOrderButton orderStatus={order.status} />
         <TelegramAppWidgets />
-      </div>
+      </Box>
     </>
   )
 }

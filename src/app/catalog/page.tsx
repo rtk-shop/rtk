@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { Box } from '@/components/ui/box'
 import { Pagination } from '@/components/layout/pagination'
 import { Controls } from './controls'
 import { Filters } from './filters'
@@ -175,9 +176,9 @@ export default function Page() {
   if (error) return <FetchError />
 
   return (
-    <div>
+    <Box>
       <FormProvider {...formMethods}>
-        <div className="flex w-full flex-wrap px-2 lg:flex-nowrap">
+        <Box flex="row" className="w-full flex-wrap px-2 lg:flex-nowrap">
           <SortMenu
             open={controls.isSortMenuOpen}
             onSortClose={() =>
@@ -199,32 +200,32 @@ export default function Page() {
             priceRange={[priceRange?.gt || 0, priceRange?.lt || 0]}
           />
 
-          <div className="w-full">
+          <Box className="w-full">
             {fetching ? (
               <>
                 <ControlsSkeleton />
                 <ProductListSkeleton />
               </>
             ) : (
-              <div className="h-full">
+              <Box className="h-full">
                 <Controls
                   onSortClick={() => setControls({ isSortMenuOpen: true, isFiltersOpen: false })}
                   onFiltersClick={() => setControls({ isFiltersOpen: true, isSortMenuOpen: false })}
                 />
                 <ProductList products={products} onReset={handleReset} />
-                <div className="px-2 pt-2.5 pb-4">
+                <Box className="px-2 pt-2.5 pb-4">
                   <Pagination
                     onNextPage={handleNextPage}
                     onPrevPage={handlePrevPage}
                     hasNextPage={pageInfo?.hasNextPage}
                     hasPreviousPage={pageInfo?.hasPreviousPage}
                   />
-                </div>
-              </div>
+                </Box>
+              </Box>
             )}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </FormProvider>
-    </div>
+    </Box>
   )
 }

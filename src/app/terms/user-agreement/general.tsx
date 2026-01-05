@@ -1,6 +1,8 @@
+import { Box } from '@/components/ui/box'
+
 export function GeneralTerms() {
   return (
-    <div className="my-4 font-medium">
+    <Box className="my-4 font-medium">
       <h2 className="mb-2">2. Загальні умови</h2>
       <p>
         2.1. Залишаючись на Платформі Користувач приймає умови та порядок направлення оферти
@@ -94,6 +96,6 @@ export function GeneralTerms() {
       </p>
       2.12. На Платформі {process.env.NEXT_PUBLIC_APP_NAME} є або можуть бути інші договори
       (правила), що регулюють окремі взаємовідносини.
-    </div>
+    </Box>
   )
 }

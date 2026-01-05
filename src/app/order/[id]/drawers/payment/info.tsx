@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Loader } from '@/components/ui/loader'
 import { cva } from 'cva'
 import { Button } from '@/components/ui/button'
@@ -34,27 +35,27 @@ export default function PaymentInfo({
 
   if (isLoading) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <Box flex="row" align="center" justify="center" className="h-full">
         <Loader color="secondary" />
-      </div>
+      </Box>
     )
   }
 
   if (error) {
     return (
-      <div className="flex h-full flex-col items-center justify-center">
+      <Box flex="col" align="center" justify="center" className="h-full">
         <Icon name="action/warning" className="m-auto mb-3 block text-[69px]" />
         <p className="text-lg font-medium text-gray-500">Сталася помилка, спробуйте пізніше</p>
         <Button fullWidth className="mt-auto" onClick={onClose}>
           Згорнути
         </Button>
-      </div>
+      </Box>
     )
   }
 
   if (!isDataDefined(data)) {
     return (
-      <div className="flex h-full flex-col items-center justify-center">
+      <Box flex="col" align="center" justify="center" className="h-full">
         <Icon name="action/warning" className="m-auto mb-3 block text-[69px]" />
         <p className="text-center text-lg font-medium text-gray-500">
           Сталася помилка, платіжні дані невідомі, спробуйте пізніше
@@ -62,7 +63,7 @@ export default function PaymentInfo({
         <Button fullWidth className="mt-auto" onClick={onClose}>
           Згорнути
         </Button>
-      </div>
+      </Box>
     )
   }
 
@@ -102,23 +103,23 @@ export default function PaymentInfo({
   }
 
   return (
-    <div>
+    <Box>
       <h3 className="mb-4 text-center text-xl font-medium">Оплата за реквізитами</h3>
-      <ul>
+      <Box as="ul">
         {viewData.map(({ title, info }, index) => (
-          <li key={index} className="mb-1.5">
+          <Box as="li" key={index} className="mb-1.5">
             <p className={paymentTitle()}>{title}</p>
-            <div className="flex items-center">
+            <Box flex="row" align="center">
               <p className="font-medium">
                 {title.includes('IBAN') && 'UA'}
                 {info}
               </p>
               <CopyToClipboard what={info} />
-            </div>
-          </li>
+            </Box>
+          </Box>
         ))}
-      </ul>
-      <div className="mb-4">
+      </Box>
+      <Box className="mb-4">
         <p className={paymentTitle()}>
           Сума до сплати&nbsp;
           {type === PaymentPurpose.DeliveryAndOrder && (
@@ -127,14 +128,14 @@ export default function PaymentInfo({
             </span>
           )}
         </p>
-        <div className="flex items-center">
+        <Box flex="row" align="center">
           <FormatPrice price={totalSumm} currency="грн." />
           <CopyToClipboard what={totalSumm.toString()} />
-        </div>
-      </div>
-      <div className="mb-5">
+        </Box>
+      </Box>
+      <Box className="mb-5">
         <Callout type="info">
-          <div className="text-sm leading-4 font-medium">
+          <Box className="text-sm leading-4 font-medium">
             {mode === 'payment' && (
               <p>
                 Після того як Ви сплатили за реквізитами, повідомте про це нас, натиснувши на кнопку
@@ -142,10 +143,10 @@ export default function PaymentInfo({
               </p>
             )}
             <p className="mt-1">Ми перевіримо платіж як можна швидше!</p>
-          </div>
+          </Box>
         </Callout>
-      </div>
-      <div className="flex justify-between">
+      </Box>
+      <Box flex="row" justify="between">
         {mode === 'payment' && (
           <ConfirmButton orderId={orderId} onSucess={onClose}>
             Платіж надіслано
@@ -154,7 +155,7 @@ export default function PaymentInfo({
         <Button fullWidth={mode === 'reminder'} onClick={onClose}>
           Згорнути
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

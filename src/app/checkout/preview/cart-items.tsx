@@ -1,4 +1,5 @@
 import { CartItem, type CartItemProps } from '@/components/cart/item'
+import { Box } from '@/components/ui/box'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
 import { routeNames } from '@/lib/routes'
 import { useRouter } from 'next/navigation'
@@ -32,22 +33,22 @@ export function CartItems({
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between px-2 pt-4 pb-4">
+    <Box>
+      <Box flex="row" align="center" justify="between" className="px-2 pt-4 pb-4">
         <h2 className="font-medium">{t('Checkout.preview.yourOrder')}</h2>
         <button type="button" className="text-[13px] text-gray-500" onClick={handleClearClick}>
           {t('Common.actions.deleteAll')}
         </button>
-      </div>
+      </Box>
       {loading ? (
         <ListSkeleton len={1} />
       ) : (
-        <ul className="scroll-bar max-h-[400px] overflow-x-hidden overflow-y-auto pt-4">
+        <Box as="ul" className="scroll-bar max-h-100 overflow-x-hidden overflow-y-auto pt-4">
           {cartProducts.map((item) => (
             <CartItem key={item.product.id} quantity={item.quantity} product={item.product} />
           ))}
-        </ul>
+        </Box>
       )}
-    </div>
+    </Box>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import useSWRMutation from 'swr/mutation'
+import { Box } from '@/components/ui/box'
 import { Loader } from '@/components/ui/loader'
 import { LogoLoader } from '@/components/ui/logo-loader'
 import { useRouter } from 'next/navigation'
@@ -93,11 +94,11 @@ export default function Page() {
   }
 
   return (
-    <div className="flex h-dvh flex-col items-center justify-center">
+    <Box flex="col" align="center" justify="center" className="h-dvh">
       <LogoLoader size={180} onAnimationEnd={handleLogoAnimationEnd} />
-      <div className="animate-fade-in-2s mt-6 opacity-0">
+      <Box className="animate-fade-in-2s mt-6 opacity-0">
         <Loader color="secondary" />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

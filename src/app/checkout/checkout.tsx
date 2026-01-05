@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
+import { Box } from '@/components/ui/box'
 import { CustomerInfo } from './customer-info'
 import { DeliveryInfo } from './delivery-info'
 import { Preview } from './preview'
@@ -56,13 +57,13 @@ export function Checkout() {
         `}
       </style>
       <FormProvider {...formMethods}>
-        <div className="px-2.5 py-5 pb-3">
+        <Box className="px-2.5 py-5 pb-3">
           <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
             <CustomerInfo />
             <DeliveryInfo />
             <Preview submitLoading={orderResult.fetching} />
           </form>
-        </div>
+        </Box>
       </FormProvider>
       <OrderSuccessDrawer />
       <OrderErrorDrawer />

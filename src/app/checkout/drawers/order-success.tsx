@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { Drawer } from '@/components/ui/drawer'
 import { useRouter } from 'next/navigation'
@@ -24,7 +25,7 @@ export function OrderSuccessDrawer() {
 
   return (
     <Drawer open={isOpen} position="bottom">
-      <div className="rounded-t-2xl bg-white px-4 pt-7 pb-7">
+      <Box className="rounded-t-2xl bg-white px-4 pt-7 pb-7">
         <Image
           src="/icons/tada.webp"
           width={100}
@@ -36,26 +37,26 @@ export function OrderSuccessDrawer() {
         {/*  */}
         <h1 className="text-center text-2xl font-medium">{t('title')}</h1>
         {/*  */}
-        <ul className="mt-5 text-black *:flex *:justify-center">
-          <li className="mb-3">
+        <Box as="ul" className="mt-5 text-black *:flex *:justify-center">
+          <Box as="li" className="mb-3">
             <Icon name="checkout/letter" className="text-[33px]" />
             <p className="ml-3 max-w-60 leading-4">{t('hint1')}</p>
-          </li>
-          <li>
+          </Box>
+          <Box as="li">
             <Icon name="checkout/box-taped" className="fill-black text-[33px]" />
             <p className="ml-3 max-w-60 leading-4">
               {t.rich('hint2', {
                 highlight: (chunks) => <span className="underline">{chunks}</span>
               })}
             </p>
-          </li>
-        </ul>
-        <div className="mt-5 flex justify-center px-3">
+          </Box>
+        </Box>
+        <Box flex="row" justify="center" className="mt-5 px-3">
           <Button onClick={handleCompleteClick} fullWidth>
             {t('review')}
           </Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Drawer>
   )
 }

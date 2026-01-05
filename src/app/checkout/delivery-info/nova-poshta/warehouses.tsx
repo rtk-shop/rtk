@@ -1,4 +1,5 @@
 import useSWR, { Fetcher } from 'swr'
+import { Box } from '@/components/ui/box'
 import { useEffect, useState } from 'react'
 import { usePageState } from '../../model/state'
 import { useFormContext } from 'react-hook-form'
@@ -36,14 +37,14 @@ export const VirtualizedList = ({
 
   const rowRenderer = ({ key, parent, index, style }: ListRowProps) => (
     <CellMeasurer cache={cellCache} key={key} columnIndex={0} rowIndex={index} parent={parent}>
-      <div key={key} style={style}>
+      <Box key={key} style={style}>
         {rows[index]}
-      </div>
+      </Box>
     </CellMeasurer>
   )
 
   return (
-    <div style={{ height: '300px' }}>
+    <Box style={{ height: '300px' }}>
       <AutoSizer>
         {({ width, height }) => {
           recalculateRowHeight()
@@ -60,7 +61,7 @@ export const VirtualizedList = ({
           )
         }}
       </AutoSizer>
-    </div>
+    </Box>
   )
 }
 
@@ -113,7 +114,7 @@ export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: 
     })
 
   return (
-    <div className="mb-3">
+    <Box className="mb-3">
       <span>{t(`Common.nouns.${warehouseTypeLocale[+warehouseType]}`)}</span>
       <AsyncSelect
         components={{ MenuList: VirtualizedList }}
@@ -143,6 +144,6 @@ export function Warehouses({ cityId, onSelect }: { cityId: string; onSelect(id: 
           })
         }}
       />
-    </div>
+    </Box>
   )
 }

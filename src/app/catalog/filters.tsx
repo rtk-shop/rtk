@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { Drawer } from '@/components/ui/drawer'
 import { RadioGroup } from '@/components/ui/radio-group'
@@ -61,10 +62,10 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
 
   return (
     <Drawer open={open} position="bottom" onClose={onFiltersClose}>
-      <section className="max-h-[510px] overflow-y-auto rounded-t-2xl">
-        <div className="bg-white px-4">
-          <form>
-            <div className="relative py-4">
+      <Box as="section" className="max-h-127.5 overflow-y-auto rounded-t-2xl">
+        <Box className="bg-white px-4">
+          <Box as="form">
+            <Box className="relative py-4">
               <p className="text-center text-xl font-semibold">{t('nouns.filters')}</p>
               {isDirty && (
                 <button
@@ -75,12 +76,12 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
                   {t('verbs.clear')}
                 </button>
               )}
-              <div className="absolute top-3 right-1">
+              <Box className="absolute top-3 right-1">
                 <IconButton onClick={onFiltersClose} className="text-sm text-black">
                   <Icon name="common/xmark" />
                 </IconButton>
-              </div>
-            </div>
+              </Box>
+            </Box>
             <div className="mb-2.5 h-0.5 bg-gray-100" />
             <CheckboxGroup
               title={t('nouns.categories')}
@@ -104,9 +105,9 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
               name="availability"
               options={availabilityOptionsData.map(addI18)}
             />
-          </form>
-        </div>
-      </section>
+          </Box>
+        </Box>
+      </Box>
     </Drawer>
   )
 }

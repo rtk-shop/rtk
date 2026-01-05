@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { Box } from '@/components/ui/box'
 import { Pagination } from './pagination'
 import { OrdersList } from './list'
 import { useTranslations } from 'next-intl'
@@ -54,16 +55,16 @@ export function Orders() {
   }
 
   return (
-    <section className="h-full">
-      <div className="mb-4 flex items-center justify-between">
+    <Box as="section" className="h-full">
+      <Box flex="row" align="center" justify="between" className="mb-4">
         <h2 className="text-xl font-medium">{t('myorders')}</h2>
         <Pagination
           pageInfo={data?.userOrders.pageInfo}
           onNextPage={handleNextPage}
           onPrevPage={handlePrevPage}
         />
-      </div>
+      </Box>
       <OrdersList fetching={fetching} error={error} orders={orders} />
-    </section>
+    </Box>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import dynamic from 'next/dynamic'
 import { Drawer } from '@/components/ui/drawer'
 import { usePageState } from '../../lib/state'
@@ -27,7 +28,7 @@ export function PaymentDrawer({
 
   return (
     <Drawer open={paymentDrawer.open} position="bottom" onClose={handleDrawerClose}>
-      <div className="h-[530px] rounded-t-2xl bg-white px-3 py-4">
+      <Box className="h-132.5 rounded-t-2xl bg-white px-3 py-4">
         {paymentDrawer.open && (
           <PaymentInfo
             mode={paymentDrawer.mode}
@@ -38,7 +39,7 @@ export function PaymentDrawer({
             onClose={handleDrawerClose}
           />
         )}
-      </div>
+      </Box>
     </Drawer>
   )
 }

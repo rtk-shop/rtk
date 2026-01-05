@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { type ReactElement } from 'react'
 import { cva } from 'cva'
 import { PaymentStatus } from '@/lib/api/graphql/types'
@@ -42,9 +43,9 @@ export function PaymentStatusBadge({ status }: { status: PaymentStatus }) {
   }
 
   return (
-    <div className={container({ status })}>
+    <Box className={container({ status })}>
       {statusIcon}
       <span className="ml-1">{t(status.toLowerCase())}</span>
-    </div>
+    </Box>
   )
 }

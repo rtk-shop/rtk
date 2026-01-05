@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import useSWR, { Fetcher } from 'swr'
+import { Box } from '@/components/ui/box'
 import { cva } from 'cva'
 import { usePageState } from '../model/state'
 import { StepTitle } from '../common/step-title'
@@ -68,21 +69,21 @@ export function DeliveryInfo() {
   }
 
   return (
-    <section className="rounded-lg bg-white">
+    <Box as="section" className="rounded-lg bg-white">
       <StepTitle step={2} isEdit={isDeliveryOpen} onEdit={onDeliverySection} valid={isValuesValid}>
         {t('Checkout.delivery.title')}
       </StepTitle>
       <DynamicExpander open={isDeliveryOpen}>
-        <div className="px-2.5 pb-3">
-          <div className="mb-3">
+        <Box className="px-2.5 pb-3">
+          <Box className="mb-3">
             <Callout type="info">
               <p className="text-sm leading-4 font-medium">
                 {t('Checkout.callouts.deliveryPayment')}
               </p>
             </Callout>
-          </div>
-          <ul className="flex">
-            <li className="mr-2 w-full">
+          </Box>
+          <Box as="ul" flex="row">
+            <Box as="li" className="mr-2 w-full">
               <label>
                 <input
                   type="radio"
@@ -90,18 +91,18 @@ export function DeliveryInfo() {
                   className="peer hidden"
                   {...register('supplier')}
                 />
-                <div
+                <Box
                   className={deliveryService({
                     class: peerStyles()
                   })}
                 >
-                  <div className="relative h-full">
+                  <Box className="relative h-full">
                     <Image fill={true} src="/assets/nova_poshta.svg" alt="логотип 'Новая Почта'" />
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </label>
-            </li>
-            <li className="w-full">
+            </Box>
+            <Box as="li" className="w-full">
               <label>
                 <input
                   disabled
@@ -110,18 +111,18 @@ export function DeliveryInfo() {
                   className="peer hidden"
                   {...register('supplier')}
                 />
-                <div
+                <Box
                   className={deliveryService({
                     class: peerStyles()
                   })}
                 >
-                  <div className="relative h-full">
+                  <Box className="relative h-full">
                     <Image fill={true} src="/assets/ukr_poshta.svg" alt="логотип 'Укр Почта'" />
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </label>
-            </li>
-          </ul>
+            </Box>
+          </Box>
           <p className="mt-1 text-end text-[13px] leading-none">
             * {t('Checkout.delivery.unavailable')}
           </p>
@@ -136,8 +137,8 @@ export function DeliveryInfo() {
           <Button color="accept" fullWidth disabled={!isValuesValid} onClick={closeDelivery}>
             {t('Common.verbs.continue')}
           </Button>
-        </div>
+        </Box>
       </DynamicExpander>
-    </section>
+    </Box>
   )
 }

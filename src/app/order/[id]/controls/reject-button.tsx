@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { usePageState } from '../lib/state'
 import { Button } from '@/components/ui/button'
 import { OrderStatus } from '@/lib/api/graphql/types'
@@ -10,9 +11,9 @@ export function RejectOrderButton({ orderStatus }: { orderStatus: OrderStatus })
   const setRejectDrawerOpen = usePageState((state) => state.setRejectDrawerOpen)
 
   return (
-    <div>
+    <Box>
       {statusesForReject.includes(orderStatus) && (
-        <div className="py-3">
+        <Box className="py-3">
           <Button
             color="secondary"
             fullWidth
@@ -21,8 +22,8 @@ export function RejectOrderButton({ orderStatus }: { orderStatus: OrderStatus })
           >
             Отменить заказ
           </Button>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   )
 }

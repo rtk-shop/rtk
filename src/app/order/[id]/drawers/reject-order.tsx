@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Drawer } from '@/components/ui/drawer'
@@ -32,9 +33,9 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
 
   return (
     <Drawer open={isRejectDrawerOpen} position="bottom" onClose={handleCancelClick}>
-      <div className="rounded-t-2xl bg-white px-4 pt-7 pb-3">
+      <Box className="rounded-t-2xl bg-white px-4 pt-7 pb-3">
         <h3 className="mb-4 text-center text-lg font-medium">Вы подтверждаете отмену заказа?</h3>
-        <div className="mb-3 flex">
+        <Box className="mb-3 flex">
           <Button loading={fetching} onClick={handleConfirmClick} fullWidth>
             Подтвердить
           </Button>
@@ -46,11 +47,11 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
           >
             Згорнути
           </Button>
-        </div>
+        </Box>
         <ErrorMessage show={!!error} align="center">
           <span className="text-center">Ошибка, повторите попытку позже</span>
         </ErrorMessage>
-      </div>
+      </Box>
     </Drawer>
   )
 }

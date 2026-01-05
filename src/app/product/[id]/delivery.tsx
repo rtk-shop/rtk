@@ -1,15 +1,17 @@
 import Image from 'next/image'
+import { Box } from '@/components/ui/box'
 import { useTranslations } from 'next-intl'
 import { CategoryType } from '@/lib/api/graphql/types'
 
 export function Delivery({ category }: { category: CategoryType }) {
   const t = useTranslations('Product')
+
   return (
-    <div>
+    <Box>
       <p className="mb-1.5 font-medium">{t('deliveryTitle')}:</p>
-      <ul className="px-1">
-        <li className="mb-2 flex items-center justify-between text-sm leading-none font-medium">
-          <div className="flex items-center">
+      <Box as="ul" className="text-sm leading-none font-medium">
+        <Box as="li" flex="row" align="center" justify="between" className="mb-2">
+          <Box flex="row" align="center">
             <Image
               src="/icons/novaposta.svg"
               width={27}
@@ -17,12 +19,12 @@ export function Delivery({ category }: { category: CategoryType }) {
               alt="изображение — Нова Пошта"
             />
             <p className="ml-1.5 text-left">Нова Пошта</p>
-          </div>
+          </Box>
           <p className="text-right">{t('delivery')}</p>
-        </li>
+        </Box>
         {category !== CategoryType.Suitcase && (
-          <li className="mb-3 flex items-center justify-between text-sm leading-none font-medium">
-            <div className="flex items-center">
+          <Box as="li" flex="row" align="center" justify="between" className="mb-3">
+            <Box flex="row" align="center">
               <Image
                 src="/icons/urkposhta.svg"
                 width={23}
@@ -31,11 +33,11 @@ export function Delivery({ category }: { category: CategoryType }) {
                 alt="изображение — Укрпошта"
               />
               <p className="ml-2.5 text-left">Укрпошта</p>
-            </div>
+            </Box>
             <p className="text-right">{t('delivery')}</p>
-          </li>
+          </Box>
         )}
-      </ul>
-    </div>
+      </Box>
+    </Box>
   )
 }

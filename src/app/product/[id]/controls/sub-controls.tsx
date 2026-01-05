@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { toast } from 'sonner'
 import { LikeButton } from '@/components/ui/like-button'
@@ -43,19 +44,22 @@ export function SubControls({ productId }: { productId: string }) {
   }
 
   return (
-    <div className="flex flex-wrap items-center">
-      <div className="relative basis-1/2 before:absolute before:-top-0.5 before:right-0.5 before:h-7 before:w-0.5 before:bg-gray-300">
-        <div className="flex justify-center">
-          <Icon name="action/share" className="mr-2 fill-black text-[21px]" />
-          <p className="font-medium">{t('share')}</p>
-        </div>
-      </div>
-      <div className="flex basis-1/2 items-center justify-center">
+    <Box flex="row" align="center">
+      <Box
+        flex="row"
+        align="center"
+        justify="center"
+        className="relative basis-1/2 before:absolute before:-top-0.5 before:right-0.5 before:h-7 before:w-0.5 before:bg-gray-300"
+      >
+        <Icon name="action/share" className="mr-2 fill-black text-[21px]" />
+        <p className="font-medium">{t('share')}</p>
+      </Box>
+      <Box flex="row" align="center" justify="center" className="basis-1/2">
         <LikeButton width={21} height={21} liked={isFavourite} onClick={handleLikeClick} />
         <p className="ml-1 leading-none font-medium select-none" onClick={handleLikeClick}>
           {isFavourite ? t('favourite') : t('toFavourite')}
         </p>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

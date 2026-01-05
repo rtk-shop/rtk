@@ -1,9 +1,11 @@
+import { Box } from '@/components/ui/box'
+
 export function Promo() {
   const percent = 5
 
   return (
-    <div className="bg-checkoutPromo mt-4 select-none rounded-lg bg-cover bg-center bg-no-repeat py-2">
-      <div className="flex items-center justify-between font-medium leading-none text-white">
+    <Box className="bg-checkoutPromo mt-4 rounded-lg bg-cover bg-center bg-no-repeat py-2 select-none">
+      <div className="flex items-center justify-between leading-none font-medium text-white">
         <div className="ml-4 rounded-md bg-white px-2 py-1">
           <span className="text-[18px] text-red-600">-{percent}%</span>
         </div>
@@ -11,6 +13,6 @@ export function Promo() {
           <p>Бонус на первую покупку</p>
         </div>
       </div>
-    </div>
+    </Box>
   )
 }

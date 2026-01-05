@@ -9,6 +9,7 @@ import { Loader } from '@/components/ui/loader'
 import { IconButton } from '@/components/ui/icon-button'
 import { isDataDefined } from '@/lib/api/helpers'
 import { OrderStatus, OrderPaymentMethod, PaymentPurpose } from '@/lib/api/graphql/types'
+import { Box } from '@/components/ui/box'
 
 const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
 
@@ -27,32 +28,32 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
 
   if (fetching) {
     return (
-      <div className="mt-6 flex h-8 items-center justify-center">
-        <div className="size-6">
+      <Box flex="row" align="center" justify="center" className="mt-6 h-8">
+        <Box className="size-6">
           <Loader color="secondary" adaptive />
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   if (!isDataDefined(data) || error) {
     return (
-      <div className="mt-6 flex h-8 items-center justify-center">
-        <div className="flex items-center font-medium">
+      <Box flex="row" align="center" justify="center" className="mt-6 h-8 font-medium">
+        <Box flex="row" align="center">
           <Icon name="action/warning" className="mr-1 text-2xl text-red-700" />
           <p>Ошибка</p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   const payment = data.orderPayment.__typename === 'Payment' ? data.orderPayment : null
 
   return (
-    <div className="mt-6">
+    <Box className="mt-6">
       {payment && orderStatus !== OrderStatus.Done ? (
         <>
-          <div className="absolute top-1 right-1">
+          <Box className="absolute top-1 right-1">
             <IconButton
               className="text-xl"
               onClick={() =>
@@ -65,7 +66,7 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
             >
               <Icon name="action/circle-info" />
             </IconButton>
-          </div>
+          </Box>
           <PaymentStatusBadge status={payment.status} />
         </>
       ) : (
@@ -90,6 +91,6 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
             : 'Оплатить доставку'}
         </Button>
       )}
-    </div>
+    </Box>
   )
 }

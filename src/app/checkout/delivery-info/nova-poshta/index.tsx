@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react'
+import { Box } from '@/components/ui/box'
 import AsyncSelect from 'react-select/async'
 import { Warehouses } from './warehouses'
 import { useFormContext, useWatch } from 'react-hook-form'
@@ -135,18 +136,18 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
   }))
 
   return (
-    <div>
-      <div className="mb-3">
-        <div className="mb-2.5">
+    <Box>
+      <Box className="mb-3">
+        <Box className="mb-2.5">
           <p className="mb-0.5 text-sm font-medium">{t('Checkout.delivery.paymentMethod')}</p>
           <RadioGroup direction="row" name="paymentMethod" options={radioPaymentOptions} />
-        </div>
+        </Box>
         <p className="mb-0.5 text-sm font-medium">{t('Checkout.delivery.warehouseType')}</p>
         <ScrollMask>
           <RadioGroup direction="row" name="np-delivery-type" options={radioOptions} />
         </ScrollMask>
-      </div>
-      <div className="w-full">
+      </Box>
+      <Box className="w-full">
         <p className="my-1.5 leading-none">{t('Common.nouns.city')}</p>
         <AsyncSelect
           cacheOptions
@@ -193,20 +194,21 @@ export function NovaPoshta({ popularCitiesLoad, popularCities }: NovaPoshtaProps
             })
           }}
         />
-      </div>
+      </Box>
       {/*  */}
-      <ul className="my-1 flex justify-between">
+      <Box as="ul" flex="row" justify="between" className="my-1">
         {selectedCities.map(({ baseLabel, value, label }) => (
-          <li
+          <Box
+            as="li"
             key={baseLabel}
             onClick={() => handleCityQuikSet({ label, value })}
             className="text-sm font-medium text-blue-700"
           >
             <span>{baseLabel}</span>
-          </li>
+          </Box>
         ))}
-      </ul>
+      </Box>
       {cityId && <Warehouses cityId={cityId} onSelect={handleWarehouseChange} />}
-    </div>
+    </Box>
   )
 }

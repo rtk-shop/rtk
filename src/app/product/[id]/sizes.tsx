@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { useRouter } from 'next/navigation'
 import { SizeGuide, type SizeItem } from '@/components/ui/size-guide'
 import { CategoryType } from '@/lib/api/graphql/types'
@@ -23,7 +24,7 @@ export function Sizes({ category, sizeName, availableSizes }: DetailsProps) {
   }
 
   return (
-    <section>
+    <Box as="section">
       {sizeName !== 'none' && (
         <>
           <p className="mb-2 font-medium">{t('sizes')}:</p>
@@ -35,6 +36,6 @@ export function Sizes({ category, sizeName, availableSizes }: DetailsProps) {
           />
         </>
       )}
-    </section>
+    </Box>
   )
 }

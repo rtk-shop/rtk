@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { parse } from 'valibot'
 import { usePageState } from './model/state'
 import { StepTitle } from './common/step-title'
@@ -39,28 +40,28 @@ export function CustomerInfo() {
   }
 
   return (
-    <section className="mb-7 rounded-lg bg-white">
+    <Box as="section" className="mb-7 rounded-lg bg-white">
       <StepTitle step={1} isEdit={isInfoOpen} onEdit={onInfoSection} valid={isValid}>
         {t('order.receiver')}
       </StepTitle>
       <HeightExpander expanded={isInfoOpen}>
-        <div className="px-4 pb-4">
-          <ul>
-            <li>
+        <Box className="px-4 pb-4">
+          <Box as="ul">
+            <Box as="li">
               <Input name="name" label={t('nouns.name')} />
-            </li>
-            <li>
+            </Box>
+            <Box as="li">
               <Input name="surname" label={t('nouns.surname')} />
-            </li>
-            <li>
+            </Box>
+            <Box as="li">
               <PhoneInput name="phone" label={t('nouns.phone')} />
-            </li>
-          </ul>
+            </Box>
+          </Box>
           <Button color="accept" fullWidth disabled={!isValid} onClick={handleNextClick}>
             {t('verbs.continue')}
           </Button>
-        </div>
+        </Box>
       </HeightExpander>
-    </section>
+    </Box>
   )
 }

@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { ProductItem } from '@/components/product/item'
 import { ProductTag } from '@/lib/api/graphql/types'
 import { NoDataPlug } from './plugs/no-data'
@@ -19,10 +20,10 @@ export function ProductList({ products, onReset }: ProductsProps) {
   if (!products.length) return <NoDataPlug onActionClick={onReset} />
 
   return (
-    <div className="lg:px-2.5">
-      <ul className="flex flex-wrap">
+    <Box className="lg:px-2.5">
+      <Box as="ul" flex="row">
         {products.map((product) => (
-          <li key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
+          <Box as="li" key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
             <ProductItem
               id={product.id}
               preview={product.preview}
@@ -32,9 +33,9 @@ export function ProductList({ products, onReset }: ProductsProps) {
               tag={product.tag}
               basePrice={product.basePrice}
             />
-          </li>
+          </Box>
         ))}
-      </ul>
-    </div>
+      </Box>
+    </Box>
   )
 }

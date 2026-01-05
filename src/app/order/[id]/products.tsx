@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { useTranslations } from 'next-intl'
 import { OrderProductItem } from '@/components/order-product-item'
 
@@ -11,12 +12,12 @@ export interface OrderProductsProps {
 }
 
 export function OrderProducts({ products }: OrderProductsProps) {
-  const t = useTranslations('Common')
+  const _ = useTranslations('Common')
 
   return (
-    <section className="rounded-lg bg-white p-3 shadow-sm">
+    <Box as="section" className="rounded-lg bg-white p-3 shadow-sm">
       <h2 className="text-xl font-medium">Товары:</h2>
-      <ul className="pt-2">
+      <Box as="ul" className="pt-2">
         {products.map(({ id, quantity, priceAtOrder, product }) => (
           <OrderProductItem
             key={id}
@@ -25,7 +26,7 @@ export function OrderProducts({ products }: OrderProductsProps) {
             product={product}
           />
         ))}
-      </ul>
-    </section>
+      </Box>
+    </Box>
   )
 }

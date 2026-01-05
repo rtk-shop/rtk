@@ -1,10 +1,11 @@
+import { Box } from '@/components/ui/box'
 import { TermsDefinitions } from './definitions'
 import { GeneralTerms } from './general'
 import { ForceMajeureTerms } from './force-majeure'
 
 export function UserAgreement() {
   return (
-    <div>
+    <Box>
       <h1 className="mb-2 text-xl font-medium">Угода користувача</h1>
       <p className="mb-1">
         Вчинення дій особами (далі іменовані «Користувач»/ «Покупець», а в множині «Користувачі»/
@@ -20,6 +21,6 @@ export function UserAgreement() {
       <TermsDefinitions />
       <GeneralTerms />
       <ForceMajeureTerms />
-    </div>
+    </Box>
   )
 }

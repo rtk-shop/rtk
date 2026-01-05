@@ -1,15 +1,16 @@
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { Products } from './product-list'
 
 export default function Favourites() {
   return (
-    <div className="h-full px-2 pt-5">
+    <Box className="h-full px-2 pt-5">
       <h1 className="text-2xl leading-0 font-medium">
         Понравившиеся товары <Icon name="common/heart" className="text-red-600" />
       </h1>
-      <div className="h-full pt-4">
+      <Box className="h-full pt-4">
         <Products />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { CartItems } from './cart-items'
 import { Summary } from './summary'
@@ -19,9 +20,9 @@ export function Preview({ submitLoading }: PreviewProps) {
   if (error) {
     onErrorDrawerOpen(true)
     return (
-      <div className="mt-20 flex justify-center px-4">
+      <Box flex="row" justify="center" className="mt-20 px-4">
         <Icon name="common/emptycart" className="fill-black text-[280px]" />
-      </div>
+      </Box>
     )
   }
 
@@ -31,12 +32,12 @@ export function Preview({ submitLoading }: PreviewProps) {
   )
 
   return (
-    <section className="pt-4">
-      <div className="rounded-lg bg-white px-2.5">
+    <Box as="section" className="pt-4">
+      <Box className="rounded-lg bg-white px-2.5">
         <CartItems loading={fetching} cartProducts={data?.cartProducts || []} />
         <Summary totalSum={cartPrice} loading={fetching} submitLoading={submitLoading} />
-      </div>
+      </Box>
       {/* <Promo /> */}
-    </section>
+    </Box>
   )
 }

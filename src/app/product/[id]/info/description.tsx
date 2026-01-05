@@ -1,14 +1,15 @@
+import { Box } from '@/components/ui/box'
 import DOMPurify from 'isomorphic-dompurify'
 import styles from './markdown-overrides.module.css'
 
 export function Description({ textMarkdown }: { textMarkdown: string }) {
   return (
-    <div className={styles.markdown}>
-      <div
+    <Box className={styles.markdown}>
+      <Box
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(textMarkdown, { USE_PROFILES: { html: true } })
         }}
       />
-    </div>
+    </Box>
   )
 }

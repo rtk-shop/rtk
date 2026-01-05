@@ -1,6 +1,7 @@
 'use client'
 
 import { type ReactNode, useState } from 'react'
+import { Box } from '@/components/ui/box'
 import { cva } from 'cva'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { useKeenSlider } from 'keen-slider/react'
@@ -36,10 +37,10 @@ export function Preview({ images, tag }: { images: string[]; tag: ReactNode }) {
   // }
 
   return (
-    <div className="relative">
-      <ul ref={sliderRef} className="keen-slider cursor-grab">
+    <Box className="relative">
+      <Box as="ul" ref={sliderRef} className="keen-slider">
         {images.map((image, index) => (
-          <li key={index} className="keen-slider__slide">
+          <Box as="li" key={index} className="keen-slider__slide">
             <ImagePlaceholder
               src={image}
               quality={100}
@@ -48,15 +49,15 @@ export function Preview({ images, tag }: { images: string[]; tag: ReactNode }) {
               height={1350}
               alt={`фото №${index + 1}`}
             />
-          </li>
+          </Box>
         ))}
-      </ul>
-      <ul className="absolute bottom-2 left-1/2 flex -translate-x-1/2">
+      </Box>
+      <Box as="ul" className="absolute bottom-2 left-1/2 flex -translate-x-1/2">
         {[...Array(images.length)].map((_, index) => (
-          <li key={index} className={dot({ active: currentIndex === index })} />
+          <Box as="li" key={index} className={dot({ active: currentIndex === index })} />
         ))}
-      </ul>
+      </Box>
       <div className="absolute top-5 right-5">{tag}</div>
-    </div>
+    </Box>
   )
 }

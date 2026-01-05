@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
@@ -23,14 +24,14 @@ export function Controls({
   const filtersDirtyCount = countFiltersDirtyFields(dirtyFields)
 
   return (
-    <section className="py-3">
-      <div className="flex">
+    <Box as="section" className="py-3">
+      <Box flex="row">
         <Badge content={isSortDirty} className="w-full pr-0.5" dotClassName="right-3 top-1">
           <Button
             color="secondary"
             fullWidth
             onClick={onSortClick}
-            className="bg-gray-200 !px-1 !py-2"
+            className="bg-gray-200 px-1! py-2!"
             endIcon={<Icon name="action/sort" className="text-[25px]" />}
           >
             {t('actions.sort')}
@@ -41,13 +42,13 @@ export function Controls({
             color="secondary"
             fullWidth
             onClick={onFiltersClick}
-            className="bg-gray-200 !px-1 !py-2"
+            className="bg-gray-200 px-1! py-2!"
             startIcon={<Icon name="action/filter" className="mr-1" />}
           >
             {t('nouns.filter')}
           </Button>
         </Badge>
-      </div>
-    </section>
+      </Box>
+    </Box>
   )
 }

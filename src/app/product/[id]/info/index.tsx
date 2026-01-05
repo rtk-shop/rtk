@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@/components/ui/box'
 import { type ReactNode, useState } from 'react'
 import { Tabs, TabContent } from '@/components/ui/tabs'
 import { useTranslations } from 'next-intl'
@@ -18,8 +19,8 @@ export function Info({ description, properties }: InfoProps) {
   }
 
   return (
-    <section className="mt-5">
-      <div>
+    <Box as="section" className="mt-5">
+      <Box>
         <Tabs
           activeTab={activeTab}
           onChange={handleTabChange}
@@ -33,12 +34,12 @@ export function Info({ description, properties }: InfoProps) {
           ]}
         />
         <TabContent tabID={0} value={activeTab}>
-          <div className="py-5 pl-1">{description}</div>
+          <Box className="py-5 pl-1">{description}</Box>
         </TabContent>
         <TabContent tabID={1} value={activeTab}>
           {properties}
         </TabContent>
-      </div>
-    </section>
+      </Box>
+    </Box>
   )
 }

@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { cva } from 'cva'
 import { Preview } from './preview'
 import { InstockBadge } from '@/components/product/instock-badge'
@@ -40,7 +41,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
   const withDiscount = product.basePrice > product.currentPrice
 
   return (
-    <div>
+    <Box>
       <Preview
         images={product.images}
         tag={
@@ -53,23 +54,23 @@ export default async function Product({ params }: { params: Promise<{ id: string
           )
         }
       />
-      <div className="px-1.5">
-        <section>
+      <Box className="px-1.5">
+        <Box as="section">
           <h1 className="mt-4 mb-2.5 text-[21px] leading-5 font-medium">{product.title}</h1>
-          <div className="mb-2.5 flex items-center justify-between pr-2.5">
+          <Box flex="row" align="center" justify="between" className="mb-2.5 pr-2.5">
             <InstockBadge inStock={product.inStock} />
-            <div>
+            <Box>
               {withDiscount && (
-                <div className="text-end leading-none text-gray-500 line-through">
+                <Box className="text-end leading-none text-gray-500 line-through">
                   <FormatPrice price={product.basePrice} />
-                </div>
+                </Box>
               )}
-              <div className={priceTitle({ withDiscount })}>
+              <Box className={priceTitle({ withDiscount })}>
                 <FormatPrice size="inherit" price={product.currentPrice} />
-              </div>
-            </div>
-          </div>
-        </section>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
         <Sizes
           category={product.category}
           sizeName={product.sizeName}
@@ -90,8 +91,8 @@ export default async function Product({ params }: { params: Promise<{ id: string
           }
         />
         <Delivery category={product.category} />
-      </div>
+      </Box>
       <TelegramAppWidgets />
-    </div>
+    </Box>
   )
 }

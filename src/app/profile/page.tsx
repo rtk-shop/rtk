@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Orders } from './orders'
 import { LangSwitcher } from '@/components/lang-switcher'
 import { useTranslations } from 'next-intl'
@@ -14,17 +15,17 @@ export default function Profile() {
           }
         `}
       </style>
-      <div className="h-full px-2">
-        <div className="flex h-full flex-col">
-          <div className="my-3 flex items-center justify-between">
+      <Box className="h-full px-2">
+        <Box flex="col" className="h-full">
+          <Box flex="row" align="center" justify="between" className="my-3">
             <h2 className="text-xl font-medium">{t('Common.nouns.ilang')}</h2>
             <LangSwitcher />
-          </div>
-          <div className="h-full">
+          </Box>
+          <Box className="h-full">
             <Orders />
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </>
   )
 }
