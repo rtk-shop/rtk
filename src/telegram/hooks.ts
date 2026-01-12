@@ -33,3 +33,27 @@ export function useTelegramBackButton(fallback: string) {
     }
   }, [router, fallback])
 }
+
+export function useTelegramHeaderColor(color: string) {
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.Telegram) return
+
+    window.Telegram.WebApp.setHeaderColor(color)
+  }, [color])
+}
+
+export function useTelegramClosingConfirmation(enable: boolean = true) {
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.Telegram) return
+
+    if (enable) {
+      window.Telegram.WebApp.enableClosingConfirmation()
+    } else {
+      window.Telegram.WebApp.disableClosingConfirmation()
+    }
+
+    return () => {
+      window.Telegram.WebApp.disableClosingConfirmation()
+    }
+  }, [enable])
+}

@@ -18,7 +18,6 @@ export function BotLayout({ children }: { children: ReactNode }) {
       window.Telegram.WebApp.expand()
       window.Telegram.WebApp.disableVerticalSwipes()
       window.Telegram.WebApp.lockOrientation()
-      window.Telegram.WebApp.enableClosingConfirmation()
     }
   }, [])
 

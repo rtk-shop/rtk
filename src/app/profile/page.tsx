@@ -2,6 +2,7 @@ import { Box } from '@/components/ui/box'
 import { Orders } from './orders'
 import { LangSwitcher } from '@/components/lang-switcher'
 import { useTranslations } from 'next-intl'
+import { TelegramAppWidgets } from './telegram'
 
 export default function Profile() {
   const t = useTranslations()
@@ -25,6 +26,7 @@ export default function Profile() {
             <Orders />
           </Box>
         </Box>
+        <TelegramAppWidgets />
       </Box>
     </>
   )
