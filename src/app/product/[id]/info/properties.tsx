@@ -37,18 +37,23 @@ export function Properties({ gender, dimensions, weightKG, category }: Propertie
   ]
 
   return (
-    <Box className="py-5 pl-1 font-medium">
+    <Box className="px-1 py-5 font-medium">
       <Box>
         <Box as="ul">
           {details
             .filter(({ value }) => !!value)
             .map((property) => (
-              <Box as="li" flex="row" justify="between" key={property.name}>
-                <span className="shrink-0 text-gray-500">{property.name}</span>
-                <span className="basis-8/12 text-black">
-                  <span className="mr-5 text-gray-500">—</span>
-                  <span>{property.value}</span>
-                </span>
+              <Box
+                as="li"
+                flex="row"
+                justify="between"
+                gap={1}
+                key={property.name}
+                className="mb-2.5 leading-none"
+              >
+                <span className="text-gray-500">{property.name}</span>
+                <Box as="span" className="leader-dots h-1e flex-1" />
+                <span>{property.value}</span>
               </Box>
             ))}
         </Box>
