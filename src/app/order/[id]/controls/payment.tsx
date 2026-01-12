@@ -1,15 +1,15 @@
 'use client'
 
+import ContentLoader from 'react-content-loader'
+import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { usePageState } from '../lib/state'
 import { Icon } from '@/components/ui/icon'
 import { useOrderPayment } from '@/lib/api/hooks'
 import { PaymentStatusBadge } from './status-badge'
-import { Loader } from '@/components/ui/loader'
 import { IconButton } from '@/components/ui/icon-button'
 import { isDataDefined } from '@/lib/api/helpers'
 import { OrderStatus, OrderPaymentMethod, PaymentPurpose } from '@/lib/api/graphql/types'
-import { Box } from '@/components/ui/box'
 
 const statusesForPayment: OrderStatus[] = [OrderStatus.Processed, OrderStatus.Sent]
 
@@ -29,9 +29,9 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
   if (fetching) {
     return (
       <Box flex="row" align="center" justify="center" className="mt-6 h-8">
-        <Box className="size-6">
-          <Loader color="secondary" adaptive />
-        </Box>
+        <ContentLoader backgroundColor="#eeeeee" foregroundColor="#e1e1e1" width="100%" height="32">
+          <rect x="0" y="0" rx="6" ry="6" width="100%" height="100%" />
+        </ContentLoader>
       </Box>
     )
   }
@@ -71,7 +71,6 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
         </>
       ) : (
         <Button
-          color="accept"
           fullWidth
           className="rounded-lg! pt-1.5 pb-1.5 text-sm"
           disabled={!statusesForPayment.includes(orderStatus)}

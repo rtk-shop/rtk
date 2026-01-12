@@ -37,7 +37,7 @@ export function ControlsGrid({
           <OrderStatusBadge status={status} />
         </Box>
         <Box className="col-span-2 col-start-4 row-span-3 rounded-lg bg-white p-2 shadow-sm">
-          <p className="mb-1 text-sm font-medium text-gray-500">Оплата:</p>
+          <p className="text-sm font-medium text-gray-500">Оплата:</p>
           <OrderPaymentMethodBadge method={paymentMethod} />
         </Box>
       </Box>
