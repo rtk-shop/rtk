@@ -14,8 +14,13 @@ export function Delivery({ category, inStock }: { category: CategoryType; inStoc
     <Box className="mb-4">
       <p className="mb-1.5 text-lg font-medium">{t('delivery.title')}:</p>
 
-      <Box className="mb-2 flex items-center">
-        <Box className="relative flex size-11 items-center justify-center rounded-full bg-gray-100">
+      <Box flex="row" align="center" className="mb-2">
+        <Box
+          flex="row"
+          align="center"
+          justify="center"
+          className="relative size-11 rounded-full bg-gray-100"
+        >
           <Image
             src="/icons/package.png"
             width={26}
@@ -41,8 +46,13 @@ export function Delivery({ category, inStock }: { category: CategoryType; inStoc
         </Box>
       </Box>
       {/*  */}
-      <Box className="mb-2 flex items-center">
-        <Box className="relative flex size-11 items-center justify-center rounded-full bg-gray-100">
+      <Box flex="row" align="center" className="mb-2">
+        <Box
+          flex="row"
+          align="center"
+          justify="center"
+          className="relative size-11 rounded-full bg-gray-100"
+        >
           <Image src="/icons/truck.png" width={26} height={26} alt="изображение — эмодзи машины" />
           <Image
             src="/icons/novaposta.svg"
@@ -68,11 +78,9 @@ const shipmentForecast = (inStock: boolean): string => {
 
   const now = new Date()
   const currentHour = now.getHours()
-  const dayOfWeek = now.getDay() // 0 - Sunday, 6 - Saturday
 
-  if (dayOfWeek === 6) {
-    return 'delivery.inDays1'
-  }
+  // 0 - Sunday, 6 - Saturday
+  if (now.getDay() === 6) return 'delivery.inDays1'
 
   return currentHour < 16 ? 'delivery.today' : 'delivery.tomorrow'
 }
