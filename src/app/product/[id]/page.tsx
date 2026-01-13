@@ -90,7 +90,7 @@ export default async function Product({ params }: { params: Promise<{ id: string
             />
           }
         />
-        <Delivery category={product.category} />
+        <Delivery inStock={product.inStock} category={product.category} />
       </Box>
       <TelegramAppWidgets />
     </Box>

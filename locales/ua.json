@@ -162,8 +162,17 @@
     "toFavourite": "До обраного",
     "description": "Опис",
     "details": "Подробиці",
-    "deliveryTitle": "Способи доставки",
-    "delivery": "За тарифами перевізника",
+    "delivery": {
+      "title": "Варіанти доставки",
+      "toWarehouse": "До відділення",
+      "postomat": "поштомату",
+      "byCourier": "Кур'єром на адресу",
+      "willSend": "Відправимо замовлення",
+      "today": "сьогодні",
+      "tomorrow": "завтра",
+      "inDays1": "через 1 день",
+      "byAvailability": "за наявністю"
+    },
     "toasts": {
       "addToCartErr": "Не вдалось додати товар до кошика",
       "addFavourite": "Не вдалось додати в обране",

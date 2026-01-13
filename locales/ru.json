@@ -162,8 +162,17 @@
     "toFavourite": "В избранное",
     "description": "Описание",
     "details": "Подробности",
-    "deliveryTitle": "Способы доставки",
-    "delivery": "По тарифам перевозчика",
+    "delivery": {
+      "title": "Способы доставки",
+      "toWarehouse": "На отделение",
+      "postomat": "почтомат",
+      "byCourier": "Курьером по адресу",
+      "willSend": "Отправим посылку",
+      "today": "сегодня",
+      "tomorrow": "завтра",
+      "inDays1": "через 1 день",
+      "byAvailability": "по наличию"
+    },
     "toasts": {
       "addToCartErr": "Не удалось добавить товар в корзину",
       "addFavourite": "Не удалось добавить в избранное",
