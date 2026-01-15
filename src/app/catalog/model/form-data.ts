@@ -61,6 +61,10 @@ export const categoriesOptionsData: Option<CategoryType>[] = [
     value: CategoryType.Bag
   },
   {
+    label: 'categories.suitcase_accessories',
+    value: CategoryType.SuitcaseAccessories
+  },
+  {
     label: 'categories.backpack',
     value: CategoryType.Backpack
   },

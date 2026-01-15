@@ -51,7 +51,8 @@ export enum CategoryType {
   Backpack = 'BACKPACK',
   Bag = 'BAG',
   Other = 'OTHER',
-  Suitcase = 'SUITCASE'
+  Suitcase = 'SUITCASE',
+  SuitcaseAccessories = 'SUITCASE_ACCESSORIES'
 }
 
 export type ClearCartPayload = {
