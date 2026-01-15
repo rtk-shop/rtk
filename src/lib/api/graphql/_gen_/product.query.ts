@@ -23,7 +23,6 @@ export type GetProductQuery = {
         preview: string
         category: Types.CategoryType
         inStock: boolean
-        description: string
         colorName: string
         sizeName: string
         brandName: string
@@ -31,6 +30,13 @@ export type GetProductQuery = {
         isHidden: boolean
         updatedAt: string
         createdAt: string
+        details: {
+          __typename?: 'ProductDetails'
+          description: string
+          dimensions?: string | null
+          weight?: number | null
+          capacity?: number | null
+        }
         availableSizes: Array<{ __typename?: 'SizeVariation'; size: string; productId: string }>
       }
 }
@@ -51,7 +57,6 @@ export const GetProductDocument = gql`
         preview
         category
         inStock
-        description
         colorName
         sizeName
         brandName
@@ -59,6 +64,12 @@ export const GetProductDocument = gql`
         isHidden
         updatedAt
         createdAt
+        details {
+          description
+          dimensions
+          weight
+          capacity
+        }
         availableSizes {
           size
           productId

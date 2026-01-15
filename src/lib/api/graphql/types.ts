@@ -354,7 +354,7 @@ export type Product = {
   colorName: Scalars['String']['output']
   createdAt: Scalars['String']['output']
   currentPrice: Scalars['Price']['output']
-  description: Scalars['HTML']['output']
+  details: ProductDetails
   gender: Gender
   id: Scalars['ID']['output']
   images: Array<Scalars['String']['output']>
@@ -383,6 +383,17 @@ export type ProductConnection = {
   pageInfo: PageInfo
   priceRange: PriceRangeType
   totalCount: Scalars['Int']['output']
+}
+
+export type ProductDetails = {
+  __typename?: 'ProductDetails'
+  /** capacity - capacity represent in liters */
+  capacity?: Maybe<Scalars['Int']['output']>
+  description: Scalars['HTML']['output']
+  /** dimensions - dimensions represent in cm. */
+  dimensions?: Maybe<Scalars['String']['output']>
+  /** weight - weight represent in kg. */
+  weight?: Maybe<Scalars['Float']['output']>
 }
 
 export type ProductEdge = {

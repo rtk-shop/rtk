@@ -79,14 +79,15 @@ export default async function Product({ params }: { params: Promise<{ id: string
         <AddToCartButton productId={product.id} inStock={product.inStock} />
         <SubControls productId={product.id} />
         <Info
-          description={<Description textMarkdown={product.description as string} />}
+          description={<Description textMarkdown={product.details.description as string} />}
           properties={
             <Properties
-              gender={product.gender}
-              weightKG={1.1} // todo
-              dimensions={'110x81x21'} // todo
-              color={product.colorName}
               category={product.category}
+              gender={product.gender}
+              weight={product.details.weight}
+              dimensions={product.details.dimensions}
+              capacity={product.details.capacity}
+              color={product.colorName}
             />
           }
         />

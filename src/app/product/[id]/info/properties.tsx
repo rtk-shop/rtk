@@ -4,36 +4,46 @@ import { CategoryType, Gender } from '@/lib/api/graphql/types'
 
 export interface PropertiesProps {
   gender: Gender
-  category: CategoryType
-  weightKG: number
-  dimensions: string
   color: string
+  category: CategoryType
+  weight?: number | null
+  capacity?: number | null
+  dimensions?: string | null
 }
 
-export function Properties({ gender, dimensions, weightKG, category }: PropertiesProps) {
+export function Properties({ gender, dimensions, weight, category, capacity }: PropertiesProps) {
   const t = useTranslations('Common')
 
   const details = [
     {
-      name: t(`nouns.size`) + ' в см.',
-      value: dimensions
+      name: t('nouns.category'),
+      value: category,
+      label: t(`categories.${category.toLowerCase()}`)
+    },
+    {
+      name: 'Тип',
+      value: gender,
+      label: t(`gender.${gender.toLowerCase()}`)
+    },
+    {
+      name: t(`nouns.size`),
+      value: dimensions,
+      label: dimensions + ' см.'
     },
     {
       name: t(`nouns.weight`),
-      value: weightKG + ' кг.'
+      value: weight,
+      label: weight + ' кг.'
     },
+    {
+      name: t(`capacity`),
+      value: capacity,
+      label: capacity + ' л.'
+    }
     // {
     //   name: 'Цвет',
     //   value: color
     // },
-    {
-      name: 'Тип',
-      value: t(`gender.${gender.toLowerCase()}`)
-    },
-    {
-      name: t('nouns.category'),
-      value: t(`categories.${category.toLowerCase()}`)
-    }
   ]
 
   return (
@@ -53,7 +63,7 @@ export function Properties({ gender, dimensions, weightKG, category }: Propertie
               >
                 <span className="text-gray-500">{property.name}</span>
                 <Box as="span" className="leader-dots h-1e flex-1" />
-                <span>{property.value}</span>
+                <span>{property.label}</span>
               </Box>
             ))}
         </Box>

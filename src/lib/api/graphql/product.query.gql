@@ -13,7 +13,6 @@ query GetProduct($id: ID!) {
       preview
       category
       inStock
-      description
       colorName
       sizeName
       brandName
@@ -21,6 +20,12 @@ query GetProduct($id: ID!) {
       isHidden
       updatedAt
       createdAt
+      details {
+        description
+        dimensions
+        weight
+        capacity
+      }
       availableSizes {
         size
         productId
