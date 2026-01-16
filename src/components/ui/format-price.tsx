@@ -1,12 +1,13 @@
 import { formatPrice } from '@/lib/helpers'
-import { cva } from 'cva'
+import { cva, type VariantProps } from 'cva'
 
-const priceView = cva('font-medium', {
+const priceView = cva('leading-none font-medium tracking-tight', {
   variants: {
     size: {
       normal: 'text-base',
       XL: 'text-lg',
       XXL: 'text-xl',
+      XL2: 'text-2xl',
       inherit: ''
     }
   },
@@ -15,15 +16,16 @@ const priceView = cva('font-medium', {
   }
 })
 
+export interface FormatPriceProps {
+  price: number
+  currency?: string
+}
+
 export function FormatPrice({
   price,
   size,
   currency = '₴'
-}: {
-  price: number
-  currency?: string
-  size?: 'normal' | 'XL' | 'XXL' | 'inherit'
-}) {
+}: VariantProps<typeof priceView> & FormatPriceProps) {
   return (
     <span className={priceView({ size })}>
       {formatPrice(price)}

@@ -1,44 +1,38 @@
 'use client'
 
 import { Box } from '@/components/ui/box'
-import { type ReactNode, useState } from 'react'
-import { Tabs, TabContent } from '@/components/ui/tabs'
+import { type ReactNode } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useTranslations } from 'next-intl'
 
-export interface InfoProps {
+export function Info({
+  description,
+  properties
+}: {
   description: ReactNode
   properties: ReactNode
-}
-
-export function Info({ description, properties }: InfoProps) {
+}) {
   const t = useTranslations('Product')
-  const [activeTab, setActiveTab] = useState(0)
-
-  const handleTabChange = (tabIndex: number) => {
-    setActiveTab(tabIndex)
-  }
 
   return (
-    <Box as="section" className="mt-5">
+    <Box as="section">
       <Box>
-        <Tabs
-          activeTab={activeTab}
-          onChange={handleTabChange}
-          tabs={[
-            {
-              label: t('description')
-            },
-            {
-              label: t('details')
-            }
-          ]}
-        />
-        <TabContent tabID={0} value={activeTab}>
-          <Box className="py-5 pl-1">{description}</Box>
-        </TabContent>
-        <TabContent tabID={1} value={activeTab}>
-          {properties}
-        </TabContent>
+        <Tabs defaultValue="description">
+          <div className="flex justify-center">
+            <TabsList className="w-10/12">
+              <TabsTrigger className="w-full" value="description">
+                {t('description')}
+              </TabsTrigger>
+              <TabsTrigger className="w-full" value="details">
+                {t('details')}
+              </TabsTrigger>
+            </TabsList>
+          </div>
+          <TabsContent value="description">
+            <Box className="py-5 pl-1">{description}</Box>
+          </TabsContent>
+          <TabsContent value="details">{properties}</TabsContent>
+        </Tabs>
       </Box>
     </Box>
   )

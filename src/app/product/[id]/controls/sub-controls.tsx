@@ -44,7 +44,7 @@ export function SubControls({ productId }: { productId: string }) {
   }
 
   return (
-    <Box flex="row" align="center">
+    <Box flex="row" align="center" className="text-sm">
       <Box
         flex="row"
         align="center"

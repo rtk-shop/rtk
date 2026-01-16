@@ -9,7 +9,7 @@ import { useKeenSlider } from 'keen-slider/react'
 const dot = cva('mx-0.5 size-2 rounded-full', {
   variants: {
     active: {
-      true: 'bg-gray-500',
+      true: 'bg-gray-600',
       false: 'bg-gray-300'
     }
   }

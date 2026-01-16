@@ -36,7 +36,7 @@ export function Properties({ gender, dimensions, weight, category, capacity }: P
       label: weight + ' кг.'
     },
     {
-      name: t(`capacity`),
+      name: t(`nouns.capacity`),
       value: capacity,
       label: capacity + ' л.'
     }
@@ -53,17 +53,9 @@ export function Properties({ gender, dimensions, weight, category, capacity }: P
           {details
             .filter(({ value }) => !!value)
             .map((property) => (
-              <Box
-                as="li"
-                flex="row"
-                justify="between"
-                gap={1}
-                key={property.name}
-                className="mb-2.5 leading-none"
-              >
-                <span className="text-gray-500">{property.name}</span>
-                <Box as="span" className="leader-dots h-1e flex-1" />
-                <span>{property.label}</span>
+              <Box key={property.name} as="li" className="mb-2">
+                <p className="text-sm leading-none text-gray-500">{property.name}</p>
+                <p>{property.label}</p>
               </Box>
             ))}
         </Box>
