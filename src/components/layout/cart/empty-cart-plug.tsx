@@ -21,17 +21,16 @@ export function EmptyCartPlug() {
         <Icon name="common/emptycart" className="text-[300px] text-gray-500" />
         <p className="mt-2.5 text-center text-2xl font-medium">{t('empty.text')}</p>
       </div>
-      <Button onClick={handleActionButtonClick} fullWidth className="mt-12 max-w-62 py-3">
+      <Button onClick={handleActionButtonClick} fullWidth className="mt-10 max-w-62 py-3">
         {t('empty.action')}
       </Button>
-      <div className="absolute top-5 right-4">
+      <div className="absolute bottom-7 left-1/2 -translate-x-1/2">
         <Button
           onClick={closeCart}
           color="secondary"
-          className="flex items-center rounded-md bg-slate-100 !py-1 !pr-3 !pl-2 text-sm leading-4 text-gray-700"
-          startIcon={<Icon name="common/arrow" className="-rotate-90 text-[23px]" />}
+          className="p flex items-center rounded-md bg-slate-100 px-2.5! py-1.5! text-sm text-gray-900"
         >
-          Назад
+          {t('empty.close')}
         </Button>
       </div>
     </div>

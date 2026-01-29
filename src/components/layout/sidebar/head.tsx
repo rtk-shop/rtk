@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { IconButton } from '@/components/ui/icon-button'
 import { Icon } from '@/components/ui/icon'
 import { useRouter } from 'next/navigation'
@@ -16,13 +17,13 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
   }
 
   return (
-    <div className="flex items-center justify-between px-4 py-2">
-      <div className="w-14 text-[47px] text-white" onClick={handleLogoClick}>
-        <Icon name="common/logo" />
-      </div>
-      <IconButton onClick={onClose} className="text-sm text-white hover:text-gray-300">
+    <Box flex="row" align="center" justify="between" className="px-4 py-2 pt-8 text-white">
+      <Box onClick={handleLogoClick}>
+        <Icon name="common/logo" className="text-[48px]" />
+      </Box>
+      <IconButton onClick={onClose} className="text-sm">
         <Icon name="common/xmark" />
       </IconButton>
-    </div>
+    </Box>
   )
 }
