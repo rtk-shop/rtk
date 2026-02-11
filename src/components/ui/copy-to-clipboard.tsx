@@ -1,19 +1,29 @@
 'use client'
 
-import { useCopyToClipboard } from '@/hooks'
+import { toast } from 'sonner'
 import { Icon } from './icon'
 import { IconButton } from './icon-button'
+import { useTranslations } from 'next-intl'
+import { useCopyToClipboard } from '@/hooks'
 
 export function CopyToClipboard({ what }: { what: string }) {
   const [copiedText, copy] = useCopyToClipboard()
 
+  const t = useTranslations('Common.toasts.copy')
+
   const handleClick = () => {
     copy(what)
       .then(() => {
-        console.log('Copied!', { what })
+        toast.success(t('success'), {
+          duration: 2000
+        })
       })
-      .catch((error) => {
-        console.error('Failed to copy!', error)
+      .catch(() => {
+        toast.error(t('titleError'), {
+          richColors: true,
+          duration: 3000,
+          description: t('details')
+        })
       })
   }
 

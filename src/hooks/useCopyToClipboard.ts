@@ -9,7 +9,7 @@ export const useCopyToClipboard = (): [CopiedValue, CopyFn] => {
   useEffect(() => {
     const t = setTimeout(() => {
       if (copiedText) setCopiedText(null)
-    }, 3000)
+    }, 2500)
 
     return () => {
       clearTimeout(t)
@@ -17,17 +17,14 @@ export const useCopyToClipboard = (): [CopiedValue, CopyFn] => {
   }, [copiedText])
 
   const copy: CopyFn = useCallback(async (text) => {
-    if (!navigator.clipboard) {
-      console.warn('Clipboard not supported')
-      return
-    }
+    if (!navigator.clipboard) return Promise.reject(new Error('clipboard not supported'))
 
     try {
       await navigator.clipboard.writeText(text)
       setCopiedText(text)
     } catch (error) {
-      console.warn('Copy failed', error)
       setCopiedText(null)
+      return Promise.reject(error)
     }
   }, [])
 
