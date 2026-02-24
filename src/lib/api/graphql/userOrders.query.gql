@@ -29,6 +29,7 @@ query UserOrders(
         createdAt
         products {
           id
+          __typename
           quantity
           priceAtOrder
           product {

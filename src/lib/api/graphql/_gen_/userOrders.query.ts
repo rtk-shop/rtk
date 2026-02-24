@@ -38,7 +38,7 @@ export type UserOrdersQuery = {
         updatedAt: string
         createdAt: string
         products: Array<{
-          __typename?: 'OrderProduct'
+          __typename: 'OrderProduct'
           id: string
           quantity: number
           priceAtOrder: number
@@ -75,6 +75,7 @@ export const UserOrdersDocument = gql`
           createdAt
           products {
             id
+            __typename
             quantity
             priceAtOrder
             product {
