@@ -3,11 +3,11 @@
 import { Box } from '@/components/ui/box'
 import { usePageState } from '../lib/state'
 import { Button } from '@/components/ui/button'
-import { OrderStatus } from '@/lib/api/graphql/types'
+import { OrderStatus, type OrderStatus as TOrderStatus } from '@/lib/api/graphql/types'
 
-const statusesForReject = [OrderStatus.Created, OrderStatus.Processed]
+const statusesForReject: [TOrderStatus, TOrderStatus] = [OrderStatus.Created, OrderStatus.Processed]
 
-export function RejectOrderButton({ orderStatus }: { orderStatus: OrderStatus }) {
+export function RejectOrderButton({ orderStatus }: { orderStatus: TOrderStatus }) {
   const setRejectDrawerOpen = usePageState((state) => state.setRejectDrawerOpen)
 
   return (

@@ -1,19 +1,22 @@
 import { useQuery, useMutation, UseQueryArgs } from 'urql'
 
-import * as rejectOrder from './graphql/_gen_/rejectOrder.mutation'
-import * as cartProducts from './graphql/_gen_/cartProducts.query'
-import * as createOrder from './graphql/_gen_/createOrder.mutation'
-import * as addFavouriteProduct from './graphql/_gen_/addFavouriteProduct.mutation'
-import * as removeFavouriteProduct from './graphql/_gen_/removeFavouriteProduct.mutation'
-import * as favouriteQuery from '@/lib/api/graphql/_gen_/userFavouriteProducts.query'
-import * as addCartItem from '@/lib/api/graphql/_gen_/addCartItem.mutation'
-import * as removeCartItem from '@/lib/api/graphql/_gen_/removeCartItem.mutation'
-import * as reduceCartItem from '@/lib/api/graphql/_gen_/reduceCartItemQuantity.mutation'
-import * as clearCart from '@/lib/api/graphql/_gen_/clearCart.mutation'
-import * as productsQuery from '@/lib/api/graphql/_gen_/products.query'
-import * as userOrders from '@/lib/api/graphql/_gen_/userOrders.query'
-import * as orderPayment from '@/lib/api/graphql/_gen_/orderPayment.query'
-import * as initSoleProprietorPayment from '@/lib/api/graphql/_gen_/initSoleProprietorPayment.mutation'
+import * as createOrder from './graphql/order/_gen_/create.mutation'
+import * as rejectOrder from './graphql/order/_gen_/reject.mutation'
+import * as userOrders from './graphql/order/_gen_/user-orders.query'
+
+import * as cartProducts from './graphql/cart/_gen_/products.query'
+import * as addCartItem from './graphql/cart/_gen_/add-item.mutation'
+import * as removeCartItem from './graphql/cart/_gen_/remove-item.mutation'
+import * as reduceCartItem from './graphql/cart/_gen_/reduce-item-quantity.mutation'
+import * as clearCart from './graphql/cart/_gen_/clear.mutation'
+
+import * as productsQuery from './graphql/product/_gen_/products.query'
+import * as favouriteProductsQuery from './graphql/product/_gen_/user-favourite.query'
+import * as addFavouriteProduct from './graphql/product/_gen_/add-favourite.mutation'
+import * as removeFavouriteProduct from './graphql/product/_gen_/remove-favourite.mutation'
+
+import * as orderPayment from './graphql/payment/_gen_/order-payment.query'
+import * as initSoleProprietorPayment from './graphql/payment/_gen_/init-sole-proprietor-payment.mutation'
 
 export function useProductsQuery({
   variables,
@@ -78,11 +81,11 @@ export function useRemoveProductFromFavorites() {
 
 export function useFavoriteProductsQuery() {
   return useQuery<
-    favouriteQuery.UserFavouriteProductsQuery,
-    favouriteQuery.UserFavouriteProductsQueryVariables
+    favouriteProductsQuery.UserFavouriteProductsQuery,
+    favouriteProductsQuery.UserFavouriteProductsQueryVariables
   >({
     requestPolicy: 'cache-first', // todo in separate
-    query: favouriteQuery.UserFavouriteProductsDocument
+    query: favouriteProductsQuery.UserFavouriteProductsDocument
   })
 }
 

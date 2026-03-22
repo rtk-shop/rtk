@@ -27,7 +27,7 @@ export function Sidebar() {
             >
               Умови використання додатку
             </Link>
-            <p className="mt-0.5">© 2025 Інтернет-магазин «{process.env.NEXT_PUBLIC_APP_NAME}»</p>
+            <p className="mt-0.5">© 2026 Інтернет-магазин «{process.env.NEXT_PUBLIC_APP_NAME}»</p>
           </Box>
         </Box>
       </Box>

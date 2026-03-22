@@ -47,12 +47,12 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^6.1.1",
-    "@graphql-codegen/client-preset": "^5.2.2",
+    "@graphql-codegen/cli": "^6.2.1",
+    "@graphql-codegen/client-preset": "^5.2.4",
     "@graphql-codegen/fragment-matcher": "^6.0.0",
-    "@graphql-codegen/near-operation-file-preset": "^4.0.0",
-    "@graphql-codegen/typescript-operations": "^5.0.7",
-    "@graphql-codegen/typescript-urql": "^4.0.1",
+    "@graphql-codegen/near-operation-file-preset": "^5.0.0",
+    "@graphql-codegen/typescript-operations": "^5.0.9",
+    "@graphql-codegen/typescript-urql": "^5.0.0",
     "@neodx/svg": "^0.8.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/js-cookie": "^3.0.6",

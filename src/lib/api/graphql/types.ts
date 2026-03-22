@@ -47,14 +47,15 @@ export type CartProduct = {
   quantity: Scalars['Int']['output']
 }
 
-export enum CategoryType {
-  Backpack = 'BACKPACK',
-  Bag = 'BAG',
-  Other = 'OTHER',
-  Suitcase = 'SUITCASE',
-  SuitcaseAccessories = 'SUITCASE_ACCESSORIES'
-}
+export const CategoryType = {
+  Backpack: 'BACKPACK',
+  Bag: 'BAG',
+  Other: 'OTHER',
+  Suitcase: 'SUITCASE',
+  SuitcaseAccessories: 'SUITCASE_ACCESSORIES'
+} as const
 
+export type CategoryType = (typeof CategoryType)[keyof typeof CategoryType]
 export type ClearCartPayload = {
   __typename?: 'ClearCartPayload'
   cartId: Scalars['ID']['output']
@@ -72,12 +73,13 @@ export type DeleteProductPayload = {
   id: Scalars['ID']['output']
 }
 
-export enum Gender {
-  Female = 'FEMALE',
-  Male = 'MALE',
-  Unisex = 'UNISEX'
-}
+export const Gender = {
+  Female: 'FEMALE',
+  Male: 'MALE',
+  Unisex: 'UNISEX'
+} as const
 
+export type Gender = (typeof Gender)[keyof typeof Gender]
 export type HideProductPayload = {
   __typename?: 'HideProductPayload'
   isHidden: Scalars['Boolean']['output']
@@ -251,11 +253,12 @@ export type OrderFilter = {
 
 export type OrderPayload = NotFound | Order
 
-export enum OrderPaymentMethod {
-  Delivery = 'DELIVERY',
-  Online = 'ONLINE'
-}
+export const OrderPaymentMethod = {
+  Delivery: 'DELIVERY',
+  Online: 'ONLINE'
+} as const
 
+export type OrderPaymentMethod = (typeof OrderPaymentMethod)[keyof typeof OrderPaymentMethod]
 export type OrderProduct = {
   __typename?: 'OrderProduct'
   id: Scalars['ID']['output']
@@ -269,27 +272,40 @@ export type OrderSortByInput = {
   field: OrderSortField
 }
 
-export enum OrderSortField {
+export const OrderSortField = {
   /** CREATION_DATE - by order creation date */
-  CreationDate = 'CREATION_DATE',
+  CreationDate: 'CREATION_DATE',
   /** PRICE - by order price */
-  Price = 'PRICE'
-}
+  Price: 'PRICE'
+} as const
 
-export enum OrderStatus {
-  Created = 'CREATED',
-  Done = 'DONE',
-  Processed = 'PROCESSED',
-  Rejected = 'REJECTED',
-  Returned = 'RETURNED',
-  Sent = 'SENT'
-}
+export type OrderSortField = (typeof OrderSortField)[keyof typeof OrderSortField]
+export const OrderStatus = {
+  Created: 'CREATED',
+  Done: 'DONE',
+  Processed: 'PROCESSED',
+  Rejected: 'REJECTED',
+  Returned: 'RETURNED',
+  Sent: 'SENT'
+} as const
 
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 export type OrdersConnection = {
   __typename?: 'OrdersConnection'
   edges: Array<OrderEdge>
   pageInfo: PageInfo
   totalCount: Scalars['Int']['output']
+}
+
+export type OrdersCountByStatusPayload = {
+  __typename?: 'OrdersCountByStatusPayload'
+  created: Scalars['Int']['output']
+  done: Scalars['Int']['output']
+  processed: Scalars['Int']['output']
+  rejected: Scalars['Int']['output']
+  returned: Scalars['Int']['output']
+  sent: Scalars['Int']['output']
+  total: Scalars['Int']['output']
 }
 
 export type OrdersFilter = {
@@ -327,17 +343,19 @@ export type Payment = {
 
 export type PaymentPayload = NotFound | Payment
 
-export enum PaymentPurpose {
-  Delivery = 'DELIVERY',
-  DeliveryAndOrder = 'DELIVERY_AND_ORDER'
-}
+export const PaymentPurpose = {
+  Delivery: 'DELIVERY',
+  DeliveryAndOrder: 'DELIVERY_AND_ORDER'
+} as const
 
-export enum PaymentStatus {
-  AwaitingConfirmation = 'AWAITING_CONFIRMATION',
-  Confirmed = 'CONFIRMED',
-  Rejected = 'REJECTED'
-}
+export type PaymentPurpose = (typeof PaymentPurpose)[keyof typeof PaymentPurpose]
+export const PaymentStatus = {
+  AwaitingConfirmation: 'AWAITING_CONFIRMATION',
+  Confirmed: 'CONFIRMED',
+  Rejected: 'REJECTED'
+} as const
 
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 export type PriceRange = {
   gt: Scalars['Price']['input']
   lt: Scalars['Price']['input']
@@ -425,14 +443,15 @@ export type ProductFilter = {
   tag?: InputMaybe<ProductTag>
 }
 
-export enum ProductFilterSortBy {
-  Default = 'DEFAULT',
+export const ProductFilterSortBy = {
+  Default: 'DEFAULT',
   /** PRICE_ASC - from cheap to expensive */
-  PriceAsc = 'PRICE_ASC',
+  PriceAsc: 'PRICE_ASC',
   /** PRICE_DESC - from expensive to cheap */
-  PriceDesc = 'PRICE_DESC'
-}
+  PriceDesc: 'PRICE_DESC'
+} as const
 
+export type ProductFilterSortBy = (typeof ProductFilterSortBy)[keyof typeof ProductFilterSortBy]
 export type ProductImageInput = {
   image: Scalars['Upload']['input']
   /** order - starts from 1 not from zero-index */
@@ -441,12 +460,13 @@ export type ProductImageInput = {
 
 export type ProductPayload = NotFound | Product
 
-export enum ProductTag {
-  New = 'NEW',
-  Stock = 'STOCK',
-  Top = 'TOP'
-}
+export const ProductTag = {
+  New: 'NEW',
+  Stock: 'STOCK',
+  Top: 'TOP'
+} as const
 
+export type ProductTag = (typeof ProductTag)[keyof typeof ProductTag]
 export type ProductsStats = {
   __typename?: 'ProductsStats'
   /** count — all products available for sale */
@@ -460,6 +480,7 @@ export type Query = {
   order: OrderPayload
   orderPayment: PaymentPayload
   orders: OrdersConnection
+  ordersCountByStatus: OrdersCountByStatusPayload
   payment: PaymentPayload
   product: ProductPayload
   products: ProductConnection
@@ -471,6 +492,7 @@ export type Query = {
    *   - MANAGER, ADMIN - can receive orders from all users
    */
   userOrders: UserOrdersConnection
+  users: UsersConnection
 }
 
 export type QueryOrderArgs = {
@@ -516,6 +538,14 @@ export type QueryUserOrdersArgs = {
   userId?: InputMaybe<Scalars['ID']['input']>
 }
 
+export type QueryUsersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  before?: InputMaybe<Scalars['String']['input']>
+  first: Scalars['Int']['input']
+  sortBy?: InputMaybe<UserSortByInput>
+  where?: InputMaybe<UsersFilter>
+}
+
 export type RejectOrderPayload = {
   __typename?: 'RejectOrderPayload'
   id: Scalars['ID']['output']
@@ -533,36 +563,47 @@ export type RemoveFavouritePayload = {
   productId: Scalars['ID']['output']
 }
 
-export enum Role {
-  Admin = 'ADMIN',
-  Customer = 'CUSTOMER',
-  Manager = 'MANAGER'
-}
+export const Role = {
+  Admin: 'ADMIN',
+  Customer: 'CUSTOMER',
+  Manager: 'MANAGER'
+} as const
 
+export type Role = (typeof Role)[keyof typeof Role]
 export type SizeVariation = {
   __typename?: 'SizeVariation'
   productId: Scalars['String']['output']
   size: Scalars['String']['output']
 }
 
-export enum SortDirection {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
+export const SortDirection = {
+  Asc: 'ASC',
+  Desc: 'DESC'
+} as const
 
-export enum SupplierService {
-  Novap = 'NOVAP',
-  Ukrp = 'UKRP'
-}
+export type SortDirection = (typeof SortDirection)[keyof typeof SortDirection]
+export const SupplierService = {
+  Novap: 'NOVAP',
+  Ukrp: 'UKRP'
+} as const
 
+export type SupplierService = (typeof SupplierService)[keyof typeof SupplierService]
 export type User = {
   __typename?: 'User'
   createdAt: Scalars['String']['output']
   firstName: Scalars['String']['output']
   id: Scalars['ID']['output']
-  phone: Scalars['String']['output']
-  role: Scalars['String']['output']
+  onlineAt: Scalars['String']['output']
+  photoUrl?: Maybe<Scalars['String']['output']>
+  role: Role
   updatedAt: Scalars['String']['output']
+  username?: Maybe<Scalars['String']['output']>
+}
+
+export type UserEdge = {
+  __typename?: 'UserEdge'
+  cursor: Scalars['String']['output']
+  node: User
 }
 
 export type UserOrdersConnection = {
@@ -577,8 +618,31 @@ export type UserOrdersSortByInput = {
   field: UserOrdersSortField
 }
 
-export enum UserOrdersSortField {
-  CreationDate = 'CREATION_DATE'
+export const UserOrdersSortField = {
+  CreationDate: 'CREATION_DATE'
+} as const
+
+export type UserOrdersSortField = (typeof UserOrdersSortField)[keyof typeof UserOrdersSortField]
+export type UserSortByInput = {
+  direction: SortDirection
+  field: UserSortField
+}
+
+export const UserSortField = {
+  CreationDate: 'CREATION_DATE',
+  OnlineDate: 'ONLINE_DATE'
+} as const
+
+export type UserSortField = (typeof UserSortField)[keyof typeof UserSortField]
+export type UsersConnection = {
+  __typename?: 'UsersConnection'
+  edges: Array<UserEdge>
+  pageInfo: PageInfo
+  totalCount: Scalars['Int']['output']
+}
+
+export type UsersFilter = {
+  role?: InputMaybe<Array<Role>>
 }
 
 export type UsersStats = {

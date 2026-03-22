@@ -1,4 +1,4 @@
-import { OrderStatus } from '@/lib/api/graphql/types'
+import { type OrderStatus } from '@/lib/api/graphql/types'
 
 export type OrderType = {
   id: string

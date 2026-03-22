@@ -1,10 +1,10 @@
 import { gql } from 'urql'
 import { getClient } from './urql-ssr-client'
 
-import * as GetProduct from './graphql/_gen_/product.query'
-import * as FavouriteProducts from './graphql/_gen_/userFavouriteProducts.query'
-import * as cartProducts from './graphql/_gen_/cartProducts.query'
-import * as orderQuery from './graphql/_gen_/order.query'
+import * as GetProduct from './graphql/product/_gen_/product.query'
+import * as FavouriteProducts from './graphql/product/_gen_/user-favourite.query'
+import * as cartProducts from './graphql/cart/_gen_/products.query'
+import * as orderQuery from './graphql/order/_gen_/order.query'
 
 export async function getProduct(id: string) {
   const result = await getClient().query<

@@ -2,8 +2,8 @@ import { gql } from 'urql'
 import type { Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
 import type { FavouriteProductsCacheQuery } from '../types'
 
-import type { AddFavouriteProductMutation } from '@/lib/api/graphql/_gen_/addFavouriteProduct.mutation'
-import type { RemoveFavouriteProductMutation } from '@/lib/api/graphql/_gen_/removeFavouriteProduct.mutation'
+import type { AddFavouriteProductMutation } from '@/lib/api/graphql/product/_gen_/add-favourite.mutation'
+import type { RemoveFavouriteProductMutation } from '@/lib/api/graphql/product/_gen_/remove-favourite.mutation'
 
 export const addFavouriteProduct = (
   result: AddFavouriteProductMutation,

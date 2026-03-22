@@ -1,4 +1,4 @@
-import { CategoryType } from '@/lib/api/graphql/types'
+import { CategoryType, type CategoryType as TCategoryType } from '@/lib/api/graphql/types'
 
 type OrderProduct = {
   id: string
@@ -7,12 +7,13 @@ type OrderProduct = {
   product: { id: string; title: string; preview: string; category: CategoryType }
 }
 
-const categoryCost = {
+const categoryCost: Record<TCategoryType, number> = {
   [CategoryType.Suitcase]: 240,
   [CategoryType.Backpack]: 120,
   [CategoryType.Bag]: 120,
+  [CategoryType.SuitcaseAccessories]: 120,
   [CategoryType.Other]: 120
-} as const
+}
 
 export const calculateDeliveryCost = (products: Array<OrderProduct>): number => {
   return products.reduce((acc, { quantity, product }) => {

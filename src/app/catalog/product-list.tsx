@@ -21,7 +21,7 @@ export function ProductList({ products, onReset }: ProductsProps) {
 
   return (
     <Box className="lg:px-2.5">
-      <Box as="ul" flex="row">
+      <Box as="ul" flex="row" className="flex-wrap">
         {products.map((product) => (
           <Box as="li" key={product.id} className="basis-6/12 md:basis-4/12 xl:basis-3/12">
             <ProductItem

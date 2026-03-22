@@ -1,5 +1,5 @@
 import { cva } from 'cva'
-import { CategoryType } from '@/lib/api/graphql/types'
+import { CategoryType, type CategoryType as TCategoryType } from '@/lib/api/graphql/types'
 
 export type SizeItem = {
   size: string
@@ -13,10 +13,11 @@ export interface SizeGuideProps {
   onSelect(target: SizeItem): void
 }
 
-export const SIZE_VARIATIONS = {
+export const SIZE_VARIATIONS: Record<TCategoryType, string[]> = {
   [CategoryType.Suitcase]: ['S', 'M', 'L'],
   [CategoryType.Backpack]: ['S', 'M'],
   [CategoryType.Bag]: ['S', 'M'],
+  [CategoryType.SuitcaseAccessories]: [],
   [CategoryType.Other]: []
 }
 

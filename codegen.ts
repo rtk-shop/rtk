@@ -9,7 +9,7 @@ const config: CodegenConfig = {
     'src/lib/api/graphql/types.ts': {
       plugins: ['typescript', 'fragment-matcher'],
       config: {
-        constEnums: false,
+        enumsAsConst: true,
         omitDescriptions: true,
         // namingConvention: {
         //   enumValues: 'change-case-all#upperCase'

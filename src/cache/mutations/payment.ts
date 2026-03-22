@@ -1,7 +1,6 @@
-import type { DataFields, Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
-import { InitSoleProprietorPaymentMutation } from '@/lib/api/graphql/_gen_/initSoleProprietorPayment.mutation'
-
-import { GetOrderPaymentDocument } from '@/lib/api/graphql/_gen_/orderPayment.query'
+import type { Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
+import { InitSoleProprietorPaymentMutation } from '@/lib/api/graphql/payment/_gen_/init-sole-proprietor-payment.mutation'
+import { GetOrderPaymentDocument } from '@/lib/api/graphql/payment/_gen_/order-payment.query'
 
 export const initSoleProprietorPayment = (
   result: InitSoleProprietorPaymentMutation,

@@ -2,9 +2,9 @@ import { gql } from 'urql'
 import type { DataFields, Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
 import type { CartProduct } from '@/lib/api/graphql/types'
 
-import type { AddCartItemMutation } from '@/lib/api/graphql/_gen_/addCartItem.mutation'
-import type { RemoveCartItemMutation } from '@/lib/api/graphql/_gen_/removeCartItem.mutation'
-import type { ReduceCartItemQuantityMutation } from '@/lib/api/graphql/_gen_/reduceCartItemQuantity.mutation'
+import type { AddCartItemMutation } from '@/lib/api/graphql/cart/_gen_/add-item.mutation'
+import type { RemoveCartItemMutation } from '@/lib/api/graphql/cart/_gen_/remove-item.mutation'
+import type { ReduceCartItemQuantityMutation } from '@/lib/api/graphql/cart/_gen_/reduce-item-quantity.mutation'
 
 export const addCartItem = (
   result: AddCartItemMutation, // or DataFields from '@urql/exchange-graphcache' by default

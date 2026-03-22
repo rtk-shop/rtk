@@ -1,5 +1,4 @@
 import useSWR, { Fetcher } from 'swr'
-import * as orderPayment from '@/lib/api/graphql/_gen_/orderPayment.query'
 
 export type PaymentInfoResponse = {
   id: string

@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react'
-import { cva } from 'cva'
-import { OrderStatus } from '@/lib/api/graphql/types'
-import { Icon } from '@/components/ui/icon'
 import { useTranslations } from 'next-intl'
+import { cva } from 'cva'
+import { OrderStatus, type OrderStatus as TOrderStatus } from '@/lib/api/graphql/types'
+import { Icon } from '@/components/ui/icon'
 
 const statusView = cva('font-medium', {
   variants: {
@@ -38,7 +38,7 @@ export function OrderStatusBadge({
   status,
   size
 }: {
-  status: OrderStatus
+  status: TOrderStatus
   size?: 'normal' | 'XL'
 }) {
   const t = useTranslations('Common.order.statuses')

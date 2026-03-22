@@ -1,7 +1,7 @@
 import { gql } from 'urql'
 import type { DataFields, Variables, Cache, ResolveInfo } from '@urql/exchange-graphcache'
 
-import type { RejectOrderMutation } from '@/lib/api/graphql/_gen_/rejectOrder.mutation'
+import type { RejectOrderMutation } from '@/lib/api/graphql/order/_gen_/reject.mutation'
 
 export const createOrder = (
   _result: DataFields,
