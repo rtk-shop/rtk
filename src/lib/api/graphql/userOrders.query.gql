@@ -4,8 +4,9 @@ query UserOrders(
   $first: Int!
   $after: String
   $before: String
+  $sortBy: UserOrdersSortByInput
 ) {
-  userOrders(userId: $userId, first: $first, after: $after, before: $before) {
+  userOrders(userId: $userId, first: $first, after: $after, before: $before, sortBy: $sortBy) {
     totalCount
     pageInfo {
       hasNextPage

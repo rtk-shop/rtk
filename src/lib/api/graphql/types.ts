@@ -264,6 +264,18 @@ export type OrderProduct = {
   quantity: Scalars['Int']['output']
 }
 
+export type OrderSortByInput = {
+  direction: SortDirection
+  field: OrderSortField
+}
+
+export enum OrderSortField {
+  /** CREATION_DATE - by order creation date */
+  CreationDate = 'CREATION_DATE',
+  /** PRICE - by order price */
+  Price = 'PRICE'
+}
+
 export enum OrderStatus {
   Created = 'CREATED',
   Done = 'DONE',
@@ -473,6 +485,7 @@ export type QueryOrdersArgs = {
   after?: InputMaybe<Scalars['String']['input']>
   before?: InputMaybe<Scalars['String']['input']>
   first: Scalars['Int']['input']
+  sortBy?: InputMaybe<OrderSortByInput>
   where?: InputMaybe<OrdersFilter>
 }
 
@@ -499,6 +512,7 @@ export type QueryUserOrdersArgs = {
   after?: InputMaybe<Scalars['String']['input']>
   before?: InputMaybe<Scalars['String']['input']>
   first: Scalars['Int']['input']
+  sortBy?: InputMaybe<UserOrdersSortByInput>
   userId?: InputMaybe<Scalars['ID']['input']>
 }
 
@@ -531,6 +545,11 @@ export type SizeVariation = {
   size: Scalars['String']['output']
 }
 
+export enum SortDirection {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
 export enum SupplierService {
   Novap = 'NOVAP',
   Ukrp = 'UKRP'
@@ -551,6 +570,15 @@ export type UserOrdersConnection = {
   edges: Array<OrderEdge>
   pageInfo: PageInfo
   totalCount: Scalars['Int']['output']
+}
+
+export type UserOrdersSortByInput = {
+  direction: SortDirection
+  field: UserOrdersSortField
+}
+
+export enum UserOrdersSortField {
+  CreationDate = 'CREATION_DATE'
 }
 
 export type UsersStats = {

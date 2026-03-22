@@ -7,6 +7,7 @@ export type UserOrdersQueryVariables = Types.Exact<{
   first: Types.Scalars['Int']['input']
   after?: Types.InputMaybe<Types.Scalars['String']['input']>
   before?: Types.InputMaybe<Types.Scalars['String']['input']>
+  sortBy?: Types.InputMaybe<Types.UserOrdersSortByInput>
 }>
 
 export type UserOrdersQuery = {
@@ -50,8 +51,14 @@ export type UserOrdersQuery = {
 }
 
 export const UserOrdersDocument = gql`
-  query UserOrders($userId: ID, $first: Int!, $after: String, $before: String) {
-    userOrders(userId: $userId, first: $first, after: $after, before: $before) {
+  query UserOrders(
+    $userId: ID
+    $first: Int!
+    $after: String
+    $before: String
+    $sortBy: UserOrdersSortByInput
+  ) {
+    userOrders(userId: $userId, first: $first, after: $after, before: $before, sortBy: $sortBy) {
       totalCount
       pageInfo {
         hasNextPage

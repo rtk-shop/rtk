@@ -6,6 +6,7 @@ import { Pagination } from './pagination'
 import { OrdersList } from './list'
 import { useTranslations } from 'next-intl'
 import { useUserOrdersQuery } from '@/lib/api/hooks'
+import { SortDirection, UserOrdersSortField } from '@/lib/api/graphql/types'
 
 type Cursor = {
   after?: string | null
@@ -23,7 +24,11 @@ export function Orders() {
   const [{ data, fetching, error }] = useUserOrdersQuery({
     variables: {
       first: 7,
-      ...cursors
+      ...cursors,
+      sortBy: {
+        field: UserOrdersSortField.CreationDate,
+        direction: SortDirection.Desc
+      }
     }
   })
 
