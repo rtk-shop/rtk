@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "check-types": "tsc --noEmit",
-    "dev": "next dev -p 3000 --turbopack",
+    "dev": "next dev -p 3000",
     "build": "next build --turbopack",
     "start": "next start -p 3000",
     "lint": "eslint .",
     "gen": "graphql-codegen",
+    "gen:sprites": "node scripts/build-icons-sprites.mjs",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|tsx|json)\""
   },
   "dependencies": {
