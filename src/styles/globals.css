@@ -181,12 +181,12 @@
   .icon,
   .icon-x {
     /* scale horizontally */
-    @apply w-[1em];
+    @apply w-1e;
   }
 
   .icon,
   .icon-y {
     /* scale vertically */
-    @apply h-[1em];
+    @apply h-1e;
   }
 }

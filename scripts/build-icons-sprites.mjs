@@ -6,11 +6,7 @@ const builder = createSvgSpriteBuilder({
   output: 'public/sprites',
   fileName: '{name}.{hash:8}.svg',
   metadata: {
-    path: 'src/sprite.gen.ts',
-    runtime: {
-      size: true,
-      viewBox: true
-    }
+    path: 'src/sprite.gen.ts'
   },
   group: true
 })
