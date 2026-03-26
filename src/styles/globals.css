@@ -20,7 +20,6 @@
 
   --spacing-1e: 1em;
 
-  /* ANIMATIONS */
   --animate-fade-in-2s: fade-in-plain 0.5s ease-in-out 2s forwards;
   @keyframes fade-in-plain {
     0% {
@@ -28,6 +27,35 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  --animate-tada: tada 1s ease-in-out infinite;
+  @keyframes tada {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+
+    10%,
+    20% {
+      transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+
+    40%,
+    60%,
+    80% {
+      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
     }
   }
 }

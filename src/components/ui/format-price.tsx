@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'cva'
 const priceView = cva('leading-none font-medium tracking-tight', {
   variants: {
     size: {
+      sm: 'text-sm',
       normal: 'text-base',
       XL: 'text-lg',
       XXL: 'text-xl',

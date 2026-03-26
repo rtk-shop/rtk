@@ -1,14 +1,14 @@
-import { type ReactElement } from 'react'
-import { useTranslations } from 'next-intl'
+import { type ComponentType, type ReactNode } from 'react'
 import { cva } from 'cva'
+import { Icon, type IconName } from '@/components/ui/icon'
+import { useTranslations } from 'next-intl'
 import { OrderStatus, type OrderStatus as TOrderStatus } from '@/lib/api/graphql/types'
-import { Icon } from '@/components/ui/icon'
 
-const statusView = cva('font-medium', {
+const statusView = cva('leading-none font-medium tracking-tight whitespace-nowrap', {
   variants: {
     size: {
-      normal: 'text-[15px]',
-      XL: 'text-lg'
+      normal: 'text-sm',
+      xl: 'text-base'
     }
   },
   defaultVariants: {
@@ -16,71 +16,90 @@ const statusView = cva('font-medium', {
   }
 })
 
-const iconStyle = cva('shrink-0', {
+const iconStyle = cva('mr-0.5 shrink-0 text-black', {
   variants: {
     status: {
-      [OrderStatus.Rejected]: 'text-gray-500',
-      [OrderStatus.Returned]: 'text-red-500',
-      [OrderStatus.Processed]: 'text-black',
-      [OrderStatus.Done]: 'text-green-700'
+      [OrderStatus.Created]: '',
+      [OrderStatus.Sent]: '',
+      [OrderStatus.Processed]: '',
+      [OrderStatus.Done]: 'text-green-600',
+      [OrderStatus.Rejected]: '',
+      [OrderStatus.Returned]: ''
     },
     size: {
-      normal: 'mr-0.5 text-[20px]',
-      XL: 'mr-1 text-[24px]'
+      normal: 'size-4.5',
+      xl: 'size-5'
     }
   },
   defaultVariants: {
     size: 'normal'
   }
 })
+
+type BadgeSize = 'normal' | 'xl'
+
+type StatusIconProps = {
+  size: BadgeSize
+  className?: string
+}
+
+type StatusConfig = {
+  icon?: ComponentType<StatusIconProps>
+  label?: ReactNode
+}
+
+function CreatedStatusIcon() {
+  return (
+    <div className="mr-0.5">
+      <Icon name="common/new" className="animate-tada size-7" />
+    </div>
+  )
+}
+
+function makeIcon(name: IconName): ComponentType<StatusIconProps> {
+  return function StatusSvgIcon({ className }: StatusIconProps) {
+    return <Icon name={name} className={className} />
+  }
+}
+
+const statusConfig: Record<TOrderStatus, StatusConfig> = {
+  [OrderStatus.Created]: {
+    icon: CreatedStatusIcon
+  },
+  [OrderStatus.Sent]: {
+    icon: makeIcon('profile/truck')
+  },
+  [OrderStatus.Processed]: {
+    icon: makeIcon('profile/timer')
+  },
+  [OrderStatus.Done]: {
+    icon: makeIcon('profile/package-check')
+  },
+  [OrderStatus.Rejected]: {
+    icon: makeIcon('profile/circle-x')
+  },
+  [OrderStatus.Returned]: {
+    icon: makeIcon('profile/package-x')
+  }
+}
 
 export function OrderStatusBadge({
   status,
-  size
+  size = 'normal'
 }: {
   status: TOrderStatus
-  size?: 'normal' | 'XL'
+  size?: BadgeSize
 }) {
   const t = useTranslations('Common.order.statuses')
 
-  let statusIcon: ReactElement
-
-  switch (status) {
-    case OrderStatus.Created:
-      statusIcon = (
-        <span className="relative mr-1 mb-0.5 ml-0.5 flex size-2.5 justify-center">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex size-2.5 rounded-full bg-green-500"></span>
-        </span>
-      )
-      break
-    case OrderStatus.Sent:
-      statusIcon = (
-        <span className="relative mr-1 mb-0.5 ml-0.5 flex size-2.5 justify-center">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
-          <span className="relative inline-flex size-2.5 rounded-full bg-blue-500" />
-        </span>
-      )
-      break
-    case OrderStatus.Processed:
-      statusIcon = <Icon name="profile/timer" className={iconStyle({ status, size })} />
-      break
-    case OrderStatus.Done:
-      statusIcon = <Icon name="profile/package-check" className={iconStyle({ status, size })} />
-      break
-    case OrderStatus.Rejected:
-      statusIcon = <Icon name="profile/package-x" className={iconStyle({ status, size })} />
-      break
-    case OrderStatus.Returned:
-      statusIcon = <Icon name="profile/package-x" className={iconStyle({ status, size })} />
-      break
-  }
+  const config = statusConfig[status]
+  const StatusIcon = config.icon
 
   return (
     <div className={statusView({ size })}>
       <div className="flex items-center">
-        {statusIcon}
-        <span>{t(status.toLowerCase())}</span>
+        {StatusIcon && <StatusIcon size={size} className={iconStyle({ status, size })} />}
+        <span>{config.label ?? t(status.toLowerCase())}</span>
       </div>
     </div>
   )

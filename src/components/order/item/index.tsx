@@ -63,12 +63,14 @@ export function OrderItem({
   return (
     <div className="rounded-xl bg-slate-100">
       <div onClick={() => onExpand(currentIndex)} className="grid grid-cols-8 py-2.5 pl-2">
-        <div className="col-span-2 self-center text-start text-sm font-medium">№{order.id}</div>
-        <div className="col-span-2">
+        <div className="col-span-2 self-center text-start font-medium">
+          <span className="text-sm leading-none">№{order.id}</span>
+        </div>
+        <div className="col-span-2 self-center">
           <OrderStatusBadge status={status} />
         </div>
-        <div className="col-span-3 text-center">
-          <FormatPrice price={price} />
+        <div className="col-span-3 self-center text-center">
+          <FormatPrice price={price} size="sm" />
         </div>
         <div className="col-span-1 flex items-center justify-center">
           <ExpandIcon expanded={isOrderExpanded} />

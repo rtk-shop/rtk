@@ -332,18 +332,24 @@ export const sprites = defineSpriteMap([defineSprite(
      ["menu"],
      [448, 512]
    ), defineSpriteSymbol(
+     ["new"],
+     [48]
+   ), defineSpriteSymbol(
      ["user"],
      [512]
    ), defineSpriteSymbol(
      ["xmark"],
      [20]
    )],
-  defineExternalAssetMeta('common.e1100616.svg')
+  defineExternalAssetMeta('common.dcd06a82.svg')
 )]
 ), defineSprite(
   'profile',
   [defineSpriteAsset(
   [defineSpriteSymbol(
+     ["circle-x"],
+     [24]
+   ), defineSpriteSymbol(
      ["package-check"],
      [24]
    ), defineSpriteSymbol(
@@ -352,16 +358,19 @@ export const sprites = defineSpriteMap([defineSprite(
    ), defineSpriteSymbol(
      ["timer"],
      [24]
+   ), defineSpriteSymbol(
+     ["truck"],
+     [24]
    )],
-  defineExternalAssetMeta('profile.8b220eb3.svg')
+  defineExternalAssetMeta('profile.a4ed824b.svg')
 )]
 )])
 
 export type SpritesMeta = {
   "action": "circle-info" | "circle-minus" | "circle-plus" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
-  "common": "arrow" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "user" | "xmark";
-  "profile": "package-check" | "package-x" | "timer";
+  "common": "arrow" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user" | "xmark";
+  "profile": "circle-x" | "package-check" | "package-x" | "timer" | "truck";
 }
 
 //#endregion
