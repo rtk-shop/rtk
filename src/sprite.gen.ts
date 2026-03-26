@@ -266,8 +266,11 @@ export const sprites = defineSpriteMap([defineSprite(
      ["circle-plus"],
      [512]
    ), defineSpriteSymbol(
+     ["copy-check"],
+     [24]
+   ), defineSpriteSymbol(
      ["copy"],
-     [448, 512]
+     [24]
    ), defineSpriteSymbol(
      ["edit"],
      [512]
@@ -290,7 +293,7 @@ export const sprites = defineSpriteMap([defineSprite(
      ["warning"],
      [512]
    )],
-  defineExternalAssetMeta('action.e57874ec.svg')
+  defineExternalAssetMeta('action.a7a055d5.svg')
 )]
 ), defineSprite(
   'checkout',
@@ -309,6 +312,9 @@ export const sprites = defineSpriteMap([defineSprite(
   [defineSpriteAsset(
   [defineSpriteSymbol(
      ["arrow"],
+     [24]
+   ), defineSpriteSymbol(
+     ["barcode"],
      [24]
    ), defineSpriteSymbol(
      ["cart"],
@@ -341,7 +347,7 @@ export const sprites = defineSpriteMap([defineSprite(
      ["xmark"],
      [20]
    )],
-  defineExternalAssetMeta('common.dcd06a82.svg')
+  defineExternalAssetMeta('common.704d9c87.svg')
 )]
 ), defineSprite(
   'profile',
@@ -367,9 +373,9 @@ export const sprites = defineSpriteMap([defineSprite(
 )])
 
 export type SpritesMeta = {
-  "action": "circle-info" | "circle-minus" | "circle-plus" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
+  "action": "circle-info" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
-  "common": "arrow" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user" | "xmark";
+  "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user" | "xmark";
   "profile": "circle-x" | "package-check" | "package-x" | "timer" | "truck";
 }
 

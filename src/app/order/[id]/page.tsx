@@ -47,6 +47,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           postOffice={order.postOfficeName}
           supplier={order.supplier}
           parcelTrackId={order.parcelTrackId}
+          status={order.status}
         />
         <ControlsGrid
           orderId={order.id}

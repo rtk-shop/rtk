@@ -1,17 +1,20 @@
 import { Box } from '@/components/ui/box'
 import { DeliverySupplier } from '@/components/ui/delivery-supplier'
-import { CopyToClipboard } from '@/components/ui/copy-to-clipboard'
+import { ParcelTrackId } from '@/components/order/parcel-track-Id'
+import { type OrderStatus, OrderStatus as OrderStatusEnum } from '@/lib/api/graphql/types'
 
 export function Delivery({
   city,
   postOffice,
   supplier,
-  parcelTrackId
+  parcelTrackId,
+  status
 }: {
   city: string
   postOffice: string
   supplier: string
   parcelTrackId?: string | null
+  status: OrderStatus
 }) {
   return (
     <Box as="section" className="mb-2 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
@@ -29,11 +32,11 @@ export function Delivery({
           <span className="mr-1.5 text-gray-500">Отделение:</span>
           {postOffice}
         </p>
-        <Box flex="row" align="center">
-          <span className="mr-1.5 text-gray-500">Трекинг ID:</span>
-          {parcelTrackId ? parcelTrackId : '-'.repeat(24)}
-          {parcelTrackId && <CopyToClipboard what={parcelTrackId} />}
-        </Box>
+        {status !== OrderStatusEnum.Rejected && (
+          <Box>
+            <ParcelTrackId trackId={parcelTrackId} />
+          </Box>
+        )}
       </Box>
     </Box>
   )

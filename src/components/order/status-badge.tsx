@@ -2,7 +2,7 @@ import { type ComponentType, type ReactNode } from 'react'
 import { cva } from 'cva'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { useTranslations } from 'next-intl'
-import { OrderStatus, type OrderStatus as TOrderStatus } from '@/lib/api/graphql/types'
+import { type OrderStatus, OrderStatus as OrderStatusEnum } from '@/lib/api/graphql/types'
 
 const statusView = cva('leading-none font-medium tracking-tight whitespace-nowrap', {
   variants: {
@@ -19,12 +19,12 @@ const statusView = cva('leading-none font-medium tracking-tight whitespace-nowra
 const iconStyle = cva('mr-0.5 shrink-0 text-black', {
   variants: {
     status: {
-      [OrderStatus.Created]: '',
-      [OrderStatus.Sent]: '',
-      [OrderStatus.Processed]: '',
-      [OrderStatus.Done]: 'text-green-600',
-      [OrderStatus.Rejected]: '',
-      [OrderStatus.Returned]: ''
+      [OrderStatusEnum.Created]: '',
+      [OrderStatusEnum.Sent]: '',
+      [OrderStatusEnum.Processed]: '',
+      [OrderStatusEnum.Done]: 'text-green-600',
+      [OrderStatusEnum.Rejected]: '',
+      [OrderStatusEnum.Returned]: ''
     },
     size: {
       normal: 'size-4.5',
@@ -62,23 +62,23 @@ function makeIcon(name: IconName): ComponentType<StatusIconProps> {
   }
 }
 
-const statusConfig: Record<TOrderStatus, StatusConfig> = {
-  [OrderStatus.Created]: {
+const statusConfig: Record<OrderStatus, StatusConfig> = {
+  [OrderStatusEnum.Created]: {
     icon: CreatedStatusIcon
   },
-  [OrderStatus.Sent]: {
+  [OrderStatusEnum.Sent]: {
     icon: makeIcon('profile/truck')
   },
-  [OrderStatus.Processed]: {
+  [OrderStatusEnum.Processed]: {
     icon: makeIcon('profile/timer')
   },
-  [OrderStatus.Done]: {
+  [OrderStatusEnum.Done]: {
     icon: makeIcon('profile/package-check')
   },
-  [OrderStatus.Rejected]: {
+  [OrderStatusEnum.Rejected]: {
     icon: makeIcon('profile/circle-x')
   },
-  [OrderStatus.Returned]: {
+  [OrderStatusEnum.Returned]: {
     icon: makeIcon('profile/package-x')
   }
 }
@@ -87,7 +87,7 @@ export function OrderStatusBadge({
   status,
   size = 'normal'
 }: {
-  status: TOrderStatus
+  status: OrderStatus
   size?: BadgeSize
 }) {
   const t = useTranslations('Common.order.statuses')

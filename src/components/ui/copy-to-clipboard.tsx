@@ -28,8 +28,8 @@ export function CopyToClipboard({ what }: { what: string }) {
   }
 
   return (
-    <IconButton onClick={handleClick} className="ml-2 pt-0 pr-0 pb-0 pl-0 text-[22px]">
-      {copiedText ? <Icon name="common/check" /> : <Icon name="action/copy" />}
+    <IconButton onClick={handleClick} className="ml-2 pt-0 pr-0 pb-0 pl-0 text-[18px]">
+      {copiedText ? <Icon name="action/copy-check" /> : <Icon name="action/copy" />}
     </IconButton>
   )
 }
