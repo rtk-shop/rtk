@@ -32,7 +32,7 @@ export function Delivery({
           <span className="mr-1.5 text-gray-500">Отделение:</span>
           {postOffice}
         </p>
-        {status !== OrderStatusEnum.Rejected && (
+        {status !== OrderStatusEnum.Rejected && status !== OrderStatusEnum.Created && (
           <Box>
             <ParcelTrackId trackId={parcelTrackId} />
           </Box>

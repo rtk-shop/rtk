@@ -104,7 +104,7 @@ export function OrderItem({
               <span className="text-gray-500">{t('order.delivery.address')}:</span> {cityName},{' '}
               {postOfficeName}
             </p>
-            {status !== OrderStatusEnum.Rejected && (
+            {status !== OrderStatusEnum.Rejected && status !== OrderStatusEnum.Created && (
               <Box className="pt-0.5">
                 <span className="mr-1 text-gray-500">{t('order.delivery.tracking')}:</span>
                 <ParcelTrackId trackId={parcelTrackId} />
