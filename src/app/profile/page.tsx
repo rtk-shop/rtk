@@ -20,7 +20,9 @@ export default function Profile() {
         <Box flex="col" className="h-full">
           <Box flex="row" align="center" justify="between" className="my-3">
             <h2 className="text-xl font-medium">{t('Common.nouns.ilang')}</h2>
-            <LangSwitcher />
+            <Box className="text-sm">
+              <LangSwitcher />
+            </Box>
           </Box>
           <Box className="h-full">
             <Orders />

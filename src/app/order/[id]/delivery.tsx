@@ -17,13 +17,13 @@ export function Delivery({
   status: OrderStatus
 }) {
   return (
-    <Box as="section" className="mb-2 rounded-xl bg-white px-3 py-2 font-medium shadow-sm">
-      <h2 className="mb-1.5 text-lg">Информация о доставке</h2>
-      <Box className="text-sm">
-        <p className="flex items-center">
+    <Box as="section" className="mb-2 rounded-xl bg-white px-3 py-2 shadow-sm">
+      <h2 className="mb-1 text-lg font-medium">Информация о доставке</h2>
+      <Box className="leading-tight">
+        <div className="flex items-center">
           <span className="mr-1.5 text-gray-500">Сервис:</span>
           <DeliverySupplier supplier={supplier} />
-        </p>
+        </div>
         <p>
           <span className="mr-1.5 text-gray-500">Населенный пункт:</span>
           {city}
