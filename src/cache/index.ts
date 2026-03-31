@@ -7,6 +7,9 @@ import { addFavouriteProduct, removeFavouriteProduct } from './mutations/favouri
 import { initSoleProprietorPayment } from './mutations/payment'
 
 export const cacheExchange = Exchange({
+  keys: {
+    UserDoneOrdersCountPayload: () => null
+  },
   optimistic: {
     removeFavouriteProduct(args, _cache, _info) {
       return {

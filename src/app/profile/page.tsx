@@ -3,6 +3,9 @@ import { Orders } from './orders'
 import { LangSwitcher } from '@/components/lang-switcher'
 import { useTranslations } from 'next-intl'
 import { TelegramAppWidgets } from './telegram'
+import { WidgetGrid } from './ui/widget-grid'
+import { Widget } from './ui/widget'
+import { DoneOrdersCount } from './widgets/done-orders-count'
 
 export default function Profile() {
   const t = useTranslations()
@@ -23,6 +26,16 @@ export default function Profile() {
             <Box className="text-sm">
               <LangSwitcher />
             </Box>
+          </Box>
+          <Box as="section" className="mb-3">
+            <WidgetGrid>
+              <Widget title="Отримано замовлень" className="col-span-6 row-span-2">
+                <DoneOrdersCount />
+              </Widget>
+              <Widget title="Для вас" className="col-span-6 row-span-2">
+                <div></div>
+              </Widget>
+            </WidgetGrid>
           </Box>
           <Box className="h-full">
             <Orders />

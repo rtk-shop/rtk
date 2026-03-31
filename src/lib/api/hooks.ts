@@ -3,6 +3,7 @@ import { useQuery, useMutation, UseQueryArgs } from 'urql'
 import * as createOrder from './graphql/order/_gen_/create.mutation'
 import * as rejectOrder from './graphql/order/_gen_/reject.mutation'
 import * as userOrders from './graphql/order/_gen_/user-orders.query'
+import * as userDoneOrdersCount from './graphql/order/_gen_/user-done-orders-count.query'
 
 import * as cartProducts from './graphql/cart/_gen_/products.query'
 import * as addCartItem from './graphql/cart/_gen_/add-item.mutation'
@@ -127,4 +128,16 @@ export function useInitSoleProprietorPaymentMutation() {
     initSoleProprietorPayment.InitSoleProprietorPaymentMutation,
     initSoleProprietorPayment.InitSoleProprietorPaymentMutationVariables
   >(initSoleProprietorPayment.InitSoleProprietorPaymentDocument)
+}
+
+export function useUserDoneOrdersCount(
+  options?: Omit<UseQueryArgs<userDoneOrdersCount.UserDoneOrdersCountQueryVariables>, 'query'>
+) {
+  return useQuery<
+    userDoneOrdersCount.UserDoneOrdersCountQuery,
+    userDoneOrdersCount.UserDoneOrdersCountQueryVariables
+  >({
+    query: userDoneOrdersCount.UserDoneOrdersCountDocument,
+    ...options
+  })
 }

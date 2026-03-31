@@ -485,6 +485,7 @@ export type Query = {
   product: ProductPayload
   products: ProductConnection
   productsByID: Array<Product>
+  userDoneOrdersCount: UserDoneOrdersCountPayload
   userFavouriteProducts: Array<Product>
   /**
    * userOrders - getting orders of the user with authorization.
@@ -592,12 +593,18 @@ export type User = {
   __typename?: 'User'
   createdAt: Scalars['String']['output']
   firstName: Scalars['String']['output']
+  hasTgPremium: Scalars['Boolean']['output']
   id: Scalars['ID']['output']
   onlineAt: Scalars['String']['output']
   photoUrl?: Maybe<Scalars['String']['output']>
   role: Role
   updatedAt: Scalars['String']['output']
   username?: Maybe<Scalars['String']['output']>
+}
+
+export type UserDoneOrdersCountPayload = {
+  __typename?: 'UserDoneOrdersCountPayload'
+  count: Scalars['Int']['output']
 }
 
 export type UserEdge = {
