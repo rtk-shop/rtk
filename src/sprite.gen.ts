@@ -356,6 +356,9 @@ export const sprites = defineSpriteMap([defineSprite(
      ["circle-x"],
      [24]
    ), defineSpriteSymbol(
+     ["gift"],
+     [24]
+   ), defineSpriteSymbol(
      ["package-check"],
      [24]
    ), defineSpriteSymbol(
@@ -368,7 +371,7 @@ export const sprites = defineSpriteMap([defineSprite(
      ["truck"],
      [24]
    )],
-  defineExternalAssetMeta('profile.a4ed824b.svg')
+  defineExternalAssetMeta('profile.0b368c5a.svg')
 )]
 )])
 
@@ -376,7 +379,7 @@ export type SpritesMeta = {
   "action": "circle-info" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
   "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user" | "xmark";
-  "profile": "circle-x" | "package-check" | "package-x" | "timer" | "truck";
+  "profile": "circle-x" | "gift" | "package-check" | "package-x" | "timer" | "truck";
 }
 
 //#endregion

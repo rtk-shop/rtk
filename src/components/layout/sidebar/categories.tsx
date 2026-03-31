@@ -52,7 +52,6 @@ export function Categories() {
                 <Image
                   priority
                   src={category.img}
-                  quality={100}
                   width={144}
                   height={144}
                   alt={`Изображение категории - ${t(`categories.${category.i18n}`)}`}

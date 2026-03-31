@@ -26,13 +26,13 @@ export function DoneOrdersCount() {
 
   if (error)
     return (
-      <Box className="flex justify-center text-3xl text-red-600">
+      <Box flex="row" justify="center" className="text-3xl text-red-600">
         <Icon name="action/warning" />
       </Box>
     )
 
   return (
-    <Box className="flex justify-center text-3xl">
+    <Box flex="row" justify="center" className="text-3xl">
       <span>{data?.userDoneOrdersCount.count}</span>
     </Box>
   )

@@ -6,6 +6,7 @@ import { TelegramAppWidgets } from './telegram'
 import { WidgetGrid } from './ui/widget-grid'
 import { Widget } from './ui/widget'
 import { DoneOrdersCount } from './widgets/done-orders-count'
+import { Offer } from './widgets/offer'
 
 export default function Profile() {
   const t = useTranslations()
@@ -33,7 +34,7 @@ export default function Profile() {
                 <DoneOrdersCount />
               </Widget>
               <Widget title="Для вас" className="col-span-6 row-span-2">
-                <div></div>
+                <Offer />
               </Widget>
             </WidgetGrid>
           </Box>
