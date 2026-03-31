@@ -1,5 +1,7 @@
 import { Box } from '@/components/ui/box'
+import { Icon } from '@/components/ui/icon'
 import { formatPhoneNumber } from '@/lib/helpers'
+import { BoxSection } from './ui/box-section'
 
 export function Receiver({
   name,
@@ -11,8 +13,10 @@ export function Receiver({
   phone: string
 }) {
   return (
-    <Box as="section" className="mb-2 rounded-xl bg-white px-3 py-2 shadow-sm">
-      <h2 className="mb-1 text-lg font-medium">Отримувач</h2>
+    <BoxSection
+      title="Отримувач"
+      icon={<Icon name="common/user-round" className="text-[22px] text-gray-800" />}
+    >
       <Box className="leading-tight">
         <p>
           <span className="mr-1.5 text-gray-500">Имя:</span>
@@ -27,6 +31,6 @@ export function Receiver({
           {formatPhoneNumber(phone)}
         </p>
       </Box>
-    </Box>
+    </BoxSection>
   )
 }

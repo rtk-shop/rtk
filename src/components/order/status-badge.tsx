@@ -51,7 +51,7 @@ type StatusConfig = {
 function CreatedStatusIcon() {
   return (
     <div className="mr-0.5">
-      <Icon name="common/new" className="animate-tada size-7" />
+      <Icon name="common/new" className="animate-tada size-7 text-black" />
     </div>
   )
 }

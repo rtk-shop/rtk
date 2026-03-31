@@ -1,12 +1,12 @@
-import { Box } from '@/components/ui/box'
-import { Orders } from './orders'
-import { LangSwitcher } from '@/components/lang-switcher'
 import { useTranslations } from 'next-intl'
-import { TelegramAppWidgets } from './telegram'
+import { LangSwitcher } from '@/components/lang-switcher'
+import { Box } from '@/components/ui/box'
 import { WidgetGrid } from './ui/widget-grid'
 import { Widget } from './ui/widget'
 import { DoneOrdersCount } from './widgets/done-orders-count'
 import { Offer } from './widgets/offer'
+import { Orders } from './orders'
+import { TelegramAppWidgets } from './telegram'
 
 export default function Profile() {
   const t = useTranslations()
@@ -20,10 +20,10 @@ export default function Profile() {
           }
         `}
       </style>
-      <Box className="h-full px-2">
+      <Box className="h-full px-2 pt-1">
         <Box flex="col" className="h-full">
-          <Box flex="row" align="center" justify="between" className="my-3">
-            <h2 className="text-xl font-medium">{t('Common.nouns.ilang')}</h2>
+          <Box as="section" flex="row" align="center" justify="between" className="my-3">
+            <h2 className="text-lg font-medium tracking-tight">{t('Common.nouns.ilang')}</h2>
             <Box className="text-sm">
               <LangSwitcher />
             </Box>
@@ -38,7 +38,7 @@ export default function Profile() {
               </Widget>
             </WidgetGrid>
           </Box>
-          <Box className="h-full">
+          <Box as="section" className="h-full">
             <Orders />
           </Box>
         </Box>

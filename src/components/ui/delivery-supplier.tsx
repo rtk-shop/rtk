@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { cva } from 'cva'
 
-const nameStyle = cva('text-base font-medium tracking-tight')
+const nameStyle = cva('text-sm tracking-tight')
 
 export function DeliverySupplier({ supplier }: { supplier: string }) {
   switch (supplier) {

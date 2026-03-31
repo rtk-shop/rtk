@@ -47,7 +47,7 @@ export function UrqlProvider({ children }: { children: ReactNode }) {
                   const errorText = await response.text()
                   throw new Error(errorText)
                 }
-              } catch (error) {
+              } catch (_error) {
                 router.replace(routeNames.root)
               }
             }

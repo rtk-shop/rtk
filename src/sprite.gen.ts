@@ -341,13 +341,16 @@ export const sprites = defineSpriteMap([defineSprite(
      ["new"],
      [48]
    ), defineSpriteSymbol(
+     ["user-round"],
+     [24]
+   ), defineSpriteSymbol(
      ["user"],
      [512]
    ), defineSpriteSymbol(
      ["xmark"],
      [20]
    )],
-  defineExternalAssetMeta('common.704d9c87.svg')
+  defineExternalAssetMeta('common.ec441049.svg')
 )]
 ), defineSprite(
   'profile',
@@ -378,7 +381,7 @@ export const sprites = defineSpriteMap([defineSprite(
 export type SpritesMeta = {
   "action": "circle-info" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
-  "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user" | "xmark";
+  "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user-round" | "user" | "xmark";
   "profile": "circle-x" | "gift" | "package-check" | "package-x" | "timer" | "truck";
 }
 

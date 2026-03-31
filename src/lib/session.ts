@@ -9,7 +9,7 @@ export function parseSessionToken(token?: string) {
   if (!token) return null
   try {
     return decodeJwt<SessionTokenData>(token)
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -18,7 +18,7 @@ export function parseRefreshToken(token?: string) {
   if (!token) return null
   try {
     return decodeJwt<RefreshTokenData>(token)
-  } catch (error) {
+  } catch {
     return null
   }
 }

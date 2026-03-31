@@ -1,10 +1,13 @@
 import { memo, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
 import { OrderItem } from '@/components/order/item'
 import { OrderItemSkeleton } from '@/components/order/item/skeleton'
 import { type OrderType } from '@/types/order'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
+import { Button } from '@/components/ui/button'
+import { routeNames } from '@/lib/routes'
 
 export interface OrdersListProps {
   fetching: boolean
@@ -13,6 +16,7 @@ export interface OrdersListProps {
 }
 
 export const OrdersList = memo(function OrdersList({ fetching, error, orders }: OrdersListProps) {
+  const router = useRouter()
   const listRef = useRef<HTMLUListElement>(null)
 
   const [expandedOrder, setExpandedOrder] = useState({
@@ -40,6 +44,10 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
     })
   }
 
+  const handleCatalogClick = () => {
+    router.push(routeNames.catalog)
+  }
+
   if (fetching) {
     return (
       <Box>
@@ -61,7 +69,7 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
           className="h-full rounded-lg bg-slate-100 text-gray-500"
         >
           <Icon name="action/warning" className="mb-1 size-16" />
-          <p className="text-lg">Ошибка получения данных</p>
+          <p className="text-lg">Помилка отримання даних</p>
         </Box>
       </Box>
     )
@@ -74,10 +82,17 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
           flex="col"
           align="center"
           justify="center"
-          className="h-full rounded-lg bg-slate-100 text-gray-500"
+          className="h-full rounded-lg bg-slate-100 text-gray-600"
         >
           <Icon name="common/emptycart" className="mb-3 text-[230px]" />
-          <p className="text-lg">Список закакоз пуст</p>
+          <p className="text-xl font-medium tracking-tight">Замовлення відсутні</p>
+          <Button
+            color="secondary"
+            onClick={handleCatalogClick}
+            className="mt-5 flex items-center rounded-md bg-slate-200 px-2.5! py-1.5! text-sm"
+          >
+            Переглянути каталог
+          </Button>
         </Box>
       </Box>
     )

@@ -88,28 +88,32 @@ export function OrderItem({
                 {formatDate(createdAt, { day: 'numeric', month: 'numeric', year: 'numeric' })}
               </span>
             </p>
-            <p>
-              {receiverName} {receiverSurname}
-            </p>
-            <p>{formatPhoneNumber(receiverPhone)}</p>
+            <Box className="text-sm">
+              <p>
+                {receiverName} {receiverSurname}
+              </p>
+              <p>{formatPhoneNumber(receiverPhone)}</p>
+            </Box>
           </Box>
           {/* Delivery */}
           <Box className="mb-3.5 leading-snug">
             <p className="mb-0.5 font-medium">{t('order.delivery.title')}</p>
-            <p className="flex items-center">
-              <span className="mr-1 text-gray-500">{t('order.delivery.service')}:</span>
-              <DeliverySupplier supplier={supplier} />
-            </p>
-            <p>
-              <span className="text-gray-500">{t('order.delivery.address')}:</span> {cityName},{' '}
-              {postOfficeName}
-            </p>
-            {status !== OrderStatusEnum.Rejected && status !== OrderStatusEnum.Created && (
-              <Box className="pt-0.5">
-                <span className="mr-1 text-gray-500">{t('order.delivery.tracking')}:</span>
-                <ParcelTrackId trackId={parcelTrackId} />
+            <Box className="text-sm">
+              <Box flex="row" align="center">
+                <span className="mr-1 text-gray-500">{t('order.delivery.service')}:</span>
+                <DeliverySupplier supplier={supplier} />
               </Box>
-            )}
+              <p>
+                <span className="text-gray-500">{t('order.delivery.address')}:</span> {cityName},{' '}
+                {postOfficeName}
+              </p>
+              {status !== OrderStatusEnum.Rejected && status !== OrderStatusEnum.Created && (
+                <Box className="pt-0.5">
+                  <span className="mr-1 text-gray-500">{t('order.delivery.tracking')}:</span>
+                  <ParcelTrackId trackId={parcelTrackId} />
+                </Box>
+              )}
+            </Box>
           </Box>
           {/* Products */}
           <Box as="ul" className={productList({ status: status === 'REJECTED' ? status : null })}>
@@ -128,7 +132,7 @@ export function OrderItem({
               color="secondary"
               fullWidth
               onClick={handleDetailsClick}
-              className="bg-slate-200 pt-2 pb-2"
+              className="bg-slate-200 pt-1.5 pb-1.5"
             >
               {t('order.details')}
             </Button>

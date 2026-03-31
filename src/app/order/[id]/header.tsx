@@ -7,7 +7,7 @@ export function OrderHeader({ orderId, createdAt }: { orderId: string; createdAt
       <Box className="font-medium">
         <h1 className="text-2xl">Замовлення №{orderId}</h1>
         <p className="text-center text-sm leading-none text-gray-500">
-          Від {formatDate(createdAt, { dateStyle: 'medium', timeStyle: 'short' })}
+          Від {formatDate(createdAt, { dateStyle: 'long' })}
         </p>
       </Box>
     </Box>

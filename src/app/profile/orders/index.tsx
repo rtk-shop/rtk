@@ -60,9 +60,9 @@ export function Orders() {
   }
 
   return (
-    <Box as="section" className="h-full">
+    <Box className="h-full">
       <Box flex="row" align="center" justify="between" className="mb-4">
-        <h2 className="text-xl font-medium">{t('myorders')}</h2>
+        <h2 className="text-lg font-medium tracking-tight">{t('myorders')}</h2>
         <Pagination
           pageInfo={data?.userOrders.pageInfo}
           onNextPage={handleNextPage}

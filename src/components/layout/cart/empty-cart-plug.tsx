@@ -28,7 +28,7 @@ export function EmptyCartPlug() {
         <Button
           onClick={closeCart}
           color="secondary"
-          className="p flex items-center rounded-md bg-slate-100 px-2.5! py-1.5! text-sm text-gray-900"
+          className="flex items-center rounded-md bg-slate-100 px-2.5! py-1.5! text-sm text-gray-900"
         >
           {t('empty.close')}
         </Button>
