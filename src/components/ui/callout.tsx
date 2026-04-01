@@ -1,11 +1,10 @@
-import { type ReactNode } from 'react'
 import { Icon } from '@/components/ui/icon'
 import { cva } from 'cva'
 
 export interface CalloutProps {
   type: 'info' | 'warn'
   invariant?: boolean
-  children: ReactNode
+  children: React.ReactNode
 }
 
 const contaier = cva('flex rounded-lg px-2.5 py-3', {
@@ -15,14 +14,14 @@ const contaier = cva('flex rounded-lg px-2.5 py-3', {
       warn: 'bg-amber-200'
     },
     invariant: {
-      true: '!bg-black text-white',
+      true: 'bg-black! text-white',
       false: ''
     }
   }
 })
 
 const icons = {
-  info: 'action/circle-info',
+  info: 'action/info',
   warn: 'action/warning'
 } as const
 

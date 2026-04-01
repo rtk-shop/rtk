@@ -32,11 +32,13 @@ export function AddToCartButton({ productId, inStock }: { productId: string; inS
         fullWidth
         hapticFeedback="soft"
         loading={fetching}
+        size="lg"
         onClick={handleButtonClick}
         className="h-13.25"
+        rounded="xl"
         disabled={!inStock}
-        startIcon={<Icon name="common/cart" className="mr-2.5 fill-white text-[26px]" />}
       >
+        <Icon name="common/cart" className="mr-2.5 fill-white text-[26px]" />
         {t('addToCart')}
       </Button>
     </Box>

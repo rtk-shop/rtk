@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { CartHead } from './head'
 import { Summary } from './summary'
 import { EmptyCartPlug } from './empty-cart-plug'
@@ -7,9 +8,7 @@ import { CartItem } from '@/components/cart/item'
 import { useCartQuery } from '@/lib/api/hooks'
 
 export function CartInner() {
-  const [result] = useCartQuery()
-
-  const { data, fetching, error } = result
+  const [{ data, fetching, error }] = useCartQuery()
 
   let productsAmount = 0
 
@@ -23,7 +22,7 @@ export function CartInner() {
   if (!fetching && !data?.cartProducts.length) return <EmptyCartPlug />
 
   return (
-    <div className="flex h-full flex-col">
+    <Box flex="col" className="h-full">
       <CartHead quantity={productsAmount} />
       {fetching ? (
         <ListSkeleton len={3} />
@@ -35,6 +34,6 @@ export function CartInner() {
         </ul>
       )}
       <Summary loading={fetching} totalSum={cartPrice} />
-    </div>
+    </Box>
   )
 }

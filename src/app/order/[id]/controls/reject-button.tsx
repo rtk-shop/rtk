@@ -14,7 +14,11 @@ export function RejectOrderButton({ orderStatus }: { orderStatus: TOrderStatus }
     <Box>
       {statusesForReject.includes(orderStatus) && (
         <Box flex="row" justify="center" className="py-3">
-          <Button color="secondary" onClick={() => setRejectDrawerOpen(true)} className="pt-2 pb-2">
+          <Button
+            color="ghost"
+            className="bg-transparent!"
+            onClick={() => setRejectDrawerOpen(true)}
+          >
             Отменить заказ
           </Button>
         </Box>

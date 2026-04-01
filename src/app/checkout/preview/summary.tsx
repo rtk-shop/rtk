@@ -42,9 +42,11 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
       </Box>
       <Button
         fullWidth
-        color="accept"
-        disabled={hasErr}
+        color="primary"
         type="submit"
+        size="lg"
+        rounded="xl"
+        disabled={hasErr}
         loading={submitLoading || loading}
       >
         {t('preview.submitOrder')}

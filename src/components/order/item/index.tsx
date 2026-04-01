@@ -128,12 +128,7 @@ export function OrderItem({
           </Box>
           {/* Controls */}
           <Box className="mb-2">
-            <Button
-              color="secondary"
-              fullWidth
-              onClick={handleDetailsClick}
-              className="bg-slate-200 pt-1.5 pb-1.5"
-            >
+            <Button fullWidth color="secondary" onClick={handleDetailsClick}>
               {t('order.details')}
             </Button>
           </Box>

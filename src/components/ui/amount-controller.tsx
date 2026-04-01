@@ -1,5 +1,5 @@
+import { Button } from './button'
 import { Icon } from './icon'
-import { IconButton } from './icon-button'
 import { Loader } from '@/components/ui/loader'
 
 export interface AmountControllerProps {
@@ -29,15 +29,15 @@ export function AmountController({
 
   return (
     <div className="flex items-center rounded-lg bg-gray-100">
-      <IconButton
+      <Button
         hapticFeedback="soft"
+        color="ghost"
         onClick={handleSubClick}
         disabled={loading || amount <= 1}
-        aria-label="удалить одну единицу данного продукта"
-        className="p-2! text-[25px] text-black active:not-disabled:scale-110"
+        className="text-[25px] text-black active:not-disabled:scale-110"
       >
         <Icon name="action/circle-minus" />
-      </IconButton>
+      </Button>
 
       <div className="w-7 text-center text-lg font-medium select-none">
         {loading ? (
@@ -50,15 +50,15 @@ export function AmountController({
           <span>{amount}</span>
         )}
       </div>
-      <IconButton
+      <Button
         hapticFeedback="soft"
+        color="ghost"
         onClick={handleAddClick}
         disabled={loading || (!!max && amount >= max)}
-        aria-label="добавить одну единицу данного продукта"
-        className="p-2! text-[25px] !text-black active:not-disabled:scale-110"
+        className="text-[25px] text-black active:not-disabled:scale-110"
       >
         <Icon name="action/circle-plus" />
-      </IconButton>
+      </Button>
     </div>
   )
 }

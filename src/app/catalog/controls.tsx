@@ -27,24 +27,14 @@ export function Controls({
     <Box as="section" className="py-3">
       <Box flex="row">
         <Badge content={isSortDirty} className="w-full pr-0.5" dotClassName="right-3 top-1">
-          <Button
-            color="secondary"
-            fullWidth
-            onClick={onSortClick}
-            className="bg-gray-200 px-1! py-2!"
-            endIcon={<Icon name="action/sort" className="text-[25px]" />}
-          >
+          <Button color="secondary" fullWidth onClick={onSortClick}>
+            <Icon name="action/arrow-down-up" className="mr-1 text-lg" />
             {t('actions.sort')}
           </Button>
         </Badge>
         <Badge content={filtersDirtyCount} className="w-full pl-0.5" dotClassName="right-3 top-1">
-          <Button
-            color="secondary"
-            fullWidth
-            onClick={onFiltersClick}
-            className="bg-gray-200 px-1! py-2!"
-            startIcon={<Icon name="action/filter" className="mr-1" />}
-          >
+          <Button color="secondary" fullWidth onClick={onFiltersClick}>
+            <Icon name="action/funnel" className="mr-1 text-lg" />
             {t('nouns.filter')}
           </Button>
         </Badge>

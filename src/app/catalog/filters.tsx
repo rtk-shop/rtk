@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
+import { Button } from '@/components/ui/button'
 import { Drawer } from '@/components/ui/drawer'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { CheckboxGroup } from '@/components/ui/checkbox-group'
-import { IconButton } from '@/components/ui/icon-button'
 import { PriceRange } from '@/components/ui/price-range'
 import { useFormContext } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
@@ -68,18 +68,15 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
             <Box className="relative py-4">
               <p className="text-center text-xl font-semibold">{t('nouns.filters')}</p>
               {isDirty && (
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="absolute top-4.5 left-1 rounded-lg bg-red-500 px-2 py-0.5 text-sm font-medium text-white select-none"
-                >
+                <Button size="sm" className="absolute top-4 left-0" onClick={handleReset}>
+                  <Icon name="common/x" className="mr-0.5" />
                   {t('verbs.clear')}
-                </button>
+                </Button>
               )}
-              <Box className="absolute top-3 right-1">
-                <IconButton onClick={onFiltersClose} className="text-sm text-black">
-                  <Icon name="common/xmark" />
-                </IconButton>
+              <Box className="absolute top-2.5 right-1">
+                <Button color="ghost" className="bg-transparent" onClick={onFiltersClose}>
+                  <Icon name="common/x" className="text-2xl text-black" />
+                </Button>
               </Box>
             </Box>
             <div className="mb-2.5 h-0.5 bg-gray-100" />

@@ -86,11 +86,7 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
         >
           <Icon name="common/emptycart" className="mb-3 text-[230px]" />
           <p className="text-xl font-medium tracking-tight">Замовлення відсутні</p>
-          <Button
-            color="secondary"
-            onClick={handleCatalogClick}
-            className="mt-5 flex items-center rounded-md bg-slate-200 px-2.5! py-1.5! text-sm"
-          >
+          <Button color="secondary" onClick={handleCatalogClick} className="mt-5">
             Переглянути каталог
           </Button>
         </Box>

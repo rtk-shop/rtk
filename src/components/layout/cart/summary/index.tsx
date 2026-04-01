@@ -32,7 +32,7 @@ export function Summary({
           <FormatPrice size="XL" price={totalSum} currency="грн" />
         </span>
       </p>
-      <Button fullWidth onClick={handleButtonClick}>
+      <Button fullWidth size="lg" rounded="xl" onClick={handleButtonClick}>
         {t('makeOrder')}
       </Button>
     </div>

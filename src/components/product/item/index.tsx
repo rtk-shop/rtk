@@ -4,7 +4,7 @@ import { memo } from 'react'
 import { cva } from 'cva'
 import { Icon } from '@/components/ui/icon'
 import { LikeButton } from '@/components/ui/like-button'
-import { IconButton } from '@/components/ui/icon-button'
+import { Button } from '@/components/ui/button'
 import { routeNames } from '@/lib/routes'
 import { FormatPrice } from '@/components/ui/format-price'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
@@ -133,9 +133,13 @@ function ProductItemInner({
           </div>
           <div>
             {withDelete ? (
-              <IconButton onClick={handleActionClick} className="p-1! pb-1.5! text-red-600">
+              <Button
+                color="ghost"
+                onClick={handleActionClick}
+                className="bg-transparent p-1! pb-1.5!"
+              >
                 <Icon name="action/trash" className="size-5" />
-              </IconButton>
+              </Button>
             ) : (
               <LikeButton liked={isFavourite} onClick={handleActionClick} />
             )}

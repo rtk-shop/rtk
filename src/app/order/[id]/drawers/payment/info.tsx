@@ -44,9 +44,11 @@ export default function PaymentInfo({
   if (error) {
     return (
       <Box flex="col" align="center" justify="center" className="h-full">
-        <Icon name="action/warning" className="m-auto mb-3 block text-[69px]" />
-        <p className="text-lg font-medium text-gray-500">Сталася помилка, спробуйте пізніше</p>
-        <Button fullWidth className="mt-auto" onClick={onClose}>
+        <Icon name="action/warning" className="m-auto mb-3 block text-[85px] text-red-500" />
+        <p className="text-xl font-medium tracking-tight text-gray-700">
+          Сталася помилка, спробуйте пізніше
+        </p>
+        <Button fullWidth className="mt-auto" size="lg" rounded="xl" onClick={onClose}>
           Згорнути
         </Button>
       </Box>
@@ -60,7 +62,7 @@ export default function PaymentInfo({
         <p className="text-center text-lg font-medium text-gray-500">
           Сталася помилка, платіжні дані невідомі, спробуйте пізніше
         </p>
-        <Button fullWidth className="mt-auto" onClick={onClose}>
+        <Button fullWidth className="mt-auto" size="lg" rounded="xl" onClick={onClose}>
           Згорнути
         </Button>
       </Box>
@@ -152,7 +154,13 @@ export default function PaymentInfo({
             Платіж надіслано
           </ConfirmButton>
         )}
-        <Button fullWidth={mode === 'reminder'} onClick={onClose}>
+        <Button
+          size="lg"
+          rounded="xl"
+          color="secondary"
+          fullWidth={mode === 'reminder'}
+          onClick={onClose}
+        >
           Згорнути
         </Button>
       </Box>

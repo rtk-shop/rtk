@@ -8,9 +8,9 @@ const loader = cva('aspect-square animate-spin rounded-full border-solid', {
     },
     color: {
       primary: 'border-white border-r-black',
+      secondary: 'border-black border-r-slate-200',
       accept: 'border-r-green-lime border-black',
-      danger: 'border-white border-r-red-500',
-      secondary: 'border-black border-r-white'
+      ghost: 'border-black border-r-slate-100'
     }
   },
   defaultVariants: {
@@ -23,7 +23,7 @@ export function Loader({
   color
 }: {
   adaptive?: boolean
-  color: 'primary' | 'secondary' | 'accept' | 'danger'
+  color: 'primary' | 'secondary' | 'accept' | 'ghost'
 }) {
   return <div className={loader({ adaptive, color })} />
 }

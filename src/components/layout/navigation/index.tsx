@@ -1,8 +1,8 @@
 'use client'
 
 import { routeNames } from '@/lib/routes'
+import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { IconButton } from '@/components/ui/icon-button'
 import { useRouter } from 'next/navigation'
 import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { Icon } from '@/components/ui/icon'
@@ -43,42 +43,67 @@ export function Navigation() {
         <nav className="px-3 pt-1">
           <ul className="flex w-full justify-between">
             <li>
-              <IconButton onClick={openSidebar} className="text-[24px] text-white">
+              <Button
+                color="ghost"
+                size="lg"
+                onClick={openSidebar}
+                className="bg-transparent text-[24px] text-white"
+              >
                 <Icon name="common/menu" />
-              </IconButton>
+              </Button>
             </li>
             {/*  */}
             <li>
-              <IconButton className="" onClick={handleFavoritesClick}>
+              <Button
+                color="ghost"
+                size="lg"
+                className="bg-transparent"
+                onClick={handleFavoritesClick}
+              >
                 <Badge content={favoriteAmount}>
                   <Icon
                     name="common/heart"
                     className="bg-sl fill-transparent stroke-white text-[22px]"
                   />
                 </Badge>
-              </IconButton>
+              </Button>
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={openCart} className="text-[24px]">
+              <Button
+                color="ghost"
+                size="lg"
+                onClick={openCart}
+                className="bg-transparent text-[24px]"
+              >
                 <Badge content={cartAmount}>
                   <Icon name="common/cart" className="fill-white stroke-white" />
                 </Badge>
-              </IconButton>
+              </Button>
             </li>
             {/*  */}
             <li>
-              <IconButton onClick={handleCatalogClick} className="text-[24px] text-white">
+              <Button
+                color="ghost"
+                size="lg"
+                onClick={handleCatalogClick}
+                className="bg-transparent text-[24px] text-white"
+              >
                 <Icon name="common/grid" />
-              </IconButton>
+              </Button>
             </li>
             {/*  */}
             <li>
-              <IconButton className="text-[24px] text-white" onClick={handleProfileClick}>
+              <Button
+                color="ghost"
+                size="lg"
+                className="bg-transparent text-[24px] text-white"
+                onClick={handleProfileClick}
+              >
                 <Badge content={0} max={5}>
                   <Icon name="common/user" />
                 </Badge>
-              </IconButton>
+              </Button>
             </li>
           </ul>
         </nav>

@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from './button'
 import { toast } from 'sonner'
 import { Icon } from './icon'
-import { IconButton } from './icon-button'
 import { useTranslations } from 'next-intl'
 import { useCopyToClipboard } from '@/hooks'
 
@@ -28,8 +28,8 @@ export function CopyToClipboard({ what }: { what: string }) {
   }
 
   return (
-    <IconButton onClick={handleClick} className="ml-2 pt-0 pr-0 pb-0 pl-0 text-[18px]">
+    <Button color="ghost" onClick={handleClick} className="ml-2 bg-transparent p-1! text-[19px]">
       {copiedText ? <Icon name="action/copy-check" /> : <Icon name="action/copy" />}
-    </IconButton>
+    </Button>
   )
 }

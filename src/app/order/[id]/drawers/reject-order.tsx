@@ -36,15 +36,10 @@ export function OrderRejectModal({ orderId }: { orderId: string }) {
       <Box className="rounded-t-2xl bg-white px-4 pt-7 pb-3">
         <h3 className="mb-4 text-center text-lg font-medium">Вы подтверждаете отмену заказа?</h3>
         <Box className="mb-3 flex">
-          <Button loading={fetching} onClick={handleConfirmClick} fullWidth>
+          <Button color="secondary" loading={fetching} onClick={handleConfirmClick} fullWidth>
             Подтвердить
           </Button>
-          <Button
-            onClick={handleCancelClick}
-            fullWidth
-            className="ml-2 bg-gray-200"
-            color="secondary"
-          >
+          <Button fullWidth onClick={handleCancelClick} className="ml-2">
             Згорнути
           </Button>
         </Box>

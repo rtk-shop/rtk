@@ -1,16 +1,16 @@
-import { Icon } from '@/components/ui/icon'
 import { cva } from 'cva'
+import { Box } from '@/components/ui/box'
+import { Button } from '@/components/ui/button'
+import { Icon } from '@/components/ui/icon'
+import type { PageInfo } from '@/types/pagination'
 
 export interface PaginationProps {
-  hasNextPage?: boolean
-  hasPreviousPage?: boolean
-  startCursor?: string
-  endCursor?: string | null
+  pageInfo?: PageInfo
   onNextPage(): void
   onPrevPage(): void
 }
 
-const navButton = cva('flex items-center rounded-lg bg-gray-100 px-3 py-1 leading-7 select-none', {
+const navButton = cva('', {
   variants: {
     visible: {
       true: 'visible',
@@ -19,40 +19,34 @@ const navButton = cva('flex items-center rounded-lg bg-gray-100 px-3 py-1 leadin
   }
 })
 
-const arrowIcon = cva('fill-black text-[27px] font-medium', {
-  variants: {
-    direction: {
-      left: '-rotate-90',
-      right: 'rotate-90'
-    }
-  }
-})
-
-export function Pagination({
-  hasPreviousPage,
-  hasNextPage,
-  onNextPage,
-  onPrevPage
-}: PaginationProps) {
+export function Pagination({ pageInfo, onNextPage, onPrevPage }: PaginationProps) {
   const handleNextClick = () => {
-    if (hasNextPage) onNextPage()
+    if (pageInfo?.hasNextPage) onNextPage()
   }
 
   const handlePrevClick = () => {
-    if (hasPreviousPage) onPrevPage()
+    if (pageInfo?.hasPreviousPage) onPrevPage()
   }
 
   return (
-    <div className="flex items-center justify-between">
-      <button onClick={handlePrevClick} className={navButton({ visible: hasPreviousPage })}>
-        <Icon name="common/arrow" className={arrowIcon({ direction: 'left' })} />
-        <span>Назад</span>
-      </button>
+    <Box flex="row" align="center" justify="between">
+      <Button
+        color="ghost"
+        onClick={handlePrevClick}
+        className={navButton({ visible: pageInfo?.hasPreviousPage })}
+      >
+        <Icon name="common/arrow" className="-rotate-90 text-[23px]" />
+        Попередня сторінка
+      </Button>
       {/*  */}
-      <button onClick={handleNextClick} className={navButton({ visible: hasNextPage })}>
-        <span>Дальше</span>
-        <Icon name="common/arrow" className={arrowIcon({ direction: 'right' })} />
-      </button>
-    </div>
+      <Button
+        color="ghost"
+        onClick={handleNextClick}
+        className={navButton({ visible: pageInfo?.hasNextPage })}
+      >
+        Наступна сторінка
+        <Icon name="common/arrow" className="rotate-90 text-[23px]" />
+      </Button>
+    </Box>
   )
 }

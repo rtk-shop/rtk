@@ -34,8 +34,8 @@ export function OrderSuccessDrawer() {
           alt="tada icon"
           className="m-auto mb-4"
         />
-        {/*  */}
-        <h1 className="text-center text-2xl font-medium">{t('title')}</h1>
+        {/* todo: i18n-change */}
+        <h1 className="text-center text-2xl font-medium tracking-tight">{t('title')}</h1>
         {/*  */}
         <Box as="ul" className="mt-5 text-black *:flex *:justify-center">
           <Box as="li" className="mb-3">
@@ -52,7 +52,7 @@ export function OrderSuccessDrawer() {
           </Box>
         </Box>
         <Box flex="row" justify="center" className="mt-5 px-3">
-          <Button onClick={handleCompleteClick} fullWidth>
+          <Button fullWidth size="lg" rounded="xl" onClick={handleCompleteClick}>
             {t('review')}
           </Button>
         </Box>

@@ -19,17 +19,20 @@ export function EmptyCartPlug() {
     <div className="relative flex h-full flex-col items-center justify-center">
       <div className="px-4">
         <Icon name="common/emptycart" className="text-[300px] text-gray-500" />
-        <p className="mt-2.5 text-center text-2xl font-medium">{t('empty.text')}</p>
+        <p className="mt-2.5 text-center text-2xl font-medium tracking-tight">{t('empty.text')}</p>
       </div>
-      <Button onClick={handleActionButtonClick} fullWidth className="mt-10 max-w-62 py-3">
+      <Button
+        rounded="xl"
+        size="lg"
+        onClick={handleActionButtonClick}
+        fullWidth
+        className="mt-10 max-w-62"
+      >
+        <Icon name="common/arrow" className="-rotate-90 text-[23px]" />
         {t('empty.action')}
       </Button>
       <div className="absolute bottom-7 left-1/2 -translate-x-1/2">
-        <Button
-          onClick={closeCart}
-          color="secondary"
-          className="flex items-center rounded-md bg-slate-100 px-2.5! py-1.5! text-sm text-gray-900"
-        >
+        <Button color="ghost" size="sm" onClick={closeCart}>
           {t('empty.close')}
         </Button>
       </div>

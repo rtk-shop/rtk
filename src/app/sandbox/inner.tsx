@@ -3,12 +3,11 @@
 import { RadioGroup } from '@/components/ui/radio-group'
 import { novaDeliveryTypeOptions } from '../checkout/model/constants'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Icon } from '@/components/ui/icon'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
-import { IconButton } from '@/components/ui/icon-button'
 import { OrderStatusBadge } from '@/components/order/status-badge'
 import { OrderStatus } from '@/lib/api/graphql/types'
+import { Buttons } from './buttons'
 
 export default function PageInner() {
   const formMethods = useForm({
@@ -42,8 +41,10 @@ export default function PageInner() {
   }
 
   return (
-    <div>
-      <h1>Sandbox</h1>
+    <div className="p-3">
+      <div className="mb-3">
+        <Buttons />
+      </div>
 
       <OrderStatusBadge status={OrderStatus.Created} />
       <OrderStatusBadge status={OrderStatus.Sent} />
@@ -70,13 +71,6 @@ export default function PageInner() {
           <Button onClick={handleQRScanClick}>Show native QR scan</Button>
         </li>
       </ul>
-
-      <div>
-        <IconButton className="text-[24px]" hapticFeedback="light">
-          <Icon name="action/share" />
-        </IconButton>
-      </div>
-
       <div className="p-10"></div>
       <FormProvider {...formMethods}>
         <Checkbox name="rg1" value="test" label="Норм" register={formMethods.register} />

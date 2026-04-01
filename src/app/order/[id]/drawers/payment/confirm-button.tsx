@@ -34,6 +34,8 @@ export function ConfirmButton({ orderId, children, onSucess }: ConfirmButtonProp
       fullWidth
       color="accept"
       loading={fetching}
+      rounded="xl"
+      size="lg"
       onClick={handleButtonClick}
       className="mr-2"
     >

@@ -57,12 +57,10 @@ export default function Page() {
     [filters, filterParams]
   )
 
-  const [result] = useProductsQuery({
+  const [{ data, fetching, error }] = useProductsQuery({
     requestPolicy: 'cache-and-network',
     variables: queryVariables
   })
-
-  const { data, fetching, error } = result
 
   const products = useMemo(
     () => data?.products.edges?.map((e) => e?.node) || [],
@@ -217,8 +215,7 @@ export default function Page() {
                   <Pagination
                     onNextPage={handleNextPage}
                     onPrevPage={handlePrevPage}
-                    hasNextPage={pageInfo?.hasNextPage}
-                    hasPreviousPage={pageInfo?.hasPreviousPage}
+                    pageInfo={pageInfo}
                   />
                 </Box>
               </Box>

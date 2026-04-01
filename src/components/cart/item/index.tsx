@@ -1,6 +1,6 @@
+import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { useAppState } from '@/stores/app/store'
-import { IconButton } from '@/components/ui/icon-button'
 import { ImagePlaceholder } from '@/components/ui/image-placeholder'
 import { AmountController } from '@/components/ui/amount-controller'
 import { routeNames } from '@/lib/routes'
@@ -121,13 +121,15 @@ export function CartItem({ product, quantity }: CartItemProps) {
             onChange={handleAmountChange}
             loading={addItemMeta.fetching}
           />
-          <IconButton
+          <Button
+            color="ghost"
+            rounded="xl"
             hapticFeedback="light"
             onClick={handleRemoveCartItem}
-            className="rounded-lg bg-gray-100! px-3 text-lg text-gray-600!"
+            className="bg-gray-100! px-3"
           >
-            <Icon name="action/trash" />
-          </IconButton>
+            <Icon name="action/trash" className="text-xl" />
+          </Button>
         </div>
       </div>
     </li>

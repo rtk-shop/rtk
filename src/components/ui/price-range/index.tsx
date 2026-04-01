@@ -1,10 +1,11 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import { cva } from 'cva'
+import { Button } from '../button'
 import Slider, { type SliderProps } from 'rc-slider'
 import { Collapse, CollapseHead } from '@/components/ui/collapse'
 
 import styles from './styles.module.css'
 import 'rc-slider/assets/index.css'
-import { cva } from 'cva'
 
 interface PriceRangeProps {
   title: string
@@ -94,13 +95,9 @@ export function PriceRange({ title, min, max, step = 1, onSet }: PriceRangeProps
               onChange={onMaxChange}
               className={priceInput()}
             />
-            <button
-              onClick={handleSubmit}
-              type="button"
-              className="w-20 rounded-sm bg-black py-1 font-medium text-white"
-            >
-              OK
-            </button>
+            <Button onClick={handleSubmit} type="button">
+              Застосувати
+            </Button>
           </div>
           <div className="pl-1.5">
             <Slider

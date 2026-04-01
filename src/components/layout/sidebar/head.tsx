@@ -1,8 +1,8 @@
 import { Box } from '@/components/ui/box'
-import { IconButton } from '@/components/ui/icon-button'
 import { Icon } from '@/components/ui/icon'
 import { useRouter } from 'next/navigation'
 import { routeNames } from '@/lib/routes'
+import { Button } from '@/components/ui/button'
 
 export function SidebarHead({ onClose }: { onClose(): void }) {
   const router = useRouter()
@@ -21,9 +21,9 @@ export function SidebarHead({ onClose }: { onClose(): void }) {
       <Box onClick={handleLogoClick}>
         <Icon name="common/logo" className="text-[48px]" />
       </Box>
-      <IconButton onClick={onClose} className="text-sm">
-        <Icon name="common/xmark" />
-      </IconButton>
+      <Button color="ghost" size="sm" onClick={onClose} className="bg-transparent">
+        <Icon name="common/x" className="text-2xl text-white" />
+      </Button>
     </Box>
   )
 }

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { CartItem, type CartItemProps } from '@/components/cart/item'
 import { Box } from '@/components/ui/box'
 import { ListSkeleton } from '@/components/layout/cart/list-skeleton' // TODO: make shared
@@ -35,10 +36,14 @@ export function CartItems({
   return (
     <Box>
       <Box flex="row" align="center" justify="between" className="px-2 pt-4 pb-4">
-        <h2 className="font-medium">{t('Checkout.preview.yourOrder')}</h2>
-        <button type="button" className="text-[13px] text-gray-500" onClick={handleClearClick}>
+        <h2 className="text-lg font-medium">{t('Checkout.preview.yourOrder')}</h2>
+        <Button
+          color="ghost"
+          className="bg-transparent! font-normal! text-gray-600"
+          onClick={handleClearClick}
+        >
           {t('Common.actions.deleteAll')}
-        </button>
+        </Button>
       </Box>
       {loading ? (
         <ListSkeleton len={1} />

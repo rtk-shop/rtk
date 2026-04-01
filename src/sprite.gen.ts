@@ -257,14 +257,14 @@ export const sprites = defineSpriteMap([defineSprite(
   'action',
   [defineSpriteAsset(
   [defineSpriteSymbol(
-     ["circle-info"],
-     [512]
+     ["arrow-down-up"],
+     [24]
    ), defineSpriteSymbol(
      ["circle-minus"],
-     [512]
+     [24]
    ), defineSpriteSymbol(
      ["circle-plus"],
-     [512]
+     [24]
    ), defineSpriteSymbol(
      ["copy-check"],
      [24]
@@ -275,8 +275,11 @@ export const sprites = defineSpriteMap([defineSprite(
      ["edit"],
      [512]
    ), defineSpriteSymbol(
-     ["filter"],
-     [512]
+     ["funnel"],
+     [24]
+   ), defineSpriteSymbol(
+     ["info"],
+     [24]
    ), defineSpriteSymbol(
      ["search"],
      [18]
@@ -284,16 +287,13 @@ export const sprites = defineSpriteMap([defineSprite(
      ["share"],
      [512]
    ), defineSpriteSymbol(
-     ["sort"],
-     [24]
-   ), defineSpriteSymbol(
      ["trash"],
-     [20]
+     [24]
    ), defineSpriteSymbol(
      ["warning"],
      [512]
    )],
-  defineExternalAssetMeta('action.a7a055d5.svg')
+  defineExternalAssetMeta('action.615d964f.svg')
 )]
 ), defineSprite(
   'checkout',
@@ -347,10 +347,10 @@ export const sprites = defineSpriteMap([defineSprite(
      ["user"],
      [512]
    ), defineSpriteSymbol(
-     ["xmark"],
-     [20]
+     ["x"],
+     [24]
    )],
-  defineExternalAssetMeta('common.ec441049.svg')
+  defineExternalAssetMeta('common.acb36e6c.svg')
 )]
 ), defineSprite(
   'profile',
@@ -379,9 +379,9 @@ export const sprites = defineSpriteMap([defineSprite(
 )])
 
 export type SpritesMeta = {
-  "action": "circle-info" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "filter" | "search" | "share" | "sort" | "trash" | "warning";
+  "action": "arrow-down-up" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "funnel" | "info" | "search" | "share" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
-  "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user-round" | "user" | "xmark";
+  "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user-round" | "user" | "x";
   "profile": "circle-x" | "gift" | "package-check" | "package-x" | "timer" | "truck";
 }
 

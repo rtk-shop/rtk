@@ -7,7 +7,6 @@ import { usePageState } from '../lib/state'
 import { Icon } from '@/components/ui/icon'
 import { useOrderPayment } from '@/lib/api/hooks'
 import { PaymentStatusBadge } from './status-badge'
-import { IconButton } from '@/components/ui/icon-button'
 import { isDataDefined } from '@/lib/api/helpers'
 import { OrderStatus, OrderPaymentMethod, PaymentPurpose } from '@/lib/api/graphql/types'
 
@@ -54,8 +53,8 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
       {payment && orderStatus !== OrderStatus.Done ? (
         <>
           <Box className="absolute top-1 right-1">
-            <IconButton
-              className="text-xl"
+            <Button
+              className="bg-transparent"
               onClick={() =>
                 setPaymentDrawer({
                   open: true,
@@ -64,15 +63,15 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
                 })
               }
             >
-              <Icon name="action/circle-info" />
-            </IconButton>
+              <Icon name="action/info" className="text-2xl text-gray-800" />
+            </Button>
           </Box>
           <PaymentStatusBadge status={payment.status} />
         </>
       ) : (
         <Button
           fullWidth
-          className="rounded-lg! pt-1.5 pb-1.5 text-sm"
+          color="accept"
           disabled={!statusesForPayment.includes(orderStatus)}
           onClick={() =>
             setPaymentDrawer({
