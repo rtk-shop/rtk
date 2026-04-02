@@ -36,7 +36,7 @@ export default function PaymentInfo({
   if (isLoading) {
     return (
       <Box flex="row" align="center" justify="center" className="h-full">
-        <Loader color="secondary" />
+        <Loader size="lg" />
       </Box>
     )
   }

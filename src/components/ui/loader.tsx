@@ -1,29 +1,25 @@
-import { cva } from 'cva'
+import { cva, type VariantProps } from 'cva'
 
-const loader = cva('aspect-square animate-spin rounded-full border-solid', {
-  variants: {
-    adaptive: {
-      true: 'size-auto border-2',
-      false: 'w-10 border-[6px]'
+const loader = cva(
+  'aspect-square shrink-0 animate-spin rounded-full border-solid border-current border-r-transparent',
+  {
+    variants: {
+      size: {
+        inline: 'size-auto border-2',
+        xs: 'w-3 border-2',
+        sm: 'w-5 border-2',
+        md: 'w-7 border-2',
+        lg: 'w-10 border-4'
+      }
     },
-    color: {
-      primary: 'border-white border-r-black',
-      secondary: 'border-black border-r-slate-200',
-      accept: 'border-r-green-lime border-black',
-      ghost: 'border-black border-r-slate-100'
+    defaultVariants: {
+      size: 'sm'
     }
-  },
-  defaultVariants: {
-    adaptive: false
   }
-})
+)
 
-export function Loader({
-  adaptive,
-  color
-}: {
-  adaptive?: boolean
-  color: 'primary' | 'secondary' | 'accept' | 'ghost'
-}) {
-  return <div className={loader({ adaptive, color })} />
+export type LoaderProps = VariantProps<typeof loader>
+
+export function Loader({ size }: LoaderProps) {
+  return <div className={loader({ size })} />
 }

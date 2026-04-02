@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <Box flex="row" align="center" justify="center" className="h-dvh">
       <Box className="animate-in fade-in zoom-in">
-        <Loader color="secondary" />
+        <Loader size="lg" />
       </Box>
     </Box>
   )

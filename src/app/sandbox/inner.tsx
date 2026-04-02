@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { OrderStatusBadge } from '@/components/order/status-badge'
 import { OrderStatus } from '@/lib/api/graphql/types'
 import { Buttons } from './buttons'
+import { Loaders } from './loaders'
 
 export default function PageInner() {
   const formMethods = useForm({
@@ -44,6 +45,9 @@ export default function PageInner() {
     <div className="p-3">
       <div className="mb-3">
         <Buttons />
+      </div>
+      <div className="mb-3">
+        <Loaders />
       </div>
 
       <OrderStatusBadge status={OrderStatus.Created} />

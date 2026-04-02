@@ -54,6 +54,7 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
         <>
           <Box className="absolute top-1 right-1">
             <Button
+              color="ghost"
               className="bg-transparent"
               onClick={() =>
                 setPaymentDrawer({

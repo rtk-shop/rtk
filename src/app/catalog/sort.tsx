@@ -19,7 +19,7 @@ export function SortMenu({ open, onSortClose }: { open: boolean; onSortClose(): 
   return (
     <Drawer open={open} position="bottom" onClose={onSortClose}>
       <Box as="section" className="relative h-117.5 rounded-t-2xl bg-white px-4 pb-4">
-        <p className="py-4 text-[21px] font-semibold">{t('nouns.sort')}</p>
+        <p className="py-4 text-[21px] font-medium">{t('nouns.sort')}</p>
         <Box className="absolute top-2.5 right-3">
           <Button color="ghost" onClick={onSortClose} className="bg-transparent">
             <Icon name="common/x" className="text-2xl text-black" />

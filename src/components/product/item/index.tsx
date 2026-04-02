@@ -38,7 +38,7 @@ const priceBlock = cva('basis-4/5 text-lg', {
 })
 
 const titleStyles = cva(
-  'clear-both line-clamp-2 h-[34px] text-[13px] leading-4 font-semibold text-ellipsis whitespace-normal no-underline md:h-9 md:text-sm md:font-medium',
+  'clear-both line-clamp-2 h-8.5 text-sm leading-4 font-medium text-ellipsis whitespace-normal no-underline',
   {
     variants: {
       inStock: {

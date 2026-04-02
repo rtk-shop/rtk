@@ -66,7 +66,7 @@ export function Filters({ open, priceRange, onReset, onFiltersClose }: FiltersPr
         <Box className="bg-white px-4">
           <Box as="form">
             <Box className="relative py-4">
-              <p className="text-center text-xl font-semibold">{t('nouns.filters')}</p>
+              <p className="text-center text-xl font-medium">{t('nouns.filters')}</p>
               {isDirty && (
                 <Button size="sm" className="absolute top-4 left-0" onClick={handleReset}>
                   <Icon name="common/x" className="mr-0.5" />

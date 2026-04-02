@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from './skeleton'
 import { useTranslations } from 'next-intl'
@@ -25,8 +26,8 @@ export function Summary({
   if (loading) return <Skeleton />
 
   return (
-    <div className="bg-gray-50 px-4 pt-4 pb-5">
-      <p className="mb-2 flex justify-between text-lg font-semibold">
+    <Box className="bg-gray-50 px-4 pt-4 pb-5">
+      <p className="mb-2 flex justify-between text-lg font-medium">
         <span>{t('total')}:</span>
         <span>
           <FormatPrice size="XL" price={totalSum} currency="грн" />
@@ -35,6 +36,6 @@ export function Summary({
       <Button fullWidth size="lg" rounded="xl" onClick={handleButtonClick}>
         {t('makeOrder')}
       </Button>
-    </div>
+    </Box>
   )
 }

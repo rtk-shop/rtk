@@ -3,6 +3,7 @@
 import React, { forwardRef } from 'react'
 import { cva } from 'cva'
 import { Loader } from '@/components/ui/loader'
+import clsx from 'clsx'
 
 export type buttonVariants = 'primary' | 'secondary' | 'accept' | 'ghost'
 
@@ -20,49 +21,52 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?(): void
 }
 
-const buttonStyles = cva('font-medium transition-all select-none disabled:pointer-events-none', {
-  variants: {
-    color: {
-      primary: 'bg-black text-white active:bg-[#383838]',
-      secondary: 'bg-slate-200 text-black',
-      accept: 'bg-green-lime text-black active:bg-[#48ff90]',
-      ghost: 'bg-slate-100 text-black'
+const buttonStyles = cva(
+  'relative font-medium transition-all select-none disabled:pointer-events-none',
+  {
+    variants: {
+      color: {
+        primary: 'bg-black text-white',
+        secondary: 'bg-slate-200 text-black',
+        accept: 'bg-green-lime text-black active:bg-[#48ff90]',
+        ghost: 'bg-slate-100 text-black'
+      },
+      disabled: {
+        true: 'cursor-not-allowed opacity-75'
+      },
+      fullWidth: {
+        true: 'w-full',
+        false: 'w-auto'
+      },
+      rounded: {
+        lg: 'rounded-lg',
+        xl: 'rounded-xl'
+      },
+      size: {
+        sm: 'px-2 py-1 text-sm',
+        base: 'px-2.5 py-2 text-sm',
+        lg: 'px-2.5 py-3 text-base'
+      }
     },
-    disabled: {
-      true: 'cursor-not-allowed opacity-75'
+    defaultVariants: {
+      fullWidth: false,
+      rounded: 'lg',
+      size: 'base'
     },
-    fullWidth: {
-      true: 'w-full',
-      false: 'w-auto'
-    },
-    rounded: {
-      lg: 'rounded-lg',
-      xl: 'rounded-xl'
-    },
-    size: {
-      sm: 'px-2 py-1 text-sm',
-      base: 'px-2.5 py-2 text-sm',
-      lg: 'px-2.5 py-3 text-base'
-    }
-  },
-  defaultVariants: {
-    fullWidth: false,
-    rounded: 'lg',
-    size: 'base'
-  },
-  compoundVariants: [
-    {
-      color: 'accept',
-      disabled: true,
-      className: 'text-stone-700'
-    },
-    {
-      color: 'secondary',
-      disabled: true,
-      className: 'bg-slate-100! text-gray-400'
-    }
-  ]
-})
+    compoundVariants: [
+      {
+        color: 'accept',
+        disabled: true,
+        className: 'text-stone-700'
+      },
+      {
+        color: 'secondary',
+        disabled: true,
+        className: 'bg-slate-100! text-gray-400'
+      }
+    ]
+  }
+)
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
@@ -100,15 +104,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       disabled={loading || disabled}
       {...otherProps}
     >
-      {loading ? (
-        <div className="flex justify-center">
-          <div className="size-[1lh]">
-            <Loader adaptive color={color} />
-          </div>
+      {loading && (
+        <div className="absolute left-1/2 size-[1lh] -translate-x-1/2">
+          <Loader size="inline" />
         </div>
-      ) : (
-        <div className="flex items-center justify-center">{children}</div>
       )}
+      <div
+        className={clsx('flex items-center justify-center', loading ? 'opacity-0' : 'opacity-100')}
+      >
+        {children}
+      </div>
     </button>
   )
 })

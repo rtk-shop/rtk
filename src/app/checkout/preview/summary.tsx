@@ -52,9 +52,7 @@ export function Summary({ loading, submitLoading, totalSum = 0 }: SummaryProps) 
         {t('preview.submitOrder')}
       </Button>
       {hasErr && (
-        <p className="text-md mt-2 px-5 text-center leading-none font-semibold text-red-600">
-          {t('fillForm')}
-        </p>
+        <p className="text-md mt-2 px-5 text-center leading-none text-red-500">{t('fillForm')}</p>
       )}
       <p className="mt-2 px-5 text-center text-sm leading-none text-gray-400">
         {t('preview.offerta')}

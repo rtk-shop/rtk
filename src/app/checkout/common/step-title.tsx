@@ -30,7 +30,7 @@ const inner = cva('flex items-center justify-start rounded-lg select-none', {
 })
 
 const stepBadge = cva(
-  'flex content-center items-center justify-center rounded-full p-1 text-sm leading-none font-semibold text-white transition-colors select-none',
+  'flex content-center items-center justify-center rounded-full p-1 text-sm leading-none font-medium text-white transition-colors select-none',
   {
     variants: {
       expand: {

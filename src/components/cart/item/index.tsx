@@ -1,3 +1,4 @@
+import { Box } from '@/components/ui/box'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { useAppState } from '@/stores/app/store'
@@ -85,7 +86,10 @@ export function CartItem({ product, quantity }: CartItemProps) {
   }
 
   return (
-    <li className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 last:after:hidden">
+    <Box
+      as="li"
+      className="relative mb-8 flex after:absolute after:-bottom-4 after:left-1/2 after:h-[1px] after:w-9/12 after:-translate-x-2/4 after:bg-gray-300 last:mb-0 last:after:hidden"
+    >
       <div className="relative mr-2 w-full max-w-32">
         <div onClick={handleRedirect} className="rounded-lg">
           <ImagePlaceholder src={preview} alt={title} width={216} height={270} />
@@ -94,7 +98,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
       <div className="w-full max-w-md min-w-0 pt-3">
         <p
           onClick={handleRedirect}
-          className="clear-both mb-2 line-clamp-2 h-8.25 text-sm leading-4 font-semibold text-ellipsis whitespace-normal text-black no-underline"
+          className="clear-both mb-2 line-clamp-2 h-8.25 text-sm leading-4 font-medium text-ellipsis whitespace-normal text-black no-underline"
         >
           {title}
         </p>
@@ -109,7 +113,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
             </>
           )}
         </span>
-        <p className="leading-none font-semibold">
+        <p className="leading-none font-medium">
           {quantity}&nbsp;шт:&nbsp;&nbsp;
           <FormatPrice price={quantity * currentPrice} />
         </p>
@@ -132,6 +136,6 @@ export function CartItem({ product, quantity }: CartItemProps) {
           </Button>
         </div>
       </div>
-    </li>
+    </Box>
   )
 }

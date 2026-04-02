@@ -1,3 +1,4 @@
+import { Box } from './box'
 import { Button } from './button'
 import { Icon } from './icon'
 import { Loader } from '@/components/ui/loader'
@@ -28,7 +29,7 @@ export function AmountController({
   }
 
   return (
-    <div className="flex items-center rounded-lg bg-gray-100">
+    <Box flex="row" align="center" className="rounded-lg bg-gray-100">
       <Button
         hapticFeedback="soft"
         color="ghost"
@@ -39,17 +40,15 @@ export function AmountController({
         <Icon name="action/circle-minus" />
       </Button>
 
-      <div className="w-7 text-center text-lg font-medium select-none">
+      <Box className="w-7 text-center text-lg font-medium select-none">
         {loading ? (
-          <div className="flex justify-center">
-            <div className="w-4">
-              <Loader adaptive color="secondary" />
-            </div>
-          </div>
+          <Box flex="row" justify="center">
+            <Loader size="xs" />
+          </Box>
         ) : (
           <span>{amount}</span>
         )}
-      </div>
+      </Box>
       <Button
         hapticFeedback="soft"
         color="ghost"
@@ -59,6 +58,6 @@ export function AmountController({
       >
         <Icon name="action/circle-plus" />
       </Button>
-    </div>
+    </Box>
   )
 }
