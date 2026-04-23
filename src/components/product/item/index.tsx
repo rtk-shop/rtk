@@ -123,12 +123,12 @@ function ProductItemInner({
             })}
           >
             {currentPrice < basePrice && (
-              <div className="text-[13px] leading-none text-gray-400 line-through">
-                <FormatPrice size="inherit" price={basePrice} />
+              <div className="text-[13px] text-gray-400 line-through">
+                <FormatPrice size="sm" price={basePrice} />
               </div>
             )}
             <div className="leading-none">
-              <FormatPrice size="inherit" price={currentPrice} />
+              <FormatPrice size="XL" price={currentPrice} />
             </div>
           </div>
           <div>

@@ -1,8 +1,12 @@
 import { Box } from '@/components/ui/box'
+import { FormatPrice } from '@/components/ui/format-price'
+import { OrderProduct } from './ui/order-product'
+import { SectionWrapper } from './ui/section-wrapper'
 import { useTranslations } from 'next-intl'
-import { OrderProductItem } from '@/components/order-product-item'
 
-export interface OrderProductsProps {
+export interface ProductsProps {
+  orderPrice: number
+  deliveryCost: number
   products: Array<{
     id: string
     quantity: number
@@ -11,22 +15,37 @@ export interface OrderProductsProps {
   }>
 }
 
-export function OrderProducts({ products }: OrderProductsProps) {
+export function Products({ orderPrice, deliveryCost, products }: ProductsProps) {
   const _ = useTranslations('Common')
 
+  const productsAmount = products.reduce((counter, product) => counter + product.quantity, 0)
+
   return (
-    <Box as="section" className="rounded-lg bg-white p-3 shadow-sm">
-      <h2 className="text-xl font-medium">Товары:</h2>
-      <Box as="ul" className="pt-2">
+    <SectionWrapper>
+      <h2 className="mb-3 text-xl font-medium tracking-tight">
+        Товари <span className="text-lg">({productsAmount})</span>
+      </h2>
+      <Box as="ul">
         {products.map(({ id, quantity, priceAtOrder, product }) => (
-          <OrderProductItem
-            key={id}
-            quantity={quantity}
-            priceAtOrder={priceAtOrder}
-            product={product}
-          />
+          <li key={id}>
+            <OrderProduct quantity={quantity} priceAtOrder={priceAtOrder} product={product} />
+          </li>
         ))}
       </Box>
-    </Box>
+      <Box className="mb-1.5 h-0.5 bg-gray-100" />
+      <Box flex="row" align="center" justify="between" className="mb-1.5 text-gray-400">
+        <p className="text-sm font-medium">Товари</p>
+        <FormatPrice price={orderPrice} size="sm" />
+      </Box>
+      <Box flex="row" align="center" justify="between" className="mb-1.5 text-gray-400">
+        <p className="text-sm font-medium">Доставка</p>
+        <FormatPrice price={deliveryCost} size="sm" />
+      </Box>
+      <Box className="mb-2 h-0.5 bg-gray-100" />
+      <Box flex="row" align="center" justify="between">
+        <p className="font-medium">Разом до сплати</p>
+        <FormatPrice price={orderPrice + deliveryCost} size="XXL" />
+      </Box>
+    </SectionWrapper>
   )
 }

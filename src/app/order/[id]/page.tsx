@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation'
 import { OrderHeader } from './header'
 import { Receiver } from './receiver'
 import { Delivery } from './delivery'
-import { ControlsGrid } from './controls-grid'
-import { OrderProducts } from './products'
+import { Products } from './products'
 import { Payment } from './controls/payment'
 import { calculateDeliveryCost } from './lib/utils'
 import { RejectOrderButton } from './controls/reject-button'
 import { TelegramAppWidgets } from './telegram'
+import { Price } from './price'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -30,31 +30,17 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       <style precedence="high">
         {`
           body {
-            background-color: var(--color-gray-100);
+            background-color: var(--color-gray-50);
             min-height: 100dvh;
           }
         `}
       </style>
-      <Box className="px-2 pt-2">
+      <Box className="px-2">
         <OrderHeader orderId={order.id} createdAt={order.createdAt} />
-        <Receiver
-          name={order.receiverName}
-          surname={order.receiverSurname}
-          phone={order.receiverPhone}
-        />
-        <Delivery
-          city={order.cityName}
-          postOffice={order.postOfficeName}
-          supplier={order.supplier}
-          parcelTrackId={order.parcelTrackId}
-          status={order.status}
-        />
-        <ControlsGrid
-          orderId={order.id}
+        <Price
           orderPrice={order.price}
-          status={order.status}
-          deliveryCost={deliveryCost}
           paymentMethod={order.paymentMethod}
+          orderStatus={order.status}
           payment={
             <Payment
               orderId={order.id}
@@ -63,8 +49,21 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             />
           }
         />
-        <OrderProducts products={order.products} />
-        <RejectOrderButton orderStatus={order.status} />
+        <Delivery
+          city={order.cityName}
+          postOffice={order.postOfficeName}
+          supplier={order.supplier}
+          parcelTrackId={order.parcelTrackId}
+          status={order.status}
+        />
+        <Receiver
+          name={order.receiverName}
+          surname={order.receiverSurname}
+          phone={order.receiverPhone}
+        />
+        <Products deliveryCost={deliveryCost} orderPrice={order.price} products={order.products} />
+
+        {/* <RejectOrderButton orderStatus={order.status} /> */}
         <TelegramAppWidgets />
       </Box>
     </>

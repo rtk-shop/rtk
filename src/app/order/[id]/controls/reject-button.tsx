@@ -16,7 +16,7 @@ export function RejectOrderButton({ orderStatus }: { orderStatus: TOrderStatus }
         <Box flex="row" justify="center" className="py-3">
           <Button
             color="ghost"
-            className="bg-transparent!"
+            className="bg-transparent! text-red-500"
             onClick={() => setRejectDrawerOpen(true)}
           >
             Отменить заказ

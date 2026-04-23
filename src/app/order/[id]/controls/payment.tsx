@@ -27,8 +27,8 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
 
   if (fetching) {
     return (
-      <Box flex="row" align="center" justify="center" className="mt-6 h-8">
-        <ContentLoader backgroundColor="#eeeeee" foregroundColor="#e1e1e1" width="100%" height="32">
+      <Box flex="row" align="center" justify="center" className="mt-6 h-12">
+        <ContentLoader backgroundColor="#eeeeee" foregroundColor="#e1e1e1" width="100%" height="48">
           <rect x="0" y="0" rx="6" ry="6" width="100%" height="100%" />
         </ContentLoader>
       </Box>
@@ -37,7 +37,7 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
 
   if (!isDataDefined(data) || error) {
     return (
-      <Box flex="row" align="center" justify="center" className="mt-6 h-8 font-medium">
+      <Box flex="row" align="center" justify="center" className="mt-6 h-12 font-medium">
         <Box flex="row" align="center">
           <Icon name="action/warning" className="mr-1 text-2xl text-red-700" />
           <p>Ошибка</p>
@@ -52,7 +52,7 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
     <Box className="mt-6">
       {payment && orderStatus !== OrderStatus.Done ? (
         <>
-          <Box className="absolute top-1 right-1">
+          <Box className="absolute -top-0.5 right-1">
             <Button
               color="ghost"
               className="bg-transparent"
@@ -64,7 +64,7 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
                 })
               }
             >
-              <Icon name="action/info" className="text-2xl text-gray-800" />
+              <Icon name="action/info" className="text-xl text-gray-800" />
             </Button>
           </Box>
           <PaymentStatusBadge status={payment.status} />
@@ -72,7 +72,9 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
       ) : (
         <Button
           fullWidth
-          color="accept"
+          color="ghost"
+          size="lg"
+          className="bg-emerald-500! text-white!"
           disabled={!statusesForPayment.includes(orderStatus)}
           onClick={() =>
             setPaymentDrawer({
@@ -88,6 +90,8 @@ export function Payment({ orderId, orderStatus, orderPaymentMethod }: PaymentPro
           {orderPaymentMethod === OrderPaymentMethod.Online
             ? 'Оплатить заказ'
             : 'Оплатить доставку'}
+
+          <Icon name="common/arrow" className="rotate-90 text-[23px]" />
         </Button>
       )}
     </Box>

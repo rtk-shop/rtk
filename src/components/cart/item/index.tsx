@@ -98,7 +98,7 @@ export function CartItem({ product, quantity }: CartItemProps) {
       <div className="w-full max-w-md min-w-0 pt-3">
         <p
           onClick={handleRedirect}
-          className="clear-both mb-2 line-clamp-2 h-8.25 text-sm leading-4 font-medium text-ellipsis whitespace-normal text-black no-underline"
+          className="clear-both mb-2 line-clamp-2 h-8.25 text-base leading-4 font-medium text-ellipsis whitespace-normal text-black no-underline"
         >
           {title}
         </p>

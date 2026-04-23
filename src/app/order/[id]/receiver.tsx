@@ -1,7 +1,9 @@
 import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
+import { labelStyle } from './lib/constants'
+import { SectionWrapper } from './ui/section-wrapper'
+import { SectionHeader } from './ui/section-header'
 import { formatPhoneNumber } from '@/lib/helpers'
-import { BoxSection } from './ui/box-section'
 
 export function Receiver({
   name,
@@ -13,24 +15,31 @@ export function Receiver({
   phone: string
 }) {
   return (
-    <BoxSection
-      title="Отримувач"
-      icon={<Icon name="common/user-round" className="text-[22px] text-gray-800" />}
-    >
-      <Box className="leading-tight">
-        <p>
-          <span className="mr-1.5 text-gray-500">Имя:</span>
-          {name}
-        </p>
-        <p>
-          <span className="mr-1.5 text-gray-500">Фамилия:</span>
-          {surname}
-        </p>
-        <p>
-          <span className="mr-1.5 text-gray-500">Телефон:</span>
-          {formatPhoneNumber(phone)}
-        </p>
+    <SectionWrapper>
+      <SectionHeader
+        title="Отримувач"
+        icon={<Icon name="common/user-round" className="text-[23px]" />}
+      />
+      <Box className="mb-2.5 grid grid-cols-[40%_1fr] grid-rows-[auto_auto_auto] gap-2 text-sm font-medium">
+        <Box>
+          <p className={labelStyle}>Імʼя</p>
+        </Box>
+        <Box>
+          <p>{name}</p>
+        </Box>
+        <Box>
+          <p className={labelStyle}>Прізвище</p>
+        </Box>
+        <Box>
+          <p>{surname}</p>
+        </Box>
+        <Box>
+          <p className={labelStyle}>Телефон</p>
+        </Box>
+        <Box>
+          <p>{formatPhoneNumber(phone)}</p>
+        </Box>
       </Box>
-    </BoxSection>
+    </SectionWrapper>
   )
 }

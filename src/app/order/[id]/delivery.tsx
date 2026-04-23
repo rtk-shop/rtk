@@ -1,9 +1,13 @@
 import { Box } from '@/components/ui/box'
-import { BoxSection } from './ui/box-section'
+import { Icon } from '@/components/ui/icon'
+import { SectionWrapper } from './ui/section-wrapper'
+import { SectionHeader } from './ui/section-header'
 import { DeliverySupplier } from '@/components/ui/delivery-supplier'
 import { ParcelTrackId } from '@/components/order/parcel-track-Id'
-import { Icon } from '@/components/ui/icon'
+import { labelStyle } from './lib/constants'
 import { type OrderStatus, OrderStatus as OrderStatusEnum } from '@/lib/api/graphql/types'
+
+const hideTrackIdWhen: Array<OrderStatus> = [OrderStatusEnum.Created, OrderStatusEnum.Rejected]
 
 export function Delivery({
   city,
@@ -19,29 +23,36 @@ export function Delivery({
   status: OrderStatus
 }) {
   return (
-    <BoxSection
-      title="Інформація про доставку"
-      icon={<Icon name="profile/truck" className="mr-0.5 text-[22px] text-gray-800" />}
-    >
-      <Box className="leading-tight">
-        <div className="flex items-center">
-          <span className="mr-1.5 text-gray-500">Сервіс:</span>
+    <SectionWrapper>
+      <SectionHeader
+        title="Інформація про доставку"
+        icon={<Icon name="profile/truck" className="text-[23px]" />}
+      />
+      <Box className="mb-2.5 grid grid-cols-[40%_1fr] grid-rows-[auto_auto_auto] gap-2 text-sm font-medium">
+        <Box>
+          <p className={labelStyle}>Сервіс</p>
+        </Box>
+        <Box>
           <DeliverySupplier supplier={supplier} />
-        </div>
-        <p>
-          <span className="mr-1.5 text-gray-500">Населений пункт:</span>
-          {city}
-        </p>
-        <p className="mb-2">
-          <span className="mr-1.5 text-gray-500">Місце доставки:</span>
-          {postOffice}
-        </p>
-        {status !== OrderStatusEnum.Rejected && status !== OrderStatusEnum.Created && (
-          <Box>
-            <ParcelTrackId trackId={parcelTrackId} />
-          </Box>
-        )}
+        </Box>
+        <Box>
+          <p className={labelStyle}>Населений пункт</p>
+        </Box>
+        <Box>
+          <p>{city}</p>
+        </Box>
+        <Box>
+          <p className={labelStyle}>Місце доставки</p>
+        </Box>
+        <Box>
+          <p>{postOffice}</p>
+        </Box>
       </Box>
-    </BoxSection>
+      {!hideTrackIdWhen.includes(status) && (
+        <Box>
+          <ParcelTrackId trackId={parcelTrackId} />
+        </Box>
+      )}
+    </SectionWrapper>
   )
 }

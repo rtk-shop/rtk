@@ -24,7 +24,7 @@ export function Offer() {
   return (
     <Box flex="row" justify="center" align="center">
       <Icon name="profile/gift" className="mr-1 text-[33px] text-gray-500" />
-      <Box className="text-sm leading-none tracking-tighter text-gray-500">
+      <Box className="text-sm leading-none tracking-tighter text-gray-600">
         <p>Покищо</p>
         <p>немає пропозицій</p>
       </Box>
