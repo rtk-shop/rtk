@@ -28,7 +28,7 @@ export function Delivery({
         title="Інформація про доставку"
         icon={<Icon name="profile/truck" className="text-[23px]" />}
       />
-      <Box className="mb-2.5 grid grid-cols-[40%_1fr] grid-rows-[auto_auto_auto] gap-2 text-sm font-medium">
+      <Box className="mb-2.5 grid grid-cols-[40%_1fr] grid-rows-[auto_auto_auto] gap-2 text-sm leading-4 font-medium">
         <Box>
           <p className={labelStyle}>Сервіс</p>
         </Box>
