@@ -359,6 +359,9 @@ export const sprites = defineSpriteMap([defineSprite(
      ["circle-x"],
      [24]
    ), defineSpriteSymbol(
+     ["clock"],
+     [24]
+   ), defineSpriteSymbol(
      ["credit-card"],
      [576, 512]
    ), defineSpriteSymbol(
@@ -371,13 +374,10 @@ export const sprites = defineSpriteMap([defineSprite(
      ["package-x"],
      [24]
    ), defineSpriteSymbol(
-     ["timer"],
-     [24]
-   ), defineSpriteSymbol(
      ["truck"],
      [24]
    )],
-  defineExternalAssetMeta('profile.9e85ae33.svg')
+  defineExternalAssetMeta('profile.a1c5fd68.svg')
 )]
 )])
 
@@ -385,7 +385,7 @@ export type SpritesMeta = {
   "action": "arrow-down-up" | "circle-minus" | "circle-plus" | "copy-check" | "copy" | "edit" | "funnel" | "info" | "search" | "share" | "trash" | "warning";
   "checkout": "box-taped" | "letter";
   "common": "arrow" | "barcode" | "cart" | "check" | "emptycart" | "grid" | "heart" | "logo" | "menu" | "new" | "user-round" | "user" | "x";
-  "profile": "circle-x" | "credit-card" | "gift" | "package-check" | "package-x" | "timer" | "truck";
+  "profile": "circle-x" | "clock" | "credit-card" | "gift" | "package-check" | "package-x" | "truck";
 }
 
 //#endregion

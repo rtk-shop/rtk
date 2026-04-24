@@ -70,7 +70,7 @@ const statusConfig: Record<OrderStatus, StatusConfig> = {
     icon: makeIcon('profile/truck')
   },
   [OrderStatusEnum.Processed]: {
-    icon: makeIcon('profile/timer')
+    icon: makeIcon('profile/clock')
   },
   [OrderStatusEnum.Done]: {
     icon: makeIcon('profile/package-check')

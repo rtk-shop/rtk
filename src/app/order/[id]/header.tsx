@@ -3,7 +3,7 @@ import { formatDate } from '@/lib/helpers'
 
 export function OrderHeader({ orderId, createdAt }: { orderId: string; createdAt: string }) {
   return (
-    <Box className="mt-2 mb-5">
+    <Box className="my-3">
       <h1 className="text-center text-2xl leading-6 font-medium tracking-tight">
         Замовлення №{orderId}
       </h1>

@@ -8,8 +8,9 @@ import { Products } from './products'
 import { Payment } from './controls/payment'
 import { calculateDeliveryCost } from './lib/utils'
 import { RejectOrderButton } from './controls/reject-button'
-import { TelegramAppWidgets } from './telegram'
+import { StatusBanner } from './ui/status-banner'
 import { Price } from './price'
+import { TelegramAppWidgets } from './telegram'
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -37,6 +38,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       </style>
       <Box className="px-2">
         <OrderHeader orderId={order.id} createdAt={order.createdAt} />
+        <Box className="mb-3">
+          <StatusBanner status={order.status} />
+        </Box>
         <Price
           orderPrice={order.price}
           paymentMethod={order.paymentMethod}
