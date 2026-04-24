@@ -1,13 +1,18 @@
 'use client'
 
-import { useEffect, type ReactNode } from 'react'
-import { Navigation } from '@/components/layout/navigation'
+import { useEffect } from 'react'
 import { Cart } from '@/components/layout/cart'
 import { Sidebar } from '@/components/layout/sidebar'
 import { checkNoPannelRoutes } from '@/lib/routes'
 import { usePathname } from 'next/navigation'
 
-export function BotLayout({ children }: { children: ReactNode }) {
+export function BotLayout({
+  children,
+  navbar
+}: {
+  children: React.ReactNode
+  navbar: React.ReactNode
+}) {
   const pathname = usePathname()
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export function BotLayout({ children }: { children: ReactNode }) {
         <Sidebar />
         {children}
       </main>
-      {withPannel && <Navigation />}
+      {withPannel && navbar}
     </>
   )
 }

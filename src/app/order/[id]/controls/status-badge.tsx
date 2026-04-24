@@ -25,7 +25,7 @@ export function PaymentStatusBadge({ status }: { status: PaymentStatus }) {
 
   switch (status) {
     case PaymentStatus.AwaitingConfirmation:
-      statusIcon = <Icon name="profile/timer" className="text-xl" />
+      statusIcon = <Icon name="profile/clock" className="text-xl" />
       break
     case PaymentStatus.Confirmed:
       statusIcon = (

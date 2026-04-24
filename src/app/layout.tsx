@@ -10,6 +10,7 @@ import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { UrqlProvider } from '@/providers/urql'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Navbar } from '@/components/layout/nav-bar'
 
 import '@/styles/globals.css'
 
@@ -48,7 +49,7 @@ export default async function WebAppLayout({ children }: { children: ReactNode }
                 src="https://telegram.org/js/telegram-web-app.js?56"
               />
               <UrqlProvider>
-                <BotLayout>{children}</BotLayout>
+                <BotLayout navbar={<Navbar />}>{children}</BotLayout>
                 <Toaster position="bottom-center" mobileOffset={{ bottom: '25px', left: '10px' }} />
               </UrqlProvider>
               <div id="app-drawers" />

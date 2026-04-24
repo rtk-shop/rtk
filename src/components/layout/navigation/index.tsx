@@ -1,39 +1,20 @@
-'use client'
-
+import { Box } from '@/components/ui/box'
 import { routeNames } from '@/lib/routes'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { useRouter } from 'next/navigation'
-import { useFavoriteStore } from '@/providers/favorite-store-provider'
 import { Icon } from '@/components/ui/icon'
-import { useCartQuery } from '@/lib/api/hooks'
-import { useAppState } from '@/stores/app/store'
+import Link from 'next/link'
 
-export function Navigation() {
-  const router = useRouter()
-
-  const openCart = useAppState((state) => state.openCart)
-  const openSidebar = useAppState((state) => state.openSidebar)
-
-  const [result] = useCartQuery()
-  const [favoriteAmount] = useFavoriteStore((state) => state.amount)
-
-  const cartAmount = result.data?.cartProducts.reduce((acc, item) => item.quantity + acc, 0)
-
-  const handleFavoritesClick = () => {
-    router.push(routeNames.favourites)
-  }
-
-  const handleCatalogClick = () => {
-    router.push(routeNames.catalog)
-  }
-
-  const handleProfileClick = () => {
-    router.push(routeNames.profile)
-  }
-
+export function Navigation({
+  menu,
+  favorites,
+  cart
+}: {
+  cart: React.ReactNode
+  menu: React.ReactNode
+  favorites: React.ReactNode
+}) {
   return (
-    <div className="fixed bottom-0 z-40 w-screen">
+    <Box className="fixed bottom-0 z-40 w-screen">
       <header
         className="bg-black/80 backdrop-blur-md"
         style={{
@@ -41,73 +22,29 @@ export function Navigation() {
         }}
       >
         <nav className="px-3 pt-1">
-          <ul className="flex w-full justify-between">
+          <ul className="flex w-full items-center justify-between">
+            <li>{menu}</li>
             <li>
-              <Button
-                color="ghost"
-                size="lg"
-                onClick={openSidebar}
-                className="bg-transparent text-[24px] text-white"
-              >
-                <Icon name="common/menu" />
-              </Button>
+              <Link className="inline-flex p-3" href={routeNames.favourites}>
+                {favorites}
+              </Link>
             </li>
-            {/*  */}
+            <li>{cart}</li>
             <li>
-              <Button
-                color="ghost"
-                size="lg"
-                className="bg-transparent"
-                onClick={handleFavoritesClick}
-              >
-                <Badge content={favoriteAmount}>
-                  <Icon
-                    name="common/heart"
-                    className="bg-sl fill-transparent stroke-white text-[22px]"
-                  />
-                </Badge>
-              </Button>
-            </li>
-            {/*  */}
-            <li>
-              <Button
-                color="ghost"
-                size="lg"
-                onClick={openCart}
-                className="bg-transparent text-[24px]"
-              >
-                <Badge content={cartAmount}>
-                  <Icon name="common/cart" className="fill-white stroke-white" />
-                </Badge>
-              </Button>
-            </li>
-            {/*  */}
-            <li>
-              <Button
-                color="ghost"
-                size="lg"
-                onClick={handleCatalogClick}
-                className="bg-transparent text-[24px] text-white"
-              >
+              <Link href={routeNames.catalog} className="inline-flex p-3 text-[24px] text-white">
                 <Icon name="common/grid" />
-              </Button>
+              </Link>
             </li>
-            {/*  */}
             <li>
-              <Button
-                color="ghost"
-                size="lg"
-                className="bg-transparent text-[24px] text-white"
-                onClick={handleProfileClick}
-              >
+              <Link href={routeNames.profile} className="inline-flex p-3 text-[24px] text-white">
                 <Badge content={0} max={5}>
                   <Icon name="common/user" />
                 </Badge>
-              </Button>
+              </Link>
             </li>
           </ul>
         </nav>
       </header>
-    </div>
+    </Box>
   )
 }

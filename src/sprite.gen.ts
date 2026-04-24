@@ -336,7 +336,7 @@ export const sprites = defineSpriteMap([defineSprite(
      [75, 41]
    ), defineSpriteSymbol(
      ["menu"],
-     [448, 512]
+     [24]
    ), defineSpriteSymbol(
      ["new"],
      [48]
@@ -350,7 +350,7 @@ export const sprites = defineSpriteMap([defineSprite(
      ["x"],
      [24]
    )],
-  defineExternalAssetMeta('common.acb36e6c.svg')
+  defineExternalAssetMeta('common.7e0c31b4.svg')
 )]
 ), defineSprite(
   'profile',
