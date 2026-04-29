@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import clsx from 'clsx'
 import { Box } from '@/components/ui/box'
 import { FormatPrice } from '@/components/ui/format-price'
 import { routeNames } from '@/lib/routes'
 
-export interface OrderProductItemProps {
+export interface OrderProductProps {
+  size?: 'sm' | 'md'
   quantity: number
   priceAtOrder: number
   product: {
@@ -14,15 +16,28 @@ export interface OrderProductItemProps {
   }
 }
 
-export function OrderProduct({ quantity, priceAtOrder, product }: OrderProductItemProps) {
+export function OrderProduct({ quantity, priceAtOrder, product, size = 'md' }: OrderProductProps) {
+  const imageSize = {
+    sm: {
+      width: 48,
+      height: 60,
+      className: 'w-12'
+    },
+    md: {
+      width: 54,
+      height: 65,
+      className: 'w-13.5'
+    }
+  }
+
   return (
     <Box className="mb-2.5 flex items-center">
       <Link href={routeNames.product + product.id} prefetch={false} className="shrink-0">
         <Image
           src={product.preview}
-          className="aspect-4/5 w-13.5 rounded-lg"
-          width={54}
-          height={65}
+          className={clsx('aspect-4/5 rounded-lg', imageSize[size].className)}
+          width={imageSize[size].width}
+          height={imageSize[size].height}
           alt={'изображение товара ' + product.title}
         />
       </Link>

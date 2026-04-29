@@ -9,13 +9,13 @@ import { DeliverySupplier } from '@/components/ui/delivery-supplier'
 import { ExpandIcon } from '@/components/ui/expand-icon'
 import { formatDate, formatPhoneNumber } from '@/lib/helpers'
 import { useTranslations } from 'next-intl'
-import { OrderProductItem } from '../../order-product-item'
+import { OrderProduct } from '@/components/product/order-product'
 import { OrderStatusBadge } from '../status-badge'
 import { ParcelTrackId } from '../parcel-track-Id'
 import { OrderStatus as OrderStatusEnum } from '@/lib/api/graphql/types'
 import { type OrderType } from '@/types/order'
 
-export interface OrderItemProps {
+export interface OrderPreviewProps {
   order: OrderType
   currentIndex: number
   expandIndex: number
@@ -31,13 +31,13 @@ const productList = cva('pt-2', {
   }
 })
 
-export function OrderItem({
+export function OrderPreview({
   order,
   expandIndex,
   isExpanded,
   currentIndex,
   onExpand
-}: OrderItemProps) {
+}: OrderPreviewProps) {
   const t = useTranslations('Common')
   const router = useRouter()
 
@@ -118,12 +118,14 @@ export function OrderItem({
           {/* Products */}
           <Box as="ul" className={productList({ status: status === 'REJECTED' ? status : null })}>
             {order.products.map(({ id, quantity, priceAtOrder, product }) => (
-              <OrderProductItem
-                key={id}
-                quantity={quantity}
-                priceAtOrder={priceAtOrder}
-                product={product}
-              />
+              <Box as="li" key={id}>
+                <OrderProduct
+                  size="sm"
+                  quantity={quantity}
+                  priceAtOrder={priceAtOrder}
+                  product={product}
+                />
+              </Box>
             ))}
           </Box>
           {/* Controls */}

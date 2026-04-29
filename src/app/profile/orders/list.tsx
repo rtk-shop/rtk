@@ -2,8 +2,8 @@ import { memo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Box } from '@/components/ui/box'
 import { Icon } from '@/components/ui/icon'
-import { OrderItem } from '@/components/order/item'
-import { OrderItemSkeleton } from '@/components/order/item/skeleton'
+import { OrderPreview } from '@/components/order/preview'
+import { OrderItemSkeleton } from '@/components/order/preview/skeleton'
 import { type OrderType } from '@/types/order'
 import OrderSkeletonList from '@/components/ui/order-skeleton-list'
 import { Button } from '@/components/ui/button'
@@ -98,7 +98,7 @@ export const OrdersList = memo(function OrdersList({ fetching, error, orders }: 
     <ul ref={listRef} className="h-full overflow-y-auto">
       {orders.map((order, index) => (
         <Box as="li" key={index} className="mb-3">
-          <OrderItem
+          <OrderPreview
             currentIndex={index}
             order={{ ...order }}
             expandIndex={expandedOrder.index}

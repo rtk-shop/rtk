@@ -1,6 +1,6 @@
 import { Box } from '@/components/ui/box'
 import { FormatPrice } from '@/components/ui/format-price'
-import { OrderProduct } from './ui/order-product'
+import { OrderProduct } from '@/components/product/order-product'
 import { SectionWrapper } from './ui/section-wrapper'
 import { useTranslations } from 'next-intl'
 
