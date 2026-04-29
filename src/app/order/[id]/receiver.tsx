@@ -18,7 +18,7 @@ export function Receiver({
     <SectionWrapper>
       <SectionHeader
         title="Отримувач"
-        icon={<Icon name="common/user-round" className="text-[23px]" />}
+        icon={<Icon name="common/user-round" className="text-[22px]" />}
       />
       <Box className="mb-2.5 grid grid-cols-[40%_1fr] grid-rows-[auto_auto_auto] gap-2 text-sm leading-4 font-medium">
         <Box>

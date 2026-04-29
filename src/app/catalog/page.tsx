@@ -14,6 +14,7 @@ import { useProductsQuery } from '@/lib/api/hooks'
 import { ProductListSkeleton } from '@/components/product/list/skeleton'
 import { FetchError } from './plugs/fetch-err'
 import type { FormValues, PriceRangeType } from './model/types'
+import { TelegramAppWidgets } from './telegram'
 import { ProductFilterSortBy, CategoryType, Gender, ProductTag } from '@/lib/api/graphql/types'
 import {
   parseAsArrayOf,
@@ -223,6 +224,7 @@ export default function Page() {
           </Box>
         </Box>
       </FormProvider>
+      <TelegramAppWidgets />
     </Box>
   )
 }

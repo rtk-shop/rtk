@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       <style precedence="high">
         {`
           body {
-            background-color: var(--color-gray-50);
+            background-color: var(--color-gray-100);
             min-height: 100dvh;
           }
         `}

@@ -5,6 +5,6 @@ import { useTelegramBackButton, useTelegramHeaderColor } from '@/telegram/hooks'
 
 export function TelegramAppWidgets() {
   useTelegramBackButton(routeNames.catalog)
-  useTelegramHeaderColor('#f9fafb')
+  useTelegramHeaderColor('#f3f4f6')
   return null
 }
